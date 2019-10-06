@@ -51,7 +51,8 @@ bot.on('message', async msg => {
 			.setAuthor(msg.author.username)
 			.setDescription("This is the help page!")
 			.setColor("#000000")
-			.addField("Commands", `userinfo | serverinfo`);
+			.addField("Information commands", `userinfo | serverinfo`)
+			.addField("Voice channels commands", `join | leave | play`);
 		msg.channel.send(embed);
 	}
 
@@ -86,10 +87,10 @@ bot.on('message', async msg => {
 
 	if(command === `${prefix}join`){
 		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
-		const voiceChannel = msg.member.voiceChannel;
+		var voiceChannel = msg.member.voiceChannel;
+		var connection = await voiceChannel.join();
 		voiceChannel.join()
   		.then(connection => console.log('Connected!'))
-  		.catch(console.error);
 		return;
 	}
 
@@ -107,6 +108,24 @@ bot.on('message', async msg => {
 			.on('end', () => {
 				msg.channel.send("Song finished! Did you like it?");
 			})
+		return;
+	}
+
+	if(command === `${prefix}stop`){
+		console.log(`Stop: actived by ${msg.author.username} (${msg.author.id})`);
+		var voiceChannel = msg.member.voiceChannel;
+		var connection = await voiceChannel.join();
+		const dispatcher = connection.playFile('./mp3/audio.mp3');
+
+		return;
+	}
+
+	if(command === `${prefix}earrape`){
+		console.log(`Earrape: actived by ${msg.author.username} (${msg.author.id})`);
+		var voiceChannel = msg.member.voiceChannel;
+		var connection = await voiceChannel.join();
+		const dispatcher = connection.playFile('./mp3/audio.mp3');
+		dispatcher.setVolume(50);
 		return;
 	}
 
