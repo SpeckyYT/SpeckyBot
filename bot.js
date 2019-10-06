@@ -51,7 +51,7 @@ bot.on('message', async msg => {
 			.setAuthor(msg.author.username)
 			.setDescription("This is the help page!")
 			.setColor("#000000")
-			.addField("Commands", `userinfo | serverinfo | ban`);
+			.addField("Commands", `userinfo | serverinfo`);
 		msg.channel.send(embed);
 	}
 
@@ -76,6 +76,7 @@ bot.on('message', async msg => {
 			.setDescription("These are the informations about the server you're in!")
 			.setColor("#420FF")
 			.addField("Server name", `${msg.guild.name}`)
+			.addField("Server ID", `${msg.guild.ID}`)
 			.addField("Owner", `${msg.guild.owner} (${msg.guild.ownerID})`)
 			.addField("Created at", `${msg.guild.createdAt}`);
 		msg.channel.send(embed);
@@ -83,14 +84,41 @@ bot.on('message', async msg => {
 		return;
 	}
 
-	if(command === `${prefix}ban`){
-		console.log(`Ban: actived by ${msg.author.username} (${msg.author.id})`);
-
-		msg.channel.send("ok :(");
-		msg.guild.leave();
-		console.log(`Left ${msg.guild.name} (${msg.guild.id})`)
-		
+	if(command === `${prefix}join`){
+		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
+		const voiceChannel = msg.member.voiceChannel;
+		voiceChannel.join()
+  		.then(connection => console.log('Connected!'))
+  		.catch(console.error);
 		return;
 	}
 
+	if(command === `${prefix}leave`){
+		console.log(`Leave: actived by ${msg.author.username} (${msg.author.id})`);
+		msg.member.voiceChannel.leave();
+		return;
+	}
+
+	if(command === `${prefix}play`){
+		console.log(`Play: actived by ${msg.author.username} (${msg.author.id})`);
+		var voiceChannel = msg.member.voiceChannel;
+		var connection = await voiceChannel.join();
+		const dispatcher = connection.playFile('./mp3/audio.mp3')
+			.on('end', () => {
+				msg.channel.send("Song finished! Did you like it?");
+			})
+		return;
+	}
+
+/*
+	if(command === `${prefix}ban`){
+		console.log(`Ban: actived by ${msg.author.username} (${msg.author.id})`);
+		msg.channel.send("ok :(");
+		msg.guild.leave();
+		console.log(`Ban: Left ${msg.guild.name} (${msg.guild.id})`)
+
+//		msg.channel.send("You don't have ban members permission.")
+		return;
+	}
+*/
 });

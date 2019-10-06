@@ -5,7 +5,9 @@
   "main": "bot.js",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "node-fetch": "^2.6.0"
+    "ffmpeg-binaries": "^4.0.0",
+    "node-fetch": "^2.6.0",
+    "opusscript": "0.0.7"
   },
   "devDependencies": {},
   "scripts": {
