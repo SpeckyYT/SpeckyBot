@@ -45,9 +45,17 @@ bot.on('message', async msg => {
 	let cmd = bot.commands.get(command.slice(prefix.lenght))
 	if(cmd) cmd.run(bot, message, args)
 */
+	if(command === `${prefix}help`){
+		console.log(`Help: actived by ${msg.author.username} (${msg.author.id})`);
+		let embed = new Discord.RichEmbed()
+			.setAuthor(msg.author.username)
+			.setDescription("This is the help page!")
+			.setColor("#000000")
+			.addField("Commands", `userinfo | serverinfo | ban`);
+		msg.channel.send(embed);
+	}
 
-
-	if(command = `${prefix}userinfo`){
+	if(command === `${prefix}userinfo`){
 		console.log(`Userinfo: actived by ${msg.author.username} (${msg.author.id})`);
 		let embed = new Discord.RichEmbed()
 			.setAuthor(msg.author.username)
@@ -61,17 +69,28 @@ bot.on('message', async msg => {
 		return;
 	}
 
-	if(command = `${prefix}server`){
+	if(command === `${prefix}serverinfo`){
 		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
 		let embed = new Discord.RichEmbed()
 			.setAuthor(msg.author.username)
-			.setDescription("WOAH")
-			.setColor("#284890")
-			.addField("Full Username", `${msg.author.username}#${msg.author.discriminator}`)
-			.addField("ID", `${msg.author.id}`)
-			.addField("Created at", `${msg.author.createdAt}`);
+			.setDescription("These are the informations about the server you're in!")
+			.setColor("#420FF")
+			.addField("Server name", `${msg.guild.name}`)
+			.addField("Owner", `${msg.guild.owner} (${msg.guild.ownerID})`)
+			.addField("Created at", `${msg.guild.createdAt}`);
 		msg.channel.send(embed);
 
 		return;
 	}
+
+	if(command === `${prefix}ban`){
+		console.log(`Ban: actived by ${msg.author.username} (${msg.author.id})`);
+
+		msg.channel.send("ok :(");
+		msg.guild.leave();
+		console.log(`Left ${msg.guild.name} (${msg.guild.id})`)
+		
+		return;
+	}
+
 });
