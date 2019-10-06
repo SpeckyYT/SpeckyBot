@@ -3,11 +3,11 @@ const bot = new Discord.Client({disableEveryone: true});
 const fs = require('fs');
 const util = require('util');
 
-const config = require("../config.json");
+const config = require("../config.json"); //remove one dot if you h
 const prefix = config.prefix;
 
 console.log(prefix);
-
+/*
 fs.readdir("./cmds/", (err, files) => {
 	if(err) console.error(err);
 
@@ -24,6 +24,7 @@ fs.readdir("./cmds/", (err, files) => {
 //		bot.commands.set(props.help.name,props);
 	});
 });
+*/
 
 bot.login(config.token);
 
@@ -40,11 +41,12 @@ bot.on('message', async msg => {
 	args = args.slice(1);
 
 	if(!msg.content.startsWith(prefix)) return;
-
+/*
 	let cmd = bot.commands.get(command.slice(prefix.lenght))
 	if(cmd) cmd.run(bot, message, args)
+*/
 
-	/*
+
 	if(command = `${prefix}userinfo`){
 		console.log(`Userinfo: actived by ${msg.author.username} (${msg.author.id})`);
 		let embed = new Discord.RichEmbed()
@@ -72,5 +74,4 @@ bot.on('message', async msg => {
 
 		return;
 	}
-	*/
 });
