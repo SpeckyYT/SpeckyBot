@@ -1,15 +1,20 @@
+//Discord.js stuff
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
-const fs = require('fs');
+
+//other stuff
 const util = require('util');
 const ytdl = require('ytdl-core');
 const ytdlDiscord = require('ytdl-core-discord');
+fs          = require('fs');
+request     = require('request');
+path        = require('path')
 
 const config = require("../config.json"); //remove one dot if you h
 const prefix = config.prefix;
 
 console.log(prefix);
-/*
+
 
 fs.readdir("./cmds/", (err, files) => {
 	if(err) console.error(err);
@@ -24,10 +29,10 @@ fs.readdir("./cmds/", (err, files) => {
 	jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
-//		bot.commands.set(props.help.name,props);
+		bot.commands.set(props.help.name,props);
 	});
 });
-*/
+
 
 bot.login(config.token);
 
@@ -95,7 +100,12 @@ bot.on('message', async msg => {
 
 		return;
 	}
+	
+	if(command === `${prefix}summon`){
+		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
+		
 
+	}
 /* //MUSIC
 	if(command === `${prefix}join`){
 		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
