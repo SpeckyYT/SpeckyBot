@@ -1,6 +1,7 @@
 //Discord.js stuff
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
+bot.commands = new Discord.Collection();
 
 //other stuff
 const util = require('util');
@@ -49,10 +50,11 @@ bot.on('message', async msg => {
 	args = args.slice(1);
 
 	if(!msg.content.startsWith(prefix)) return;
+
+	let cmd = bot.commands.get(command.slice(prefix.lenght));
+	if(cmd) cmd.run(bot, message, args);
+
 /*
-	let cmd = bot.commands.get(command.slice(prefix.lenght))
-	if(cmd) cmd.run(bot, message, args)
-*/
 	if(command === `${prefix}help`){
 		console.log(`Help: actived by ${msg.author.username} (${msg.author.id})`);
 		let embed = new Discord.RichEmbed()
@@ -101,11 +103,7 @@ bot.on('message', async msg => {
 		return;
 	}
 	
-	if(command === `${prefix}summon`){
-		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
-		
-
-	}
+*/
 /* //MUSIC
 	if(command === `${prefix}join`){
 		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
