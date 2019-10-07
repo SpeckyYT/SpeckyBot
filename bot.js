@@ -96,15 +96,6 @@ bot.on('message', async msg => {
 		return;
 	}
 
-	if(command === `${prefix}serverinfo`){
-		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
-		speech.speak({
-			text: 'Hello, how are you today ?',
-		});
-
-		return;
-	}
-
 /* //MUSIC
 	if(command === `${prefix}join`){
 		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
