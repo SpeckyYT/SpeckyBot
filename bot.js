@@ -51,14 +51,9 @@ bot.on('message', async msg => {
 
 	if(!msg.content.startsWith(prefix)) return;
 
-	const cmd = bot.commands.get(command.slice(prefix.lenght));
+	let cmd = bot.commands.get(command.slice(prefix.lenght));
+	cmd.run(bot, message, args);
 
-	console.log(`${msg.content} has been accepted`)
-
-		console.log("OK WORKS");
-		cmd.run(bot, message, args);
-
-	console.log(`${msg.content} has been skipped`)
 /*
 	if(command === `${prefix}help`){
 		console.log(`Help: actived by ${msg.author.username} (${msg.author.id})`);
