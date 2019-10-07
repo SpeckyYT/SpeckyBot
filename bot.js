@@ -10,6 +10,7 @@ const prefix = config.prefix;
 
 console.log(prefix);
 /*
+
 fs.readdir("./cmds/", (err, files) => {
 	if(err) console.error(err);
 
@@ -64,8 +65,11 @@ bot.on('message', async msg => {
 			.setAuthor(msg.author.username)
 			.setDescription("This is your user profile!")
 			.setColor("#284890")
-			.addField("Full Username", `${msg.author.username}#${msg.author.discriminator}`)
+			.addField("Full Username", `${msg.author.tag}`)
 			.addField("ID", `${msg.author.id}`)
+			.addField("Is he/she a bot?", `${msg.author.bot}`)
+			.addField("Avatar", `${msg.author.displayAvatarURL}`)
+			.addField("Last message", `${msg.author.lastMessage}`)
 			.addField("Created at", `${msg.author.createdAt}`);
 		msg.channel.send(embed);
 
@@ -79,14 +83,29 @@ bot.on('message', async msg => {
 			.setDescription("These are the informations about the server you're in!")
 			.setColor("#420FF")
 			.addField("Server name", `${msg.guild.name}`)
-			.addField("Server ID", `${msg.guild.ID}`)
+			.addField("Server ID", `${msg.guild.id}`)
+			.addField("Server region", `${msg.guild.region}`)
+			.addField("Entering channel", `${msg.guild.systemChannel}`)
+			.addField("Verification level", `${msg.guild.verificationLevel}`)
 			.addField("Owner", `${msg.guild.owner} (${msg.guild.ownerID})`)
+			.addField("Member count", `${msg.guild.memberCount}`)
+			.addField("Is the server large?", `${msg.guild.large}`)
 			.addField("Created at", `${msg.guild.createdAt}`);
 		msg.channel.send(embed);
 
 		return;
 	}
 
+	if(command === `${prefix}serverinfo`){
+		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
+		speech.speak({
+			text: 'Hello, how are you today ?',
+		});
+
+		return;
+	}
+
+/* //MUSIC
 	if(command === `${prefix}join`){
 		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
@@ -130,7 +149,7 @@ bot.on('message', async msg => {
 		dispatcher.setVolume(500000);
 		return;
 	}
-
+*/
 /*
 	if(command === `${prefix}ban`){
 		console.log(`Ban: actived by ${msg.author.username} (${msg.author.id})`);
@@ -142,68 +161,4 @@ bot.on('message', async msg => {
 		return;
 	}
 */
-
-	if(command === `${prefix}beta`){
-		const { voiceChannel } = message.member;
-		if (!voiceChannel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
-		const permissions = voiceChannel.permissionsFor(message.client.user);
-		if (!permissions.has('CONNECT')) return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
-		if (!permissions.has('SPEAK')) return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
-
-		const serverQueue = message.client.queue.get(message.guild.id);
-		const songInfo = await ytdl.getInfo(args[0]);
-		const song = {
-			id: songInfo.video_id,
-			title: Util.escapeMarkdown(songInfo.title),
-			url: songInfo.video_url
-		};
-
-		if (serverQueue) {
-			serverQueue.songs.push(song);
-			console.log(serverQueue.songs);
-			return message.channel.send(`✅ **${song.title}** has been added to the queue!`);
-		}
-
-		const queueConstruct = {
-			textChannel: message.channel,
-			voiceChannel,
-			connection: null,
-			songs: [],
-			volume: 2,
-			playing: true
-		};
-		message.client.queue.set(message.guild.id, queueConstruct);
-		queueConstruct.songs.push(song);
-
-		const play = async song => {
-			const queue = message.client.queue.get(message.guild.id);
-			if (!song) {
-				queue.voiceChannel.leave();
-				message.client.queue.delete(message.guild.id);
-				return;
-			}
-
-			const dispatcher = queue.connection.playOpusStream(await ytdlDiscord(song.url), { passes: 3 })
-				.on('end', reason => {
-					if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-					else console.log(reason);
-					queue.songs.shift();
-					play(queue.songs[0]);
-				})
-				.on('error', error => console.error(error));
-			dispatcher.setVolumeLogarithmic(queue.volume / 5);
-			queue.textChannel.send(`🎶 Start playing: **${song.title}**`);
-		};
-
-		try {
-			const connection = await voiceChannel.join();
-			queueConstruct.connection = connection;
-			play(queueConstruct.songs[0]);
-		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}`);
-			message.client.queue.delete(message.guild.id);
-			await voiceChannel.leave();
-			return message.channel.send(`I could not join the voice channel: ${error}`);
-		}
-	}
 });
