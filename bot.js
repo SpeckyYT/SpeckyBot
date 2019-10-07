@@ -104,7 +104,7 @@ bot.on('message', async msg => {
 		console.log(`Play: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
 		var connection = await voiceChannel.join();
-		const dispatcher = connection.playFile('./mp3/audio.mp3')
+		const dispatcher = connection.playFile(`./mp3/${args[0]}.mp3`)
 			.on('end', () => {
 				msg.channel.send("Song finished! Did you like it?");
 			})
@@ -115,7 +115,7 @@ bot.on('message', async msg => {
 		console.log(`Stop: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
 		var connection = await voiceChannel.join();
-		const dispatcher = connection.playFile('./mp3/audio.mp3');
+		const dispatcher = connection.playFile(`./mp3/${args[0]}.mp3`);
 
 		return;
 	}
@@ -124,8 +124,8 @@ bot.on('message', async msg => {
 		console.log(`Earrape: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
 		var connection = await voiceChannel.join();
-		const dispatcher = connection.playFile('./mp3/audio.mp3');
-		dispatcher.setVolume(50);
+		const dispatcher = connection.playFile(`./mp3/${args[0]}.mp3`);
+		dispatcher.setVolume(500000);
 		return;
 	}
 
