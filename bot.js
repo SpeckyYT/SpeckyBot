@@ -206,5 +206,4 @@ bot.on('message', async msg => {
 			return message.channel.send(`I could not join the voice channel: ${error}`);
 		}
 	}
-
 });
