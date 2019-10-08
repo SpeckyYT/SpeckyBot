@@ -49,7 +49,10 @@ bot.on('message', async msg => {
 	args = args.slice(1);
 
 	let cmd = bot.commands.get(command.slice(prefix.length));
-	cmd.run(bot, msg, args);
+	if(cmd){
+		cmd.run(bot, msg, args);
+	}
+	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
 
 	//MUSIC
 	if(command === `${prefix}join`){
