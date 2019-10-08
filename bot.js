@@ -42,86 +42,14 @@ bot.on('ready', () => {
 });
 
 bot.on('message', async msg => {
-	if(msg.author.bot) return;
-	if(msg.channel.type === "dm") return;
+	if (!msg.content.startsWith(prefix) || msg.author.bot || msg.channel.type === "dm") return;
 
 	let args = msg.content.split(" ");
 	let command = args[0];
 	args = args.slice(1);
 
-	if(!msg.content.startsWith(prefix)) return;
-
 	let cmd = bot.commands.get(command.slice(prefix.length));
-//	await cmd.run(bot, message, args);
-
-
-	if(command === `${prefix}help`){
-		console.log(`Help: actived by ${msg.author.username} (${msg.author.id})`);
-		let embed = new Discord.RichEmbed()
-			.setAuthor(msg.author.username)
-			.setDescription("This is the help page!")
-			.setColor("#000000")
-			.addField("Information commands", `userinfo | serverinfo`)
-			.addField("Voice channels commands", `join | leave | play`);
-		msg.channel.send(embed);
-		
-		return;
-	}
-
-	if(command === `${prefix}userinfo`){
-		console.log(`Userinfo: actived by ${msg.author.username} (${msg.author.id})`);
-		let embed = new Discord.RichEmbed()
-			.setAuthor(msg.author.username)
-			.setDescription("This is your user profile!")
-			.setColor("#284890")
-			.addField("Full Username", `${msg.author.tag}`)
-			.addField("ID", `${msg.author.id}`)
-			.addField("Is he/she a bot?", `${msg.author.bot}`)
-			.addField("Avatar", `${msg.author.displayAvatarURL}`)
-			.addField("Last message", `${msg.author.lastMessage}`)
-			.addField("Created at", `${msg.author.createdAt}`);
-		msg.channel.send(embed);
-
-		return;
-	}
-
-	if(command === `${prefix}serverinfo`){
-		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
-		let embed = new Discord.RichEmbed()
-			.setAuthor(msg.author.username)
-			.setDescription("These are the informations about the server you're in!")
-			.setColor("#420FF")
-			.addField("Server name", `${msg.guild.name}`)
-			.addField("Server ID", `${msg.guild.id}`)
-			.addField("Server region", `${msg.guild.region}`)
-			.addField("Entering channel", `${msg.guild.systemChannel}`)
-			.addField("Verification level", `${msg.guild.verificationLevel}`)
-			.addField("Owner", `${msg.guild.owner} (${msg.guild.ownerID})`)
-			.addField("Member count", `${msg.guild.memberCount}`)
-			.addField("Is the server large?", `${msg.guild.large}`)
-			.addField("Created at", `${msg.guild.createdAt}`);
-		msg.channel.send(embed);
-
-		return;
-	}	
-
-	if(command === `${prefix}vc`){
-		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
-		if(msg.member.voiceChannel){
-		let embed = new Discord.RichEmbed()
-			.setAuthor(msg.author.username)
-			.setDescription("Here are some informations of the vocal channel you're in!")
-			.setColor("#694235")
-			.addField("Voice channel name", `${msg.member.voiceChannel}`)
-			.addField("Voice channel ID", `${msg.member.voiceChannel.id}`)
-			.addField("User limit", `${msg.member.voiceChannel.userLimit}`)
-			.addField("Link", `https://discordapp.com/channels/${msg.guild.id}/${msg.member.voiceChannel.id}`);
-			msg.channel.send(embed);
-		}else{
-			msg.reply("you aren't in a voice channel")
-		}
-		return;
-	}	
+	cmd.run(bot, msg, args);
 
 	//MUSIC
 	if(command === `${prefix}join`){
