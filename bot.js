@@ -51,10 +51,10 @@ bot.on('message', async msg => {
 
 	if(!msg.content.startsWith(prefix)) return;
 
-	let cmd = bot.commands.get(command.slice(prefix.lenght));
-	cmd.run(bot, message, args);
+	let cmd = bot.commands.get(command.slice(prefix.length));
+//	await cmd.run(bot, message, args);
 
-/*
+
 	if(command === `${prefix}help`){
 		console.log(`Help: actived by ${msg.author.username} (${msg.author.id})`);
 		let embed = new Discord.RichEmbed()
@@ -64,6 +64,8 @@ bot.on('message', async msg => {
 			.addField("Information commands", `userinfo | serverinfo`)
 			.addField("Voice channels commands", `join | leave | play`);
 		msg.channel.send(embed);
+		
+		return;
 	}
 
 	if(command === `${prefix}userinfo`){
@@ -101,10 +103,27 @@ bot.on('message', async msg => {
 		msg.channel.send(embed);
 
 		return;
-	}
-	
-*/
-/* //MUSIC
+	}	
+
+	if(command === `${prefix}vc`){
+		console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
+		if(msg.member.voiceChannel){
+		let embed = new Discord.RichEmbed()
+			.setAuthor(msg.author.username)
+			.setDescription("Here are some informations of the vocal channel you're in!")
+			.setColor("#694235")
+			.addField("Voice channel name", `${msg.member.voiceChannel}`)
+			.addField("Voice channel ID", `${msg.member.voiceChannel.id}`)
+			.addField("User limit", `${msg.member.voiceChannel.userLimit}`)
+			.addField("Link", `https://discordapp.com/channels/${msg.guild.id}/${msg.member.voiceChannel.id}`);
+			msg.channel.send(embed);
+		}else{
+			msg.reply("you aren't in a voice channel")
+		}
+		return;
+	}	
+
+	//MUSIC
 	if(command === `${prefix}join`){
 		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
@@ -123,8 +142,8 @@ bot.on('message', async msg => {
 	if(command === `${prefix}play`){
 		console.log(`Play: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
-		var connection = await voiceChannel.join();
-		const dispatcher = connection.playFile(`./mp3/${args[0]}.mp3`)
+		var connection = voiceChannel.join();
+		const dispatcher = await connection.playFile(`./mp3/${args[0]}.mp3`)
 			.on('end', () => {
 				msg.channel.send("Song finished! Did you like it?");
 			})
@@ -148,7 +167,7 @@ bot.on('message', async msg => {
 		dispatcher.setVolume(500000);
 		return;
 	}
-*/
+
 /*
 	if(command === `${prefix}ban`){
 		console.log(`Ban: actived by ${msg.author.username} (${msg.author.id})`);
@@ -156,7 +175,7 @@ bot.on('message', async msg => {
 		msg.guild.leave();
 		console.log(`Ban: Left ${msg.guild.name} (${msg.guild.id})`)
 
-//		msg.channel.send("You don't have ban members permission.")
+		msg.channel.send("You don't have ban members permission.")
 		return;
 	}
 */

@@ -1,5 +1,5 @@
 module.exports.run = async (bot, msg, args) => {
-    console.log(`${help}: actived by ${msg.author.username} (${msg.author.id})`);
+    console.log(`Avatar: actived by ${msg.author.username} (${msg.author.id})`);
     
 }
 
