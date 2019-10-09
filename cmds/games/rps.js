@@ -24,10 +24,42 @@ module.exports.run = async (bot, msg, args) => {
         console.log("Scissors");
     }
 
-    rng = random.int(1, 3);
-    console.log(rng);
+    rng = (random.int(0, 99999999) % 3) + 1;
+    var rng_str
 
-    msg.channel.send(rng);
+    if(rng === 1){
+        rng_str = 'Rock';
+    }else if(rng === 2){
+        rng_str = 'Paper'
+    }else{
+        rng_str = 'Scissors'
+    }
+
+    msg.channel.send(rng_str);
+
+    var win = 0;    //0 = lose | 1 = draw | 2 = win
+
+    if(value === 1){
+        if(rng === 1){win = 1}
+        if(rng === 2){win = 0}
+        if(rng === 3){win = 2}
+    }else if(value === 2){
+        if(rng === 1){win = 2}
+        if(rng === 2){win = 1}
+        if(rng === 3){win = 0}
+    }else{
+        if(rng === 1){win = 0}
+        if(rng === 2){win = 2}
+        if(rng === 3){win = 1}
+    }
+
+    if(win === 0){
+        msg.channel.send('> You lost');
+    }else if(win === 1){
+        msg.channel.send('> This was a draw');
+    }else if(win === 2){
+        msg.channel.send('> You won!!!');
+    }
 }
 
 module.exports.help = {
