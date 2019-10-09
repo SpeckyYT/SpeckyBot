@@ -55,21 +55,6 @@ bot.on('message', async msg => {
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
 
 	//MUSIC
-	if(command === `${prefix}join`){
-		console.log(`Join: actived by ${msg.author.username} (${msg.author.id})`);
-		var voiceChannel = msg.member.voiceChannel;
-		var connection = await voiceChannel.join();
-		voiceChannel.join()
-  		.then(connection => console.log('Connected!'))
-		return;
-	}
-
-	if(command === `${prefix}leave`){
-		console.log(`Leave: actived by ${msg.author.username} (${msg.author.id})`);
-		msg.member.voiceChannel.leave();
-		return;
-	}
-
 	if(command === `${prefix}play`){
 		console.log(`Play: actived by ${msg.author.username} (${msg.author.id})`);
 		var voiceChannel = msg.member.voiceChannel;
