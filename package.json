@@ -1,7 +1,7 @@
 {
   "name": "speckybot",
   "version": "0.0.1",
-  "description": "Test Bot",
+  "description": "This is an awesome bot made by SpeckyYT",
   "main": "bot.js",
   "dependencies": {
     "discord.js": "^11.5.1",
@@ -10,11 +10,12 @@
     "opusscript": "0.0.7",
     "request": "^2.88.0",
     "ytdl-core": "^1.0.0",
-    "ytdl-core-discord": "^1.0.3"
+    "ytdl-core-discord": "^1.0.3",
+    "gdprofiles": "^1.0.2-rc.2"
   },
   "devDependencies": {},
   "scripts": {
-	"start": "node bot.js"
+    "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SpeckyYT",

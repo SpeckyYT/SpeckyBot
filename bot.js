@@ -17,7 +17,7 @@ const prefix = config.prefix;
 console.log(prefix);
 
 
-fs.readdir("./cmds/", (err, files) => {
+fs.readdir("./cmds/utilities/", (err, files) => {
 	if(err) console.error(err);
 
 	let jsfiles = files.filter(f => f.split(".").pop() === "js")
@@ -28,12 +28,45 @@ fs.readdir("./cmds/", (err, files) => {
 	console.log(`Loading ${jsfiles.lenght} commands!`)
 
 	jsfiles.forEach((f,i) => {
-		let props = require(`./cmds/${f}`)
+		let props = require(`./cmds/utilities/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
 		bot.commands.set(props.help.name,props);
 	});
 });
 
+fs.readdir("./cmds/music/", (err, files) => {
+	if(err) console.error(err);
+
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
+	if(jsfiles.lenght <= 0){
+		console.log("No commands to load!");
+		return;
+	}
+	console.log(`Loading ${jsfiles.lenght} commands!`)
+
+	jsfiles.forEach((f,i) => {
+		let props = require(`./cmds/music/${f}`)
+		console.log(`${i+1}: ${f} loaded!`)
+		bot.commands.set(props.help.name,props);
+	});
+});
+
+fs.readdir("./cmds/misc/", (err, files) => {
+	if(err) console.error(err);
+
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
+	if(jsfiles.lenght <= 0){
+		console.log("No commands to load!");
+		return;
+	}
+	console.log(`Loading ${jsfiles.lenght} commands!`)
+
+	jsfiles.forEach((f,i) => {
+		let props = require(`./cmds/misc/${f}`)
+		console.log(`${i+1}: ${f} loaded!`)
+		bot.commands.set(props.help.name,props);
+	});
+});
 
 bot.login(config.token);
 
@@ -51,8 +84,10 @@ bot.on('message', async msg => {
 	let cmd = bot.commands.get(command.slice(prefix.length));
 	if(cmd){
 		cmd.run(bot, msg, args);
-	}
+		return;
+	}else{
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
+	}
 
 	//MUSIC
 	if(command === `${prefix}play`){
