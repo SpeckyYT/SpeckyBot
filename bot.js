@@ -18,6 +18,7 @@ console.log(prefix);
 
 
 fs.readdir("./cmds/utilities/", (err, files) => {
+	console.log("Utilities loading");
 	if(err) console.error(err);
 
 	let jsfiles = files.filter(f => f.split(".").pop() === "js")
@@ -35,6 +36,7 @@ fs.readdir("./cmds/utilities/", (err, files) => {
 });
 
 fs.readdir("./cmds/music/", (err, files) => {
+	console.log("Music loading");
 	if(err) console.error(err);
 
 	let jsfiles = files.filter(f => f.split(".").pop() === "js")
@@ -52,6 +54,7 @@ fs.readdir("./cmds/music/", (err, files) => {
 });
 
 fs.readdir("./cmds/misc/", (err, files) => {
+	console.log("Misc loading");
 	if(err) console.error(err);
 
 	let jsfiles = files.filter(f => f.split(".").pop() === "js")
@@ -63,6 +66,24 @@ fs.readdir("./cmds/misc/", (err, files) => {
 
 	jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/misc/${f}`)
+		console.log(`${i+1}: ${f} loaded!`)
+		bot.commands.set(props.help.name,props);
+	});
+});
+
+fs.readdir("./cmds/games/", (err, files) => {
+	console.log("Games loading");
+	if(err) console.error(err);
+
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
+	if(jsfiles.lenght <= 0){
+		console.log("No commands to load!");
+		return;
+	}
+	console.log(`Loading ${jsfiles.lenght} commands!`)
+
+	jsfiles.forEach((f,i) => {
+		let props = require(`./cmds/games/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
 		bot.commands.set(props.help.name,props);
 	});
