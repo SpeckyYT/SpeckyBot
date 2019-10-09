@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const random = require('random');
 
 random.int(min = 0, max = 1)
