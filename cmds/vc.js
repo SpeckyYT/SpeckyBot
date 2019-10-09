@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, msg, args) => {
-	console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
+	console.log(`VC: actived by ${msg.author.username} (${msg.author.id})`);
 	if(msg.member.voiceChannel){
 	let embed = new Discord.RichEmbed()
 		.setAuthor(msg.author.username)
