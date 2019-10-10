@@ -10,13 +10,10 @@ module.exports.run = async (bot, msg, args) => {
 
     if(args[0] === "rock"){
         value = 1;
-        console.log("Rock");
     }else if(args[0] === "paper"){
         value = 2;
-        console.log("Paper");
     }else if(args[0] === "scissors"){
         value = 3;
-        console.log("Scissors");
     }else{
         msg.channel.send("Invalid hand sign");
         return;
