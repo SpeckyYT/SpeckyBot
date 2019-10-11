@@ -16,6 +16,7 @@ const prefix = config.prefix;
 
 console.log(prefix);
 
+bot.login(config.token);
 
 fs.readdir("./cmds/utilities/", (err, files) => {
 	console.log("Utilities loading");
@@ -88,8 +89,6 @@ fs.readdir("./cmds/games/", (err, files) => {
 		bot.commands.set(props.help.name,props);
 	});
 });
-
-bot.login(config.token);
 
 bot.on('ready', () => {
   console.log(`Logged in as ${bot.user.tag}!`);
