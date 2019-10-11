@@ -2,10 +2,9 @@ let {getDiffImg} = require('gdprofiles');
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, msg, args) => {
-    console.log(`GDDiff: actived by ${msg.author.username} (${msg.author.id})`);
-    let bmsg = await msg.channel.send("Generating difficulty image...");
-
-    if(!args[0]) return;
+    const bmsg = msg.channel.send("Generating difficulty image...");
+/*
+    if(!args[0]) return console.log("0");;
     console.log("1");
     if(!args[0].isInteger) return;
     console.log("2");
@@ -13,16 +12,31 @@ module.exports.run = async (bot, msg, args) => {
     console.log("3");
     if(!args[2]) return;
     console.log("4");
+*/
 
+    const diffNum = args[0];
+    const featured = args[1];
+    const epic = args[2];
+    //https://gdicon.net/icons/difficulty_09_featured.png
 
-    let diffNum = 10;
-    let featured = false;
-    let epic = true;
+    const rate = 'didnt work'; 
+    const link = 'bruh';
 
-    const attachment = new Discord.Attachment(`${getDiffImg(diffNum, featured, epic)}`); // => String
+    if(featured = true){
+        rate = '_featured';
+    }else if(epic = true){
+        rate = '_epic';
+    }else{
+        rate = '';
+    }
+
+    link = `gdicon.net/icons/difficulty_${diffNum.padStart(2, "0")}`
+
     console.log(attachment);
+    msg.channel.send("hewwo UwU");
+    msg.channel.send();
     msg.channel.send(attachment);
-    await bmsg.delete();
+    bmsg.delete();
 }
 
 module.exports.help = {

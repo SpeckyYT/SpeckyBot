@@ -98,12 +98,13 @@ bot.on('ready', () => {
 bot.on('message', async msg => {
 	if (!msg.content.startsWith(prefix) || msg.author.bot || msg.channel.type === "dm") return;
 
-	let args = msg.content.split(" ");
+	let args = msg.content.toLowerCase().split(" ");
 	let command = args[0];
 	args = args.slice(1);
 
 	let cmd = bot.commands.get(command.slice(prefix.length));
 	if(cmd){
+		console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id})`);
 		cmd.run(bot, msg, args);
 		return;
 	}else{

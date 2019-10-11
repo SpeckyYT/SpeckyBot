@@ -1,8 +1,6 @@
 const random = require('random');
 
 module.exports.run = async (bot, msg, args) => {
-    console.log(`RPS: actived by ${msg.author.username} (${msg.author.id})`);
-
     if(!args[0]) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
 
     var value = 4;

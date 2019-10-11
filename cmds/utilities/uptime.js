@@ -1,8 +1,7 @@
 module.exports.run = async (bot, msg, args) => {
-    console.log(`Uptime: actived by ${msg.author.username} (${msg.author.id})`);
     function duration(ms){
         const mil = Math.floor((ms % 1000)).toString();
-        const sec = Math.floor((ms / 1000)).toString();
+        const sec = Math.floor((ms / 1000) % 60).toString();
         const min = Math.floor((ms / (1000 * 60)) % 60).toString();
         const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString();
         const day = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString();

@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, msg, args) => {
-	console.log(`Server: actived by ${msg.author.username} (${msg.author.id})`);
 	let embed = new Discord.RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("These are the informations about the server you're in!")
