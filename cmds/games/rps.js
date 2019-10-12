@@ -21,11 +21,11 @@ module.exports.run = async (bot, msg, args) => {
     var rng_str;
 
     if(rng === 1){
-        rng_str = 'Rock';
+        rng_str = ':fist: Rock';
     }else if(rng === 2){
-        rng_str = 'Paper';
+        rng_str = ':raised_hand: Paper';
     }else{
-        rng_str = 'Scissors';
+        rng_str = ':v: Scissors';
     }
 
     msg.channel.send(rng_str);
@@ -59,5 +59,5 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
     name: "rps",
-    aliases: []
+    aliases: ["rockscissorspaper"]
 }
