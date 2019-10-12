@@ -2,6 +2,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client({disableEveryone: true});
 bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
 
 //other stuff
 const util = require('util');
@@ -13,6 +14,7 @@ path        = require('path')
 
 const config = require("../config.json"); //remove one dot if you h
 const prefix = config.prefix;
+const owner  = config.owner;
 
 console.log(prefix);
 
@@ -22,7 +24,7 @@ fs.readdir("./cmds/utilities/", (err, files) => {
 	console.log("Utilities loading");
 	if(err) console.error(err);
 
-	let jsfiles = files.filter(f => f.split(".").pop() == "js")
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
 	if(jsfiles.lenght <= 0){
 		console.log("No commands to load!");
 		return;
@@ -32,7 +34,10 @@ fs.readdir("./cmds/utilities/", (err, files) => {
 	jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/utilities/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
-		bot.commands.set(props.help.name,props);
+		bot.commands.set(props.config.name,props);
+		props.config.aliases.forEach((alias) =>{
+			bot.aliases.set(alias, props.config.aliases);
+		});
 	});
 });
 
@@ -40,7 +45,7 @@ fs.readdir("./cmds/music/", (err, files) => {
 	console.log("Music loading");
 	if(err) console.error(err);
 
-	let jsfiles = files.filter(f => f.split(".").pop() == "js")
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
 	if(jsfiles.lenght <= 0){
 		console.log("No commands to load!");
 		return;
@@ -50,7 +55,10 @@ fs.readdir("./cmds/music/", (err, files) => {
 	jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/music/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
-		bot.commands.set(props.help.name,props);
+		bot.commands.set(props.config.name,props);
+		props.config.aliases.forEach((alias) =>{
+			bot.aliases.set(alias, props.config.aliases);
+		});
 	});
 });
 
@@ -58,7 +66,7 @@ fs.readdir("./cmds/misc/", (err, files) => {
 	console.log("Misc loading");
 	if(err) console.error(err);
 
-	let jsfiles = files.filter(f => f.split(".").pop() == "js")
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
 	if(jsfiles.lenght <= 0){
 		console.log("No commands to load!");
 		return;
@@ -68,7 +76,10 @@ fs.readdir("./cmds/misc/", (err, files) => {
 	jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/misc/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
-		bot.commands.set(props.help.name,props);
+		bot.commands.set(props.config.name,props);
+		props.config.aliases.forEach((alias) =>{
+			bot.aliases.set(alias, props.config.aliases);
+		});
 	});
 });
 
@@ -76,7 +87,7 @@ fs.readdir("./cmds/games/", (err, files) => {
 	console.log("Games loading");
 	if(err) console.error(err);
 
-	let jsfiles = files.filter(f => f.split(".").pop() == "js")
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
 	if(jsfiles.lenght <= 0){
 		console.log("No commands to load!");
 		return;
@@ -86,7 +97,31 @@ fs.readdir("./cmds/games/", (err, files) => {
 	jsfiles.forEach((f,i) => {
 		let props = require(`./cmds/games/${f}`)
 		console.log(`${i+1}: ${f} loaded!`)
-		bot.commands.set(props.help.name,props);
+		bot.commands.set(props.config.name,props);
+		props.config.aliases.forEach((alias) =>{
+			bot.aliases.set(alias, props.config.aliases);
+		});
+	});
+});
+
+fs.readdir("./cmds/admin/", (err, files) => {
+	console.log("Admin loading");
+	if(err) console.error(err);
+
+	let jsfiles = files.filter(f => f.split(".").pop() === "js")
+	if(jsfiles.lenght <= 0){
+		console.log("No commands to load!");
+		return;
+	}
+	console.log(`Loading ${jsfiles.lenght} commands!`)
+
+	jsfiles.forEach((f,i) => {
+		let props = require(`./cmds/admin/${f}`)
+		console.log(`${i+1}: ${f} loaded!`)
+		bot.commands.set(props.config.name,props);
+		props.config.aliases.forEach((alias) =>{
+			bot.aliases.set(alias, props.config.name);
+		});
 	});
 });
 
@@ -101,10 +136,10 @@ bot.on('message', async msg => {
 	let command = args[0];
 	args = args.slice(1);
 
-	let cmd = bot.commands.get(command.slice(prefix.length));
+	let cmd = bot.commands.get(command.slice(prefix.length) || bot.commands.get(bot.aliases.get(command.slice(prefix.length))));
 	if(cmd){
 		console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id})`);
-		cmd.run(bot, msg, args);
+		cmd.run(bot, msg, args, owner, prefix);
 		return;
 	}else{
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");

@@ -6,6 +6,7 @@ module.exports.run = async (bot, msg, args) => {
     const dispatcher = connection.playFile(`./mp3/${args[0]}.mp3`);
 }
 
-module.exports.help = {
-	name: "stop"
+module.exports.config = {
+    name: "stop",
+    aliases: ["s"]
 }

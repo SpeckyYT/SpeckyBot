@@ -17,6 +17,7 @@ module.exports.run = async (bot, msg, args) => {
 	msg.channel.send(embed);
 }
 
-module.exports.help = {
-	name: "serverinfo"
+module.exports.config = {
+	name: "serverinfo",
+    aliases: []
 }

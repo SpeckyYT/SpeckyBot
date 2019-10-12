@@ -6,7 +6,7 @@ module.exports.run = async (bot, msg, args) => {
 
     let resp;
     try{
-        resp = math.eval(args.join(' '));
+        resp = math.evaluate(args.join(' '));
     } catch (e){
         return msg.channel.send('Sorry, please input a valid calculation.')
     }
@@ -18,6 +18,7 @@ module.exports.run = async (bot, msg, args) => {
 	msg.channel.send(embed);
 }
 
-module.exports.help = {
-	name: "math"
+module.exports.config = {
+	name: "math",
+    aliases: []
 }

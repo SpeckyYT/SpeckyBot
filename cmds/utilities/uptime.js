@@ -11,6 +11,7 @@ module.exports.run = async (bot, msg, args) => {
     msg.channel.send(`I have been online for: ${duration(bot.uptime)}`)
 }
 
-module.exports.help = {
-    name: "uptime"
+module.exports.config = {
+    name: "uptime",
+    aliases: []
 }

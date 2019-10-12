@@ -12,6 +12,7 @@ module.exports.run = async (bot, msg, args) => {
 	msg.channel.send(embed);
 }
 
-module.exports.help = {
-	name: "help"
+module.exports.config = {
+	name: "help",
+    aliases: []
 }

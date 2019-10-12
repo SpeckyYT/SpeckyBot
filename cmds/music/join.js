@@ -12,6 +12,7 @@ module.exports.run = async (bot, msg, args) => {
 	}
 }
 
-module.exports.help = {
-	name: "join"
+module.exports.config = {
+	name: "join",
+	aliases: ["j"]
 }

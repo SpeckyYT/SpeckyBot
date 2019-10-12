@@ -9,6 +9,7 @@ module.exports.run = async (bot, msg, args) => {
 	}
 }
 
-module.exports.help = {
-	name: "leave"
+module.exports.config = {
+	name: "leave",
+	aliases: ["l"]
 }
