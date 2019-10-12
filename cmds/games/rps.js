@@ -59,5 +59,5 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
     name: "rps",
-    aliases: ["rockscissorspaper"]
+    aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }
