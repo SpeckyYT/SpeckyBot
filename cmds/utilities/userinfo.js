@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
 	let embed = new Discord.RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("This is your user profile!")
@@ -16,5 +16,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
 	name: "userinfo",
-    aliases: []
+	description: "Informations about the channel you're chatting in!",
+	usage: ``,
+	accessableby: "Members",
+    aliases: ["ui","useri","usinfo"]
 }

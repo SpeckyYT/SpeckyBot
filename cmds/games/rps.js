@@ -1,6 +1,6 @@
 const random = require('random');
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
     if(!args[0]) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
 
     var value = 4;
@@ -59,5 +59,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
     name: "rps",
+	description: "Lets you play Rock Paper Scissors with the bot!",
+	usage: `<handsign>`,
+	accessableby: "Members",
     aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }

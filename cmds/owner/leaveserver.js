@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, owner) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
     if(!msg.author.id === owner){
         msg.channel.send("You aren't my owner.");
         return;
@@ -9,5 +9,8 @@ module.exports.run = async (bot, msg, args, owner) => {
 
 module.exports.config = {
     name: "leaveserver",
-    aliases: []
+	description: "The bot will leave the servers where there isn't the owner!",
+	usage: ``,
+	accessableby: "Bot Owner",
+    aliases: ["ls"]
 }

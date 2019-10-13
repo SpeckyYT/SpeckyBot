@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
 	if(msg.member.voiceChannel){
 		var voiceChannel = msg.member.voiceChannel;
 		var connection = await voiceChannel.join();
@@ -14,5 +14,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
 	name: "join",
+	description: "Does the bot join a VC!",
+	usage: ``,
+	accessableby: "Members",
 	aliases: ["j"]
 }

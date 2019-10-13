@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
 	let embed = new Discord.RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("These are the informations about the server you're in!")
@@ -19,5 +19,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
 	name: "serverinfo",
-    aliases: []
+	description: "Informations about the server you're in!",
+	usage: ``,
+	accessableby: "Members",
+    aliases: ["si","serveri"]
 }

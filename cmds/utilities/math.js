@@ -1,7 +1,7 @@
 const math = require("mathjs");
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
     if(!args[0]) return msg.channel.send('Please input a calculation.');
 
     let resp;
@@ -20,5 +20,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
 	name: "math",
-    aliases: []
+	description: "The math command to evaluate some math!",
+	usage: `<problem>`,
+	accessableby: "Members",
+    aliases: ["maths","mathematic","mathematics"]
 }

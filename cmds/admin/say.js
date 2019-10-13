@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args, owner) => {
-    if(!msg.member.hasPermission(["MANAGE_MESSAGES"]) && !msg.member.hasPermission(["ADMINISTRATOR"]) && !msg.member.id == owner){
+module.exports.run = async (bot, msg, args, owner, prefix) => {
+    if(!msg.member.hasPermission(["MANAGE_MESSAGES"]) && !msg.member.hasPermission(["ADMINISTRATOR"]) && !(msg.member.id == owner)){
         msg.channel.send("You can't use this command!");
         return;
     }else{
@@ -21,5 +21,8 @@ module.exports.run = async (bot, msg, args, owner) => {
 
 module.exports.config = {
     name: "say",
+	description: "Lets the bot say something for you!",
+	usage: `<text>`,
+	accessableby: "Server Admins and Moderators",
     aliases: ["announcement"]
 }

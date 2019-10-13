@@ -27,6 +27,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 
 module.exports.config = {
         name: "eval",
-        aliases: [],
-        description: "Evaluates code"
+        description: "Runs custom code directly from Discord!",
+        usage: `<code in js>`,
+        accessableby: "Bot Owner",        
+        aliases: ["evaluate"],
 }

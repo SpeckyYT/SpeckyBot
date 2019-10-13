@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
     function duration(ms){
         const mil = Math.floor((ms % 1000)).toString();
         const sec = Math.floor((ms / 1000) % 60).toString();
@@ -13,5 +13,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
     name: "uptime",
-    aliases: []
+	description: "Information about how long the bot has been online!",
+	usage: ``,
+	accessableby: "Members",
+    aliases: ["upt"]
 }

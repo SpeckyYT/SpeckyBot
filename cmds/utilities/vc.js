@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, msg, args, owner, prefix) => {
 	if(msg.member.voiceChannel){
 	let embed = new Discord.RichEmbed()
 		.setAuthor(msg.author.username)
@@ -18,5 +18,8 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
 	name: "vc",
-    aliases: []
+	description: "Informations about the vocal channel you're in!",
+	usage: ``,
+	accessableby: "Members",
+    aliases: ["vocalchannel","vcinfo"]
 }
