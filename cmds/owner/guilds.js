@@ -1,5 +1,5 @@
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!msg.author.id === owner){
+    if(!(msg.author.id === owner)){
         msg.channel.send("You aren't my owner.");
         return;
     }
