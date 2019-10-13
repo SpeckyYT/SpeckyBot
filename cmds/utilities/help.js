@@ -1,37 +1,42 @@
-const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
+const { readdirSync } = require("fs")
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-	if(args[0] === "help") return msg.channel.send(`Just do ${prefix}help instead`)
+	const embed = new RichEmbed()
+	.setColor('#000000')
+	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
+	.setThumbnail(bot.user.displayAvatarURL)
 
-	if(args[0]){
-		msg.delete();
-		let cmd = args[0];
-		if(bot.commands.has(cmd)){
-			cmd = bot.commands.get(cmd);
-			let embed = new Discord.RichEmbed()
-			.setColor("#000000")
-			.setAuthor('SpeckyBot Help', msg.guild.iconURL)
-			.setDescription(`The bot prefix is: ${prefix}\n\n**Command:** ${cmd.config.name}\n**Description:** ${cmd.config.description || "No Description"}\n**Usage:** ${cmd.config.usage || "No Usage"}\n**Aliases** ${cmd.config.aliases || cmd.config.noaliases}`);
-			msg.channel.send(embed);
-		}
-	}
-	if(!args[0]){
-		msg.delete();
-		let embed = new Discord.RichEmbed()
-		.setAuthor(`Help Command!`, msg.guild.iconURL)
-		.setColor("#000000")
-		.setDescription(`${msg.author.username} check your DMs!`)
+	if(!args[0]) {
+		const categories = readdirSync("./cmds/")
 
-		let Sembed = new Discord.RichEmbed()
-		.setAuthor(`${bot.user.username} Help`, msg.guild.iconURL)
-		.setColor("#000000")
-		.setThumbnail(bot.user.displayAvatarURL)
-		.setTimestamp()
-		.setDescription(`These are the avaiable commands for SpeckyBot!\nThe bot prefix is: ${prefix}`)
-		.addField(`Commands:`, `||this will be added soon||`)
-		.setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
-		msg.channel.send(embed).then(m => m.delete(10000));
-		msg.author.send(Sembed);
+		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${prefix}**`)
+		embed.setFooter(`© ${msg.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
+
+		categories.forEach(category => {
+			const dir = bot.commands.filter(c => c.config.category === category)
+			const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
+			try {
+				embed.addField(`❯ ${capitalise} [${dir.size}]:`, dir.map(c => `\`${c.config.name}\``).join(" "))
+			} catch(e) {
+				console.log(e)
+			}
+		})
+
+		return msg.channel.send(embed)
+	} else {
+		let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
+		if(!command) return msg.channel.send(embed.setTitle("Invalid Command.").setDescription(`Do \`${prefix}help\` for the list of the commands.`))
+		command = command.config
+
+		embed.setDescription(`The bot's prefix is: \`${prefix}\`\n
+		**Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
+		**Description:** ${command.description || "No Description provided."}
+		**Usage:** ${command.usage ? `\`${prefix}${command.name} ${command.usage}\`` : "No Usage"}
+		**Accessible by:** ${command.accessableby || "Members"}
+		**Aliases:** ${command.aliases ? command.aliases.join(", ") : "None."}`)
+
+		return msg.channel.send(embed)
 	}
 }
 

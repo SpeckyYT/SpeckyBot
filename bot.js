@@ -43,7 +43,7 @@ function loadCommands(folder){
 
 bot.on('ready', () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
-	const folders = ["utilities", "music", "misc", "games", "admin"];
+	const folders = ["utilities", "music", "misc", "games", "admin","owner"];
   	folders.forEach(fold => {loadCommands(fold)})
 });
 
