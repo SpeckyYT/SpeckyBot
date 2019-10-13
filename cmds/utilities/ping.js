@@ -7,5 +7,5 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.config = {
     name: "ping",
-    aliases: []
+    aliases: ["pong", "pin", "pon"]
 }
