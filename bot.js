@@ -25,11 +25,11 @@ function loadCommands(folder){
 		console.log(`${folder.toUpperCase()} loading`);
 		if(err) console.error(err);
 		let jsfiles = files.filter(f => f.split(".").pop() === "js")
-		if(jsfiles.lenght <= 0){
+		if(jsfiles.length <= 0){
 			console.log("No commands to load!");
 			return;
 		}
-		console.log(`Loading ${jsfiles.lenght} commands!`)
+		console.log(`Loading ${jsfiles.length} commands!`)
 		jsfiles.forEach((f,i) => {
 			let props = require(`./cmds/${folder}/${f}`)
 			console.log(`${i+1}: ${f} loaded!`)
