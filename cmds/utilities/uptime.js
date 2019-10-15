@@ -14,7 +14,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "uptime",
 	description: "Information about how long the bot has been online!",
-	usage: ``,
+    usage: ``,
+    category: `utilities`,
 	accessableby: "Members",
     aliases: ["upt"]
 }

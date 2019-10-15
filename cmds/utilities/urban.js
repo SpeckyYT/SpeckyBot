@@ -32,7 +32,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "urban",
     description: "Gives you informations about a word you don't know!",
-    usage: `<query>`,
+    usage: `<search/random> <query>`,
+    category: `utilities`,
     accessableby: "Members",
     aliases: ["urba","urb","ud","urbandictionary","dictionary"]
 }

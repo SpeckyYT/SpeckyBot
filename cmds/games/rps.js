@@ -60,7 +60,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "rps",
 	description: "Lets you play Rock Paper Scissors with the bot!",
-	usage: `<handsign>`,
+    usage: `<handsign>`,
+    category: `games`,
 	accessableby: "Members",
     aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }

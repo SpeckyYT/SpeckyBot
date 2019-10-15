@@ -10,7 +10,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "leaveserver",
 	description: "The bot will leave the servers where there isn't the owner!",
-	usage: ``,
+    usage: ``,
+    category: `owner`,
 	accessableby: "Bot Owner",
     aliases: ["ls"]
 }

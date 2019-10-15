@@ -3,12 +3,12 @@ const { readdirSync } = require("fs")
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
 	const embed = new RichEmbed()
-	.setColor('#000000')
+	.setColor('#FF00AA')
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
 	.setThumbnail(bot.user.displayAvatarURL)
 
 	if(!args[0]) {
-		const categories = readdirSync('../cmds')
+		const categories = readdirSync('./cmds/')
 
 		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${prefix}**`)
 		embed.setFooter(`© ${msg.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
@@ -17,9 +17,9 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 			const dir = bot.commands.filter(c => c.config.category === category)
 			const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
 			try {
-				embed.addField(`❯ ${capitalise} [${dir.size}]:`, dir.map(c => `\`${c.config.name}\``).join(" "))
+				embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`) // `${dir.map(c => `\`${c.config.name}\``).join(" ")}`
 			} catch(e) {
-				console.log(e)
+				//console.log(e)
 			}
 		})
 
@@ -44,6 +44,7 @@ module.exports.config = {
 	name: "help",
 	description: "The help for this bot!",
 	usage: `<command>`,
+	category: `utilities`,
 	accessableby: "Members",
     aliases: ["h", "halp", "hel"]
 }

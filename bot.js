@@ -60,6 +60,7 @@ bot.on('message', async msg => {
 		cmd.run(bot, msg, args, owner, prefix);
 		return;
 	}else{
+	console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id})`);
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
 	}
 });

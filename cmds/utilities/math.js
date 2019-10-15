@@ -21,7 +21,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
 	name: "math",
 	description: "The math command to evaluate some math!",
-	usage: `<problem>`,
+    usage: `<problem>`,
+    category: `utilities`,
 	accessableby: "Members",
     aliases: ["maths","mathematic","mathematics"]
 }

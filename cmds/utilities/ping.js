@@ -8,7 +8,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "ping",
 	description: "Information about how fast the bot is!",
-	usage: ``,
+    usage: ``,
+    category: `utilities`,
 	accessableby: "Members",
     aliases: ["pong", "pin", "pon"]
 }

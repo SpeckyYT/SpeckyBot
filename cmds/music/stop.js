@@ -9,7 +9,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "stop",
 	description: "Stops the music that is playing!",
-	usage: ``,
+    usage: ``,
+    category: `music`,
 	accessableby: "Members",
     aliases: ["s"]
 }

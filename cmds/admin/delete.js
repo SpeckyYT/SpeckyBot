@@ -23,7 +23,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "delete",
 	description: "Deletes a message for you!",
-	usage: `<messageID>`,
+    usage: `<messageID>`,
+    category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["deletion", "msgdelet","msgdelete","delet"]
 }

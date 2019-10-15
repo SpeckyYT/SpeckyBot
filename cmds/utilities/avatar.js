@@ -5,7 +5,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "avatar",
 	description: "Wanna see your profile picture at highest resolution?",
-	usage: ``,
+    usage: ``,
+    category: `utilities`,
 	accessableby: "Members",
     aliases: ["a","ava"]
 }

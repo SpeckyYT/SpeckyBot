@@ -20,7 +20,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "say",
 	description: "Lets the bot say something for you!",
-	usage: `<text>`,
+    usage: `<text>`,
+    category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["announcement"]
 }

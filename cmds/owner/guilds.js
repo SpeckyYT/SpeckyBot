@@ -14,7 +14,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "guilds",
 	description: "Gets all servers IDs in which the bot is present!",
-	usage: ``,
+    usage: ``,
+    category: `owner`,
 	accessableby: "Bot Owner",
     aliases: ["guild","gilds","gild"]
 }

@@ -30,7 +30,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "randomimg",
 	description: "Gives you a random image from loremflickr.com!",
-	usage: `<keyword>`,
+    usage: `<keyword>`,
+    category: `misc`,
 	accessableby: "Members",
     aliases: ["randomimage","rimg"]
 }

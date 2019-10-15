@@ -31,7 +31,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "gddiff",
 	description: "Gives you one of the difficulty icons of Geometry Dash!",
-	usage: `<difficulty number (0-10)> <featured (0/1)> <epic (0/1)>`,
+    usage: `<difficulty number (0-10)> <featured (0/1)> <epic (0/1)>`,
+    category: `misc`,
 	accessableby: "Members",
     aliases: ["gddifficulty","geometrydashdiff"]
 }
