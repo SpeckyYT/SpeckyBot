@@ -12,6 +12,8 @@
     "opusscript": "0.0.7",
     "random": "^2.1.1",
     "request": "^2.88.0",
+    "superagent": "^5.1.0",
+    "urban": "^0.3.2",
     "ytdl-core": "^1.0.0",
     "ytdl-core-discord": "^1.0.3"
   },

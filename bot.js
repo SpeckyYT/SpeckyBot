@@ -22,14 +22,14 @@ bot.login(config.token);
 
 function loadCommands(folder){
 	fs.readdir(`./cmds/${folder}/`, (err, files) => {
-		console.log(`${folder.toUpperCase()} loading`);
 		if(err) console.error(err);
 		let jsfiles = files.filter(f => f.split(".").pop() === "js")
 		if(jsfiles.length <= 0){
 			console.log("No commands to load!");
 			return;
 		}
-		console.log(`Loading ${jsfiles.length} commands!`)
+		console.log(``)
+		console.log(`Loading ${jsfiles.length} ${folder.toUpperCase()} commands!`)
 		jsfiles.forEach((f,i) => {
 			let props = require(`./cmds/${folder}/${f}`)
 			console.log(`${i+1}: ${f} loaded!`)
@@ -44,7 +44,7 @@ function loadCommands(folder){
 bot.on('ready', () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
 	const folders = ["utilities", "music", "misc", "games", "admin","owner"];
-  	folders.forEach(fold => {loadCommands(fold)})
+	folders.forEach(fold => {loadCommands(fold)});
 });
 
 bot.on('message', async msg => {

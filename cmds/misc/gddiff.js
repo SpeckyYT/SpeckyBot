@@ -16,7 +16,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 
         if(featured == true){
             rate = '_featured';
-        }else if(epic == true){
+        }
+        if(epic == true){
             rate = '_epic';
         }else{
             rate = '';
