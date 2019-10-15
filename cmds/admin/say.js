@@ -7,15 +7,13 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     }else{
         let argsresult;
         let channel = msg.mentions.channels.first()
-
         if(channel){
-            argsresult = args.slice(1).join(" ");
+            argsresult = msg.content.split(" ").slice(2).join(" ");
             channel.send(argsresult);
         }else{
-            argsresult = args.join(" ");
+            argsresult = msg.content.split(" ").slice(1).join(" ");
             msg.channel.send(argsresult);
         }
-        msg.delete(5000);
     }
 }
 
