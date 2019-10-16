@@ -56,11 +56,18 @@ bot.on('message', async msg => {
 
 	let cmd = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
 	if(cmd){
-		console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id})`);
+		console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
 		cmd.run(bot, msg, args, owner, prefix);
 		return;
 	}else{
 	console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id})`);
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
 	}
+});
+
+let prompt = process.openStdin();
+prompt.addListener("data", res => {
+	channel = fs.readFileSync("../cnscnl.txt");
+	let result = res.toString().trim().split(/ +/g);
+	bot.channels.get(`${channel}`).send(result.join(" "));
 });
