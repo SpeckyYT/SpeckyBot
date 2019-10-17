@@ -10,11 +10,16 @@ const ytdl = require('ytdl-core');
 const ytdlDiscord = require('ytdl-core-discord');
 fs          = require('fs');
 request     = require('request');
-path        = require('path')
+path        = require('path');
+http = require('http');
+
+http.createServer(onRequest).listen(8888);
 
 const config = require("../config.json"); //remove one dot if you h
 const prefix = config.prefix;
 const owner  = config.owner;
+
+var commandslog = [[]];
 
 console.log(prefix);
 
@@ -41,6 +46,14 @@ function loadCommands(folder){
 	});
 }
 
+function onRequest(request, response){
+	response.writeHead(200, {'Content-Type': 'text/plain'});
+	commandslog.forEach((cmd,status,username,user,channel,server)=>{
+		response.write(`${cmd} ${status} ${username} ${user} ${channel} ${server}\n`);
+	});
+	response.end();
+}
+
 bot.on('ready', () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
 	const folders = ["utilities", "music", "misc", "games", "admin","owner"];
@@ -57,12 +70,14 @@ bot.on('message', async msg => {
 	let cmd = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
 	if(cmd){
 		console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
+		var pushcmd = {"command": cmd, "status": "acceptet", "username": msg.author.tag, "user": msg.author.id, "channel": msg.channel.id, "server": msg.guild.id};
 		cmd.run(bot, msg, args, owner, prefix);
-		return;
 	}else{
 	console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id})`);
+	var pushcmd = {"command": cmd, "status": "rejected", "username": msg.author.tag, "user": msg.author.id, "channel": msg.channel.id, "server": msg.guild.id};
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
 	}
+	commandslog.push(pushcmd);
 });
 
 let prompt = process.openStdin();
