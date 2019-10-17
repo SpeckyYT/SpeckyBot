@@ -4,10 +4,12 @@
   "description": "This is an awesome bot made by SpeckyYT",
   "main": "bot.js",
   "dependencies": {
+    "cleverbot-free": "^1.0.3",
     "discord.js": "^11.5.1",
     "ffmpeg-binaries": "^4.0.0",
     "gdprofiles": "^1.0.2-rc.2",
     "mathjs": "^6.2.3",
+    "neuro.js": "^0.1.7",
     "node-fetch": "^2.6.0",
     "opusscript": "0.0.7",
     "play-tts": "^1.0.7",

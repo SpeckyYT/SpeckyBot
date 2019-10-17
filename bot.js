@@ -23,8 +23,6 @@ var commandslog = [[]];
 
 console.log(prefix);
 
-bot.login(config.token);
-
 function loadCommands(folder){
 	fs.readdir(`./cmds/${folder}/`, (err, files) => {
 		if(err) console.error(err);
@@ -86,3 +84,5 @@ prompt.addListener("data", res => {
 	let result = res.toString().trim().split(/ +/g);
 	bot.channels.get(`${channel}`).send(result.join(" "));
 });
+
+bot.login(config.token);
