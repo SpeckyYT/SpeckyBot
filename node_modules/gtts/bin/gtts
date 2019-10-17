@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+const gTTS = require('../lib/gTTS');
+
+var argv = require('yargs')
+  .default({ language: 'en', verbose: 0 })
+  .usage('Usage: $0 "text to speed" [options]')
+  .demand(1)
+  .demand('language')
+  .alias('l', 'language')
+  .describe('l', 'Language to speak in. A ISO 639-1 language code supported by the Google Text to Speech API')
+  .demand('output')
+  .alias('o', 'output')
+  .describe('o', 'Destination file to output')
+  .demand('verbose')
+  .alias('v', 'verbose')
+  .describe('verbose', 'Print debug message')
+  .argv;
+
+var gtts = new gTTS(argv._[0], argv.language, argv.debug);
+gtts.save(argv.output, function (err) {
+  if (err) {
+    process.stderr.write('Error ' + err);
+    process.exit(1);
+    return;
+  }
+});
