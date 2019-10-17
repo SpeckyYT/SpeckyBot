@@ -7,7 +7,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 module.exports.config = {
     name: "chatbot",
 	description: "What about chatting to an AI?",
-    usage: ``,
+    usage: `<text>`,
     category: `utilities`,
 	accessableby: "Members",
     aliases: ["cb","chatai","cleverbot"]
