@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
         return;
     }
 
-    rng = (random.int(0, 99999999) % 3) + 1;
+    rng = (random.int(1, 3));
     var rng_str;
 
     if(rng === 1){
