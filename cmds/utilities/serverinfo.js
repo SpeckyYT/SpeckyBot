@@ -5,6 +5,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 		.setAuthor(msg.author.username)
 		.setDescription("These are the informations about the server you're in!")
 		.setColor("#420FF")
+		.setImage(msg.guild.iconURL)
 		.addField("Server name", `${msg.guild.name}`)
 		.addField("Server ID", `${msg.guild.id}`)
 		.addField("Server region", `${msg.guild.region}`)
