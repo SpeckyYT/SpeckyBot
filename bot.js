@@ -47,7 +47,7 @@ function loadCommands(folder){
 function onRequest(request, response){
 	response.writeHead(200, {'Content-Type': 'text/plain'});
 	commandslog.forEach((cmd,status,username,user,channel,server)=>{
-		response.write(`${cmd} ${status} ${username} ${user} ${channel} ${server}\n`);
+		response.write(`${cmd[0]} ${status} ${username} ${user} ${channel} ${server}\n`);
 	});
 	response.end();
 }
@@ -68,14 +68,14 @@ bot.on('message', async msg => {
 	let cmd = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
 	if(cmd){
 		console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
-		var pushcmd = {"command": cmd, "status": "acceptet", "username": msg.author.tag, "user": msg.author.id, "channel": msg.channel.id, "server": msg.guild.id};
+//		var pushcmd = {"command": cmd, "status": "acceptet", "username": msg.author.tag, "user": msg.author.id, "channel": msg.channel.id, "server": msg.guild.id};
 		cmd.run(bot, msg, args, owner, prefix);
 	}else{
 	console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id})`);
-	var pushcmd = {"command": cmd, "status": "rejected", "username": msg.author.tag, "user": msg.author.id, "channel": msg.channel.id, "server": msg.guild.id};
+//	var pushcmd = {"command": command, "status": "rejected", "username": msg.author.tag, "user": msg.author.id, "channel": msg.channel.id, "server": msg.guild.id};
 	msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
 	}
-	commandslog.push(pushcmd);
+//	commandslog.push(pushcmd.parse());
 });
 
 let prompt = process.openStdin();
