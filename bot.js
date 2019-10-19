@@ -64,8 +64,8 @@ bot.on('ready', () => {
 
 bot.on('message', async msg => {
 	if (msg.author.bot || msg.channel.type === "dm") return;
-	const msgguild = msg.guild.id; 
-	if(msg.channel.id == emb[msgguild].channel){
+	
+	if(msg.channel.id == emb[msg.guild.id].channel){
 		try{
 			const embed = new Discord.RichEmbed()
 				.setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
