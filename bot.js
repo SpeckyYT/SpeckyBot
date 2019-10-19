@@ -44,6 +44,9 @@ function loadCommands(folder){
 	});
 }
 
+const folders = ["utilities", "music", "misc", "games", "admin","owner"];
+folders.forEach(fold => {loadCommands(fold)});
+
 function onRequest(request, response){
 	response.writeHead(200, {'Content-Type': 'text/plain'});
 	commandslog.forEach((cmd,status,username,user,channel,server)=>{
@@ -54,8 +57,6 @@ function onRequest(request, response){
 
 bot.on('ready', () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
-	const folders = ["utilities", "music", "misc", "games", "admin","owner"];
-	folders.forEach(fold => {loadCommands(fold)});
 });
 
 bot.on('message', async msg => {
@@ -84,5 +85,13 @@ prompt.addListener("data", res => {
 	let result = res.toString().trim().split(/ +/g);
 	bot.channels.get(`${channel}`).send(result.join(" "));
 });
+/*
+bot.on('guildCreate', guild => {
+	guild.systemChannel.id.send("Hi, I'm new here... I would like to know what's up here!")
+});
 
+bot.on('guildDelete', guild => {
+	guild.systemChannel.id.send("Bye bye members of this server!")
+});
+*/
 bot.login(config.token);

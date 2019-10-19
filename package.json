@@ -12,6 +12,7 @@
     "neuro.js": "^0.1.7",
     "node-fetch": "^2.6.0",
     "opusscript": "0.0.7",
+    "osureplayparser": "^1.0.1",
     "play-tts": "^1.0.7",
     "random": "^2.1.1",
     "request": "^2.88.0",
