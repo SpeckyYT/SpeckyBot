@@ -8,6 +8,8 @@ bot.aliases = new Discord.Collection();
 const util = require('util');
 const ytdl = require('ytdl-core');
 const ytdlDiscord = require('ytdl-core-discord');
+const colorthief = require('color-thief');
+ 
 fs          = require('fs');
 request     = require('request');
 path        = require('path');
@@ -16,6 +18,7 @@ http = require('http');
 http.createServer(onRequest).listen(8888);
 
 const config = require("../config.json"); //remove one dot if you h
+const emb = require("../msgtoembed.json"); //remove one dot if you h
 const prefix = config.prefix;
 const owner  = config.owner;
 
@@ -57,6 +60,23 @@ function onRequest(request, response){
 
 bot.on('ready', () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
+});
+
+bot.on('message', async msg => {
+	if (msg.author.bot || msg.channel.type === "dm") return;
+	const msgguild = msg.guild.id; 
+	if(msg.channel.id == emb[msgguild].channel){
+		try{
+			const embed = new Discord.RichEmbed()
+				.setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+				.setDescription(`${msg.content}`)
+				.setColor('#FF00AA');
+			msg.channel.send(embed);
+		}catch(e){
+			return;
+		}
+		msg.delete();
+	}
 });
 
 bot.on('message', async msg => {
