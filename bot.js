@@ -8,12 +8,14 @@ bot.aliases = new Discord.Collection();
 const util = require('util');
 const ytdl = require('ytdl-core');
 const ytdlDiscord = require('ytdl-core-discord');
-const colorThief = require('color-thief');
- 
+const dominantcolorsJs = require("dominantcolors.js");
+
 fs          = require('fs');
 request     = require('request');
 path        = require('path');
-http = require('http');
+fetch		= require('node-fetch');
+url 		= require('url');
+http 		= require('http');
 
 http.createServer(onRequest).listen(8888);
 
@@ -64,17 +66,20 @@ bot.on('ready', () => {
 
 bot.on('message', async msg => {
 	if (msg.author.bot || msg.channel.type === "dm") return;
-	const msgguild = msg.guild.id; 
-	if(msg.channel.id == emb[msgguild].channel){
-		rgb = colorThief.getColor(msg.author.avatarURL);
-		red = ConvertBase(rgb.r).from(10).to(16);
-		green = ConvertBase(rgb.g).from(10).to(16);
-		blue = ConvertBase(rgb.g).from(10).to(16);
+	if(msg.channel.id == emb[msg.guild.id].channel){
+		try{
+			color = dominantcolorsJs(`${url(msg.author.avatarURL)}`, {
+				count: 2,
+				colorFormat: "hex" // hex or rgb
+			});
+		}catch(e){
+//			console.log(e);
+		}
 		try{
 			const embed = new Discord.RichEmbed()
 				.setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
 				.setDescription(`${msg.content}`)
-				.setColor(`#${red}${green}${blue}`);
+				.setColor('#000000');
 			msg.channel.send(embed);
 		}catch(e){
 			return;

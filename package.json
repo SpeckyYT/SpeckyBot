@@ -5,8 +5,8 @@
   "main": "bot.js",
   "dependencies": {
     "cleverbot-free": "^1.0.3",
-    "color-thief": "^2.2.5",
     "discord.js": "^11.5.1",
+    "dominantcolors.js": "0.0.5",
     "ffmpeg-binaries": "^4.0.0",
     "gdprofiles": "^1.0.2-rc.2",
     "mathjs": "^6.2.3",
