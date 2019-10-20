@@ -9,8 +9,10 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
         msg.channel.send("You have to tag a channel!")
         return;
     }else{
+
         msgtemb [msg.guild.id] = {
-            channel: msg.mentions.channels.first().id
+            channel: msg.mentions.channels.first().id,
+            name: args[1]
         }
         fs.writeFile("../msgtoembed.json", JSON.stringify(msgtemb, null, 4), err => {
             if(err) throw err;

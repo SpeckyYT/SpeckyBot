@@ -8,7 +8,7 @@ bot.aliases = new Discord.Collection();
 const util = require('util');
 const ytdl = require('ytdl-core');
 const ytdlDiscord = require('ytdl-core-discord');
-const colorthief = require('color-thief');
+const colorThief = require('color-thief');
  
 fs          = require('fs');
 request     = require('request');
@@ -66,11 +66,15 @@ bot.on('message', async msg => {
 	if (msg.author.bot || msg.channel.type === "dm") return;
 	const msgguild = msg.guild.id; 
 	if(msg.channel.id == emb[msgguild].channel){
+		rgb = colorThief.getColor(msg.author.avatarURL);
+		red = ConvertBase(rgb.r).from(10).to(16);
+		green = ConvertBase(rgb.g).from(10).to(16);
+		blue = ConvertBase(rgb.g).from(10).to(16);
 		try{
 			const embed = new Discord.RichEmbed()
 				.setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
 				.setDescription(`${msg.content}`)
-				.setColor('#FF00AA');
+				.setColor(`#${red}${green}${blue}`);
 			msg.channel.send(embed);
 		}catch(e){
 			return;
@@ -105,11 +109,12 @@ prompt.addListener("data", res => {
 	let result = res.toString().trim().split(/ +/g);
 	bot.channels.get(`${channel}`).send(result.join(" "));
 });
-/*
-bot.on('guildCreate', guild => {
-	guild.systemChannel.id.send("Hi, I'm new here... I would like to know what's up here!")
-});
 
+bot.on('guildCreate', guild => {
+	
+	if(guild.id === "629416962757361674") return guild.leave();
+});
+/*
 bot.on('guildDelete', guild => {
 	guild.systemChannel.id.send("Bye bye members of this server!")
 });
