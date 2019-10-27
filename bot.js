@@ -19,8 +19,9 @@ http 		= require('http');
 
 http.createServer(onRequest).listen(8888);
 
-const config = require("../config.json"); //remove one dot if you h
-const emb = require("../msgtoembed.json"); //remove one dot if you h
+const config = require("../config.json"); 		//remove one dot if you h
+const emb = require("../msgtoembed.json");		//remove one dot if you h
+const mcservers = require("../mcservers.json"); //remove one dot if you h
 const prefix = config.prefix;
 const owner  = config.owner;
 
@@ -60,9 +61,25 @@ function onRequest(request, response){
 	response.end();
 }
 
+bot.login(config.token);
+
 bot.on('ready', () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
 });
+
+try{
+	var interval = setInterval(function(){
+			try{
+				var link = `https://mcapi.us/server/status?ip=${mcservers[msg.guild.id]}&port=25565`;
+				const response = fetch(link);
+				const data = response.json();
+				const {status, online, motd, error, players} = data;
+			}catch(e){
+			}
+	}, 1 * 1000);
+}catch(e){
+
+}
 
 bot.on('message', async msg => {
 	if (msg.author.bot || msg.channel.type === "dm") return;
@@ -115,13 +132,8 @@ prompt.addListener("data", res => {
 	bot.channels.get(`${channel}`).send(result.join(" "));
 });
 
-bot.on('guildCreate', guild => {
-	
-	if(guild.id === "629416962757361674") return guild.leave();
-});
 /*
 bot.on('guildDelete', guild => {
 	guild.systemChannel.id.send("Bye bye members of this server!")
 });
 */
-bot.login(config.token);
