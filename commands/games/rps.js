@@ -2,70 +2,61 @@ const discord = require('discord.js');
 const random = require('random');
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!args[0]) return msg.channel.send("You have to define how many times you want to play");
-    var timesPlayed = 0;
-    var games = args[0];
-    while(timesPlayed <= games){
-        var value = 4;
-        msg.channel.awaitMessage({time: 15000, errors: ['time']}).then(result => {
-            if(!result.content) return result.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
+    if(!msg.content) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
 
-            var rng = 4;
-            
-            var hands = result.content.toLowerCase();
-            
-            if(hands === ("rock" || "stone" || "fist")){
-                value = 1;
-            }else if(hands === ("paper" || "raised_hand")){
-                value = 2;
-            }else if(hands === ("scissors" || "scissor" || "v")){
-                value = 3;
-            }else{
-                msg.channel.send("Invalid hand sign");
-                return;
-            }
+    var value = 4;
+    var rng = 4;
+    
+    var hands = msg.content.toLowerCase();
+    
+    if(hands == ("rock" || "stone" || "fist")){
+        value = 1;
+    }else if(hands == ("paper" || "raised_hand")){
+        value = 2;
+    }else if(hands == ("scissors" || "scissor" || "v")){
+        value = 3;
+    }else{
+        msg.channel.send("Invalid hand sign");
+        return;
+    }
 
-            rng = (random.int(1, 3));
-            var rng_str;
+    rng = (random.int(1, 3));
+    var rng_str;
 
-            if(rng === 1){
-                rng_str = ':fist: Rock';
-            }else if(rng === 2){
-                rng_str = ':raised_hand: Paper';
-            }else{
-                rng_str = ':v: Scissors';
-            }
+    if(rng == 1){
+        rng_str = ':fist: Rock';
+    }else if(rng == 2){
+        rng_str = ':raised_hand: Paper';
+    }else{
+        rng_str = ':v: Scissors';
+    }
 
-            result.channel.send(rng_str);
+    result.channel.send(rng_str);
 
-            var win = 0;    //0 = lose | 1 = draw | 2 = win
+    var win = 0;    //0 = lose | 1 = draw | 2 = win
 
-            if(value === 1){
-                if(rng === 1){win = 1}
-                if(rng === 2){win = 0}
-                if(rng === 3){win = 2}
-            }else if(value === 2){
-                if(rng === 1){win = 2}
-                if(rng === 2){win = 1}
-                if(rng === 3){win = 0}
-            }else{
-                if(rng === 1){win = 0}
-                if(rng === 2){win = 2}
-                if(rng === 3){win = 1}
-            }
+    if(value === 1){
+        if(rng == 1){win = 1}
+        if(rng == 2){win = 0}
+        if(rng == 3){win = 2}
+    }else if(value == 2){
+        if(rng == 1){win = 2}
+        if(rng == 2){win = 1}
+        if(rng == 3){win = 0}
+    }else{
+        if(rng == 1){win = 0}
+        if(rng == 2){win = 2}
+        if(rng == 3){win = 1}
+    }
 
-            if(win === 0){
-                result.channel.send('> You lost');
-            }else if(win === 1){
-                result.channel.send('> This was a draw');
-            }else if(win === 2){
-                result.channel.send('> You won!!!');
-            }else {
-                result.channel.send("An error occurred")
-            }
-
-            timesPlayed++;
-        })
+    if(win === 0){
+        result.channel.send('> You lost');
+    }else if(win === 1){
+        result.channel.send('> This was a draw');
+    }else if(win === 2){
+        result.channel.send('> You won!!!');
+    }else {
+        result.channel.send("An error occurred")
     }
 }
 
