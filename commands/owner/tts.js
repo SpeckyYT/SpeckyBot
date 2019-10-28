@@ -7,7 +7,11 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     }
     const lang = args[0]
     const text = args.slice(1).join(" ");
-    tts.play(text, lang);
+    try{
+        tts.play(text, lang);
+    }catch(e){
+        msg.channel.send(`Language \`${lang}\` is not supported,`)
+    }
 }
 
 module.exports.config = {

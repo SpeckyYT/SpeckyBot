@@ -8,7 +8,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 	.setThumbnail(bot.user.displayAvatarURL)
 
 	if(!args[0]) {
-		const categories = readdirSync('./cmds/')
+		const categories = readdirSync('./commands/')
 
 		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${prefix}**`)
 		embed.setFooter(`© ${msg.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);

@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
+    if(!args[0]) return msg.channel.send("You have to define a Server IP");
     var link = `https://mcapi.us/server/status?ip=${args[0]}`;
     const response = fetch(link)
     .then(res => res.json())
@@ -28,8 +29,8 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 
 module.exports.config = {
     name: "minecraft",
-	description: "Gives you one of the difficulty icons of Geometry Dash!",
-    usage: `<server IP (no static IP)>`,
+	description: "Gives some informations of a Minecraft Server!",
+    usage: `<server IP>`,
     category: `misc`,
 	accessableby: "Members",
     aliases: ["minecraftserver","mcs","ms","mineserver"]
