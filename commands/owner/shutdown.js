@@ -17,5 +17,5 @@ module.exports.config = {
     usage: ``,
     category: `owner`,
 	accessableby: "Bot Owner",
-    aliases: ["quit","exit","die","reboot"]
+    aliases: ["quit","exit","die","kill","reboot"]
 }

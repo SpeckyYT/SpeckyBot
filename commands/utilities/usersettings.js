@@ -1,8 +1,8 @@
 const dir = '../../../u_settings.json';
-const u_settings = require(dir);
 const fs = require('fs');
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
+    const u_settings = require(dir);
     switch(args[0]){
         case "embedcolor":
         case "ec":
@@ -11,10 +11,10 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
             if(color == null) return msg.channel.send("You have to define a color (in HEX format)");
             
             var temp = parseInt(color, 16);
-            if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The color in HEX format is invalid");
-            
+            if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
+            if(color.length != 3 && color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
             u_settings [msg.author.id] = {
-                embedcolor: color,
+                embedcolor: `${color}`,
             }
             fs.writeFile(dir, JSON.stringify(u_settings, null, 4), err => {
                 if(err) throw err;
@@ -34,9 +34,9 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 
 module.exports.config = {
     name: "usersettings",
-	description: "What about custumization?",
+	description: "What about customization?",
     usage: `<setting> <values>`,
     category: `utilities`,
 	accessableby: "Members",
-    aliases: ["us"]
+    aliases: ["us","usersetting"]
 }
