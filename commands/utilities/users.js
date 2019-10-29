@@ -23,5 +23,5 @@ module.exports.config = {
     usage: ``,
     category: `utilities`,
 	accessableby: "Members",
-    aliases: ["us"]
+    aliases: []
 }

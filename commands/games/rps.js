@@ -7,14 +7,19 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     var value = 4;
     var rng = 4;
     
-    var hands = msg.content.toLowerCase();
+    var hands = args[0];
     
-    if(hands == ("rock" || "stone" || "fist")){
-        value = 1;
-    }else if(hands == ("paper" || "raised_hand")){
-        value = 2;
-    }else if(hands == ("scissors" || "scissor" || "v")){
-        value = 3;
+    if(         hands == "rock" ||
+                hands == "stone" ||
+                hands == ":fist:" ){
+                    value = 1;
+    }else if(   hands == "paper" ||
+                hands == ":raised_hand:"){
+                    value = 2;
+    }else if(   hands == "scissors" ||
+                hands == "scissor" ||
+                hands == ":v:"){
+                    value = 3;
     }else{
         msg.channel.send("Invalid hand sign");
         return;
@@ -30,8 +35,6 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     }else{
         rng_str = ':v: Scissors';
     }
-
-    result.channel.send(rng_str);
 
     var win = 0;    //0 = lose | 1 = draw | 2 = win
 
@@ -49,14 +52,22 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
         if(rng == 3){win = 1}
     }
 
+    let signs = [
+        `:v:`,
+        `:raised_hand:`,
+        `:fist:`
+    ]
+
+    msg.channel.send(rng_str);
+
     if(win === 0){
-        result.channel.send('> You lost');
+        msg.channel.send('> You lost');
     }else if(win === 1){
-        result.channel.send('> This was a draw');
+        msg.channel.send('> This was a draw');
     }else if(win === 2){
-        result.channel.send('> You won!!!');
+        msg.channel.send('> You won!!!');
     }else {
-        result.channel.send("An error occurred")
+        msg.channel.send("An error occurred")
     }
 }
 

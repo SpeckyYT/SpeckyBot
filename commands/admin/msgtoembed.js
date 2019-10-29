@@ -1,5 +1,5 @@
 const fs = require("fs");
-const dir = '../../../settings.json'
+const dir = '../../../s_settings.json'
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
     switch(msg.args[0]){

@@ -10,7 +10,7 @@ module.exports = async bot => {
 
     setInterval(function() {
         let status = statuses[Math.floor(Math.random() * statuses.length)];
-        bot.user.setActivity(status, {type: "WATCHING", url:"https://github.com/Specky-Projects/SpeckyBot"});
+        bot.user.setActivity(status, {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
     }, 10000)
 
 }

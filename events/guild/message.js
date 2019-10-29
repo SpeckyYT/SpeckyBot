@@ -1,10 +1,10 @@
 const { prefix, owner } = require('../../../config.json')
-const settings = require('../../../settings.json')
+const s_settings = require('../../../s_settings.json')
 const { RichEmbed } = require('discord.js')
 
 module.exports = async (bot, msg) => { 
     if (msg.author.bot || msg.channel.type === "dm") return;
-	if(msg.channel.id == settings[msg.guild.id].mte){
+	    if(msg.channel.id == s_settings[msg.guild.id].mte){
 		try{
 			var embed = new RichEmbed()
 				.setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
@@ -12,8 +12,8 @@ module.exports = async (bot, msg) => {
 				.setColor('#000000');
 			msg.channel.send(embed);
 		}catch(e){
-			return console.log(e);
-		}
+			console.log(e);
+        }
 		msg.delete();
     }
     
