@@ -1,10 +1,10 @@
-const fs = require("fs");
+const { writeFile } = require("fs");
 const dir = '../../../s_settings.json'
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-    switch(msg.args[0]){
+    switch(args[0]){
         case "add":
-            const mte = require(dir);
+            var mte = require(dir);
             if(!msg.member.hasPermission(["MANAGE_MESSAGES"]) && !msg.member.hasPermission(["ADMINISTRATOR"]) && !(msg.member.id == owner)){
                 msg.channel.send("You can't use this command!");
                 return;
@@ -12,11 +12,11 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
                 msg.channel.send("You have to tag a channel!")
                 return;
             }else{
-
+                var channelName = msg.mentions.channels.first().id;
                 mte [msg.guild.id] = {
-                    mte: msg.mentions.channels.first().id,
-                }
-                fs.writeFile(dir, JSON.stringify(mte, null, 4), err => {
+                    mtechannel: channelName,
+                };
+                writeFile('../s_settings.json', JSON.stringify(mte, null, 4), err => {
                     if(err) throw err;
                     msg.channel.send("Added! :ok_hand:")
                 });

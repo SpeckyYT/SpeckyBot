@@ -4,7 +4,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 	let embed = new Discord.RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("These are the informations about the server you're in!")
-		.setColor("#420FF")
+		.setColor("#FF00AA")
 		.setImage(msg.guild.iconURL)
 		.addField("Server name", `${msg.guild.name}`)
 		.addField("Server ID", `${msg.guild.id}`)
