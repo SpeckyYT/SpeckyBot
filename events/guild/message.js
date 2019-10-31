@@ -6,30 +6,31 @@ module.exports = async (bot, msg) => {
     const { prefix, owner } = require('../../../config.json')
     var color;
     try{
-        if (msg.author.bot || msg.channel.type === "dm") return;
+        if (msg.author.id == bot.user.id || msg.channel.type == "dm") return;
         if(s_settings[msg.guild.id]){
             if(s_settings[msg.guild.id].mtechannel){
                 if(msg.channel.id == s_settings[msg.guild.id].mtechannel){
                     try{
                         console.log(`${msg.author.username} "${msg.content}" (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
-//                       if(msg.deletable()){
+//                        if(msg.deletable){
                             if(u_settings[msg.member.id]){
                                 if(u_settings[msg.member.id].embedcolor){
                                     color = `${u_settings[msg.member.id].embedcolor}`;
+                                }else{
+                                    color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
                                 }
-                            }else{
-                                color = "000000";
-                            }
                                 var embed = new RichEmbed()
                                     .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
                                     .setDescription(`${msg.content}`)
+                                    .setImage(msg.attachments.url)
                                     .setColor(`#${color}`);
                                 msg.delete();
                                 msg.channel.send(embed);
                             
-//                        }else(console.log("Message is not deletable"))
+//                            }else{console.log("Message is not deletable")}
+                        }
                     }catch(e){
-                        console.log("Error in MTE system (message.js) occourred");
+                        console.log("Error in MTE system (message.js) occurred");
                     }
                 }
             }

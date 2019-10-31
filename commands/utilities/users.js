@@ -1,16 +1,12 @@
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-    var quantity = 0;
-    bot.users.forEach(user => {
-        quantity++;
-    })
     const embed = new RichEmbed()
         .setColor('#FF00AA')
         .setTitle(`${bot.user.username}`)
         .setThumbnail(bot.user.imageURL)
         .addBlankField()
-        .addField(`Member Count:`, `${quantity}`)
+        .addField(`Member Count:`, `${bot.users.size}`)
         .addBlankField()
         .setTimestamp()
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
