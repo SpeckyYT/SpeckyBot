@@ -16,19 +16,19 @@ module.exports = async (bot, msg) => {
                             if(u_settings[msg.member.id]){
                                 if(u_settings[msg.member.id].embedcolor){
                                     color = `${u_settings[msg.member.id].embedcolor}`;
-                                }else{
-                                    color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
                                 }
-                                var embed = new RichEmbed()
-                                    .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-                                    .setDescription(`${msg.content}`)
-                                    .setImage(msg.attachments.url)
-                                    .setColor(`#${color}`);
-                                msg.delete();
-                                msg.channel.send(embed);
+                            }else{
+                                color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
+                            }
+                            var embed = new RichEmbed()
+                                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                                .setDescription(`${msg.content}`)
+                                .setImage(msg.attachments.url)
+                                .setColor(`#${color}`);
+                            msg.delete();
+                            msg.channel.send(embed);
                             
-//                            }else{console.log("Message is not deletable")}
-                        }
+//                         }else{console.log("Message is not deletable")}
                     }catch(e){
                         console.log("Error in MTE system (message.js) occurred");
                     }

@@ -7,7 +7,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 
 module.exports.config = {
     name: "brainfuck",
-	description: "You ever wished to turn text into BrainFuck?",
+	description: "You ever wished to turn text into BrainFuck? (May break with 15 or more letters)",
     usage: `<text>`,
     category: `utilities`,
 	accessableby: "Members",

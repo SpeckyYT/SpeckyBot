@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 
 module.exports.config = {
 	name: "join",
-	description: "Does the bot join a VC!",
+	description: "Makes the bot join a VC!",
 	usage: ``,
 	category: `music`,
 	accessableby: "Members",
