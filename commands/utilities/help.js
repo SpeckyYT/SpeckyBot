@@ -46,5 +46,5 @@ module.exports.config = {
 	usage: `<command>`,
 	category: `utilities`,
 	accessableby: "Members",
-    aliases: ["h", "halp", "hel"]
+    aliases: ["h", "halp", "hel","hwlp"]
 }
