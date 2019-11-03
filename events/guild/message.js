@@ -41,15 +41,29 @@ module.exports = async (bot, msg) => {
     if (!msg.content.toLowerCase().startsWith(prefix) || msg.author.bot || msg.channel.type === "dm") return;
     
     let args = msg.content.toLowerCase().split(" ");
-    let command = args[0];
+    var command = args[0];
+
+    const maxtimes = 100;
+    var times = 0;
+
+    while((args[0] == prefix) && (times <= maxtimes)){
+        const fix = `${args[0]}${args[1]}`
+        args[1] = fix;
+        command = fix;
+        args = args.slice(1);
+    }
+    if(times >= maxtimes){
+        return
+    }
+
     args = args.slice(1);
-    
+
     let cmd = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
     if(cmd){
         console.log(`${command.toUpperCase().slice(prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
         cmd.run(bot, msg, args, owner, prefix);
     }else{
-        console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id})`);
-        msg.reply("we didn't find the commad you were looking for. Sowwy UwU");
+        console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
+        msg.reply("we didn't find the command you were looking for. Sowwy UwU");
     }
 }
