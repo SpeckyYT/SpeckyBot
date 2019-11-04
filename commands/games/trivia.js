@@ -1,6 +1,5 @@
 const fetch = require('node-fetch');
 const { RichEmbed } = require('discord.js');
-const base64 = require('base64-js');
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
     const link =  'https://opentdb.com/api.php?amount=1&encode=base64'; 
