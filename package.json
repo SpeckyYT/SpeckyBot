@@ -12,6 +12,7 @@
     "gdprofiles": "^1.0.2-rc.2",
     "mathjs": "^6.2.3",
     "mee6-levels-api": "^1.0.1",
+    "microseconds": "^0.1.0",
     "neuro.js": "^0.1.7",
     "node-fetch": "^2.6.0",
     "opusscript": "0.0.7",

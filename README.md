@@ -12,5 +12,5 @@
 
 # Links and Invites
 
-- Discord: https://discord.gg/4EecFku
+- Discord Server: https://discord.gg/4EecFku
 - Invite Bot in your Server: https://discordapp.com/api/oauth2/authorize?client_id=398157933315227649&permissions=2147483135&scope=bot
