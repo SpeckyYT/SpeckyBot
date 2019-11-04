@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
                     .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
                     .setFooter('Say "reveal" once you\'ve written the answer down! (You have 1 minute time)');
                 msg.channel.send(cEmbed).then(resp => {
-                    const filter = m => m.content.includes('reveal');
+                    const filter = m => m.content.toLowerCase().includes('reveal');
                     msg.channel.awaitMessages(filter, {max: 1, time: 60000})
                     .then(collected => {
                         var times = 0
