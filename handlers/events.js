@@ -9,7 +9,7 @@ module.exports = (bot) => {
             bot.on(eName, evt.bind(null, bot));
             console.log(`${dirs} | ${file}`);
         };
-        console.log();
     };
     ["client", "guild"].forEach(x => load(x));
+    console.log();
 };
