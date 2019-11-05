@@ -8,11 +8,12 @@ module.exports = (bot) => {
             let result = res.toString().trim().split(/ +/g);
             try{
                 if(result.join(" ").includes('E:')){
-                    const resnew = result.slice(1).join(" ");
+                    const resnew = result.join(" ").replace('E:', '');
                     const cEmbed = new RichEmbed()
                         .setAuthor(bot.user.username,bot.user.avatarURL)
-                        .setDescription(resnew);
-                    bot.channels.get(`${channel}`).send(result.join(" "))
+                        .setDescription(resnew)
+                        .setColor('#FF00AA')
+                    bot.channels.get(`${channel}`).send(cEmbed)
                 }else{
                     bot.channels.get(`${channel}`).send(result.join(" "));
                 }
