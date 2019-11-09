@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const { RichEmbed } = require('discord.js');
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-    const link =  'https://opentdb.com/api.php?amount=1&encode=base64'; 
+    const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64'; 
 /*    const response = await fetch(link);
     const json = await response.json();
     msg.channel.send(json);
