@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     if(!args[1]) return;
     let smallnum = (Math.min(args[0], args[1]));
     let bignum = (Math.max(args[0], args[1]));

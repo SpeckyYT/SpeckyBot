@@ -1,8 +1,4 @@
-module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!(msg.author.id === owner)){
-        msg.channel.send("You aren't my owner.");
-        return;
-    }
+module.exports.run = async (bot, msg, args, config) => {
     try{
         await msg.channel.send("Bot is shutting down!").then(ms => ms.delete(5000));
         msg.delete(5000);

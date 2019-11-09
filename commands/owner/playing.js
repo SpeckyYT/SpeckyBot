@@ -1,8 +1,4 @@
-module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!(msg.author.id === owner)){
-        msg.channel.send("You aren't my owner.");
-        return;
-    }
+module.exports.run = async (bot, msg, args, config) => {
     const playing = args[0];
     const game = msg.content.split(" ").slice(2).join(" ");
     try{

@@ -1,10 +1,6 @@
 const tts = require('play-tts')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!(msg.author.id === owner)){
-        msg.channel.send("You aren't my owner.");
-        return;
-    }
+module.exports.run = async (bot, msg, args, config) => {
     const lang = args[0]
     const text = args.slice(1).join(" ");
     try{

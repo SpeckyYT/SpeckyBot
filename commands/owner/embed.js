@@ -1,10 +1,6 @@
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!(msg.author.id === owner)){
-        msg.channel.send("You aren't my owner.");
-        return;
-    }
     switch(args[0]){
         case "gdi":
         case "gdas":

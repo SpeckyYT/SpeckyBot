@@ -1,10 +1,4 @@
-const { setStatus } = require('discord.js')
-
-module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!(msg.author.id === owner)){
-        msg.channel.send("You aren't my owner.");
-        return;
-    }
+module.exports.run = async (bot, msg, args, config) => {
     const state = args[0];
     try{
         bot.user.setStatus(`idle`).then().catch();
