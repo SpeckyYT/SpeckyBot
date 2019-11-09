@@ -1,11 +1,7 @@
 var mys = require('microseconds');
 const { readFileSync } = require('fs');
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
-    if(!(msg.author.id === owner)){
-        msg.channel.send("You aren't my owner.");
-        return;
-    }
+module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
     const begin = mys.now();
     const cmddir = `../../handlers/commands.js`;
