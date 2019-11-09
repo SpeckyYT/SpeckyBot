@@ -6,7 +6,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     let mesg = await msg.channel.send("Generating...")
     let kw = ``;
     if(args[0]){
-        kw = `/${args[0]}`;
+        kw = `/${args.join(" ")}`;
     }else{
         kw = `/all`
     }

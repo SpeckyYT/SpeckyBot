@@ -7,7 +7,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     .setColor("#FF00AA")
     .addField("Characters", `${args.join(" ").length}`)
     .addField("Words", `${args.length}`)
-    .addField("Sentences", `${words.split(". ").lenght + words.split("! ").length + words.split("? ").length + words.split("‽ ").length}`)
+//    .addField("Sentences", `${words.split(". ").lenght + words.split("! ").length + words.split("? ").length + words.split("‽ ").length}`)
     .addField("Whitespaces", `${args.length}`)
     msg.channel.send(embed)
 }

@@ -1,4 +1,5 @@
 var mys = require('microseconds');
+const { readFileSync } = require('fs');
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
     if(!(msg.author.id === owner)){
@@ -7,9 +8,9 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
     }
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
     const begin = mys.now();
-    const cmddir = '../../handlers/commands';
-    const eventdir = '../../handlers/events';
-    const consdir = '../../handlers/console';
+    const cmddir = `../../handlers/commands.js`;
+    const eventdir = `../../handlers/events.js`;
+    const consdir = `../../handlers/console.js`;
     try{
         switch(args[0]){
             case "commands":
@@ -29,13 +30,13 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
             case "event":
             case "eve":
             case "ev":
-                delete require.cache[require.resolve(eventdir)];
+                await delete require.cache[require.resolve('../../handlers/events.js')];
                 require(eventdir)(bot);
                 break
 
             case "console":
             case "cons":
-                delete require.cache[require.resolve(consdir)];
+                await delete require.cache[require.resolve('../handlers/console.js')];
                 require(consdir)(bot);    
                 break
                 
@@ -44,10 +45,12 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
         }
     }catch(e){
         msg.channel.send(`ERROR: ${e.message}`);
+        return
     }
     const end = mys.now();
     const diff = end - begin;
-    msg.channel.send(`Every event got reloaded! (${parseFloat(diff/1000).toFixed(3)}ms)`)
+    msg.channel.send(`Every **${args[0]}** got reloaded! (${parseFloat(diff/1000).toFixed(3)}ms)`).then(ms => ms.delete(10000)).catch()
+    msg.delete(5000)
 }
 
 module.exports.config = {

