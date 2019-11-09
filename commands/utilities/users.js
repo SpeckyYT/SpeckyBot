@@ -6,7 +6,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
         .setTitle(`${bot.user.username}`)
         .setThumbnail(bot.user.imageURL)
         .addBlankField()
-        .addField(`Member Count:`, `${bot.users.size}`)
+        .addField(`Total Member Count:`, `${bot.users.size}`)
         .addBlankField()
         .setTimestamp()
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);

@@ -67,17 +67,19 @@ module.exports = async (bot, msg) => {
 
         if(cmd.config.category === "admin"){
             try{
-                if(!msg.member.hasPermission(["MANAGE_MESSAGES"]) && !msg.member.hasPermission(["ADMINISTRATOR"]) && !(msg.member.id == config.owner)){
-                    msg.channel.send("You can't use this command!");
-                    return;
-                }
+                if( !(msg.member.hasPermission(["MANAGE_MESSAGES"])) &&
+                    !(msg.member.hasPermission(["ADMINISTRATOR"])) &&
+                    !(msg.member.id == config.owner)){
+                        msg.channel.send("You can't use this command!");
+                        return;
+                    }
             }catch(e){
                 return
             }
         }
         cmd.run(bot, msg, args, config);
     }else{
-        console.log(`${command.toUpperCase().slice(prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
+        console.log(`${command.toUpperCase().slice(config.prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
         msg.reply("we didn't find the command you were looking for. Sowwy UwU");
     }
 }
