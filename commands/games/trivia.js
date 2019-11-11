@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const { RichEmbed } = require('discord.js');
+const { compareTwoStrings } = require('string-similarity')
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
     const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64'; 
@@ -40,7 +41,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
                 msg.channel.send(cEmbed).then(async resp => {
 
                     const filter =  m => ((m.content.toLowerCase().includes('reveal')) && (m.author.id == msg.author.id)) || 
-                                    Buffer.from(data.correct_answer, 'base64').toString().toLowerCase().includes(m.content.toLowerCase());
+                                    (compareTwoStrings(Buffer.from(data.correct_answer, 'base64'), m.content) >= 0.7);
 
                     await msg.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
                     .then(c => {

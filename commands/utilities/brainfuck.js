@@ -2,7 +2,8 @@ const bff = require('brainfuckify')
 
 module.exports.run = async (bot, msg, args, owner, prefix) => {
     const bft = bff(args.join(" "));
-    msg.channel.send(bft,{split: true});
+    bft.split(">").join(">\n ");
+    msg.channel.send(bft,{split: {char: '>'}});
 }
 
 module.exports.config = {
