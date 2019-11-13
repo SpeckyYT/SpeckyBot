@@ -67,5 +67,5 @@ module.exports.config = {
     usage: ``,
     category: `games`,
 	accessableby: "Members",
-    aliases: ["trivi", "triv","quiz"]
+    aliases: ["trivi", "triv"]
 }
