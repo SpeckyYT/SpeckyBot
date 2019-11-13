@@ -37,7 +37,7 @@ module.exports = async (bot, msg) => {
 
     if (!msg.content.toLowerCase().startsWith(config.prefix) || msg.author.bot || msg.channel.type === "dm") return;
     
-    let args = msg.content.toLowerCase().split(" ");
+    let args = msg.content.toLowerCase().split(/\s|\n/g);
     var command = args[0];
 
     const maxtimes = 100;
