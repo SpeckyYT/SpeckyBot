@@ -1,7 +1,7 @@
 const { RichEmbed } = require("discord.js");
 const { readdirSync } = require("fs")
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
 	const embed = new RichEmbed()
 	.setColor('#FF00AA')
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
@@ -10,7 +10,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 	if(!args[0]) {
 		const categories = readdirSync('./commands/')
 
-		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${prefix}**`)
+		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
 		embed.setFooter(`© ${msg.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
 		categories.forEach(category => {
@@ -26,13 +26,13 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
 		return msg.channel.send(embed)
 	} else {
 		let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
-		if(!command) return msg.channel.send(embed.setTitle("Invalid Command.").setDescription(`Do \`${prefix}help\` for the list of the commands.`))
+		if(!command) return msg.channel.send(embed.setTitle("Invalid Command.").setDescription(`Do \`${config.prefix}help\` for the list of the commands.`))
 		command = command.config
 
-		embed.setDescription(`The bot's prefix is: \`${prefix}\`\n
+		embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n
 		**Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
 		**Description:** ${command.description || "No Description provided."}
-		**Usage:** ${command.usage ? `\`${prefix}${command.name} ${command.usage}\`` : "No Usage"}
+		**Usage:** ${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : "No Usage"}
 		**Accessible by:** ${command.accessableby || "Members"}
 		**Aliases:** ${command.aliases ? command.aliases.join(", ") : "None."}`)
 

@@ -1,7 +1,7 @@
 const math = require("mathjs");
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]) return msg.channel.send('Please input a calculation.');
 
     let resp;

@@ -1,6 +1,6 @@
 const cleverbot = require("cleverbot-free");
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     cleverbot(args.join(" ")).then(response => msg.channel.send(response))
 }
 

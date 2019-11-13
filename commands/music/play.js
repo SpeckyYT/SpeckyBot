@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fs = require('fs');
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     var voiceChannel = msg.member.voiceChannel;
     if(!voiceChannel) return msg.channel.send("You have to be in a voice channel to play music!");
     var connection = voiceChannel.join();

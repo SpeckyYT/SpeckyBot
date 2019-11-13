@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     function duration(ms){
         const mil = Math.floor((ms % 1000)).toString();
         const sec = Math.floor((ms / 1000) % 60).toString();

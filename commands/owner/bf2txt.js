@@ -3,7 +3,7 @@ const comp = uf.compiler({
     type: Uint16Array,
     in: String,
     out: String,
-    width: 102400
+    width: 1024
 });
 
 module.exports.run = async (bot, msg, args, config) => {
@@ -11,8 +11,12 @@ module.exports.run = async (bot, msg, args, config) => {
         msg.channel.send(`Right syntax: \`${config.prefix}bf2txt [BF String]\``);
         return;
     }
-    var tuf = comp.run(args.join(""),'');
-    msg.channel.send(tuf,{split: {char: ' '}});
+    if(0){
+        var tuf = comp.run(args.join(""),'');
+        msg.channel.send(tuf,{split: {char: ' '}});
+    }else{
+        msg.channel.send("This command causes usually to crash the bot, so it got disabled")
+    }
 }
 
 module.exports.config = {

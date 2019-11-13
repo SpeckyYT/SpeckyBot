@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const Math = require('mathjs');
 const superagent = require('superagent')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     let mesg = await msg.channel.send("Generating...")
     let kw = ``;
     if(args[0]){

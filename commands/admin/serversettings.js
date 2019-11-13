@@ -1,7 +1,7 @@
 const { writeFile } = require("fs");
 const dir = '../../../s_settings.json'
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     switch(args[0]){
         case "mte":
         case "messagetoembed":

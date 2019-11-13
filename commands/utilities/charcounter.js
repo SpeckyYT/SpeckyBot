@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     let words = args.filter(" ").join(" ")
     let embed = new RichEmbed()
     .setAuthor(msg.author.username)

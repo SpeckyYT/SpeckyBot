@@ -1,6 +1,6 @@
 const mee6 = require('mee6-levels-api')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
 
     var serverID, userID;
 

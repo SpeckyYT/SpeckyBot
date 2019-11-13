@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Math = require('mathjs');
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     if(!args[0] || args[0] >= 11){
         msg.channel.send("You have to define a difficulty (a number from 0 to 10)")
         return;

@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     const embed = new RichEmbed()
         .setColor('#FF00AA')
         .setTitle(`${bot.user.username}`)

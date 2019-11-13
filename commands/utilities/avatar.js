@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg, args, config) => {
     msg.reply(`${msg.author.avatarURL}`);
 }
 
