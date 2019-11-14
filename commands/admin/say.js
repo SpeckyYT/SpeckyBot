@@ -2,9 +2,7 @@ const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
     args = msg.content.split(" ");
-    const maxtimes = 100;
-    var times = 0;
-    while((args[0] == prefix) && (times <= maxtimes)){
+    while(args[0] == config.prefix){
         const fix = `${args[0]}${args[1]}`
         args[1] = fix;
         args = args.slice(1);
