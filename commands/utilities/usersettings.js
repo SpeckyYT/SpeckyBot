@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg, args, config) => {
             
             var temp = parseInt(color, 16);
             if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
-            if(color.length != 3 && color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
+            if(color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
             
             u_settings [msg.author.id] = {
                 embedcolor: color.toUpperCase(),

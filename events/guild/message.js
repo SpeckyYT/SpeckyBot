@@ -1,4 +1,4 @@
-const { RichEmbed, deletable } = require('discord.js')
+const { RichEmbed } = require('discord.js')
 
 module.exports = async (bot, msg) => {
     const s_settings = require('../../../s_settings.json')

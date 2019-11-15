@@ -12,7 +12,12 @@ module.exports = async bot => {
     setInterval(function() {
         let status = statuses[Math.floor(Math.random() * statuses.length)];
         bot.user.setActivity(status, {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
-bot.user.setStatus("offline");
     }, 10000)
 
+    let cmd = bot.commands.get('checkserver');
+    cmd.run(bot)
+
+    setInterval(function() {
+        cmd.run(bot)
+    }, 300000)
 }
