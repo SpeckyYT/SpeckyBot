@@ -9,7 +9,7 @@ module.exports = async (bot, msg) => {
         if (msg.author.id == bot.user.id || msg.channel.type == "dm") return;
         if(s_settings[msg.guild.id]){
             if(s_settings[msg.guild.id].mtechannel){
-                s_settings[msg.guild.id].mtechannel.forEach(chan => {
+                s_settings[msg.guild.id].mtechannel.forEach(async chan => {
                     if(msg.channel.id == chan){
                         try{
 //                          console.log(`${msg.author.username} "${msg.content}" (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
@@ -25,8 +25,8 @@ module.exports = async (bot, msg) => {
                                 .setDescription(`${msg.content}`)
                                 .setImage(msg.attachments.url)
                                 .setColor(`#${color}`);
-                            msg.delete();
-                            msg.channel.send(embed);
+                            await msg.delete();
+                            await msg.channel.send(embed);
                         }catch(e){
                             console.log("Error in MTE system (message.js) occurred");
                         }

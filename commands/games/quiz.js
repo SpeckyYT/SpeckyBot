@@ -81,7 +81,6 @@ module.exports.run = async (bot, msg, args, config) => {
                     cEmbed.addBlankField()
 
                     const filter =  m => m.author.id == msg.author.id;
-                    console.log(data.correct_answer);
                     await msg.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
                     .then(c => {
                         if(compareTwoStrings(data.correct_answer.toLowerCase(), msg.author.lastMessage.content.toLowerCase()) >= 0.75){
