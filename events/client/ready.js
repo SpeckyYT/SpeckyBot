@@ -13,10 +13,13 @@ module.exports = async bot => {
         bot.user.setActivity(status, {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
     }, 10000)
 
-    let cmd = bot.commands.get('checkserver');
-    cmd.run(bot)
+    let cs = bot.commands.get('checkserver');
+    let cu = bot.commands.get('checkusers');
+    cs.run(bot)
+    cu.run(bot)
 
     setInterval(function() {
-        cmd.run(bot)
+        cs.run(bot)
+        cu.run(bot)
     }, 300000)
 }

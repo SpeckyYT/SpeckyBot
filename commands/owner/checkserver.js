@@ -3,7 +3,7 @@ const dir = '../../../servers.json'
 
 module.exports.run = async (bot, msg, args, config) => {
     bot.guilds.forEach(guild => {
-        const servers = require(dir);
+        var servers = require(dir);
         
         servers[guild.id] = {
             serverName: guild.name,
@@ -14,6 +14,9 @@ module.exports.run = async (bot, msg, args, config) => {
             ownerID: guild.owner.id,
             ownerName: guild.owner.user.tag,
         }
+
+        servers.sort()
+
         writeFile('../servers.json', JSON.stringify(servers, null, 4), err => {
             if(err) console.log(err);
         });

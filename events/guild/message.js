@@ -54,34 +54,29 @@ module.exports = async (bot, msg) => {
     let cmd = bot.commands.get(command.slice(config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(config.prefix.length)));
     if(cmd){
         console.log(`${command.toUpperCase().slice(config.prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
-        if(cmd.config.category === "owner"){
-            if(!(msg.author.id === config.owner)){
+        
+        if(!(msg.author.id === config.owner)){
+            if(cmd.config.category === "owner"){
                 msg.channel.send("You aren't my owner.");
                 return;
             }
-        }
 
-        if(cmd.config.category === "admin"){
-            try{
-                if( !(msg.member.hasPermission(["MANAGE_MESSAGES"])) &&
-                    !(msg.member.hasPermission(["ADMINISTRATOR"])) &&
-                    !(msg.member.id == config.owner)){
-                        msg.channel.send("You can't use this command!");
-                        return;
-                    }
-            }catch(e){
-                return
-            }
-        }
-
-        if(cmd.config.servers){
-            var customServer = 0;
-            cmd.config.servers.forEach(server => {
-                if (server == msg.guild.id){
-                    customServer = 1;
+            if(cmd.config.category === "admin"){
+                try{
+                    if( !(msg.member.hasPermission(["MANAGE_MESSAGES"])) &&
+                        !(msg.member.hasPermission(["ADMINISTRATOR"]))) return msg.channel.send("You can't use this command!");
+                }catch(e){
+                    return
                 }
-            })
-            if(!customServer) return msg.channel.send(`This command isn't avaiable on this server.`);
+            }
+
+            if(cmd.config.servers){
+                var customServer = 0;
+                cmd.config.servers.forEach(server => {
+                    if (server == msg.guild.id){customServer = 1}
+                })
+                if(!customServer) return msg.channel.send(`This command isn't avaiable on this server.`);
+            }
         }
 
         try{

