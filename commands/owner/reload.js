@@ -3,7 +3,7 @@ const { readFileSync } = require('fs');
 
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
-    const begin = mys.now();
+    var begin = mys.now();
     const cmddir = `../../handlers/commands.js`;
     const eventdir = `../../handlers/events.js`;
     const consdir = `../../handlers/console.js`;
@@ -13,15 +13,15 @@ module.exports.run = async (bot, msg, args, config) => {
             case "command":
             case "cmds":
             case "cmd":
-                bot.commands.forEach(c => {
+                await bot.commands.forEach(c => {
                     bot.commands.delete(c);
                 });
-                bot.aliases.forEach(a => {
+                await bot.aliases.forEach(a => {
                     bot.commands.delete(a);
                 });
                 require(cmddir)(bot);
                 break
-            
+            /*
             case "events":
             case "event":
             case "eve":
@@ -35,17 +35,17 @@ module.exports.run = async (bot, msg, args, config) => {
                 await delete require.cache[require.resolve('../handlers/console.js')];
                 require(consdir)(bot);    
                 break
-                
+                */
             default:
                 msg.channel.send("Action is invalid")
         }
     }catch(e){
-        msg.channel.send(`ERROR: ${e.message}`);
+        console.log(`ERROR: ${e.message}`);
         return
     }
     const end = mys.now();
     const diff = end - begin;
-    msg.channel.send(`Every **${args[0]}** got reloaded! (${parseFloat(diff/1000).toFixed(3)}ms)`).then(ms => ms.delete(10000)).catch()
+    msg.channel.send(`**${args[0]}** got reloaded! (${parseFloat(diff/1000).toFixed(3)}ms)`).then(ms => ms.delete(10000)).catch()
     msg.delete(5000)
 }
 

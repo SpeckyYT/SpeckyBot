@@ -73,6 +73,17 @@ module.exports = async (bot, msg) => {
                 return
             }
         }
+
+        if(cmd.config.servers){
+            var customServer = 0;
+            cmd.config.servers.forEach(server => {
+                if (server == msg.guild.id){
+                    customServer = 1;
+                }
+            })
+            if(!customServer) return msg.channel.send(`This isn't avaiable on this server.`);
+        }
+
         try{
             cmd.run(bot, msg, args, config);
         }catch(err){console.log(err)}

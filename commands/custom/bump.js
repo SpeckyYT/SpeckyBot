@@ -18,5 +18,6 @@ module.exports.config = {
     usage: ``,
     category: `misc`,
 	accessableby: "Members",
-    aliases: [""]
+    aliases: [""],
+    servers: [265505748413448193]
 }
