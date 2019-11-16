@@ -81,7 +81,7 @@ module.exports = async (bot, msg) => {
                     customServer = 1;
                 }
             })
-            if(!customServer) return msg.channel.send(`This isn't avaiable on this server.`);
+            if(!customServer) return msg.channel.send(`This command isn't avaiable on this server.`);
         }
 
         try{
