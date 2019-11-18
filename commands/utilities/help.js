@@ -2,7 +2,7 @@ const { RichEmbed } = require("discord.js");
 const { readdirSync } = require("fs")
 
 module.exports.run = async (bot, msg, args, config) => {
-	const embed = new RichEmbed()
+	var embed = new RichEmbed()
 	.setColor('#FF00AA')
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
 	.setThumbnail(bot.user.displayAvatarURL)

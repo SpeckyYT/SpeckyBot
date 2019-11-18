@@ -15,8 +15,6 @@ module.exports.run = async (bot, msg, args, config) => {
             ownerName: guild.owner.user.tag,
         }
 
-        servers.sort()
-
         writeFile('../servers.json', JSON.stringify(servers, null, 4), err => {
             if(err) console.log(err);
         });

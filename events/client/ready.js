@@ -16,10 +16,8 @@ module.exports = async bot => {
     let cs = bot.commands.get('checkserver');
     let cu = bot.commands.get('checkusers');
     cs.run(bot)
-    cu.run(bot)
 
     setInterval(function() {
         cs.run(bot)
-        cu.run(bot)
     }, 300000)
 }

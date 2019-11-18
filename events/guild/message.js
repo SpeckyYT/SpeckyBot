@@ -56,6 +56,7 @@ module.exports = async (bot, msg) => {
         console.log(`${command.toUpperCase().slice(config.prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
         
         if(!(msg.author.id === config.owner)){
+            
             if(cmd.config.category === "owner"){
                 msg.channel.send("You aren't my owner.");
                 return;
