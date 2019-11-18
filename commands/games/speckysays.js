@@ -13,6 +13,7 @@ module.exports.run = async (bot, msg, args, config) => {
                 gameReady = 1;
                 msg.channel.send('OwO?')
             })
+            .catch(c => {
                 if(c.size >= 3){
                     gameReady = 1
                     msg.channel.send('OwO!')
