@@ -19,7 +19,7 @@ module.exports = async bot => {
 
     setInterval(function() {
         cs.run(bot)
-    }, 300000)
+    }, 600000)
 }
 
 module.exports.config = {

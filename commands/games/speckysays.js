@@ -1,10 +1,11 @@
 module.exports.run = async (bot, msg, args, config) => {
     const chan = msg.channel;
-    var players, gameReady;
+    var players = 0;
+    var gameReady = null;
 
     if(args[0] == 'start'){
         
-        msg.channel.send(`We need at least 3 players to join!\nTo join, just type \`Join!\``)
+        await msg.channel.send(`We need at least 3 players to join!\nTo join, just type \`Join!\``)
         
         const filter = m => m.content.toLowerCase().includes(`join!`);
 
@@ -78,7 +79,7 @@ module.exports.run = async (bot, msg, args, config) => {
 module.exports.config = {
     name: "speckysays",
 	description: "Users have to complete the challenges in order to survive!",
-    usage: `[start]`,
+    usage: `start`,
     category: `games`,
 	accessableby: "Members",
     aliases: ["simonsays", "simon"]
