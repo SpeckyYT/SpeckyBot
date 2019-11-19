@@ -7,7 +7,7 @@ module.exports = {
     run: async function (channel, players, time, client, info) {
         const collector = channel.createMessageCollector(() => true);
 
-        const config = info.config
+        const settings = info.settings
 
         let collected
         collector.on('end', collected_ => {
@@ -16,7 +16,7 @@ module.exports = {
 
         //when time is up
         await sleep(time)
-        if (config.opposite_day) await channel.send('Alright time\'s up!')
+        if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         collector.stop()
 
@@ -47,7 +47,7 @@ module.exports = {
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }

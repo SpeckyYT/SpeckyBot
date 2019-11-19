@@ -1,0 +1,47 @@
+{ 
+   "minigames":{ 
+      "dontWrite":true,
+      "react":true,
+      "reactSpecific":true,
+      "solveEquation":true,
+      "write":true,
+      "writeSpecific":true,
+      "oppositeDay":true
+   },
+   "fakeStarts":[ 
+      "Alright,",
+      "Okay,",
+      "Now,",
+      "Simoon says",
+      "Simmon says",
+      "Simone says",
+      "Please"
+   ],
+   "tasks":{ 
+      "say":[ 
+         "hello",
+         "hi",
+         "boom",
+         "beep boop",
+         "i love this bot",
+         "this is the best game i have ever participated in",
+         "you are cool",
+         "bruh"
+      ],
+      "react":[ 
+         "🤖",
+         "👍",
+         "🔥",
+         "🤔",
+         "❤️"
+      ],
+      "status":[ 
+         "online",
+         "idle",
+         "dnd",
+         "offline"
+      ],
+      "opposite_day":false
+   },
+   "opposite_day":false
+}

@@ -10,7 +10,7 @@ module.exports = {
 
         const collector = channel.createMessageCollector(() => true);
 
-        const config = info.config
+        const settings = info.settings
  
 
         let collected
@@ -20,7 +20,7 @@ module.exports = {
 
         //when time is up
         await sleep(time)
-        if (config.opposite_day) await channel.send('Alright time\'s up!')
+        if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         collector.stop()
 
@@ -52,7 +52,7 @@ module.exports = {
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }

@@ -4,9 +4,9 @@ module.exports = {
     defTime: 20000,
     name: 'oppositeDay',
     run: async function (channel, players, time, client, info) {
-        var config = info.config
+        var settings = info.settings
         
-        if (!config.opposite_day) await channel.send('Opposite day begins soon! Write **ok** in chat if you are ready!')
+        if (!settings.opposite_day) await channel.send('Opposite day begins soon! Write **ok** in chat if you are ready!')
         else await channel.send('Opposite day has ended! Write **ok** if you are ready to go back to normal!')
 
         const collector = channel.createMessageCollector(() => true);
@@ -19,7 +19,7 @@ module.exports = {
         //when time is up
         await sleep(time)
 
-        if (!config.opposite_day) await channel.send('Simon says time\'s up! We\'re ready to start the opposite day! \n **From now and until opposite day ends, do the opposite of what you would normally do to stay in the game!**')
+        if (!settings.opposite_day) await channel.send('Simon says time\'s up! We\'re ready to start the opposite day! \n **From now and until opposite day ends, do the opposite of what you would normally do to stay in the game!**')
         else await channel.send('Alright time\'s up! We\'ve ended the opposite day!')
 
         collector.stop()
@@ -44,13 +44,13 @@ module.exports = {
         })
         let newPlayers = players.filter( ( el ) => !out.includes( el ) )
 
-        config.opposite_day = !config.opposite_day
+        settings.opposite_day = !settings.opposite_day
         
 
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }

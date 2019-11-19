@@ -1,86 +1,84 @@
-module.exports.run = async (bot, msg, args, config) => {
-    const chan = msg.channel;
-    var players = 0;
-    var gameReady = null;
+const { RichEmbed } = require('discord.js')
+const { runGame } = require('./SpeckySays/game');
 
-    if(args[0] == 'start'){
-        
-        await msg.channel.send(`We need at least 3 players to join!\nTo join, just type \`Join!\``)
-        
-        const filter = m => m.content.toLowerCase().includes(`join!`);
+module.exports.run = async (bot, msg, args) => {
+    if (!msg.member.hasPermission('MANAGE_MESSAGES')) {
+        msg.reply(`you don't have permissions to use this command!`)
+        return
+    }
 
-        chan.awaitMessages(filter, {max: 16, time: 5000, errors: ['time']})
-            .then(c => {
-                gameReady = 1;
-                msg.channel.send('OwO?')
-            })
-            .catch(c => {
-                if(c.size >= 3){
-                    gameReady = 1
-                    msg.channel.send('OwO!')
-                }else{
-                    chan.send(`Time expired and only ${c.size - 1} players joined.`);
-                    gameReady = 0;
-                    return;
-                }
+    let channel = msg.mentions.channels.first()
+
+    var time;
+
+    if (!channel) {
+        channel = msg.channel;
+        time = args[0] ? parseInt(args[0], 10) * 1000 : 30000
+    } else {
+        time = args[1] ? parseInt(args[1], 10) * 1000 : 30000
+    }
+
+    if (!time){
+        msg.reply('the time must be an integer of seconds.')
+        return
+    }
+
+    if (channel) {
+        msg.channel.send(`Starting game in ${channel}!`)
+    }
+
+    //collect players
+
+    let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE TO JOIN SIMON SAYS!")
+    .setDescription(`Hosted by <@${msg.author.id}>`)
+    .setColor(msg.member.displayColor)
+    .setFooter(`The game will start in ${Math.floor(time / 1000)} seconds.`)
+    channel.send(startembed).then(async (msg) => {
+        msg.react('🎲')
+        
+        let collected = await msg.awaitReactions(() => true, {
+            time: time
         })
 
-        if(gameReady = 1){
-
-            var challenge;      // 1: send message 
-                                // 2: react to message
-                                // 3: change nickname 
-                                // 4: change custom status 
-                                // 5: change status (active, inactive, ndn) 
-                                // 6: enter vocal channel 
-                                // 7: send DM
-            var minChallenge = 1;
-            var maxChallenge = 7;
-            let alive = true;
-
-            while(alive) {
-                challenge = Math.round(Math.random() * maxChallenge) + minChallenge;  
-            
-                switch(challenge){
-                    case 1:
-
-                        break
-
-                    case 2:
-
-                        break
-
-                    case 3:
-
-                        break
-
-                    case 4:
-
-                        break
-
-                    case 5:
-
-                        break
-
-                    case 6:
-
-                        break
-
-                    case 7:
-
-                        break
-                }
-            
-            }
+        if(collected.size < 2){
+            channel.send('**Game canceled!** Not enough players!')
+            return
         }
-    }
+        
+        let players = []
+        for (let reaction of collected.array()) {
+            let users = await reaction.fetchUsers()
+            players = players.concat(users.array())
+        }
+        players = players.filter(player => player.id != bot.user.id)
+
+        channel.send(`The game is starting! Players: ${players.join(', ')}`)
+        let explanationEmbed = new RichEmbed().setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
+                                                .setColor('#77ecf2')
+        channel.send(explanationEmbed)
+        if(time > 30000 || players.length > 5){
+            await sleep(10000)
+        } else {
+            await sleep(5000)
+        }
+
+        runGame(channel, players, bot)
+        msg.delete()
+        //make game mechanics in game.js
+    })
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 module.exports.config = {
     name: "speckysays",
-	description: "Users have to complete the challenges in order to survive!",
-    usage: `start`,
+	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
+    usage: `start #[channel] [start time]`,
     category: `games`,
-	accessableby: "Members",
+	accessableby: "Server Admins and Moderators",
     aliases: ["simonsays", "simon"]
 }
+// 'start', 'startgame', 'game', 'newgame', 'new'
+// startgame [channel] ([joinTime])

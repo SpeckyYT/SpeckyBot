@@ -5,8 +5,8 @@ module.exports = {
     defTime: 27000,
     name: 'writeDMSpecific',
     run: async function (channel, players, time, client, info) {
-        const config = info.config
-        const alternatives = config.tasks.say
+        const settings = info.settings
+        const alternatives = settings.tasks.say
 
         const word = alternatives[getRandomInt(alternatives.length)].toLowerCase()
         await channel.send(`**${word}**`)
@@ -21,7 +21,7 @@ module.exports = {
 
         //when time is up
         await sleep(time)
-        if (config.opposite_day) await channel.send('Alright time\'s up!')
+        if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
 
         await Promise.all(collectors)
@@ -59,7 +59,7 @@ module.exports = {
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }

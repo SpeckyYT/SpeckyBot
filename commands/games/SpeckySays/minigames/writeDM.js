@@ -7,7 +7,7 @@ module.exports = {
     run: async function (channel, players, time, client, info) {
 
         //when time is up
-        const config = info.config
+        const settings = info.settings
         
         //making a bunch of collectors
         let collectors = []
@@ -19,7 +19,7 @@ module.exports = {
 
         //when time is up
         await sleep(time)
-        if (config.opposite_day) await channel.send('Alright time\'s up!')
+        if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
 
         await Promise.all(collectors)
@@ -58,7 +58,7 @@ module.exports = {
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }

@@ -5,8 +5,8 @@ module.exports = {
     defTime: 10000,
     name: 'status',
     run: async function (channel, players, time, client, info) {
-        const config = info.config
-        const alternatives = config.tasks.status
+        const settings = info.settings
+        const alternatives = settings.tasks.status
 
         const status = alternatives[getRandomInt(alternatives.length)]
         
@@ -14,7 +14,7 @@ module.exports = {
         
         //when time is up
         await sleep(time)
-        if (config.opposite_day) await channel.send('Alright time\'s up!')
+        if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         
 
@@ -40,7 +40,7 @@ module.exports = {
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }

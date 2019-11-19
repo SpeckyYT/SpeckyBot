@@ -5,8 +5,8 @@ module.exports = {
     defTime: 25000,
     name: 'reactSpecific',
     run: async function (channel, players, time, client, info) {
-        const config = info.config
-        const alternatives = config.tasks.react
+        const settings = info.settings
+        const alternatives = settings.tasks.react
 
         const emoji = alternatives[getRandomInt(alternatives.length)]
         const startMessage = await channel.send(`React to this message with this emoji: ${emoji}`)
@@ -16,7 +16,7 @@ module.exports = {
         })
         await sleep(time - 1000)
         //when time is up
-        if (config.opposite_day) await channel.send('Alright time\'s up!')
+        if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         await sleep(1000)
         allReactions = await allReactions
@@ -60,7 +60,7 @@ module.exports = {
         return ({
             playersOut: out,
             playersLeft: newPlayers,
-            configOut: config
+            settingsOut: settings
         })
     }
 }
