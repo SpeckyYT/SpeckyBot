@@ -4,3 +4,7 @@ module.exports = async () => {
     console.log()
     process.exit();    
 }
+
+module.exports.config = {
+    event: "error"
+}

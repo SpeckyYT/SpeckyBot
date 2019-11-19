@@ -5,7 +5,7 @@ module.exports = (bot) => {
         const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith('.js'));
         for (let file of events) {
             const evt = require(`../events/${dirs}/${file}`);
-            let eName = file.split('.')[0];
+            let eName = evt.config.event;
             bot.on(eName, evt.bind(null, bot));
             console.log(`${dirs} | ${file}`);
         };

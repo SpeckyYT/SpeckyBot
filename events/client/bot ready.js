@@ -21,3 +21,7 @@ module.exports = async bot => {
         cs.run(bot)
     }, 300000)
 }
+
+module.exports.config = {
+    event: "ready"
+}

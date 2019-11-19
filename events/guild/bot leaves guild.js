@@ -20,3 +20,7 @@ module.exports = async (bot, guild) => {
     let cmd = bot.commands.get('checkserver');
     cmd.run(bot)
 }
+
+module.exports.config = {
+    event: "guildDelete"
+}
