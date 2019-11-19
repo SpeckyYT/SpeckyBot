@@ -80,5 +80,3 @@ module.exports.config = {
 	accessableby: "Server Admins and Moderators",
     aliases: ["simonsays", "simon"]
 }
-// 'start', 'startgame', 'game', 'newgame', 'new'
-// startgame [channel] ([joinTime])
