@@ -6,7 +6,10 @@
       "solveEquation":true,
       "write":true,
       "writeSpecific":true,
-      "oppositeDay":true
+      "oppositeDay":true,
+      "status":true,
+      "writeDM":true,
+      "writeDMSpecific":true
    },
    "fakeStarts":[ 
       "Alright,",
@@ -25,6 +28,7 @@
          "beep boop",
          "i love this bot",
          "this is the best game i have ever participated in",
+         "why are we still here just to suffer",
          "you are cool",
          "bruh"
       ],
@@ -33,7 +37,8 @@
          "👍",
          "🔥",
          "🤔",
-         "❤️"
+         "🐭",
+         "🍌"
       ],
       "status":[ 
          "online",

@@ -16,6 +16,9 @@ module.exports.run = async (bot, msg, args) => {
         time = args[0] ? parseInt(args[0], 10) * 1000 : 30000
     } else {
         time = args[1] ? parseInt(args[1], 10) * 1000 : 30000
+        if(!time){
+            time = args[0] ? parseInt(args[0], 10) * 1000 : 30000
+        }
     }
 
     if (!time){
@@ -23,12 +26,11 @@ module.exports.run = async (bot, msg, args) => {
         return
     }
 
-    if (channel) {
+    if (channel != msg.channel) {
         msg.channel.send(`Starting game in ${channel}!`)
     }
 
     //collect players
-
     let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE TO JOIN SIMON SAYS!")
     .setDescription(`Hosted by <@${msg.author.id}>`)
     .setColor(msg.member.displayColor)
@@ -39,23 +41,25 @@ module.exports.run = async (bot, msg, args) => {
         let collected = await msg.awaitReactions(() => true, {
             time: time
         })
-
-        if(collected.size < 2){
-            channel.send('**Game canceled!** Not enough players!')
-            return
-        }
         
         let players = []
         for (let reaction of collected.array()) {
-            let users = await reaction.fetchUsers()
-            players = players.concat(users.array())
+            console.log(reaction)
+            if(reaction.emoji.name == '🎲'){
+                let users = await reaction.fetchUsers()
+                players = players.concat(users.array())
+            }
         }
-        players = players.filter(player => player.id != bot.user.id)
+        players = players.filter(player => !player.bot)
+
+        if(players.length < 1 || players.length == null) return channel.send('**Game canceled!** Not enough players!');
 
         channel.send(`The game is starting! Players: ${players.join(', ')}`)
-        let explanationEmbed = new RichEmbed().setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
-                                                .setColor('#77ecf2')
+        let explanationEmbed = new RichEmbed()
+            .setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
+            .setColor('#77ecf2')
         channel.send(explanationEmbed)
+
         if(time > 30000 || players.length > 5){
             await sleep(10000)
         } else {
@@ -74,8 +78,8 @@ function sleep(ms) {
 
 module.exports.config = {
     name: "speckysays",
-	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
-    usage: `start #[channel] [start time]`,
+	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
+    usage: `#[channel] [start time in seconds]`,
     category: `games`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["simonsays", "simon"]

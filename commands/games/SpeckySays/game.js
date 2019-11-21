@@ -15,7 +15,15 @@ module.exports.runGame = async function (channel, players_, bot) {
     let players = players_
     let time = 1
     let winners
-    let gameOn = true
+    let gameOn
+    let prematurelyEnd
+    if(players_.length < 1){
+        prematurelyEnd = true
+        gameOn = false
+    }else{
+        prematurelyEnd = false
+        gameOn = true
+    }
     let rounds = 1
     let lastGame = null
     //example of how to start a game
@@ -28,7 +36,7 @@ module.exports.runGame = async function (channel, players_, bot) {
         let enabledGames = []
         for(let game of bot.minigames){
             if(settings.minigames[game.name]){
-                if(game.name == 'oppositeDay' && rounds < 4) continue
+                if(game.name == 'oppositeDay' && rounds < 5) continue
                 enabledGames.push(game)
             }
         }
@@ -91,7 +99,7 @@ module.exports.runGame = async function (channel, players_, bot) {
         await sleep(1000)
         
 
-        if (playersLeft.length == 0) {
+        if (playersLeft.length < 1) {
             winners = playersOut
             gameOn = false
             break
@@ -102,11 +110,13 @@ module.exports.runGame = async function (channel, players_, bot) {
         lastGame = currentGame
     }
 
-    var embed = new discord.RichEmbed()
-        .setTitle('The game has ended!')
-        .setDescription(`${winners.join(', ')} won with ${rounds} points! GG!`)
-        .setColor('#FFBE11')
-    channel.send(embed)
+    if(!prematurelyEnd){
+        var embed = new discord.RichEmbed()
+            .setTitle('The game has ended!')
+            .setDescription(`${winners.join(', ')} won with ${rounds} points! GG!`)
+            .setColor('#FFBE11')
+        channel.send(embed)
+    }
 }
 
 function getRandomInt(max) {

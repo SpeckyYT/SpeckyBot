@@ -37,7 +37,7 @@ module.exports.run = async (bot, msg, args, config) => {
                 break
                 */
             default:
-                msg.channel.send("Action is invalid")
+                return msg.channel.send("Action is invalid")
         }
     }catch(e){
         console.log(`ERROR: ${e.message}`);
