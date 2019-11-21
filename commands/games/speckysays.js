@@ -1,8 +1,8 @@
 const { RichEmbed } = require('discord.js')
 const { runGame } = require('./SpeckySays/game');
 
-module.exports.run = async (bot, msg, args) => {
-    if (!msg.member.hasPermission('MANAGE_MESSAGES')) {
+module.exports.run = async (bot, msg, args, config) => {
+    if (!msg.member.hasPermission('MANAGE_MESSAGES') && msg.author.id != config.owner) {
         msg.reply(`you don't have permissions to use this command!`)
         return
     }
@@ -31,7 +31,7 @@ module.exports.run = async (bot, msg, args) => {
     }
 
     //collect players
-    let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE TO JOIN SIMON SAYS!")
+    let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
     .setDescription(`Hosted by <@${msg.author.id}>`)
     .setColor(msg.member.displayColor)
     .setFooter(`The game will start in ${Math.floor(time / 1000)} seconds.`)

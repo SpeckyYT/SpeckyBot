@@ -15,12 +15,12 @@ module.exports.run = async (bot, msg, args, config) => {
 }
 
 module.exports.config = {
-    name: "inftest1",
-	description: "This was the C++ exam #1 in SpeckyYT's class (06/11/2019) (Written in JavaScript)!",
-    usage: `<num1> <num2>`,
+    name: "inftest",
+	description: "These were the C++ exams in SpeckyYT's class (Written in JavaScript)!\nTest #1: 06/11/2019",
+    usage: `[exam number] <depends from exam>`,
     category: `owner`,
 	accessableby: "Bot Owner",
-    aliases: ["it1"]
+    aliases: ["it"]
 }
 
 
