@@ -4,7 +4,7 @@ module.exports.run = async (bot, msg, args, config) => {
     var discrims = [];
     bot.users.forEach(user => {
         if(discrims.length < 10){
-            if(msg.author.discriminator == user.discriminator){
+            if(msg.author.discriminator == user.discriminator && msg.author.username != user.username){
                 discrims.push(user.tag)
             }
         }
@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg, args, config) => {
     const embed = new RichEmbed()
         .setColor('#FF00AA')
         .setTitle(`#${msg.author.discriminator}`)
-        .setDescription(discrims.join(`\n`))
+        .setDescription(discrims.length ? discrims.join(`\n`) : 'No user found')
     msg.channel.send(embed);
 };
 

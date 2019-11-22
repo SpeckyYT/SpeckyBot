@@ -3,12 +3,16 @@ const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg, args, config) => {
 
-    var baseURL = `https://mee6.xyz/api/plugins/levels/leaderboard/`
+    let baseURL = `https://mee6.xyz/api/plugins/levels/leaderboard/`
+    let embed = new RichEmbed();
 
     fetch(`${baseURL}${args[0]}`)
         .then(resp => resp.json())
         .then(json => {
-            msg.channel.send(json.page)
+            json.players.forEach(user => {
+                embed.addField(`${user.username}#${user.discriminator}`,`Level: ${user.level}\nExperience: ${user.xp}`)
+            });
+            msg.channel.send(embed, {split: ''})
         })
 }
 
