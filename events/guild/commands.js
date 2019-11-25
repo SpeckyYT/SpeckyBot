@@ -21,7 +21,7 @@ module.exports = async (bot, msg) => {
         
         if(!(msg.author.id === config.owner)){
             
-            if(cmd.config.category === "owner"){
+            if(cmd.config.category === "owner" || cmd.config.category === "private"){
                 msg.channel.send("You aren't my owner.");
                 return;
             }

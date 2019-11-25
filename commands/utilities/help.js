@@ -8,19 +8,17 @@ module.exports.run = async (bot, msg, args, config) => {
 	.setThumbnail(bot.user.displayAvatarURL)
 
 	if(!args[0]) {
-		const categories = readdirSync('./commands/')
+		let categories = readdirSync('./commands/')
 
 		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
 		embed.setFooter(`© ${msg.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
 		categories.forEach(category => {
-			const dir = bot.commands.filter(c => c.config.category === category)
-			const capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
-			try {
-				embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`) // `${dir.map(c => `\`${c.config.name}\``).join(" ")}`
-			} catch(e) {
-				//console.log(e)
-			}
+			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
+			let capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
+			try{
+			embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
+			}catch{}
 		})
 
 		return msg.channel.send(embed)

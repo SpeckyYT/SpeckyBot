@@ -10,6 +10,7 @@
     "ffmpeg-binaries": "^4.0.0",
     "gdprofiles": "^1.0.2-rc.2",
     "got": "^9.6.0",
+    "iliad-cli": "^1.4.1",
     "mathjs": "^6.2.3",
     "mee6-levels-api": "^1.0.1",
     "microseconds": "^0.1.0",
