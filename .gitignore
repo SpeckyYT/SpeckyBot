@@ -1,3 +1,9 @@
+events/guild/chatbot.js
+events/guild/training.js
+
+events/guild/chatbot.json
+events/guild/train.json
+
 # Logs
 logs
 *.log

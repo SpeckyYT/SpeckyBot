@@ -18,13 +18,18 @@ module.exports = async (bot, msg) => {
                             }else{
                                 color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
                             }
-                            var embed = new RichEmbed()
-                                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-                                .setDescription(`${msg.content}`)
-                                .setImage(msg.attachments.url)
-                                .setColor(`#${color}`);
                             await msg.delete();
-                            await msg.channel.send(embed);
+                            if(msg.content){
+                                var embed = new RichEmbed()
+                                    .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                                    .setDescription(`${msg.content}`)
+                                    .setImage(msg.attachments.url)
+                                    .setColor(`#${color}`);
+                                await msg.channel.send(embed);
+                            }
+                            if(msg.embeds.length){
+                                await msg.embeds.forEach(emb => msg.channel.send(new RichEmbed(emb).setThumbnail(msg.author.avatarURL)))
+                            }
                         }catch(e){
                             console.log(`Error in MTE system (message.js) occurred: ${msg.channel.id}, ${msg.guild.id}`);
                         }

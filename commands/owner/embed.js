@@ -46,11 +46,9 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
             })
             break
         case "crofter":
-            let embed = new RichEmbed()
-                .setColor('#00ff00')
-                .setAuthor(`Quick maths with TheHDCrofter!`)
-                .setDescription(`26 / 7 is equal to ${parseFloat(26/7).toFixed(2)}`);
-            msg.channel.send(embed);
+            msg.mentions.channels.first().fetchMessage('603606203968258048').then(mess => {
+                msg.channel.send(new RichEmbed(mess.embeds[0]))
+            })
             break
     }
 }
