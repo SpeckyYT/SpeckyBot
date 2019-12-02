@@ -4,6 +4,8 @@ events/guild/training.js
 events/guild/chatbot.json
 events/guild/train.json
 
+events/private
+
 commands/private
 
 

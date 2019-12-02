@@ -20,7 +20,7 @@ module.exports.config = {
     name: "mod",
 	description: "Moderates stuffs!",
     usage: ``,
-    category: `misc`,
+    category: `custom`,
 	accessableby: "Members",
     aliases: [],
     servers: [265505748413448193]

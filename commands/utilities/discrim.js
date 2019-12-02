@@ -22,5 +22,5 @@ module.exports.config = {
     usage: ``,
     category: `utilities`,
 	accessableby: "Members",
-    aliases: ["discrims","discriminator","discriminators"]
+    aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
 }

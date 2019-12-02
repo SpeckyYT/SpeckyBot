@@ -22,7 +22,7 @@ module.exports.config = {
     name: "bump",
 	description: "Bumps the server!",
     usage: ``,
-    category: `misc`,
+    category: `custom`,
 	accessableby: "Members",
     aliases: [],
     servers: [265505748413448193]

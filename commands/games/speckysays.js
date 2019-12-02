@@ -44,7 +44,6 @@ module.exports.run = async (bot, msg, args, config) => {
         
         let players = []
         for (let reaction of collected.array()) {
-            console.log(reaction)
             if(reaction.emoji.name == '🎲'){
                 let users = await reaction.fetchUsers()
                 players = players.concat(users.array())
