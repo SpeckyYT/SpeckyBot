@@ -3,8 +3,14 @@ const config = require('../../config.json')
 module.exports = (bot) => {
     bot.music.start(bot, {
         youtubeKey: config.youtube,
-        ownerOverMember: true,
         ownerID: config.owner,
-        insertMusic: true
+        ownerOverMember: true,
+        botAdmins: [config.owner],
+        insertMusic: true,
+        logging: false,
+        botPrefix: null,
+        inlineEmbeds: true,
+        bigPicture: false,
+        requesterName: true,
     })
 };
