@@ -8,6 +8,7 @@ events/private
 
 commands/private
 
+*.json
 
 # Logs
 logs
