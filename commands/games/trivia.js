@@ -41,7 +41,7 @@ module.exports.run = async (bot, msg, args, config) => {
                 msg.channel.send(cEmbed).then(async resp => {
 
                     const filter =  m => ((m.content.toLowerCase().includes('reveal')) && (m.author.id == msg.author.id)) || 
-                                    (compareTwoStrings(Buffer.from(data.correct_answer, 'base64'), m.content) >= 0.7);
+                                    (compareTwoStrings(Buffer.from(data.correct_answer, 'base64').toString(), m.content) >= 0.7);
 
                     await msg.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
                     .then(c => {
