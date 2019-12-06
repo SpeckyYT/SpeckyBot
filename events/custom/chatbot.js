@@ -1,10 +1,12 @@
 const fs = require('fs')
 const chatbot = require('cleverbot-free')
-const custom = require('./module/custom.js')
+
+//server limiter
+const limited = ["538028973058424832","334362123293425676","592412978138054688"]
 
 module.exports = async (bot, msg) => {
-    if(!custom(bot, msg)) return;
-
+    
+    if(!limited.includes(msg.guild.id)) return;
 
     if(msg.channel.name != 'chatbot-testing-stuff-cool-wtf') return;
     if(!(msg.content === 'start')) return;
