@@ -10,6 +10,6 @@ module.exports = (bot) => {
             console.log(`${dirs} | ${file}`);
         };
     };
-    ["client", "guild","private"].forEach(x => load(x));
+    ["client", "custom", "guild","private"].forEach(x => load(x));
     console.log();
 };

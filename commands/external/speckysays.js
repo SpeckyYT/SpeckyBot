@@ -1,4 +1,4 @@
-const { RichEmbed } = require('discord.js')
+﻿const { RichEmbed } = require('discord.js')
 const { runGame } = require('./SpeckySays/game');
 
 module.exports.run = async (bot, msg, args, config) => {

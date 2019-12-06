@@ -1,6 +1,7 @@
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
+    if(msg.content.split(/\s|\n/g).join(null).length < 7) return msg.channel.send('The message is too short.');
     args = msg.content.split(" ");
     while(args[0] == config.prefix){
         const fix = `${args[0]}${args[1]}`
@@ -13,6 +14,7 @@ module.exports.run = async (bot, msg, args, config) => {
     let cEmbed = new RichEmbed()
         .setTitle(msg.author.username, msg.author.avatarURL)
         .setDescription(argsresult);
+
     if(channel){
         argsresult = msg.content.split(" ").slice(2).join(" ");
         channel.send(argsresult);
@@ -20,7 +22,7 @@ module.exports.run = async (bot, msg, args, config) => {
         argsresult = args.join(" ");
         msg.channel.send(argsresult);
     }
-    msg.delete(5000);
+    msg.delete();
 }
 
 module.exports.config = {
