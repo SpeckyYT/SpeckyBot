@@ -1,5 +1,5 @@
 module.exports = async (bot, msg) => {
-    const config = require('../../../config.json')
+    const config = require('../../config.json')
 
     if (!msg.content.toLowerCase().startsWith(config.prefix) || msg.author.bot || msg.channel.type === "dm") return;
     
