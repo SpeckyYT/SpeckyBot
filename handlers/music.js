@@ -10,7 +10,7 @@ module.exports = (bot) => {
         logging: false,
         botPrefix: null,
         inlineEmbeds: true,
-        bigPicture: false,
+        bigPicture: true,
         requesterName: true,
     })
 };
