@@ -35,5 +35,6 @@ module.exports.config = {
     usage: `<vocalchannelID> <vocalchannelID>`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
-    aliases: ["am","moveid","idmove"]
+    aliases: ["am","moveid","idmove"],
+    perms: ['MOVE_MEMBERS']
 }

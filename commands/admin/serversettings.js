@@ -80,5 +80,6 @@ module.exports.config = {
     usage: `<text>`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
-    aliases: ["ss","serversetting","servset","serverset","serversets"]
+    aliases: ["ss","serversetting","servset","serverset","serversets"],
+    perms: ['MANAGE_GUILD']
 }

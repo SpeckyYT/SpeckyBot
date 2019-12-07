@@ -39,5 +39,6 @@ module.exports.config = {
     usage: `<message quantity>`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
-    aliases: []
+    aliases: [],
+    perms: ['MANAGE_MESSAGES']
 }
