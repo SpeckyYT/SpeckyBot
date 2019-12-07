@@ -32,7 +32,8 @@ module.exports.run = async (bot, msg, args, config) => {
 		**Description:** ${command.description || "No Description provided."}
 		**Usage:** ${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : "No Usage"}
 		**Accessible by:** ${command.accessableby || "Members"}
-		${command.aliases ? `**Aliases:** ` + command.aliases.join(", ") : "None."}`)
+		${command.aliases ? `**Aliases:** ` + command.aliases.join(", ") : "None"}
+		**Required permissions:** ${command.perms ? command.perms.join(", ") : "None"}`)
 
 		return msg.channel.send(embed)
 	}
