@@ -5,15 +5,17 @@ module.exports.run = async (bot, msg, args, config) => {
     if(args.length == 1 && msg.mentions.channels.first() || args.length == 0){
         member = msg.member
     }else{
-        if(msg.mentions.members.first() != null){
+        if(msg.mentions.members > 0){
             member = msg.mentions.members.first()
         }else{
-            if(msg.guild.fetchMember(args[0]) != null){
-                member = msg.guild.fetchMember(args[0])
-            }else if(msg.guild.fetchMember(args[1] != null)){
-                member = msg.guild.fetchMember(args[1])
-            }else{
-                return msg.channel.send('No user was found.')
+            if(!args[0]) return;
+            msg.guild.fetchMember(args[0])
+                .then(memb => {if(memb){member = memb}})
+                .catch(e => console.error(e))
+            if(args[1]){
+                msg.guild.fetchMember(args[1])
+                    .then(memb => {if(memb){member = memb}})
+                    .catch(e => console.error(e))
             }
         }
     }

@@ -4,7 +4,7 @@ const { RichEmbed } = require('discord.js');
 module.exports = (bot) => {
     let prompt = process.openStdin();
     prompt.addListener("data", res => {
-        channel = readFileSync("../cnscnl.txt");
+        channel = readFileSync("./cnscnl.txt");
         let result = res.toString().trim().split(/ +/g);
         try{
             if(result.join(" ").includes('E:')){

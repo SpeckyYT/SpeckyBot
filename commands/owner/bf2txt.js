@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg, args, config) => {
     }
     if(0){
         var tuf = comp.run(args.join(""),'');
-        msg.channel.send(tuf,{split: {char: ' '}});
+        msg.channel.send(tuf, {split: {char: ' '}});
     }else{
         msg.channel.send("This command causes usually to crash the bot, so it got disabled")
     }
