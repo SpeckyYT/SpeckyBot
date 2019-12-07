@@ -5,7 +5,9 @@ const chatbot = require('cleverbot-free')
 const limited = ["538028973058424832","334362123293425676","592412978138054688"]
 
 module.exports = async (bot, msg) => {
-    
+    if(msg.channel.type === "dm") return;
+
+    //server limiter
     if(!limited.includes(msg.guild.id)) return;
 
     if(msg.channel.name != 'chatbot-testing-stuff-cool-wtf') return;
