@@ -73,7 +73,7 @@ function sleep(ms) {
 
 module.exports.config = {
     name: "towncountryriver",
-	description: "You have to type a word with the starting letter that the bot gives!",
+	description: "You have to type a word with the starting letter that the bot gives!\nThanks to Mantevian / Manteex and Spu7Nix / SputNix for the base of this module!\nhttps://github.com/Mantevian/simonsaysbot",
     usage: `#[channel] [start time in seconds]`,
     category: `games`,
 	accessableby: "Members",

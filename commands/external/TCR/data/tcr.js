@@ -1,10 +1,8 @@
 var fs = require('fs')
-
-const wordlistpath = require('word-list')
-const words = fs.readFileSync(wordlistpath, 'utf8').split('\n')
+const words = fs.readFileSync('./commands/external/TCR/data/words.txt', 'utf8').split('\n')
 
 module.exports = {
-    startMessage: `say a word that starts with:`,
+    startMessage: `a word that starts with the following letter:`,
     defTime: 10000,
     name: 'tcr',
     run: async function (channel, players, time, client, info) {
@@ -35,16 +33,19 @@ module.exports = {
             let sentMessage = false
             for (const message of messages) {
                 if (message.author == player) {
+                    if(!message.content.toLowerCase().startsWith(letter.toLowerCase()) || words.indexOf(message.content.toLowerCase()) < 0){
+                        out.push(player)
+                        outIndex.push(i)
+                        break
+                    }
                     //if simon didnt say, the player is out
                     sentMessage = true
                     break
                 }
             }
             if (!sentMessage) {
-                if(!words.includes(message.content)){
-                    out.push(player)
-                    outIndex.push(i)
-                }
+                out.push(player)
+                outIndex.push(i)
             }
         })
         let newPlayers = players.filter( ( el ) => !out.includes( el ) )

@@ -2,14 +2,7 @@ var discord = require('discord.js')
 var fs = require('fs')
 
 module.exports.runGame = async function (channel, players_, bot) {
-
-    bot.minigames = []
-    const gameFiles = fs.readdirSync('./commands/external/TCR/minigames').filter(file => file.endsWith('.js'))
-
-    for (const file of gameFiles) {
-        const game = require(`./minigames/${file}`)
-        bot.minigames.push(game)
-    }
+    const game = require(`./data/tcr`)
 
     let players = players_
     let time = 1
@@ -26,36 +19,21 @@ module.exports.runGame = async function (channel, players_, bot) {
     let rounds = 1
     let lastGame = null
     //example of how to start a game
-    let settings = require('./settings')
+    let settings = {
+        "minigames":{
+            "tcr":true
+        }
+    }
 
     while (gameOn) {
         
         //chooses a random minigame
-        
-        let enabledGames = []
-        for(let game of bot.minigames){
-            if(settings.minigames[game.name]){
-                enabledGames.push(game)
-            }
-        }
-
-        if(enabledGames.length == 0){
-            channel.send('You need to have at least one game enabled to play. Enable/disable with the config command.')
-            return
-        }
-        let currentGame  = enabledGames[getRandomInt(enabledGames.length)]
-        
-        while(currentGame == lastGame){
-            currentGame = enabledGames[getRandomInt(enabledGames.length)]
-        }
+        let currentGame  = game
         
         //picks a random start of startmessage (67% chance of getting "Simon says")
-        let start
-        if(rounds < 3){
-            start = {
-                string: 'Simon says',
-                real: true
-            } 
+        let start = {
+            string: 'Type',
+            real: true
         }
 
         let actualTime = (time * currentGame.defTime).clamp(5000, 15000)
