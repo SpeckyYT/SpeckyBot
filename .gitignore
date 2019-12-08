@@ -8,7 +8,9 @@ events/private
 
 commands/private
 
-*.json
+s_settings.json
+u_settings.json
+config.json
 
 # Logs
 logs

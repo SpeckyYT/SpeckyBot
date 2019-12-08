@@ -1,5 +1,5 @@
-﻿const { RichEmbed } = require('discord.js')
-const { runGame } = require('./SpeckySays/game');
+const { RichEmbed } = require('discord.js')
+const { runGame } = require('./TCR/game');
 
 module.exports.run = async (bot, msg, args, config) => {
 
@@ -27,7 +27,7 @@ module.exports.run = async (bot, msg, args, config) => {
     }
 
     //collect players
-    let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
+    let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN TOWN COUNTRY RIVER!")
     .setDescription(`Hosted by <@${msg.author.id}>`)
     .setColor(msg.member.displayColor)
     .setFooter(`The game will start in ${Math.floor(time / 1000)} seconds.`)
@@ -51,7 +51,7 @@ module.exports.run = async (bot, msg, args, config) => {
 
         channel.send(`The game is starting! Players: ${players.join(', ')}`)
         let explanationEmbed = new RichEmbed()
-            .setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
+            .setTitle('**Think fast! You have less than 10 seconds to think of a word that starts with the given letter in the given time!**')
             .setColor('#77ecf2')
         channel.send(explanationEmbed)
 
@@ -72,11 +72,11 @@ function sleep(ms) {
 }
 
 module.exports.config = {
-    name: "speckysays",
-	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
+    name: "towncountryriver",
+	description: "You have to type a word with the starting letter that the bot gives!",
     usage: `#[channel] [start time in seconds]`,
     category: `games`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["simonsays", "simon"],
+	accessableby: "Members",
+    aliases: ["tcr"],
     perms: ["MANAGE_MESSAGES"]
 }

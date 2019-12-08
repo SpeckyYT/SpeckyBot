@@ -28,6 +28,7 @@
     "ttbf": "^0.10.0",
     "unfuck": "^0.3.0",
     "urban": "^0.3.2",
+    "word-list": "^3.1.0",
     "ytdl-core": "^1.0.1",
     "ytdl-core-discord": "^1.0.3"
   },
