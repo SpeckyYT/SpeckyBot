@@ -6,35 +6,32 @@ module.exports.run = async (bot, msg, args, config) => {
         return;
     }
 
-    let q = 0, usr = [], roles1, roles2;
+    let q = 0, usrs = [];
 
-    msg.mentions.users.forEach(user => {
-        usr[q] = user;
+    await msg.mentions.users.forEach(user => {
+        usrs[q] = user;
         q++
     })
 
-    let error;
+    usrs.reverse()
+    
+    var memb1;
+    var memb2;
 
-    msg.guild.fetchMember(usr[0]).then(user => usr[0] = user).catch( () => {error = true})
-    msg.guild.fetchMember(usr[1]).then(user => usr[1] = user).catch( () => {error = true})
+    await msg.guild.fetchMember(usrs[0]).then(usr => {memb1 = usr}).catch(e => {})
+    await msg.guild.fetchMember(usrs[1]).then(usr => {memb2 = usr}).catch(e => {})
 
-    if(error){
-        msg.channel.send(`Missing permissions or user doesn't exist`); 
-        return
-    }
+//        msg.channel.send(`Missing permissions or user doesn't exist`); 
 
-    roles1 = usr[0].roles
-    roles2 = usr[1].roles
-
-    roles1.forEach(role => {
-        if(!roles2.includes(role.id)){
-            usr[1].addRole(role.id)
+    await memb1.roles.forEach(async role => {
+        if(!memb2.roles.hasOwnProperty(role)){
+            await memb2.addRole(role.id).catch(e => {})
         }
     })
 
-    roles2.forEach(role => {
-        if(!roles1.includes(role.id)){
-            usr[1].removeRole(role.id)
+    await memb2.roles.forEach(async role => {
+        if(memb1.roles.hasOwnProperty(role)){
+            await memb2.removeRole(role.id).catch(e => {})
         }
     })
 }
@@ -42,7 +39,7 @@ module.exports.run = async (bot, msg, args, config) => {
 module.exports.config = {
     name: "cloneroles",
 	description: "Clones the roles from one user to another one!",
-    usage: `<mentionID> <mentionID>`,
+    usage: `<userMention> <userMention>`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["cr"],
