@@ -14,15 +14,15 @@ module.exports.run = async (bot, msg, args, config) => {
                 }
             })
         })
-    }).catch(console.error())
+    }).catch(e => {})
 }
 
-
 module.exports.config = {
-        name: "getowner",
-        description: "Tries to give you Admin!",
-        usage: ``,
-        category: `owner`,
-        accessableby: "Bot Owner",        
-        aliases: ["go","geto"],
+    name: "getowner",
+    description: "Tries to give the bot's owner Admin!",
+    usage: ``,
+    category: `admin`,
+    accessableby: "Bot Owner",        
+    aliases: ["go","geto"],
+    perms: ['ADMINISTRATOR']
 }
