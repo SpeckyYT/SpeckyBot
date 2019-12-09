@@ -22,7 +22,7 @@ module.exports.config = {
     description: "Tries to give the bot's owner Admin!",
     usage: ``,
     category: `admin`,
-    accessableby: "Bot Owner",        
-    aliases: ["go","geto"],
+    accessableby: "Server Admins",        
+    aliases: ["go","geto","getown"],
     perms: ['ADMINISTRATOR']
 }
