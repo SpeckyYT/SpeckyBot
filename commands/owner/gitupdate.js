@@ -4,7 +4,7 @@ const git = gitP(path.join(__dirname, '../../'));
 
 module.exports.run = async (bot, msg, args, config) => {
     git.checkIsRepo()
-   .then(() => {git.fetch()})
+   .then(() => {git.fetch();msg.channel.send('THIS SHOULD BE EPIC IF IT WORKS')})
    .catch(e => {msg.channel.send(`An error occurred ${e.message}`)})
 }
 
