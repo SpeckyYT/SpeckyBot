@@ -20,7 +20,7 @@ module.exports = (bot) => {
             }
         }
     }
-    ["admin", "custom", "external", "games", "misc", "music", "owner", "utilities","private"].forEach(x => load(x));
+    ["owner", "admin", "custom", "utilities", "external", "games", "misc", "music", "private"].forEach(x => load(x));
     boot = 1
     console.log();
 };
