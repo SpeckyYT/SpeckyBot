@@ -14,17 +14,25 @@ module.exports = async (bot, msg) => {
     let contentu = msg.content.toUpperCase();       //Upper Case one
 
 //--------------REACTIONS-----------------------
-    if(contentl.includes('specky')){
-        msg.react(specky)
+    if(msg.guild.me.hasPermission('ADD_REACTIONS')){
+        if(contentl.includes('specky')){
+            msg.react(specky)
+        }
+
+
     }
 
 //-----------MESSAGES/RESPONSES-----------------
-    if(contentl == "ayy"){
-        msg.channel.send('lmao')
-    }
+    if(msg.guild.me.hasPermission('SEND_MESSAGES')){
+        if(contentl == "ayy"){
+            msg.channel.send('lmao')
+        }
 
-    if(contentl == "owo"){
-        msg.channel.send(`What's this?`)
+        if(contentl == "owo"){
+            msg.channel.send(`What's this?`)
+        }
+
+
     }
 
 //---------------OTHER--------------------------
@@ -39,10 +47,8 @@ module.exports = async (bot, msg) => {
         await msg.channel.send(embed);
         }
 
-
-        
+  
     }
-
 
 
 }

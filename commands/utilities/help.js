@@ -27,13 +27,13 @@ module.exports.run = async (bot, msg, args, config) => {
 		if(!command) return msg.channel.send(embed.setTitle("Invalid Command.").setDescription(`Do \`${config.prefix}help\` for the list of the commands.`))
 		command = command.config
 
-		embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n
-		**Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
-		**Description:** ${command.description || "No Description provided."}
-		**Usage:** ${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : "No Usage"}
-		**Accessible by:** ${command.accessableby || "Members"}
-		${command.aliases ? `**Aliases:** ` + command.aliases.join(", ") : "None"}
-		**Required permissions:** ${command.perms ? command.perms.join(", ") : "None"}`)
+embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n
+**Command:** ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
+**Description:** ${command.description || "No Description provided."}
+**Usage:** ${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : "No Usage"}
+**Accessible by:** ${command.accessableby || "Members"}
+${command.aliases ? `**Aliases:** ` + command.aliases.join(", ") : "None"}
+**Required permissions:** ${command.perms ? command.perms.join(", ") : "None"}`)
 
 		return msg.channel.send(embed)
 	}

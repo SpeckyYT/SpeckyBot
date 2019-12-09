@@ -8,7 +8,7 @@ module.exports.run = async (bot, msg, args, config) => {
         return `${day.padStart(1, "0")} days, ${hrs.padStart(2, "0")} hours, ${min.padStart(2, "0")} minutes, ${sec.padStart(1, "0")} seconds, ${mil.padStart(3, "0")} milliseconds.`
     }
 
-    msg.channel.send(`I have been online for: ${duration(bot.uptime)}`)
+    msg.channel.send(`I have been online* for: ${duration(bot.uptime)}\n*Since last reboot`)
 }
 
 module.exports.config = {
