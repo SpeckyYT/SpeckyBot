@@ -43,5 +43,6 @@ module.exports.config = {
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["cr"],
-    perms: ['MANAGE_ROLES']
+    perms: ['MANAGE_ROLES'],
+    cmdperms: ['MANAGE_ROLES']
 }

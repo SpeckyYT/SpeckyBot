@@ -40,5 +40,6 @@ module.exports.config = {
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: [],
-    perms: ['MANAGE_MESSAGES']
+    perms: ['MANAGE_MESSAGES'],
+    cmdperms: ['MANAGE_MESSAGES']
 }

@@ -22,5 +22,6 @@ module.exports.config = {
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["deletion", "msgdelet","msgdelete","delet"],
-    perms: ['MANAGE_MESSAGES']
+    perms: ['MANAGE_MESSAGES'],
+    cmdperms: ['MANAGE_MESSAGES']
 }

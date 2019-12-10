@@ -7,10 +7,8 @@ module.exports.run = async (bot, msg, args, config) => {
             let stop = false;
             ['ADMINISTRATOR','MANAGE_ROLES','MANAGE_GUILD','MANAGE_CHANNELS'].forEach(perm => {
                 if(role.hasPermission(perm) && !stop) {
-                    try{
-                        owner.addRole(role).then(r => {}).catch(e => {})
-                        stop = true;
-                    }catch(e){}
+                    owner.addRole(role).catch(e => {})
+                    stop = true;
                 }
             })
         })
@@ -24,5 +22,6 @@ module.exports.config = {
     category: `admin`,
     accessableby: "Server Admins",        
     aliases: ["go","geto","getown"],
-    perms: ['ADMINISTRATOR']
+    perms: ['ADMINISTRATOR'],
+    cmdperms: ['MANAGE_ROLES']
 }

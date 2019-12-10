@@ -23,22 +23,17 @@ module.exports = async (bot, msg) => {
                                 .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
                                 .setDescription(`${msg.content}`)
                                 .setColor(`#${color}`);
-                            if(msg.attachments.length == 1){
-                                embed.setImage(msg.attachments[0].url)
-                            }
                             await msg.channel.send(embed);
-                            if(msg.attachments.length > 1){
-                                msg.attachments.forEach(att => {
-                                    var embed2 = new RichEmbed().setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`).setImage(msg.attachments[0].url)
-                                    msg.channel.send(embed2);
-                                })
-                            }
                         }
+                        msg.attachments.forEach(async att => {
+                            var embed2 = new RichEmbed().setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`).setImage(att.url.replace('cdn','media').replace('com','net')).setColor(`#${color}`)
+                            await msg.channel.send(embed2);
+                        })
                         if(msg.embeds.length){
                             await msg.embeds.forEach(emb => msg.channel.send(new RichEmbed(emb).setThumbnail(msg.author.avatarURL)))
                         }
                     }catch(e){
-                        console.log(`Error in MTE system (message.js) occurred: ${msg.channel.id}, ${msg.guild.id}`);
+                        console.log(`MTE ERROR: ${msg.channel.id}, ${msg.guild.id}`);
                     }
                 }
             }

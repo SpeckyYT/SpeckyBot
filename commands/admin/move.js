@@ -27,5 +27,6 @@ module.exports.config = {
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["moveuser","moveu","mu","mov"],
-    perms: ['MOVE_MEMBERS']
+    perms: ['MOVE_MEMBERS'],
+    cmdperms: ['MOVE_MEMBERS']
 }

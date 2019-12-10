@@ -2,8 +2,6 @@ const { RichEmbed } = require("discord.js");
 const Math = require('mathjs');
 
 module.exports.run = async (bot, msg, args, config) => {
-    if(!msg.member.hasPermission('KICK_MEMBERS')) return msg.channel.send('why tf are you even trying to do this?');
-    
     let user = msg.mentions.members.first()
     
     switch(args[0]){
@@ -23,5 +21,7 @@ module.exports.config = {
     category: `custom`,
 	accessableby: "Members",
     aliases: [],
-    servers: [265505748413448193]
+    servers: [265505748413448193],
+    perms: ['KICK_MEMBERS'],
+    cmdperms: ['MANAGE_ROLES']
 }
