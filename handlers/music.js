@@ -12,5 +12,6 @@ module.exports = (bot) => {
         inlineEmbeds: true,
         bigPicture: true,
         requesterName: true,
+        botPrefix: "NtV4vGZ5o4EAbKy2ZyfCOXTyw5dT3o2KrsDzn5tV0FCQOQxCLRZZsSpMjims9nWUERdU87eoMDYfj23I",  //"disabled"
     })
 };

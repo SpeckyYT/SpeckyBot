@@ -2,6 +2,9 @@ const { Client, Collection } = require("discord.js");
 
 const bot = new Client({autoReconnect:true}); bot.music = require("discord.js-musicbot-addon");
 
+const mf = require('./handlers/missingfiles');
+mf().then(prom => {if(prom)return});
+
 ["events","commands","aliases"].forEach(x => 
     bot[x] = new Collection()
 );
@@ -13,11 +16,6 @@ const bot = new Client({autoReconnect:true}); bot.music = require("discord.js-mu
 
 const { token, prefix } = require("./config.json");
 
-try{
-    bot.login(token)
-}catch(e){
-    console.log("Error occourred on logging in");
-    process.exit();
-}
+bot.login(token).catch(() => {for(var i = 0; i < 100; i++)console.log('PLEASE EDIT THE CONFIG.JSON FILE')})
 
 console.log(`Bot prefix: ${prefix}`);
