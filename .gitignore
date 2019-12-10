@@ -1,9 +1,3 @@
-events/guild/chatbot.js
-events/guild/training.js
-
-events/guild/chatbot.json
-events/guild/train.json
-
 events/private
 
 commands/private
@@ -11,6 +5,7 @@ commands/private
 s_settings.json
 u_settings.json
 config.json
+textchannelcons.txt
 
 # Logs
 logs
