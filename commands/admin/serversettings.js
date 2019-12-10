@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js')
 const { writeFile } = require("fs");
-const dir = '../../../s_settings.json'
+const dir = '../../s_settings.json'
 
 module.exports.run = async (bot, msg, args, config) => {
     if( !msg.member.hasPermission(["MANAGE_MESSAGES"]) &&

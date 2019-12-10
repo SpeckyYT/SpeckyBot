@@ -1,4 +1,4 @@
-const dir = '../../../u_settings';
+const dir = '../../u_settings';
 const { writeFile } = require('fs');
 
 module.exports.run = async (bot, msg, args, config) => {

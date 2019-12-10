@@ -22,9 +22,17 @@ module.exports = async (bot, msg) => {
                             var embed = new RichEmbed()
                                 .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
                                 .setDescription(`${msg.content}`)
-                                .setImage(msg.attachments.url)
                                 .setColor(`#${color}`);
+                            if(msg.attachments.length == 1){
+                                embed.setImage(msg.attachments[0].url)
+                            }
                             await msg.channel.send(embed);
+                            if(msg.attachments.length > 1){
+                                msg.attachments.forEach(att => {
+                                    var embed2 = new RichEmbed().setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`).setImage(msg.attachments[0].url)
+                                    msg.channel.send(embed2);
+                                })
+                            }
                         }
                         if(msg.embeds.length){
                             await msg.embeds.forEach(emb => msg.channel.send(new RichEmbed(emb).setThumbnail(msg.author.avatarURL)))
