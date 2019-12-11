@@ -1,18 +1,12 @@
-const { Client, Collection } = require("discord.js");
+const { Client } = require("discord.js");
 
 const bot = new Client({autoReconnect:true}); bot.music = require("discord.js-musicbot-addon");
 
 const mf = require('./handlers/missingfiles');
 mf().then(prom => {if(prom)return});
 
-["events","commands","aliases"].forEach(x => 
-    bot[x] = new Collection()
-);
-
-["events", "commands", "console","music"].forEach(x => {
-    console.log(`\n\nLoading ${x.toUpperCase()}!\n`);
-    require(`./handlers/${x}`)(bot)
-});
+const hh = require('./handlers/handleshandler')
+hh(bot)
 
 const { token, prefix } = require("./config.json");
 
