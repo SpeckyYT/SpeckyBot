@@ -9,7 +9,7 @@ module.exports.run = async (bot, msg, args, config) => {
         case "embcol":
             const color = args[1]
             if(color == null) return msg.channel.send("You have to define a color (in HEX format)");
-            
+            color = color.replace("#",'');
             var temp = parseInt(color, 16);
             if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
             if(color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
@@ -18,22 +18,14 @@ module.exports.run = async (bot, msg, args, config) => {
                 embedcolor: color.toUpperCase(),
             };
 
-            writeFile('../u_settings.json', JSON.stringify(u_settings, null, 4), err => {
+            writeFile('./u_settings.json', JSON.stringify(u_settings, null, 4), err => {
                 if(err) console.log(err);
                 msg.channel.send(`Changed your embed color to \`${color.toUpperCase()}\`!`)
             });
             break;
-
-        case 'uwu':
-            msg.channel.send("uwu");
-            break;
-
-        case !null:
-            msg.channel.send("You fucced up stuff");
-            break;
         
         default:
-            msg.channel.send("You have to define a setting to edit (list will be completed in the future)")
+            msg.channel.send("You have to define a setting to edit.\n\n\n\nChange Message to Embed color: `sb!ss ec <HEX COLOR>`")
 
     }
 };

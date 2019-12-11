@@ -24,17 +24,14 @@ module.exports = async (bot, msg) => {
         if(!(msg.author.id === config.owner)){
             if(!msg.guild.me.permissionsIn(msg.channel).toArray().includes('SEND_MESSAGES')) return;
 
-            let perm = false;
             if(cmd.config.cmdperms){
                 await cmd.config.cmdperms.forEach(perm => {
                     if(!msg.guild.me.hasPermission(perm)){
                         msg.channel.send(`The bot doesn't have the required permissions.`)
-                        perm = true;
                         return;
                     }
                 })
             }
-            if(perm){return;}
 
             if(cmd.config.category === "owner" || cmd.config.category === "private"){
                 msg.channel.send("You aren't my owner.");

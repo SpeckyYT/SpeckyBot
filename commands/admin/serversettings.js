@@ -31,7 +31,7 @@ module.exports.run = async (bot, msg, args, config) => {
                                 mtechannel: [...mte[msg.guild.id].mtechannel,channelid],
                             };
                         }
-                        writeFile('../s_settings.json', JSON.stringify(mte, null, 4), err => {
+                        writeFile('./s_settings.json', JSON.stringify(mte, null, 4), err => {
                             if(err) throw err;
                             msg.channel.send("Added! :ok_hand:")
                         });
@@ -52,7 +52,7 @@ module.exports.run = async (bot, msg, args, config) => {
                         mte[msg.guild.id] = {
                             mtechannel: rest,
                         };
-                        writeFile('../s_settings.json', JSON.stringify(mte, null, 4), err => {
+                        writeFile('./s_settings.json', JSON.stringify(mte, null, 4), err => {
                             if(err) throw err;
                             msg.channel.send("Removed! :ok_hand:")
                         });
