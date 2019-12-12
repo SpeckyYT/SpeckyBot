@@ -1,8 +1,4 @@
-const mf = require('./handlers/missingfiles');
-mf().then(prom => {if(prom)return});
-
-const hh = require('./handlers/handlershandler')
-hh(bot)
+const hh = require('./handlers/generalhandler')(bot);
 
 const { token, prefix } = require("./config.json");
 
