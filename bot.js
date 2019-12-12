@@ -1,4 +1,4 @@
-require('./handlers/generalhandler')(bot);
+require('./handlers/generalhandler');
 
 const { token, prefix } = require("./config.json");
 
