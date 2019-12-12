@@ -1,6 +1,6 @@
 const { Client, Collection } = require("discord.js");
 
-module.exports = async (bot) =>{
+module.exports = () => {
     require('./missingfiles')().then(prom => {if(prom)return});
     
     const bot = new Client({autoReconnect:true});
