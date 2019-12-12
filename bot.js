@@ -5,7 +5,7 @@ const bot = new Client({autoReconnect:true}); bot.music = require("discord.js-mu
 const mf = require('./handlers/missingfiles');
 mf().then(prom => {if(prom)return});
 
-const hh = require('./handlers/handleshandler')
+const hh = require('./handlers/handlershandler')
 hh(bot)
 
 const { token, prefix } = require("./config.json");
