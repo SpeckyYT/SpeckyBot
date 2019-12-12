@@ -15,4 +15,12 @@ module.exports = () => {
         console.log(`\n\nLoading ${x.toUpperCase()}!\n`);
         require(`./${x}`)(bot)
     });
+    
+    const { token } = require('../config.json')
+        
+    bot.login(token).catch(() => {
+        for(var i = 0; i < 50; i++){
+            console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`)
+        }
+    })
 }
