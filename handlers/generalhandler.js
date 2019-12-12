@@ -1,8 +1,9 @@
 const { Client, Collection } = require("discord.js");
 
 module.exports = () => {
-    require('./missingfiles')().then(prom => {if(prom)return});
-    
+    require('./missingdirectories')()
+    require('./missingfiles')()
+
     const bot = new Client({autoReconnect:true});
     
     bot.music = require("discord.js-musicbot-addon");
