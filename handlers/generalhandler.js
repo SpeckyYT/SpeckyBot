@@ -1,6 +1,12 @@
-const { Collection } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 
-module.exports = async (bot) =>{
+module.exports = () => {
+    require('./missingfiles')().then(prom => {if(prom)return});
+    
+    const bot = new Client({autoReconnect:true});
+    
+    bot.music = require("discord.js-musicbot-addon");
+    
     ["events","commands","aliases"].forEach(async x => 
         bot[x] = new Collection()
     );
