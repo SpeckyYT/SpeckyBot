@@ -1,7 +1,3 @@
-const { Client } = require("discord.js");
-
-const bot = new Client({autoReconnect:true}); bot.music = require("discord.js-musicbot-addon");
-
 const mf = require('./handlers/missingfiles');
 mf().then(prom => {if(prom)return});
 
