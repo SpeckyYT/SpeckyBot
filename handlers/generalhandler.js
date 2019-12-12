@@ -3,7 +3,7 @@ const { Client, Collection } = require("discord.js");
 module.exports = async (bot) =>{
     require('./missingfiles')().then(prom => {if(prom)return});
     
-    const bot = new Client({autoReconnect:true});
+    bot = new Client({autoReconnect:true});
     
     bot.music = require("discord.js-musicbot-addon");
     
