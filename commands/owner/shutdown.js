@@ -1,7 +1,10 @@
 module.exports.run = async (bot, msg, args, config) => {
     try{
-        await msg.channel.send("Bot is shutting down!").then(ms => ms.delete(5000));
-        process.exit();
+        await msg.channel.send("Bot is shutting down!")
+        .then(ms => {
+            ms.delete(5000);
+            process.exit();
+        });
     }catch(e){
         msg.channel.send("An error occourred");
     }

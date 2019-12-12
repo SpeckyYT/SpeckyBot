@@ -21,7 +21,7 @@ module.exports.config = {
     category: `custom`,
 	accessableby: "Members",
     aliases: [],
-    servers: [265505748413448193],
+    servers: ['265505748413448193'],
     perms: ['KICK_MEMBERS'],
     cmdperms: ['MANAGE_ROLES']
 }
