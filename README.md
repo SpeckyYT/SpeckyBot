@@ -2,13 +2,21 @@
  
 - Created by a unexperienced user
 
-# Features
+# Contributors
 
-- Various informations (server, user and voice channel)
-- Command files
-- Minor music features
+- SpeckyYT
 
-- More be added soon
+# How to run successfully the bot?
+
+- Download or clone this repository
+- Extract the files
+- Run the .bat file and close it
+- Enter the private informations in the config.json file (bot token, prefix, etc.)
+- Run the .bat file once again and you should be done!
+
+# External dependencies
+
+- For the music features, you should have FFMPEG already installed on your machine (not the NPM version)
 
 # Links and Invites
 
