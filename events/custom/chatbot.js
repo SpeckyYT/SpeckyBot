@@ -15,22 +15,11 @@ module.exports = async (bot, msg) => {
     await msg.channel.send('Learning session starting!')
 
     var response, first;
-    var err = 0;
+    let err = false;
 
-    await chatbot('what do you think about me').then(resp => response = resp).catch(c => {err = 1})
+    await chatbot('what do you think about me').then(resp => response = resp).catch(c => {err = true})
 
     if(err) return msg.channel.send('Error occurred!')
-
-    /*file = reloadJson()
-
-    file.push({
-        input:[
-            'hello how are you'
-        ],
-        output: [response]
-    })
-
-    writeJson(file)*/
 
     file = await reloadJson()
     while(!err){
