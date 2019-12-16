@@ -2,10 +2,10 @@ const { existsSync, mkdirSync } = require('fs')
 
 module.exports = async () => {
     [
-    './events/private',
-    './commands/private'
+    'events',
+    'commands'
     ]
     .forEach(dir => {
-        if (!existsSync(dir)) mkdirSync(dir);
+        if (!existsSync(`./${dir}/private`)) mkdirSync(`./${dir}/private`);
     })
 }
