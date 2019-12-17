@@ -37,15 +37,6 @@ module.exports = async (bot, msg) => {
 
 //---------------OTHER--------------------------
     if(msg.guild.me.hasPermission('MANAGE_MESSAGES')){
-        if(contento.includes(':EMB:')){
-            var embed = new RichEmbed()
-            .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-            .setDescription(`${msg.content.replace(':EMB:','')}`)
-            .setImage(msg.attachments.url)
-            .setColor(`${msg.member.displayHexColor}`);
-        await msg.delete();
-        await msg.channel.send(embed);
-        }
 
   
     }
