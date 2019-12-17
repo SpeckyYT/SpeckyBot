@@ -13,7 +13,7 @@ module.exports = async (bot, msg) => {
         color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
     }
 
-    if(msg.guild.me.hasPermission('MANAGE_MESSAGES')){
+    if(msg.guild.me.permissionsIn(msg.channel).toArray().includes('MANAGE_MESSAGES')){
         if(msg.content.includes(':EMB:')){
             var embed = new RichEmbed()
                 .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
