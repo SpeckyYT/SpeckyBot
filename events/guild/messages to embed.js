@@ -4,19 +4,21 @@ module.exports = async (bot, msg) => {
     const s_settings = require('../../s_settings.json')
     const u_settings = require('../../u_settings.json')
     var color;
+
+    if(u_settings[msg.member.id]){
+        if(u_settings[msg.member.id].embedcolor){
+            color = `${u_settings[msg.member.id].embedcolor}`;
+        }
+    }else{
+        color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
+    }
+
     try{
         if (msg.author.id == bot.user.id || msg.channel.type == "dm") return;
         if(s_settings[msg.guild.id]){
             if(s_settings[msg.guild.id].mtechannel){
                 if(s_settings[msg.guild.id].mtechannel.includes(msg.channel.id)){
                     try{
-                        if(u_settings[msg.member.id]){
-                            if(u_settings[msg.member.id].embedcolor){
-                                color = `${u_settings[msg.member.id].embedcolor}`;
-                            }
-                        }else{
-                            color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
-                        }
                         await msg.delete();
                         if(msg.content){
                             var embed = new RichEmbed()
