@@ -13,6 +13,19 @@ module.exports = async (bot, msg) => {
         color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
     }
 
+    if(msg.guild.me.hasPermission('MANAGE_MESSAGES')){
+        if(msg.content.includes(':EMB:')){
+            var embed = new RichEmbed()
+                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                .setDescription(`${msg.content.replace(':EMB:','')}`)
+                .setImage(msg.attachments.url)
+                .setColor(`${color}`);
+            await msg.delete();
+            await msg.channel.send(embed);
+            return;
+        }
+    }
+
     try{
         if (msg.author.id == bot.user.id || msg.channel.type == "dm") return;
         if(s_settings[msg.guild.id]){
