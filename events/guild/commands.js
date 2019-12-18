@@ -40,6 +40,11 @@ module.exports = async (bot, msg) => {
                 msg.channel.send("You aren't my owner.");
                 return;
             }
+            
+            if(cmd.config.category === "nsfw" && !msg.channel.nsfw){
+                msg.channel.send("This command is only allowed in a NSFW channel.");
+                return;
+            }
 
             if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
                 if(cmd.config.perms){
