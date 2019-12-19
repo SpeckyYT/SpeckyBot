@@ -1,3 +1,5 @@
+const { Collection } = require("discord.js");
+
 module.exports = (bot) => {
     bot.music = require("discord.js-musicbot-addon");
 
