@@ -8,7 +8,6 @@ module.exports = (bot) => {
         botAdmins: [config.owner],
         insertMusic: true,
         logging: false,
-        botPrefix: null,
         inlineEmbeds: true,
         bigPicture: true,
         requesterName: true,
