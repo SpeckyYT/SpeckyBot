@@ -14,7 +14,7 @@ module.exports = (bot) => {
             }
             if(!error){
                 let pull = require(`../commands/${dirs}/${file}`);
-                bot.commands.set(pull.config.name, pull).catch{};
+                bot.commands.set(pull.config.name, pull).catch(()=>{});
                 if (pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
                 console.log(`${dirs}     \t|\t${file}`);
             }
