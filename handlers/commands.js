@@ -18,7 +18,7 @@ module.exports = (bot) => {
                     bot.commands.set(pull.config.name, pull);
                     if (pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
                     console.log(`${dirs}     \t|\t${file}`);
-                }catch{console.log(`ERROR: ${dirs} | ${file}`)}
+                }catch{console.log(`${dirs}     \t|\t${file} ERROR!`)}
             }
         }
     }
