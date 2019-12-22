@@ -21,7 +21,6 @@ module.exports.run = async (bot, msg, args, config) => {
                 });
                 require(cmddir)(bot);
                 break
-            /*
             case "events":
             case "event":
             case "eve":
@@ -29,15 +28,15 @@ module.exports.run = async (bot, msg, args, config) => {
                 await delete require.cache[require.resolve('../../handlers/events.js')];
                 require(eventdir)(bot);
                 break
-
+            /*
             case "console":
             case "cons":
                 await delete require.cache[require.resolve('../handlers/console.js')];
                 require(consdir)(bot);    
                 break
-                */
+            */
             default:
-                return msg.channel.send("Action is invalid")
+                return msg.channel.send("Module to reload is invalid")
         }
     }catch(e){
         console.log(`ERROR: ${e.message}`);
