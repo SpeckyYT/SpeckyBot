@@ -51,8 +51,8 @@ module.exports.run = async (bot, msg, args, config) => {
 
 module.exports.config = {
     name: "reload",
-	description: "The bot will reload all events!",
-    usage: `<type>`,
+	description: "The bot will reload a specific handler!",
+    usage: `<handler>`,
     category: `owner`,
 	accessableby: "Bot Owner",
     aliases: ["rld","rl"]
