@@ -1,9 +1,8 @@
 const git = require('nodegit')
 
 module.exports.run = async () => {
-    git.clone("https://github.com/SpeckyYT/SpeckyBot", "../../")
-	
-	
+    git.clone("https://github.com/SpeckyYT/SpeckyBot", "../../../");
+    msg.channel.send("The bot's files got updated!")	
 }
 
 module.exports.config = {
