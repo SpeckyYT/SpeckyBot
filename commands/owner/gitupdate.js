@@ -1,5 +1,9 @@
-module.exports.run = async () => {
+const git = require('nodegit')
 
+module.exports.run = async () => {
+    git.clone("https://github.com/SpeckyYT/SpeckyBot", "../../")
+	
+	
 }
 
 module.exports.config = {
