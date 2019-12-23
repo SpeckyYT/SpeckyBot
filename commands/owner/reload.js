@@ -35,6 +35,17 @@ module.exports.run = async (bot, msg, args, config) => {
                 require(consdir)(bot);    
                 break
             */
+            case "bot":
+                const git = require('nodegit');
+                git.clone("https://github.com/SpeckyYT/SpeckyBot", "../../../");
+                break
+            case "npm":
+                const cmd = require('node-cmd');
+                cmd.run(`
+                    cd ../
+                    npm i
+                `)
+                break
             default:
                 return msg.channel.send("Module to reload is invalid")
         }
