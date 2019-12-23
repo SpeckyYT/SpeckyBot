@@ -36,10 +36,14 @@ module.exports.run = async (bot, msg, args, config) => {
                 break
             */
             case "bot":
+            case "git":
+            case "repo":
                 const git = require('nodegit');
                 git.clone("https://github.com/SpeckyYT/SpeckyBot", "../../../");
                 break
             case "npm":
+            case "modules":
+            case "packages":
                 const cmd = require('node-cmd');
                 cmd.run(`
                     cd ../
