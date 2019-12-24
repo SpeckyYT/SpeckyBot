@@ -1,4 +1,4 @@
-const ttbf = require('ttbf');
+const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]){
@@ -6,7 +6,7 @@ module.exports.run = async (bot, msg, args, config) => {
         return;
     }
     var newArgs = msg.content.split(" ").splice(1);
-    var text = ttbf.convert(newArgs.join(" "));
+    var text = convert(newArgs.join(" "));
     msg.channel.send(`\`\`\`bf\n${text}\n\`\`\``,{split: {char: '>'}})
 }
 
