@@ -1,6 +1,7 @@
 const config = require('../config.json')
 
 module.exports = (bot) => {
+    bot.music = require("discord.js-musicbot-addon");
     bot.music.start(bot, {
         youtubeKey: config.youtube,
         ownerID: config.owner,
