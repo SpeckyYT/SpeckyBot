@@ -54,7 +54,7 @@ module.exports.run = async (bot, msg, args, config) => {
         case "7":
         case "easydemon":
         case "ezdemon":
-        case "easdemon"
+        case "easdemon":
             diffNum = 7; break;
 
         case "8":
@@ -76,14 +76,14 @@ module.exports.run = async (bot, msg, args, config) => {
         switch(featured){
 
         case "2":
-        case "2cp"
+        case "2cp":
         case "feature":
         case "featured":
             rate = '_featured'; break;
 
         case "3":
-        case "3cp"
-        case "epic"
+        case "3cp":
+        case "epic":
             rate = '_epic'; break;
 
         default:
