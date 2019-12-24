@@ -7,7 +7,7 @@ module.exports.run = async (bot, msg, args, config) => {
     }
     var newArgs = msg.content.split(" ").splice(1);
     var text = ttbf.convert(newArgs.join(" "));
-    msg.channel.send(text,{split: {char: '>'}})
+    msg.channel.send(`\`\`\`bf\n${text}\n\`\`\``,{split: {char: '>'}})
 }
 
 module.exports.config = {
