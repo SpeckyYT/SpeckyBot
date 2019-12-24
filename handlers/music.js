@@ -1,12 +1,12 @@
-const config = require('../config.json')
+const { youtube, owner } = require('../config.json')
 
 module.exports = (bot) => {
     bot.music = require("discord.js-musicbot-addon");
     bot.music.start(bot, {
-        youtubeKey: config.youtube,
-        ownerID: config.owner,
+        youtubeKey: youtube,
+        ownerID: owner,
         ownerOverMember: true,
-        botAdmins: [config.owner],
+        botAdmins: [owner],
         insertMusic: true,
         logging: false,
         inlineEmbeds: true,
