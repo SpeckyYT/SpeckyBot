@@ -41,11 +41,19 @@ module.exports.run = async (bot, msg, args, config) => {
             case "repo":
                 const rimraf = require('rimraf');
                 rimraf('./tmp', rmdirSync, () => {})
+
                 const git = require('nodegit');
-                await git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp');
-                const ncp = require('ncp').ncp;
-                await ncp("./tmp","./", () => {})
-                rimraf('./tmp', rmdirSync, () => {})
+                await git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp')
+                .then(() => {
+		    setTimeout(() => {
+				
+                    const ncp = require('ncp').ncp;
+                    await ncp("./tmp","./", () => {})
+
+                    rimraf('./tmp', rmdirSync, () => {})
+  
+		    }, 5000)	
+		})
                 break
             case "npm":
             case "modules":

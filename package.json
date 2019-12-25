@@ -26,6 +26,7 @@
     "osureplayparser": "^1.0.1",
     "play-tts": "^1.0.7",
     "random": "^2.1.1",
+    "replace-in-file": "^5.0.2",
     "request": "^2.88.0",
     "rimraf": "^3.0.0",
     "simple-git": "^1.128.0",
