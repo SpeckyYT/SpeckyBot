@@ -36,6 +36,7 @@ module.exports.run = async (bot, msg, args, config) => {
                 require(consdir)(bot);    
                 break
             */
+            /*
             case "bot":
             case "git":
             case "repo":
@@ -55,6 +56,8 @@ module.exports.run = async (bot, msg, args, config) => {
 		        }, 5000);	
 		})
                 break
+            */
+            /*
             case "npm":
             case "modules":
             case "packages":
@@ -64,6 +67,7 @@ module.exports.run = async (bot, msg, args, config) => {
                     npm i
                 `)
                 break
+            */
             default:
                 return msg.channel.send("Module to reload is invalid")
         }
