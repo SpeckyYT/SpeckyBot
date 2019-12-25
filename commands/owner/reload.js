@@ -1,6 +1,7 @@
 var mys = require('microseconds');
 const { readFileSync } = require('fs');
 
+
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
     var begin = mys.now();
@@ -39,7 +40,9 @@ module.exports.run = async (bot, msg, args, config) => {
             case "git":
             case "repo":
                 const git = require('nodegit');
-                git.Clone("https://github.com/SpeckyYT/SpeckyBot", './');
+                git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp');
+                const ncp = require('ncp').ncp;
+                ncp("./tmp","./", () => {})
                 break
             case "npm":
             case "modules":

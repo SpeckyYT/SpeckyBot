@@ -1,6 +1,8 @@
 events/private
 commands/private
 
+tmp
+
 s_settings.json
 u_settings.json
 config.json
