@@ -17,6 +17,7 @@
     "mee6-levels-api": "^1.0.1",
     "microseconds": "^0.1.0",
     "neuro.js": "^0.1.7",
+    "node-cmd": "^3.0.0",
     "node-fetch": "^2.6.0",
     "node-osu": "^1.3.3",
     "nodegit": "^0.26.3",
