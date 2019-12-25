@@ -16,7 +16,10 @@ module.exports = (bot) => {
                 bot.commands.set(pull.config.name, pull);
                 if (pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
                 console.log(`${dirs}     \t|\t${file}`);
-            }catch{console.log(`${dirs}     \t|\t${file} ERROR!`); console.error}
+            }catch(err){
+                console.log(`${dirs}     \t|\t${file} ERROR!`);
+                console.log(err.message);
+            }
         }
     }
     ["owner", "admin", "utilities", "external", "games", "misc", "music", "private", "custom"].forEach(x => load(x));
