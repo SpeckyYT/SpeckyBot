@@ -16,7 +16,10 @@ module.exports = (bot) => {
                 let eName = evt.config.event;
                 bot.on(eName, evt.bind(null, bot));
                 console.log(`${dirs}\t|\t${file}`);
-            }catch{console.log(`${dirs}\t|\t${file} ERROR!`)}
+            }catch(err){
+                console.log(`${dirs}\t|\t${file} ERROR!`)
+                console.log(err.message);
+            }
         };
     };
     ["client", "custom", "guild","private"].forEach(x => load(x));
