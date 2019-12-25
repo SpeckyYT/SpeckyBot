@@ -39,7 +39,7 @@ module.exports.run = async (bot, msg, args, config) => {
             case "git":
             case "repo":
                 const git = require('nodegit');
-                git.clone("https://github.com/SpeckyYT/SpeckyBot", "../../../");
+                git.Clone("https://github.com/SpeckyYT/SpeckyBot", "../../../");
                 break
             case "npm":
             case "modules":
