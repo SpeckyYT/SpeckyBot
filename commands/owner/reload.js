@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg, args, config) => {
             case "event":
             case "eve":
             case "ev":
-                await delete require.cache[require.resolve('../../handlers/events.js')];
+                delete require.cache[require.resolve('../../handlers/events.js')];
                 require(eventdir)(bot);
                 break
             /*
@@ -40,19 +40,19 @@ module.exports.run = async (bot, msg, args, config) => {
             case "git":
             case "repo":
                 const rimraf = require('rimraf');
-                rimraf('./tmp', rmdirSync, () => {})
+                rimraf('./tmp', {}, () => {})
 
                 const git = require('nodegit');
                 await git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp')
                 .then(() => {
-		    setTimeout(() => {
+		        setTimeout(() => {
 				
-                    const ncp = require('ncp').ncp;
-                    await ncp("./tmp","./", () => {})
+                const ncp = require('ncp').ncp;
+                ncp("./tmp","./", () => {})
 
-                    rimraf('./tmp', rmdirSync, () => {})
+                rimraf('./tmp', {}, () => {})
   
-		    }, 5000)	
+		        }, 5000);	
 		})
                 break
             case "npm":
