@@ -24,13 +24,6 @@ module.exports = async (bot, msg) => {
 
 //-----------MESSAGES/RESPONSES-----------------
     if(msg.guild.me.hasPermission('SEND_MESSAGES')){
-        if(contentl == "ayy"){
-            msg.channel.send('lmao')
-        }
-
-        if(contentl == "owo"){
-            msg.channel.send(`What's this?`)
-        }
 
 
     }

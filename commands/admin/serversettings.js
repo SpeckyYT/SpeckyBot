@@ -3,11 +3,7 @@ const { writeFile } = require("fs");
 const dir = '../../s_settings.json'
 
 module.exports.run = async (bot, msg, args, config) => {
-    if( !msg.member.hasPermission(["MANAGE_MESSAGES"]) &&
-    !msg.member.hasPermission(["ADMINISTRATOR"]) && !(msg.member.id == config.owner)){
-        msg.channel.send("You can't use this command!");
-        return;
-    }
+    let s_settings = require(dir);
 
     switch(args[0]){
         case "mte":
@@ -15,48 +11,106 @@ module.exports.run = async (bot, msg, args, config) => {
         case "messagetoembedchannel":
         case "msgtoembchannel":
         case "mtechannel":
-
+            if(!msg.mentions.channels.first()){
+                msg.channel.send("You have to tag a channel!")
+                return;
+            }
             switch(args[1]){
 
                 case "add":
-                    var mte = require(dir);
-                    if(!msg.mentions.channels.first()){
-                        msg.channel.send("You have to tag a channel!")
-                        return;
-                    }else{
-                        var channelid = msg.mentions.channels.first().id;
-
-                        if(!mte[msg.guild.id].mtechannel.includes(channelid)){
-                            mte[msg.guild.id] = {
-                                mtechannel: [...mte[msg.guild.id].mtechannel,channelid],
-                            };
+                    var channelid = msg.mentions.channels.first().id;
+                    if(s_settings[msg.guild.id]){
+                        if(s_settings[msg.guild.id].mtechannel){
+                            if(!s_settings[msg.guild.id].mtechannel.includes(channelid)){
+                                s_settings[msg.guild.id] = {
+                                    mtechannel: [...s_settings[msg.guild.id].mtechannel,channelid],
+                                };
+                            }
                         }
-                        writeFile('./s_settings.json', JSON.stringify(mte, null, 4), err => {
-                            if(err) throw err;
-                            msg.channel.send("Added! :ok_hand:")
-                        });
+                    }else{
+                        s_settings[msg.guild.id] = {
+                            mtechannel: [channelid],
+                        }; 
                     }
+                    writeFile('./s_settings.json', JSON.stringify(s_settings, null, 4), err => {
+                        if(err) throw err;
+                        msg.channel.send("Added! :ok_hand:")
+                    });
                     break;
 
                 case "remove":
                 case "delete":
-                    var mte = require(dir);
-                    if(!msg.mentions.channels.first()){
-                        msg.channel.send("You have to tag a channel!")
-                        return;
+                    var channelid = msg.mentions.channels.first().id;
+                    var rest = s_settings[msg.guild.id].mtechannel.filter(function(number) {
+                        return number != channelid;
+                    });
+                    s_settings[msg.guild.id] = {
+                        mtechannel: rest,
+                    };
+                    writeFile('./s_settings.json', JSON.stringify(s_settings, null, 4), err => {
+                        if(err) throw err;
+                        msg.channel.send("Removed! :ok_hand:")
+                    });
+                    break;
+
+                default:
+                    msg.channel.send("You have to define an action (add | remove)")
+            }
+            break
+        case "ic":
+        case "istantcommands":
+        case "istantcommand":
+            if(!msg.mentions.channels.first()){
+                msg.channel.send("You have to tag a channel!")
+                return;
+            }
+
+            let command = args[2];
+            let cmd = bot.commands.get(command) || bot.commands.get(bot.aliases.get(command));
+
+            if(!cmd){
+                msg.channel.send(`Command \`${args[2]}\` not found`)
+            }
+
+            if(!cmd.usage){
+                msg.channel.send(`Command \`${args[2]}\` doesn't have any usage`)
+            }
+
+            switch(args[1]){
+                case "add":
+                    var channelid = msg.mentions.channels.first().id;
+                    if(s_settings[msg.guild.id]){
+                        if(s_settings[msg.guild.id].ic){
+                            if(!s_settings[msg.guild.id].ic.includes(channelid)){
+                                s_settings[msg.guild.id] = {
+                                    ic: [...s_settings[msg.guild.id].ic,channelid],
+                                };
+                            }
+                        }
                     }else{
-                        var channelid = msg.mentions.channels.first().id;
-                        var rest = mte[msg.guild.id].mtechannel.filter(function(number) {
-                            return number != channelid;
-                        });
-                        mte[msg.guild.id] = {
-                            mtechannel: rest,
-                        };
-                        writeFile('./s_settings.json', JSON.stringify(mte, null, 4), err => {
-                            if(err) throw err;
-                            msg.channel.send("Removed! :ok_hand:")
-                        });
+                        s_settings[msg.guild.id] = {
+                            ic: [channelid],
+                        }; 
                     }
+                    writeFile('./s_settings.json', JSON.stringify(s_settings, null, 4), err => {
+                        if(err) throw err;
+                        msg.channel.send("Added! :ok_hand:")
+                    });
+                    break;
+
+                case "remove":
+                case "delete":
+                    var channelid = msg.mentions.channels.first().id;
+                    var rest = s_settings[msg.guild.id].ic.filter(function(number) {
+                        return number != channelid;
+                    });
+                    s_settings[msg.guild.id] = {
+                        ic: rest,
+                    };
+                    writeFile('./s_settings.json', JSON.stringify(s_settings, null, 4), err => {
+                        if(err) throw err;
+                        msg.channel.send("Removed! :ok_hand:")
+                    });
                     break;
 
                 default:
@@ -64,11 +118,12 @@ module.exports.run = async (bot, msg, args, config) => {
             }
             break
         default:
-            var cEmbed = new RichEmbed()
+            let cEmbed = new RichEmbed()
                 .setTitle("Server Settings Help Page!")
                 .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
                 .addBlankField()
-                .addField(`Message to Embed feature [mte]`,`\`${config.prefix}serversettings mte add/remove #channel\``);
+                .addField(`Message to Embed feature [mte]`,`\`${config.prefix}serversettings mte add/remove #channel\``)
+                .addField(`Istant Commands feature [ic]`,`\`${config.prefix}serversettings ic add/remove <command> #channel\``);
             msg.channel.send(cEmbed);
         break
     }
@@ -76,10 +131,10 @@ module.exports.run = async (bot, msg, args, config) => {
 
 module.exports.config = {
     name: "serversettings",
-	description: "You can choose a channel where your messages get turned into embeds!",
-    usage: `<text>`,
+	description: "You can edit any serversettings!",
+    usage: `<feature> <depends from feature>`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["ss","serversetting","servset","serverset","serversets"],
-    perms: ['MANAGE_GUILD']
+    perms: ['MANAGE_MESSAGES']
 }
