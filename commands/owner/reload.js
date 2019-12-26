@@ -44,7 +44,9 @@ module.exports.run = async (bot, msg, args, config) => {
                 const git = require('nodegit');
                 await git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp')
                 .then(() => {
-				
+
+                rimraf('./tmp/.git', {}, () => {});
+	
                 const Rsync = require('rsync');
                 const rsync = new Rsync()
                 .source('./tmp')
