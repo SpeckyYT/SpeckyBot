@@ -36,7 +36,6 @@ module.exports.run = async (bot, msg, args, config) => {
                 require(consdir)(bot);    
                 break
             */
-            /*
             case "bot":
             case "git":
             case "repo":
@@ -46,17 +45,18 @@ module.exports.run = async (bot, msg, args, config) => {
                 const git = require('nodegit');
                 await git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp')
                 .then(() => {
-		        setTimeout(() => {
 				
-                const ncp = require('ncp').ncp;
-                ncp("./tmp","./", () => {})
+                const Rsync = require('rsync');
+                const rsync = new Rsync()
+                .source('./tmp')
+                .destination('.');
+                
+                rsync.execute(() => {});
 
                 rimraf('./tmp', {}, () => {})
-  
-		        }, 5000);	
-		})
+	
+		}).catch{msg.channel.send("Error occurred while cloning the repository!")}
                 break
-            */
             /*
             case "npm":
             case "modules":
