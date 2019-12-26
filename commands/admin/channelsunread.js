@@ -1,4 +1,5 @@
 module.exports.run = async (bot, msg, args, config) => {
+    msg.delete();
     msg.guild.channels.forEach(async channel => {
         try{
             channel.send('New').then(msg => msg.delete());
