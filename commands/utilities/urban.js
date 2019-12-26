@@ -18,14 +18,7 @@ module.exports.run = async (bot, msg, args, config) => {
                 .setColor("#C78C2B")
                 .setAuthor(`Urban Dictionary | ${word}`, image)
                 .setThumbnail(image)
-                .setDescription(`**Defintion:** ${definition || "No definition"}
-                
-                **Example:** ${example || "No Example"}
-                
-                **Upvotes:** ${thumbs_up || 0}
-                **Downvotes:** ${thumbs_down || 0}
-                
-                **Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
+                .setDescription(`**Defintion:** ${definition || "No definition"}\n\n**Example:** ${example || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
                 .setTimestamp()
                 .setFooter(`Written by ${author || "unknown"}`);
                 msg.channel.send(embed)
