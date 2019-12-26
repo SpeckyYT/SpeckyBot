@@ -20,22 +20,21 @@ module.exports.run = async (bot, msg, args, config) => {
                 await bot.aliases.forEach(a => {
                     bot.commands.delete(a);
                 });
+                delete require.cache[require.resolve(cmddir)];
                 require(cmddir)(bot);
                 break
             case "events":
             case "event":
             case "eve":
             case "ev":
-                delete require.cache[require.resolve('../../handlers/events.js')];
+                delete require.cache[require.resolve(eventdir)];
                 require(eventdir)(bot);
                 break
-            /*
             case "console":
             case "cons":
-                await delete require.cache[require.resolve('../handlers/console.js')];
+                await delete require.cache[require.resolve(consdir)];
                 require(consdir)(bot);    
                 break
-            */
             case "bot":
             case "git":
             case "repo":
