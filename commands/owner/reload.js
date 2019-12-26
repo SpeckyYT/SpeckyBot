@@ -54,7 +54,7 @@ module.exports.run = async (bot, msg, args, config) => {
 
                 rimraf('./tmp', {}, () => {})
 	
-		}).catch{msg.channel.send("Error occurred while cloning the repository!")}
+		});
                 break
             /*
             case "npm":
