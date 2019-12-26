@@ -18,7 +18,7 @@ module.exports = (bot) => {
                 console.log(`${dirs}     \t|\t${file}`);
             }catch(err){
                 console.log(`${dirs}     \t|\t${file} ERROR!`);
-                console.log(err.message);
+                console.log(err);
             }
         }
     }
