@@ -1,6 +1,6 @@
 const { youtube, owner } = require('../config.json')
 
-module.exports = (bot) => {
+module.exports = async (bot) => {
     bot.music = require("discord.js-musicbot-addon");
     bot.music.start(bot, {
         youtubeKey: youtube,

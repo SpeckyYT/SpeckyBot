@@ -1,4 +1,4 @@
-module.exports = (bot) => {
+module.exports = async (bot) => {
     const { token } = require('../config.json')
         
     bot.login(token).catch(() => {

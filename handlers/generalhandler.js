@@ -1,9 +1,9 @@
 const { Client } = require("discord.js");
 
-module.exports = () => {
+module.exports = async () => {
     const bot = new Client({autoReconnect:true});
     require('./missingdirectories')();
     require('./missingfiles')();
-    require('./botloader')(bot);
     require('./login')(bot);
+    require('./botloader')(bot);
 }

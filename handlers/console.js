@@ -1,7 +1,7 @@
 const { readFileSync } = require('fs');
 const { RichEmbed } = require('discord.js');
 
-module.exports = (bot) => {
+module.exports = async (bot) => {
     let prompt = process.openStdin();
     prompt.addListener("data", res => {
         channel = readFileSync("./textchannelcons.txt");

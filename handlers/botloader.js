@@ -1,6 +1,6 @@
 const { Collection } = require("discord.js");
 
-module.exports = (bot) => {
+module.exports = async (bot) => {
     ["commands","aliases"].forEach(async x => 
         bot[x] = new Collection()
     );
