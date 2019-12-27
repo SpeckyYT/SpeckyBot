@@ -1,3 +1,5 @@
+const { RichEmbed } = require('discord.js')
+
 module.exports = async (bot, msg) => {
     const config = require('../../config.json')
 
@@ -30,34 +32,31 @@ module.exports = async (bot, msg) => {
             if(cmd.config.cmdperms){
                 await cmd.config.cmdperms.forEach(perm => {
                     if(!msg.guild.me.hasPermission(perm)){
-                        msg.channel.send(`The bot doesn't have the required permissions.`)
-                        return;
+                        return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``));
                     }
                 })
             }
 
             if(cmd.config.category == "owner" || cmd.config.category === "private"){
-                msg.channel.send("You aren't my owner.");
-                return;
+                return msg.channel.send(error(`👮‍♂️ You aren't the bot owner.`));
             }
             
             if(cmd.config.category == "nsfw" && !msg.channel.nsfw){
-                msg.channel.send("This command is only allowed in a NSFW channel.");
-                return;
+                return msg.channel.send(error(`🔞 This command is only allowed in a NSFW channel.`));
             }
 
             if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
                 if(cmd.config.perms){
                     if(!msg.member.hasPermission(cmd.config.perms)){
-                        return msg.channel.send("You can't use this command!")
+                        return msg.channel.send(error(`🚷 You don't have the required permissions for that command.`));
                     }
                 }
             }
 
             if(cmd.config.servers){
                 if(cmd.config.servers.indexOf(msg.guild.id.toString()) < 0){
-                    console.log(cmd.config.servers)
-                    return msg.channel.send(`This command isn't avaiable on this server.`)
+                    return msg.channel.send(error(`⛔ This command isn't available on this server.`));
+
                 }
             }
         }
@@ -69,6 +68,13 @@ module.exports = async (bot, msg) => {
         console.log(`${command.toUpperCase().slice(config.prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
         msg.channel.send(`We didn't find the command you were looking for. (${command})`);
     }
+}
+
+function error(error){
+    return new RichEmbed()
+    .setTitle('ERROR')
+    .setDescription(error)
+    .setColor('FF0000')
 }
 
 module.exports.config = {
