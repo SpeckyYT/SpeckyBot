@@ -7,9 +7,9 @@ module.exports = async (bot, msg) => {
     const u_settings = require('../../u_settings.json')
     var color;
 
-    if(u_settings[msg.member.id]){
-        if(u_settings[msg.member.id].embedcolor){
-            color = `${u_settings[msg.member.id].embedcolor}`;
+    if(u_settings[msg.author.id]){
+        if(u_settings[msg.author.id].embedcolor){
+            color = `${u_settings[msg.author.id].embedcolor}`;
         }
     }else{
         color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
