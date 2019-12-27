@@ -99,6 +99,7 @@ module.exports = async (method, msg) => {
     sfw[method]().then(async imgURL => {
         let embed = new RichEmbed()
         .setImage(imgURL.url)
+        .setFooter("Powered by nekos.life")
         .setColor('FF00AA');
         if(sent) embed.setDescription(sent);
         return msg.channel.send(embed);

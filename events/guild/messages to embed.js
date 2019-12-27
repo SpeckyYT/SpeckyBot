@@ -26,14 +26,8 @@ module.exports = async (bot, msg) => {
                     .setColor(`${color}`);
                 await msg.channel.send(embed);
             }
-            msg.attachments.forEach(async att  => {
-                let emb = new RichEmbed()
-                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-                .setImage(`${att.proxyURL}`)
-                .setColor(color);
-                msg.channel.send(emb);
-            })
-            msg.delete().catch(()=>{})
+            await atts(msg,color)
+            await msg.delete().catch(()=>{})
             return;
         }
     }else{
@@ -53,13 +47,7 @@ module.exports = async (bot, msg) => {
                                 .setColor(`${color}`);
                             await msg.channel.send(embed);
                         }
-                        msg.attachments.forEach(async att  => {
-                            let emb = new RichEmbed()
-                            .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-                            .setImage(`${att.proxyURL}`)
-                            .setColor(color);
-                            msg.channel.send(emb);
-                        })
+                        await atts(msg,color)
                     }catch(e){
                         console.log(`MTE ERROR: ${msg.channel.id}, ${msg.guild.id}`);
                     }
@@ -67,6 +55,16 @@ module.exports = async (bot, msg) => {
             }
         }   
     }catch(err){console.log(err)}
+}
+
+async function atts(msg,color) {
+    msg.attachments.forEach(async att  => {
+        let emb = new RichEmbed()
+        .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+        .setImage(`${att.proxyURL}`)
+        .setColor(color);
+        msg.channel.send(emb);
+    })
 }
 
 module.exports.config = {
