@@ -1,7 +1,7 @@
 const { readdirSync } = require("fs")
 var boot = false;
 
-module.exports = async (bot) => {
+module.exports = (bot) => {
     bot.removeAllListeners();
     const load = dirs => {    
         const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith('.js'));

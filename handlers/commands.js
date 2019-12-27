@@ -2,7 +2,7 @@ const { readdirSync } = require("fs")
 var boot = false
 
 
-module.exports = async (bot) => {
+module.exports = (bot) => {
     var load = dirs => {
         var commands = readdirSync(`./commands/${dirs}/`).filter(d => d.endsWith('.js'));
         for (let file of commands) {
