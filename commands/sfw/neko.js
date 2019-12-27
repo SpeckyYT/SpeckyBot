@@ -2,7 +2,7 @@ const Math = require('mathjs')
 
 module.exports.run = async (bot, msg, args, config) => {
     let methods = ["neko","nekoGif"]
-    let method = statuses[Math.floor(Math.random() * methods.length)];
+    let method = methods[Math.floor(Math.random() * methods.length)];
     require('./functions/img')(method, msg);
 }
 
