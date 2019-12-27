@@ -1,10 +1,9 @@
 const Math = require('mathjs')
 
 module.exports.run = async (bot, msg, args, config) => {
-    if(Math.randomInt(0,5))
-        require('./functions/img')('neko', msg);
-    else
-        require('./functions/img')('nekoGif',msg);
+    let methods = ["neko","nekoGif"]
+    let method = statuses[Math.floor(Math.random() * methods.length)];
+    require('./functions/img')(method, msg);
 }
 
 module.exports.config = {

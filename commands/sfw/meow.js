@@ -8,5 +8,5 @@ module.exports.config = {
     usage: ``,
     category: `sfw`,
 	accessableby: "Members",
-    aliases: []
+    aliases: ["miao","miau","miu","miav","meu","mjaullin","miauw","miaou","miar","mjao","mjaw","mijav","miob","meo","myau"]
 }
