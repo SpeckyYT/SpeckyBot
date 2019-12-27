@@ -36,12 +36,12 @@ module.exports = async (bot, msg) => {
                 })
             }
 
-            if(cmd.config.category === "owner" || cmd.config.category === "private"){
+            if(cmd.config.category == "owner" || cmd.config.category === "private"){
                 msg.channel.send("You aren't my owner.");
                 return;
             }
             
-            if(cmd.config.category === "nsfw" && !msg.channel.nsfw){
+            if(cmd.config.category == "nsfw" && !msg.channel.nsfw){
                 msg.channel.send("This command is only allowed in a NSFW channel.");
                 return;
             }
