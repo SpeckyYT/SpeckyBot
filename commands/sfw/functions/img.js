@@ -97,12 +97,10 @@ module.exports = async (method, msg) => {
     }
 
     sfw[method]().then(async imgURL => {
-        if(!imgURL.includes('/404.png')){
-            let embed = new RichEmbed()
-            .setImage(imgURL.url)
-            .setColor('FF00AA');
-            if(sent) embed.setDescription(sent);
-            return msg.channel.send(embed);
-        }
+        let embed = new RichEmbed()
+        .setImage(imgURL.url)
+        .setColor('FF00AA');
+        if(sent) embed.setDescription(sent);
+        return msg.channel.send(embed);
     })
 }
