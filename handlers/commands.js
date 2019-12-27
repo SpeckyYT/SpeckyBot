@@ -22,7 +22,7 @@ module.exports = (bot) => {
             }
         }
     }
-    ["owner", "admin", "utilities", "external", "games", "misc", "music", "private", "custom"].forEach(x => load(x));
+    ["owner", "admin", "utilities", "external", "games", "misc", "music", "sfw", "nsfw", "private", "custom"].forEach(x => load(x));
     boot = true;
     console.log();
 };
