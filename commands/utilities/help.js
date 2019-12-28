@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg, args, config) => {
 			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
 			let capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
 			try{
-				if(!(category == "nsfw" && !msg.channel.nsfw) && !(category == "owner" && msg.author.id != config.owner)){
+				if(categoryCheck(category, msg, config)){
 					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
 				}
 			}catch{}
@@ -26,8 +26,11 @@ module.exports.run = async (bot, msg, args, config) => {
 		return msg.channel.send(embed)
 	} else {
 		let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
-		if(!command) return msg.channel.send(embed.setTitle("Invalid Command.").setDescription(`Do \`${config.prefix}help\` for the list of the commands.`))
+		if(!command) return msg.channel.send(invalidcmd(embed,config));
+
 		command = command.config
+
+		if(!categoryCheck(command.category, msg, config)) return msg.channel.send(invalidcmd(embed,config));
 		
 		const cmd = command.name.slice(0, 1).toUpperCase() + command.name.slice(1)
 		const description = command.description || "No Description provided."
@@ -40,6 +43,20 @@ module.exports.run = async (bot, msg, args, config) => {
 		embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n\n**Command:** ${cmd}\n**Description:** ${description}\n**Usage:** ${usage}\n**Accessible by:** ${usableby}\n**Aliases:** ${aliases}\n**Required User Permissions:** ${perms}\n**Required Bot Permissions:** ${cmdperms}`)
 		return msg.channel.send(embed)
 	}
+}
+
+function invalidcmd(embed,config){
+	return embed.setTitle("Invalid Command.")
+				.setDescription(`Do \`${config.prefix}help\` for the list of the commands.`)
+}
+
+function categoryCheck(category,msg,config){
+	category = category.toLowerCase()
+	return (
+	!(category == "nsfw" && !msg.channel.nsfw) &&
+	!(category == "owner" && msg.author.id != config.owner) &&
+	!(category == "admin" && !msg.member.permissions.toArray().join(' ').includes('MANAGE_'))
+	)
 }
 
 module.exports.config = {

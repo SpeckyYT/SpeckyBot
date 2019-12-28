@@ -3,10 +3,10 @@ module.exports.run = async (bot, msg, args, config) => {
 }
 
 module.exports.config = {
-    name: "cumsluts",
+    name: "classic",
 	description: "Gives you a classic endpoint!",
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
-    aliases: ["cs"]
+    aliases: []
 }

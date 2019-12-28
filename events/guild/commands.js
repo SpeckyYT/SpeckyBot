@@ -5,18 +5,19 @@ module.exports = async (bot, msg) => {
 
     if (!msg.content.toLowerCase().startsWith(config.prefix) || msg.author.bot || msg.channel.type === "dm") return;
     
-    let args = msg.content.toLowerCase().split(/\s|\n/g);
-    var command = args[0];
+    msg.args = msg.content.split(/\s|\n/g);
 
-    while(args[0] == config.prefix){
-        const fix = args[0] + args[1]
-        args[1] = fix;
-        command = fix;
-        args = args.slice(1);
+    let command = msg.args[0].toLowerCase();
+
+    while(msg.args[0] == config.prefix){
+        let fix = msg.args[0] + msg.args[1];
+        msg.args[1] = fix;
+        command = fix.toLowerCase();
+        msg.args = msg.args.slice(1);
     }
-    args = args.slice(1);
+    msg.args = msg.args.slice(1);
 
-    if(command == `${config.prefix}undefined`) return;
+    let args = msg.args.join(' ').toLowerCase().split(' ');
 
     let cmd = bot.commands.get(command.slice(config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(config.prefix.length)));
 
