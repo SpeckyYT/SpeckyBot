@@ -15,7 +15,7 @@ module.exports.run = async (bot, msg, args, owner, prefix) => {
         }
         
     } catch (e) {
-        return console.log(`Error while evaluating`);
+        return msg.channel.send(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
     }
 }
 

@@ -19,6 +19,8 @@ module.exports = async (bot, msg) => {
 
     let args = msg.args.join(' ').toLowerCase().split(' ');
 
+    if(command == `${config.prefix}undefined`) return;
+
     let cmd = bot.commands.get(command.slice(config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(config.prefix.length)));
 
     if(cmd){
