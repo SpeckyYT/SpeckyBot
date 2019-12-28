@@ -7,10 +7,10 @@ module.exports.run = async (bot, msg, args, config) => {
 }
 
 module.exports.config = {
-    name: "nekonsfw",
+    name: "yuri",
 	description: "Gives you a yuri!",
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
-    aliases: ["nsfwneko","lewdneko","nekolewd"]
+    aliases: []
 }

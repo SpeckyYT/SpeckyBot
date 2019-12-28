@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg, args, config) => {
 			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
 			let capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
 			try{
-				if(!(category == "nsfw" && !msg.channel.nsfw)){
+				if(!(category == "nsfw" && !msg.channel.nsfw) && !(category == "owner" && msg.author.id != config.owner)){
 					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
 				}
 			}catch{}

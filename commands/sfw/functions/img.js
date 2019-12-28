@@ -74,7 +74,7 @@ module.exports = async (method, msg) => {
                 sent = `Have some cute cat girls ${user}`; break;
             case "meow":
                 sent = `Have some cute cats ${user}`; break;
-            case "nekoGif":
+            case "lizard":
                 sent = `Have a lizard ${user}`; break;
             case "kiss":
                 sent = `${user} just kissed himself`; break;

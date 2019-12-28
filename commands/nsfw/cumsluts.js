@@ -12,5 +12,5 @@ module.exports.config = {
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
-    aliases: ["cs"]
+    aliases: ["cumslut","cs"]
 }
