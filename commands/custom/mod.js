@@ -1,10 +1,10 @@
 const { RichEmbed } = require("discord.js");
-const Math = require('mathjs');
 
 module.exports.run = async (bot, msg, args, config) => {
     let user = msg.mentions.members.first()
     
     switch(args[0]){
+
         case 'mute':
             user.addRole('265902715010285568')
         break
