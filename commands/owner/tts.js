@@ -1,10 +1,10 @@
-const tts = require('play-tts')
+const { play } = require('play-tts')
 
 module.exports.run = async (bot, msg, args, config) => {
     const lang = args[0]
     const text = args.slice(1).join(" ");
     try{
-        tts.play(text, lang);
+        play(text, lang);
     }catch(e){
         msg.channel.send(`Language \`${lang}\` is not supported,`)
     }
