@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
 
@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg, args, config) => {
 		}
 	});
 
-	let embed = new Discord.RichEmbed()
+	let embed = new RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("These are the informations about the server you're in!")
 		.setColor("#FF00AA")
