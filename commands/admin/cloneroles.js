@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[1]){
         msg.channel.send("You have to mention 2 users to clone roles (1st => 2nd)");
