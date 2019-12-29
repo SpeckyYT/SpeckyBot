@@ -1,7 +1,7 @@
-const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
-	let embed = new Discord.RichEmbed()
+	let embed = new RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("This is your user profile!")
 		.setColor("#284890")
