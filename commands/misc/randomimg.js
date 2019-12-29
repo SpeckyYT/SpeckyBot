@@ -1,21 +1,18 @@
-const Discord = require("discord.js");
-const Math = require('mathjs');
-const superagent = require('superagent')
+const { RichEmbed } = require("discord.js");
+const { get } = require('superagent')
 
 module.exports.run = async (bot, msg, args, config) => {
     let mesg = await msg.channel.send("Generating...")
     let kw = ``;
     if(args[0]){
-        kw = `/${args.join(" ")}`;
+        kw = `${args.join(" ")}`;
     }else{
-        kw = `/all`
+        kw = `all`
     }
-    let {body} = await superagent
-    .get(`https://loremflickr.com/json/g/400/400${kw}`)
-    //console.log(body.file)
+    let {body} = await get(`https://loremflickr.com/json/g/1024/1024/${kw}`)
     if(!{body}) return msg.channel.send("I broke! Try again.")
 
-        let cEmbed = new Discord.RichEmbed()
+        let cEmbed = new RichEmbed()
         .setColor('#FF00AA')
         .setAuthor(`Random Image!`, msg.guild.iconURL)
         .setImage(body.file)
