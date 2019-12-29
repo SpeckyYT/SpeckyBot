@@ -1,10 +1,10 @@
-var mys = require('microseconds');
+var { now } = require('microseconds');
 const { readFileSync } = require('fs');
 
 
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
-    var begin = mys.now();
+    var begin = now();
     const cmddir = `../../handlers/commands.js`;
     const eventdir = `../../handlers/events.js`;
     const consdir = `../../handlers/console.js`;
@@ -76,7 +76,7 @@ module.exports.run = async (bot, msg, args, config) => {
         console.log(`ERROR: ${e.message}`);
         return
     }
-    const end = mys.now();
+    const end = now();
     const diff = end - begin;
     msg.channel.send(`**${args[0]}** got reloaded! (${parseFloat(diff/1000).toFixed(3)}ms)`).then(ms => ms.delete(10000)).catch()
     msg.delete(5000)
