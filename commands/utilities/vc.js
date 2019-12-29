@@ -1,8 +1,8 @@
-const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
 	if(msg.member.voiceChannel){
-	let embed = new Discord.RichEmbed()
+	let embed = new RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("Here are some informations of the vocal channel you're in!")
 		.setColor("#694235")
