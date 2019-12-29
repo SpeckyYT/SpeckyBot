@@ -1,5 +1,4 @@
-const discord = require('discord.js');
-const random = require('random');
+const { int } = require('random');
 
 module.exports.run = async (bot, msg, args, config) => {
     if(!msg.content) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
@@ -25,7 +24,7 @@ module.exports.run = async (bot, msg, args, config) => {
         return;
     }
 
-    rng = (random.int(1, 3));
+    rng = (int(1, 3));
     var rng_str;
 
     if(rng == 1){
