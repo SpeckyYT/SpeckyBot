@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg, args, config) => {
@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg, args, config) => {
     .then(json => {
         try{
         const {status, online, motd, error, players, server} = json;
-        let cEmbed = new Discord.RichEmbed()
+        let cEmbed = new RichEmbed()
         .setColor('#00FF00')
         .addField(`Fetch Status:`, status)
         .addField(`Online Status:`, online)
