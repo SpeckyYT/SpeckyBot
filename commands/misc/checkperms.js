@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
     var member, channel;
@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg, args, config) => {
         channel = msg.channel;
     }
 
-    let cEmbed = new Discord.RichEmbed()
+    let cEmbed = new RichEmbed()
     .setTitle(`Permissions of ${member.user.username} in #${channel.name}`)
     .setThumbnail(member.user.avatarURL)
     .setColor(member.displayHexColor)
