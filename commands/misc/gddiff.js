@@ -1,5 +1,4 @@
 const { RichEmbed } = require("discord.js");
-const Math = require('mathjs');
 
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]){
