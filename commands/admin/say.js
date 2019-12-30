@@ -10,7 +10,7 @@ module.exports.run = (bot, msg, args, config) => {
 
     if(res.includes('--rcase')){
         res = res.replace('--rcase','');
-        res = res.forEach(l => {
+        res = res.split('').forEach(l => {
             let chance = round(random());
             return l = chance ? l.toLowerCase() : l.toUpperCase();
         }).join('')
@@ -26,7 +26,8 @@ module.exports.run = (bot, msg, args, config) => {
         res = res.replace('--emb','');
 
         res = new RichEmbed()
-        .setTitle(msg.author.username, msg.author.avatarURL)
+        .setTitle(msg.author.username)
+        .setThumbnail(msg.author.avatarURL)
         .setDescription(res);
     }
 
