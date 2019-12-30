@@ -13,6 +13,7 @@ module.exports.run = async (bot, msg, args, config) => {
     if(!user) user = msg.author;
     
     res = res.replace(channel,'')
+    res = res.replace(user,'')
 
     function incl(string){
         let option = "--" + string;
