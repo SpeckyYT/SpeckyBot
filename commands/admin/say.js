@@ -8,15 +8,23 @@ module.exports.run = async (bot, msg, args, config) => {
 
     let channel = msg.mentions.channels.first();
 
-    let cEmbed = new RichEmbed()
-        .setTitle(msg.author.username, msg.author.avatarURL)
-        .setDescription(res);
-
-    if(res.includes('--rcaps')){
-        res = res.map(l => {
+    if(res.includes('--rcase')){
+        res = res.replace('--rcase','')
+        res = res.forEach(l => {
             let chance = round(random());
             return l = chance ? l.toLowerCase() : l.toUpperCase();
         }).join('')
+    }
+
+    res = res.trim();
+
+    let embed = new RichEmbed()
+    .setTitle(msg.author.username, msg.author.avatarURL)
+    .setDescription(res);
+
+    if(res.includes('--emb')){
+        res = res.replace('--emb','')
+        res = embed;
     }
 
     if(channel){
