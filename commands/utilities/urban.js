@@ -3,12 +3,14 @@ const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg, args, config) => {
     let image = "http://cdn.marketplaceimages.windowsphone.com/v8/images/5c942bfe-6c90-45b0-8cd7-1f2129c6e319?imageType=ws_icon_medium";
-    var search;
-    if(args[0] == "random"){
-        search = urban.random();
-    }else{
-        search = urban(args.join(" "));
-    }
+    let search;
+    try{
+        if(args[0] == "random"){
+            search = urban.random();
+        }else{
+            search = urban(args.join(" "));
+        }
+    }catch{return}
     
     try {
         search.first(res => {
@@ -34,7 +36,7 @@ module.exports.config = {
     name: "urban",
     description: "Gives you informations about a word you don't know!",
     usage: `[random] <query>`,
-    category: `utilities`,
+    category: `owner`,
     accessableby: "Members",
     aliases: ["urba","urb","ud","urbandictionary","dictionary"]
 }
