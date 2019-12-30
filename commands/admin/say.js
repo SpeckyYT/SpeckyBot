@@ -7,6 +7,12 @@ module.exports.run = async (bot, msg, args, config) => {
     let res = msg.args.join(' ');
 
     let channel = msg.mentions.channels.first();
+    if(!channel) channel = msg.channel;
+
+    let user = msg.mentions.users.first();
+    if(!user) user = msg.author;
+    
+    res = res.replace(channel,'')
 
     function incl(string){
         let option = "--" + string;
@@ -15,12 +21,6 @@ module.exports.run = async (bot, msg, args, config) => {
             return true;
         }
         return false;
-    }
-
-    if(channel){
-        res = res.replace(channel,'')
-    }else{
-        channel = msg.channel;
     }
 
     if(incl("rcase")){
@@ -36,9 +36,11 @@ module.exports.run = async (bot, msg, args, config) => {
 
     if(incl("emb")){
         res = new RichEmbed()
-        .setTitle(msg.author.username)
-        .setThumbnail(msg.author.avatarURL)
         .setDescription(res);
+
+        if(incl("author") || incl("user")){
+            res.setAuthor(user.username, user.avatarURL)
+        }
     }
 
     channel.send(res)
