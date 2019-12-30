@@ -17,13 +17,18 @@ module.exports.run = async (bot, msg, args, config) => {
         return false;
     }
 
+    if(channel){
+        res = res.replace(channel,'')
+    }else{
+        channel = msg.channel;
+    }
+
     if(incl("rcase")){
         res = res.split('').forEach(l => {
             let chance = round(random());
             return l = chance ? l.toLowerCase() : l.toUpperCase();
         }).join('')
     }
-
 
     if(incl("sneak")){
         msg.delete();
@@ -36,18 +41,13 @@ module.exports.run = async (bot, msg, args, config) => {
         .setDescription(res);
     }
 
-    if(channel){
-        res = res.replace(channel,'')
-        channel.send(res);
-    }else{
-        msg.channel.send(res);
-    }
+    channel.send(res)
 }
 
 module.exports.config = {
     name: "say",
 	description: "Lets the bot say something for you!",
-    usage: `<text>`,
+    usage: `<text> [#channel] [--emb/--sneak]`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["announcement"],
