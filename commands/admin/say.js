@@ -35,7 +35,7 @@ module.exports.run = async (bot, msg, args, config) => {
     }
 
     if(incl("rcase")){
-        res.split('').map(function(l){
+        res = res.split('').map(function(l){
             return l[randomInt(0,1)?'toUpperCase':'toLowerCase']();
         }).join('');
     }
