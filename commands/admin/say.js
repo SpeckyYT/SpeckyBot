@@ -9,7 +9,7 @@ module.exports.run = (bot, msg, args, config) => {
     let channel = msg.mentions.channels.first();
 
     if(res.includes('--rcase')){
-        res.replace('--rcase','');
+        res = res.replace('--rcase','');
         res = res.forEach(l => {
             let chance = round(random());
             return l = chance ? l.toLowerCase() : l.toUpperCase();
@@ -18,11 +18,12 @@ module.exports.run = (bot, msg, args, config) => {
 
 
     if(res.includes('--sneak')){
-        res.replace('--sneak','');
+        res = res.replace('--sneak','');
+        msg.delete();
     }
 
     if(res.includes('--emb')){
-        res.replace('--emb','');
+        res = res.replace('--emb','');
 
         res = new RichEmbed()
         .setTitle(msg.author.username, msg.author.avatarURL)
@@ -34,7 +35,6 @@ module.exports.run = (bot, msg, args, config) => {
     }else{
         msg.channel.send(res);
     }
-    msg.delete();
 }
 
 module.exports.config = {
