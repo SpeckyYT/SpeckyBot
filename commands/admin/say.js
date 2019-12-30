@@ -35,9 +35,7 @@ module.exports.run = async (bot, msg, args, config) => {
     }
 
     if(incl("rcase")){
-        for(let i = 0; i < res.length; i++)
-            res[i] = round(random()) ? res[i].toLowerCase() : res[i].toUpperCase();
-        })
+        for(let i = 0; i < res.length; i++) res[i] = round(random()) ? res[i].toLowerCase() : res[i].toUpperCase();
     }
 
     if(incl("sneak")){
