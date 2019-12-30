@@ -21,7 +21,7 @@ module.exports.run = async (bot, msg, args, config) => {
     if(incl("channel")){
         let tempchannel = msg.mentions.channels.first();
         if(tempchannel){
-            user = tempchannel;
+            channel = tempchannel;
             res = res.replace(channel,'')
         }
     }
