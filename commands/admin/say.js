@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const { round, random } = require('mathjs')
+const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg, args, config) => {
     if(msg.content.split(/\s|\n/g).join(null).length < 7) return msg.channel.send('The message is too short.');
@@ -36,7 +36,7 @@ module.exports.run = async (bot, msg, args, config) => {
 
     if(incl("rcase")){
         res.split('').map(function(l){
-            return l[Math.round(Math.random())?'toUpperCase':'toLowerCase']();
+            return l[randomInt(0,1))?'toUpperCase':'toLowerCase']();
         }).join('');
     }
 
