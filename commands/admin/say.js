@@ -1,26 +1,28 @@
-const { RichEmbed } = require("discord.js");
+const { RichEmbed } = require('discord.js');
+const { round, random } = require('mathjs')
 
 module.exports.run = async (bot, msg, args, config) => {
     if(msg.content.split(/\s|\n/g).join(null).length < 7) return msg.channel.send('The message is too short.');
-    args = msg.content.split(" ");
-    while(args[0] == config.prefix){
-        const fix = `${args[0]}${args[1]}`
-        args[1] = fix;
-        args = args.slice(1);
-    }
-    args = args.splice(1);
-    let argsresult;
+
+    let res = msg.args.join(' ');
+
     let channel = msg.mentions.channels.first();
+
     let cEmbed = new RichEmbed()
         .setTitle(msg.author.username, msg.author.avatarURL)
-        .setDescription(argsresult);
+        .setDescription(res);
+
+    if(res.includes('--rcaps')){
+        res = res.map(l => {
+            let chance = round(random());
+            return l = chance ? l.toLowerCase() : l.toUpperCase();
+        }).join('')
+    }
 
     if(channel){
-        argsresult = msg.content.split(" ").slice(2).join(" ");
-        channel.send(argsresult);
+        channel.send(res);
     }else{
-        argsresult = args.join(" ");
-        msg.channel.send(argsresult);
+        msg.channel.send(res);
     }
     msg.delete();
 }
