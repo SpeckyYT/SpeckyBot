@@ -26,42 +26,77 @@ module.exports = async (bot, msg) => {
     if(cmd){
         console.log(`${command.toUpperCase().slice(config.prefix.length)}: actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
         
-        if(!(msg.author.id === config.owner)){
-            
-            if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){
-                return;
-            }
+        if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){
+            return;
+        }
 
-            if(cmd.config.cmdperms){
-                await cmd.config.cmdperms.forEach(perm => {
-                    if(!msg.guild.me.hasPermission(perm)){
-                        return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``));
+        let owner = false;
+        let illegal = false;
+
+        if(msg.author.id == config.owner){owner = true}
+
+        function check(){
+            if(owner = true){
+                illegal = true;
+                return false;
+            }
+            return true;
+        }
+
+        if((cmd.config.category == "owner" || cmd.config.category === "private") && !owner){
+            return msg.channel.send(error(`👮‍♂️ You aren't the bot owner.`))
+        }
+
+        if(cmd.config.cmdperms){
+            await cmd.config.cmdperms.forEach(perm => {
+                if(!msg.guild.me.hasPermission(perm)){
+                    if(check()){
+                        return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``))
                     }
-                })
+                }
+            })
+        }
+        
+        if(cmd.config.category == "nsfw" && !msg.channel.nsfw){
+            if(check()){
+                return msg.channel.send(error(`🔞 This command is only allowed in a NSFW channel.`))
             }
+        }
 
-            if(cmd.config.category == "owner" || cmd.config.category === "private"){
-                return msg.channel.send(error(`👮‍♂️ You aren't the bot owner.`));
-            }
-            
-            if(cmd.config.category == "nsfw" && !msg.channel.nsfw){
-                return msg.channel.send(error(`🔞 This command is only allowed in a NSFW channel.`));
-            }
-
-            if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
-                if(cmd.config.perms){
-                    if(!msg.member.hasPermission(cmd.config.perms)){
-                        return msg.channel.send(error(`🚷 You don't have the required permissions for that command.`));
+        if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
+            if(cmd.config.perms){
+                if(!msg.member.hasPermission(cmd.config.perms)){
+                    if(check()){
+                        return msg.channel.send(error(`🚷 You don't have the required permissions for that command.`))
                     }
                 }
             }
+        }
 
-            if(cmd.config.servers){
-                if(cmd.config.servers.indexOf(msg.guild.id.toString()) < 0){
+        if(cmd.config.servers){
+            if(cmd.config.servers.indexOf(msg.guild.id.toString()) < 0){
+                if(check()){
                     return msg.channel.send(error(`⛔ This command isn't available on this server.`));
-
                 }
             }
+        }
+
+        if(illegal){
+            await msg.channel.send("⚠️ You are doing something that you shouldn't!\nThis message and yours with autodestruct in 15 seconds if you don't confirm.")
+            .then(async ms => {
+                let emote = '✅';
+                const filter = (reaction, user) => {reaction.emoji.name === emote && user.id === config.owner}
+                ms.react(emote)
+                await ms.awaitReactions(filter, { max: 1, time: 15000, errors: ['time']})
+                .then(() => {
+                    ms.delete();
+                })
+                .catch(() => {
+                    msg.delete();
+                    ms.delete();
+                    return;
+                })
+            })
         }
 
         try{

@@ -17,8 +17,8 @@ module.exports = async (bot, msg) => {
 
     let perms = msg.guild.me.permissionsIn(msg.channel).toArray();
     if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES')){
-        await msg.delete().catch(()=>{return})
         if(msg.content.includes(':EMB:')){
+            await msg.delete().catch(()=>{return})
             msg.content = msg.content.replace(':EMB:','').trim();
             if(msg.content){
                 let embed = new RichEmbed()
