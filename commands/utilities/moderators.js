@@ -12,9 +12,9 @@ module.exports.run = async (bot, msg, args, config) => {
     })
     mods.forEach(mod => {
         if(list[mod.user.presence.status]){
-            list[mod.user.presence.status].push(mod.user.username);
+            list[mod.user.presence.status].concat([mod.user.username]);
         }else{
-            list[mod.user.presence.status] = mod.user.username;
+            list[mod.user.presence.status] = [mod.user.username];
         }
     })
 
