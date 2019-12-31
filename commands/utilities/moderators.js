@@ -18,10 +18,10 @@ module.exports.run = async (bot, msg, args, config) => {
         }
     })
 
-    let online = "<:online2:464520569975603200>"
-    let away = "<:away2:464520569862357002>"
-    let dnd = "<:dnd2:464520569560498197>"
-    let offline = "<:offline2:464520569929334784>"
+    let online = "<:online:661611929332219905>"
+    let away = "<:idle:661611969131970580>"
+    let dnd = "<:dnd:661612025943818265>"
+    let offline = "<:offline:661612200527396865>"
 
     let embed = new RichEmbed()
     .setTitle("__Mods__:")
