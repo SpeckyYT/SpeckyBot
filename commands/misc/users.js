@@ -3,7 +3,7 @@ const { Attachment } = require('discord.js')
 
 module.exports.run = async (bot, msg, args, config) => {
     msg.guild.members.forEach(member => {
-        appendFileSync('./members.txt',member.user.id + " ")
+        appendFileSync('./members.txt',member.user.id + "\n")
     })
     let att = new Attachment('./members.txt',"members.txt")
     await msg.channel.send(att);
