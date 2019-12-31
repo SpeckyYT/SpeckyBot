@@ -25,5 +25,5 @@ module.exports.config = {
     category: `custom`,
 	accessableby: "Members",
     aliases: [],
-    servers: ['265505748413448193']
+    servers: ['265505748413448193','525114151077675039']
 }
