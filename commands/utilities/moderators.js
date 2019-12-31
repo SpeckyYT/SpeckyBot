@@ -11,7 +11,11 @@ module.exports.run = async (bot, msg, args, config) => {
         }
     })
     mods.forEach(mod => {
-        list[mod.user.presence.status].push(mod.user.username)
+        if(list[mod.user.presence.status]){
+            list[mod.user.presence.status].push(mod.user.username);
+        }else{
+            list[mod.user.presence.status] = mod.user.username;
+        }
     })
 
     let online = "<:online2:464520569975603200>"
@@ -23,6 +27,8 @@ module.exports.run = async (bot, msg, args, config) => {
     .setTitle("__Mods__:")
     .setThumbnail(msg.guild.iconURL)
     .setDescription(`${online} ${list.online.join(", ")}\n${away} ${list.idle.join(", ")}\n${dnd} ${list.dnd.join(", ")}\n${offline} ${list.offline.join(", ")}`);
+
+    msg.channel.send(embed);
 }
 
 module.exports.config = {
