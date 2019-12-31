@@ -39,12 +39,12 @@ module.exports.run = async (bot, msg, args, config) => {
             case "git":
             case "repo":
                 
-                let repoDir = "../../";
+                let repoDir = "./";
 
                 let repository;
 
                 // Open a repository that needs to be fetched and fast-forwarded
-                nodegit.Repository.open(path.resolve(__dirname, repoDir))
+                nodegit.Repository.open(path.resolve(repoDir))
                 .then(function(repo) {
                     repository = repo;
 
