@@ -1,6 +1,6 @@
 var { now } = require('microseconds');
-const { readFileSync } = require('fs');
-
+var nodegit = require('nodegit');
+var path = require("path");
 
 module.exports.run = async (bot, msg, args, config) => {
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
@@ -38,25 +38,20 @@ module.exports.run = async (bot, msg, args, config) => {
             case "bot":
             case "git":
             case "repo":
-                const rimraf = require('rimraf');
-                rimraf('./tmp', {}, () => {})
-
-                const git = require('nodegit');
-                await git.Clone("https://github.com/SpeckyYT/SpeckyBot", './tmp')
-                .then(() => {
-	
-                const Rsync = require('rsync');
-                const rsync = new Rsync()
-                .shell('cmd')
-                .source('./tmp')
-                .destination('.')
-                .recursive()
                 
-                rsync.execute(() => {});
+                nodegit.Repository.open(path.resolve(__dirname, "../../.git"))
+                .then(function(repo) {
+                    return repo.fetch("origin", {
+                        callbacks: {
+                            credentials: function(url, userName) {
+                                return nodegit.Cred.sshKeyFromAgent(userName);
+                            }
+                        }
+                    });
+                }).done(function() {
+                    console.log("It worked!");
+                });
 
-                rimraf('./tmp', {}, () => {})
-	
-		});
                 break
             /*
             case "npm":

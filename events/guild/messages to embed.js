@@ -5,7 +5,7 @@ module.exports = async (bot, msg) => {
 
     const s_settings = require('../../s_settings.json')
     const u_settings = require('../../u_settings.json')
-    var color;
+    let color;
 
     if(u_settings[msg.author.id]){
         if(u_settings[msg.author.id].embedcolor){
@@ -17,6 +17,7 @@ module.exports = async (bot, msg) => {
 
     let perms = msg.guild.me.permissionsIn(msg.channel).toArray();
     if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES')){
+        await msg.delete().catch(()=>{return})
         if(msg.content.includes(':EMB:')){
             msg.content = msg.content.replace(':EMB:','').trim();
             if(msg.content){
@@ -27,7 +28,6 @@ module.exports = async (bot, msg) => {
                 await msg.channel.send(embed);
             }
             await atts(msg,color)
-            await msg.delete().catch(()=>{})
             return;
         }
     }else{

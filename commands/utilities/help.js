@@ -1,5 +1,6 @@
 const { RichEmbed } = require("discord.js");
 const { readdirSync } = require("fs")
+const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg, args, config) => {
 	var embed = new RichEmbed()
@@ -7,7 +8,7 @@ module.exports.run = async (bot, msg, args, config) => {
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
 	.setThumbnail(bot.user.displayAvatarURL)
 
-	if(!args[0]) {
+	if(!args[0] || (msg.author.id == config.owner && args[0] == "all")) {
 		let categories = readdirSync('./commands/')
 
 		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
@@ -17,11 +18,18 @@ module.exports.run = async (bot, msg, args, config) => {
 			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
 			let capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
 			try{
-				if(categoryCheck(category, msg, config)){
+				if(args[0] || categoryCheck(category, msg, config)){
 					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
 				}
 			}catch{}
 		})
+		let diduknow = [`you can use the \`${config.prefix}serversettings\` command to personalize your server!`,
+						`you can use the \`${config.prefix}serversettings\` command to personalize your profile!`,
+						`you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
+						`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`];
+
+		embed.addBlankField()
+		embed.addField('Did you know that',diduknow[randomInt(0,diduknow.length)])
 
 		return msg.channel.send(embed)
 	} else {
