@@ -4,7 +4,7 @@ module.exports.run = async (bot, msg, args, config) => {
     let mods = [];
     let list = [];
     msg.guild.roles.forEach(role => {
-        if(role.permissions.toArray().includes('MANAGE_MESSAGES')){
+        if(role.hasPermission('MANAGE_MESSAGES')){
             role.members.forEach(member => {
                 if(!mods.includes(member)) mods.push(member);
             })
