@@ -4,7 +4,9 @@ module.exports.run = async (bot, msg, args, config) => {
     let discriminator = msg.author.discriminator.padStart(4,"0");
     if(args[0]){
         if(!isNaN(args[0])){
-            discriminator = args[0].padStart(4,"0")
+            if(discrim <= 9999 && discrim >= 0){
+                discriminator = args[0].padStart(4,"0")
+            }
         }
     }
     var discrims = [];
