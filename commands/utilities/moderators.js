@@ -4,12 +4,13 @@ module.exports.run = async (bot, msg, args, config) => {
     let mods = [];
     let list = [];
     msg.guild.roles.forEach(role => {
-        if(role.hasPermission('MANAGE_MESSAGES')){
+        if(role.hasPermission('MANAGE_MESSAGES') || role.hasPermission('ADMINISTRATOR')){
             role.members.forEach(member => {
                 if(!mods.includes(member) && !member.user.bot) mods.push(member);
             })
         }
     })
+
     mods.forEach(mod => {
         if(list[mod.user.presence.status]){
             list[mod.user.presence.status].push([mod.user.username]);
@@ -18,17 +19,34 @@ module.exports.run = async (bot, msg, args, config) => {
         }
     })
 
-    let online = "<:online:661611929332219905>"
-    let away = "<:idle:661611969131970580>"
-    let dnd = "<:dnd:661612025943818265>"
-    let offline = "<:offline:661612200527396865>"
+    let online, idle, dnd, offline;
+
+    online = check(list,'online');
+    idle = check(list,'idle');
+    dnd = check(list,'dnd');
+    offline = check(list,offline);
+
+    let Eonline = "<:online:661611929332219905>"
+    let Eidle = "<:idle:661611969131970580>"
+    let Ednd = "<:dnd:661612025943818265>"
+    let Eoffline = "<:offline:661612200527396865>"
 
     let embed = new RichEmbed()
     .setTitle("__Mods__:")
     .setThumbnail(msg.guild.iconURL)
-    .setDescription(`${online} ${list.online.join(", ")}\n${away} ${list.idle.join(", ")}\n${dnd} ${list.dnd.join(", ")}\n${offline} ${list.offline.join(", ")}`);
+    .setDescription(`${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`);
 
     msg.channel.send(embed);
+}
+    
+function check(list,status){
+    if(!list[status]){
+        return "*Nobody*";
+    }else if(list[status].length == 1){
+        return list[status];
+    }else{
+        return list[status].join(', ');
+    }
 }
 
 module.exports.config = {
