@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg, args, config) => {
     })
     const embed = new RichEmbed()
         .setColor('#FF00AA')
-        .setTitle(`#${msg.author.discriminator}`)
+        .setTitle(`#${discriminator}`)
         .setDescription(discrims.length ? discrims.join(`\n`) : 'No user found')
     msg.channel.send(embed);
 };
@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg, args, config) => {
 module.exports.config = {
     name: "discrim",
 	description: "You want to change your discriminator without Nitro?",
-    usage: ``,
+    usage: `[discriminator]`,
     category: `utilities`,
 	accessableby: "Members",
     aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
