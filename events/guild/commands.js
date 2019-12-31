@@ -90,14 +90,17 @@ module.exports = async (bot, msg) => {
                 await ms.awaitReactions(filter, { max: 1, time: 15000, errors: ['time']})
                 .then(() => {
                     ms.delete();
+                    illegal = false;
                 })
                 .catch(() => {
                     msg.delete();
                     ms.delete();
-                    return;
+                    illegal = true;
                 })
             })
         }
+
+        if(illegal){return}
 
         try{
             cmd.run(bot, msg, args, config);
