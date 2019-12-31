@@ -36,7 +36,7 @@ module.exports = async (bot, msg) => {
         if(msg.author.id == config.owner){owner = true}
 
         function check(){
-            if(owner = true){
+            if(owner == true){
                 illegal = true;
                 return false;
             }
