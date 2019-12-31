@@ -48,7 +48,7 @@ module.exports = async (bot, msg) => {
         }
 
         if(cmd.config.cmdperms){
-            await cmd.config.cmdperms.forEach(perm => {
+            cmd.config.cmdperms.forEach(perm => {
                 if(!msg.guild.me.hasPermission(perm)){
                     if(check()){
                         return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``))
@@ -82,29 +82,33 @@ module.exports = async (bot, msg) => {
         }
 
         if(illegal){
-            await msg.channel.send("⚠️ You are doing something that you shouldn't!\nThis message and yours with autodestruct in 15 seconds if you don't confirm.")
-            .then(async ms => {
+            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\nThis message and yours with autodestruct in 10 seconds if you don't confirm.`))
+            .then(ms => {
                 let emote = '✅';
-                const filter = (reaction, user) => {reaction.emoji.name === emote && user.id === config.owner}
-                ms.react(emote)
-                await ms.awaitReactions(filter, { max: 1, time: 15000, errors: ['time']})
-                .then(() => {
+                ms.react(emote);
+                const filter = (reaction, user) => user.id === config.owner && reaction.emoji.name === emote
+                ms.awaitReactions(filter, { max: 1, time: 10000, errors: ['time']})
+                .then(collected => {
                     ms.delete();
-                    illegal = false;
+                    run();
                 })
                 .catch(() => {
-                    msg.delete();
                     ms.delete();
-                    illegal = true;
+                    try{
+                        msg.delete();
+                    }catch{}
                 })
             })
+        }else{
+            run()
         }
 
-        if(illegal){return}
+        function run(){
+            try{
+                cmd.run(bot, msg, args, config);
+            }catch(err){console.log(err)}
+        }
 
-        try{
-            cmd.run(bot, msg, args, config);
-        }catch(err){console.log(err)}
     }else{
         console.log(`${command.toUpperCase().slice(config.prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
         msg.channel.send(`We didn't find the command you were looking for. (${command})`);
@@ -113,7 +117,7 @@ module.exports = async (bot, msg) => {
 
 function error(error){
     return new RichEmbed()
-    .setTitle('ERROR')
+    .setTitle('ERROR!')
     .setDescription(error)
     .setColor('FF0000')
 }
