@@ -16,7 +16,7 @@ module.exports.config = {
     name: "members",
 	description: "Turns all user IDs into a txt file!",
     usage: ``,
-    category: `owner`,
+    category: `utilities`,
 	accessableby: "Members",
     aliases: []
 }

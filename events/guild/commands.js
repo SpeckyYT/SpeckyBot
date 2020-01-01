@@ -39,8 +39,9 @@ module.exports = async (bot, msg) => {
             if(owner == true){
                 illegal = true;
                 return false;
+            }else{
+                return true
             }
-            return true;
         }
 
         if((cmd.config.category == "owner" || cmd.config.category === "private") && !owner){
