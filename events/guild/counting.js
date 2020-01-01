@@ -6,7 +6,7 @@ module.exports = async (bot, msg) => {
             if(msg.content != number){
                 msg.delete()
             }else{
-                msg.channel.setTopic(`${text}${number++}`)
+                msg.channel.setTopic(`${text}${parseInt(number,10) + 1}`)
             }
         }
     }
