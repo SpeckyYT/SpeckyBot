@@ -90,14 +90,12 @@ module.exports = async (bot, msg) => {
                 const filter = (reaction, user) => user.id === config.owner && reaction.emoji.name === emote
                 ms.awaitReactions(filter, { max: 1, time: 10000, errors: ['time']})
                 .then(collected => {
-                    ms.delete();
+                    try{ms.delete()}catch{}
                     run();
                 })
                 .catch(() => {
-                    ms.delete();
-                    try{
-                        msg.delete();
-                    }catch{}
+                    try{msg.delete()}catch{}
+                    try{ms.delete()}catch{}
                 })
             })
         }else{

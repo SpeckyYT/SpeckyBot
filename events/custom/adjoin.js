@@ -14,7 +14,7 @@ module.exports = async (bot, member) => {
                 member.removeRole(memberRole)
             }catch{}
         }
-    },10000)
+    },7500)
 }
 
 module.exports.config = {
