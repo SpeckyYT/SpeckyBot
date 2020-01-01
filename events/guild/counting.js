@@ -1,7 +1,7 @@
 module.exports = async (bot, msg) => {
     let text = 'Next number: '
     if(msg.channel.topic.startsWith(text)){
-        if(msg.authot.bot) return msg.delete();
+        if(msg.author.bot) return msg.delete();
         let number = msg.channel.topic.slice(text.length);
         if(!isNaN(number)){
             if(msg.content != number){
