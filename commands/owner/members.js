@@ -3,11 +3,11 @@ const { Attachment } = require('discord.js')
 
 module.exports.run = async (bot, msg, args, config) => {
     msg.guild.members.forEach(async member => {
-        appendFile('./members.txt',member.user.id + "\n")
+        appendFile('./members.txt',member.user.id + "\n", () => {})
     })
     let att = new Attachment('./members.txt',"members.txt")
     await msg.channel.send(att);
-    unlink('./members.txt')
+    unlink('./members.txt', () => {})
 }
 
 module.exports.config = {
