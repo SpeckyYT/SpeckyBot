@@ -7,18 +7,19 @@ module.exports = async (bot, msg) => {
 
     if(msg.author.bot) return msg.delete();
 
-    let min = 7;
-    let max = 10;
-
-    let regex = /\d{min,max}/g
+    let regex = /\d{7,10}/g
 
     if(msg.content.match(regex)){
         if(msg.content.length > 100){
-            msg.channel.send("You exceed the massage length of 100 letters.\nYour message will be deleted in 15 seconds")
+            msg.channel.send("You exceed the massage length of 100 letters.\nYour message will be deleted in 15 seconds.")
             .then(ms => {
-                ms.delete(15000)
+                try{
+                    ms.delete(15000)
+                }catch{}
             })
-            msg.delete(15000)
+            try{
+                msg.delete(15000)
+            }catch{}
         }else{
             return;
         }
