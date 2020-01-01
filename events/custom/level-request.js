@@ -12,7 +12,7 @@ module.exports = async (bot, msg) => {
 
     let regex = /\d{min,max}/g
 
-    if(msg.content.matches(regex)){
+    if(msg.content.match(regex)){
         if(msg.content.length > 100){
             msg.channel.send("You exceed the massage length of 100 letters.\nYour message will be deleted in 15 seconds")
             .then(ms => {
