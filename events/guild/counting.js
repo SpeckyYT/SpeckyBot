@@ -1,4 +1,5 @@
 module.exports = async (bot, msg) => {
+    if(!msg.channel.topic) return;
     let text = 'Next number: '
     if(msg.channel.topic.startsWith(text)){
         if(msg.author.bot) return msg.delete();
