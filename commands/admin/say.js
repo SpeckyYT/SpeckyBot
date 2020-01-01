@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg, args, config) => {
 
     function incl(string){
         let option = "--" + string;
-        if(res.includes(option)){
+        if(res.toLowerCase().includes(option)){
             res = res.replace(option,'')
             return true;
         }
@@ -34,14 +34,14 @@ module.exports.run = async (bot, msg, args, config) => {
         }
     }
 
+    if(incl("sneak")){
+        msg.delete();
+    }
+
     if(incl("rcase")){
         res = res.split('').map(function(l){
             return l[randomInt(0,2)?'toUpperCase':'toLowerCase']();
         }).join('');
-    }
-
-    if(incl("sneak")){
-        msg.delete();
     }
 
     if(incl("emb")){
