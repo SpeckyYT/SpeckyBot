@@ -1,6 +1,6 @@
 module.exports = async (bot, msg) => {
     let text = 'Next number: '
-    if(msg.channel.topic.startsWith(text)){
+    if(msg.channel.topic.includes(text)){
         let number = msg.channel.topic.slice(text.length)
         if(!isNaN(number)){
             if(msg.content != number){
@@ -9,6 +9,8 @@ module.exports = async (bot, msg) => {
                 msg.channel.setTopic(`${text}${number + 1}`)
             }
         }
+        console.log(text)
+        console.log(number)
     }
 }
 
