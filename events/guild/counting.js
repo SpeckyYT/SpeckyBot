@@ -1,12 +1,13 @@
 module.exports = async (bot, msg) => {
     let text = 'Next number: '
     if(msg.channel.topic.startsWith(text)){
-        let number = msg.channel.topic.slice(text.length)
+        if(msg.authot.bot) return msg.delete();
+        let number = msg.channel.topic.slice(text.length);
         if(!isNaN(number)){
             if(msg.content != number){
-                msg.delete()
+                msg.delete();
             }else{
-                msg.channel.setTopic(`${text}${parseInt(number,10) + 1}`)
+                msg.channel.setTopic(`${text}${parseInt(number,10) + 1}`);
             }
         }
     }
