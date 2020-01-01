@@ -111,7 +111,7 @@ module.exports = async (bot, msg) => {
 
     }else{
         console.log(`${command.toUpperCase().slice(config.prefix.length)}: (REJECTED) actived by ${msg.author.username} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`);
-        msg.channel.send(`We didn't find the command you were looking for. (${command})`);
+        msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
     }
 }
 
