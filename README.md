@@ -10,7 +10,8 @@
 
 - Download or clone this repository
 - Extract the files
-- Run the .bat file and close it
+- Download all NPM dependencies [npm i]
+- Run the .bat file and close it once you get an error
 - Enter the private informations in the config.json file (bot token, prefix, etc.)
 - Run the .bat file once again and you should be done!
 
