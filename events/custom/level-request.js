@@ -10,7 +10,7 @@ module.exports = async (bot, msg) => {
     if(msg.author.bot && msg.author.id != bot.user.id) return msg.delete();
     if(msg.author.id == bot.user.id) return;
 
-    let regex = /^\d{7,10}$/g
+    let regex = /\b\d{7,10}\b/g
 
     if(msg.content.match(regex)){
         if(msg.content.length > 100){
