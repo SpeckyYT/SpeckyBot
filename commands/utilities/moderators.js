@@ -3,11 +3,9 @@ const { RichEmbed } = require('discord.js')
 module.exports.run = async (bot, msg, args, config) => {
     let mods = [];
     let list = [];
-    msg.guild.roles.forEach(role => {
-        if(role.hasPermission('MANAGE_MESSAGES') || role.hasPermission('ADMINISTRATOR')){
-            role.members.forEach(member => {
-                if(!mods.includes(member) && !member.user.bot) mods.push(member);
-            })
+    msg.guild.members.forEach(member => {
+        if(member.hasPermission('MANAGE_MESSAGES') || member.hasPermission('ADMINISTRATOR')){
+            if(!mods.includes(member) && !member.user.bot) mods.push(member);
         }
     })
 
