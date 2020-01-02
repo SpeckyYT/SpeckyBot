@@ -3,13 +3,13 @@ const { RichEmbed } = require('discord.js')
 module.exports.run = async (bot, msg, args, config) => {
     let mods = [];
     let list = [];
-    msg.guild.members.forEach(member => {
+    msg.guild.members.forEach(async member => {
         if(member.hasPermission('MANAGE_MESSAGES') || member.hasPermission('ADMINISTRATOR')){
             if(!mods.includes(member) && !member.user.bot) mods.push(member);
         }
     })
 
-    mods.forEach(mod => {
+    mods.forEach(async mod => {
         if(list[mod.user.presence.status]){
             list[mod.user.presence.status].push([mod.user.username]);
         }else{
@@ -37,7 +37,7 @@ module.exports.run = async (bot, msg, args, config) => {
     msg.channel.send(embed);
 }
     
-function check(list,status){
+async function check(list,status){
     if(!list[status]){
         return "*Nobody*";
     }else if(list[status].length == 1){
