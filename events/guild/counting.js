@@ -1,8 +1,8 @@
 module.exports = async (bot, msg) => {
     if(!msg.channel.topic) return;
+    let text = 'Next number:'
     if(msg.channel.topic.startsWith(text)){
         if(msg.author.bot) return msg.delete();
-        let text = 'Next number:'
         let alt = '[alternate]'
         let alttrue = msg.channel.topic.toLowerCase().includes(alt);
         let number = parseInt(msg.channel.topic.slice(text.length).trim());
