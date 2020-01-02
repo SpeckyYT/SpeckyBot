@@ -37,7 +37,7 @@ module.exports.run = async (bot, msg, args, config) => {
     msg.channel.send(embed);
 }
     
-async function check(list,status){
+function check(list,status){
     if(!list[status]){
         return "*Nobody*";
     }else if(list[status].length == 1){
