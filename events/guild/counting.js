@@ -9,7 +9,7 @@ module.exports = async (bot, msg) => {
         if(!isNaN(number)){
             if(msg.content != number){
                 msg.delete();
-            }else if(alttrue){
+            }else if(alttrue && number > 1){
                 msg.channel.fetchMessages({ limit: 2 })
                 .then(msgs => {
                     if(msgs.filter(ms => ms.author.id == msg.author.id).size < 2){
