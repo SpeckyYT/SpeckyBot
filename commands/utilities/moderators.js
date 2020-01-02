@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg, args, config) => {
     online = check(list,'online');
     idle = check(list,'idle');
     dnd = check(list,'dnd');
-    offline = check(list,offline);
+    offline = check(list,'offline');
 
     let Eonline = "<:online:661611929332219905>"
     let Eidle = "<:idle:661611969131970580>"
