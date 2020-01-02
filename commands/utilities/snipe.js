@@ -3,7 +3,7 @@ const { RichEmbed } = require('discord.js')
 module.exports.run = async (bot, msg, args, config) => {
     msg.channel.fetchMessages({ limit: 2 })
     .then(msgs => {
-        let ms = msgs.first();
+        let ms = msgs[1];
         let embed = new RichEmbed()
             .setAuthor(ms.author.username, ms.author.avatarURL)
             .setColor('000000')
