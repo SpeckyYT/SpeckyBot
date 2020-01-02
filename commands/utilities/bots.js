@@ -1,19 +1,19 @@
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg, args, config) => {
-    let mods = [];
+    let bots = [];
     let list = [];
     msg.guild.members.forEach(async member => {
-        if(member.hasPermission('MANAGE_MESSAGES') || member.hasPermission('ADMINISTRATOR')){
-            if(!mods.includes(member) && !member.user.bot) mods.push(member);
+        if(member.user.bot){
+            if(!bots.includes(member)) bots.push(member);
         }
     })
 
-    mods.forEach(async mod => {
-        if(list[mod.user.presence.status]){
-            list[mod.user.presence.status].push([mod.user.username]);
+    bots.forEach(async bot => {
+        if(list[bot.user.presence.status]){
+            list[bot.user.presence.status].push([bot.user.username]);
         }else{
-            list[mod.user.presence.status] = [mod.user.username];
+            list[bot.user.presence.status] = [bot.user.username];
         }
     })
 
@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg, args, config) => {
     let Eoffline = "<:offline:661612200527396865>"
 
     let embed = new RichEmbed()
-    .setTitle("__Mods__:")
+    .setTitle("__Bots__:")
     .setThumbnail(msg.guild.iconURL)
     .setDescription(`${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`);
 
@@ -46,10 +46,10 @@ function check(list,status){
 }
 
 module.exports.config = {
-	name: "moderators",
-	description: "Gives you the active/inactive moderators list!",
+	name: "bots",
+	description: "Gives you the online/offline bots list!",
     usage: ``,
     category: `utilities`,
 	accessableby: "Members",
-    aliases: ["moderator","mods"]
+    aliases: ["bot","robot","robots"]
 }
