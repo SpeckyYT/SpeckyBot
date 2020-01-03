@@ -9,6 +9,7 @@ module.exports = async (bot, member) => {
     let adInStatusRole = '638091940545560639'
 
     setTimeout(() => {
+        if(!member.roles) return;
         if(member.roles.includes(adInStatusRole)){
             try{
                 member.removeRole(memberRole)

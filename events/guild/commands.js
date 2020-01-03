@@ -1,46 +1,46 @@
 const { RichEmbed } = require('discord.js')
 
 module.exports = async (bot, msg) => {
-    const config = require('../../config.json')
-    
     if(msg.author.bot || msg.channel.type === "dm") return;
 
-    if(!msg.content.toLowerCase().startsWith(config.prefix)){
+    if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first()) {
             if(msg.mentions.users.first().tag == bot.user.tag){
-                let clean = `@${msg.guild.me.nickname?msg.guild.me.nickname:bot.user.username}`;
+                let clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
                 if(msg.cleanContent != clean){
-                    msg.content = msg.cleanContent.replace(clean,config.prefix).trim();
+                    msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
                 }else{
                     logger("help",true,msg);
-                    bot.commands.get("help").run(bot, msg, [], config);
+                    bot.commands.get("help").run(cmd, bot, msg, "help");
                 }
             }
         }
     }
 
-    if(!msg.content.toLowerCase().startsWith(config.prefix)) return;
+    if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
     
-    msg.args = msg.content.split(/\s|\n/g);
+    msg.Args = msg.content.split(/\s|\n/g);
 
-    let command = msg.args[0].toLowerCase();
+    let command = msg.Args[0].toLowerCase();
 
-    while(msg.args[0] == config.prefix){
-        let fix = msg.args[0] + msg.args[1];
-        msg.args[1] = fix;
+    while(msg.Args[0] == bot.config.prefix){
+        let fix = msg.Args[0] + msg.Args[1];
+        msg.Args[1] = fix;
         command = fix.toLowerCase();
-        msg.args = msg.args.slice(1);
+        msg.Args = msg.Args.slice(1);
     }
-    msg.args = msg.args.slice(1);
+    msg.Args = msg.Args.slice(1);
 
-    let args = msg.args.join(' ').toLowerCase().split(' ');
+    msg.args = msg.Args.join(' ').toLowerCase().split(' ');
 
-    if(command == `${config.prefix}undefined`) return;
+    if(command == `${bot.config.prefix}undefined`) return;
 
-    let cmd = bot.commands.get(command.slice(config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(config.prefix.length)));
+    let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     
     if(cmd){
-        logger(command.slice(config.prefix.length),true,msg);
+        bot.functions.startTyping(msg.channel);
+        bot.stats.commandsExecuted++;
+        logger(command.slice(bot.config.prefix.length),true,msg);
         if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){
             return;
         }
@@ -48,7 +48,7 @@ module.exports = async (bot, msg) => {
         let owner = false;
         let illegal = false;
 
-        if(msg.author.id == config.owner){owner = true}
+        if(msg.author.id == bot.config.owner){owner = true}
 
         function check(){
             if(owner == true){
@@ -64,7 +64,7 @@ module.exports = async (bot, msg) => {
         }
 
         if(cmd.config.cmdperms){
-            cmd.config.cmdperms.forEach(perm => {
+            cmd.bot.config.cmdperms.forEach(perm => {
                 if(!msg.guild.me.hasPermission(perm)){
                     if(check()){
                         return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``))
@@ -98,15 +98,16 @@ module.exports = async (bot, msg) => {
         }
 
         if(illegal){
-            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\nThis message and yours with autodestruct in 10 seconds if you don't confirm.`))
+            let time = 10;
+            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
             .then(ms => {
                 let emote = '✅';
                 ms.react(emote);
-                const filter = (reaction, user) => user.id === config.owner && reaction.emoji.name === emote
-                ms.awaitReactions(filter, { max: 1, time: 10000, errors: ['time']})
+                const filter = (reaction, user) => user.id === bot.config.owner && reaction.emoji.name === emote
+                ms.awaitReactions(filter, { max: 1, time: (time*1000), errors: ['time']})
                 .then(collected => {
                     try{ms.delete()}catch{}
-                    run();
+                    run(cmd, bot, msg, command);
                 })
                 .catch(() => {
                     try{msg.delete()}catch{}
@@ -114,19 +115,29 @@ module.exports = async (bot, msg) => {
                 })
             })
         }else{
-            run()
-        }
-
-        function run(){
-            try{
-                cmd.run(bot, msg, args, config);
-            }catch(err){console.log(err)}
+            run(cmd, bot, msg, command)
         }
 
     }else{
-        logger(command.slice(config.prefix.length),false,msg);
+        logger(command.slice(bot.config.prefix.length),false,msg);
         msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
+        bot.functions.stopTyping(msg.channel);
     }
+}
+
+async function run(cmd, bot, msg, command){
+    try{
+        await cmd.run(bot, msg);
+    }catch(err){
+        console.error(err);
+        await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
+        if(err.length < 1950){
+            await msg.channel.send(errdesc(err));
+        }else{
+            await msg.channel.send(errdesc(err.message));
+        }
+    }
+    await bot.functions.stopTyping(msg.channel);
 }
 
 function logger(cmd, actived, msg){
@@ -137,6 +148,13 @@ function error(error){
     return new RichEmbed()
     .setTitle('ERROR!')
     .setDescription(error)
+    .setColor('FF0000')
+}
+
+function errdesc(err){
+    return new RichEmbed()
+    .setTitle('ERROR DESCRIPTION')
+    .setDescription(err)
     .setColor('FF0000')
 }
 

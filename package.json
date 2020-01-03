@@ -13,6 +13,7 @@
     "git-js": "^1.1.1",
     "got": "^9.6.0",
     "iliad-cli": "^1.4.1",
+    "jimp": "^0.9.3",
     "mathjs": "^6.2.5",
     "mee6-levels-api": "^1.1.0",
     "microseconds": "^0.1.0",

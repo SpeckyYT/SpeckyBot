@@ -11,7 +11,8 @@ module.exports.run = async (bot, msg, args, config) => {
     .addField(`Free RAM Memory:`, `${os.freemem() / 1000000}MB`)
     .addField(`Total RAM Memory:`, `${os.totalmem() / 1000000}MB`)
     .addBlankField()
-//  .addField(`Permissions:`, `${msg.guild.fetchMember(bot.user.id).permissions()}`)
+    .addField(`Total Executed Commands`, `${bot.stats.commandsExecuted} Commands`)
+    .addField(`Bot Uptime`,`${bot.functions.msToTime(bot.uptime)}`)
     .setTimestamp()
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 

@@ -101,7 +101,7 @@ module.exports = async (method, msg) => {
         let embed = new RichEmbed()
         .setImage(imgURL)
         .setColor('FF00AA');
-        if(poweredby) embed.setFooter("Powered by "+ poweredby);
+        if(poweredby) embed.setFooter("Powered by " + poweredby);
         if(sendt) embed.setDescription(sendt);
         return msg.channel.send(embed);
     }
@@ -112,7 +112,7 @@ module.exports = async (method, msg) => {
         })
     }else if(animals[method]){
         animals[method]().then(async imgURL => {
-            send(imgURL, '')
+            send(imgURL, "")
         })
     }else{
         msg.channel.send('This should never happen.\nBut if it happens, wish Specky a good day.')
