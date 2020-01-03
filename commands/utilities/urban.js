@@ -1,14 +1,15 @@
 const urban = require("urban");
 const { RichEmbed } = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { Args } = msg;
     let image = "http://cdn.marketplaceimages.windowsphone.com/v8/images/5c942bfe-6c90-45b0-8cd7-1f2129c6e319?imageType=ws_icon_medium";
     let search;
     try{
-        if(args[0] == "random"){
+        if(Args[0] == "random"){
             search = urban.random();
         }else{
-            search = urban(args.join(" "));
+            search = urban(Args.join(" "));
         }
     }catch{return}
     

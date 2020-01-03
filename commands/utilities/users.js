@@ -1,13 +1,11 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     const embed = new RichEmbed()
         .setColor('#FF00AA')
         .setTitle(`${bot.user.username}`)
         .setThumbnail(bot.user.imageURL)
-        .addBlankField()
         .addField(`Total Users Count:`, `${bot.users.size}`)
-        .addBlankField()
         .setTimestamp()
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
     msg.channel.send(embed);

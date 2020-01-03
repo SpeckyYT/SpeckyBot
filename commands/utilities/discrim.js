@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     let discriminator = msg.author.discriminator.padStart(4,"0");
     if(args[0]){
         if(!isNaN(args[0])){

@@ -1,7 +1,8 @@
 const { evaluate } = require("mathjs");
 const { RichEmbed } = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(!args[0]) return msg.channel.send('Please input a calculation.');
 
     let resp;

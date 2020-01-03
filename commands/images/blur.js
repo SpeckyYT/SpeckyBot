@@ -1,8 +1,8 @@
 const Jimp = require('jimp')
 const fs = require('fs')
 
-module.exports.run = async (bot, msg, args, config) => {
-
+module.exports.run = async (bot, msg) => {
+    let { args } = bot;
     var image    = bot.cache.lastImage[msg.author.id]; 
     var id       = bot.snowflake.nextId();
 

@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let API = 'https://icanhazdadjoke.com/';
 
     let res = await fetch(API, {headers: {Accept: 'application/json'}})

@@ -1,6 +1,6 @@
 const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let mods = [];
     let list = [];
     msg.guild.members.forEach(async member => {

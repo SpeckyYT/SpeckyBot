@@ -1,6 +1,8 @@
 const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg, args, config) => {
+    let { config } = bot;
+    let { args } = msg;
     if(!args[0]){
         msg.channel.send(`Right syntax: \`${config.prefix}txt2bf [Text String]\``);
         return;

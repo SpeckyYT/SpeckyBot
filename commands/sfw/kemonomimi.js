@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     require('./functions/img')('kemonomimi', msg);
 }
 
@@ -8,5 +8,5 @@ module.exports.config = {
     usage: ``,
     category: `sfw`,
 	accessableby: "Members",
-    aliases: ['kemo']
+    aliases: ['kemo','kemono','kemonomi']
 }

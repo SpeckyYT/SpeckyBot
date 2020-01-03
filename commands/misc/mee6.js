@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
-
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     let baseURL = `https://mee6.xyz/api/plugins/levels/leaderboard/`
     let embed = new RichEmbed();
 

@@ -1,6 +1,8 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { config } = bot;
+    let { args } = msg;
     var quantity = 0;
     bot.guilds.forEach(server => {
         if(msg.author.id === config.owner && args[0] == `yes`) msg.channel.send(`${server.name} (${server.id})`);

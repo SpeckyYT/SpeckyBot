@@ -1,6 +1,7 @@
 const { RichEmbed } = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     var member, channel;
     if(args.length == 1 && msg.mentions.channels.first() || args.length == 0){
         member = msg.member

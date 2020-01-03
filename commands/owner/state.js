@@ -1,7 +1,8 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     const state = args[0];
     try{
-        bot.user.setStatus(`idle`).then().catch();
+        bot.user.setStatus(state).then().catch();
         msg.channel.send("should have been working bruj");
     }catch(e){
         msg.channel.send("An error occurred");

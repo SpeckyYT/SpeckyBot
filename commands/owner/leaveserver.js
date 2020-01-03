@@ -1,4 +1,5 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(!args[0]) return msg.channel.send("You have to define a server");
     guild = bot.guilds.get(args[0]);
     try{

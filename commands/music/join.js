@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
 	if(msg.member.voiceChannel){
                 msg.member.voiceChannel.join()
 	}else{

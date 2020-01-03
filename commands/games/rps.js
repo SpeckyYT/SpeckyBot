@@ -1,6 +1,7 @@
 const { int } = require('random');
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(!msg.content) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
 
     var value = 4;

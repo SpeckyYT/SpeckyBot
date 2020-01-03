@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     msg.channel.send('Pinging...').then(m =>{
         let ping = m.createdTimestamp - msg.createdTimestamp;
         m.edit(`Bot Latency: \`${ping}ms\`\nAPI Latency: \`${Math.round(bot.ping)}ms\``)

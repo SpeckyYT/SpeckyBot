@@ -1,4 +1,5 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     const playing = args[0];
     const game = msg.content.split(" ").slice(2).join(" ");
     try{

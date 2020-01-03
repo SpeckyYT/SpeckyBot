@@ -1,6 +1,7 @@
 const { play } = require('play-tts')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     const lang = args[0]
     const text = args.slice(1).join(" ");
     try{

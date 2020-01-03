@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     const embed = new RichEmbed()
         .setColor("#FF00AA")
 		.setTitle('Links!')

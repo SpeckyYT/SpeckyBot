@@ -1,7 +1,7 @@
 const { appendFile, unlink } = require('fs')
 const { Attachment } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let members = [];
     msg.guild.members.forEach(async member => {
         members.push(member.user.id)

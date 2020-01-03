@@ -1,4 +1,5 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(!args[0]){return msg.channel.send("You didn't include a Voice Channel ID.")}
     if(isNaN(args[0])){return msg.channel.send("The Vocal Channel ID (#1) is invalid.")}
     var VC1;

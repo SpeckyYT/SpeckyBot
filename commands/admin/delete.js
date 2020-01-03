@@ -1,4 +1,5 @@
 module.exports.run = async (bot, msg, args, config) => {
+    let { args } = msg;
     if(!args[0]){
         msg.channel.send("You have to define a message to delete");
         return;

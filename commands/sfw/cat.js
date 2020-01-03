@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     require('./functions/img')('cat', msg);
 }
 

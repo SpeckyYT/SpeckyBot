@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const { RichEmbed } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64'; 
 /*    const response = await fetch(link);
     const json = await response.json();

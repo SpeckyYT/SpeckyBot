@@ -1,7 +1,8 @@
 const dir = '../../../u_settings';
 const { writeFile } = require('fs');
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     const u_settings = require(dir);
     switch(args[0]){
         case "embedcolor":

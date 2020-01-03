@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     msg.delete();
     switch(args[0]){
         case "gdi":

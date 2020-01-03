@@ -2,7 +2,8 @@ var { now } = require('microseconds');
 var nodegit = require('nodegit');
 var path = require("path");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(!args[0]) return msg.channel.send("You have to define an handler to reload")
     var begin = now();
     const cmddir = `../../handlers/commands.js`;

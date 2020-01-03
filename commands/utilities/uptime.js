@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     msg.channel.send(`I have been online* for: ${bot.functions.msToTime(bot.uptime)}\n*Since last reboot`)
 }
 

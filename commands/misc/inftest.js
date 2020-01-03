@@ -1,4 +1,5 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     switch(args[0]){
         case "1":
             if(!args[1]) return;

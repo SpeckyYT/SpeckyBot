@@ -1,6 +1,6 @@
 const Math = require('mathjs')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let methods = ["kitsune","eroKitsune"]
     let method = methods[Math.floor(Math.random() * methods.length)];
     require('./functions/img')(method,msg);
@@ -12,5 +12,5 @@ module.exports.config = {
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
-    aliases: []
+    aliases: ["kitsu"]
 }

@@ -1,6 +1,7 @@
 const { RichEmbed } = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     let user = msg.mentions.members.first()
     
     switch(args[0]){

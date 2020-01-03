@@ -1,13 +1,14 @@
 const brain = require('brain.js');
 const fs = require('fs');
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { Args } = bot;
     var net = new brain.recurrent.LSTM()
     net.train(reloadJson(),{
         iterations: 5,
         timeout: 10000
     })
-    var resp = net.run(args.join(' '));
+    var resp = net.run(Args.join(' '));
     if(resp){
         msg.channel.send()
     }else{

@@ -1,5 +1,6 @@
-module.exports.run = async (bot, msg, args, config) => {
-    bot.music.playFunction(msg, args.join(' '))
+module.exports.run = async (bot, msg) => {
+    let { Args } = msg;
+    bot.music.playFunction(msg, Args.join(' '))
 }
 
 module.exports.config = {

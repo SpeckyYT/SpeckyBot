@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     if(!msg.member.voiceChannel){return msg.channel.send("You aren't in a Voice Channel.")}
     
     const VC1 = msg.member.voiceChannel;

@@ -1,6 +1,6 @@
 const { inspect } = require("util")
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg) => {
     try {
         let toEval = msg.args.join(" ")
         let evaluated = inspect(eval(toEval, { depth: 0 }));

@@ -1,7 +1,8 @@
 const { RichEmbed } = require("discord.js");
 const { randomInt } = require('mathjs');
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { config } = bot;
     var random;
     if(msg.author.id == config.owner){
         random = randomInt(1,10000)

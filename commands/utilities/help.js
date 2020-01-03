@@ -2,7 +2,9 @@ const { RichEmbed } = require("discord.js");
 const { readdirSync } = require("fs")
 const { randomInt } = require('mathjs')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+	let { config } = bot;
+    let { args } = msg;
 	var embed = new RichEmbed()
 	.setColor('#FF00AA')
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)

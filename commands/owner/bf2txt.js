@@ -7,6 +7,8 @@ const comp = uf.compiler({
 });
 
 module.exports.run = async (bot, msg, args, config) => {
+    let { config } = bot;
+    let { args } = msg;
     if(!args[0]){
         msg.channel.send(`Right syntax: \`${config.prefix}bf2txt [BF String]\``);
         return;

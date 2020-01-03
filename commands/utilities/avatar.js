@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let member;
     if(msg.mentions.users.first()){
         member = msg.mentions.users.first();

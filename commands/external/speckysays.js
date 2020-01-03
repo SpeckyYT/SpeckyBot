@@ -1,8 +1,8 @@
 ﻿const { RichEmbed } = require('discord.js')
 const { runGame } = require('./SpeckySays/game');
 
-module.exports.run = async (bot, msg, args, config) => {
-
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     let channel = msg.mentions.channels.first()
 
     var time;

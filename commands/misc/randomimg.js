@@ -1,7 +1,8 @@
 const { RichEmbed } = require("discord.js");
 const { get } = require('superagent')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     let mesg = await msg.channel.send("Generating...")
     let kw = ``;
     if(args[0]){

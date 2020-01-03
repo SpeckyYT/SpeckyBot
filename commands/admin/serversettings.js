@@ -2,7 +2,9 @@ const { RichEmbed } = require('discord.js')
 const { writeFile } = require("fs");
 const dir = '../../s_settings.json'
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { config } = bot;
+    let { args } = msg;
     let s_settings = require(dir);
 
     switch(args[0]){

@@ -1,6 +1,6 @@
 const { RichEmbed } = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     
     var cEmbed = new RichEmbed()
         .setTitle("These are the server's most played games at the moment:");

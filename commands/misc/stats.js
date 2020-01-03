@@ -1,7 +1,7 @@
 const { RichEmbed } = require('discord.js')
 const os = require('os')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let cEmbed = new RichEmbed()
     .setColor('#FF00AA')
     .setDescription('Here are some stats about the server that is running the bot')

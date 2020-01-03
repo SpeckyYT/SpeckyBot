@@ -1,4 +1,5 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(!args[1]){
         msg.channel.send("You have to mention 2 users to clone roles (1st => 2nd)");
         return;

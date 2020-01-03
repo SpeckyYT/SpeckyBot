@@ -1,7 +1,7 @@
 const { RichEmbed } = require('discord.js');
 const { randomInt } = require('mathjs')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     if(msg.content.split(/\s|\n/g).join(null).length < 7) return msg.channel.send('The message is too short.');
 
     let res = msg.args.join(' ');

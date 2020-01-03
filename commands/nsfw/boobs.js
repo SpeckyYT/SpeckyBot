@@ -1,6 +1,6 @@
 const Math = require('mathjs')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let methods = ["tits","boobs"] //removed: smallBoobs
     let method = methods[Math.floor(Math.random() * methods.length)];
     require('./functions/img')(method,msg);

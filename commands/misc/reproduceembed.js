@@ -1,6 +1,7 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, owner, prefix) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     if(msg.mentions.channels > 0){
         var chan = msg.mentions.channels.first()
     }else{

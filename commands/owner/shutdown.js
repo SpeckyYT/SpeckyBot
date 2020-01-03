@@ -1,4 +1,4 @@
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     try{
         await msg.channel.send("Bot is shutting down!")
         .then(ms => {

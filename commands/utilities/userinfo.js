@@ -1,6 +1,6 @@
 const { RichEmbed } = require("discord.js");
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
 	let embed = new RichEmbed()
 		.setAuthor(msg.author.username)
 		.setDescription("This is your user profile!")

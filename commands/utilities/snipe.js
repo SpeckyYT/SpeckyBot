@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js')
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     msg.channel.fetchMessages({ limit: 2 })
     .then(msgs => {
         let ms = msgs.last();

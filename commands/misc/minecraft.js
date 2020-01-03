@@ -1,7 +1,8 @@
 const { RichEmbed } = require("discord.js");
 const fetch = require('node-fetch');
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
+    let { args } = msg;
     var link;
     if(!args[0]) return msg.channel.send("You have to define a Server IP");
     if(!args[1]){
