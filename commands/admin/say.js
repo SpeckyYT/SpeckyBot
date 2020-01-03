@@ -2,9 +2,7 @@ const { RichEmbed } = require('discord.js');
 const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
-    if(msg.content.split(/\s|\n/g).join(null).length < 7) return msg.channel.send('The message is too short.');
-
-    let res = msg.args.join(' ');
+    let res = msg.Args.join(' ');
 
     let channel = msg.channel;
     let user = msg.author;
@@ -49,7 +47,7 @@ module.exports.run = async (bot, msg) => {
         .setDescription(res)
         .setAuthor(user.username, user.avatarURL);
     }
-
+    if(!res) return msg.channel.send("Message is too short.")
     channel.send(res)
 }
 

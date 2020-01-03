@@ -1,6 +1,6 @@
 const { convert } = require('ttbf');
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let { config } = bot;
     let { args } = msg;
     if(!args[0]){

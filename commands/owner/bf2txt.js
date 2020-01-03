@@ -6,7 +6,7 @@ const comp = uf.compiler({
     width: 1024
 });
 
-module.exports.run = async (bot, msg, args, config) => {
+module.exports.run = async (bot, msg) => {
     let { config } = bot;
     let { args } = msg;
     if(!args[0]){

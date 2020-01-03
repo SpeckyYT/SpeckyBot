@@ -37,7 +37,7 @@ module.exports.config = {
     name: "urban",
     description: "Gives you informations about a word you don't know!",
     usage: `[random] <query>`,
-    category: `owner`,
+    category: `utilities`,
     accessableby: "Members",
     aliases: ["urba","urb","ud","urbandictionary","dictionary"]
 }
