@@ -1,22 +1,32 @@
-const { appendFile, unlink } = require('fs')
-const { Attachment } = require('discord.js')
+const { RichEmbed } = require('discord.js')
+const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
 
 module.exports.run = async (bot, msg) => {
     let members = [];
+    let list = [];
     msg.guild.members.forEach(async member => {
-        members.push(member.user.id)
+        if(!members.includes(member)) members.push(member);
     })
-    appendFile('./members.txt', members.join('\n'), () => {})
-    let att = new Attachment('./members.txt',"members.txt")
-    await msg.channel.send(att);
-    unlink('./members.txt', () => {})
+
+    list = listCreator(members, list)
+
+    let online, idle, dnd, offline;
+
+    online = statusCheckQuantity(list,'online');
+    idle = statusCheckQuantity(list,'idle');
+    dnd = statusCheckQuantity(list,'dnd');
+    offline = statusCheckQuantity(list,'offline');
+
+    let { Eonline, Eidle, Ednd, Eoffline } = emotes;
+
+    membersEmbed("Members",msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]])
 }
 
 module.exports.config = {
-    name: "members",
-	description: "Turns all user IDs into a txt file!",
+	name: "members",
+	description: "Gives you the active/inactive members list!",
     usage: ``,
     category: `utilities`,
 	accessableby: "Members",
-    aliases: []
+    aliases: ["servermembers","allmembers"]
 }

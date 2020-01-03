@@ -38,7 +38,7 @@ module.exports = async (bot, msg) => {
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     
     if(cmd){
-        bot.functions.startTyping(msg.channel);
+        await msg.channel.startTyping()
         bot.stats.commandsExecuted++;
         logger(command.slice(bot.config.prefix.length),true,msg);
         if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){
@@ -120,8 +120,8 @@ module.exports = async (bot, msg) => {
 
     }else{
         logger(command.slice(bot.config.prefix.length),false,msg);
-        msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
-        bot.functions.stopTyping(msg.channel);
+        await msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
+        await msg.channel.stopTyping(true)
     }
 }
 
@@ -137,7 +137,7 @@ async function run(cmd, bot, msg, command){
             await msg.channel.send(errdesc(err.message));
         }
     }
-    await bot.functions.stopTyping(msg.channel);
+    await msg.channel.stopTyping(true)
 }
 
 function logger(cmd, actived, msg){

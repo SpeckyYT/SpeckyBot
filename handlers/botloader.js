@@ -18,14 +18,6 @@ module.exports = async (bot) => {
         return `${day.padStart(1, "0")}d ${hrs.padStart(2, "0")}h ${min.padStart(2, "0")}m ${sec.padStart(1, "0")}s ${mil.padStart(3, "0")}ms`
     }
 
-    bot.functions.startTyping = async (channel) => {
-        channel.startTyping(1)
-    }
-
-    bot.functions.stopTyping = async (channel) => {
-        channel.stopTyping(true)
-    }
-
     ["commands","aliases"].forEach(async x => 
         bot[x] = new Collection()
     );
