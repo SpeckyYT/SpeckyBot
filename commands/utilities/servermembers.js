@@ -1,4 +1,5 @@
 const { RichEmbed } = require('discord.js')
+const { emotes, listCreator, statusCheckQuantity } = require('./functions/misc.js')
 
 module.exports.run = async (bot, msg, args, config) => {
     let members = [];
@@ -7,49 +8,32 @@ module.exports.run = async (bot, msg, args, config) => {
         if(!members.includes(member)) members.push(member);
     })
 
-    members.forEach(async bot => {
-        if(list[bot.user.presence.status]){
-            list[bot.user.presence.status].push([bot.user.username]);
-        }else{
-            list[bot.user.presence.status] = [bot.user.username];
-        }
-    })
+    list = listCreator(members, list)
 
     let online, idle, dnd, offline;
 
-    online = check(list,'online');
-    idle = check(list,'idle');
-    dnd = check(list,'dnd');
-    offline = check(list,'offline');
+    online = statusCheckQuantity(list,'online');
+    idle = statusCheckQuantity(list,'idle');
+    dnd = statusCheckQuantity(list,'dnd');
+    offline = statusCheckQuantity(list,'offline');
 
-    let Eonline = "<:online:661611929332219905>"
-    let Eidle = "<:idle:661611969131970580>"
-    let Ednd = "<:dnd:661612025943818265>"
-    let Eoffline = "<:offline:661612200527396865>"
+    let { Eonline, Eidle, Ednd, Eoffline } = emotes;
 
     let embed = new RichEmbed()
     .setTitle("__Members__:")
     .setThumbnail(msg.guild.iconURL);
 
-    let maxmsglength = 1970;
+    let maxmsglength = 1965;
 
     [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]].forEach(async items => {
         if(items[0].length < maxmsglength){
             embed.setDescription(`${items[1]} ${items[0]}`);
             await msg.channel.send(embed)
         }else{
-            embed.setDescription(`${items[1]} ${items[0].split(' ')[0]} *Too many people*`);
+            embed.setDescription(`${items[1]} ${items[0].split(' ')[0]} *Too many people...*`);
             await msg.channel.send(embed)
         }
     })
-}
-    
-function check(list,status){
-    if(!list[status]){
-        return "[0] *Nobody*";
-    }else{
-        return `[${list[status].length}] ${list[status].join(', ')}`;
-    }
 }
 
 module.exports.config = {

@@ -1,48 +1,28 @@
-const { RichEmbed } = require('discord.js')
+const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
 
 module.exports.run = async (bot, msg, args, config) => {
     let mods = [];
     let list = [];
     msg.guild.members.forEach(async member => {
-        if(member.hasPermission('MANAGE_MESSAGES') || member.hasPermission('ADMINISTRATOR')){
+        if(member.hasPermission('MANAGE_MESSAGES',true,true,false)){
             if(!mods.includes(member) && !member.user.bot) mods.push(member);
         }
     })
 
-    mods.forEach(async mod => {
-        if(list[mod.user.presence.status]){
-            list[mod.user.presence.status].push([mod.user.username]);
-        }else{
-            list[mod.user.presence.status] = [mod.user.username];
-        }
-    })
+    list = listCreator(mods, list)
 
     let online, idle, dnd, offline;
 
-    online = check(list,'online');
-    idle = check(list,'idle');
-    dnd = check(list,'dnd');
-    offline = check(list,'offline');
+    online = statusCheckQuantity(list,'online');
+    idle = statusCheckQuantity(list,'idle');
+    dnd = statusCheckQuantity(list,'dnd');
+    offline = statusCheckQuantity(list,'offline');
 
-    let Eonline = "<:online:661611929332219905>"
-    let Eidle = "<:idle:661611969131970580>"
-    let Ednd = "<:dnd:661612025943818265>"
-    let Eoffline = "<:offline:661612200527396865>"
+    let { Eonline, Eidle, Ednd, Eoffline } = emotes;
 
-    let embed = new RichEmbed()
-    .setTitle("__Mods__:")
-    .setThumbnail(msg.guild.iconURL)
-    .setDescription(`${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`);
-
-    msg.channel.send(embed);
-}
-    
-function check(list,status){
-    if(!list[status]){
-        return "[0] *Nobody*";
-    }else{
-        return `[${list[status].length}] ${list[status].join(', ')}`;
-    }
+    msg.channel.send(
+        membersEmbed("Mods", msg, `${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`)
+    );
 }
 
 module.exports.config = {
