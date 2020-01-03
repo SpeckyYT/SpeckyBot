@@ -20,9 +20,7 @@ module.exports.run = async (bot, msg, args, config) => {
 
     let { Eonline, Eidle, Ednd, Eoffline } = emotes;
 
-    msg.channel.send(
-        membersEmbed("Mods", msg, `${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`)
-    );
+    membersEmbed("Mods", msg, [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]])
 }
 
 module.exports.config = {

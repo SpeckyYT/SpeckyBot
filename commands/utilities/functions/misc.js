@@ -19,15 +19,28 @@ module.exports.listCreator = (memberTypeCollection,list) => {
 module.exports.statusCheckQuantity = (list,status) => {
     if(!list[status]){
         return "[0] *Nobody*";
+    }else if(list[status].join(', ').length > 1965){
+        return `[${list[status].length}] *Too many people...*`;
     }else{
         return `[${list[status].length}] ${list[status].join(', ')}`;
     }
 }
 
-module.exports.membersEmbed = (title,msg,desc) => {
+module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]]) => {
     let { RichEmbed } = require('discord.js');
-    return new RichEmbed()
+    let maxmsglength = 1965;
+    let fulldesc = `${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`;
+
+    let embed = new RichEmbed()
     .setTitle(`__${title}__:`)
-    .setThumbnail(msg.guild.iconURL)
-    .setDescription(desc);
+    .setThumbnail(msg.guild.iconURL);
+
+    if(fulldesc.length < maxmsglength){
+        msg.channel.send(embed.setDescription(fulldesc))
+    }else{
+        [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]].forEach(async items => {
+            embed.setDescription(`${items[1]} ${items[0]}`);
+            await msg.channel.send(embed)
+        })
+    }
 }
