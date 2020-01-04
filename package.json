@@ -14,7 +14,7 @@
     "got": "^9.6.0",
     "iliad-cli": "^1.4.1",
     "jimp": "^0.9.3",
-    "mathjs": "^6.2.5",
+    "mathjs": "^6.3.0",
     "mee6-levels-api": "^1.1.0",
     "microseconds": "^0.1.0",
     "ncp": "^2.0.0",
@@ -39,7 +39,7 @@
     "unfuck": "^0.3.0",
     "urban": "^0.3.2",
     "ygopro-data": "^0.1.7",
-    "ytdl-core": "^1.0.5",
+    "ytdl-core": "^1.0.6",
     "ytdl-core-discord": "^1.0.3"
   },
   "devDependencies": {},
