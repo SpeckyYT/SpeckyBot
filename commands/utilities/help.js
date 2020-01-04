@@ -28,10 +28,12 @@ module.exports.run = async (bot, msg) => {
 		let diduknow = [`you can use the \`${config.prefix}serversettings\` command to personalize your server!`,
 						`you can use the \`${config.prefix}serversettings\` command to personalize your profile!`,
 						`you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
-						`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`];
+						`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`,
+						`you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
+						`in counting-up channels, you can end the channel topic with \`[ALTERNATE]\` so all users have to alternate!`];
 
 		embed.addBlankField()
-		embed.addField('Did you know that',diduknow[randomInt(0,diduknow.length)])
+		embed.addField('Did you know that', diduknow[randomInt(0,diduknow.length)])
 
 		return msg.channel.send(embed)
 	} else {
