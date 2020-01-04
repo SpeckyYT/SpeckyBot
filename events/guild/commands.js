@@ -64,7 +64,7 @@ module.exports = async (bot, msg) => {
         }
 
         if(cmd.config.cmdperms){
-            cmd.bot.config.cmdperms.forEach(perm => {
+            cmd.config.cmdperms.forEach(perm => {
                 if(!msg.guild.me.hasPermission(perm)){
                     if(check()){
                         return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``))
