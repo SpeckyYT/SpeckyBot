@@ -18,7 +18,7 @@ module.exports.run = async (bot, msg) => {
 
 		categories.forEach(category => {
 			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
-			let capitalise = category.slice(0, 1).toUpperCase() + category.slice(1)
+			let capitalise = bot.highFirst(category)
 			try{
 				if(args[0] || categoryCheck(category, msg, config)){
 					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
@@ -42,7 +42,7 @@ module.exports.run = async (bot, msg) => {
 
 		if(!categoryCheck(command.category, msg, config)) return msg.channel.send(invalidcmd(embed,config));
 		
-		const cmd = command.name.slice(0, 1).toUpperCase() + command.name.slice(1)
+		const cmd = bot.highFirst(command.name)
 		const description = command.description || "No Description provided."
 		const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : "No Usage"}`
 		const usableby = command.accessableby || "Members"

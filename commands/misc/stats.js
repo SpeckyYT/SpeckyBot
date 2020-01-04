@@ -24,7 +24,7 @@ module.exports.run = async (bot, msg) => {
     .addField(`Used:`, `RAM: ${full.repeat(usedDiagRAM)}${empty.repeat(freeDiagRAM)} [${Math.round(usedPercentRAM)}%]`)
     .addBlankField()
     .addField(`Total Executed Commands`, `${bot.stats.commandsExecuted} Commands`,true)
-    .addField(`Bot Uptime`,`${bot.functions.msToTime(bot.uptime)}`,true)
+    .addField(`Bot Uptime`,`${bot.formatTime(bot.uptime)}`,true)
     .setTimestamp()
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 
