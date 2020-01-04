@@ -10,11 +10,13 @@ module.exports = async (bot, member) => {
 
     setTimeout(() => {
         if(!member.roles) return;
-        if(member.roles.includes(adInStatusRole)){
-            try{
-                member.removeRole(memberRole)
-            }catch{}
-        }
+        try{
+            if(member.roles.includes(adInStatusRole)){
+                try{
+                    member.removeRole(memberRole)
+                }catch{}
+            }
+        }catch{}
     },7500)
 }
 
