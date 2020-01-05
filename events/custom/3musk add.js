@@ -10,15 +10,14 @@ module.exports = async (bot, messageReaction, user) => {
 
     if(msg.id != '663303735023501314') return;
 
+    if(["offline","idle"].includes(user.presence.status)) return;
+
     guild.fetchMember(user)
     .then(async member => {
         let muskRole = "636272631984947240"
         let muskGateRole = "663303390620680193"
 
         if(member.roles.has(muskGateRole)){
-            msg.clearReactions()
-            msg.react("🍆")
-
             try{
                 member.removeRole(muskGateRole)
             }catch{}
