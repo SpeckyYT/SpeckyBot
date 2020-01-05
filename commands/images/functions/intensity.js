@@ -20,8 +20,6 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
         intensity = Number(args[0])
     }
 
-    intensity = Number(intensity)
-
     let image    = bot.cache.lastImage[msg.author.id]; 
     let id       = bot.snowflake.nextId();
 
@@ -32,7 +30,7 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
         read(image, (err, file) => {
             if (err){ msg.channel.send("Error happend") };
 
-            file[method]().write(id + `.${fileFormat}`, ()=>{
+            file[method](intensity).write(id + `.${fileFormat}`, ()=>{
                 msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
                     response.delete();
                     unlink("./" + id + `.${fileFormat}`, () => {})
