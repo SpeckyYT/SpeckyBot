@@ -7,7 +7,9 @@ module.exports = async (bot, oldMember, newMember) => {
     //server limiter
     if(!limited.includes(member.guild.id)) return;
 
-    if(member.user.presence.status != "offline") return;
+    let status = member.user.presence.status;
+
+    if(status != "offline" && status != "idle") return;
 
     let muskRole = "636272631984947240"
     let muskGateRole = "663303390620680193"
@@ -16,6 +18,7 @@ module.exports = async (bot, oldMember, newMember) => {
         try{
             member.removeRole(muskRole)
         }catch{}
+
         try{
             member.addRole(muskGateRole)
         }catch{}
