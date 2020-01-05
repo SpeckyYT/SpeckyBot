@@ -10,10 +10,15 @@ module.exports = async (bot, oldMember, newMember) => {
     if(member.user.presence.status != "offline") return;
 
     let muskRole = "636272631984947240"
+    let muskGateRole = "663303390620680193"
+
 
     try{
         member.removeRole(muskRole)
-    }catch{return}
+    }catch{}
+    try{
+        member.addRole(muskGateRole)
+    }
 }
 
 module.exports.config = {
