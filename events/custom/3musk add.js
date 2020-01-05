@@ -2,14 +2,16 @@
 const limited = ["265505748413448193"]
 
 module.exports = async (bot, messageReaction, user) => {
+    if(user.bot) return;
+    
     let msg = messageReaction.message;
-    let guild = msg.guild
+    let guild = msg.guild;
 
     //server limiter
     if(!limited.includes(guild.id)) return;
 
     if(msg.id != '663303735023501314') return;
-
+    
     if(["offline","idle"].includes(user.presence.status)) return;
 
     guild.fetchMember(user)
