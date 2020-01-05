@@ -12,7 +12,7 @@ module.exports = async (bot, oldMember, newMember) => {
     let muskRole = "636272631984947240"
     let muskGateRole = "663303390620680193"
 
-    if(member.roles.includes(muskRole)){
+    if(member.roles.array().includes(muskRole)){
         try{
             member.removeRole(muskRole)
         }catch{}
