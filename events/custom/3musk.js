@@ -12,13 +12,14 @@ module.exports = async (bot, oldMember, newMember) => {
     let muskRole = "636272631984947240"
     let muskGateRole = "663303390620680193"
 
-
-    try{
-        member.removeRole(muskRole)
-    }catch{}
-    try{
-        member.addRole(muskGateRole)
-    }catch{}
+    if(member.roles.includes(muskRole)){
+        try{
+            member.removeRole(muskRole)
+        }catch{}
+        try{
+            member.addRole(muskGateRole)
+        }catch{}
+    }
 }
 
 module.exports.config = {
