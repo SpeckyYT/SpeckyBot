@@ -20,6 +20,8 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
         intensity = Number(args[0])
     }
 
+    intensity = Number(intensity)
+
     let image    = bot.cache.lastImage[msg.author.id]; 
     let id       = bot.snowflake.nextId();
 
