@@ -10,9 +10,11 @@ module.exports = async (bot, msg) => {
                 if(msg.cleanContent != clean){
                     msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
                 }else{
+                    msg.args = [];
+                    msg.Args = [];
                     logger("help",true,msg);
                     let helpcmd = bot.commands.get("help");
-                    run(helpcmd, bot, msg, "help");
+                    run(helpcmd, bot, msg, `${bot.config.prefix}help`);
                 }
             }
         }
