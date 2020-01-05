@@ -8,7 +8,7 @@ module.exports = async (bot, messageReaction, user) => {
     if(!limited.includes(guild.id)) return;
 
     guild.fetchMember(user)
-    .then(member => {
+    .then(async member => {
 
         let muskRole = "636272631984947240"
         let muskGateRole = "663303390620680193"
@@ -19,7 +19,7 @@ module.exports = async (bot, messageReaction, user) => {
             try{
                 member.removeRole(muskGateRole)
             }catch{}
-            
+
             try{
                 member.addRole(muskRole)
             }catch{}

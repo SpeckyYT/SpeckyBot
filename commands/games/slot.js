@@ -17,8 +17,6 @@ module.exports.run = async (bot, msg) => {
         eArray.push(bot.emojis[int(1,quantity+1)]);
     }
 
-    
-
     let embed = new RichEmbed()
     .setTitle('Slots!')
     .setAuthor(`${eArray.join(" ")}`)

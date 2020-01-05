@@ -9,7 +9,7 @@ module.exports = async (bot, oldMember, newMember) => {
 
     let status = member.user.presence.status;
 
-    if(status != "offline" && status != "idle") return;
+    if(!["offline","idle"].includes(status)) return;
 
     let muskRole = "636272631984947240"
     let muskGateRole = "663303390620680193"
