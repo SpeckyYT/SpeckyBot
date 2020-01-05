@@ -18,7 +18,7 @@ module.exports = async (bot, oldMember, newMember) => {
     }catch{}
     try{
         member.addRole(muskGateRole)
-    }
+    }catch{}
 }
 
 module.exports.config = {
