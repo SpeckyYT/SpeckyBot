@@ -82,6 +82,12 @@ module.exports = async (bot, msg) => {
             }
         }
 
+        if(cmd.config.category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
+            if(check()){
+                return msg.channel.send(error(`🎨 This command requires the \`ATTACH FILES\` permission.`))
+            }
+        }
+
         if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
             if(cmd.config.perms){
                 if(!msg.member.hasPermission(cmd.config.perms)){

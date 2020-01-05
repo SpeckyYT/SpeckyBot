@@ -1,11 +1,11 @@
 module.exports.run = async (bot, msg) => {
-    require('./functions/intensity')(bot, msg,'blur',false,[5,2,50],"png")
+    require('./functions/intensity')(bot, msg,'rotate',true,[0,0,0],"png")
 }
 
 module.exports.config = {
-    name: "blur",
-	description: "Blurs the image!",
-    usage: `[Amount (2-50)]`,
+    name: "rotate",
+	description: "Rotates the image!",
+    usage: `[Amount (0-360)]`,
     category: `images`,
 	accessableby: "Members",
     aliases: [],

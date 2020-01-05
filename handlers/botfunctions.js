@@ -66,4 +66,9 @@ module.exports = async (bot) => {
     bot.resetDebug = () => {
         bot.debugN = 0;
     }
+
+
+    bot.setLastImageCache = (msg) => {
+        bot.cache.lastImage[msg.member.id] = msg.member.user.displayAvatarURL;
+    }
 }

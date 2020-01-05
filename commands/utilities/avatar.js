@@ -13,6 +13,7 @@ module.exports.run = async (bot, msg) => {
         .setImage(member.avatarURL)
         .setDescription(`[Link](${member.avatarURL})`)
     )
+    bot.setLastImageCache(msg)
 }
 
 module.exports.config = {

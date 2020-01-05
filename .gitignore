@@ -3,6 +3,10 @@ commands/private
 
 tmp
 
+*.png
+*.jpg
+*.jpeg
+
 s_settings.json
 u_settings.json
 config.json

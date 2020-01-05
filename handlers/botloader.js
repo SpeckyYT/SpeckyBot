@@ -5,7 +5,14 @@ module.exports = async (bot) => {
     bot.stats = {};
     bot.stats.commandsExecuted = 0;
     bot.stats.slots = 0;
+
+    bot.cache = {};
+    bot.cache.lastImage = {};
+
+    bot.snowflake = require('node-snowflake').Snowflake;
+
     bot.debugN = 0;
+
     bot.config = config;
 
     require('./botfunctions')(bot);
