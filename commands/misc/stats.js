@@ -13,8 +13,8 @@ module.exports.run = async (bot, msg) => {
     let usedPercentRAM = Math.round(usedRAM * 100 / totalRAM)
     let freePercentRAM = Math.round(freeRAM * 100 / totalRAM)
 
-    let usedDiagRAM = Math.round(usedPercentRAM / 100 / precision)
-    let freeDiagRAM = Math.round(freePercentRAM / 100 / precision)
+    let usedDiagRAM = Math.round((usedPercentRAM / 100) * precision)
+    let freeDiagRAM = Math.round((freePercentRAM / 100) * precision)
 
     let cEmbed = new RichEmbed()
     .setColor('#FF00AA')
@@ -23,8 +23,12 @@ module.exports.run = async (bot, msg) => {
     .addField(`Ping:`,`${bot.ping}`)
     .addField(`Used:`, `RAM: ${full.repeat(usedDiagRAM)}${empty.repeat(freeDiagRAM)} [${Math.round(usedPercentRAM)}%]`)
     .addBlankField()
-    .addField(`Total Executed Commands`, `${bot.stats.commandsExecuted} Commands`,true)
-    .addField(`Bot Uptime`,`${bot.formatTime(bot.uptime)}`,true)
+    .addField(`Total Users:`,`${bot.users.size}`,true)
+    .addField(`Total Emotes`,`${bot.emojis.size}`,true)
+    .addField(`Total Guilds`,`${bot.guilds.size}`,true)
+    .addBlankField()
+    .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`,true)
+    .addField(`Bot Uptime:`,`${bot.formatTime(bot.uptime)}`,true)
     .setTimestamp()
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 

@@ -1,26 +1,46 @@
-const { int } = require('random');
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
-    let quantity = bot.emojis.size;
+    let quantity = msg.guild.emojis.size;
     let slots = 3;
+    let global = false;
+
+    if(quantity < 5){
+        global = true;
+        quantity = bot.emojis.size
+    }
 
     if(!isNaN(msg.args[0])){
         if(msg.args[0] > 1){
             slots = msg.args[0];
         }
+        if(msg.args[0] > 75){
+            slots = 75
+        }
     }
 
     let eArray = [];
-    
+    let neweArray = [];
+
     for(let i = 0; i < slots; i++){
-        eArray.push(bot.emojis[int(1,quantity+1)]);
+        let emote;
+        if(global){
+            emote = bot.emojis.random().toString();
+        }else{
+            emote = msg.guild.emojis.random().toString();
+        }
+        neweArray.push(emote);
+
+        if(neweArray.join('').length < 1950){
+            eArray = neweArray;
+        }else{
+            slots = i;
+            break;
+        }
     }
 
-    let embed = new RichEmbed()
-    .setTitle('Slots!')
-    .setAuthor(`${eArray.join(" ")}`)
-    .setDescription(`\n${owo ? "You're the WINNER!" : "Please Try Again!"}`)
+    const allEqual = arr => arr.every( v => v === arr[0] )
+
+    await msg.channel.send(eArray.join(''))
+    await msg.channel.send(`${allEqual(eArray) ? "WINNER!" : `Please Try Again!\n||${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%||`}`)
 }
 
 module.exports.config = {

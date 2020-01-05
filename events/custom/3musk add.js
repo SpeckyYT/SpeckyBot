@@ -8,7 +8,6 @@ module.exports = async (bot, messageReaction, user) => {
     let guild = msg.guild;
 
     //server limiter
-    
     if(!limited.includes(guild.id)) return;
 
     if(msg.id != '663303735023501314') return;
@@ -21,13 +20,13 @@ module.exports = async (bot, messageReaction, user) => {
         let muskGateRole = "663303390620680193"
 
         if(member.roles.has(muskGateRole)){
-//            try{
+            try{
                 member.removeRole(muskGateRole)
-//            }catch{}
+            }catch{}
 
-//            try{
+            try{
                 member.addRole(muskRole)
-//            }catch{}
+            }catch{}
         }
     }).catch()
 }
