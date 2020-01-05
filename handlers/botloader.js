@@ -4,6 +4,7 @@ const config = require('../config.json')
 module.exports = async (bot) => {
     bot.stats = {};
     bot.stats.commandsExecuted = 0;
+    bot.debugN = 0;
     bot.config = config
 
     require('./botfunctions')(bot);

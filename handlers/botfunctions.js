@@ -56,4 +56,14 @@ module.exports = async (bot) => {
     }
 
 
+
+    bot.debug = () => {
+        console.log(bot.debugN++)
+    }
+
+
+
+    bot.resetDebug = () => {
+        bot.debugN = 0;
+    }
 }
