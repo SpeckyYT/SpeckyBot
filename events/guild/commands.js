@@ -11,7 +11,8 @@ module.exports = async (bot, msg) => {
                     msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
                 }else{
                     logger("help",true,msg);
-                    bot.commands.get("help").run(cmd, bot, msg, "help");
+                    let helpcmd = bot.commands.get("help");
+                    run(helpcmd, bot, msg, "help");
                 }
             }
         }
