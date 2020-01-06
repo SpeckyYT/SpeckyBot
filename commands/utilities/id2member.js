@@ -1,10 +1,12 @@
 module.exports.run = async (bot, msg) => {
     id = parseInt(msg.args[0]);
     bot.fetchUser(id)
-        .then(user => {
-            msg.channel.send(user.tag)
-        })
-        .catch()
+    .then(user => {
+        msg.channel.send(user.tag)
+    })
+    .catch(err => {
+        msg.channel.send("User not found.")
+    })
 }
 
 module.exports.config = {
