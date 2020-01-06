@@ -1,6 +1,6 @@
 module.exports.run = async (bot, msg) => {
     if(msg.args){
-        msg.args[0] = Number(ms) / 100
+        msg.args[0] = Number(msg.args[0]) / 100
     }
     require('./functions/intensity')(bot, msg,'real',false,[0.5,-1,1],"png")
 }
