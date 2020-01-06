@@ -1,7 +1,7 @@
 module.exports.run = async (bot, msg) => {
     let user = bot.users.find('tag',msg.Args[0])
     if(user){
-        msg.channel.send(user.tag)
+        msg.channel.send(user.id)
     }else{
         msg.channel.send("User not found.")
     }
