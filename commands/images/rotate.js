@@ -1,5 +1,5 @@
 module.exports.run = async (bot, msg) => {
-    require('./functions/intensity')(bot, msg,'rotate',true,[0,0,0],"png")
+    require('./functions/methods')(bot, msg,'rotate',true,[0,0,0],"png")
 }
 
 module.exports.config = {

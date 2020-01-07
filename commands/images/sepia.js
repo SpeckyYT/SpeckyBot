@@ -1,11 +1,11 @@
 module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'posterize',false,[5,2,50],"png")
+    require('./functions/methods')(bot, msg,'sepia',false,[false,false,false],"png")
 }
 
 module.exports.config = {
-    name: "posterize",
-	description: "Posterizes the image!",
-    usage: `[Amount (2-50)]`,
+    name: "sepia",
+	description: "Applies a sepia filter to the image!",
+    usage: ``,
     category: `images`,
 	accessableby: "Members",
     aliases: [],

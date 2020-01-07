@@ -1,5 +1,5 @@
 module.exports.run = async (bot, msg) => {
-    require('./functions/intensity')(bot, msg,'pixelate',false,[5,2,50],"png")
+    require('./functions/methods')(bot, msg,'pixelate',false,[5,2,50],"png")
 }
 
 module.exports.config = {

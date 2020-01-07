@@ -1,5 +1,5 @@
 module.exports.run = async (bot, msg) => {
-    require('./functions/intensity')(bot, msg,'blur',false,[5,2,100],"png")
+    require('./functions/methods')(bot, msg,'blur',false,[5,2,100],"png")
 }
 
 module.exports.config = {

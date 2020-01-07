@@ -6,18 +6,24 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
 
     let intensity = val;
 
-    if(!free){
-        if(!isNaN(args[0])){
-            intensity = Number(args[0]);
+    if(intensity != false){
+
+        if(!free){
+            if(!isNaN(args[0])){
+                intensity = Number(args[0]);
+            }
+            if(intensity > max){
+                intensity = max
+            }
+            if(intensity < min){
+                intensity = min
+            }
+        }else{
+            intensity = Number(args[0])
         }
-        if(intensity > max){
-            intensity = max
-        }
-        if(intensity < min){
-            intensity = min
-        }
+
     }else{
-        intensity = Number(args[0])
+        intensity = null;
     }
 
     let image    = bot.cache.lastImage[msg.channel.id]; 
@@ -30,14 +36,23 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
         read(image, (err, file) => {
             if (err){ msg.channel.send("Error happend") };
 
-            file[method](intensity).write(id + `.${fileFormat}`, ()=>{
+            function run(){
                 msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
                     response.delete();
                     unlink("./" + id + `.${fileFormat}`, () => {})
                     bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
                 })
-            })
+            }
 
+            if(intensity != null){
+                file[method](intensity).write(id + `.${fileFormat}`, ()=>{
+                    run();
+                })
+            }else{
+                file[method]().write(id + `.${fileFormat}`, ()=>{
+                    run();
+                })
+            }
         })
     })
 }
