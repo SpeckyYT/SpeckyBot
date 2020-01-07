@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
 		let categories = readdirSync('./commands/')
 
 		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
-		embed.setFooter(`© ${msg.guild.me.displayName} | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
+		embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
 		categories.forEach(category => {
 			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
