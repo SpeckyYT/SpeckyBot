@@ -69,6 +69,8 @@ module.exports = async (bot) => {
 
 
     bot.setLastImageCache = (msg) => {
-        bot.cache.lastImage[msg.member.id] = msg.member.user.displayAvatarURL;
+        if(msg.attachments.first()){
+            bot.cache.lastImage[msg.channel.id] = msg.attachments.first().url;
+        }
     }
 }
