@@ -2,7 +2,7 @@ const { inspect } = require("util")
 
 module.exports.run = async (bot, msg) => {
     try {
-        let toEval = msg.args.join(" ")
+        let toEval = msg.Args.join(" ")
         let evaluated = inspect(eval(toEval, { depth: 0 }));
         
         if (!toEval) {
@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg) => {
             let hrStart = process.hrtime()
             let hrDiff;
             hrDiff = process.hrtime(hrStart);
-            return msg.channel.send(`*Executed in ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000000}ms.*\n\`\`\`javascript\n${evaluated}\n\`\`\``, { maxLength: 1900 })
+            return msg.channel.send(`*Executed in ${hrDiff[0] > 0 ? `${hrDiff[0]}s ` : ''}${hrDiff[1] / 1000}ms.*\n\`\`\`javascript\n${evaluated}\n\`\`\``, { maxLength: 1900 })
         }
         
     } catch (e) {
