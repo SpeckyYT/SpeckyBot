@@ -2,15 +2,15 @@ const { read } = require('jimp')
 const { unlink } = require('fs')
 
 module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
-    let { args } = msg;
+    let { Args } = msg;
 
     let intensity = val;
 
-    if(intensity != false){
+    if(typeof intensity != "boolean"){
 
         if(!free){
-            if(!isNaN(args[0])){
-                intensity = Number(args[0]);
+            if(!isNaN(Args[0])){
+                intensity = Number(Args[0]);
             }
             if(intensity > max){
                 intensity = max
@@ -19,9 +19,8 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
                 intensity = min
             }
         }else{
-            intensity = Number(args[0])
+            intensity = Number(Args[0])
         }
-
     }else{
         intensity = null;
     }
