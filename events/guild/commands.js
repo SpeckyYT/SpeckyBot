@@ -59,7 +59,7 @@ module.exports = async (bot, msg) => {
             if(owner == true){
                 illegal = true;
                 return false;
-            }else if(admin == true && (category == "owner" || category == "private")){
+            }else if(admin == true && (category != "owner" && category != "private")){
                 illegal = true;
                 return false;
             }else{
