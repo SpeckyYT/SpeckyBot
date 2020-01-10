@@ -56,15 +56,20 @@ module.exports = async (bot, msg) => {
         if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){admin = true}
 
         function check(){
-            if(owner == true || admin == true){
+            if(owner == true){
+                illegal = true;
+                return false;
+            }else if(admin == true && (category == "owner" || category == "private")){
                 illegal = true;
                 return false;
             }else{
-                return true
+                return true;
             }
         }
 
-        if((cmd.config.category == "owner" || cmd.config.category === "private") && !owner){
+        let category = cmd.config.category;
+
+        if((category == "owner" || cmd.config.category === "private") && !owner){
             return msg.channel.send(error(`👮‍♂️ You aren't the bot owner.`))
         }
 
@@ -78,13 +83,13 @@ module.exports = async (bot, msg) => {
             })
         }
         
-        if(cmd.config.category == "nsfw" && !msg.channel.nsfw){
+        if(category == "nsfw" && !msg.channel.nsfw){
             if(check()){
                 return msg.channel.send(error(`🔞 This command is only allowed in a NSFW channel.`))
             }
         }
 
-        if(cmd.config.category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
+        if(category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
             if(check()){
                 return msg.channel.send(error(`🎨 This command requires the \`ATTACH FILES\` permission.`))
             }
