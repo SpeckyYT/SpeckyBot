@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg) => {
             let hrStart = process.hrtime()
             let hrDiff;
             hrDiff = process.hrtime(hrStart);
-            return msg.channel.send(`*Executed in ${hrDiff[0] > 0 ? `${Math.floor(hrDiff[0] / 1000)}ms ` : ''}ms.*\n\`\`\`js\n${evaluated}\n\`\`\``, { maxLength: 1900 })
+            return msg.channel.send(`\`\`\`js\n${evaluated}\n\`\`\``, { maxLength: 1900 })
         }
         
     } catch (e) {
