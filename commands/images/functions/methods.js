@@ -26,7 +26,7 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
     }
 
     let image    = bot.cache.lastImage[msg.channel.id]; 
-    let id       = bot.snowflake.nextId();
+    let id       = `${msg.author.id}_${bot.snowflake()}`;
 
     if(image == undefined){ msg.channel.send("No image found"); return; }
 

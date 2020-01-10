@@ -9,7 +9,7 @@ module.exports = async (bot) => {
     bot.cache = {};
     bot.cache.lastImage = {};
 
-    bot.snowflake = require('node-snowflake').Snowflake;
+    bot.snowflake = require('node-snowflake').Snowflake.nextId;
 
     bot.debugN = 0;
 
