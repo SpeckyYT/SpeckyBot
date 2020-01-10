@@ -49,12 +49,14 @@ module.exports = async (bot, msg) => {
         }
 
         let owner = false;
+        let admin = false;
         let illegal = false;
 
         if(msg.author.id == bot.config.owner){owner = true}
+        if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){admin = true}
 
         function check(){
-            if(owner == true){
+            if(owner == true || admin == true){
                 illegal = true;
                 return false;
             }else{
