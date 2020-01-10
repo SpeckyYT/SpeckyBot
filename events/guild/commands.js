@@ -119,7 +119,7 @@ module.exports = async (bot, msg) => {
             .then(ms => {
                 let emote = '✅';
                 ms.react(emote);
-                const filter = (reaction, user) => user.id === bot.config.owner && reaction.emoji.name === emote
+                const filter = (reaction, user) => user.id === msg.author.id && reaction.emoji.name === emote
                 ms.awaitReactions(filter, { max: 1, time: (time*1000), errors: ['time']})
                 .then(collected => {
                     try{ms.delete()}catch{}
