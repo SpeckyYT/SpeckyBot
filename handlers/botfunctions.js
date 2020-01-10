@@ -68,9 +68,26 @@ module.exports = async (bot) => {
     }
 
 
-    bot.setLastImageCache = (msg) => {
+    bot.setLastImageCache = async (msg) => {
         if(msg.attachments.first()){
-            bot.cache.lastImage[msg.channel.id] = msg.attachments.first().url;
+            bot.cache.lastImage[msg.channel.id] = msg.attachments.first().proxyURL;
+        }
+
+        if(!bot.cache.lastImage[msg.channel.id]){
+            await msg.channel.fetchMessages({limit: 15})
+            .then(msgs => {
+                msgs.array().reverse().some(message => {
+                    if(message.attachments.first()){
+                        bot.cache.lastImage[msg.channel.id] = message.attachments.first().proxyURL;
+                        return;
+                    }else
+                    if(message.embeds.first()){
+                        if(message.embeds.first().image){
+                            bot.cache.lastImage[msg.channel.id] = message.embeds.first().image.proxyURL;
+                        }
+                    }
+                })
+            })
         }
     }
 }

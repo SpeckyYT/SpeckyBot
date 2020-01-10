@@ -41,12 +41,15 @@ module.exports = async (bot, msg) => {
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     
     if(cmd){
-        await msg.channel.startTyping()
         bot.stats.commandsExecuted++;
+
         logger(command.slice(bot.config.prefix.length),true,msg);
+
         if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){
             return;
         }
+
+        await bot.setLastImageCache(msg);
 
         let owner = false;
         let admin = false;
@@ -59,7 +62,13 @@ module.exports = async (bot, msg) => {
             if(owner){
                 illegal = true;
                 return false;
-            }else if(adminAllowed && admin && (category != "owner" && category != "private" && category != "custom")){
+            }else if(   false &&                     //Disabled from tip of the Discord Bots community
+                        adminAllowed &&
+                        admin &&
+                        (category != "owner" &&
+                        category != "private" &&
+                        category != "custom")
+            ){
                 illegal = true;
                 return false;
             }else{
@@ -121,7 +130,7 @@ module.exports = async (bot, msg) => {
                 ms.react(emote);
                 const filter = (reaction, user) => user.id === msg.author.id && reaction.emoji.name === emote
                 ms.awaitReactions(filter, { max: 1, time: (time*1000), errors: ['time']})
-                .then(collected => {
+                .then(() => {
                     try{ms.delete()}catch{}
                     run(cmd, bot, msg, command);
                 })
@@ -137,7 +146,6 @@ module.exports = async (bot, msg) => {
     }else{
         logger(command.slice(bot.config.prefix.length),false,msg);
         await msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
-        await msg.channel.stopTyping(true)
     }
 }
 
@@ -153,7 +161,6 @@ async function run(cmd, bot, msg, command){
             await msg.channel.send(errdesc(err.message));
         }
     }
-    await msg.channel.stopTyping(true)
 }
 
 function logger(cmd, actived, msg){

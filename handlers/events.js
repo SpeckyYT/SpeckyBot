@@ -15,9 +15,9 @@ module.exports = (bot) => {
                 const evt = require(`../events/${dirs}/${file}`);
                 let eName = evt.config.event;
                 bot.on(eName, evt.bind(null, bot));
-                console.log(`${dirs}\t|\t${file}`);
+                console.log(`${dirs}   \t|\t${file}`);
             }catch(err){
-                console.log(`${dirs}\t|\t${file} ERROR!`)
+                console.log(`${dirs}   \t|\t${file} ERROR!`)
                 console.log(err.message);
             }
         };
