@@ -55,11 +55,11 @@ module.exports = async (bot, msg) => {
         if(msg.author.id == bot.config.owner){owner = true}
         if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){admin = true}
 
-        function check(){
-            if(owner == true){
+        function check(adminAllowed){
+            if(owner){
                 illegal = true;
                 return false;
-            }else if(admin == true && (category != "owner" && category != "private")){
+            }else if(adminAllowed && admin && (category != "owner" && category != "private" && category != "custom")){
                 illegal = true;
                 return false;
             }else{
@@ -76,7 +76,7 @@ module.exports = async (bot, msg) => {
         if(cmd.config.cmdperms){
             cmd.config.cmdperms.forEach(perm => {
                 if(!msg.guild.me.hasPermission(perm)){
-                    if(check()){
+                    if(check(false)){
                         return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``))
                     }
                 }
@@ -84,13 +84,13 @@ module.exports = async (bot, msg) => {
         }
         
         if(category == "nsfw" && !msg.channel.nsfw){
-            if(check()){
+            if(check(true)){
                 return msg.channel.send(error(`🔞 This command is only allowed in a NSFW channel.`))
             }
         }
 
         if(category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
-            if(check()){
+            if(check(false)){
                 return msg.channel.send(error(`🎨 This command requires the \`ATTACH FILES\` permission.`))
             }
         }
@@ -98,7 +98,7 @@ module.exports = async (bot, msg) => {
         if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
             if(cmd.config.perms){
                 if(!msg.member.hasPermission(cmd.config.perms)){
-                    if(check()){
+                    if(check(false)){
                         return msg.channel.send(error(`🚷 You don't have the required permissions for that command.`))
                     }
                 }
@@ -107,7 +107,7 @@ module.exports = async (bot, msg) => {
 
         if(cmd.config.servers){
             if(cmd.config.servers.indexOf(msg.guild.id.toString()) < 0){
-                if(check()){
+                if(check(false)){
                     return msg.channel.send(error(`⛔ This command isn't available on this server.`));
                 }
             }
