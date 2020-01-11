@@ -6,11 +6,11 @@ module.exports.run = async (bot, msg) => {
     member = msg.member;
     channel = msg.channel;
 
-    if(msg.mentions.members > 0){
+    if(msg.mentions.members.size > 0){
         member = msg.mentions.members.first();
     }
     
-    if(msg.mentions.channels > 0){
+    if(msg.mentions.channels.size > 0){
         channel = msg.mentions.channels.first();
     }
 
