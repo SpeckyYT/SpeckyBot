@@ -29,19 +29,33 @@ module.exports.statusCheckQuantity = (list,status) => {
 module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]]) => {
     let { RichEmbed } = require('discord.js');
     let maxmsglength = 1965;
-    let fulldesc = `${Eonline} ${online}\n${Eidle} ${idle}\n${Ednd} ${dnd}\n${Eoffline} ${offline}`;
+    online = `${Eonline} ${online}`;
+    idle = `${Eidle} ${idle}`;
+    dnd = `${Ednd} ${dnd}`;
+    offline = `${Eoffline} ${offline}`;
 
     let embed = new RichEmbed()
     .setTitle(`__${title}__:`)
     .setThumbnail(msg.guild.iconURL);
 
-    if(fulldesc.length < maxmsglength){
-        msg.channel.send(embed.setDescription(fulldesc))
-    }else{
-        [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]].forEach(async items => {
-            embed.setDescription(`${items[1]} ${items[0]}`);
-            await msg.channel.send(embed)
-        })
+    let statusArray = [online,idle,dnd,offline];
+
+    let currentMessage = '';
+
+    for (const message of statusArray) {
+
+        if (currentMessage.length + message.length > maxmsglength) {
+            msg.channel.send(embed.setDescription(currentMessage));
+            currentMessage = '';
+        }
+
+        currentMessage = `${currentMessage}\n${message}`;
+    }
+
+    if (currentMessage.length < maxmsglength) {
+
+        msg.channel.send(embed.setDescription(currentMessage));
+
     }
 }
 

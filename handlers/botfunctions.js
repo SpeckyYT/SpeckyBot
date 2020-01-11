@@ -9,11 +9,11 @@ module.exports = async (bot) => {
         return {mil,sec,min,hrs,day}
     }
 
+
     bot.msToTime = (ms) => {
         const {mil,sec,min,hrs,day} = bot.msToVars(ms);
         return `${day.padStart(1, "0")}d ${hrs.padStart(2, "0")}h ${min.padStart(2, "0")}m ${sec.padStart(1, "0")}s ${mil.padStart(3, "0")}ms`
     }
-
 
 
     bot.formatTime = (ms) => {
@@ -29,7 +29,6 @@ module.exports = async (bot) => {
             return `${sec} Second${(sec == 1) ? '' : 's'}`
         }
     }
-
 
 
     bot.getChannel = (input, guild) => {
@@ -50,17 +49,14 @@ module.exports = async (bot) => {
     }
 
 
-
     bot.highFirst = string => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
 
-
     bot.debug = () => {
         console.log(bot.debugN++)
     }
-
 
 
     bot.resetDebug = () => {
@@ -84,6 +80,7 @@ module.exports = async (bot) => {
                     if(message.embeds[0]){
                         if(message.embeds[0].image){
                             bot.cache.lastImage[msg.channel.id] = message.embeds[0].image.proxyURL;
+                            return;
                         }
                     }
                 })
