@@ -3,6 +3,8 @@ const { RichEmbed } = require('discord.js')
 module.exports = async (bot, msg) => {
     if(msg.author.bot || msg.channel.type === "dm") return;
 
+    if(msg.system) return;
+
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first()) {
             if(msg.mentions.users.first().tag == bot.user.tag){
@@ -12,9 +14,10 @@ module.exports = async (bot, msg) => {
                 }else{
                     msg.args = [];
                     msg.Args = [];
-                    logger("help",true,msg);
-                    let helpcmd = bot.commands.get("help");
-                    run(helpcmd, bot, msg, `${bot.config.prefix}help`);
+                    let help = "help";
+                    logger(help,true,msg);
+                    let helpcmd = bot.commands.get(help);
+                    run(helpcmd, bot, msg, `${bot.config.prefix}${help}`);
                 }
             }
         }
@@ -58,9 +61,12 @@ module.exports = async (bot, msg) => {
         if(msg.author.id == bot.config.owner){owner = true}
         if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){admin = true}
 
-        function check(adminAllowed){
+        let errorReasons = [];
+
+        function check(adminAllowed, reason){
             if(owner){
                 illegal = true;
+                errorReasons.push(reason.toString());
                 return false;
             }else if(   false &&                     //Disabled from tip of the Discord Bots community
                         adminAllowed &&
@@ -70,45 +76,53 @@ module.exports = async (bot, msg) => {
                         category != "custom")
             ){
                 illegal = true;
+                errorReasons.push(reason);
                 return false;
             }else{
                 return true;
             }
         }
 
+        let ownerError    =  "👮‍♂️ You aren't the bot owner.";
+        let botPermError  =  "🚫 Bot doesn't have required permissions.";
+        let nsfwError     =  "🔞 This command is only allowed in a NSFW channel.";
+        let imagesError   =  "🎨 This command requires the \`ATTACH FILES\` permission.";
+        let userPermError =  "🚷 You don't have the required permissions for that command.";
+        let serverError   =  "⛔ This command isn't available on this server.";
+
         let category = cmd.config.category;
 
         if((category == "owner" || cmd.config.category === "private") && !owner){
-            return msg.channel.send(error(`👮‍♂️ You aren't the bot owner.`))
+            return msg.channel.send(error(ownerError))
         }
 
         if(cmd.config.cmdperms){
             cmd.config.cmdperms.forEach(perm => {
                 if(!msg.guild.me.hasPermission(perm)){
-                    if(check(false)){
-                        return msg.channel.send(error(`🚫 Bot doesn't have required permissions.\n\`${perm}\``))
+                    if(check(false, botPermError)){
+                        return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perm}\``))
                     }
                 }
             })
         }
         
         if(category == "nsfw" && !msg.channel.nsfw){
-            if(check(true)){
-                return msg.channel.send(error(`🔞 This command is only allowed in a NSFW channel.`))
+            if(check(true, nsfwError)){
+                return msg.channel.send(error(nsfwError))
             }
         }
 
         if(category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
-            if(check(false)){
-                return msg.channel.send(error(`🎨 This command requires the \`ATTACH FILES\` permission.`))
+            if(check(false, imagesError)){
+                return msg.channel.send(error(imagesError))
             }
         }
 
         if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
             if(cmd.config.perms){
                 if(!msg.member.hasPermission(cmd.config.perms)){
-                    if(check(false)){
-                        return msg.channel.send(error(`🚷 You don't have the required permissions for that command.`))
+                    if(check(false, userPermError)){
+                        return msg.channel.send(error(userPermError))
                     }
                 }
             }
@@ -116,15 +130,15 @@ module.exports = async (bot, msg) => {
 
         if(cmd.config.servers){
             if(cmd.config.servers.indexOf(msg.guild.id.toString()) < 0){
-                if(check(false)){
-                    return msg.channel.send(error(`⛔ This command isn't available on this server.`));
+                if(check(false, serverError)){
+                    return msg.channel.send(error(serverError));
                 }
             }
         }
 
         if(illegal){
             let time = 10;
-            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
+            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\nReason${errorReasons.length == 1 ? '' : 's'}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
             .then(ms => {
                 let emote = '✅';
                 ms.react(emote);
