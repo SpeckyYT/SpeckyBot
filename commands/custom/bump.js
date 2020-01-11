@@ -2,12 +2,11 @@ const { RichEmbed } = require("discord.js");
 const { randomInt } = require('mathjs');
 
 module.exports.run = async (bot, msg) => {
-    let { config } = bot;
     var random;
-    if(msg.author.id == config.owner){
+    if(bot.checkOwner(msg.author.id)){
         random = randomInt(1,10000)
     }else{
-        random = randomInt(1,300)
+        random = randomInt(1,450)
     }
     let cEmbed = new RichEmbed()
     .setColor('#24B8B8')

@@ -10,7 +10,7 @@ module.exports.run = async (bot, msg) => {
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
 	.setThumbnail(bot.user.displayAvatarURL)
 
-	if(!args[0] || (msg.author.id == config.owner && args[0] == "all")) {
+	if(!args[0] || (bot.checkOwner(msg.author.id) && args[0] == "all")) {
 		let categories = readdirSync('./commands/')
 
 		embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
@@ -66,7 +66,7 @@ function categoryCheck(category,msg,config){
 	category = category.toLowerCase()
 	return (
 	!(category == "nsfw" && !msg.channel.nsfw) &&
-	!(category == "owner" && msg.author.id != config.owner) &&
+	!(category == "owner" && !bot.checkOwner(msg.author.id)) &&
 	!(category == "admin" && !msg.member.permissions.toArray().join(' ').includes('MANAGE_'))
 	)
 }

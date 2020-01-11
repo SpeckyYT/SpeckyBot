@@ -4,9 +4,9 @@ module.exports = async (bot) => {
     bot.music = require("discord.js-musicbot-addon");
     bot.music.start(bot, {
         youtubeKey: youtube,
-        ownerID: owner,
+        ownerID: owner[0],
         ownerOverMember: true,
-        botAdmins: [owner],
+        botAdmins: owner,
         insertMusic: true,
         logging: false,
         inlineEmbeds: true,
