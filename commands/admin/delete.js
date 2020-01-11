@@ -20,7 +20,7 @@ module.exports.config = {
     usage: `<messageID>`,
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
-    aliases: ["deletion", "msgdelet","msgdelete","delet"],
+    aliases: ["deletion", "msgdelet","msgdelete"],
     perms: ['MANAGE_MESSAGES'],
     cmdperms: ['MANAGE_MESSAGES']
 }
