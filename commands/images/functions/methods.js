@@ -4,6 +4,8 @@ const { unlink } = require('fs')
 module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
     let { Args } = msg;
 
+    Args[0] = parseInt(Args[0])
+
     let intensity = val;
 
     if(typeof intensity != "boolean"){
