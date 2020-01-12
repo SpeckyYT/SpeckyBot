@@ -1,6 +1,7 @@
-var { now } = require('microseconds');
-var nodegit = require('nodegit');
-var path = require("path");
+const { now } = require('microseconds');
+const { Collection } = require("discord.js");
+const nodegit = require('nodegit');
+const path = require("path");
 
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
@@ -9,33 +10,28 @@ module.exports.run = async (bot, msg) => {
     const cmddir = `../../handlers/commands.js`;
     const eventdir = `../../handlers/events.js`;
     const consdir = `../../handlers/console.js`;
+    delete require.cache;
     try{
         switch(args[0]){
             case "commands":
             case "command":
             case "cmds":
             case "cmd":
-                await bot.commands.forEach(c => {
-                    bot.commands.delete(c);
-                });
-                await bot.aliases.forEach(a => {
-                    bot.commands.delete(a);
-                });
-                delete require.cache[require.resolve(cmddir)];
+                bot.commands = new Collection();
+                bot.aliases = new Collection();
                 require(cmddir)(bot);
                 break
             case "events":
             case "event":
             case "eve":
             case "ev":
-                delete require.cache[require.resolve(eventdir)];
                 require(eventdir)(bot);
                 break
             case "console":
             case "cons":
-                await delete require.cache[require.resolve(consdir)];
                 require(consdir)(bot);    
                 break
+            /*
             case "bot":
             case "git":
             case "repo":
@@ -70,6 +66,7 @@ module.exports.run = async (bot, msg) => {
                 });
 
                 break
+                */
             /*
             case "npm":
             case "modules":

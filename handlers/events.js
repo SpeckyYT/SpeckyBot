@@ -1,16 +1,11 @@
 const { readdirSync } = require("fs")
-var boot = false;
 
-module.exports = (bot) => {
+module.exports = async (bot) => {
+    delete require.cache;
     bot.removeAllListeners();
     const load = dirs => {    
         const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith('.js'));
-        for (let file of events) {
-            if(boot){
-                try{
-                    delete require.cache[require.resolve(`../events/${dirs}/${file}`)];
-                }catch{}
-            }
+        events.forEach(async file => {
             try{
                 const evt = require(`../events/${dirs}/${file}`);
                 let eName = evt.config.event;
@@ -20,9 +15,8 @@ module.exports = (bot) => {
                 console.log(`${dirs}   \t|\t${file} ERROR!`)
                 console.log(err.message);
             }
-        };
+        })
     };
     ["client", "custom", "guild","private"].forEach(x => load(x));
-    boot = true;
     console.log();
 };

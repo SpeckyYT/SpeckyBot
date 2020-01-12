@@ -1,16 +1,10 @@
 const { readdirSync } = require("fs")
-var boot = false
-
 
 module.exports = (bot) => {
-    var load = dirs => {
-        var commands = readdirSync(`./commands/${dirs}/`).filter(d => d.endsWith('.js'));
-        for (let file of commands) {
-            if(boot){
-                try{
-                    delete require.cache[require.resolve(`../commands/${dirs}/${file}`)];
-                }catch{}
-            }
+    delete require.cache;
+    let load = dirs => {
+        let commands = readdirSync(`./commands/${dirs}/`).filter(d => d.endsWith('.js'));
+        commands.forEach(async file => {
             try{
                 let pull = require(`../commands/${dirs}/${file}`);
                 bot.commands.set(pull.config.name, pull);
@@ -20,9 +14,8 @@ module.exports = (bot) => {
                 console.log(`${dirs}     \t|\t${file} ERROR!`);
                 console.log(err);
             }
-        }
+        })
     }
     ["owner", "admin", "utilities", "external", "games", "misc", "music", "sfw", "nsfw", "images", "private", "custom"].forEach(x => load(x));
-    boot = true;
     console.log();
 };
