@@ -13,6 +13,7 @@
     "git-js": "^1.1.1",
     "got": "^9.6.0",
     "iliad-cli": "^1.4.1",
+    "is-image-url": "^1.1.8",
     "jimp": "^0.9.3",
     "mathjs": "^6.5.0",
     "mee6-levels-api": "^1.1.0",
