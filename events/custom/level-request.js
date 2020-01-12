@@ -7,7 +7,6 @@ module.exports = async (bot, msg) => {
     //channel limiter
     if(!limited.includes(msg.channel.id)) return;
 
-    if(msg.author.bot && msg.author.id != bot.user.id) return msg.delete();
     if(msg.author.id == bot.user.id) return;
 
     let regex = /\b\d{7,10}\b/g
