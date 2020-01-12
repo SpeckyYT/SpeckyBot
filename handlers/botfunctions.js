@@ -82,7 +82,7 @@ module.exports = async (bot) => {
                     setImage(message.attachments.first().proxyURL);
                     return;
                 }else
-                if(matches[0]){
+                if(matches){
                     let matchR
                     if(
                         matches.some(match => {
@@ -94,7 +94,7 @@ module.exports = async (bot) => {
                         return;
                     }
                 }else
-                if(message.embeds[0]){
+                if(message.embeds){
                     if(message.embeds[0].image){
                         bot.cache.lastImage[msg.channel.id] = message.embeds[0].image.proxyURL;
                         return;
