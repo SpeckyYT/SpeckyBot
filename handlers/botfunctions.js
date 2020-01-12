@@ -65,29 +65,47 @@ module.exports = async (bot) => {
 
 
     bot.setLastImageCache = async (msg) => {
-        if(msg.attachments.first()){
-            bot.cache.lastImage[msg.channel.id] = msg.attachments.first().proxyURL;
-        }else{
-            await msg.channel.fetchMessages({limit: 15})
-            .then(msgs => {
-                msgs.array().reverse().some(message => {
-                    if(message.attachments.first()){
-                        bot.cache.lastImage[msg.channel.id] = message.attachments.first().proxyURL;
-                        return;
-                    }else
-                    if(message.embeds[0]){
-                        if(message.embeds[0].image){
-                            bot.cache.lastImage[msg.channel.id] = message.embeds[0].image.proxyURL;
-                            return;
-                        }
-                        if(message.embeds[0].thumbnail){
-                            bot.cache.lastImage[msg.channel.id] = message.embeds[0].thumbnail.proxyURL;
-                            return;
-                        }
-                    }
-                })
-            })
+        const isImageUrl = require('is-image-url');
+
+        let linkRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
+
+        function setImage(input){
+            bot.cache.lastImage[msg.channel.id] = input;
         }
+
+        await msg.channel.fetchMessages({limit: 25})
+        .then(msgs => {
+            msgs.array().reverse().some(message => {
+                let matches = message.content.match(linkRegex);
+
+                if(message.attachments.first()){
+                    setImage(message.attachments.first().proxyURL);
+                    return;
+                }else
+                if(matches[0]){
+                    let matchR
+                    if(
+                        matches.some(match => {
+                            matchR = match;
+                            if(isImageUrl(match)) return true;
+                        })
+                    ){
+                        setImage(matchR);
+                        return;
+                    }
+                }else
+                if(message.embeds[0]){
+                    if(message.embeds[0].image){
+                        bot.cache.lastImage[msg.channel.id] = message.embeds[0].image.proxyURL;
+                        return;
+                    }
+                    if(message.embeds[0].thumbnail){
+                        bot.cache.lastImage[msg.channel.id] = message.embeds[0].thumbnail.proxyURL;
+                        return;
+                    }
+                }
+            })
+        })
     }
 
 
