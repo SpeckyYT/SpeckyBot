@@ -24,7 +24,7 @@ module.exports = async (bot) => {
         }else if(hrs > 0){
             return `${hrs} Hour${(hrs == 1) ? '' : 's'}`
         }else if(min > 0){
-            return `${min} Minut${(min == 1) ? '' : 's'}`
+            return `${min} Minute${(min == 1) ? '' : 's'}`
         }else{
             return `${sec} Second${(sec == 1) ? '' : 's'}`
         }
@@ -67,9 +67,7 @@ module.exports = async (bot) => {
     bot.setLastImageCache = async (msg) => {
         if(msg.attachments.first()){
             bot.cache.lastImage[msg.channel.id] = msg.attachments.first().proxyURL;
-        }
-
-        if(!bot.cache.lastImage[msg.channel.id]){
+        }else{
             await msg.channel.fetchMessages({limit: 15})
             .then(msgs => {
                 msgs.array().reverse().some(message => {
