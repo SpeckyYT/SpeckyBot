@@ -4,7 +4,8 @@ const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
 	let { config } = bot;
-    let { args } = msg;
+	let { args } = msg;
+	
 	var embed = new RichEmbed()
 	.setColor('#FF00AA')
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
@@ -17,20 +18,24 @@ module.exports.run = async (bot, msg) => {
 		embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
 		categories.forEach(category => {
-			let dir = bot.commands.filter(c => (c.config.category === category && c.config.category != "private"))
+			let dir = bot.commands.filter(c => (c.config.category == category && c.config.category != "private"))
+
 			let capitalise = bot.highFirst(category)
+
 			try{
-				if(args[0] || categoryCheck(category, msg, config)){
+				if(args[0] == "all" || categoryCheck(category, msg, config)){
 					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
 				}
 			}catch{}
 		})
-		let diduknow = [`you can use the \`${config.prefix}serversettings\` command to personalize your server!`,
-						`you can use the \`${config.prefix}serversettings\` command to personalize your profile!`,
-						`you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
-						`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`,
-						`you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
-						`in counting-up channels, you can end the channel topic with \`[ALTERNATE]\` so all users have to alternate!`];
+		let diduknow = [
+			`you can use the \`${config.prefix}serversettings\` command to personalize your server!`,
+			`you can use the \`${config.prefix}serversettings\` command to personalize your profile!`,
+			`you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
+			`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`,
+			`you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
+			`in counting-up channels, you can end the channel topic with \`[ALTERNATE]\` so all users have to alternate!`
+		];
 
 		embed.addBlankField()
 		embed.addField('Did you know that', diduknow[randomInt(0,diduknow.length)])
@@ -42,7 +47,7 @@ module.exports.run = async (bot, msg) => {
 
 		command = command.config
 
-		if(!categoryCheck(command.category, msg, config)) return msg.channel.send(invalidcmd(embed,config));
+		if(!categoryCheck(command.category, msg)) return msg.channel.send(invalidcmd(embed,config));
 		
 		const cmd = bot.highFirst(command.name)
 		const description = command.description || "No Description provided."
@@ -62,13 +67,23 @@ function invalidcmd(embed,config){
 				.setDescription(`Do \`${config.prefix}help\` for the list of the commands.`)
 }
 
-function categoryCheck(category,msg,config){
+function categoryCheck(category,msg){
 	category = category.toLowerCase()
-	return (
-	!(category == "nsfw" && !msg.channel.nsfw) &&
-	!(category == "owner" && !bot.checkOwner(msg.author.id)) &&
-	!(category == "admin" && !msg.member.permissions.toArray().join(' ').includes('MANAGE_'))
-	)
+
+	switch(category){
+
+	case "owner":
+		return bot.checkOwner(msg.author.id);
+
+	case "admin":
+		return msg.member.permissions.toArray().join(' ').includes('MANAGE_');
+
+	case "nsfw":
+		return msg.channel.nsfw;
+
+	default:
+		return true;
+	}
 }
 
 module.exports.config = {

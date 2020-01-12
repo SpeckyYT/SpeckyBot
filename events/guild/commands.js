@@ -52,8 +52,6 @@ module.exports = async (bot, msg) => {
             return;
         }
 
-        await bot.setLastImageCache(msg);
-
         let owner = false;
         let admin = false;
         let illegal = false;
@@ -91,6 +89,10 @@ module.exports = async (bot, msg) => {
         let serverError   =  "⛔ This command isn't available on this server.";
 
         let category = cmd.config.category;
+
+        if(category == "images"){
+            await bot.setLastImageCache(msg);
+        }
 
         if((category == "owner" || cmd.config.category === "private") && !owner){
             return msg.channel.send(error(ownerError))

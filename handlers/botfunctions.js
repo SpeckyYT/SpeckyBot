@@ -80,6 +80,10 @@ module.exports = async (bot) => {
                             bot.cache.lastImage[msg.channel.id] = message.embeds[0].image.proxyURL;
                             return;
                         }
+                        if(message.embeds[0].thumbnail){
+                            bot.cache.lastImage[msg.channel.id] = message.embeds[0].thumbnail.proxyURL;
+                            return;
+                        }
                     }
                 })
             })
