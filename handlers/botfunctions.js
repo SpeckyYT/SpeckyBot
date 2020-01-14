@@ -112,4 +112,16 @@ module.exports = async (bot) => {
     bot.checkOwner = (id) => {
         return bot.config.owner.includes(id)
     }
+
+
+    bot.sleep = (ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    bot.delay = (ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    bot.wait = (ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
 }
