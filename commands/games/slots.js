@@ -13,40 +13,48 @@ module.exports.run = async (bot, msg) => {
 
     if(!isNaN(msg.args[0])){
         if(msg.args[0] > 1){
-            slots = msg.args[0];
+            slots = Math.ceil(msg.args[0]);
         }
     }
 
     let eArray = [];
     let neweArray = [];
 
+    let oldEmote;
+    let won = true;
+
     for(let i = 0; i < slots; i++){
         let emote;
+
         if(global){
             emote = bot.emojis.random().toString();
         }else{
             emote = msg.guild.emojis.random().toString();
         }
+
+        if(!oldEmote){
+            oldEmote = emote;
+        }
+
+        won = won && (emote == oldEmote);
+
         neweArray.push(emote);
 
         if(neweArray.join('').length < 1950){
             eArray = neweArray;
         }else{
-            slots = i;
             break;
         }
     }
-
-    const allEqual = arr => arr.every( v => v === arr[0] )
-
-    let won = allEqual(eArray)
 
     if(won){
         bot.stats.slots++;
     }
 
     await msg.channel.send(eArray.join(''))
-    await msg.channel.send(`${won ? "WINNER!" : `Please Try Again!\n||${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%||`}`)
+    if(msg.args[1] == "stats"){
+        await msg.channel.send(`${won ? "WINNER!" : `Please Try Again!\n||${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%||`}`);
+    }
 }
 
 module.exports.config = {

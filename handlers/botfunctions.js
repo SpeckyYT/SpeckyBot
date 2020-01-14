@@ -1,23 +1,30 @@
 module.exports = async (bot) => {
 
-    bot.msToVars = (ms) => {
-        const mil = Math.floor((ms % 1000)).toString();
-        const sec = Math.floor((ms / 1000) % 60).toString();
-        const min = Math.floor((ms / (1000 * 60)) % 60).toString();
-        const hrs = Math.floor((ms / (1000 * 60   * 60)) % 24).toString();
-        const day = Math.floor((ms / (1000 * 60   * 60   * 24)) % 60).toString();
-        return {mil,sec,min,hrs,day}
+    bot.msToVars = (ms, cut = false) => {
+        let mil   = Math.floor((ms % 1000)).toString();
+        let sec   = Math.floor((ms / 1000) % 60).toString();
+        let min   = Math.floor((ms / (1000 * 60)) % 60).toString();
+        let hrs   = Math.floor((ms / (1000 * 60   * 60)) % 24).toString();
+        let day   = Math.floor((ms / (1000 * 60   * 60   * 24)) % 30).toString();
+        let month = Math.floor((ms / (1000 * 60   * 60   * 24)  * 30) % 12).toString();
+        let year  = Math.floor((ms / (1000 * 60   * 60   * 24)  * 30  * 12)).toString();
+
+        if(cut){
+
+        }
+
+        return {mil,sec,min,hrs,day,month,year}
     }
 
 
     bot.msToTime = (ms) => {
-        const {mil,sec,min,hrs,day} = bot.msToVars(ms);
+        let {mil,sec,min,hrs,day} = bot.msToVars(ms);
         return `${day.padStart(1, "0")}d ${hrs.padStart(2, "0")}h ${min.padStart(2, "0")}m ${sec.padStart(1, "0")}s ${mil.padStart(3, "0")}ms`
     }
 
 
     bot.formatTime = (ms) => {
-        const {sec,min,hrs,day} = bot.msToVars(ms);
+        let {sec,min,hrs,day} = bot.msToVars(ms);
 
         if(day > 0){
             return `${day} Day${(day == 1) ? '' : 's'}`
@@ -32,7 +39,7 @@ module.exports = async (bot) => {
 
 
     bot.getChannel = (input, guild) => {
-        var ch = guild.channels.find( item => {
+        let ch = guild.channels.find( item => {
             try{
                 return item.name.toLowerCase() === input.toLowerCase()
             }catch(err){
@@ -41,7 +48,7 @@ module.exports = async (bot) => {
         if( ch != null && typeof ch != undefined) {
             return ch
         }
-        var ch = guild.channels.get(input);
+        let ch = guild.channels.get(input);
         if(typeof ch != null && typeof ch != undefined){
             return ch
         }

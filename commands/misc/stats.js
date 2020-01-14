@@ -1,5 +1,6 @@
 const { RichEmbed } = require('discord.js')
 const os = require('os')
+const osu = require('node-os-utils')
 
 module.exports.run = async (bot, msg) => {
     let full = '█'
@@ -13,19 +14,40 @@ module.exports.run = async (bot, msg) => {
     let usedPercentRAM = Math.round(usedRAM * 100 / totalRAM)
     let freePercentRAM = Math.round(freeRAM * 100 / totalRAM)
 
-    let usedDiagRAM = Math.round((usedPercentRAM / 100) * precision)
-    let freeDiagRAM = Math.round((freePercentRAM / 100) * precision)
+    let diagramMaker = (used,free) => {
+        used = Math.round((used / 100) * precision)
+        free = Math.round((free / 100) * precision)
+        return full.repeat(used) + empty.repeat(free)
+    }
+
+    let cpuUsage;
+
+    await osu.cpu.usage()
+    .then(cpuPercentage => {
+        cpuUsage = cpuPercentage;
+    })
+
+    let driveUsed, driveFree
+
+    try{
+        driveUsed = (await osu.drive.info()).usedPercentage
+        driveFree = (await osu.drive.info()).freePercentage
+    }catch(err){}
 
     let cEmbed = new RichEmbed()
     .setColor('#FF00AA')
-    .setDescription('Here are some stats about the server that is running the bot')
+    .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, msg.guild.iconURL)
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
-    .addField(`Used:`, `RAM: ${full.repeat(usedDiagRAM)}${empty.repeat(freeDiagRAM)} [${Math.round(usedPercentRAM)}%]`)
+    .addField(`Used:`, `RAM: ${diagramMaker(usedPercentRAM, freePercentRAM)} [${Math.round(usedPercentRAM)}%]
+CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${cpuUsage}%]`)
+    .addField(`Machiene Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
+${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} [${driveUsed}%]`: ""}`)
+    .addField(`System Specs`,`System Platform: ${osu.os.platform()}\nSystem Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}`)
     .addBlankField()
     .addField(`Total Users:`,`${bot.users.size}`,true)
-    .addField(`Total Emotes`,`${bot.emojis.size}`,true)
-    .addField(`Total Guilds`,`${bot.guilds.size}`,true)
+    .addField(`Total Emotes:`,`${bot.emojis.size}`,true)
+    .addField(`Total Guilds:`,`${bot.guilds.size}`,true)
     .addBlankField()
     .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`,true)
     .addField(`Slots Winners:`,`${bot.stats.slots}`)

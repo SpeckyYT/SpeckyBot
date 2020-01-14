@@ -1,6 +1,6 @@
 module.exports.run = async (bot, msg) => {
-    const time = new Date().getTime()
-    console.log(time);
+    await bot.wait(7500)
+    msg.channel.send("bruh")
 }
 
 module.exports.config = {
