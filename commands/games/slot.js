@@ -15,9 +15,6 @@ module.exports.run = async (bot, msg) => {
         if(msg.args[0] > 1){
             slots = msg.args[0];
         }
-        if(msg.args[0] > 75){
-            slots = 75
-        }
     }
 
     let eArray = [];
