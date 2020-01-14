@@ -114,13 +114,13 @@ module.exports = async (bot) => {
     }
 
 
-    bot.sleep = (ms) {
+    bot.sleep = (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-    bot.delay = (ms) {
+    bot.delay = (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-    bot.wait = (ms) {
+    bot.wait = (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
