@@ -39,7 +39,8 @@ module.exports = async (bot) => {
 
 
     bot.getChannel = (input, guild) => {
-        let ch = guild.channels.find( item => {
+        let ch;
+        ch = guild.channels.find( item => {
             try{
                 return item.name.toLowerCase() === input.toLowerCase()
             }catch(err){
@@ -48,7 +49,7 @@ module.exports = async (bot) => {
         if( ch != null && typeof ch != undefined) {
             return ch
         }
-        let ch = guild.channels.get(input);
+        ch = guild.channels.get(input);
         if(typeof ch != null && typeof ch != undefined){
             return ch
         }
