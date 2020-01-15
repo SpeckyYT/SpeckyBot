@@ -8,8 +8,11 @@ module.exports = async (bot, msg) => {
         if(!isNaN(number)){
 
             let prevMsg;
+            let prevMsgs;
+
             await msg.channel.fetchMessages({ limit: 2 })
             .then(msgs => {
+                prevMsgs = msgs;
                 prevMsg = msgs.last();
             });
 
@@ -25,14 +28,11 @@ module.exports = async (bot, msg) => {
                     msg.delete().catch(()=>{return})
                     return;
                 }
-                msg.channel.fetchMessages({ limit: 2 })
-                .then(msgs => {
-                    if(msgs.filter(ms => ms.author.id == msg.author.id && !msg.author.bot).size < 2){
-                        if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alt.toUpperCase()}`);
-                    }else{
-                        msg.delete().catch(()=>{return})
-                    }
-                })
+                if(prevMsgs.filter(ms => ms.author.id == msg.author.id && !msg.author.bot).size < 2){
+                    if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alt.toUpperCase()}`);
+                }else{
+                    msg.delete().catch(()=>{return})
+                }
             }else if(alttrue && number > 5){
                 msg.channel.fetchMessages({ limit: 2 })
                 .then(msgs => {
