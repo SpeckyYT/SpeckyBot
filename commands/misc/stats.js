@@ -24,7 +24,7 @@ module.exports.run = async (bot, msg) => {
         cpuUsage = cpuPercentage;
     })
 
-    let driveUsed, driveFree
+    let driveUsed, driveFree;
 
     try{
         driveUsed = (await osu.drive.info()).usedPercentage
@@ -36,7 +36,7 @@ module.exports.run = async (bot, msg) => {
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, msg.guild.iconURL)
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
-    .addField(`Used:`, `RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(usedRAM)}%]
+    .addField(`Used:`, `RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]
 CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]`)
     .addField(`Machiene Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
 ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} [${driveUsed}%]`: ""}`)
