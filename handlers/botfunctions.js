@@ -1,16 +1,21 @@
 module.exports = async (bot) => {
 
-    bot.msToVars = (ms, cut = false) => {
-        let mil   = Math.floor((ms % 1000)).toString();
-        let sec   = Math.floor((ms / 1000) % 60).toString();
-        let min   = Math.floor((ms / (1000 * 60)) % 60).toString();
-        let hrs   = Math.floor((ms / (1000 * 60   * 60)) % 24).toString();
-        let day   = Math.floor((ms / (1000 * 60   * 60   * 24)) % 30).toString();
-        let month = Math.floor((ms / (1000 * 60   * 60   * 24)  * 30) % 12).toString();
-        let year  = Math.floor((ms / (1000 * 60   * 60   * 24)  * 30  * 12)).toString();
+    bot.msToVars = (ms = 0, cut = true) => {
+        let mil   = Math.floor( ms ).toString();
+        let sec   = Math.floor((ms / 1000)).toString();
+        let min   = Math.floor((ms / (1000 * 60))).toString();
+        let hrs   = Math.floor((ms / (1000 * 60  * 60))).toString();
+        let day   = Math.floor((ms / (1000 * 60  * 60  * 24))).toString();
+        let month = Math.floor((ms / (1000 * 60  * 60  * 24) * 30)).toString();
+        let year  = Math.floor((ms / (1000 * 60  * 60  * 24) * 30 * 12)).toString();
 
         if(cut){
-
+            mil = mil % 1000;
+            sec = sec % 60;
+            min = min % 60;
+            hrs = hrs % 24;
+            day = day % 30;
+            month = month % 12;
         }
 
         return {mil,sec,min,hrs,day,month,year}
