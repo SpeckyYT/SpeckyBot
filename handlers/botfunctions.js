@@ -1,13 +1,15 @@
+const isImageUrl = require('is-image-url');
+
 module.exports = async (bot) => {
 
     bot.msToVars = (ms = 0, keep = false) => {
-        let mil   = Math.floor(ms).toString();
-        let sec   = Math.floor(ms /  1000).toString();
-        let min   = Math.floor(ms / (1000 * 60)).toString();
-        let hrs   = Math.floor(ms / (1000 * 60  * 60)).toString();
-        let day   = Math.floor(ms / (1000 * 60  * 60  * 24)).toString();
-        let month = Math.floor(ms / (1000 * 60  * 60  * 24 * 30)).toString();
-        let year  = Math.floor(ms / (1000 * 60  * 60  * 24 * 30 * 12)).toString();
+        let mil   = Math.floor(ms);
+        let sec   = Math.floor(ms /  1000);
+        let min   = Math.floor(ms / (1000 * 60));
+        let hrs   = Math.floor(ms / (1000 * 60  * 60));
+        let day   = Math.floor(ms / (1000 * 60  * 60  * 24));
+        let month = Math.floor(ms / (1000 * 60  * 60  * 24 * 30));
+        let year  = Math.floor(ms / (1000 * 60  * 60  * 24 * 30 * 12));
 
         if(!keep){
             mil = mil % 1000;
@@ -78,8 +80,6 @@ module.exports = async (bot) => {
 
 
     bot.setLastImageCache = async (msg) => {
-        const isImageUrl = require('is-image-url');
-
         let linkRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
 
         function setImage(input){
@@ -108,14 +108,14 @@ module.exports = async (bot) => {
                     }
                 }else
                 if(message.embeds){
-                    if(message.embeds[0].image){
-                        bot.cache.lastImage[msg.channel.id] = message.embeds[0].image.proxyURL;
+                    try{
+                        setImage(message.embeds[0].image.proxyURL);
                         return;
-                    }
-                    if(message.embeds[0].thumbnail){
-                        bot.cache.lastImage[msg.channel.id] = message.embeds[0].thumbnail.proxyURL;
+                    }catch(e){}
+                    try{
+                        setImage(message.embeds[0].thumbnail.proxyURL);
                         return;
-                    }
+                    }catch(e){}
                 }
             })
         })
