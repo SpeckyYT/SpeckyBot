@@ -7,16 +7,13 @@ module.exports.run = async (bot, msg) => {
     let empty = '░'
     let precision = 15
 
-    let totalRAM = os.totalmem()
     let usedRAM = os.totalmem() - os.freemem()
     let freeRAM = os.freemem()
 
-    let usedPercentRAM = Math.round(usedRAM * 100 / totalRAM)
-    let freePercentRAM = Math.round(freeRAM * 100 / totalRAM)
-
     let diagramMaker = (used,free) => {
-        used = Math.round((used / 100) * precision)
-        free = Math.round((free / 100) * precision)
+        let total = used + free;
+        used = Math.round((used / total) * precision)
+        free = Math.round((free / total) * precision)
         return full.repeat(used) + empty.repeat(free)
     }
 
@@ -39,8 +36,8 @@ module.exports.run = async (bot, msg) => {
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, msg.guild.iconURL)
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
-    .addField(`Used:`, `RAM: ${diagramMaker(usedPercentRAM, freePercentRAM)} [${Math.round(usedPercentRAM)}%]
-CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${cpuUsage}%]`)
+    .addField(`Used:`, `RAM: ${diagramMaker(usedRam, freeRAM)} [${Math.round(usedRAM)}%]
+CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]`)
     .addField(`Machiene Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
 ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} [${driveUsed}%]`: ""}`)
     .addField(`System Specs`,`System Platform: ${osu.os.platform()}\nSystem Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}`)
