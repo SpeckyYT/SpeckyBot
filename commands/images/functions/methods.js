@@ -46,11 +46,13 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
             }
 
             if(intensity != null){
-                file[method](intensity).write(id + `.${fileFormat}`, ()=>{
+                file[method](intensity);
+                file.autocrop().write(id + `.${fileFormat}`, ()=>{
                     run();
                 })
             }else{
-                file[method]().write(id + `.${fileFormat}`, ()=>{
+                file[method]();
+                file.autocrop().write(id + `.${fileFormat}`, ()=>{
                     run();
                 })
             }
