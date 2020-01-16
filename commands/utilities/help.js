@@ -34,7 +34,7 @@ module.exports.run = async (bot, msg) => {
 			`you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
 			`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`,
 			`you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
-			`in counting-up channels, you can end the channel topic with \`[ALTERNATE]\` so all users have to alternate!`
+			`in any text channel, you can include \`[ALTERNATE]\` in the channel topic, so all users have to alternate!`
 		];
 
 		embed.addBlankField()

@@ -169,12 +169,17 @@ async function run(cmd, bot, msg, command){
     try{
         await cmd.run(bot, msg);
     }catch(err){
-        console.error(err);
-        await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
-        if(err.length < 1950){
-            await msg.channel.send(errdesc(err));
+        if(err.includes("[EXPECTED]")){
+            err = err.replace("[EXPECTED]","").trim();
+            await msg.channel.send(error(err));
         }else{
-            await msg.channel.send(errdesc(err.message));
+            console.error(err);
+            await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
+            if(err.length < 1950){
+                await msg.channel.send(errdesc(err));
+            }else{
+                await msg.channel.send(errdesc(err.message));
+            }
         }
     }
 }

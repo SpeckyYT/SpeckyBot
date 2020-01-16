@@ -3,6 +3,7 @@ const os = require('os')
 const osu = require('node-os-utils')
 
 module.exports.run = async (bot, msg) => {
+    let notSupported = "Operative system not supported"
     let full = '█'
     let empty = '░'
     let precision = 15
@@ -29,18 +30,28 @@ module.exports.run = async (bot, msg) => {
     try{
         driveUsed = (await osu.drive.info()).usedPercentage
         driveFree = (await osu.drive.info()).freePercentage
-    }catch(err){}
+    }catch(err){driveUsed = false}
+
+    let networkUsage, networkUsageIn, networkUsageOut;
+
+    try{
+        networkUsage  = (await osu.netstat.inOut()).total;
+        networkUsageIn = networkUsage.inputMb;
+        networkUsageOut = networkUsage.outputMb;
+    }catch(err){networkUsage = false}
 
     let cEmbed = new RichEmbed()
     .setColor('#FF00AA')
     .setDescription('Here are some stats about the bot and other stuff')
-    .setAuthor(`${bot.user.username}`, msg.guild.iconURL)
+    .setAuthor(`${bot.user.username}`, bot.user.iconURL)
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
     .addField(`Used:`, `RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]
-CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]`)
-    .addField(`Machiene Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
+CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]
+STORAGE: ${driveUsed ? `${diagramMaker(driveUsed, driveFree)} [${Math.round(driveUsed)}%]` : notSupported}`)
+    .addField(`Machine Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
 ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} [${driveUsed}%]`: ""}`)
-    .addField(`System Specs`,`System Platform: ${osu.os.platform()}\nSystem Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}`)
+    .addField(`System Specs:`,`System Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}\nSystem Platform: ${osu.os.platform()}`)
+    .addField(`Network Stats:`,`${networkUsage ? `Input Speed: ${networkUsageIn}\nOutput Speed: ${networkUsageOut}` : notSupported}`)
     .addBlankField()
     .addField(`Total Users:`,`${bot.users.size}`,true)
     .addField(`Total Emotes:`,`${bot.emojis.size}`,true)

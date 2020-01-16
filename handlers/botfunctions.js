@@ -3,6 +3,9 @@ const isImageUrl = require('is-image-url');
 module.exports = async (bot) => {
 
     bot.msToVars = (ms = 0, keep = false) => {
+        if(ms < 0){
+            ms = (-ms)
+        }
         let mil   = Math.floor(ms);
         let sec   = Math.floor(ms /  1000);
         let min   = Math.floor(ms / (1000 * 60));
@@ -137,4 +140,13 @@ module.exports = async (bot) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+
+    bot.singPlur = (variable, string) => {
+        return `${variable} ${string}${variable == 1 ? '' : 's'}`
+    }
+
+
+    bot.cmdError = (error) => {
+        return new Promise((resolve, reject) => reject(`[EXPECTED] ${error}`))
+    }
 }
