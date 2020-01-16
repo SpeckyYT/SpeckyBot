@@ -2,6 +2,7 @@ module.exports.run = async (bot, msg) => {
     let { args } = msg;
     switch(args[0]){
         case "1":
+            args = args.slice(1);
             if(!args[1]) return;
             let smallnum = (Math.min(args[0], args[1]));
             let bignum = (Math.max(args[0], args[1]));
