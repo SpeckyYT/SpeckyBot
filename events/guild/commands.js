@@ -37,6 +37,8 @@ module.exports = async (bot, msg) => {
     }
     msg.Args = msg.Args.slice(1);
 
+    msg.command = command.slice(bot.config.prefix.length);
+
     msg.args = msg.Args.join(' ').toLowerCase().split(' ');
 
     if(command == `${bot.config.prefix}undefined`) return;

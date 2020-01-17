@@ -51,7 +51,7 @@ module.exports.run = async (bot, msg) => {
 		
 		const cmd = bot.highFirst(command.name)
 		const description = command.description || "No Description provided."
-		const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : "No Usage"}`
+		const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`
 		const usableby = command.accessableby || "Members"
 		const aliases = `${command.aliases ? command.aliases.join(", ") : "None"}`
 		const perms = `${command.perms ? command.perms.join(", ") : "None"}`
