@@ -169,7 +169,13 @@ async function run(cmd, bot, msg, command){
     try{
         await cmd.run(bot, msg);
     }catch(err){
-        if(err.includes("[EXPECTED]")){
+
+        let expected;
+        try{
+            expected = err.includes("[EXPECTED]")
+        }catch(e){expected = false}
+
+        if(expected){
             err = err.replace("[EXPECTED]","").trim();
             await msg.channel.send(error(err));
         }else{
