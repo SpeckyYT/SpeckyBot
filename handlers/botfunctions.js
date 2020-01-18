@@ -133,12 +133,8 @@ module.exports = async (bot) => {
     bot.sleep = (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-    bot.delay = (ms) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-    bot.wait = (ms) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    bot.delay = bot.sleep;
+    bot.wait = bot.sleep;
 
 
     bot.singPlur = (variable, string) => {
@@ -148,5 +144,23 @@ module.exports = async (bot) => {
 
     bot.cmdError = (error) => {
         return new Promise((resolve, reject) => reject(`[EXPECTED] ${error}`))
+    }
+
+
+    bot.findSnowflake = (snowflake) => {
+        let user = bot.users.get(snowflake);
+        let guild = bot.guilds.get(snowflake);
+        let emoji = bot.emojis.get(snowflake);
+        let channel = bot.channels.get(snowflake);
+
+        let res = null;
+        
+        [user,guild,emoji,channel].reverse().some(item => {
+            if(item){
+                res = item;
+            }
+        })
+
+        return res;
     }
 }

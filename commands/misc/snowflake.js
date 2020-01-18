@@ -1,7 +1,12 @@
-const { RichEmbed } = require('discord.js')
+const { RichEmbed, SnowflakeUtil } = require('discord.js')
+const { deconstruct } = SnowflakeUtil;
 
 module.exports.run = async (bot, msg) => {
-    let timestamp = Number((Number(msg.Args[0]) / 4194304) + 1420070400000);
+    let snowflake = msg.Args[0];
+
+    let { date } = deconstruct(snowflake);
+    let timestamp = date;
+
     let timenow = new Date();
 
     if(isNaN(timestamp)){
@@ -15,15 +20,27 @@ module.exports.run = async (bot, msg) => {
     .setFooter("Date of the snowflake")
     .setColor("#FF00AA")
     .addField(`${timestamp < timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`)
-    .setTimestamp(timestamp);
-
-   msg.channel.send(embed)
-    .catch(() => {
+    
+    if(snowflake > 1056890076895641534463){
         embed.setFooter("Time isn't compatible in ISO8601 fomat...")
-        .setTimestamp(null);
+    }else{
+        embed.setFooter("Date of the snowflake")
+        embed.setTimestamp(timestamp)
+    }
 
-        msg.channel.send(embed).catch()
-    })
+    let item = bot.findSnowflake(String(snowflake));
+
+    let result = false;
+
+    if(item){
+        result = item.toString()
+    }
+
+    if(result){
+        embed.addField(`Resulting snowflake`,result)
+    }
+
+    await msg.channel.send(embed).catch()
 }
 
 module.exports.config = {
@@ -32,5 +49,5 @@ module.exports.config = {
     usage: `[ID]`,
     category: `misc`,
 	accessableby: "Members",
-    aliases: []
+    aliases: ['sf','id']
 }

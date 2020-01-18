@@ -35,7 +35,8 @@ module.exports.run = async (bot, msg) => {
 			`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`,
 			`you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
 			`in any text channel, you can include \`[ALTERNATE]\` in the channel topic, so all users have to alternate!`,
-			`in any text channel, you can include \`[ONE-WORD]\` in the channel topic, so all users can only type one word per message!`
+			`in any text channel, you can include \`[ONE-WORD]\` in the channel topic, so all users can only type one word per message!`,
+			`in any text channel, you can include \`[NO-MEDIA]\` in the channel topic, so nobody can share links/images in the channel!`,
 		];
 
 		embed.addBlankField()
