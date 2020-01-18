@@ -1,5 +1,4 @@
-const { RichEmbed, SnowflakeUtil } = require('discord.js')
-const { deconstruct } = SnowflakeUtil;
+const { RichEmbed, SnowflakeUtil } = require('discord.js'), { deconstruct } = SnowflakeUtil;
 
 module.exports.run = async (bot, msg) => {
     let snowflake = msg.Args[0];

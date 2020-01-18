@@ -8,8 +8,10 @@ module.exports = async () => {
         if (!existsSync(`./${file}_settings.json`)) {
             appendFileSync(`./${file}_settings.json`,'{}')
         }
+    });
+    ["textchannelcons.txt","commands.log"].forEach(file => {
+        if (!existsSync(`./${file}`)) {
+            appendFileSync(`./${file}`,'')
+        }
     })
-    if (!existsSync('./textchannelcons.txt')) {
-        appendFileSync('./textchannelcons.txt','')
-    }
 }

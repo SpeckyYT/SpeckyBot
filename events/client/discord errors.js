@@ -1,7 +1,7 @@
 module.exports = async () => {
-    console.log()
-    console.log("Error occurred (REBOOTING)")
-    console.log()
+    bot.log()
+    bot.log("Error occurred (REBOOTING)")
+    bot.log()
     process.exit();    
 }
 

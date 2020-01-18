@@ -1,4 +1,5 @@
 const isImageUrl = require('is-image-url');
+const { appendFile, readFile, writeFile } = require('fs');
 
 module.exports = async (bot) => {
 
@@ -162,5 +163,32 @@ module.exports = async (bot) => {
         })
 
         return res;
+    }
+
+    bot.logged = []
+
+    bot.log = async (content) => {
+        appendFile('./commands.log',`${content}\n`,()=>{});
+
+        let file;
+
+        readFile('./commands.log', async (err,data)=>{
+
+            file = data.toString().split('\n');
+
+            if(file.length > 10000){
+                while(file.length > 9000){
+                    file.shift();
+                }
+                writeFile('./commands.log',file.join("\n"),()=>{})
+            }
+
+        })
+
+        if(content){
+            console.log(content)
+        }else{
+            console.log()
+        }
     }
 }

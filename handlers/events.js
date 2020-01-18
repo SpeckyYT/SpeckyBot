@@ -12,14 +12,14 @@ module.exports = async (bot) => {
                     const evt = require(`../events/${dir}/${file}`);
                     let eName = evt.config.event;
                     bot.on(eName, evt.bind(null, bot));
-                    console.log(`${dir}   \t|\t${file}`);
+                    bot.log(`${dir}   \t|\t${file}`);
                 }catch(err){
-                    console.log(`${dir}   \t|\t${file} ERROR!`)
-                    console.log(err.message);
+                    bot.log(`${dir}   \t|\t${file} ERROR!`)
+                    bot.log(err.message);
                 }
             })
-        }catch(err){console.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
+        }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
     };
     ["client", "custom", "guild","private"].forEach(x => load(x));
-    console.log();
+    bot.log();
 };

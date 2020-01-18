@@ -15,7 +15,7 @@ module.exports = async (bot, msg) => {
                     msg.args = [];
                     msg.Args = [];
                     let help = "help";
-                    logger(help,true,msg);
+                    logger(help,true,msg,bot);
                     let helpcmd = bot.commands.get(help);
                     run(helpcmd, bot, msg, `${bot.config.prefix}${help}`);
                 }
@@ -48,7 +48,7 @@ module.exports = async (bot, msg) => {
     if(cmd){
         bot.stats.commandsExecuted++;
 
-        logger(command.slice(bot.config.prefix.length),true,msg);
+        logger(command.slice(bot.config.prefix.length),true,msg,bot);
 
         if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){
             return;
@@ -162,7 +162,7 @@ module.exports = async (bot, msg) => {
         }
 
     }else{
-        logger(command.slice(bot.config.prefix.length),false,msg);
+        logger(command.slice(bot.config.prefix.length),false,msg, bot);
         await msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
     }
 }
@@ -181,7 +181,7 @@ async function run(cmd, bot, msg, command){
             err = err.replace("[EXPECTED]","").trim();
             await msg.channel.send(error(err));
         }else{
-            console.error(err);
+            bot.error(err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
             if(err.length < 1950){
                 await msg.channel.send(errdesc(err));
@@ -192,8 +192,8 @@ async function run(cmd, bot, msg, command){
     }
 }
 
-function logger(cmd, actived, msg){
-    console.log(`${cmd.toUpperCase()}: (${actived?"activated":"rejected"}) ${msg.author.tag} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`)
+function logger(cmd, actived, msg, bot){
+    bot.log(`${cmd.toUpperCase()}: (${actived?"activated":"rejected"}) ${msg.author.tag} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`)
 }
 
 function error(error){

@@ -18,7 +18,7 @@ module.exports = async (bot) => {
                 bot.channels.get(`${channel}`).send(result.join(" ")).catch(()=>{});
             }
         }catch(e){
-            console.log("Bot: Channel doesn't exist or bot doesn't have access to it")
+            bot.log("Bot: Channel doesn't exist or bot doesn't have access to it")
         }
     });
 }
