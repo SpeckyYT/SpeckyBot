@@ -6,4 +6,5 @@ module.exports = async () => {
     require('./missingfiles')();
     require('./login')(bot);
     require('./botloader')(bot);
+    require('./website')(bot);
 }

@@ -68,6 +68,44 @@ module.exports = async (bot) => {
     }
 
 
+    bot.getUser = (input, guild) => {
+        let us;
+        us = guild.members.find( item => {
+            try{
+                return item.user.username.toLowerCase() === input.toLowerCase()
+            }catch(err){
+                return null
+            }});
+        if( us != null && typeof us != undefined) {
+            return us.user
+        }
+        us = guild.members.get(input);
+        if(typeof us != null && typeof us != undefined){
+            return us.user
+        }
+        return input;
+    }
+
+
+    bot.getMember = (input, guild) => {
+        let mmb;
+        mmb = guild.members.find( item => {
+            try{
+                return item.user.username.toLowerCase() === input.toLowerCase()
+            }catch(err){
+                return null
+            }});
+        if( mmb != null && typeof mmb != undefined) {
+            return mmb
+        }
+        mmb = guild.members.get(input);
+        if(typeof mmb != null && typeof mmb != undefined){
+            return mmb
+        }
+        return input;
+    }
+
+
     bot.highFirst = string => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }

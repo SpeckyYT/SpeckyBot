@@ -13,7 +13,7 @@ module.exports = async (bot, msg) => {
         if(msg.embeds.length > 0){
             msg.delete().catch();
         }else
-        if(matches > 0){
+        if(matches){
             msg.delete().catch();
         }
     }
