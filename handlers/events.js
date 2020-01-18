@@ -1,6 +1,7 @@
 const { readdirSync } = require("fs")
 
 module.exports = async (bot) => {
+    bot.setMaxListeners(25)
     delete require.cache;
     bot.removeAllListeners();
     const load = dir => {    
