@@ -181,7 +181,7 @@ async function run(cmd, bot, msg, command){
             err = err.replace("[EXPECTED]","").trim();
             await msg.channel.send(error(err));
         }else{
-            bot.error(err);
+            bot.log(err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
             if(err.length < 1950){
                 await msg.channel.send(errdesc(err));

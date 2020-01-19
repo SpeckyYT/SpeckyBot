@@ -1,42 +1,51 @@
-const { RichEmbed, SnowflakeUtil } = require('discord.js'), { deconstruct } = SnowflakeUtil;
+const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
-    let snowflake = msg.Args[0];
+    let snowflake = String(msg.Args[0]);
 
-    let { date } = deconstruct(snowflake);
-    let timestamp = date;
-
-    let timenow = new Date();
-
-    if(isNaN(timestamp)){
+    if(isNaN(snowflake)){
         return bot.cmdError("Snowflake is not a number")
     }
 
-    let {sec, min, hrs, day, month, year} = bot.msToVars(timestamp-timenow)
+    let timestamp = (msg.Args[0] / 4194304) + 1420070400000
+
+    let timenow = new Date();
+
+    let {sec, min, hrs, day, month, year} = bot.msToVars(timestamp - timenow)
+
+    let skip = false;
 
     let embed = new RichEmbed()
     .setTitle("Snowflake Timestamp")
-    .setFooter("Date of the snowflake")
     .setColor("#FF00AA")
-    .addField(`${timestamp < timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`)
-    
+
+    if(year != Infinity){
+        embed.addField(`${timestamp < timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`)
+    }else{
+        skip = true;
+        embed.setDescription("The requested Snowflake's age is older than `2^1024` or `10^309` years.\nSuch a big number can't be handled by the bot ;-)")
+    }
+
     if(snowflake > 1056890076895641534463){
+        skip = true;
         embed.setFooter("Time isn't compatible in ISO8601 fomat...")
     }else{
         embed.setFooter("Date of the snowflake")
         embed.setTimestamp(timestamp)
     }
 
-    let item = bot.findSnowflake(String(snowflake));
+    if(!skip){
+        let item = bot.findSnowflake(snowflake);
 
-    let result = false;
+        let result = false;
 
-    if(item){
-        result = item.toString()
-    }
+        if(item){
+            result = item.toString()
+        }
 
-    if(result){
-        embed.addField(`Resulting snowflake`,result)
+        if(result){
+            embed.addField(`Resulting snowflake`,result)
+        }
     }
 
     await msg.channel.send(embed).catch()
