@@ -94,7 +94,7 @@ module.exports.run = async (bot, msg) => {
             rate = '';
         }
 
-        const link = `https://gdicon.net/icons/difficulty_${Number(diff).padStart(2, "0")}${rate}.png`
+        const link = `https://gdicon.net/icons/difficulty_${String(diff).padStart(2, "0")}${rate}.png`
 
         let cEmbed = new RichEmbed()
         .setColor('#000000')
