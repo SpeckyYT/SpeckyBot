@@ -6,8 +6,8 @@ module.exports.run = async (bot, msg) => {
         msg.channel.send("You have to define a difficulty (a number from 0 to 10)")
         return;
     }
-    const diffNum = args[0];
-    const featured = args[1];
+    let diffNum = args[0];
+    let featured = args[1];
 
     const bmsg = msg.channel.send("Generating difficulty image...")
     .then(m =>{
