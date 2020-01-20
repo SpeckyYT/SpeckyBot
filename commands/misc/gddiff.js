@@ -11,7 +11,8 @@ module.exports.run = async (bot, msg) => {
 
     const bmsg = msg.channel.send("Generating difficulty image...")
     .then(m =>{
-        var rate;
+        let rate = '';
+        let diff = 0;
         
         switch(diffNum){
         
@@ -19,58 +20,61 @@ module.exports.run = async (bot, msg) => {
         case "na":
         case "n.a":
         case "n.a.":
-            diffNum = 0; break;
+            diff = 0; break;
 
         case "1":
         case "easy":
         case "ez":
         case "eas":
-            diffNum = 1; break;
+            diff = 1; break;
 
         case "2":
         case "normal":
         case "norm":
-            diffNum = 2; break;
+            diff = 2; break;
 
         case "3":
         case "hard":
         case "difficult":
-            diffNum = 3; break;
+            diff = 3; break;
 
         case "4":
         case "harder":
-            diffNum = 4; break;
+            diff = 4; break;
 
         case "5":
         case "insane":
         case "insan":
-            diffNum = 5; break;
+            diff = 5; break;
 
         case "6":
         case "harddemon":
         case "hardemon":
-            diffNum = 6; break;
+            diff = 6; break;
 
         case "7":
         case "easydemon":
         case "ezdemon":
         case "easdemon":
-            diffNum = 7; break;
+            diff = 7; break;
 
         case "8":
         case "mediumdemon":
         case "meddemon":
-            diffNum = 8; break;
+            diff = 8; break;
 
         case "9":
         case "insanedemon":
         case "insandemon":
-            diffNum = 9; break;
+            diff = 9; break;
 
         case "10":
         case "extremedemon":
         case "extremdemon":
-            diffNum = 10; break;
+            diff = 10; break;
+
+        default:
+            diff = 0;
         }
 
         switch(featured){
@@ -90,7 +94,7 @@ module.exports.run = async (bot, msg) => {
             rate = '';
         }
 
-        const link = `https://gdicon.net/icons/difficulty_${diffNum.padStart(2, "0")}${rate}.png`
+        const link = `https://gdicon.net/icons/difficulty_${diff.padStart(2, "0")}${rate}.png`
 
         let cEmbed = new RichEmbed()
         .setColor('#000000')
