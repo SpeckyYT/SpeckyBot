@@ -176,8 +176,8 @@ module.exports = async (bot) => {
     bot.wait = bot.sleep;
 
 
-    bot.singPlur = (variable, string) => {
-        return `${variable} ${string}${variable == 1 ? '' : 's'}`
+    bot.singPlur = (variable, string, outputNumb = true) => {
+        return `${outputNumb?variable:''} ${string}${variable == 1 ? '' : 's'}`.trim()
     }
 
 

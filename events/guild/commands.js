@@ -29,7 +29,7 @@ module.exports = async (bot, msg) => {
 
     let command = msg.Args[0].toLowerCase();
 
-    while(msg.Args[0] == bot.config.prefix){
+    while(msg.Args[0] == bot.config.prefix && msg.Args.length > 0){
         let fix = msg.Args[0] + msg.Args[1];
         msg.Args[1] = fix;
         command = fix.toLowerCase();
@@ -37,11 +37,15 @@ module.exports = async (bot, msg) => {
     }
     msg.Args = msg.Args.slice(1);
 
-    msg.command = command.slice(bot.config.prefix.length);
+    msg.Args = msg.Args.filter(value => {
+        if(value) return value;
+    })
 
     msg.args = msg.Args.join(' ').toLowerCase().split(' ');
 
-    if(command == `${bot.config.prefix}undefined`) return;
+    if(command == `${bot.config.prefix}undefined`) command = `${bot.config.prefix}help`;
+
+    msg.command = command.slice(bot.config.prefix.length);
 
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     
@@ -85,7 +89,7 @@ module.exports = async (bot, msg) => {
 
         let ownerError    =  "👮‍♂️ You aren't the bot owner.";
         let botPermError  =  "🚫 Bot doesn't have required permissions.";
-        let nsfwError     =  "🔞 This command is only allowed in a NSFW channel.";
+        let nsfwError     =  "🔞 This command is only allowed in NSFW channels.";
         let imagesError   =  "🎨 This command requires the \`ATTACH FILES\` permission.";
         let userPermError =  "🚷 You don't have the required permissions for that command.";
         let serverError   =  "⛔ This command isn't available on this server.";
@@ -142,7 +146,7 @@ module.exports = async (bot, msg) => {
 
         if(illegal){
             let time = 10;
-            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\nReason${errorReasons.length == 1 ? '' : 's'}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
+            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${bot.singPlur(errorReasons.length,"Reason",false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
             .then(ms => {
                 let emote = '✅';
                 ms.react(emote);

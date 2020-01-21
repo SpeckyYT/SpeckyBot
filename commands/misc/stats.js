@@ -20,9 +20,15 @@ module.exports.run = async (bot, msg) => {
 
     let cpuUsage;
 
-    await osu.cpu.usage()
+    osu.cpu.usage()
     .then(cpuPercentage => {
         cpuUsage = cpuPercentage;
+    })
+
+    let processes;
+
+    osu.proc.totalProcesses().then(process => {
+        processes = process;
     })
 
     let driveUsed, driveFree;
@@ -47,7 +53,8 @@ module.exports.run = async (bot, msg) => {
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
     .addField(`Used:`, `RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]
 CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]
-STORAGE: ${driveUsed ? `${diagramMaker(driveUsed, driveFree)} [${Math.round(driveUsed)}%]` : notSupported}`)
+STORAGE: ${driveUsed ? `${diagramMaker(driveUsed, driveFree)} [${Math.round(driveUsed)}%]` : notSupported}
+PROCESSES: ${processes != 'not supported'? processes : notSupported}`)
     .addField(`Machine Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
 ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} [${driveUsed}%]`: ""}`)
     .addField(`System Specs:`,`System Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}\nSystem Platform: ${osu.os.platform()}`)
