@@ -4,7 +4,7 @@ module.exports = async (bot, msg) => {
     let text = '[one-word]'
 
     if(msg.channel.topic.toLowerCase().includes(text.toLowerCase())){
-        if(msg.content.match(/\W/g)){
+        if(msg.content.match(/\s/g)){
             msg.delete().catch()
         }
     }
