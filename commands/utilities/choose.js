@@ -2,7 +2,7 @@ module.exports.run = async (bot, msg) => {
     let { Args } = msg;
     let options = Args.join(" ").split('|');
 
-    let option = options[Math.floor(Math.random()*(options.length))]
+    let option = options.pick()
 
     if(options.length < 2){
         msg.channel.send(`There isn't much to choose from, but I'll choose: \`${Args.join(' ') ? Args.join(' ') : " "}\``)

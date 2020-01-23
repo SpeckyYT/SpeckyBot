@@ -37,9 +37,7 @@ module.exports = async (bot, msg) => {
     }
     msg.Args = msg.Args.slice(1);
 
-    msg.Args = msg.Args.filter(value => {
-        if(value) return value;
-    })
+    msg.Args = msg.Args.clean();
 
     msg.args = msg.Args.join(' ').toLowerCase().split(' ');
 

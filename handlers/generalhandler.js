@@ -7,6 +7,7 @@ module.exports = async () => {
         fetchAllMembers : true
     });
 
+    require('./dependencies')();
     require('./missingdirectories')();
     require('./missingfiles')();
     require('./login')(bot);
