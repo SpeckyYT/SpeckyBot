@@ -1,3 +1,5 @@
+const { RichEmbed } = require('discord.js')
+
 module.exports.run = async (bot, msg) => {
     let games = [];
 
@@ -12,9 +14,18 @@ module.exports.run = async (bot, msg) => {
         }
     })
 
-    games.sort((a, b) => {return b.length - a.length;});
+    games.sort((a,b) => b.length - a.length);
 
-    console.log(games)
+    let stringGames = '';
+
+    games.forEach(game => {
+        stringGames = `${stringGames}\n[${game.length}] ${game[0]}`;
+    })
+
+    await msg.channel.send(
+        new RichEmbed()
+        .setDescription(stringGames)
+    )
 };
 
 module.exports.config = {
