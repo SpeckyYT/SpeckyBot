@@ -43,8 +43,6 @@ module.exports = async (bot, msg) => {
 
     msg.args = msg.Args.join(' ').toLowerCase().split(' ');
 
-    if(command == `${bot.config.prefix}undefined`) command = `${bot.config.prefix}help`;
-
     msg.command = command.slice(bot.config.prefix.length);
 
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
