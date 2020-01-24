@@ -17,7 +17,7 @@ module.exports = async (bot) => {
 
     require('./botfunctions')(bot);
 
-    ["commands","aliases"].forEach(async x => 
+    ["commands","aliases","console","consoleali"].forEach(async x => 
         bot[x] = new Collection()
     );
 
