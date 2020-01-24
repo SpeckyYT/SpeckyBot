@@ -3,6 +3,7 @@ commands/private
 
 tmp
 
+*.txt
 *.png
 *.jpg
 *.jpeg
@@ -10,7 +11,6 @@ tmp
 s_settings.json
 u_settings.json
 config.json
-textchannelcons.txt
 
 # Logs
 logs

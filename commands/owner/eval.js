@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
         return msg.channel.send(`Error while evaluating: \`air\``);
     } else {
         return msg.channel.send(`\`\`\`js\n${evaluated}\n\`\`\``, { maxLength: 1900 })
-    } 
+    }
 }
 
 

@@ -181,32 +181,28 @@ async function run(cmd, bot, msg, command){
             err = err.replace("[EXPECTED]","").trim();
             await msg.channel.send(error(err));
         }else{
-            bot.log(err);
+            bot.log(err.error);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
-            if(err.length < 1950){
-                await msg.channel.send(errdesc(err));
-            }else{
-                await msg.channel.send(errdesc(err.message));
-            }
+            await msg.channel.send(errdesc(err));
         }
     }
 }
 
 function logger(cmd, actived, msg, bot){
-    bot.log(`${cmd.toUpperCase()}: (${actived?"activated":"rejected"}) ${msg.author.tag} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`)
+    bot.log(`${cmd.toUpperCase()}: (${actived?"activated":"rejected"}) ${msg.author.tag} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`.cmd)
 }
 
 function error(error){
     return new RichEmbed()
     .setTitle('ERROR!')
-    .setDescription(error)
+    .setDescription(error.substr(0,1950))
     .setColor('FF0000')
 }
 
 function errdesc(err){
     return new RichEmbed()
     .setTitle('ERROR DESCRIPTION')
-    .setDescription(err)
+    .setDescription(`${err.stack.substr(0,1900)}\n\nFile: ${err.fileName}\nLine: ${err.lineNumber}`)
     .setColor('FF0000')
 }
 

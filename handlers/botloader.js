@@ -22,7 +22,7 @@ module.exports = async (bot) => {
     );
 
     ["events", "commands", "console","music"].forEach(async x => {
-        bot.log(`\n\nLoading ${x.toUpperCase()}!\n`);
+        bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
         require(`./${x}`)(bot)
     });
 }

@@ -23,7 +23,7 @@ module.exports.run = async (bot, msg) => {
 			let capitalise = bot.highFirst(category)
 
 			try{
-				if(args[0] == "all" || categoryCheck(category, msg, config)){
+				if(args[0] == "all" || categoryCheck(category, msg, config, bot)){
 					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
 				}
 			}catch{}
@@ -49,7 +49,7 @@ module.exports.run = async (bot, msg) => {
 
 		command = command.config
 
-		if(!categoryCheck(command.category, msg)) return msg.channel.send(invalidcmd(embed,config));
+		if(!categoryCheck(command.category, msg, bot)) return msg.channel.send(invalidcmd(embed,config));
 		
 		const cmd = bot.highFirst(command.name)
 		const description = command.description || "No Description provided."
@@ -69,7 +69,7 @@ function invalidcmd(embed,config){
 				.setDescription(`Do \`${config.prefix}help\` for the list of the commands.`)
 }
 
-function categoryCheck(category,msg){
+function categoryCheck(category,msg,bot){
 	category = category.toLowerCase()
 
 	switch(category){

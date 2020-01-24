@@ -1,8 +1,6 @@
 const config = require('../../config.json')
 
 module.exports = async bot => {
-    bot.log(`Logged as ${bot.user.tag}!\n`)
-
     let statuses = [
         `${bot.guilds.size} servers!`,
         `${config.prefix}help`,

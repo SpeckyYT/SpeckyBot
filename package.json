@@ -6,9 +6,10 @@
   "dependencies": {
     "canvas": "^2.6.1",
     "cleverbot-free": "^1.0.3",
+    "colors": "^1.4.0",
     "confusables": "^0.3.3",
     "discord.js": "^11.5.1",
-    "discord.js-musicbot-addon": "^13.8.1",
+    "discord.js-musicbot-addon": "^13.9.1",
     "dominantcolors.js": "0.0.5",
     "express": "^4.17.1",
     "gdprofiles": "^1.0.2-rc.2",

@@ -11,10 +11,10 @@ module.exports = async (bot) => {
                     const evt = require(`../events/${dir}/${file}`);
                     let eName = evt.config.event;
                     bot.on(eName, evt.bind(null, bot));
-                    bot.log(`${dir}   \t|\t${file}`);
+                    bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
-                    bot.log(`${dir}   \t|\t${file} ERROR!`)
-                    bot.log(err.message);
+                    bot.log(`${dir}   \t|\t${file} ERROR!`.error)
+                    bot.log(err.message.error);
                 }
             })
         }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
