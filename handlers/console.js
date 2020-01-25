@@ -21,18 +21,29 @@ module.exports = async (bot) => {
         
         if(!args[0]) return;
 
-        let command = args[0];
+        let command = args[0].toLowerCase();
 
-        args.slice(1)
+        args = args.slice(1)
 
         let cmd = bot.console.get(command) || bot.console.get(bot.consoleali.get(command));
 
         if(cmd){
-            if(cmd.run){
-                cmd.run(bot,args);
-            }else{
-                console.log("RUN not found".error)
-            }
+            cmd.run(bot,args)
+            .then(() => {
+                if(bot.cache.console.debug){
+                    console.log(`Command ${command.toUpperCase()} runned successfully!`.success)
+                }
+            })
+            .catch(err => {
+                if(err){
+                    if(err.message){
+                        err = err.message
+                    }
+                    console.log(err.replace('[EXPECTED] ','').trim().error)
+                }else{
+                    console.log("Unexpected error happend".error)
+                }
+            })
         }else{
             console.log(`Command ${command.toUpperCase()} not found`.error)
         }

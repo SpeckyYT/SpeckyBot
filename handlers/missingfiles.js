@@ -9,7 +9,7 @@ module.exports = async () => {
             appendFileSync(`./${file}_settings.json`,'{}')
         }
     });
-    ["textchannelcons.txt","commands.log"].forEach(file => {
+    ["commands.log"].forEach(file => {
         if (!existsSync(`./${file}`)) {
             appendFileSync(`./${file}`,'')
         }

@@ -8,6 +8,8 @@ module.exports = async (bot) => {
 
     bot.cache = {};
     bot.cache.lastImage = {};
+    bot.cache.console = {};
+    bot.cache.console.debug = false;
 
     bot.snowflake = require('node-snowflake').Snowflake.nextId;
 
