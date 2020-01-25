@@ -1,6 +1,6 @@
 module.exports = {
     name: 'sendmessage',
-    aliases: ['say','send']
+    aliases: ['say','send','s','>','<']
 }
 
 module.exports.run = async (bot, args) => {

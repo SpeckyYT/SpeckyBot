@@ -17,13 +17,24 @@ module.exports = async (bot) => {
 
 
     process.openStdin().addListener("data", res => {
-        let args = res.toString().split(/\s/g).clean();
+        let oargs = res.toString().split(/\s/g).clean();
         
-        if(!args[0]) return;
+        if(!oargs[0]) return;
 
-        let command = args[0].toLowerCase();
+        let regex = /^[^0-9a-zA-Z]+/g
 
-        args = args.slice(1)
+        let matches = oargs[0].match(regex)
+
+        if(matches){
+            oargs[0] = oargs[0].slice(matches[0].length)
+            oargs.unshift(matches[0])
+        }
+
+        oargs = oargs.clean();
+
+        let command = oargs[0].toLowerCase();
+
+        args = oargs.slice(1);
 
         let cmd = bot.console.get(command) || bot.console.get(bot.consoleali.get(command));
 
@@ -45,7 +56,13 @@ module.exports = async (bot) => {
                 }
             })
         }else{
-            console.log(`Command ${command.toUpperCase()} not found`.error)
+            let search = bot.console.get('searchchannel');
+            
+            search.run(bot,oargs)
+            .then(() => {console.log(`Channel/member changed to ${oargs[0]}`.info)})
+            .catch(() => {
+                console.log(`Command ${command.toUpperCase()} not found`.error)
+            })
         }
     });
 }

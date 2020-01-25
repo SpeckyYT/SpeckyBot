@@ -9,6 +9,7 @@ module.exports = async (bot) => {
         for(var i = 0; i < 25; i++){
             console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`.error)
         }
+        process.exit(807)
     })
 
     bot.log(`Bot prefix: ${prefix}`.startupinfo);
