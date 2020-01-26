@@ -6,9 +6,10 @@ module.exports = async (bot) => {
         bot.log(`Logged as ${bot.user.tag}!`.data)
     })
     .catch(() => {
-        for(var i = 0; i < 25; i++){
-            console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`)
-        }
+        Array(26).forEach(() => {
+            console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`.error)
+        })
+        process.exit(0)
     })
 
     bot.log(`Bot prefix: ${prefix}`.data);
