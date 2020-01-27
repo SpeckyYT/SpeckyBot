@@ -1,3 +1,12 @@
+module.exports = {
+    name: "charcounter",
+	description: "Here you can grab some info from your sentences!",
+    usage: `<sentence/word/emotes>`,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["cc","ccounter","sentencestats"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -11,13 +20,4 @@ module.exports.run = async (bot, msg) => {
     //.addField("Sentences", `${words.split(". ").lenght + words.split("! ").length + words.split("? ").length + words.split("‽ ").length - 4}`)
     .addField("Whitespaces", `${Args.length}`)
     msg.channel.send(embed)
-}
-
-module.exports.config = {
-    name: "charcounter",
-	description: "Here you can grab some info from your sentences!",
-    usage: `<sentence/word/emotes>`,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["cc","ccounter","sentencestats"]
 }

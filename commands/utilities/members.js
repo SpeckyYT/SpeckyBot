@@ -1,4 +1,12 @@
-const { RichEmbed } = require('discord.js')
+module.exports = {
+	name: "members",
+	description: "Gives you the active/inactive members list!",
+    usage: ``,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["servermembers","allmembers"]
+}
+
 const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
 
 module.exports.run = async (bot, msg) => {
@@ -20,13 +28,4 @@ module.exports.run = async (bot, msg) => {
     let { Eonline, Eidle, Ednd, Eoffline } = emotes;
 
     membersEmbed("Members",msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]])
-}
-
-module.exports.config = {
-	name: "members",
-	description: "Gives you the active/inactive members list!",
-    usage: ``,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["servermembers","allmembers"]
 }

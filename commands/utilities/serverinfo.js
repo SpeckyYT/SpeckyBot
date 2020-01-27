@@ -1,3 +1,12 @@
+module.exports = {
+	name: "serverinfo",
+	description: "Informations about the server you're in!",
+	usage: ``,
+	category: `utilities`,
+	accessableby: "Members",
+    aliases: ["si","serveri"]
+}
+
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
@@ -29,13 +38,4 @@ module.exports.run = async (bot, msg) => {
 		.addField("Is the server large?", `${msg.guild.large}`)
 		.addField("Created at", `${msg.guild.createdAt}`);
 	msg.channel.send(embed);
-}
-
-module.exports.config = {
-	name: "serverinfo",
-	description: "Informations about the server you're in!",
-	usage: ``,
-	category: `utilities`,
-	accessableby: "Members",
-    aliases: ["si","serveri"]
 }

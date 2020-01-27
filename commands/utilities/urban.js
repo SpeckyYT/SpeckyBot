@@ -1,3 +1,12 @@
+module.exports = {
+    name: "urban",
+    description: "Gives you informations about a word you don't know!",
+    usage: `[random] <query>`,
+    category: `utilities`,
+    accessableby: "Members",
+    aliases: ["urba","urb","ud","urbandictionary","dictionary"]
+}
+
 const urban = require("urban");
 const { RichEmbed } = require("discord.js");
 
@@ -30,14 +39,4 @@ module.exports.run = async (bot, msg) => {
         console.log(e)
         return msg.channel.send("looks like i've broken! Try again")
     }
-}
-
-
-module.exports.config = {
-    name: "urban",
-    description: "Gives you informations about a word you don't know!",
-    usage: `[random] <query>`,
-    category: `utilities`,
-    accessableby: "Members",
-    aliases: ["urba","urb","ud","urbandictionary","dictionary"]
 }

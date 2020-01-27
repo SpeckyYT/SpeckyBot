@@ -1,3 +1,12 @@
+module.exports = {
+    name: "choose",
+	description: "Bot will choose a random option from your text!",
+    usage: `<option 1> | <option 2> | <option 3> | <etc>`,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: []
+}
+
 module.exports.run = async (bot, msg) => {
     let { Args } = msg;
     let options = Args.join(" ").split('|');
@@ -9,13 +18,4 @@ module.exports.run = async (bot, msg) => {
     }else{
         msg.channel.send(`I'll choose: \`${option.trim() ? option.trim() : ` `}\``)
     }
-}
-
-module.exports.config = {
-    name: "choose",
-	description: "Bot will choose a random option from your text!",
-    usage: `<option 1> | <option 2> | <option 3> | <etc>`,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: []
 }

@@ -1,3 +1,12 @@
+module.exports = {
+    name: "usersettings",
+	description: "What about customization?",
+    usage: `<setting> <values>`,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["us","usersetting"]
+}
+
 const dir = '../../../u_settings';
 const { writeFile } = require('fs');
 
@@ -29,13 +38,4 @@ module.exports.run = async (bot, msg) => {
             msg.channel.send("You have to define a setting to edit.\n\n\n\nChange Message to Embed color: `sb!ss ec <HEX COLOR>`")
 
     }
-};
-
-module.exports.config = {
-    name: "usersettings",
-	description: "What about customization?",
-    usage: `<setting> <values>`,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["us","usersetting"]
 }

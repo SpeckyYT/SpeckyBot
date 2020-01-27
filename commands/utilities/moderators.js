@@ -1,3 +1,12 @@
+module.exports = {
+	name: "moderators",
+	description: "Gives you the active/inactive moderators list!",
+    usage: ``,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["moderator","mods"]
+}
+
 const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
 
 module.exports.run = async (bot, msg) => {
@@ -21,13 +30,4 @@ module.exports.run = async (bot, msg) => {
     let { Eonline, Eidle, Ednd, Eoffline } = emotes;
 
     membersEmbed("Mods", msg, [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]])
-}
-
-module.exports.config = {
-	name: "moderators",
-	description: "Gives you the active/inactive moderators list!",
-    usage: ``,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["moderator","mods"]
 }
