@@ -1,6 +1,8 @@
 const { Collection } = require("discord.js");
 
 module.exports = async (bot) => {
+    bot.setMaxListeners(25);
+    
     bot.stats = {};
     bot.stats.commandsExecuted = 0;
     bot.stats.slots = 0;

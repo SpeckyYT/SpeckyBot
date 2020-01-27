@@ -1,7 +1,6 @@
 const { readdirSync } = require("fs")
 
 module.exports = async (bot) => {
-    bot.setMaxListeners(25);
     bot.removeAllListeners();
     ["client", "custom", "guild","private"].forEach(async dir => {    
         try{
