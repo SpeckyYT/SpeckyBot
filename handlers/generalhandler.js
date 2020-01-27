@@ -10,7 +10,7 @@ module.exports = async () => {
     require('./dependencies')();
     require('./missingdirectories')();
     require('./missingfiles')();
-    require('./login')(bot);
     require('./botloader')(bot);
+    require('./login')(bot);
     require('./website')(bot);
 }

@@ -7,11 +7,16 @@ module.exports = () => {
         verbose: 'cyan',
         prompt: 'grey',
         info: 'green',
-        data: 'grey',
+        data: 'blue',
         help: 'cyan',
         warn: 'yellow',
         debug: 'blue',
         error: 'red',
-        cmd: 'magenta'
+        cmd: 'magenta',
+        success: 'green',
+        startupinfo: 'grey',
+        fail: 'red',
+        failed: 'red',
+        fatal: ['black','bgRed']
     })
 }

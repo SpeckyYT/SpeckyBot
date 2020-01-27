@@ -1,16 +1,18 @@
 module.exports = async (bot) => {
-    const { token, prefix } = require('../config.json')
+    const { token, prefix } = bot.config;
         
     await bot.login(token)
     .then(() => {
-        bot.log(`Logged as ${bot.user.tag}!`.data)
+        bot.log(`Logged as ${bot.user.tag}!`.startupinfo)
     })
     .catch(() => {
         Array(26).forEach(() => {
             console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`.error)
         })
-        process.exit(0)
+        if(token == "TOKEN_HERE"){
+            process.exit(0)
+        }
     })
 
-    bot.log(`Bot prefix: ${prefix}`.data);
+    bot.log(`Bot prefix: ${prefix}`.startupinfo);
 }

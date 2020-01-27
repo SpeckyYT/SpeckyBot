@@ -1,5 +1,4 @@
 const { Collection } = require("discord.js");
-const config = require('../config.json')
 
 module.exports = async (bot) => {
     bot.stats = {};
@@ -8,16 +7,18 @@ module.exports = async (bot) => {
 
     bot.cache = {};
     bot.cache.lastImage = {};
+    bot.cache.console = {};
+    bot.cache.console.debug = false;
 
     bot.snowflake = require('node-snowflake').Snowflake.nextId;
 
     bot.debugN = 0;
 
-    bot.config = config;
+    bot.config = require('../config.json');
 
     require('./botfunctions')(bot);
 
-    ["commands","aliases"].forEach(async x => 
+    ["commands","aliases","console","consoleali"].forEach(async x => 
         bot[x] = new Collection()
     );
 
