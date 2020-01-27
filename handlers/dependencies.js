@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = async () => {
     require('more-array-methods')();
 
     require('colors').setTheme({

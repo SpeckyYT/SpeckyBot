@@ -2,7 +2,7 @@ const { readdirSync } = require("fs")
 
 module.exports = (bot) => {
     delete require.cache;
-    let load = async dir => {
+    ["owner", "admin", "utilities", "games", "misc", "music", "sfw", "nsfw", "images", "private", "custom"].forEach(async dir => {
         try{
             let commands = readdirSync(`./commands/${dir}/`).filter(d => d.endsWith('.js'));
             commands.forEach(async file => {
@@ -18,7 +18,6 @@ module.exports = (bot) => {
                 }
             })
         }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
-    }
-    ["owner", "admin", "utilities", "games", "misc", "music", "sfw", "nsfw", "images", "private", "custom"].forEach(x => load(x));
+    })
     bot.log();
 };

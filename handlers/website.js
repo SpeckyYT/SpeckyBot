@@ -3,7 +3,7 @@ const app = express()
 
 const { readFile } = require('fs')
 
-module.exports = (bot) => {
+module.exports = async (bot) => {
     app.set('port', 3000)
 
     app.get('/log', function (req, res) {

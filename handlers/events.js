@@ -3,7 +3,7 @@ const { readdirSync } = require("fs")
 module.exports = async (bot) => {
     bot.setMaxListeners(25);
     bot.removeAllListeners();
-    const load = dir => {    
+    ["client", "custom", "guild","private"].forEach(async dir => {    
         try{
             const events = readdirSync(`./events/${dir}/`).filter(d => d.endsWith('.js'));
             events.forEach(async file => {
@@ -18,7 +18,6 @@ module.exports = async (bot) => {
                 }
             })
         }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
-    };
-    ["client", "custom", "guild","private"].forEach(x => load(x));
+    })
     bot.log();
 };
