@@ -1,3 +1,12 @@
+module.exports = {
+    name: "mee6",
+	description: "Gives informations from MEE6's leaderboard!",
+    usage: `<"server / roles / xp"> <serverID> [userID]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["status","st"]
+}
+
 const fetch = require('node-fetch')
 const { RichEmbed } = require('discord.js')
 
@@ -14,13 +23,4 @@ module.exports.run = async (bot, msg) => {
             });
             msg.channel.send(embed, {split: ''})
         })
-}
-
-module.exports.config = {
-    name: "mee6",
-	description: "Gives informations from MEE6's leaderboard!",
-    usage: `<"server / roles / xp"> <serverID> [userID]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["status","st"]
 }

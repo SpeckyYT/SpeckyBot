@@ -1,3 +1,12 @@
+module.exports = {
+    name: "inftest",
+	description: "These were the C++ exams in SpeckyYT's class (Written in JavaScript)!\nTest #1: 06/11/2019",
+    usage: `[exam number] <depends from exam>`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["it"]
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     switch(args[0]){
@@ -15,14 +24,3 @@ module.exports.run = async (bot, msg) => {
             msg.channel.send("You have to define which test you want to see [1]")
     }
 }
-
-module.exports.config = {
-    name: "inftest",
-	description: "These were the C++ exams in SpeckyYT's class (Written in JavaScript)!\nTest #1: 06/11/2019",
-    usage: `[exam number] <depends from exam>`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["it"]
-}
-
-

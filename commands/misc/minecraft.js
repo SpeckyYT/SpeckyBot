@@ -1,3 +1,12 @@
+module.exports = {
+    name: "minecraft",
+	description: "Gives some informations of a Minecraft Server!",
+    usage: `<Server IP> [Server Port]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["minecraftserver","mcs","ms","mineserver"]
+}
+
 const { RichEmbed } = require("discord.js");
 const fetch = require('node-fetch');
 
@@ -34,13 +43,4 @@ module.exports.run = async (bot, msg) => {
             msg.channel.send("An error occurred (server doesn't exist or wrong port)")
         }
     });
-}
-
-module.exports.config = {
-    name: "minecraft",
-	description: "Gives some informations of a Minecraft Server!",
-    usage: `<Server IP> [Server Port]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["minecraftserver","mcs","ms","mineserver"]
 }

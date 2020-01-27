@@ -1,3 +1,12 @@
+module.exports = {
+    name: "snowflake",
+	description: "Converts an ID into a timestamp!",
+    usage: `[ID]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ['sf','id']
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -49,13 +58,4 @@ module.exports.run = async (bot, msg) => {
     }
 
     await msg.channel.send(embed).catch()
-}
-
-module.exports.config = {
-    name: "snowflake",
-	description: "Converts an ID into a timestamp!",
-    usage: `[ID]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ['sf','id']
 }
