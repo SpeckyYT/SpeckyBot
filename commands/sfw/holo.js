@@ -1,3 +1,12 @@
+module.exports = {
+    name: "holo",
+	description: "Gives you a holo!",
+    usage: ``,
+    category: `sfw`,
+	accessableby: "Members",
+    aliases: ['kemo']
+}
+
 const Math = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
@@ -12,11 +21,3 @@ module.exports.run = async (bot, msg) => {
     }
 }
 
-module.exports.config = {
-    name: "holo",
-	description: "Gives you a holo!",
-    usage: ``,
-    category: `sfw`,
-	accessableby: "Members",
-    aliases: ['kemo']
-}
