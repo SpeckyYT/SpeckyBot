@@ -2,12 +2,13 @@ const { readdirSync } = require("fs")
 
 module.exports = (bot) => {
     delete require.cache;
-    let load = dir => {
+    let load = async dir => {
         try{
             let commands = readdirSync(`./commands/${dir}/`).filter(d => d.endsWith('.js'));
             commands.forEach(async file => {
                 try{
                     let pull = require(`../commands/${dir}/${file}`);
+                    if(!pull.name) throw {message: error = "Name of the command not found!".toUpperCase()};
                     bot.commands.set(pull.name, pull);
                     if (pull.aliases) pull.aliases.forEach(a => bot.aliases.set(a, pull.name));
                     bot.log(`${dir}     \t|\t${file}`.debug);

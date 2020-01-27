@@ -1,4 +1,4 @@
-module.exports.config = {
+module.exports = {
     name: "poke",
 	description: "Gives you a poke!",
     usage: ``,
