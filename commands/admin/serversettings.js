@@ -1,3 +1,13 @@
+module.exports = {
+    name: "serversettings",
+	description: "You can edit any serversettings!",
+    usage: `<feature> <depends from feature>`,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["ss","serversetting","servset","serverset","serversets"],
+    perms: ['MANAGE_MESSAGES']
+}
+
 const { RichEmbed } = require('discord.js')
 const { writeFile } = require("fs");
 const dir = '../../s_settings.json'
@@ -129,14 +139,4 @@ module.exports.run = async (bot, msg) => {
             msg.channel.send(cEmbed);
         break
     }
-}
-
-module.exports.config = {
-    name: "serversettings",
-	description: "You can edit any serversettings!",
-    usage: `<feature> <depends from feature>`,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["ss","serversetting","servset","serverset","serversets"],
-    perms: ['MANAGE_MESSAGES']
 }

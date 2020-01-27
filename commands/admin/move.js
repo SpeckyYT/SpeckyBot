@@ -1,3 +1,14 @@
+module.exports = {
+    name: "move",
+	description: "Moves all users from one VC to another one!",
+    usage: ``,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["moveuser","moveu","mu","mov"],
+    perms: ['MOVE_MEMBERS'],
+    cmdperms: ['MOVE_MEMBERS']
+}
+
 module.exports.run = async (bot, msg) => {
     if(!msg.member.voiceChannel){return msg.channel.send("You aren't in a Voice Channel.")}
     
@@ -18,15 +29,4 @@ module.exports.run = async (bot, msg) => {
 
             })
         })
-}
-
-module.exports.config = {
-    name: "move",
-	description: "Moves all users from one VC to another one!",
-    usage: ``,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["moveuser","moveu","mu","mov"],
-    perms: ['MOVE_MEMBERS'],
-    cmdperms: ['MOVE_MEMBERS']
 }

@@ -1,3 +1,14 @@
+module.exports = {
+    name: "cloneroles",
+	description: "Clones the roles from one user to another one!",
+    usage: `<userMention> <userMention>`,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["cr"],
+    perms: ['MANAGE_ROLES'],
+    cmdperms: ['MANAGE_ROLES']
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     if(!args[1]){
@@ -33,15 +44,4 @@ module.exports.run = async (bot, msg) => {
             await memb2.removeRole(role.id).catch(e => {})
         }
     })
-}
-
-module.exports.config = {
-    name: "cloneroles",
-	description: "Clones the roles from one user to another one!",
-    usage: `<userMention> <userMention>`,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["cr"],
-    perms: ['MANAGE_ROLES'],
-    cmdperms: ['MANAGE_ROLES']
 }

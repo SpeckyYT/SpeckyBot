@@ -1,3 +1,14 @@
+module.exports = {
+    name: "purge",
+	description: "Deletes a TON of messages for you!",
+    usage: `<message quantity>`,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: [],
+    perms: ['MANAGE_MESSAGES'],
+    cmdperms: ['MANAGE_MESSAGES']
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     if(!args[0] || isNaN(args[0])){
@@ -30,15 +41,4 @@ module.exports.run = async (bot, msg) => {
     msg.channel.send("Finished purging!")
     .then(ms => ms.delete(5000))
     .catch();
-}
-
-module.exports.config = {
-    name: "purge",
-	description: "Deletes a TON of messages for you!",
-    usage: `<message quantity>`,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: [],
-    perms: ['MANAGE_MESSAGES'],
-    cmdperms: ['MANAGE_MESSAGES']
 }

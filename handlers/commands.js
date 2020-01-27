@@ -8,8 +8,8 @@ module.exports = (bot) => {
             commands.forEach(async file => {
                 try{
                     let pull = require(`../commands/${dir}/${file}`);
-                    bot.commands.set(pull.config.name, pull);
-                    if (pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
+                    bot.commands.set(pull.name, pull);
+                    if (pull.aliases) pull.aliases.forEach(a => bot.aliases.set(a, pull.name));
                     bot.log(`${dir}     \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}     \t|\t${file} ERROR!`.error);

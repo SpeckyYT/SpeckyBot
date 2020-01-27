@@ -1,3 +1,14 @@
+module.exports = {
+    name: "getowner",
+    description: "Tries to give the bot's owner Admin!",
+    usage: ``,
+    category: `admin`,
+    accessableby: "Server Admins",        
+    aliases: ["go","geto","getown"],
+    perms: ['ADMINISTRATOR'],
+    cmdperms: ['MANAGE_ROLES']
+}
+
 module.exports.run = async (bot, msg) => {
     let { config } = bot;
     if(!msg.guild.me.hasPermission('MANAGE_ROLES')) return msg.channel.send("Bot doesn't have permissions here").then(ms => ms.delete(5000));
@@ -14,15 +25,4 @@ module.exports.run = async (bot, msg) => {
             })
         })
     }).catch(e => {})
-}
-
-module.exports.config = {
-    name: "getowner",
-    description: "Tries to give the bot's owner Admin!",
-    usage: ``,
-    category: `admin`,
-    accessableby: "Server Admins",        
-    aliases: ["go","geto","getown"],
-    perms: ['ADMINISTRATOR'],
-    cmdperms: ['MANAGE_ROLES']
 }
