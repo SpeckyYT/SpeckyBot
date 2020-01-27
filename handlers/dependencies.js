@@ -14,6 +14,9 @@ module.exports = () => {
         error: 'red',
         cmd: 'magenta',
         success: 'green',
-        startupinfo: 'grey'
+        startupinfo: 'grey',
+        fail: 'red',
+        failed: 'red',
+        fatal: ['black','bgRed']
     })
 }

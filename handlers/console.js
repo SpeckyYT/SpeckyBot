@@ -59,7 +59,9 @@ module.exports = async (bot) => {
             let search = bot.console.get('searchchannel');
             
             search.run(bot,oargs)
-            .then(() => {console.log(`Channel/member changed to ${oargs[0]}`.info)})
+            .then(() => {
+                console.log(`Channel/member changed to ${oargs[0]}`.info)
+            })
             .catch(() => {
                 console.log(`Command ${command.toUpperCase()} not found`.error)
             })

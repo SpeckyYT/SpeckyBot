@@ -1,5 +1,4 @@
 const { Collection } = require("discord.js");
-const config = require('../config.json')
 
 module.exports = async (bot) => {
     bot.stats = {};
@@ -15,7 +14,7 @@ module.exports = async (bot) => {
 
     bot.debugN = 0;
 
-    bot.config = config;
+    bot.config = require('../config.json');
 
     require('./botfunctions')(bot);
 
