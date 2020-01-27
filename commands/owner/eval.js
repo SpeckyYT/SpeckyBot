@@ -1,3 +1,12 @@
+module.exports = {
+    name: "eval",
+    description: "Runs custom code directly from Discord!",
+    usage: `<code in js>`,
+    category: `owner`,
+    accessableby: "Bot Owner",        
+    aliases: ["evaluate"],
+}
+
 const { inspect } = require("util")
 
 module.exports.run = async (bot, msg) => {
@@ -15,14 +24,4 @@ module.exports.run = async (bot, msg) => {
     } else {
         return msg.channel.send(`\`\`\`js\n${evaluated}\n\`\`\``, { maxLength: 1900 })
     }
-}
-
-
-module.exports.config = {
-        name: "eval",
-        description: "Runs custom code directly from Discord!",
-        usage: `<code in js>`,
-        category: `owner`,
-        accessableby: "Bot Owner",        
-        aliases: ["evaluate"],
 }

@@ -1,3 +1,12 @@
+module.exports = {
+    name: "shutdown",
+	description: "Shuts the bot down!",
+    usage: ``,
+    category: `owner`,
+	accessableby: "Bot Owner",
+    aliases: ["quit","exit","die","kill","reboot"]
+}
+
 module.exports.run = async (bot, msg) => {
     try{
         await msg.channel.send("Bot is shutting down!")
@@ -8,13 +17,4 @@ module.exports.run = async (bot, msg) => {
     }catch(e){
         msg.channel.send("An error occourred");
     }
-}
-
-module.exports.config = {
-    name: "shutdown",
-	description: "Shuts the bot down!",
-    usage: ``,
-    category: `owner`,
-	accessableby: "Bot Owner",
-    aliases: ["quit","exit","die","kill","reboot"]
 }
