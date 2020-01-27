@@ -6,9 +6,9 @@ module.exports = async (bot) => {
         bot.log(`Logged as ${bot.user.tag}!`.startupinfo)
     })
     .catch(() => {
-        for(var i = 0; i < 25; i++){
+        Array(26).forEach(() => {
             console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`.error)
-        }
+        })
         if(token == "TOKEN_HERE"){
             process.exit(0)
         }
