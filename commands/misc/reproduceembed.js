@@ -1,3 +1,12 @@
+module.exports = {
+    name: "reproduceembed",
+	description: "Reproduces an existing embed",
+    usage: `#[Channel] [MessageID]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["remb","repemb"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -15,13 +24,4 @@ module.exports.run = async (bot, msg) => {
             }
         })
     })
-}
-
-module.exports.config = {
-    name: "reproduceembed",
-	description: "Reproduces an existing embed",
-    usage: `#[Channel] [MessageID]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["remb","repemb"]
 }

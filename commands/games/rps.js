@@ -1,3 +1,12 @@
+module.exports = {
+    name: "rps",
+	description: "Lets you play Rock Paper Scissors with the bot!",
+    usage: `<handsign>`,
+    category: `games`,
+	accessableby: "Members",
+    aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
+}
+
 const { int } = require('random');
 
 module.exports.run = async (bot, msg) => {
@@ -69,13 +78,4 @@ module.exports.run = async (bot, msg) => {
     }else {
         msg.channel.send("An error occurred")
     }
-}
-
-module.exports.config = {
-    name: "rps",
-	description: "Lets you play Rock Paper Scissors with the bot!",
-    usage: `<handsign>`,
-    category: `games`,
-	accessableby: "Members",
-    aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }

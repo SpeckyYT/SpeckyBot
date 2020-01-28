@@ -1,3 +1,14 @@
+module.exports = {
+    name: "flop",
+	description: "Flips the image! (Vertically)",
+    usage: ``,
+    category: `images`,
+	accessableby: "Members",
+    aliases: [],
+    perms: [],
+    cmdperms: []
+}
+
 const { read } = require('jimp')
 const { unlink } = require('fs')
 
@@ -24,15 +35,4 @@ module.exports.run = async (bot, msg) => {
             })
         })
     })
-}
-
-module.exports.config = {
-    name: "flop",
-	description: "Flips the image! (Vertically)",
-    usage: ``,
-    category: `images`,
-	accessableby: "Members",
-    aliases: [],
-    perms: [],
-    cmdperms: []
 }

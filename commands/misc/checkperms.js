@@ -1,3 +1,12 @@
+module.exports = {
+    name: "checkperms",
+	description: "Checks the permissions of the user in a specific channel!",
+    usage: `@[User] #[Channel]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["checkpermissions","checkp","cp"]
+}
+
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
@@ -21,13 +30,4 @@ module.exports.run = async (bot, msg) => {
     .addField(`Permissions:`, `\`\`\`${member.permissionsIn(channel).toArray().join('\n')}\`\`\``)
 
     msg.channel.send(cEmbed);
-}
-
-module.exports.config = {
-    name: "checkperms",
-	description: "Checks the permissions of the user in a specific channel!",
-    usage: `@[User] #[Channel]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["checkpermissions","checkp","cp"]
 }

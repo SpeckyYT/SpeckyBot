@@ -1,7 +1,16 @@
+module.exports = {
+    name: "reload",
+	description: "The bot will reload a specific handler!",
+    usage: `<handler>`,
+    category: `owner`,
+	accessableby: "Bot Owner",
+    aliases: ["rld","rl"]
+}
+
 const { now } = require('microseconds');
 const { Collection } = require("discord.js");
-const nodegit = require('nodegit');
-const path = require("path");
+//const nodegit = require('nodegit');
+//const path = require("path");
 
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
@@ -89,13 +98,4 @@ module.exports.run = async (bot, msg) => {
     const diff = end - begin;
     msg.channel.send(`**${args[0]}** got reloaded! (${parseFloat(diff/1000).toFixed(3)}ms)`).then(ms => ms.delete(10000)).catch()
     msg.delete(5000)
-}
-
-module.exports.config = {
-    name: "reload",
-	description: "The bot will reload a specific handler!",
-    usage: `<handler>`,
-    category: `owner`,
-	accessableby: "Bot Owner",
-    aliases: ["rld","rl"]
 }

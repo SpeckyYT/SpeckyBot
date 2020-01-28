@@ -1,3 +1,12 @@
+module.exports = {
+    name: "avatar",
+	description: "Wanna see your profile picture?",
+    usage: `[@user]`,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["a","ava"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -25,13 +34,4 @@ module.exports.run = async (bot, msg) => {
         .setImage(user.avatarURL)
         .setDescription(`[Link](${user.avatarURL})`)
     )
-}
-
-module.exports.config = {
-    name: "avatar",
-	description: "Wanna see your profile picture?",
-    usage: `[@user]`,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["a","ava"]
 }

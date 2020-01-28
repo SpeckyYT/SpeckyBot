@@ -1,7 +1,11 @@
+module.exports = {
+    event: "guildMemberAdd"
+}
+
 //server limiter
 const limited = ["265505748413448193"]
 
-module.exports = async (bot, member) => {
+module.exports.call = async (bot, member) => {
     //server limiter
     if(!limited.includes(member.guild.id)) return;
 
@@ -19,8 +23,3 @@ module.exports = async (bot, member) => {
         }catch{}
     },7500)
 }
-
-module.exports.config = {
-    event: "guildMemberAdd"
-}
-

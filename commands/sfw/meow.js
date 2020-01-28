@@ -1,12 +1,12 @@
-module.exports.run = async (bot, msg) => {
-    require('./functions/img')('meow', msg);
-}
-
-module.exports.config = {
+module.exports = {
     name: "meow",
 	description: "Gives you a cat!",
     usage: ``,
     category: `sfw`,
 	accessableby: "Members",
     aliases: ["miao","miau","miu","miav","meu","mjaullin","miauw","miaou","miar","mjao","mjaw","mijav","miob","meo","myau"]
+}
+
+module.exports.run = async (bot, msg) => {
+    require('./functions/img')('meow', msg);
 }

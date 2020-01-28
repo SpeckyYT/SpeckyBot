@@ -1,3 +1,12 @@
+module.exports = {
+    name: "trivia",
+	description: "A random trivia question from the internet!",
+    usage: ``,
+    category: `games`,
+	accessableby: "Members",
+    aliases: ["trivi", "triv"]
+}
+
 const fetch = require('node-fetch');
 const { RichEmbed } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity')
@@ -59,13 +68,4 @@ module.exports.run = async (bot, msg) => {
             })
         }
     })
-}
-
-module.exports.config = {
-    name: "trivia",
-	description: "A random trivia question from the internet!",
-    usage: ``,
-    category: `games`,
-	accessableby: "Members",
-    aliases: ["trivi", "triv"]
 }

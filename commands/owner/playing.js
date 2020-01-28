@@ -1,3 +1,12 @@
+module.exports = {
+    name: "playing",
+	description: "Some stuff for the bot's presence",
+    usage: `<Playing> <Game>`,
+    category: `owner`,
+	accessableby: "Bot Owner",
+    aliases: ["presence","game"]
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     const playing = args[0];
@@ -7,13 +16,4 @@ module.exports.run = async (bot, msg) => {
     }catch(e){
         msg.channel.send("An error occurred");
     }
-};
-
-module.exports.config = {
-    name: "playing",
-	description: "Some stuff for the bot's presence",
-    usage: `<Playing> <Game>`,
-    category: `owner`,
-	accessableby: "Bot Owner",
-    aliases: ["presence","game"]
 }

@@ -1,3 +1,12 @@
+module.exports = {
+    name: "hack",
+	description: "Hacks your server!",
+    usage: ``,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["hacked"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -11,22 +20,12 @@ module.exports.run = async (bot, msg) => {
     await msg.channel.send(`\`\`\`json\n{\n\t${rand()}\n\t${rand()}\n\t${rand()}\n\t${rand()}\n\t${rand()}\n}\`\`\``)
     .then(async ms => {
         for(let i = 0; i < 4; i++){
-            await bot.delay(400);
+            await bot.delay(1500);
             ms.edit(`\`\`\`json\n{\n\t${rand()}\n\t${rand()}\n\t${rand()}\n\t${rand()}\n\t${rand()}\n}\`\`\``);
         }
-        await bot.delay(1000);
+        await bot.delay(2500);
         await ms.delete();
     }).then(() => {
         msg.channel.send(new RichEmbed().setTitle("YOU HAVE BEEN HACKED!").setColor("#FF0000"))
     })
 }
-
-module.exports.config = {
-    name: "hack",
-	description: "Hacks your server!",
-    usage: ``,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["hacked"]
-}
-

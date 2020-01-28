@@ -1,3 +1,12 @@
+module.exports = {
+    name: "tts",
+	description: "Makes the bot say things!",
+    usage: `<lang (en/it/...)> <text>`,
+    category: `owner`,
+	accessableby: "Bot Owner",
+    aliases: ["texttospeach"]
+}
+
 const { play } = require('play-tts')
 
 module.exports.run = async (bot, msg) => {
@@ -9,13 +18,4 @@ module.exports.run = async (bot, msg) => {
     }catch(e){
         msg.channel.send(`Language \`${lang}\` is not supported,`)
     }
-}
-
-module.exports.config = {
-    name: "tts",
-	description: "Makes the bot say things!",
-    usage: `<lang (en/it/...)> <text>`,
-    category: `owner`,
-	accessableby: "Bot Owner",
-    aliases: ["texttospeach"]
 }

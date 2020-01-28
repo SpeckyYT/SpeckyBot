@@ -1,8 +1,4 @@
-module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'rotate',true,[0,0,0],"png")
-}
-
-module.exports.config = {
+module.exports = {
     name: "rotate",
 	description: "Rotates the image!",
     usage: `[Amount (0-360)]`,
@@ -11,4 +7,8 @@ module.exports.config = {
     aliases: [],
     perms: [],
     cmdperms: []
+}
+
+module.exports.run = async (bot, msg) => {
+    require('./functions/methods')(bot, msg,'rotate',true,[0,0,0],"png")
 }

@@ -1,6 +1,10 @@
+module.exports = {
+    event: "messageDelete"
+}
+
 const { RichEmbed } = require('discord.js')
 
-module.exports = async (bot, msg) => {
+module.exports.call = async (bot, msg) => {
     if(msg.author.bot) return;
     if(msg.mentions.members.first()){
         msg.mentions.members.forEach(member => {
@@ -17,8 +21,4 @@ module.exports = async (bot, msg) => {
             }
         })
     }
-}
-
-module.exports.config = {
-    event: "messageDelete"
 }

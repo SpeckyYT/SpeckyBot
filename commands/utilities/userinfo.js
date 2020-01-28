@@ -1,3 +1,12 @@
+module.exports = {
+	name: "userinfo",
+	description: "Informations about the channel you're chatting in!",
+	usage: ``,
+	category: `utilities`,
+	accessableby: "Members",
+    aliases: ["ui","useri","usinfo"]
+}
+
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
@@ -12,13 +21,4 @@ module.exports.run = async (bot, msg) => {
 		.addField("Last message", `${msg.author.lastMessage}`)
 		.addField("Created at", `${msg.author.createdAt}`);
 	msg.channel.send(embed);
-}
-
-module.exports.config = {
-	name: "userinfo",
-	description: "Informations about the channel you're chatting in!",
-	usage: ``,
-	category: `utilities`,
-	accessableby: "Members",
-    aliases: ["ui","useri","usinfo"]
 }

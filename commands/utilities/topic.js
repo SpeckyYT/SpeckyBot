@@ -1,3 +1,12 @@
+module.exports = {
+    name: "topic",
+    description: "Gives you a random question to trigger a discussion!",
+    usage: ``,
+    category: `utilities`,
+    accessableby: "Members",
+    aliases: ["bruh"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 let questions = [
@@ -37,14 +46,4 @@ module.exports.run = async (bot, msg) => {
             .setTimestamp(msg.member.joinedTimestamp)
         )
     }
-}
-
-
-module.exports.config = {
-    name: "topic",
-    description: "Gives you a random question to trigger a discussion!",
-    usage: ``,
-    category: `utilities`,
-    accessableby: "Members",
-    aliases: ["bruh"]
 }

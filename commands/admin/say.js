@@ -1,3 +1,13 @@
+module.exports = {
+    name: "say",
+	description: "Lets the bot say something for you!",
+    usage: `<text> [#channel] [--emb/--sneak]`,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["send","announcement"],
+    perms: ['MANAGE_MESSAGES']
+}
+
 const { RichEmbed } = require('discord.js');
 const { randomInt } = require('mathjs')
 
@@ -49,14 +59,4 @@ module.exports.run = async (bot, msg) => {
     }
     if(!res) return msg.channel.send("Message is too short.")
     channel.send(res)
-}
-
-module.exports.config = {
-    name: "say",
-	description: "Lets the bot say something for you!",
-    usage: `<text> [#channel] [--emb/--sneak]`,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["announcement"],
-    perms: ['MANAGE_MESSAGES']
 }

@@ -1,3 +1,12 @@
+module.exports = {
+    name: "whohasrole",
+	description: "Returns all users that has this role!",
+    usage: `[roleID]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["whr"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -17,13 +26,4 @@ module.exports.run = async (bot, msg) => {
     }else{
         return bot.cmdError("ID is not a valid snowflake")
     }
-}
-
-module.exports.config = {
-    name: "whohasrole",
-	description: "Returns all users that has this role!",
-    usage: `[roleID]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["whr"]
 }

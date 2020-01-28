@@ -1,3 +1,12 @@
+module.exports = {
+	name: "id2member",
+	description: "Converts a user id to the username and discriminator.",
+	usage: `<userid>`,
+	category: `utilities`,
+	accessableby: "Members",
+    aliases: ["i2m"]
+}
+
 module.exports.run = async (bot, msg) => {
     id = parseInt(msg.args[0]);
     bot.fetchUser(id)
@@ -7,14 +16,4 @@ module.exports.run = async (bot, msg) => {
     .catch(err => {
         msg.channel.send("User not found.")
     })
-}
-
-module.exports.config = {
-	name: "id2member",
-	description: "Converts a user id to the username and discriminator.",
-	usage: `<userid>`,
-	category: `utilities`,
-	accessableby: "Members",
-    aliases: ["i2m"]
-}
- 
+} 

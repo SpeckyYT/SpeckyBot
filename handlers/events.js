@@ -1,16 +1,16 @@
 const { readdirSync } = require("fs")
 
 module.exports = async (bot) => {
-    bot.setMaxListeners(25);
     bot.removeAllListeners();
-    const load = dir => {    
+    ["client", "custom", "guild","private"].forEach(async dir => {    
         try{
             const events = readdirSync(`./events/${dir}/`).filter(d => d.endsWith('.js'));
             events.forEach(async file => {
                 try{
                     const evt = require(`../events/${dir}/${file}`);
-                    let eName = evt.config.event;
-                    bot.on(eName, evt.bind(null, bot));
+                    let eName = evt.event;
+                    if(!eName) throw {message: error = "Event not found!".toUpperCase()};
+                    bot.on(eName, evt.call.bind(null, bot));
                     bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}   \t|\t${file} ERROR!`.error)
@@ -18,7 +18,6 @@ module.exports = async (bot) => {
                 }
             })
         }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
-    };
-    ["client", "custom", "guild","private"].forEach(x => load(x));
+    })
     bot.log();
 };

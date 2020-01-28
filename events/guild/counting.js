@@ -1,4 +1,8 @@
-module.exports = async (bot, msg) => {
+module.exports = {
+    event: "message"
+}
+
+module.exports.call = async (bot, msg) => {
     if(!msg.channel.topic) return;
     let text = 'Next number: '
     if(msg.channel.topic.toLowerCase().startsWith(text.toLowerCase())){
@@ -47,8 +51,4 @@ module.exports = async (bot, msg) => {
             }
         }
     }
-}
-
-module.exports.config = {
-    event: "message"
 }

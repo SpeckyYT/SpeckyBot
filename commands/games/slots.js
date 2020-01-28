@@ -1,3 +1,12 @@
+module.exports = {
+    name: "slots",
+	description: "Lets you play slots!",
+    usage: `<slots quantity>`,
+    category: `games`,
+	accessableby: "Members",
+    aliases: ["slot"]
+}
+
 module.exports.run = async (bot, msg) => {
     let quantity = msg.guild.emojis.size;
     let slots = 3;
@@ -55,13 +64,4 @@ module.exports.run = async (bot, msg) => {
     if(msg.args[1] == "stats"){
         await msg.channel.send(`${won ? "WINNER!" : `Please Try Again!\n||${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%||`}`);
     }
-}
-
-module.exports.config = {
-    name: "slots",
-	description: "Lets you play slots!",
-    usage: `<slots quantity>`,
-    category: `games`,
-	accessableby: "Members",
-    aliases: ["slot"]
 }

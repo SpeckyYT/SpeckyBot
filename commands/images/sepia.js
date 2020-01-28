@@ -1,8 +1,4 @@
-module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'sepia',false,[false,false,false],"png")
-}
-
-module.exports.config = {
+module.exports = {
     name: "sepia",
 	description: "Applies a sepia filter to the image!",
     usage: ``,
@@ -11,4 +7,8 @@ module.exports.config = {
     aliases: [],
     perms: [],
     cmdperms: []
+}
+
+module.exports.run = async (bot, msg) => {
+    require('./functions/methods')(bot, msg,'sepia',false,[false,false,false],"png")
 }

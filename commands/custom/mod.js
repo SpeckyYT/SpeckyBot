@@ -1,4 +1,14 @@
-const { RichEmbed } = require("discord.js");
+module.exports = {
+    name: "mod",
+	description: "Moderates stuffs!",
+    usage: ``,
+    category: `custom`,
+	accessableby: "Members",
+    aliases: [],
+    servers: ['265505748413448193'],
+    perms: ['KICK_MEMBERS'],
+    cmdperms: ['MANAGE_ROLES']
+}
 
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
@@ -13,16 +23,4 @@ module.exports.run = async (bot, msg) => {
             user.removeRole('265902715010285568')
         break
     }
-}
-
-module.exports.config = {
-    name: "mod",
-	description: "Moderates stuffs!",
-    usage: ``,
-    category: `custom`,
-	accessableby: "Members",
-    aliases: [],
-    servers: ['265505748413448193'],
-    perms: ['KICK_MEMBERS'],
-    cmdperms: ['MANAGE_ROLES']
 }

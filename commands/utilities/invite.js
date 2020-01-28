@@ -1,3 +1,12 @@
+module.exports = {
+	name: "invite",
+	description: "Do you want to add this bot to your server?",
+    usage: ``,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["inv","invit"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -11,13 +20,4 @@ module.exports.run = async (bot, msg) => {
 		.setTitle('Links!')
         .setDescription(`[SpeckyBot Discord Server](https://discord.gg/4EecFku)\n[Bot Invite](${link})\n[Support This Bot](https://patreon.com/SpeckyBot)`)
 	msg.channel.send(embed);
-}
-
-module.exports.config = {
-	name: "invite",
-	description: "Do you want to add this bot to your server?",
-    usage: ``,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["inv","invit"]
 }

@@ -1,3 +1,13 @@
+module.exports = {
+    name: "bump",
+	description: "Bumps the server!",
+    usage: ``,
+    category: `custom`,
+	accessableby: "Members",
+    aliases: [],
+    servers: ['265505748413448193','525114151077675039']
+}
+
 const { RichEmbed } = require("discord.js");
 const { randomInt } = require('mathjs');
 
@@ -16,14 +26,4 @@ module.exports.run = async (bot, msg) => {
     .setImage('https://cdn.discordapp.com/attachments/555484681135587338/599982089089187870/bot-command-image-bump.png')
 
     msg.channel.send(cEmbed);
-}
-
-module.exports.config = {
-    name: "bump",
-	description: "Bumps the server!",
-    usage: ``,
-    category: `custom`,
-	accessableby: "Members",
-    aliases: [],
-    servers: ['265505748413448193','525114151077675039']
 }

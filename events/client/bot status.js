@@ -1,10 +1,12 @@
-const config = require('../../config.json')
+module.exports = {
+    event: "ready"
+}
 
-module.exports = async bot => {
+module.exports.call = async bot => {
     let statuses = [
         `${bot.guilds.size} servers!`,
-        `${config.prefix}help`,
-        `${config.prefix}invite`,
+        `${bot.config.prefix}help`,
+        `${bot.config.prefix}invite`,
         `over ${bot.users.size} users!`
     ]
 
@@ -12,8 +14,4 @@ module.exports = async bot => {
         let status = statuses[Math.floor(Math.random() * statuses.length)];
         bot.user.setActivity(status, {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
     }, 30000)
-}
-
-module.exports.config = {
-    event: "ready"
 }

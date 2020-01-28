@@ -1,9 +1,13 @@
+module.exports = {
+    event: "message"
+}
+
 const { RichEmbed } = require('discord.js')
 
 //channel limiter
 const limited = ["643548931007184906"]
 
-module.exports = async (bot, msg) => {
+module.exports.call = async (bot, msg) => {
     //channel limiter
     if(!limited.includes(msg.channel.id)) return;
 
@@ -43,8 +47,4 @@ function error(text){
     .setTitle('ERROR!')
     .setColor('FF0000')
     .setDescription(text + "\nYour message will be deleted in 15 seconds.")
-}
-
-module.exports.config = {
-    event: "message"
 }

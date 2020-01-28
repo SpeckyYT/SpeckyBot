@@ -1,6 +1,10 @@
+module.exports = {
+    event: "message"
+}
+
 const { RichEmbed } = require('discord.js')
 
-module.exports = async (bot, msg) => {
+module.exports.call = async (bot, msg) => {
     if (msg.author.id == bot.user.id || msg.channel.type == "dm") return;
 
     const s_settings = require('../../s_settings.json')
@@ -65,8 +69,4 @@ async function atts(msg,color) {
         .setColor(color);
         msg.channel.send(emb);
     })
-}
-
-module.exports.config = {
-    event: "message"
 }
