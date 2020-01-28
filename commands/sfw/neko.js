@@ -1,3 +1,12 @@
+module.exports = {
+    name: "neko",
+	description: "Gives you a neko!",
+    usage: ``,
+    category: `sfw`,
+	accessableby: "Members",
+    aliases: ["nya","nyan"]
+}
+
 const Math = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
@@ -12,13 +21,4 @@ module.exports.run = async (bot, msg) => {
         let method = methods[Math.floor(Math.random() * methods.length)];
         require('../nsfw/functions/img')(method, msg);
     }
-}
-
-module.exports.config = {
-    name: "neko",
-	description: "Gives you a neko!",
-    usage: ``,
-    category: `sfw`,
-	accessableby: "Members",
-    aliases: ["nya","nyan"]
 }

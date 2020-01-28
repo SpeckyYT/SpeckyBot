@@ -1,3 +1,12 @@
+module.exports = {
+    name: "presences",
+	description: "Says how many people are playing different games in the server.",
+    usage: ``,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["prsncs","prs"]
+}
+
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
@@ -18,13 +27,4 @@ module.exports.run = async (bot, msg) => {
     cEmbed.setDescription(presences)
 */
     msg.channel.send(cEmbed)
-}
-
-module.exports.config = {
-    name: "presences",
-	description: "Says how many people are playing different games in the server.",
-    usage: ``,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["prsncs","prs"]
 }

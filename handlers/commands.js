@@ -2,14 +2,15 @@ const { readdirSync } = require("fs")
 
 module.exports = (bot) => {
     delete require.cache;
-    let load = dir => {
+    ["owner", "admin", "utilities", "games", "misc", "music", "sfw", "nsfw", "images", "private", "custom"].forEach(async dir => {
         try{
             let commands = readdirSync(`./commands/${dir}/`).filter(d => d.endsWith('.js'));
             commands.forEach(async file => {
                 try{
                     let pull = require(`../commands/${dir}/${file}`);
-                    bot.commands.set(pull.config.name, pull);
-                    if (pull.config.aliases) pull.config.aliases.forEach(a => bot.aliases.set(a, pull.config.name));
+                    if(!pull.name) throw {message: error = "Name of the command not found!".toUpperCase()};
+                    bot.commands.set(pull.name, pull);
+                    if (pull.aliases) pull.aliases.forEach(a => bot.aliases.set(a, pull.name));
                     bot.log(`${dir}     \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}     \t|\t${file} ERROR!`.error);
@@ -17,7 +18,6 @@ module.exports = (bot) => {
                 }
             })
         }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
-    }
-    ["owner", "admin", "utilities", "games", "misc", "music", "sfw", "nsfw", "images", "private", "custom"].forEach(x => load(x));
+    })
     bot.log();
 };

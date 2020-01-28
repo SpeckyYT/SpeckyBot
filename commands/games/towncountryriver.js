@@ -1,3 +1,13 @@
+module.exports = {
+    name: "towncountryriver",
+	description: "You have to type a word with the starting letter that the bot gives!\nThanks to Mantevian / Manteex and Spu7Nix / SputNix for the base of this module!\nhttps://github.com/Mantevian/simonsaysbot",
+    usage: `#[channel] [start time in seconds]`,
+    category: `games`,
+	accessableby: "Members",
+    aliases: ["tcr"],
+    perms: ["MANAGE_MESSAGES"]
+}
+
 const { RichEmbed } = require('discord.js')
 const { runGame } = require('./TCR/game');
 
@@ -69,14 +79,4 @@ module.exports.run = async (bot, msg) => {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-module.exports.config = {
-    name: "towncountryriver",
-	description: "You have to type a word with the starting letter that the bot gives!\nThanks to Mantevian / Manteex and Spu7Nix / SputNix for the base of this module!\nhttps://github.com/Mantevian/simonsaysbot",
-    usage: `#[channel] [start time in seconds]`,
-    category: `games`,
-	accessableby: "Members",
-    aliases: ["tcr"],
-    perms: ["MANAGE_MESSAGES"]
 }

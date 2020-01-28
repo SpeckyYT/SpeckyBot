@@ -1,3 +1,12 @@
+module.exports = {
+    name: "dadjoke",
+	description: "Gives you a dad joke!",
+    usage: ``,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["dadjokes"]
+}
+
 const fetch = require('node-fetch')
 const { RichEmbed } = require('discord.js')
 
@@ -14,13 +23,4 @@ module.exports.run = async (bot, msg) => {
     .setColor('FF00AA')
 
     msg.channel.send(embed)
-}
-
-module.exports.config = {
-    name: "dadjoke",
-	description: "Gives you a dad joke!",
-    usage: ``,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["dadjokes"]
 }

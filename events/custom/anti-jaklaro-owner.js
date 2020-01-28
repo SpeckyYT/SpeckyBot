@@ -1,7 +1,12 @@
+module.exports = {
+    event: "guildMemberUpdate"
+}
+
+
 //users limiter
 const limited = ["412286501528010764"]
 
-module.exports = async (bot, memberold, membernew) => {
+module.exports.call = async (bot, memberold, membernew) => {
     //users limiter
     if(!limited.includes(membernew.id)) return;
 
@@ -12,8 +17,3 @@ module.exports = async (bot, memberold, membernew) => {
         membernew.setNickname(onick.replace(/owner/ig,"Co-Owner")).catch()
     }
 }
-
-module.exports.config = {
-    event: "guildMemberUpdate"
-}
-

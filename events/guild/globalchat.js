@@ -1,4 +1,8 @@
-module.exports = async (bot, msg) => {
+module.exports = {
+    event: "message"
+}
+
+module.exports.call = async (bot, msg) => {
     /*
     msg.channel.fetchWebhooks()
     .then(hooks => {
@@ -33,8 +37,4 @@ module.exports = async (bot, msg) => {
         })
     }
     */
-}
-
-module.exports.config = {
-    event: "message"
 }

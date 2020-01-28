@@ -1,3 +1,12 @@
+module.exports = {
+    name: "users",
+	description: "How many people does this bot know?",
+    usage: ``,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: []
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -9,13 +18,4 @@ module.exports.run = async (bot, msg) => {
         .setTimestamp()
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
     msg.channel.send(embed);
-};
-
-module.exports.config = {
-    name: "users",
-	description: "How many people does this bot know?",
-    usage: ``,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: []
 }

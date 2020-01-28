@@ -1,3 +1,12 @@
+module.exports = {
+	name: "math",
+	description: "The math command to evaluate some math!",
+    usage: `<problem>`,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["maths","mathematic","mathematics"]
+}
+
 const { evaluate } = require("mathjs");
 const { RichEmbed } = require("discord.js");
 
@@ -17,13 +26,4 @@ module.exports.run = async (bot, msg) => {
 		.addField("Input", `\`\`\`js\n${args.join(' ')}\`\`\``)
 		.addField("Output", `\`\`\`js\n${resp}\`\`\``)
 	msg.channel.send(embed);
-}
-
-module.exports.config = {
-	name: "math",
-	description: "The math command to evaluate some math!",
-    usage: `<problem>`,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["maths","mathematic","mathematics"]
 }

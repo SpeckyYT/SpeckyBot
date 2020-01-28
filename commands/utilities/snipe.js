@@ -1,3 +1,12 @@
+module.exports = {
+    name: "snipe",
+	description: "Snipes the previous message!",
+    usage: ``,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: []
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -10,13 +19,4 @@ module.exports.run = async (bot, msg) => {
             .setDescription(ms.content);
         msg.channel.send(embed);
     })
-}
-
-module.exports.config = {
-    name: "snipe",
-	description: "Snipes the previous message!",
-    usage: ``,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: []
 }

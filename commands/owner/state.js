@@ -1,3 +1,12 @@
+module.exports = {
+    name: "state",
+	description: "Some stuff for the bot's presence",
+    usage: `<State>`,
+    category: `owner`,
+	accessableby: "Bot Owner",
+    aliases: []
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     const state = args[0];
@@ -7,13 +16,4 @@ module.exports.run = async (bot, msg) => {
     }catch(e){
         msg.channel.send("An error occurred");
     }
-};
-
-module.exports.config = {
-    name: "state",
-	description: "Some stuff for the bot's presence",
-    usage: `<State>`,
-    category: `owner`,
-	accessableby: "Bot Owner",
-    aliases: []
 }

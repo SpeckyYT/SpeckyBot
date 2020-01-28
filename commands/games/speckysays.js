@@ -1,4 +1,14 @@
-﻿const { RichEmbed } = require('discord.js')
+﻿module.exports = {
+    name: "speckysays",
+	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
+    usage: `#[channel] [start time in seconds]`,
+    category: `games`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["simonsays", "simon"],
+    perms: ["MANAGE_MESSAGES"]
+}
+
+const { RichEmbed } = require('discord.js')
 const { runGame } = require('./SpeckySays/game');
 
 module.exports.run = async (bot, msg) => {
@@ -69,14 +79,4 @@ module.exports.run = async (bot, msg) => {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-module.exports.config = {
-    name: "speckysays",
-	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
-    usage: `#[channel] [start time in seconds]`,
-    category: `games`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["simonsays", "simon"],
-    perms: ["MANAGE_MESSAGES"]
 }

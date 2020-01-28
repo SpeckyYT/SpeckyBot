@@ -128,7 +128,7 @@ module.exports = async (bot) => {
             bot.cache.lastImage[msg.channel.id] = input;
         }
 
-        await msg.channel.fetchMessages({limit: 25})
+        await msg.channel.fetchMessages({limit: 50})
         .then(msgs => {
             msgs.array().reverse().some(message => {
                 let matches = message.content.match(linkRegex);
@@ -149,7 +149,7 @@ module.exports = async (bot) => {
                         return;
                     }
                 }else
-                if(message.embeds){
+                if(message.embeds.length > 0){
                     try{
                         setImage(message.embeds[0].image.proxyURL);
                         return;

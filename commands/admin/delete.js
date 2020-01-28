@@ -1,3 +1,14 @@
+module.exports = {
+    name: "delete",
+	description: "Deletes a message for you!",
+    usage: `<messageID>`,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["deletion", "msgdelet","msgdelete"],
+    perms: ['MANAGE_MESSAGES'],
+    cmdperms: ['MANAGE_MESSAGES']
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     if(!args[0]){
@@ -12,15 +23,4 @@ module.exports.run = async (bot, msg) => {
             msg.channel.send("The message is not deletable or doesn't exist");
         }
     });
-}
-
-module.exports.config = {
-    name: "delete",
-	description: "Deletes a message for you!",
-    usage: `<messageID>`,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["deletion", "msgdelet","msgdelete"],
-    perms: ['MANAGE_MESSAGES'],
-    cmdperms: ['MANAGE_MESSAGES']
 }

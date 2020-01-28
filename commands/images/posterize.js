@@ -1,8 +1,4 @@
-module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'posterize',false,[5,2,50],"png")
-}
-
-module.exports.config = {
+module.exports = {
     name: "posterize",
 	description: "Posterizes the image!",
     usage: `[Amount (2-50)]`,
@@ -11,4 +7,8 @@ module.exports.config = {
     aliases: [],
     perms: [],
     cmdperms: []
+}
+
+module.exports.run = async (bot, msg) => {
+    require('./functions/methods')(bot, msg,'posterize',false,[5,2,50],"png")
 }

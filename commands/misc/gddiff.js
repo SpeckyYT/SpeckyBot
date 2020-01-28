@@ -1,3 +1,12 @@
+module.exports = {
+    name: "gddiff",
+	description: "Gives you one of the difficulty icons of Geometry Dash!",
+    usage: `<difficulty number (0-10)> <rate value (0-2)>`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["gddifficulty","geometrydashdiff"]
+}
+
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
@@ -106,13 +115,4 @@ module.exports.run = async (bot, msg) => {
 
         m.edit(cEmbed);
     })
-}
-
-module.exports.config = {
-    name: "gddiff",
-	description: "Gives you one of the difficulty icons of Geometry Dash!",
-    usage: `<difficulty number (0-10)> <rate value (0-2)>`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["gddifficulty","geometrydashdiff"]
 }

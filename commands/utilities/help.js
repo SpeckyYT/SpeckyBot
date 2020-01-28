@@ -1,3 +1,12 @@
+module.exports = {
+	name: "help",
+	description: "The help for this bot!",
+	usage: `<command>`,
+	category: `utilities`,
+	accessableby: "Members",
+    aliases: ["h", "halp", "hel","hwlp","hewlp","cmds","commands","undefined"]
+}
+
 const { RichEmbed } = require("discord.js");
 const { readdirSync } = require("fs")
 const { randomInt } = require('mathjs')
@@ -86,13 +95,4 @@ function categoryCheck(category,msg,bot){
 	default:
 		return true;
 	}
-}
-
-module.exports.config = {
-	name: "help",
-	description: "The help for this bot!",
-	usage: `<command>`,
-	category: `utilities`,
-	accessableby: "Members",
-    aliases: ["h", "halp", "hel","hwlp","hewlp","cmds","commands","undefined"]
 }

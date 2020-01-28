@@ -1,4 +1,6 @@
-const { RichEmbed } = require('discord.js')
+module.exports = {
+    event: "message"
+}
 
 //REACTIONS:
 const specky = `specky:653319769516146729`
@@ -6,7 +8,7 @@ const specky = `specky:653319769516146729`
 
 
 
-module.exports = async (bot, msg) => {
+module.exports.call = async (bot, msg) => {
     if (msg.author.bot || msg.channel.type === "dm") return;
 
     let contento = msg.content                      //Original one
@@ -35,8 +37,4 @@ module.exports = async (bot, msg) => {
     }
 
 
-}
-
-module.exports.config = {
-    event: "message"
 }

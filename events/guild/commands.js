@@ -1,6 +1,10 @@
+module.exports = {
+    event: "message"
+}
+
 const { RichEmbed } = require('discord.js')
 
-module.exports = async (bot, msg) => {
+module.exports.call = async (bot, msg) => {
     if(msg.author.bot || msg.channel.type === "dm") return;
 
     if(msg.system) return;
@@ -90,18 +94,18 @@ module.exports = async (bot, msg) => {
         let userPermError =  "🚷 You don't have the required permissions for that command.";
         let serverError   =  "⛔ This command isn't available on this server.";
 
-        let category = cmd.config.category;
+        let category = cmd.category;
 
         if(category == "images"){
             await bot.setLastImageCache(msg);
         }
 
-        if((category == "owner" || cmd.config.category === "private") && !owner){
+        if((category == "owner" || cmd.category === "private") && !owner){
             return msg.channel.send(error(ownerError))
         }
 
-        if(cmd.config.cmdperms){
-            cmd.config.cmdperms.forEach(perm => {
+        if(cmd.cmdperms){
+            cmd.cmdperms.forEach(perm => {
                 if(!msg.guild.me.hasPermission(perm)){
                     if(check(false, botPermError)){
                         return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perm}\``))
@@ -123,8 +127,8 @@ module.exports = async (bot, msg) => {
         }
 
         if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
-            if(cmd.config.perms){
-                if(!msg.member.hasPermission(cmd.config.perms)){
+            if(cmd.perms){
+                if(!msg.member.hasPermission(cmd.perms)){
                     if(check(false, userPermError)){
                         return msg.channel.send(error(userPermError))
                     }
@@ -132,8 +136,8 @@ module.exports = async (bot, msg) => {
             }
         }
 
-        if(cmd.config.servers){
-            if(cmd.config.servers.indexOf(msg.guild.id.toString()) < 0){
+        if(cmd.servers){
+            if(cmd.servers.indexOf(msg.guild.id.toString()) < 0){
                 if(check(false, serverError)){
                     return msg.channel.send(error(serverError));
                 }
@@ -204,8 +208,4 @@ function errdesc(err){
     .setTitle('ERROR DESCRIPTION')
     .setDescription(`${err.stack.substr(0,1900)}\n\nFile: ${err.fileName}\nLine: ${err.lineNumber}`)
     .setColor('FF0000')
-}
-
-module.exports.config = {
-    event: "message"
 }

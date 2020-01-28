@@ -1,4 +1,8 @@
-module.exports = async (bot, msg) => {
+module.exports = {
+    event: "message"
+}
+
+module.exports.call = async (bot, msg) => {
     if(!msg.channel.topic) return;
 
     let text = '[alternate]'
@@ -19,8 +23,4 @@ module.exports = async (bot, msg) => {
             msg.delete().catch(()=>{return})
         }
     }
-}
-
-module.exports.config = {
-    event: "message"
 }

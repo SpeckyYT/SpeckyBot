@@ -1,3 +1,14 @@
+module.exports = {
+    name: "absolutemove",
+	description: "Moves all users from one VC to another one!",
+    usage: `<vocalchannelID> <vocalchannelID>`,
+    category: `admin`,
+	accessableby: "Server Admins and Moderators",
+    aliases: ["am","moveid","idmove"],
+    perms: ['MOVE_MEMBERS'],
+    cmdperms: ['MOVE_MEMBERS']
+}
+
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     if(!args[0]){return msg.channel.send("You didn't include a Voice Channel ID.")}
@@ -28,15 +39,4 @@ module.exports.run = async (bot, msg) => {
             }catch{return msg.channel.send("Error happend (Wrong ID?)")}
         })
     }
-}
-
-module.exports.config = {
-    name: "absolutemove",
-	description: "Moves all users from one VC to another one!",
-    usage: `<vocalchannelID> <vocalchannelID>`,
-    category: `admin`,
-	accessableby: "Server Admins and Moderators",
-    aliases: ["am","moveid","idmove"],
-    perms: ['MOVE_MEMBERS'],
-    cmdperms: ['MOVE_MEMBERS']
 }

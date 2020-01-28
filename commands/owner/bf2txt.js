@@ -1,3 +1,12 @@
+module.exports = {
+    name: "bf2txt",
+	description: "Converts a Brainf*ck string to a text string!",
+    usage: `[brainf*ck string]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["brainfuck2text","brainfucktostring","bftotxt"]
+}
+
 const uf = require('unfuck');
 const comp = uf.compiler({
     type: Uint16Array,
@@ -19,13 +28,4 @@ module.exports.run = async (bot, msg) => {
     }else{
         msg.channel.send("This command causes usually to crash the bot, so it got disabled")
     }
-}
-
-module.exports.config = {
-    name: "bf2txt",
-	description: "Converts a Brainf*ck string to a text string!",
-    usage: `[brainf*ck string]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["brainfuck2text","brainfucktostring","bftotxt"]
 }

@@ -1,7 +1,11 @@
+module.exports = {
+    event: "presenceUpdate"
+}
+
 //server limiter
 const limited = ["265505748413448193"]
 
-module.exports = async (bot, oldMember, newMember) => {
+module.exports.call = async (bot, oldMember, newMember) => {
     if(newMember.user.bot) return;
     
     //server limiter
@@ -31,8 +35,3 @@ module.exports = async (bot, oldMember, newMember) => {
         })
     })
 }
-
-module.exports.config = {
-    event: "presenceUpdate"
-}
-

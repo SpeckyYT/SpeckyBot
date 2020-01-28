@@ -1,3 +1,12 @@
+module.exports = {
+    name: "txt2bf",
+	description: "Converts a text string to a Brainf*ck string!",
+    usage: `[text string]`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["text2brainfuck","texttobrainfuck","txttobf"]
+}
+
 const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg) => {
@@ -10,13 +19,4 @@ module.exports.run = async (bot, msg) => {
     var newArgs = msg.content.split(" ").splice(1);
     var text = convert(newArgs.join(" "));
     msg.channel.send(`\`\`\`bf\n${text}\n\`\`\``,{split: {char: '>'}})
-}
-
-module.exports.config = {
-    name: "txt2bf",
-	description: "Converts a text string to a Brainf*ck string!",
-    usage: `[text string]`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["text2brainfuck","texttobrainfuck","txttobf"]
 }

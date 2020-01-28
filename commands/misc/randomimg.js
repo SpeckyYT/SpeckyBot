@@ -1,3 +1,12 @@
+module.exports = {
+    name: "randomimg",
+	description: "Gives you a random image from loremflickr.com!",
+    usage: `<keyword>`,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["randomimage","rimg"]
+}
+
 const { RichEmbed } = require("discord.js");
 const { get } = require('superagent')
 
@@ -23,13 +32,4 @@ module.exports.run = async (bot, msg) => {
         msg.channel.send({embed: cEmbed})
 
         mesg.delete();
-}
-
-module.exports.config = {
-    name: "randomimg",
-	description: "Gives you a random image from loremflickr.com!",
-    usage: `<keyword>`,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["randomimage","rimg"]
 }

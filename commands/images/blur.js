@@ -1,8 +1,4 @@
-module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'blur',false,[5,2,100],"png")
-}
-
-module.exports.config = {
+module.exports = {
     name: "blur",
 	description: "Blurs the image!",
     usage: `[Amount (2-100)]`,
@@ -11,4 +7,8 @@ module.exports.config = {
     aliases: [],
     perms: [],
     cmdperms: []
+}
+
+module.exports.run = async (bot, msg) => {
+    require('./functions/methods')(bot, msg,'blur',false,[5,2,100],"png")
 }

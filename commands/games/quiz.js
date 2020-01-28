@@ -1,3 +1,12 @@
+module.exports = {
+    name: "quiz",
+	description: "A random question with (usually) 4 responses!",
+    usage: ``,
+    category: `games`,
+	accessableby: "Members",
+    aliases: ["qui", "qz","quiz"]
+}
+
 const fetch = require('node-fetch');
 const { RichEmbed } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity')
@@ -99,13 +108,4 @@ module.exports.run = async (bot, msg) => {
             })
         }
     })
-}
-
-module.exports.config = {
-    name: "quiz",
-	description: "A random question with (usually) 4 responses!",
-    usage: ``,
-    category: `games`,
-	accessableby: "Members",
-    aliases: ["qui", "qz","quiz"]
 }

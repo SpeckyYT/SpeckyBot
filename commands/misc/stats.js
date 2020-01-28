@@ -1,3 +1,12 @@
+module.exports = {
+    name: "stats",
+	description: "Gives some stats about the bot!",
+    usage: ``,
+    category: `misc`,
+	accessableby: "Members",
+    aliases: ["status","st"]
+}
+
 const { RichEmbed } = require('discord.js')
 const os = require('os')
 const osu = require('node-os-utils')
@@ -71,13 +80,4 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 
     msg.channel.send(cEmbed)
-}
-
-module.exports.config = {
-    name: "stats",
-	description: "Gives some stats about the bot!",
-    usage: ``,
-    category: `misc`,
-	accessableby: "Members",
-    aliases: ["status","st"]
 }

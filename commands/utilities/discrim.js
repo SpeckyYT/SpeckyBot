@@ -1,3 +1,12 @@
+module.exports = {
+    name: "discrim",
+	description: "You want to change your discriminator without Nitro?",
+    usage: `[discriminator]`,
+    category: `utilities`,
+	accessableby: "Members",
+    aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
+}
+
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
@@ -23,13 +32,4 @@ module.exports.run = async (bot, msg) => {
         .setTitle(`#${discriminator}`)
         .setDescription(discrims.length ? discrims.join(`\n`) : 'No user found')
     msg.channel.send(embed);
-};
-
-module.exports.config = {
-    name: "discrim",
-	description: "You want to change your discriminator without Nitro?",
-    usage: `[discriminator]`,
-    category: `utilities`,
-	accessableby: "Members",
-    aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
 }

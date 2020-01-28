@@ -1,3 +1,12 @@
+module.exports = {
+	name: "vc",
+	description: "Informations about the vocal channel you're in!",
+	usage: ``,
+	category: `utilities`,
+	accessableby: "Members",
+    aliases: ["vocalchannel","vcinfo"]
+}
+
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
@@ -14,13 +23,4 @@ module.exports.run = async (bot, msg) => {
 	}else{
 		msg.reply("you aren't in a voice channel")
 	}
-}
-
-module.exports.config = {
-	name: "vc",
-	description: "Informations about the vocal channel you're in!",
-	usage: ``,
-	category: `utilities`,
-	accessableby: "Members",
-    aliases: ["vocalchannel","vcinfo"]
 }
