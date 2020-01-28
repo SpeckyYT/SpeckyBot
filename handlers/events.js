@@ -8,8 +8,9 @@ module.exports = async (bot) => {
             events.forEach(async file => {
                 try{
                     const evt = require(`../events/${dir}/${file}`);
-                    let eName = evt.config.event;
-                    bot.on(eName, evt.bind(null, bot));
+                    let eName = evt.event;
+                    if(!eName) throw {message: error = "Event not found!".toUpperCase()};
+                    bot.on(eName, evt.call.bind(null, bot));
                     bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}   \t|\t${file} ERROR!`.error)

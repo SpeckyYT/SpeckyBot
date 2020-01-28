@@ -1,4 +1,8 @@
-module.exports = async (bot, msg) => {
+module.exports = {
+    event: "message"
+}
+
+module.exports.call = async (bot, msg) => {
     if(!msg.channel.topic) return;
 
     let text = '[no-mixed-chars]'
@@ -18,8 +22,4 @@ module.exports = async (bot, msg) => {
             msg.delete().catch();
         }
     }
-}
-
-module.exports.config = {
-    event: "message"
 }

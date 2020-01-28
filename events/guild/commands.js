@@ -1,6 +1,10 @@
+module.exports = {
+    event: "message"
+}
+
 const { RichEmbed } = require('discord.js')
 
-module.exports = async (bot, msg) => {
+module.exports.call = async (bot, msg) => {
     if(msg.author.bot || msg.channel.type === "dm") return;
 
     if(msg.system) return;
@@ -204,8 +208,4 @@ function errdesc(err){
     .setTitle('ERROR DESCRIPTION')
     .setDescription(`${err.stack.substr(0,1900)}\n\nFile: ${err.fileName}\nLine: ${err.lineNumber}`)
     .setColor('FF0000')
-}
-
-module.exports.config = {
-    event: "message"
 }

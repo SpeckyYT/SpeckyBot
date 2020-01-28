@@ -1,4 +1,8 @@
-module.exports = async (bot, msg) => {
+module.exports = {
+    event: "messageDelete"
+}
+
+module.exports.call = async (bot, msg) => {
     if(!msg.channel.topic) return;
     if(msg.author.bot) return;
     let text = 'Next number: '
@@ -13,8 +17,4 @@ module.exports = async (bot, msg) => {
             }
         })
     }
-}
-
-module.exports.config = {
-    event: "messageDelete"
 }

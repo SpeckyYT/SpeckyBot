@@ -1,7 +1,11 @@
+module.exports = {
+    event: "messageReactionAdd"
+}
+
 //server limiter
 const limited = ["265505748413448193"]
 
-module.exports = async (bot, messageReaction, user) => {
+module.exports.call = async (bot, messageReaction, user) => {
     if(user.bot) return;
     
     let msg = messageReaction.message;
@@ -29,8 +33,4 @@ module.exports = async (bot, messageReaction, user) => {
             }catch{}
         }
     }).catch()
-}
-
-module.exports.config = {
-    event: "messageReactionAdd"
 }
