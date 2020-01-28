@@ -8,9 +8,10 @@ module.exports = async (bot) => {
     })
     .catch(async () => {
         await Array(25).forEach(() => {
-            console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`.error)
+            console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is incorrect or can't login to discord)`.error);
         })
         if(token == "TOKEN_HERE"){
+            await bot.wait(10000)
             process.exit(0)
         }
     })
