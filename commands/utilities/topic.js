@@ -10,24 +10,51 @@ module.exports = {
 const { RichEmbed } = require('discord.js')
 
 let questions = [
-    "What is one thing that you can not live without?",
-    "What is the longest that you've stayed awake for?",
-    "What is the least favorite thing about this week?",
-    "If you could only eat one thing for the rest of your life, what would it be?",
-    "If you were a waiter and had a rude customer, what would you do?",
-    "Would you rather be poor or ugly?",
+
+    "Are you a giver or taker?",
+    "As a child, what did you want to be when you grew up?",
+
+    "Describe your perfect man/woman.",
+
     "Do you follow your heart or your head?",
     "Do you prefer to eat at home or eat out?",
-    "What was the biggest life change you've gone through?",
-    "Would you rather be tall and fat or short and well built?",
     "Do you like dogs or cats?",
-    "What is your favourite song?",
-    "How would you define success?",
-    "If you could live anywhere on earth, where would you live?",
     "Do you have any siblings?",
-    "What is the best thing about school/work?",
+    "Do you play any sports?",
+
+    "If you could only eat one thing for the rest of your life, what would it be?",
+    "If you were a waiter and had a rude customer, what would you do?",
+    "If you could live anywhere on earth, where would you live?",
     "If you knew that you only had a year left to live, what would you do?",
-    "As a child, what did you want to be when you grew up?"
+
+    "Have you read anything good recently?",
+
+    "How many pairs of shoes do you own?",
+    "How would you define success?",
+    "How would your friends describe you?",
+
+    "What do you carry in your purse/wallet?",
+    "What is one thing that you can not live without?",
+    "What is the best thing about school/work?",
+    "What is the longest that you've stayed awake for?",
+    "What is the least favorite thing about this week?",
+    "What is the worst movie that you've seen?",
+    "What is your earliest memory?",
+    "What is your favourite song?",
+    "What was the biggest life change you've gone through?",
+    "What would you do differently if you could relive the past year?",
+
+    "Where did you go on your last vacation?",
+    "Where is your favorite place to shop?",
+    "Which is better, being the boss or an employee?",
+
+    "Would you rather be blind or deaf?",
+    "Would you rather be rich and ugly, or poor and good looking?",
+    "Would you rather be tall and fat or short and well built?",
+    "Would you rather be the best player on a horrible team or the worst player on a great team?",
+    "Would you rather be the smartest moron or dumbest genius?",
+    "Would you rather not be able to use your hands or not be able to walk?"
+    
 ]
 
 module.exports.run = async (bot, msg) => {

@@ -27,13 +27,13 @@ module.exports.run = async (bot, msg) => {
 		embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
 		categories.forEach(category => {
-			let dir = bot.commands.filter(c => (c.config.category == category && c.config.category != "private"))
+			let dir = bot.commands.filter(c => (c.category == category && c.category != "private"))
 
 			let capitalise = bot.highFirst(category)
 
 			try{
 				if(args[0] == "all" || categoryCheck(category, msg, config, bot)){
-					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.config.name}\``).join(" ")}`)
+					embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.name}\``).join(" ")}`)
 				}
 			}catch{}
 		})
@@ -56,17 +56,15 @@ module.exports.run = async (bot, msg) => {
 		let command = bot.commands.get(bot.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())
 		if(!command) return msg.channel.send(invalidcmd(embed,config));
 
-		command = command.config
-
 		if(!categoryCheck(command.category, msg, bot)) return msg.channel.send(invalidcmd(embed,config));
 		
 		const cmd = bot.highFirst(command.name)
 		const description = command.description || "No Description provided."
 		const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`
 		const usableby = command.accessableby || "Members"
-		const aliases = `${command.aliases ? command.aliases.join(", ") : "None"}`
-		const perms = `${command.perms ? command.perms.join(", ") : "None"}`
-		const cmdperms = `${command.cmdperms ? command.cmdperms.join(", ") : "None"}`
+		const aliases = `${command.aliases.length > 0 ? command.aliases.join(", ") : "None"}`
+		const perms = `${command.perms.length > 0 ? command.perms.join(", ") : "None"}`
+		const cmdperms = `${command.cmdperms.length > 0 ? command.cmdperms.join(", ") : "None"}`
 
 		embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n\n**Command:** ${cmd}\n**Description:** ${description}\n**Usage:** ${usage}\n**Accessible by:** ${usableby}\n**Aliases:** ${aliases}\n**Required User Permissions:** ${perms}\n**Required Bot Permissions:** ${cmdperms}`)
 		return msg.channel.send(embed)
