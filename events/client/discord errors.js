@@ -2,9 +2,8 @@ module.exports = {
     event: "error"
 }
 
-module.exports.call = async () => {
+module.exports.call = async (bot, error) => {
     bot.log()
-    bot.log("Error occurred (REBOOTING)")
-    bot.log()
-    process.exit();    
+    bot.log("Discord Error Occurred".fatal)
+    bot.log(`${error.name}\n${error.message}`.error)
 }
