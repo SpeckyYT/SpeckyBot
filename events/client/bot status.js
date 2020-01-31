@@ -3,6 +3,8 @@ module.exports = {
 }
 
 module.exports.call = async bot => {
+    console.log("Bot is ready!".success);
+
     let statuses = [
         `${bot.guilds.size} servers!`,
         `${bot.config.prefix}help`,
@@ -11,7 +13,7 @@ module.exports.call = async bot => {
     ]
 
     setInterval(function() {
-        let status = statuses[Math.floor(Math.random() * statuses.length)];
+        let status = statuses.pick();
         bot.user.setActivity(status, {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
     }, 30000)
 }

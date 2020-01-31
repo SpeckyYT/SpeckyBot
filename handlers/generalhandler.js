@@ -1,12 +1,4 @@
-const { Client } = require("discord.js");
-
-module.exports = async () => {
-    const bot = new Client({
-        autoReconnect : true,
-        messageCacheMaxSize : 2500,
-        fetchAllMembers : true
-    });
-
+module.exports = async (bot) => {
     require('./dependencies')();
     require('./missingdirectories')();
     require('./missingfiles')();
