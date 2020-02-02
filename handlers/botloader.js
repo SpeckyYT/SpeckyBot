@@ -18,6 +18,7 @@ module.exports = async (bot) => {
 
     bot.config = require('../config.json');
 
+    require('./extraevents')(bot);
     require('./botfunctions')(bot);
 
     ["commands","aliases","console","consoleali"].forEach(async x => 
