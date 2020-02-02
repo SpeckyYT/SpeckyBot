@@ -16,8 +16,8 @@ module.exports.call = async (bot, msg) => {
     let regex = /\b\d{7,10}\b/g
 
     if(msg.content.match(regex)){
-        if(msg.content.length > 100){
-            msg.channel.send(error("You exceed the massage length of 100 letters."))
+        if(msg.content.length > 200){
+            msg.channel.send(error("You exceed the massage length of 200 letters."))
             .then(ms => {
                 try{
                     ms.delete(15000)

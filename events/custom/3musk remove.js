@@ -6,7 +6,6 @@ module.exports = {
 const limited = ["265505748413448193"]
 
 module.exports.call = async (bot, oldMember, newMember) => {
-    
     let member = newMember;
     if(member.user.bot) return;
 
@@ -14,7 +13,6 @@ module.exports.call = async (bot, oldMember, newMember) => {
     if(!limited.includes(member.guild.id)) return;
 
     let status = member.user.presence.status;
-
     if(!["offline","idle"].includes(status)) return;
 
     let muskRole = "636272631984947240"
