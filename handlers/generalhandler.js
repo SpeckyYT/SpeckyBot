@@ -1,8 +1,14 @@
 module.exports = async (bot) => {
-    require('./dependencies')();
-    require('./missingdirectories')();
-    require('./missingfiles')();
-    require('./botloader')(bot);
-    require('./login')(bot);
-    require('./website')(bot);
+    try{
+        await require('./missingdirectories')();
+        await require('./missingfiles')();
+        await require('./dependencies')();
+        await require('./confighandler')();
+        await require('./botloader')(bot);
+        await require('./login')(bot);
+        await require('./website')(bot);
+    }catch(err){
+        console.log("FATAL ERROR ON HANDLERS".fatal);
+        console.log(err);
+    }
 }

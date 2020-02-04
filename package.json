@@ -34,6 +34,7 @@
     "node-snowflake": "0.0.1",
     "nodegit": "^0.26.4",
     "opusscript": "0.0.7",
+    "osu": "^3.0.0-0",
     "osureplayparser": "^1.0.1",
     "play-tts": "^1.0.7",
     "random": "^2.1.1",

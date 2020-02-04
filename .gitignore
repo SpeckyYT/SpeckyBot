@@ -10,6 +10,7 @@ tmp
 
 s_settings.json
 u_settings.json
+templateconfig.json
 config.json
 
 # Logs
