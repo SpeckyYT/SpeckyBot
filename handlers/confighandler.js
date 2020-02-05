@@ -22,7 +22,7 @@ module.exports = async () => {
 
     const items = ["token","prefix"]
     const bools = ["extra_apikeys"]
-    const apikeys = ["youtube","osu"]
+    const apikeys = ["yandex","youtube","osu"]
     const arrays = ["owner"]
 
     items.forEach(conf => {

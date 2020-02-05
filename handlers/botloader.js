@@ -1,5 +1,20 @@
 const { Collection } = require("discord.js");
 
+//from https://gist.github.com/cferdinandi/42f985de9af4389e7ab3
+var forEach = function (collection, callback, scope) {
+    if (Object.prototype.toString.call(collection) === '[object Object]') {
+        for (var prop in collection) {
+            if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+                callback.call(scope, collection[prop], prop, collection);
+            }
+        }
+    } else {
+        for (var i = 0, len = collection.length; i < len; i++) {
+            callback.call(scope, collection[i], i, collection);
+        }
+    }
+}
+
 module.exports = async (bot) => {
     bot.setMaxListeners(25);
     
@@ -17,6 +32,13 @@ module.exports = async (bot) => {
     bot.debugN = 0;
 
     bot.config = require('../config.json');
+
+    if(typeof bot.config.apikeys == "object"){
+        forEach(bot.config.apikeys, function (value, prop, obj) {
+            bot.config[prop] = value;
+        });
+        bot.config.apikeys = null;
+    }
 
     require('./extraevents')(bot);
     require('./botfunctions')(bot);
