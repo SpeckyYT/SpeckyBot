@@ -21,7 +21,7 @@ module.exports = async () => {
     let nConfig = config;
 
     const items = ["token","prefix"]
-    const bools = ["extra_apikeys"]
+    const bools = ["extra_apikeys","reply_unexisting_command","load_nsfw"]
     const apikeys = ["yandex","youtube","osu"]
     const arrays = ["owner"]
 
