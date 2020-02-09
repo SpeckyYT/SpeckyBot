@@ -9,7 +9,7 @@ module.exports = (bot) => {
     , "misc"
     , "music"
     , "sfw"
-    , bot.load_nsfw ? "nsfw" : ""
+    , bot.config.load_nsfw ? "nsfw" : ""
     , "images"
     , "private"
     , "custom"]
