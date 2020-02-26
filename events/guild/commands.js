@@ -72,8 +72,7 @@ module.exports.call = async (bot, msg) => {
                 illegal = true;
                 errorReasons.push(reason.toString());
                 return false;
-            }else if(   false &&                     //Disabled from tip of the Discord Bots community
-                        adminAllowed &&
+            }else if(   adminAllowed &&
                         admin &&
                         (category != "owner" &&
                         category != "private" &&
