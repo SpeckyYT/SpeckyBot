@@ -114,7 +114,7 @@ module.exports.call = async (bot, msg) => {
             })
         }
         
-        if(category == "nsfw" && !msg.channel.nsfw){
+        if(category == "nsfw" && (msg.channel.topic.toLowerCase().includes('[no-nsfw]') || !msg.channel.nsfw)){
             if(check(true, nsfwError)){
                 return msg.channel.send(error(nsfwError))
             }
