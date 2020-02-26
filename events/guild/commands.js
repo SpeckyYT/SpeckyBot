@@ -167,7 +167,7 @@ module.exports.call = async (bot, msg) => {
     }else{
         logger(command.slice(bot.config.prefix.length),false,msg, bot);
         
-        if(bot.reply_unexisting_command){
+        if(bot.config.reply_unexisting_command){
             await msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
         }
     }
