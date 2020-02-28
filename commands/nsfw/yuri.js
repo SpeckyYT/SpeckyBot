@@ -1,16 +1,12 @@
 module.exports = {
     name: "yuri",
-	description: "Gives you a yuri!",
+	description: "Gives you yuris!",
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
     aliases: []
 }
 
-const Math = require('mathjs')
-
 module.exports.run = async (bot, msg) => {
-    let methods = ["yuri","eroYuri"]
-    let method = methods[Math.floor(Math.random() * methods.length)];
-    require('./functions/img')(method,msg);
+    require('./functions/img')(["yuri","eroYuri"].pick(),msg);
 }

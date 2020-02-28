@@ -7,10 +7,6 @@ module.exports = {
     aliases: ["bj"]
 }
 
-const Math = require('mathjs')
-
 module.exports.run = async (bot, msg) => {
-    let methods = ["bJ","blowJob"]
-    let method = methods[Math.floor(Math.random() * methods.length)];
-    require('./functions/img')(method,msg);
+    require('./functions/img')(["bJ","blowJob"].pick(),msg);
 }
