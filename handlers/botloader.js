@@ -16,7 +16,7 @@ var forEach = function (collection, callback, scope) {
 }
 
 module.exports = async (bot) => {
-    bot.setMaxListeners(25);
+    bot.setMaxListeners(50);
     
     bot.stats = {};
     bot.stats.commandsExecuted = 0;
