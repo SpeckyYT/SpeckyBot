@@ -18,9 +18,12 @@ module.exports.run = async (bot, msg) => {
         }
     }
     if(!isNaN(romannum) && romannum){
-        return msg.channel.send(romanize(romannum))
+        if(romannum > 3999){
+            return bot.cmdError("Number can't be bigger than 3999");
+        }
+        return msg.channel.send(romanize(romannum));
     }
-    return bot.cmdError("Number is invalid")
+    return bot.cmdError("Number is invalid");
 }
 
 //FROM http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
