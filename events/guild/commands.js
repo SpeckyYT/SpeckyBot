@@ -43,7 +43,8 @@ module.exports.call = async (bot, msg) => {
 
     msg.Args = msg.Args.clean();
 
-    msg.args = msg.Args.join(' ').toLowerCase().split(' ');
+    msg.args = msg.Args.toLowerCase();
+    msg.ARGS = msg.Args.toUpperCase();
 
     msg.command = command.slice(bot.config.prefix.length);
 

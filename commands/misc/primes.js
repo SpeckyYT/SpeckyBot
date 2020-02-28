@@ -1,6 +1,6 @@
 module.exports = {
     name: "primes",
-	description: "Gives you prime numbers.",
+	description: "Gives you prime numbers!",
     usage: `<base>`,
     category: `misc`,
 	accessableby: "Members",
