@@ -2,60 +2,63 @@ const { read } = require('jimp')
 const { unlink } = require('fs')
 
 module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
-    let { Args } = msg;
+    async function manipulation(){
+        let { Args } = msg;
 
-    Args[0] = parseInt(Args[0])
+        Args[0] = parseInt(Args[0])
 
-    let intensity = val;
+        let intensity = val;
 
-    if(typeof intensity != "boolean"){
+        if(typeof intensity != "boolean"){
 
-        if(!free){
-            if(!isNaN(Args[0])){
-                intensity = Number(Args[0]);
-            }
-            if(intensity > max){
-                intensity = max
-            }
-            if(intensity < min){
-                intensity = min
+            if(!free){
+                if(!isNaN(Args[0])){
+                    intensity = Number(Args[0]);
+                }
+                if(intensity > max){
+                    intensity = max
+                }
+                if(intensity < min){
+                    intensity = min
+                }
+            }else{
+                intensity = Number(Args[0])
             }
         }else{
-            intensity = Number(Args[0])
+            intensity = null;
         }
-    }else{
-        intensity = null;
-    }
 
-    let image    = bot.cache.lastImage[msg.channel.id]; 
-    let id       = `${msg.author.id}_${bot.snowflake()}`;
+        let image    = bot.cache.lastImage[msg.channel.id]; 
+        let id       = `${msg.author.id}_${bot.snowflake()}`;
 
-    if(image == undefined){ msg.channel.send("No image found"); return; }
+        if(image == undefined){ msg.channel.send("No image found"); return; }
 
-    msg.channel.send("Image is getting processed...").then( response => {
+        msg.channel.send("Image is getting processed...").then( response => {
 
-        read(image, (err, file) => {
-            if (err){ msg.channel.send("Error happend") };
+            read(image, (err, file) => {
+                if (err){ msg.channel.send("Error happend") };
 
-            function run(){
-                msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
-                    response.delete();
-                    unlink("./" + id + `.${fileFormat}`, () => {})
-                    bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
-                })
-            }
+                function run(){
+                    msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
+                        response.delete();
+                        unlink("./" + id + `.${fileFormat}`, () => {})
+                        bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
+                    })
+                }
 
-            if(intensity != null){
-                file[method](intensity);
-                file.autocrop().write(id + `.${fileFormat}`, ()=>{
-                    run();
-                })
-            }else{
-                file[method]();
-                file.autocrop().write(id + `.${fileFormat}`, ()=>{
-                    run();
-                })
-            }
+                if(intensity != null){
+                    file[method](intensity);
+                    file.autocrop().write(id + `.${fileFormat}`, ()=>{
+                        run();
+                    })
+                }else{
+                    file[method]();
+                    file.autocrop().write(id + `.${fileFormat}`, ()=>{
+                        run();
+                    })
+                }
+            })
         })
-    })
+    }
+    await manipulation();
 }
