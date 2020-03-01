@@ -48,6 +48,8 @@ module.exports.call = async (bot, msg) => {
 
     msg.command = command.slice(bot.config.prefix.length);
 
+    msg.content = msg.content.slice(command.length).trim();
+
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     
     if(cmd){
@@ -114,7 +116,7 @@ module.exports.call = async (bot, msg) => {
             })
         }
         
-        if(category == "nsfw" && (msg.channel.topic.toLowerCase().includes('[no-nsfw]') || !msg.channel.nsfw)){
+        if(category == "nsfw" && (msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : true || !msg.channel.nsfw)){
             if(check(true, nsfwError)){
                 return msg.channel.send(error(nsfwError))
             }
