@@ -1,7 +1,7 @@
 const { readdirSync } = require("fs")
 
 module.exports = async (bot) => {
-    ["client", "custom", "guild","private"].forEach(async dir => {    
+    ["client", "custom", "guild","console","private"].forEach(async dir => {    
         try{
             const events = readdirSync(`./events/${dir}/`).filter(d => d.endsWith('.js'));
             events.forEach(async file => {

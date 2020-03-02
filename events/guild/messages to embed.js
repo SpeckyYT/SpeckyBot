@@ -5,7 +5,7 @@ module.exports = {
 const { RichEmbed } = require('discord.js')
 
 module.exports.call = async (bot, msg) => {
-    if (msg.author.id == bot.user.id || msg.author.bot) return;
+    if (msg.author.id == bot.user.id || msg.author.bot || msg.channel.type != "text") return;
 
     const s_settings = require('../../s_settings.json')
     const u_settings = require('../../u_settings.json')

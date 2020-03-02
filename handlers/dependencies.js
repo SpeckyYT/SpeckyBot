@@ -15,6 +15,7 @@ module.exports = async () => {
         cmd: 'magenta',
         success: 'green',
         startupinfo: 'grey',
+        dms: 'grey',
         fail: 'red',
         failed: 'red',
         fatal: ['black','bgRed']
