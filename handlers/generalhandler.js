@@ -10,5 +10,6 @@ module.exports = async (bot) => {
     }catch(err){
         console.log("FATAL ERROR ON HANDLERS".fatal);
         console.log(err);
+        process.exit(1);
     }
 }
