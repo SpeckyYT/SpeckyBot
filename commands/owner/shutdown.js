@@ -15,6 +15,6 @@ module.exports.run = async (bot, msg) => {
             process.exit();
         });
     }catch(e){
-        msg.channel.send("An error occourred");
+        return bot.cmdError("An error occourred");
     }
 }

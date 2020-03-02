@@ -18,5 +18,5 @@ module.exports = async () => {
         fail: 'red',
         failed: 'red',
         fatal: ['black','bgRed']
-    })
+    });
 }
