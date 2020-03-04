@@ -39,14 +39,15 @@ module.exports.run = async (bot, msg) => {
 		})
 		let diduknow = [
 			`you can use the \`${config.prefix}serversettings\` command to personalize your server!`,
-			`you can use the \`${config.prefix}serversettings\` command to personalize your profile!`,
+			`you can use the \`${config.prefix}usersettings\` command to personalize your profile!`,
 			`you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
 			`you can include \`--emb\` in the \`${config.prefix}say\` command to turn the text into an embed!`,
 			`you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
 			`in any text channel, you can include \`[ALTERNATE]\` in the channel topic, so all users have to alternate!`,
 			`in any text channel, you can include \`[ONE-WORD]\` in the channel topic, so all users can only type one word per message!`,
 			`in any text channel, you can include \`[NO-MEDIA]\` in the channel topic, so nobody can share links/images in the channel!`,
-			`in any text channel, you can include \`[NO-NSFW]\` in the channel topic, so every NSFW command is not executable!`
+			`in any text channel, you can include \`[NO-NSFW]\` in the channel topic, so every NSFW command is not executable!`,
+			`commands usually have aliases? Just execute the command \`${config.prefix}help <command>\` to check them!`
 		];
 
 		embed.addBlankField()
@@ -99,7 +100,7 @@ function categoryCheck(category,msg,bot){
 		return msg.member.permissions.toArray().join(' ').includes('MANAGE_');
 
 	case "nsfw":
-		return msg.channel.nsfw;
+		return !(msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false) && msg.channel.nsfw;
 
 	default:
 		return true;
