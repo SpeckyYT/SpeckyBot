@@ -13,5 +13,8 @@ module.exports.call = async bot => {
     ]
     .forEach(event => {
         bot.emit(event, null);
+        setInterval(() => {
+            bot.emit(event, null)
+        })
     })
 }
