@@ -10,19 +10,18 @@ module.exports.call = async (bot, msg) => {
     if(msg.system) return;
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
-        if(msg.mentions.users.first()) {
-            if(msg.mentions.users.first().tag == bot.user.tag){
-                let clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
-                if(msg.cleanContent != clean){
-                    msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
-                }else{
-                    msg.args = [];
-                    msg.Args = [];
-                    let help = "help";
-                    logger(help,true,msg,bot);
-                    let helpcmd = bot.commands.get(help);
-                    run(helpcmd, bot, msg, `${bot.config.prefix}${help}`);
-                }
+        if(msg.mentions.users.first() ?
+        msg.mentions.users.first().tag == bot.user.tag : false){
+            let clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
+            if(msg.cleanContent != clean){
+                msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
+            }else{
+                msg.args = [];
+                msg.Args = [];
+                let help = "help";
+                logger(help,true,msg,bot);
+                let helpcmd = bot.commands.get(help);
+                run(helpcmd, bot, msg, `${bot.config.prefix}${help}`);
             }
         }
     }
@@ -48,7 +47,7 @@ module.exports.call = async (bot, msg) => {
 
     msg.command = command.slice(bot.config.prefix.length);
 
-    msg.content = msg.content.slice(command.length).trim();
+    msg.content = msg.content.slice(bot.config.prefix.length).trim().slice(command.length-bot.config.prefix.length).trim();
 
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     
@@ -159,8 +158,8 @@ module.exports.call = async (bot, msg) => {
                     run(cmd, bot, msg, command);
                 })
                 .catch(() => {
-                    try{msg.delete()}catch{}
-                    try{ms.delete()}catch{}
+                    msg.delete().catch();
+                    ms.delete().catch();
                 })
             })
         }else{
