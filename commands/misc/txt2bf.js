@@ -11,12 +11,9 @@ const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg) => {
     let { config } = bot;
-    let { args } = msg;
     if(!args[0]){
-        msg.channel.send(`Right syntax: \`${config.prefix}txt2bf [Text String]\``);
-        return;
+        return bot.cmdError(`Message content can't be empty`);
     }
-    var newArgs = msg.content.split(" ").splice(1);
-    var text = convert(newArgs.join(" "));
+    var text = convert(msg.content);
     msg.channel.send(`\`\`\`bf\n${text}\n\`\`\``,{split: {char: '>'}})
 }
