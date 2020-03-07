@@ -11,9 +11,9 @@ const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg) => {
     let { config } = bot;
-    if(!args[0]){
+    if(!msg.content){
         return bot.cmdError(`Message content can't be empty`);
     }
-    var text = convert(msg.content);
+    let text = convert(msg.content);
     msg.channel.send(`\`\`\`bf\n${text}\n\`\`\``,{split: {char: '>'}})
 }
