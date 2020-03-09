@@ -26,7 +26,6 @@
     "random": "^2.1.1",
     "random-animals-api": "^1.2.0",
     "request": "^2.88.2",
-    "require-time-tree": "0.0.0",
     "string-similarity": "^3.0.0",
     "superagent": "^5.2.2",
     "translate": "^1.1.1",

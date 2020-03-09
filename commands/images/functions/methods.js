@@ -29,9 +29,11 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
         }
 
         let image    = bot.cache.lastImage[msg.channel.id]; 
-        let id       = `${msg.author.id}_${bot.snowflake()}`;
+        let id       = bot.snowflake();
 
         if(image == undefined){ msg.channel.send("No image found"); return; }
+
+        if(!fileFormat){fileFormat = "png"}
 
         msg.channel.send("Image is getting processed...").then( response => {
 
@@ -41,7 +43,7 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
                 function run(){
                     msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
                         response.delete();
-                        unlink("./" + id + `.${fileFormat}`, () => {})
+                        unlink(`./${id}.${fileFormat}`, () => {})
                         bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
                     })
                 }

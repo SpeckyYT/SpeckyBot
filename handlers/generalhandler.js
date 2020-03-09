@@ -6,7 +6,6 @@ module.exports = async (bot) => {
         await require('./confighandler')();
         await require('./botloader')(bot);
         await require('./login')(bot);
-        await require('./website')(bot);
     }catch(err){
         console.log("FATAL ERROR ON HANDLERS".fatal);
         console.log(err);
