@@ -7,8 +7,9 @@ module.exports = {
     aliases: ["us","usersetting"]
 }
 
-const dir = '../../../u_settings';
+const { RichEmbed } = require('discord.js');
 const { writeFile } = require('fs');
+const dir = '../../u_settings';
 
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
@@ -17,10 +18,10 @@ module.exports.run = async (bot, msg) => {
         case "embedcolor":
         case "ec":
         case "embcol":
-            const color = args[1]
+            let color = args[1];
             if(color == null) return msg.channel.send("You have to define a color (in HEX format)");
             color = color.replace("#",'');
-            var temp = parseInt(color, 16);
+            let temp = parseInt(color, 16);
             if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
             if(color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
             
@@ -33,9 +34,13 @@ module.exports.run = async (bot, msg) => {
                 msg.channel.send(`Changed your embed color to \`${color.toUpperCase()}\`!`)
             });
             break;
-        
         default:
-            msg.channel.send("You have to define a setting to edit.\n\n\n\nChange Message to Embed color: `sb!ss ec <HEX COLOR>`")
+            let cEmbed = new RichEmbed()
+                .setTitle("User Settings Help Page!")
+                .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
+                .addBlankField()
+                .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``);
+            msg.channel.send(cEmbed);
 
     }
 }

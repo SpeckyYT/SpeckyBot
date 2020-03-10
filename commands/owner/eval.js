@@ -10,11 +10,12 @@ module.exports = {
 const { inspect } = require("util")
 
 module.exports.run = async (bot, msg) => {
-    let toEval = msg.Args.join(" ");
+    let toEval = msg.content;
 
     let evaluated;
+
     try{
-        evaluated = inspect(eval(toEval, { depth: 0 }));
+        evaluated = inspect(eval(toEval,{depth:0}));
     }catch(e){
         return msg.channel.send(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
     }

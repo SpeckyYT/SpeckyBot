@@ -6,6 +6,9 @@ const { RichEmbed } = require('discord.js')
 
 module.exports.call = async (bot, msg) => {
     if(msg.author.bot) return;
+    if(msg.channel != "text") return;
+    if(new Date().getTime() - msg.createdTimestamp > 60000) return;
+    
     if(msg.mentions.members.first()){
         msg.mentions.members.forEach(member => {
             if(msg.author.id != member.user.id && !member.user.bot){

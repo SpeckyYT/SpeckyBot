@@ -2,7 +2,19 @@ const { readdirSync } = require("fs")
 
 module.exports = (bot) => {
     delete require.cache;
-    ["owner", "admin", "utilities", "games", "misc", "music", "sfw", "nsfw", "images", "private", "custom"].forEach(async dir => {
+    [ "owner"
+    , "admin"
+    , "utilities"
+    , "games"
+    , "misc"
+    , "music"
+    , "sfw"
+    , bot.config.load_nsfw ? "nsfw" : ""
+    , "images"
+    , "private"
+    , "custom"]
+    .clean()
+    .forEach(async dir => {
         try{
             let commands = readdirSync(`./commands/${dir}/`).filter(d => d.endsWith('.js'));
             commands.forEach(async file => {

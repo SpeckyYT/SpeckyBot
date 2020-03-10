@@ -2,7 +2,7 @@ module.exports = {
     name: "randomname",
 	description: "Gives you a random person name!\nThanks to Nickguimond for the randomQuestions module\nhttps://github.com/nickguimond/randomQuestions",
     usage: ``,
-    category: `utilities`,
+    category: `misc`,
 	accessableby: "Members",
     aliases: ["rn","randname","randn","name"]
 }

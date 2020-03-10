@@ -3,15 +3,28 @@ module.exports = {
 }
 
 module.exports.call = async bot => {
-    let statuses = [
+    console.log("Bot is ready!".success);
+
+    let statuses = {
+        normal: [
         `${bot.guilds.size} servers!`,
         `${bot.config.prefix}help`,
         `${bot.config.prefix}invite`,
         `over ${bot.users.size} users!`
-    ]
+        ],
+        corona: [
+        `${bot.guilds.size} countries infected`,
+        `${bot.config.prefix}help for surviving`,
+        `${bot.config.prefix}invite`,
+        `${bot.users.size} users infected`
+        ]
+    }
+
+    let status = "corona";
 
     setInterval(function() {
-        let status = statuses[Math.floor(Math.random() * statuses.length)];
-        bot.user.setActivity(status, {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
+        try{
+            bot.user.setActivity(statuses[status].pick(), {type: "WATCHING", url:"https://www.twitch.tv/SpeckyYT"});
+        }catch(e){}
     }, 30000)
 }

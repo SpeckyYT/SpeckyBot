@@ -115,6 +115,6 @@ module.exports = async (method, msg) => {
             send(imgURL, "")
         })
     }else{
-        msg.channel.send('This should never happen.\nBut if it happens, wish Specky a good day.')
+        msg.channel.send('This should never happen, but IF it happens, wish Specky a good day.')
     }
 }

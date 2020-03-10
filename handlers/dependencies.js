@@ -1,4 +1,4 @@
-module.exports = async () => {
+module.exports = async () => {    
     require('more-array-methods')();
 
     require('colors').setTheme({
@@ -15,8 +15,9 @@ module.exports = async () => {
         cmd: 'magenta',
         success: 'green',
         startupinfo: 'grey',
+        dms: 'grey',
         fail: 'red',
         failed: 'red',
         fatal: ['black','bgRed']
-    })
+    });
 }

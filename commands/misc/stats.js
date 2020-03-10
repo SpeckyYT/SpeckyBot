@@ -43,14 +43,14 @@ module.exports.run = async (bot, msg) => {
     let driveUsed, driveFree;
 
     try{
-        driveUsed = (await osu.drive.info()).usedPercentage
-        driveFree = (await osu.drive.info()).freePercentage
+        await osu.drive.info().then(i => driveUsed = i.usedPercentage)
+        await osu.drive.info().then(i => driveFree = i.freePercentage)
     }catch(err){driveUsed = false}
 
     let networkUsage, networkUsageIn, networkUsageOut;
 
     try{
-        networkUsage  = (await osu.netstat.inOut()).total;
+        await osu.netstat.inOut().then(i => networkUsage = i.total)
         networkUsageIn = networkUsage.inputMb;
         networkUsageOut = networkUsage.outputMb;
     }catch(err){networkUsage = false}

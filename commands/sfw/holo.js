@@ -7,17 +7,13 @@ module.exports = {
     aliases: ['kemo']
 }
 
-const Math = require('mathjs')
-
 module.exports.run = async (bot, msg) => {
-    if(!msg.channel.nsfw){
+    if(require('./functions/nsfw')(msg)){
         //SFW
         require('./functions/img')('holo', msg)
     }else{
         //NSFW
-        let methods = ["holo","holoEro"]
-        let method = methods[Math.floor(Math.random() * methods.length)];
-        require('../nsfw/functions/img')(method, msg);
+        require('../nsfw/functions/img')(["holo","holoEro"].pick(), msg);
     }
 }
 

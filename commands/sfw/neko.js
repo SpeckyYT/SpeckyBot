@@ -7,18 +7,12 @@ module.exports = {
     aliases: ["nya","nyan"]
 }
 
-const Math = require('mathjs')
-
 module.exports.run = async (bot, msg) => {
-    if(!msg.channel.nsfw){
+    if(require('./functions/nsfw')(msg)){
         //SFW
-        let methods = ["neko","nekoGif"]
-        let method = methods[Math.floor(Math.random() * methods.length)];
-        require('./functions/img')(method, msg);
+        require('./functions/img')(["neko","nekoGif"].pick(), msg);
     }else{
         //NSFW
-        let methods = ["neko","nekoGif","eroNeko"]
-        let method = methods[Math.floor(Math.random() * methods.length)];
-        require('../nsfw/functions/img')(method, msg);
+        require('../nsfw/functions/img')(["neko","nekoGif","eroNeko"].pick(), msg);
     }
 }

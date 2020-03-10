@@ -4,7 +4,7 @@ module.exports = {
     usage: `<problem>`,
     category: `utilities`,
 	accessableby: "Members",
-    aliases: ["maths","mathematic","mathematics"]
+    aliases: ["maths","mathematic","mathematics","calculator","calc","calculate"]
 }
 
 const { evaluate } = require("mathjs");

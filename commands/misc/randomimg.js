@@ -13,13 +13,13 @@ const { get } = require('superagent')
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     let mesg = await msg.channel.send("Generating...")
-    let kw = ``;
+    let kw;
     if(args[0]){
-        kw = `${args.join(" ")}`;
+        kw = `${args.join(",")}`;
     }else{
         kw = `all`
     }
-    let {body} = await get(`https://loremflickr.com/json/g/1024/1024/${kw}`)
+    let {body} = await get(`https://loremflickr.com/json/p/1024/1024/${kw}`)
     if(!{body}) return msg.channel.send("I broke! Try again.")
 
         let cEmbed = new RichEmbed()

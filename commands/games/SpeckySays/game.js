@@ -2,10 +2,10 @@ let randomStart = require('./randomStart.js')
 var discord = require('discord.js')
 var fs = require('fs')
 
-module.exports.runGame = async function (channel, players_, bot) {
+module.exports.runGame = async (channel, players_, bot) => {
 
     bot.minigames = []
-    const gameFiles = fs.readdirSync('./commands/external/SpeckySays/minigames').filter(file => file.endsWith('.js'))
+    const gameFiles = fs.readdirSync('./commands/games/SpeckySays/minigames').filter(file => file.endsWith('.js'))
 
     for (const file of gameFiles) {
         const game = require(`./minigames/${file}`)

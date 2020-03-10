@@ -11,8 +11,16 @@ const cleverbot = require("cleverbot-free");
 
 module.exports.run = async (bot, msg) => {
     let { Args } = msg;
-    cleverbot(Args.join(" "))
+
+    if(typeof bot.cache.chatbot[msg.channel.id] != "object"){
+        bot.cache.chatbot[msg.channel.id] = [];
+    }
+
+    return cleverbot(Args.join(" "),bot.cache.chatbot[msg.channel.id])
     .then(response => {
         msg.channel.send(response)
+    })
+    .finally(() => {
+        bot.cache.chatbot[msg.channel.id].push(Args.join(" "));
     })
 }
