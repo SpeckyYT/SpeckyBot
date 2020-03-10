@@ -18,9 +18,9 @@ module.exports.run = async (bot, msg) => {
 
     let top = new Collection();
 
-    let topmax = msg.args[0] || 5;
+    let topmax = isNaN(msg.args[0]) ? 5 : msg.args[0];
 
-    if(msg.args[0] < 3){
+    if(topmax < 3){
         topmax = 3;
     }
 
