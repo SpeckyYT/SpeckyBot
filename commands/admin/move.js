@@ -14,8 +14,8 @@ module.exports.run = async (bot, msg) => {
     
     const VC1 = msg.member.voiceChannel;
 
-    msg.channel.send(`Now go to the Voice Channel where you want to move all users of the previous VC\nOnce you're ready, include \`ready\` in your next message (in this text channel)`)
-    const filter = m => m.content.includes('ready') && m.author.id == msg.author.id;
+    msg.channel.send(`Now go to the Voice Channel where you want to move all users of the previous VC\nOnce you're ready, include \`ready\` in your next message (in this channel)`)
+    const filter = m => m.content.toLowerCase().includes('ready') && m.author.id == msg.author.id;
     msg.channel.awaitMessages(filter, {max: 1, time: 30000, errors: ['time']})
         .then(mess => {
             mess.forEach(singmsg => {

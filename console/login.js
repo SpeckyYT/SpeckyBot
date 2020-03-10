@@ -5,7 +5,7 @@ module.exports = {
 
 module.exports.run = async (bot, args) => {
     if(!args[0]) {
-        return console.log("No token provided!".error)
+        return bot.login(bot.config.token);
     }
 
     bot.login(args[0])

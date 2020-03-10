@@ -8,7 +8,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(require('./functions/nsfw')(msg)){
+    if(require('./functions/sfw')(msg)){
         //SFW
         require('./functions/img')(["neko","nekoGif"].pick(), msg);
     }else{

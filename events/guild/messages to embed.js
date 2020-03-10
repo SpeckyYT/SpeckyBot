@@ -21,7 +21,7 @@ module.exports.call = async (bot, msg) => {
     if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES')){
         if(msg.content.includes(':EMB:')){
             await msg.delete().catch(()=>{return})
-            msg.content = msg.content.replace(/(:EMB:)/g,'').trim();
+            msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
                 let embed = new RichEmbed()
                     .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)

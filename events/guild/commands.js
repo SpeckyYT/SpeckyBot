@@ -2,7 +2,7 @@ module.exports = {
     event: "message"
 }
 
-const { RichEmbed } = require('discord.js')
+const { RichEmbed } = require('discord.js');
 
 module.exports.call = async (bot, msg) => {
     if(msg.author.bot || msg.channel.type === "dm") return;
@@ -48,6 +48,23 @@ module.exports.call = async (bot, msg) => {
     msg.command = command.slice(bot.config.prefix.length);
 
     msg.content = msg.content.slice(bot.config.prefix.length).trim().slice(command.length-bot.config.prefix.length).trim();
+
+    let flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
+
+    msg.content = msg.content.replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim();
+
+    msg.flags = [];
+
+    if(flags){
+        flags.forEach((f,index) => {
+            msg.flags[index] = flags[index].slice(2);
+        })
+    }
+
+    msg.hasFlag = (input) => {
+        return msg.flags.includes(input.toLowerCase());
+    }
+    msg.flag = msg.hasFlag;
 
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
     

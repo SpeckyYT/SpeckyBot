@@ -12,21 +12,12 @@ const { RichEmbed } = require('discord.js');
 const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
-    let res = msg.Args.join(' ');
+    let res = msg.content;
 
     let channel = msg.channel;
     let user = msg.author;
 
-    function incl(string){
-        let option = "--" + string;
-        if(res.toLowerCase().includes(option)){
-            res = res.replace(option,'')
-            return true;
-        }
-        return false;
-    }
-
-    if(incl("channel")){
+    if(msg.flag("channel")){
         let tempchannel = msg.mentions.channels.first();
         if(tempchannel){
             channel = tempchannel;
@@ -34,7 +25,7 @@ module.exports.run = async (bot, msg) => {
         }
     }
 
-    if(incl("user")){
+    if(msg.flag("user")){
         let tempuser = msg.mentions.users.first();
         if(tempuser){
             user = tempuser;
@@ -42,21 +33,23 @@ module.exports.run = async (bot, msg) => {
         }
     }
 
-    if(incl("sneak")){
+    if(msg.flag("sneak")){
         msg.delete();
     }
 
-    if(incl("rcase")){
+    if(msg.flag("rcase")){
         res = res.split('').map(function(l){
             return l[randomInt(0,2)?'toUpperCase':'toLowerCase']();
         }).join('');
     }
 
-    if(incl("emb")){
+    if(msg.flag("emb")){
         res = new RichEmbed()
         .setDescription(res)
         .setAuthor(user.username, user.avatarURL);
     }
+
     if(!res) return msg.channel.send("Message is too short.")
+
     channel.send(res)
 }
