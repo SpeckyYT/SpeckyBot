@@ -2,23 +2,17 @@ module.exports = {
     event: "message"
 }
 
-const fetch = require('node-fetch');
-const { createWriteStream, unlink }= require('fs')
+const osr = require('node-osr');
+const { parseReplay } = require('osureplayparser');
+const { createWriteStream, unlink } = require('fs');
+const { get } = require('https')
 
 module.exports.call = async (bot, msg) => {
-    if(!msg.attachments.size) return;
+    if(msg.attachments.size < 1) return;
+
     msg.attachments.forEach(async attachment => {
-        if(!attachment.filename.endsWith(".osr")) return;
-        
-        fetch(attachment.proxyURL).then(async file => {
-            const dest = createWriteStream(attachment.filename,{encoding: "binary"});
-            console.log(file.body)
-            file.body.pipe(dest);
+        if(!attachment.filename.endsWith('.osr')) return;
 
-
-            //OsuReplayParser stuff
-
-            unlink(attachment.filename,()=>{})
-        })
+        let sf = `${bot.snowflake()}.osr`;
     })
 }

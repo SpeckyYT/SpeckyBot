@@ -7,7 +7,6 @@ module.exports = {
     aliases: ["us","usersetting"]
 }
 
-const { RichEmbed } = require('discord.js');
 const { writeFile } = require('fs');
 const dir = '../../u_settings';
 
@@ -35,12 +34,12 @@ module.exports.run = async (bot, msg) => {
             });
             break;
         default:
-            let cEmbed = new RichEmbed()
+            let embed = bot.embed()
                 .setTitle("User Settings Help Page!")
                 .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
                 .addBlankField()
                 .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``);
-            msg.channel.send(cEmbed);
+            msg.channel.send(embed);
 
     }
 }

@@ -7,23 +7,18 @@ module.exports = {
     aliases: ["servers"]
 }
 
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
-    var quantity = 0;
-    bot.guilds.forEach(server => {
-        if(bot.checkOwner(msg.author.id) && args[0] == `yes`) msg.channel.send(`${server.name} (${server.id})`);
-        quantity++;
-    })
-    const embed = new RichEmbed()
-        .setColor('#FF00AA')
-        .setTitle(`${bot.user.username}`)
-        .setThumbnail(bot.user.imageURL)
+
+    if(bot.checkOwner(msg.author.id) && args[0] == "yes"){
+        bot.guilds.forEach(server => {
+            msg.channel.send(`${server.name} (${server.id})`);
+        })
+    }
+
+    const embed = bot.embed()
         .addBlankField()
-        .addField(`Servers Count:`, `${quantity}`)
-        .addBlankField()
-        .setTimestamp()
-        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
+        .addField(`Servers Count:`, bot.guilds.size)
+        .addBlankField();
     msg.channel.send(embed);
 }

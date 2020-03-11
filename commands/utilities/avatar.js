@@ -7,8 +7,6 @@ module.exports = {
     aliases: ["a","ava"]
 }
 
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
     let user;
     
@@ -28,10 +26,10 @@ module.exports.run = async (bot, msg) => {
         user = msg.author;
     }
 
-    msg.channel.send(
-        new RichEmbed()
-        .setTitle(`${user.username}#${user.discriminator}`)
-        .setImage(user.avatarURL)
-        .setDescription(`[Link](${user.avatarURL})`)
-    )
+    let embed = bot.embed()
+    .setTitle(`${user.username}#${user.discriminator}`)
+    .setImage(user.avatarURL)
+    .setDescription(`[Link](${user.avatarURL})`);
+
+    msg.channel.send(embed);
 }

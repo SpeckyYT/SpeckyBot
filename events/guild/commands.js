@@ -71,6 +71,9 @@ module.exports.call = async (bot, msg) => {
     if(cmd){
         bot.stats.commandsExecuted++;
 
+        msg.bot = bot;
+        bot.cache.msg = msg;
+
         logger(command.slice(bot.config.prefix.length),true,msg,bot);
 
         if(msg.guild.me.permissionsIn(msg.channel).toArray().indexOf('SEND_MESSAGES') < 0){

@@ -7,15 +7,8 @@ module.exports = {
     aliases: []
 }
 
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
-    const embed = new RichEmbed()
-        .setColor('#FF00AA')
-        .setTitle(`${bot.user.username}`)
-        .setThumbnail(bot.user.imageURL)
-        .addField(`Total Users Count:`, `${bot.users.size}`)
-        .setTimestamp()
-        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
+    const embed = bot.embed()
+        .addField(`Total Users Count:`, `${bot.users.size}`);
     msg.channel.send(embed);
 }

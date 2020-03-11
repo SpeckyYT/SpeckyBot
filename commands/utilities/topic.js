@@ -7,8 +7,6 @@ module.exports = {
     aliases: ["bruh"]
 }
 
-const { RichEmbed } = require('discord.js')
-
 let questions = [
 
     "Are you a giver or taker?",
@@ -63,14 +61,14 @@ module.exports.run = async (bot, msg) => {
     if(msg.command == "topic"){
         msg.channel.send(question)
     }else{
-        msg.channel.send(
-            new RichEmbed()
-            .setTitle(msg.author.username)
-            .setDescription(`${msg.author} wants to start talking about this:\n\n**${question}**`)
-            .setThumbnail(msg.author.avatarURL)
-            .setColor(msg.member.displayHexColor)
-            .setFooter("User joined")
-            .setTimestamp(msg.member.joinedTimestamp)
-        )
+        let embed = bot.embed()
+        .setTitle(msg.author.username)
+        .setDescription(`${msg.author} wants to start talking about this:\n\n**${question}**`)
+        .setThumbnail(msg.author.avatarURL)
+        .setColor(msg.member.displayHexColor)
+        .setFooter("User joined")
+        .setTimestamp(msg.member.joinedTimestamp);
+
+        msg.channel.send(embed)
     }
 }

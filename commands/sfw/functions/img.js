@@ -1,4 +1,3 @@
-const { RichEmbed } = require('discord.js');
 const client = require('nekos.life');
 const animals = require('random-animals-api'); 
 const { sfw } = new client();
@@ -98,9 +97,7 @@ module.exports = async (method, msg) => {
     }
 
     function send(imgURL, poweredby){
-        let embed = new RichEmbed()
-        .setImage(imgURL)
-        .setColor('FF00AA');
+        let embed = msg.bot.embed().setImage(imgURL);
         if(poweredby) embed.setFooter("Powered by " + poweredby);
         if(sendt) embed.setDescription(sendt);
         return msg.channel.send(embed);

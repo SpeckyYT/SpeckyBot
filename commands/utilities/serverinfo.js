@@ -7,8 +7,6 @@ module.exports = {
     aliases: ["si","serveri"]
 }
 
-const { RichEmbed } = require("discord.js");
-
 module.exports.run = async (bot, msg) => {
 
 	var bots = 0, humans = 0;
@@ -21,10 +19,9 @@ module.exports.run = async (bot, msg) => {
 		}
 	});
 
-	let embed = new RichEmbed()
+	let embed = bot.embed()
 		.setAuthor(msg.author.username)
 		.setDescription("These are the informations about the server you're in!")
-		.setColor("#FF00AA")
 		.setImage(msg.guild.iconURL)
 		.addField("Server name", `${msg.guild.name}`)
 		.addField("Server ID", `${msg.guild.id}`)

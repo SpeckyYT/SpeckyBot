@@ -7,12 +7,9 @@ module.exports = {
     aliases: ["patr","patreo"]
 }
 
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
-    const embed = new RichEmbed()
-        .setColor("#FF00AA")
-        .setAuthor('Patreon Page!')
+    const embed = bot.embed()
+        .setTitle('Patreon Page!')
         .setDescription(`[**Patreon**](https://patreon.com/SpeckyBot)`)
         .addField(`Patreons:`, `*Nobody... but you can be this first!*`)
 	msg.channel.send(embed);

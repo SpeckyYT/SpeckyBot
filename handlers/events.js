@@ -9,7 +9,11 @@ module.exports = async (bot) => {
                     const evt = require(`../events/${dir}/${file}`);
                     let eName = evt.event;
                     if(!eName) throw {message: error = "Event not found!".toUpperCase()};
-                    bot.on(eName, evt.call.bind(null, bot));
+                    let calltype = evt.type;
+                    if(!bot[calltype]){
+                        calltype = "on";
+                    }
+                    bot[calltype](eName, evt.call.bind(null, bot));
                     bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}   \t|\t${file} ERROR!`.error)

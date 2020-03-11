@@ -7,8 +7,6 @@ module.exports = {
     aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
 }
 
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
     let discriminator = msg.author.discriminator.padStart(4,"0");
@@ -27,8 +25,7 @@ module.exports.run = async (bot, msg) => {
             }
         }
     })
-    const embed = new RichEmbed()
-        .setColor('#FF00AA')
+    const embed = bot.embed()
         .setTitle(`#${discriminator}`)
         .setDescription(discrims.length ? discrims.join(`\n`) : 'No user found')
     msg.channel.send(embed);

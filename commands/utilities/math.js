@@ -8,7 +8,6 @@ module.exports = {
 }
 
 const { evaluate } = require("mathjs");
-const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
@@ -20,7 +19,7 @@ module.exports.run = async (bot, msg) => {
     } catch (e){
         return msg.channel.send('Sorry, please input a valid calculation.')
     }
-    const embed = new RichEmbed()
+    const embed = bot.embed()
         .setColor("#FFFFFF")
 		.setTitle('Math Calculation')
 		.addField("Input", `\`\`\`js\n${args.join(' ')}\`\`\``)

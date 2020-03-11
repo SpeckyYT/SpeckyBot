@@ -8,7 +8,6 @@ module.exports = {
 }
 
 const urban = require("urban");
-const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     let { Args } = msg;
@@ -26,14 +25,13 @@ module.exports.run = async (bot, msg) => {
         search.first(res => {
             if(!res) return msg.channel.send("No results found for this topic, sorry!");
             let { word, definition, example, thumbs_up, thumbs_down, permalink, author} = res;
-            let embed = new RichEmbed()
+            let embed = bot.embed()
                 .setColor("#C78C2B")
                 .setAuthor(`Urban Dictionary | ${word}`, image)
                 .setThumbnail(image)
                 .setDescription(`**Defintion:** ${definition || "No definition"}\n\n**Example:** ${example || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
-                .setTimestamp()
                 .setFooter(`Written by ${author || "unknown"}`);
-                msg.channel.send(embed)
+            msg.channel.send(embed)
         });
     } catch(e) {
         console.log(e)
