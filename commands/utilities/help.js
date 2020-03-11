@@ -7,18 +7,14 @@ module.exports = {
     aliases: ["h", "halp", "hel","hwlp","hewlp","cmds","commands","undefined","info","informations","information"]
 }
 
-const { RichEmbed } = require("discord.js");
 const { readdirSync } = require("fs")
-const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
 	let { config } = bot;
 	let { args } = msg;
 	
-	var embed = new RichEmbed()
-	.setColor('#FF00AA')
+	var embed = bot.embed()
 	.setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
-	.setThumbnail(bot.user.displayAvatarURL)
 
 	if(!args[0] || (bot.checkOwner(msg.author.id) && args[0] == "all")) {
 		let categories = readdirSync('./commands/')

@@ -4,7 +4,8 @@ module.exports = {
     usage: ``,
     category: `sfw`,
 	accessableby: "Members",
-    aliases: ['kemo','kemono','kemonomi']
+    aliases: ['kemo','kemono','kemonomi'],
+    flags: ["sfw"]
 }
 
 module.exports.run = async (bot, msg) => {

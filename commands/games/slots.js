@@ -4,7 +4,8 @@ module.exports = {
     usage: `<slots quantity>`,
     category: `games`,
 	accessableby: "Members",
-    aliases: ["slot"]
+    aliases: ["slot"],
+    flags: ["stats"]
 }
 
 module.exports.run = async (bot, msg) => {
@@ -41,11 +42,12 @@ module.exports.run = async (bot, msg) => {
             emote = msg.guild.emojis.random().toString();
         }
 
-        if(!oldEmote){
-            oldEmote = emote;
+        if(won){
+            if(!oldEmote){
+                oldEmote = emote;
+            }
+            won = won && (emote == oldEmote);
         }
-
-        won = won && (emote == oldEmote);
 
         neweArray.push(emote);
 
@@ -60,8 +62,9 @@ module.exports.run = async (bot, msg) => {
         bot.stats.slots++;
     }
 
-    await msg.channel.send(eArray.join(''))
-    if(msg.args[1] == "stats"){
-        await msg.channel.send(`${won ? "WINNER!" : `Please Try Again!\n||${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%||`}`);
+    await msg.channel.send(eArray.join(''));
+
+    if(msg.flag('stats') || won){
+        await msg.channel.send(`${won ? "WINNER!" : `Please Try Again!\n${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%`}`);
     }
 }

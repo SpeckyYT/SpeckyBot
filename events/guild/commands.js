@@ -27,7 +27,13 @@ module.exports.call = async (bot, msg) => {
     }
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
-    
+
+    let flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
+
+    msg.content = msg.content.replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim();
+
+    msg.flags = [];
+
     msg.Args = msg.content.split(/\s|\n/g);
 
     let command = msg.Args[0].toLowerCase();
@@ -38,6 +44,7 @@ module.exports.call = async (bot, msg) => {
         command = fix.toLowerCase();
         msg.Args = msg.Args.slice(1);
     }
+
     msg.Args = msg.Args.slice(1);
 
     msg.Args = msg.Args.clean();
@@ -45,15 +52,9 @@ module.exports.call = async (bot, msg) => {
     msg.args = msg.Args.toLowerCase();
     msg.ARGS = msg.Args.toUpperCase();
 
-    msg.command = command.slice(bot.config.prefix.length);
-
     msg.content = msg.content.slice(bot.config.prefix.length).trim().slice(command.length-bot.config.prefix.length).trim();
 
-    let flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
-
-    msg.content = msg.content.replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim();
-
-    msg.flags = [];
+    msg.command = command.slice(bot.config.prefix.length);
 
     if(flags){
         flags.forEach((f,index) => {
@@ -168,22 +169,29 @@ module.exports.call = async (bot, msg) => {
         if(illegal){
             let time = 10;
             msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${bot.singPlur(errorReasons.length,"Reason",false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
-            .then(ms => {
+            .then(async ms => {
                 let emote = '✅';
-                ms.react(emote);
-                const filter = (reaction, user) => user.id === msg.author.id && reaction.emoji.name === emote
-                ms.awaitReactions(filter, { max: 1, time: (time*1000), errors: ['time']})
-                .then(() => {
-                    try{ms.delete()}catch{}
-                    run(cmd, bot, msg, command);
-                })
-                .catch(() => {
-                    msg.delete().catch();
+                await ms.react(emote);
+                const filter = (reaction, user) => (user.id == msg.author.id) && (reaction.emoji.name == emote)
+                let collector =  ms.createReactionCollector(filter, { time: (time*1000), errors: ['time'] })
+                
+                let runned = false;
+                
+                collector.on('collect', async () => {
+                    runned = true;
+                    collector.stop()
                     ms.delete().catch();
+                    return run(cmd, bot, msg, command);
+                })
+                
+                collector.on('end', async () => {
+                    if(runned) return;
+                    ms.delete().catch();
+                    msg.delete().catch();
                 })
             })
         }else{
-            run(cmd, bot, msg, command)
+            await run(cmd, bot, msg, command)
         }
 
     }else{

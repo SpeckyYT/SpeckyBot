@@ -5,7 +5,8 @@ module.exports = {
     category: `admin`,
 	accessableby: "Server Admins and Moderators",
     aliases: ["send","announcement"],
-    perms: ['MANAGE_MESSAGES']
+    perms: ['MANAGE_MESSAGES'],
+    flags: ["channel","user","sneak","rcase","emb"]
 }
 
 const { RichEmbed } = require('discord.js');
