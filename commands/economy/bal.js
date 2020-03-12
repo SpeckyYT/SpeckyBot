@@ -36,7 +36,7 @@ module.exports = {
     message.channel.send({
       embed: {
         title: "Bank",
-        color: 0xf1c40f,
+        color: FF00AA,
         fields: [
           {
             name: "Account Holder",

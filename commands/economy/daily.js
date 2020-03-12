@@ -44,7 +44,7 @@ module.exports = {
       message.channel.send({
         embed: {
           title: "Bank",
-          color: 0xf1c40f,
+          color: FF00AA,
           description:
             "You Claimed your **first** Daily reward.\n`500₪` has been added to your account."
         }
@@ -73,7 +73,7 @@ module.exports = {
       message.channel.send({
         embed: {
           title: "Bank",
-          color: 0xf1c40f,
+          color: FF00AA,
           description:
             "You Claimed your Daily reward.\n`250₪` has been added to your account."
         }
