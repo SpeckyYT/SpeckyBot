@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg) => {
     const state = args[0];
     try{
         bot.user.setStatus(state).then().catch();
-        msg.channel.send("should have been working bruj");
+        msg.channel.send("should have been working bruh");
     }catch(e){
         msg.channel.send("An error occurred");
     }

@@ -9,6 +9,7 @@
     "discord.js": "^11.6.1",
     "discord.js-musicbot-addon": "^13.9.1",
     "express": "^4.17.1",
+    "got": "^10.6.0",
     "is-image-url": "^1.1.8",
     "jimp": "^0.9.5",
     "languagedetect": "^2.0.0",
