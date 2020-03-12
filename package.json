@@ -13,6 +13,7 @@
     "jimp": "^0.9.5",
     "languagedetect": "^2.0.0",
     "mathjs": "^6.6.1",
+    "moment": "^2.24.0",
     "more-array-methods": "^1.1.2",
     "nekos.life": "^2.0.5",
     "node-fetch": "^2.6.0",
