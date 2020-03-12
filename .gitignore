@@ -1,7 +1,6 @@
 events/private
 commands/private
-
-tmp
+db/
 
 *.txt
 *.png
