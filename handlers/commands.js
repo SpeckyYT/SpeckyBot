@@ -12,6 +12,7 @@ module.exports = (bot) => {
     , bot.config.load_nsfw ? "nsfw" : ""
     , "images"
     , "private"
+    , "economy"
     , "custom"]
     .clean()
     .forEach(async dir => {

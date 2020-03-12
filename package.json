@@ -24,6 +24,7 @@
     "opusscript": "0.0.7",
     "osu": "^3.0.0-0",
     "osureplayparser": "^1.0.1",
+    "parse-ms": "^2.1.0",
     "random": "^2.1.1",
     "random-animals-api": "^1.2.0",
     "request": "^2.88.2",
