@@ -267,4 +267,24 @@ module.exports = async (bot) => {
             return null;
         }
     }
+
+    bot.parseBet = (economy,author,bet,min) => {
+        let { money } = economy[author.id];
+        if(!min){
+            min = 100
+        }
+        bet = Number(bet);
+        console.log(bet)
+        if(bet > money){
+            return money;
+        }else if(bet < (min ? min : 100)){
+            return min;
+        }else if(bet === "all"){
+            return money;
+        }else if(!isNaN(bet)){
+            return bet;
+        }else{
+            throw "Unknown error on economy (bot.parseBet)";
+        }
+    }
 }

@@ -11,44 +11,24 @@ const fs = require("fs");
 const moment = require("moment");
 
 module.exports.run = async (bot, msg) => {
-  let userData = JSON.parse(fs.readFileSync("db/userdata.json", "utf8"));
+  let { economy } = bot
+  let { author } = msg;
 
-  let sender = msg.author;
-
-  // Events
-  if (!userData[sender.id]) {
-    userData[sender.id] = {};
-  }
-  if (!userData[sender.id].money) {
-    userData[sender.id].money = 1000;
-  }
-  if (!userData[sender.id].lastDaily) {
-    userData[sender.id].lastDaily = "";
-  }
-
-  // Save Changes
-  fs.writeFile("db/userdata.json", JSON.stringify(userData), err => {
-    if (err) console.error(err);
-  });
-
-  var cancollect = false;
-  let ld = userData[sender.id].lastDaily;
+  let ld = economy[author.id].lastDaily;
 
   if (ld == "") {
-    userData[sender.id].lastDaily = moment()
+    economy[author.id].lastDaily = moment()
       .utc()
       .format();
-    userData[sender.id].money += 500;
+    economy[author.id].money += 500;
 
-    const embed = bot.embed()
+    let embed = bot.embed()
     .setTitle('Bank')
     .setDescription("You Claimed your **first** Daily reward.\n`500₪` has been added to your account.")
     msg.channel.send(embed);
 
     // Save Changes
-    fs.writeFile("db/userdata.json", JSON.stringify(userData), err => {
-      if (err) console.error(err);
-    });
+    await require('./functions/write')(economy);
     return;
   }
 
@@ -62,26 +42,25 @@ module.exports.run = async (bot, msg) => {
   let cr = moment(ct).isSameOrAfter(nd);
 
   if (cr) {
-    userData[sender.id].lastDaily = moment()
+    economy[author.id].lastDaily = moment()
       .utc()
       .format();
-    userData[sender.id].money += 250;
+    economy[author.id].money += 250;
 
-    const embed = bot.embed()
+    let embed = bot.embed()
     .setTitle('Bank')
     .setDescription("You Claimed your Daily reward.\n`250₪` has been added to your account.")
 
     msg.channel.send(embed);
   } else {
-
-    const embed = bot.embed()
-    .setColor(0xf94343)
+    let embed = bot.embed()
+    .setColor('#FF4444')
     .setTitle('Bank')
     .setDescription("You already claimed your reward.\nCheck back " + moment(nd).fromNow())
+    .setTimestamp(moment(nd))
     msg.channel.send(embed);
   }
+  
   // Save Changes
-  fs.writeFile("db/userdata.json", JSON.stringify(userData), err => {
-    if (err) console.error(err);
-  });
+  await require('./functions/write')(economy);
 };

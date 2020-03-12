@@ -122,6 +122,26 @@ module.exports.call = async (bot, msg) => {
             await bot.setLastImageCache(msg);
         }
 
+        if(category == "economy"){
+            await require('../../commands/economy/functions/update')(bot);
+            let changes = false;
+            if (!bot.economy[msg.author.id]) {
+                bot.economy[msg.author.id] = {};
+                changes = true;
+            }
+            if (!bot.economy[msg.author.id].money && bot.economy[msg.author.id].money != 0) {
+                bot.economy[msg.author.id].money = 1000;
+                changes = true;
+            }
+            if (!bot.economy[msg.author.id].lastDaily) {
+                bot.economy[msg.author.id].lastDaily = "";
+                changes = true;
+            }
+            if(changes){
+                await require('../../commands/economy/functions/write')(bot.economy);
+            }
+        }
+
         if((category == "owner" || cmd.category === "private") && !owner){
             return msg.channel.send(error(ownerError))
         }
@@ -236,8 +256,13 @@ function error(error){
 }
 
 function errdesc(err){
+    try{
+        err = err.stack.substr(0,1900);
+    }catch(e){
+        err = null;
+    }
     return new RichEmbed()
     .setTitle('ERROR DESCRIPTION')
-    .setDescription(`${err.stack.substr(0,1900)}\n\nFile: ${err.fileName}\nLine: ${err.lineNumber}`)
+    .setDescription(`${err}\n\nFile: ${err.fileName}\nLine: ${err.lineNumber}`)
     .setColor('FF0000')
 }
