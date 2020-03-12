@@ -1,6 +1,5 @@
 const { RichEmbed } = require("discord.js");
 const fetch = require("node-fetch");
-const { m } = require("../../config.json");
 
 module.exports = {
     name: "meme",

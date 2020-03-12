@@ -1,7 +1,6 @@
 const fs = require("fs");
 const moment = require("moment");
 const { RichEmbed } = require("discord.js");
-const { m } = require("../../config.json");
 
 module.exports = {
     name: "daily",
@@ -41,14 +40,12 @@ module.exports = {
         .utc()
         .format();
       userData[sender.id].money += 500;
-      message.channel.send({
-        embed: {
-          title: "Bank",
-          color: FF00AA,
-          description:
-            "You Claimed your **first** Daily reward.\n`500₪` has been added to your account."
-        }
-      });
+
+      const embed = bot.embed()
+      .setTitle('Bank')
+      .setDescription("You Claimed your **first** Daily reward.\n`500₪` has been added to your account.")
+      message.channel.send(embed);
+
       // Save Changes
       fs.writeFile("db/userdata.json", JSON.stringify(userData), err => {
         if (err) console.error(err);
@@ -70,24 +67,19 @@ module.exports = {
         .utc()
         .format();
       userData[sender.id].money += 250;
-      message.channel.send({
-        embed: {
-          title: "Bank",
-          color: FF00AA,
-          description:
-            "You Claimed your Daily reward.\n`250₪` has been added to your account."
-        }
-      });
+
+      const embed = bot.embed()
+      .setTitle('Bank')
+      .setDescription("You Claimed your Daily reward.\n`250₪` has been added to your account.")
+
+      message.channel.send(embed);
     } else {
-      message.channel.send({
-        embed: {
-          title: "Bank",
-          color: 0xf94343,
-          description:
-            "You already claimed your reward.\nCheck back " +
-            moment(nd).fromNow()
-        }
-      });
+
+      const embed = bot.embed()
+      .setColor(0xf94343)
+      .setTitle('Bank')
+      .setDescription("You already claimed your reward.\nCheck back " + moment(nd).fromNow())
+      message.channel.send(embed);
     }
     // Save Changes
     fs.writeFile("db/userdata.json", JSON.stringify(userData), err => {

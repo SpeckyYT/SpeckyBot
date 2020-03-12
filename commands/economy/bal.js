@@ -1,7 +1,6 @@
 const fs = require("fs");
 const moment = require("moment");
 const { RichEmbed } = require("discord.js");
-const { m } = require("../../config.json");
 
 module.exports = {
     name: "bal",
@@ -32,23 +31,9 @@ module.exports = {
     fs.writeFile("db/userdata.json", JSON.stringify(userData), err => {
       if (err) console.error(err);
     });
-
-    message.channel.send({
-      embed: {
-        title: "Bank",
-        color: FF00AA,
-        fields: [
-          {
-            name: "Account Holder",
-            value: `${sender.username}`,
-            inline: true
-          },
-          {
-            name: "Balance",
-            value: userData[sender.id].money + "₪",
-            inline: true
-          }
-        ]
-      }
-    });
+    const embed = bot.embed()
+    .setTitle('Bank')
+    .addField("Account Holder", `${sender.username}`, true)
+    .addField("Balance", userData[sender.id].money + "₪", true)
+    message.channel.send(embed);
   };
