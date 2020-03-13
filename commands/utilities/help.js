@@ -59,7 +59,6 @@ module.exports.run = async (bot, msg) => {
 		const cmd = bot.highFirst(command.name);
 		const description = command.description || "No Description provided.";
 		const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`;
-		const usableby = command.accessableby || "Members";
 		const aliases = `${command.aliases.length > 0 ? command.aliases.join(", ") : "None"}`;
 		let perms;
 		try{
@@ -74,7 +73,7 @@ module.exports.run = async (bot, msg) => {
 			cmdperms = "None";
 		}
 
-		embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n\n**Command:** ${cmd}\n**Description:** ${description}\n**Usage:** ${usage}\n**Accessible by:** ${usableby}\n**Aliases:** ${aliases}\n**Required User Permissions:** ${perms}\n**Required Bot Permissions:** ${cmdperms}`);
+		embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n\n**Command:** ${cmd}\n**Description:** ${description}\n**Usage:** ${usage}\n**Aliases:** ${aliases}\n**Required User Permissions:** ${perms}\n**Required Bot Permissions:** ${cmdperms}`);
 		return msg.channel.send(embed);
 	}
 }
