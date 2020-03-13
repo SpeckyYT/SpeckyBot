@@ -206,7 +206,12 @@ module.exports = async (bot) => {
     bot.logged = []
 
     bot.log = async (content) => {
-        appendFile('./commands.log',`${content}\n`,()=>{});
+        appendFile('./commands.log',`${content ? 
+            content
+            .replace(/[][[][0-9]{2}m/g,'')
+            .replace(/\t/g,' ').replace(/ +/g,' ')
+            : ''}\n`,
+        ()=>{});
 
         let file;
 

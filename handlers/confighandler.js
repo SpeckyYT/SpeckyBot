@@ -1,12 +1,12 @@
 let { writeFileSync, appendFileSync, existsSync } = require('fs')
 
 module.exports = async () => {
-    let template = '{\n"token": "TOKEN_HERE",\n"prefix": "PREFIX_HERE",\n"owner": ["BOT_OWNER1_ID_HERE", "BOT_OWNER2_ID_HERE"],\n"youtube": "YOUTUBE_V3_KEY_HERE"\n}'
+    let template = '{\n"token": "TOKEN_HERE",\n"prefix": "PREFIX_HERE",\n"owner": ["BOT_OWNER1_ID_HERE", "BOT_OWNER2_ID_HERE"]\n}'
 
     let config;
     
     try{
-        config = require('../config.json')
+        config = require('../config.json');
     }catch(err){
         console.log("Wasn't able to load config.json a new file got created: templateconfig.json".error);
         

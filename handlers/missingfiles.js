@@ -9,6 +9,11 @@ module.exports = async () => {
             appendFileSync(`./${file}_settings.json`,'{}')
         }
     });
+    ["commands.log"].forEach(file => {
+        if (!existsSync(`./${file}`)) {
+            appendFileSync(`./${file}`,'')
+        }
+    });
     ['userdata'].forEach(file => {
         if (!existsSync(`./db/${file}.json`)) {
             appendFileSync(`./db/${file}.json`,'{}')

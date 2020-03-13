@@ -3,7 +3,7 @@ module.exports = {
     type: "once"
 }
 
-module.exports.call = async bot => {
+module.exports.call = async (bot) => {
     [
         ['interval_1_sec',        1 * 1000],
         ['interval_5_sec',        5 * 1000],
@@ -16,10 +16,10 @@ module.exports.call = async bot => {
         ['interval_30_min', 30 * 60 * 1000],
         ['interval_1_hr',   60 * 60 * 1000],
     ]
-    .forEach(event => {
-        bot.emit(event[0], null);
-        setInterval(() => {
-            bot.emit(event[0], null)
+    .forEach(async (event) => {
+        await bot.emit(event[0]);
+        setInterval(async () => {
+            await bot.emit(event[0])
         },event[1])
     })
 }

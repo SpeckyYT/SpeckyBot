@@ -18,6 +18,7 @@ module.exports = async () => {
         dms: 'grey',
         fail: 'red',
         failed: 'red',
-        fatal: ['black','bgRed']
+        fatal: ['black','bgRed'],
+        dependency: 'cyan'
     });
 }
