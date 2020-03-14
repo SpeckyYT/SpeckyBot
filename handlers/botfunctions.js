@@ -244,7 +244,7 @@ module.exports = async (bot) => {
         '( o͡ ꒳ o͡ )',
         '( ͡o ω ͡o )',
         '(￣ω￣)',
-        '\(★ω★)/',
+        '\\(★ω★)/',
         '( =ω=)',
         '(^◕ᴥ◕^)',
         '(^◔ᴥ◔^)',
@@ -275,21 +275,23 @@ module.exports = async (bot) => {
 
     bot.parseBet = (economy,author,bet,min) => {
         let { money } = economy[author.id];
+
         if(!min){
             min = 100
         }
-        bet = Number(bet);
-        console.log(bet)
-        if(bet > money){
-            return money;
-        }else if(bet < (min ? min : 100)){
-            return min;
+
+        let nbet = Number(bet);
+
+        if(nbet > money){
+            return 0;
+        }else if(nbet < (min ? min : 100)){
+            return "0";
         }else if(bet === "all"){
             return money;
-        }else if(!isNaN(bet)){
-            return bet;
+        }else if(isNaN(nbet)){
+            return false;
         }else{
-            throw "Unknown error on economy (bot.parseBet)";
+            return nbet;
         }
     }
 }

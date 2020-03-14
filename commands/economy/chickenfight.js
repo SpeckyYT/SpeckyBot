@@ -12,11 +12,11 @@ module.exports.run = async (bot, msg) => {
     let { author } = msg;
 
     let obet = msg.args[0];
-    console.log(obet)
     let bet = bot.parseBet(economy,author,obet);
-    console.log(bet);
-    if(bet === 0){return bot.cmdError("You don't have enough money for this")}
-    if(!bet){return bot.cmdError("Bet it not a Number")};
+    
+    if(bet === 0){return bot.cmdError(`You only have ${economy[author.id].money}₪ in the bank.`)}
+    if(bet === "0"){return bot.cmdError(`Minimum bet is 100₪`)}
+    if(bet === false){return bot.cmdError("Bet it not a Number")};
 
     let won = Math.round(Math.random())
 
@@ -33,8 +33,8 @@ module.exports.run = async (bot, msg) => {
         .setAuthor(author.tag,author.avatarURL)
         .setDescription(`Your chicken died... `)
         .setColor('RED');
-    msg.channel.send(embed);
+        msg.channel.send(embed);
     }
 
-    return await require('./functions/write')(economy)
+    return await require('./functions/economy').write(economy);
 }

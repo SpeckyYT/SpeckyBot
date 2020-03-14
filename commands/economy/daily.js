@@ -62,5 +62,5 @@ module.exports.run = async (bot, msg) => {
   }
   
   // Save Changes
-  await require('./functions/write')(economy);
+  await require('./functions/economy').write(economy);
 };

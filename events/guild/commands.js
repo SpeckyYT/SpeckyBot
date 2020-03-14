@@ -123,7 +123,7 @@ module.exports.call = async (bot, msg) => {
         }
 
         if(category == "economy"){
-            await require('../../commands/economy/functions/update')(bot);
+            await require('../../commands/economy/functions/economy').read(bot);
             let changes = false;
             if (!bot.economy[msg.author.id]) {
                 bot.economy[msg.author.id] = {};
