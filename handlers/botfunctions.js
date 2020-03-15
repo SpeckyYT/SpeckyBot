@@ -294,4 +294,54 @@ module.exports = async (bot) => {
             return nbet;
         }
     }
+
+    bot.economyRead = async (bot,author) => {
+        return await new Promise((resolve,reject) => {
+            readFile("db/userdata.json", "utf8", async (err,data) => {
+                if(err){
+                    reject(err);
+                }else{
+                    bot.economy = JSON.parse(data);
+                    let changes = false;
+
+                    if(author){
+                        author = author.author || author;
+                        author = author.id || author;
+                        if (!bot.economy[author]) {
+                            bot.economy[author] = {};
+                            changes = true;
+                        }
+                        if (!bot.economy[author].money && bot.economy[author].money != 0) {
+                            bot.economy[author].money = 1000;
+                            changes = true;
+                        }
+                        if (!bot.economy[author].lastDaily) {
+                            bot.economy[author].lastDaily = "";
+                            changes = true;
+                        }
+                    }
+
+                    if(changes){
+                        await bot.economyWrite(bot.economy);
+                        resolve();
+                    }else{
+                        resolve();
+                    }
+                }
+            })
+        })
+    }
+
+    bot.economyWrite = async (economy) => {
+        return await new Promise((resolve, reject) => {
+            economy = economy.economy || economy;
+            writeFile("db/userdata.json", JSON.stringify(economy,null,4), err => {
+                if(err){
+                    reject(err);
+                }else{
+                    resolve();
+                }
+            })
+        })
+    }
 }

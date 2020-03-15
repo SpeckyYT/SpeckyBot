@@ -123,23 +123,7 @@ module.exports.call = async (bot, msg) => {
         }
 
         if(category == "economy"){
-            await require('../../commands/economy/functions/economy').read(bot);
-            let changes = false;
-            if (!bot.economy[msg.author.id]) {
-                bot.economy[msg.author.id] = {};
-                changes = true;
-            }
-            if (!bot.economy[msg.author.id].money && bot.economy[msg.author.id].money != 0) {
-                bot.economy[msg.author.id].money = 1000;
-                changes = true;
-            }
-            if (!bot.economy[msg.author.id].lastDaily) {
-                bot.economy[msg.author.id].lastDaily = "";
-                changes = true;
-            }
-            if(changes){
-                await require('../../commands/economy/functions/write')(bot.economy);
-            }
+            await bot.economyRead(bot,msg);
         }
 
         if((category == "owner" || cmd.category === "private") && !owner){
@@ -211,7 +195,7 @@ module.exports.call = async (bot, msg) => {
                 })
             })
         }else{
-            await run(cmd, bot, msg, command)
+            await run(cmd, bot, msg, command);
         }
 
     }else{
@@ -224,10 +208,8 @@ module.exports.call = async (bot, msg) => {
 }
 
 async function run(cmd, bot, msg, command){
-    try{
-        await cmd.run(bot, msg);
-    }catch(err){
-
+    await cmd.run(bot, msg)
+    .catch(async (err) => {
         let expected;
         try{
             expected = err.includes("[EXPECTED]")
@@ -241,7 +223,12 @@ async function run(cmd, bot, msg, command){
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
             await msg.channel.send(errdesc(err));
         }
-    }
+    })
+    .finally(async () => {
+        if(cmd.category == "economy"){
+            await bot.economyWrite(bot.economy);
+        }
+    })
 }
 
 function logger(cmd, actived, msg, bot){

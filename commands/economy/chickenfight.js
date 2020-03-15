@@ -28,13 +28,11 @@ module.exports.run = async (bot, msg) => {
             .setColor('GREEN');
         msg.channel.send(embed);
     }else{
-        economy[author.id].money = economy[author.id].money - bet;
+        economy[author.id].money = Number(economy[author.id].money) - Number(bet);
         let embed = bot.embed()
         .setAuthor(author.tag,author.avatarURL)
         .setDescription(`Your chicken died... `)
         .setColor('RED');
         msg.channel.send(embed);
     }
-
-    return await require('./functions/economy').write(economy);
 }

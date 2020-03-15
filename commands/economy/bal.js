@@ -13,7 +13,8 @@ module.exports.run = async (bot, msg) => {
 
     const embed = bot.embed()
         .setTitle('Bank')
-        .addField("Account Holder", `${author.username}`, true)
+        .setAuthor(author.tag,author.avatarURL)
+        .setThumbnail(author.avatarURL)
         .addField("Balance", economy[author.id].money + "₪", true)
     msg.channel.send(embed);
 };
