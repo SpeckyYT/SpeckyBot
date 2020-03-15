@@ -24,11 +24,7 @@ module.exports.run = async (bot, msg) => {
         let embed = bot.embed()
         .setTitle('Bank')
         .setDescription("You Claimed your **first** Daily reward.\n`500₪` has been added to your account.")
-        msg.channel.send(embed);
-
-        // Save Changes
-        await require('./functions/write')(economy);
-        return;
+        return msg.channel.send(embed);
     }
 
     let nd = moment(ld)
