@@ -11,6 +11,12 @@ module.exports.run = async (bot, msg) => {
     let { economy } = bot;
     let { author } = msg;
 
+    let otheruser = msg.mentions.users.first();
+    if(otheruser){
+        bot.economySummon(bot, otheruser);
+        author = otheruser;
+    }
+
     const embed = bot.embed()
         .setTitle('Bank')
         .setAuthor(author.tag,author.avatarURL)

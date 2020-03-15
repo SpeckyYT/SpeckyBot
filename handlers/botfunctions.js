@@ -259,7 +259,7 @@ module.exports = async (bot) => {
     bot.owofy = (string) => {
         if(typeof string == "string"){
             return  string.replace(/l|r/g,'w')
-                .replace(/([.])/g,',')
+                .replace(/./g,',')
                 .replace(/L|R/g,'W')
                 .replace(/([Nn])([aeiouAEIOU])/g,'$1y$2')
                 .replace(/lly/g,'')
@@ -302,29 +302,10 @@ module.exports = async (bot) => {
                     reject(err);
                 }else{
                     bot.economy = JSON.parse(data);
-                    let changes = false;
-
+                    author = author.author || author;
+                    author = author.id || author;
                     if(author){
-                        author = author.author || author;
-                        author = author.id || author;
-                        if (!bot.economy[author]) {
-                            bot.economy[author] = {};
-                            changes = true;
-                        }
-                        if (!bot.economy[author].money && bot.economy[author].money != 0) {
-                            bot.economy[author].money = 1000;
-                            changes = true;
-                        }
-                        if (!bot.economy[author].lastDaily) {
-                            bot.economy[author].lastDaily = "";
-                            changes = true;
-                        }
-                    }
-
-                    if(changes){
-                        await bot.economyWrite(bot.economy);
-                        resolve();
-                    }else{
+                        await bot.economySummon(bot, author);
                         resolve();
                     }
                 }
@@ -332,10 +313,42 @@ module.exports = async (bot) => {
         })
     }
 
+    bot.economySummon = async (bot, user) => {
+        if(!bot) return;
+        if(!bot.economy) return;
+
+        if(user){
+            user = user.user || user;
+            user = user.id || user;
+
+            let changes = false;
+
+            if (!bot.economy[user]) {
+                bot.economy[user] = {};
+                changes = true;
+            }
+            if (!bot.economy[user].lastDaily) {
+                bot.economy[user].lastDaily = "";
+                changes = true;
+            }
+            if (bot.economy[user].money === null) {
+                bot.economy[user].money = 0;
+                changes = true;
+            }
+            if (!bot.economy[user].money && bot.economy[user].money != 0) {
+                bot.economy[user].money = 1000;
+                changes = true;
+            }
+            if(changes){
+                await bot.economyWrite(bot.economy);
+            }
+        }
+    }
+
     bot.economyWrite = async (economy) => {
         return await new Promise((resolve, reject) => {
             economy = economy.economy || economy;
-            writeFile("db/userdata.json", JSON.stringify(economy,null,4), err => {
+            writeFile("db/userdata.json", JSON.stringify(economy,null,4), (err) => {
                 if(err){
                     reject(err);
                 }else{
