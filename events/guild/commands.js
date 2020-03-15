@@ -32,8 +32,6 @@ module.exports.call = async (bot, msg) => {
 
     msg.content = msg.content.replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim();
 
-    msg.flags = [];
-
     msg.Args = msg.content.split(/\s|\n/g);
 
     let command = msg.Args[0].toLowerCase();
@@ -56,6 +54,8 @@ module.exports.call = async (bot, msg) => {
 
     msg.command = command.slice(bot.config.prefix.length);
 
+    msg.flags = {};
+
     if(flags){
         flags.forEach((f,index) => {
             msg.flags[index] = flags[index].slice(2);
@@ -67,8 +67,10 @@ module.exports.call = async (bot, msg) => {
     }
     msg.flag = msg.hasFlag;
 
+    msg.links = (msg.content ? msg.content.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g) : []) || []
+
     let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
-    
+
     if(cmd){
         bot.stats.commandsExecuted++;
 
