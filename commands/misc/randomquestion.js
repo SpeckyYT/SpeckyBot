@@ -1,10 +1,10 @@
 module.exports = {
     name: "randomquestion",
-	description: "Gives you a random question!",
+	description: "Thanks to Nickguimond for the randomQuestions module\nhttps://github.com/nickguimond/randomQuestions",
     usage: ``,
     category: `misc`,
 	accessableby: "Members",
-    aliases: ["rq","randquest","randq","question!\nThanks to Nickguimond for the randomQuestions module\nhttps://github.com/nickguimond/randomQuestions"]
+    aliases: ["rq","randquest","randq","question"]
 }
 
 const { RichEmbed } = require('discord.js')
