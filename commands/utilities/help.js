@@ -43,10 +43,10 @@ module.exports.run = async (bot, msg) => {
 			`in any text channel, you can include \`[ONE-WORD]\` in the channel topic, so all users can only type one word per message!`,
 			`in any text channel, you can include \`[NO-MEDIA]\` in the channel topic, so nobody can share links/images in the channel!`,
 			`in any text channel, you can include \`[NO-NSFW]\` in the channel topic, so every NSFW command is not executable!`,
-			`commands usually have aliases? Just execute the command \`${config.prefix}help <command>\` to check them!`
+			`commands usually have aliases? Just execute the command \`${config.prefix}help <command>\` to check them!`,
+			`most of the people don't read the helpful tricks that are here?`
 		];
 
-		embed.addBlankField()
 		embed.addField('Did you know that', diduknow.pick())
 
 		return msg.channel.send(embed)

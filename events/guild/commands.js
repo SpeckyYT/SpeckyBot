@@ -238,7 +238,8 @@ module.exports.call = async (bot, msg) => {
         })
         .catch(async () => {
             logger(msg.command, false, msg, bot);
-            return await ms.edit(new RichEmbed().setDescription("Time elapsed").setColor(bot.config.color));
+            await ms.delete();
+            return await execute();
         })
     }else{
         return await execute();

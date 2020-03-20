@@ -5,7 +5,7 @@ module.exports = {
     category: `games`,
 	accessableby: "Members",
     aliases: ["slot"],
-    flags: ["stats"]
+    flags: ["stats","win","global"]
 }
 
 module.exports.run = async (bot, msg) => {
@@ -13,13 +13,12 @@ module.exports.run = async (bot, msg) => {
     let slots = 3;
     let global = false;
 
-    if(quantity < 5){
+    if(quantity < 5 || msg.flag("global")){
         global = true;
         quantity = bot.emojis.size
     }
-    if(quantity < 5){
-        return msg.channel.send("There aren't enough emotes in this server.")
-    }
+
+    if(!quantity) return bot.cmdError("There aren't enough emotes in this server.");
 
     if(!isNaN(msg.args[0])){
         if(msg.args[0] > 1){
@@ -36,7 +35,17 @@ module.exports.run = async (bot, msg) => {
     for(let i = 0; i < slots; i++){
         let emote;
 
-        if(global){
+        if(msg.flag("win")){
+            if(neweArray.length){
+                emote = neweArray[0];
+            }else{
+                if(global){
+                    emote = bot.emojis.random().toString();
+                }else{
+                    emote = msg.guild.emojis.random().toString();
+                }
+            }
+        }else if(global){
             emote = bot.emojis.random().toString();
         }else{
             emote = msg.guild.emojis.random().toString();
