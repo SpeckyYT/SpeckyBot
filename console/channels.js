@@ -6,7 +6,7 @@ module.exports = {
 module.exports.run = async (bot, args) => {
     if(!args[0]){
         console.log(
-            bot.guilds.map(s => `${s.channels.sort().map(c => `{${s.id}}\t${s.name}\t[${c.id}]\t(${c.type})\t${c.name}`).join('\n')}`).join('\n').info
+            bot.guilds.map(s => `${s.channels.sort().map(c => `{${s.id}}\t${s.name}\t[${c.id}]\t${c.name}\t(${c.type})`).join('\n')}`).join('\n').info
         )
     }else{
         let guild = bot.guilds.get(args[0]);
