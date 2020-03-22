@@ -4,12 +4,10 @@ module.exports = {
 }
 
 const { neko } = new (require('nekos.life'))().sfw;
-const { buffer } = require('terminal-image');
-const got = require('got');
 
 module.exports.run = async (bot, args) => {
-    neko().then(async img => {
-        const {body} = await got(img.url, {responseType: 'buffer'});
-        console.log(await buffer(body));
+    await neko().then(async img => {
+        bot.cache.console.drawlink = img.url;
+        require('./functions/drawbuffer')(img.url)
     })
 }
