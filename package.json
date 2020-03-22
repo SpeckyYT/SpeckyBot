@@ -29,7 +29,6 @@
     "parse-ms": "^2.1.0",
     "random": "^2.1.1",
     "random-animals-api": "^1.2.0",
-    "request": "^2.88.2",
     "string-similarity": "^3.0.0",
     "superagent": "^5.2.2",
     "terminal-image": "^0.2.0",
