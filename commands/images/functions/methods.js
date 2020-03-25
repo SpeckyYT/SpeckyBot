@@ -1,13 +1,18 @@
 const { read } = require('jimp')
 const { unlink } = require('fs')
 
-module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
+module.exports = async (bot, msg, method, free, values,fileFormat) => {
     async function manipulation(){
         let { Args } = msg;
 
-        Args[0] = parseInt(Args[0])
+        let intensity,min,max;
+        if(typeof values == "object"){
+            intensity = values[0];
+            min = values[1];
+            max = values[2];
+        }
 
-        let intensity = val;
+        Args[0] = parseFloat(Args[0])
 
         if(typeof intensity != "boolean"){
 
@@ -62,5 +67,5 @@ module.exports = async (bot, msg, method, free, [val, min, max],fileFormat) => {
             })
         })
     }
-    await manipulation();
+    return await manipulation();
 }

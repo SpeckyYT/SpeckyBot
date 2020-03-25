@@ -14,7 +14,7 @@ const { unlink } = require('fs')
 
 module.exports.run = async (bot, msg) => {
     let image    = bot.cache.lastImage[msg.channel.id]; 
-    let id       = `${msg.author.id}_${bot.snowflake()}`;
+    let id       = bot.snowflake();
 
     let fileFormat = "png"
     let method = "flip"

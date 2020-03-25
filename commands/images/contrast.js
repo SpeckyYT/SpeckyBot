@@ -10,8 +10,8 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(msg.args){
-        msg.args[0] = Number(msg.args[0]) / 100
+    if(msg.Args){
+        msg.Args[0] = Number(msg.Args[0]) / 100
     }
     require('./functions/methods')(bot, msg,'contrast',false,[0.5,-1,1],"png")
 }

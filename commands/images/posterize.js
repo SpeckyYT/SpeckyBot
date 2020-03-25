@@ -1,7 +1,7 @@
 module.exports = {
     name: "posterize",
 	description: "Posterizes the image!",
-    usage: `[Amount (2-50)]`,
+    usage: `[Amount (2-500)]`,
     category: `images`,
 	accessableby: "Members",
     aliases: [],
@@ -10,5 +10,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'posterize',false,[5,2,50],"png")
+    require('./functions/methods')(bot, msg,'posterize',false,[5,2,500],"png")
 }
