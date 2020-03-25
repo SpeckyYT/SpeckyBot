@@ -3,10 +3,10 @@ module.exports = {
     aliases: ['nyan','nya']
 }
 
-const { neko } = new (require('nekos.life'))().sfw;
+const func = new (require('nekos.life'))().sfw['neko'];
 
 module.exports.run = async (bot, args) => {
-    await neko().then(async img => {
+    await func().then(async img => {
         bot.cache.console.drawlink = img.url;
         require('./functions/drawbuffer')(img.url)
     })

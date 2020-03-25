@@ -19,9 +19,7 @@ module.exports.run = async (bot, msg) => {
     }
     base = Math.min(Math.max(base, 2), 36);
 
-    let promises = [];
-
-    async function prime(params){
+    async function prime(){
         while(true){
             numb++;
             let temp = 1; 
