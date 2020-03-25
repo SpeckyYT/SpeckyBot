@@ -10,5 +10,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'blur',false,[5,2,100],"png")
+    return require('./functions/methods')(bot, msg,'blur',false,[5,2,100],"png");
 }

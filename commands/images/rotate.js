@@ -10,5 +10,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/methods')(bot, msg,'rotate',true,[0,0,0],"png")
+    return require('./functions/methods')(bot, msg,'rotate',true,[0,0,0],"png");
 }

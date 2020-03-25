@@ -260,7 +260,14 @@ async function run(cmd, bot, msg, command){
         }else{
             bot.log(err.error);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
-            await msg.channel.send(errdesc(err));
+            
+            if(String(err).includes("Must be 2000 or fewer in length")){
+                await msg.channel.send(errdesc(`${bot.user} tried to send a message with 2000 or more characters.`));
+            }else if(String(err).includes("Request entity too large")){
+                await msg.channel.send(errdesc(`${bot.user} tried to send an attachment with more than 8MB.`));
+            }else{
+                await msg.channel.send(errdesc(err));
+            }
         }
     })
     .finally(async () => {
@@ -283,12 +290,12 @@ function error(error){
 
 function errdesc(err){
     try{
-        err = err.stack.substr(0,1900);
+        err = err.stack ? err.stack.substr(0,1950) : err.substr(0,1950);
     }catch(e){
         err = null;
     }
     return new RichEmbed()
     .setTitle('ERROR DESCRIPTION')
-    .setDescription(`${err}\n\nFile: ${err.fileName}\nLine: ${err.lineNumber}`)
+    .setDescription(`${err}\n\nFile: ${err ? err.fileName : undefined}\nLine: ${err ? err.lineNumber : undefined}`)
     .setColor('FF0000')
 }
