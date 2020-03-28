@@ -6,8 +6,9 @@
 
 - SpeckyYT
 
-# How to run successfully the bot?
+# How to successfully run your own instance of the bot?
 
+- Create a Discord Bot account.
 - Download or clone this repository
 - Extract the files
 - Download all NPM dependencies [npm i]
