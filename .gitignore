@@ -7,7 +7,7 @@ db/
 *.jpg
 *.jpeg
 
-templateconfig.json
+template.config.json
 config.json
 
 # Logs
