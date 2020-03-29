@@ -3,12 +3,12 @@ module.exports = {
     aliases: []
 }
 
-module.exports.run = async (bot, args) => {
-    if(!args[0]) {
+module.exports.run = async (bot, data) => {
+    if(!data.Args[0]) {
         return bot.login(bot.config.token);
     }
 
-    bot.login(args[0])
+    bot.login(data.Args[0])
     .then(() => {
         console.log("Logged successfully!".success);
     })

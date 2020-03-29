@@ -5,8 +5,8 @@ module.exports = {
 
 const { inspect } = require('util')
 
-module.exports.run = async (bot, args) => {
-    let toEval = args.join(" ");
+module.exports.run = async (bot, data) => {
+    let toEval = data.content;
     let result;
     try{
         result = inspect(eval(toEval)).toString().success;

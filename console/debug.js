@@ -3,11 +3,11 @@ module.exports = {
     aliases: ['deb']
 }
 
-module.exports.run = async (bot, args) => {
-    if(!args[0]){
+module.exports.run = async (bot, data) => {
+    if(!data.args[0]){
         bot.cache.console.debug = !bot.cache.console.debug
     }else{
-        switch(args[0]){
+        switch(data.args[0]){
             case 'true':
             case 'on':
                 bot.cache.console.debug = true;

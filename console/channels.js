@@ -3,13 +3,13 @@ module.exports = {
     aliases: []
 }
 
-module.exports.run = async (bot, args) => {
-    if(!args[0]){
+module.exports.run = async (bot, data) => {
+    if(!data.args[0]){
         console.log(
             bot.guilds.map(s => `${s.channels.sort().map(c => `{${s.id}}\t${s.name}\t[${c.id}]\t${c.name}\t(${c.type})`).join('\n')}`).join('\n').info
         )
     }else{
-        let guild = bot.guilds.get(args[0]);
+        let guild = bot.guilds.get(data.args[0]);
         
         if(guild){
             console.log(

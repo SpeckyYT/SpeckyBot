@@ -3,6 +3,6 @@ module.exports = {
     aliases: ["quit","exit","die","kill","reboot"]
 }
 
-module.exports.run = async (bot, args) => {
+module.exports.run = async (bot, data) => {
     process.exit();
 }

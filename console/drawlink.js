@@ -3,6 +3,6 @@ module.exports = {
     aliases: ['dl','lastdraw','lastdrawing','ld']
 }
 
-module.exports.run = async (bot, args) => {
+module.exports.run = async (bot, data) => {
     console.log(String(bot.cache.console.drawlink).red);
 }

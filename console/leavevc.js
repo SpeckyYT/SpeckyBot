@@ -3,10 +3,10 @@ module.exports = {
     aliases: ['lvc']
 }
 
-module.exports.run = async (bot, args) => {
-    if(!args[0]){
+module.exports.run = async (bot, data) => {
+    if(!data.args[0]){
         return bot.cache.console.channel.leave()
     }else{
-        return bot.channels.get(args[0]).leave()
+        return bot.channels.get(data.args[0]).leave()
     }
 }

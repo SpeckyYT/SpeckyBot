@@ -3,7 +3,9 @@ module.exports = {
     aliases: []
 }
 
-module.exports.run = async (bot, args) => {
-    bot.cache.console.drawlink = args.join('');
-    require('./functions/drawbuffer')(args.join(''));
+module.exports.run = async (bot, data) => {
+    return require('./functions/drawbuffer')(bot,data.contento)
+    .catch(() => {
+        return bot.cmdError(`${data.content.length > 2 ? data.content.bgRed : "undefined".bgRed} is not a valid image link`.yellow)
+    })
 }

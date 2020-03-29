@@ -1,4 +1,4 @@
-const { readdirSync } = require('fs')
+const { readdirSync } = require('fs');
 
 module.exports = async (bot) => {
 
@@ -17,6 +17,7 @@ module.exports = async (bot) => {
 
 
     process.openStdin().addListener("data", res => {
+        let content = res.toString();
         let oargs = res.toString().split(/\s/g).clean();
         
         if(!oargs[0]) return;
@@ -38,13 +39,15 @@ module.exports = async (bot) => {
 
         let cmd = bot.console.get(command) || bot.console.get(bot.consoleali.get(command));
 
+        let data = {}
+        data.contento = content;
+        data.content = content.slice(command.length).trim();
+        data.ARGS = args.toUpperCase();
+        data.Args = args;
+        data.args = args.toLowerCase();
+
         if(cmd){
-            cmd.run(bot,args)
-            .then(() => {
-                if(bot.cache.console.debug){
-                    console.log(`Command ${command.toUpperCase()} runned successfully!`.success)
-                }
-            })
+            cmd.run(bot,data)
             .catch(err => {
                 if(err){
                     if(err.message){
@@ -55,12 +58,21 @@ module.exports = async (bot) => {
                     console.log("Unexpected error happend".error)
                 }
             })
+            .then(() => {
+                if(bot.cache.console.debug){
+                    console.log(`Command ${command.toUpperCase()} runned successfully!`.success)
+                }
+            })
         }else{
             let search = bot.console.get('searchchannel');
             
-            search.run(bot,oargs)
-            .then(() => {
-                console.log(`Channel/member changed to ${oargs[0]}`.info)
+            data.args[0] = command;
+
+            search.run(bot,data)
+            .catch(async () => {
+                let draw = bot.console.get('draw');
+                data.content = data.contento;
+                return await draw.run(bot,data);
             })
             .catch(() => {
                 console.log(`Command ${command.toUpperCase()} not found`.error)

@@ -3,6 +3,6 @@ module.exports = {
     aliases: ['clean','cc','delete']
 }
 
-module.exports.run = async (bot, args) => {
+module.exports.run = async (bot, data) => {
     console.clear();
 }
