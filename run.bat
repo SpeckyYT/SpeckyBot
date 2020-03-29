@@ -1,4 +1,3 @@
 :a
-cd src
-node bot.js
+node run.js
 goto a
