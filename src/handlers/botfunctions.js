@@ -206,7 +206,7 @@ module.exports = async (bot) => {
     bot.logged = []
 
     bot.log = async (content) => {
-        appendFile('./commands.log',`${content ? 
+        appendFile('../commands.log',`${content ? 
             content
             .replace(/[][[][0-9]{2}m/g,'')
             .replace(/\t/g,' ').replace(/ +/g,' ')
@@ -215,15 +215,15 @@ module.exports = async (bot) => {
 
         let file;
 
-        readFile('./commands.log', async (err,data)=>{
+        readFile('../commands.log', async (err,data)=>{
 
             file = data.toString().split('\n');
 
-            if(file.length > 10000){
-                while(file.length > 9000){
+            if(file.length > 100000){
+                while(file.length > 99000){
                     file.shift();
                 }
-                writeFile('./commands.log',file.join("\n"),()=>{})
+                writeFile('../commands.log',file.join("\n"),()=>{})
             }
 
         })
@@ -356,5 +356,25 @@ module.exports = async (bot) => {
                 }
             })
         })
+    }
+
+    bot.loadSettings = async (bot) => {
+        ['user','server'].forEach(f => {
+            delete require.cache[require.resolve(`../../db/${f.charAt(0)}_settings.json`)];
+            try{
+                bot.settings[f] = require(`../../db/${f.charAt(0)}_settings.json`);
+            }catch(err){
+                console.log(`Your db/${f.charAt(0)}_settings.json file looks like to be corrupted.\nPlease fix it before it becomes an issue.`.error)
+            }
+        })
+    }
+
+    bot.loadConfig = (bot) => {
+        delete require.cache[require.resolve('../../config.json')];
+        try{
+            bot.config = require('../../config.json');
+        }catch(err){
+            console.log("YOUR CONFIG.JSON FILE LOOKS LIKE TO BE CORRUPTED!\nPLEASE FIX IT BEFORE IT BECOMES AN ISSUE.".fatal)
+        }
     }
 }

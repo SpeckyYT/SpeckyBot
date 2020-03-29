@@ -1,7 +1,7 @@
 const { Collection } = require("discord.js");
 
 //from https://gist.github.com/cferdinandi/42f985de9af4389e7ab3
-let forEach = function (collection, callback, scope) {
+const forEach = function (collection, callback, scope) {
     if (Object.prototype.toString.call(collection) === '[object Object]') {
         for (let prop in collection) {
             if (Object.prototype.hasOwnProperty.call(collection, prop)) {
@@ -32,7 +32,10 @@ module.exports = async (bot) => {
 
     bot.debugN = 0;
 
-    bot.config = require('../config.json');
+    bot.settings = {};
+
+    bot.config = {}
+    bot.config = require('../../config.json')
 
     if(typeof bot.config.apikeys == "object"){
         forEach(bot.config.apikeys, (value, prop, obj) => {

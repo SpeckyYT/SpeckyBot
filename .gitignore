@@ -1,5 +1,5 @@
-events/private
-commands/private
+src/events/private
+src/commands/private
 db/
 
 *.txt
@@ -7,8 +7,6 @@ db/
 *.jpg
 *.jpeg
 
-s_settings.json
-u_settings.json
 templateconfig.json
 config.json
 

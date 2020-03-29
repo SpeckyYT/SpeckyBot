@@ -7,6 +7,6 @@ module.exports = async () => {
     });
     ['db']
     .forEach(dir => {
-        if (!existsSync(`./${dir}`)) mkdirSync(`./${dir}`);
+        if (!existsSync(`../${dir}`)) mkdirSync(`./${dir}`);
     });
 }

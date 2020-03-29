@@ -2,13 +2,16 @@ module.exports = {
     event: "message"
 }
 
-const { RichEmbed } = require('discord.js')
+const { RichEmbed } = require('discord.js');
 
 module.exports.call = async (bot, msg) => {
     if (msg.author.id == bot.user.id || msg.author.bot || msg.channel.type != "text") return;
 
-    const s_settings = require('../../s_settings.json')
-    const u_settings = require('../../u_settings.json')
+    await bot.loadSettings(bot);
+
+    const s_settings = bot.settings.server;
+    const u_settings = bot.settings.user;
+
     let color;
 
     if(u_settings[msg.author.id] ? u_settings[msg.author.id].embedcolor : false){
