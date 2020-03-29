@@ -174,6 +174,7 @@ module.exports = async (bot) => {
     }
     bot.delay = bot.sleep;
     bot.wait = bot.sleep;
+    bot.pause = bot.sleep;
 
 
     bot.singPlur = (variable, string, outputNumb = true) => {

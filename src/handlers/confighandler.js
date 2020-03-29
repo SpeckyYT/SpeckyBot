@@ -16,7 +16,7 @@ module.exports = async () => {
         console.log("Wasn't able to load config.json a new file got created: template.config.json".error);
         
         if (!existsSync('../template.config.json')) {
-            appendFileSync('../template.config.json', template);
+            appendFileSync('../template.config.json', JSON.stringify(template,null,4));
         }
 
         return new Promise((resolve, reject) => reject("config.json is invalid".error))
