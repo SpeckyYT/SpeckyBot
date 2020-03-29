@@ -4,6 +4,7 @@
   "description": "This is an awesome bot made by SpeckyYT",
   "main": "bot.js",
   "dependencies": {
+    "child_process": "^1.0.2",
     "cleverbot-free": "^1.0.3",
     "colors": "^1.4.0",
     "discord.js": "^11.6.1",
