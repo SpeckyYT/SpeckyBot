@@ -2,7 +2,7 @@
     "name": "speckybot",	
     "version": "0.0.1",	
     "description": "This is an awesome bot made by SpeckyYT",	
-    "main": "run.bat",	
+    "main": "run.js",	
     "dependencies": {	
         "child_process": "^1.0.2",	
         "cleverbot-free": "^1.0.3",	
@@ -40,7 +40,11 @@
         "ytdl-core": "^1.0.9",	
         "ytdl-core-discord": "^1.1.0"	
     },	
-    "devDependencies": {},		
+    "devDependencies": {},	
+    "scripts": {	
+        "start": "node run.js",	
+        "test": "echo \"Error: no test specified\" && exit 1"	
+    },	
     "author": "SpeckyYT",	
-    "license": "MIT"
+    "license": "MIT"	
 }
