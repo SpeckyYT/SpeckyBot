@@ -224,8 +224,8 @@ module.exports.call = async (bot, msg) => {
         })
         let ms;
         await msg.channel.send(bot.embed().setDescription(string)).then(m => ms = m);
-        const filter = m => (m.author.id == msg.author.id) && Boolean(m.content.match(/[0-9]/g));
-        let collector = msg.channel.createMessageCollector(filter, { max: 1, time: 15000, errors: ["time"] });
+        const filter = m => ((m.author.id == msg.author.id) && Boolean(m.content.match(/[0-9]/g)));
+        let collector = msg.channel.createMessageCollector(filter, { time: 15000, errors: ["time"] });
         let runned = false;
         collector.on('collect', async (collected) => {
             runned = true;
