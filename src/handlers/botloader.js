@@ -34,8 +34,8 @@ module.exports = async (bot) => {
 
     bot.settings = {};
 
-    bot.config = {}
-    bot.config = require('../../config.json')
+    bot.config = {};
+    bot.config = require('../../config.json');
 
     if(typeof bot.config.apikeys == "object"){
         forEach(bot.config.apikeys, (value, prop, obj) => {

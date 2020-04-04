@@ -1,9 +1,15 @@
-const { readdirSync } = require("fs")
+const { readdirSync, lstatSync } = require("fs");
+const { join } = require('path');
 
 module.exports = async (bot) => {
-    ["client", "custom", "guild","console","private"].forEach(async dir => {    
+    delete require.cache;
+    const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory());
+
+    getDirectories('./events/')
+    .map(d => d.slice(d.indexOf('\\')+1))
+    .forEach(async dir => {    
         try{
-            const events = readdirSync(`./events/${dir}/`).filter(d => d.endsWith('.js'));
+            const events = readdirSync(`./events/${dir}/`).filter(d => d.match(/(.js|.ts)$/g));
             events.forEach(async file => {
                 try{
                     const evt = require(`../events/${dir}/${file}`);

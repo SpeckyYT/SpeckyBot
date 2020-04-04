@@ -1,23 +1,15 @@
-const { readdirSync } = require("fs")
+const { readdirSync, lstatSync } = require("fs");
+const { join } = require('path');
 
 module.exports = (bot) => {
     delete require.cache;
-    [ "owner"
-    , "admin"
-    , "utilities"
-    , "games"
-    , "misc"
-    , "music"
-    , "sfw"
-    , bot.config.load_nsfw ? "nsfw" : ""
-    , "images"
-    , "private"
-    , "economy"
-    , "custom"]
-    .clean()
+    const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory());
+
+    getDirectories('./commands/')
+    .map(d => d.slice(d.indexOf('\\')+1))
     .forEach(async dir => {
         try{
-            let commands = readdirSync(`./commands/${dir}/`).filter(d => d.endsWith('.js'));
+            let commands = readdirSync(`./commands/${dir}/`).filter(d => d.match(/(.js|.ts)$/g));
             commands.forEach(async file => {
                 try{
                     let pull = require(`../commands/${dir}/${file}`);
@@ -30,7 +22,7 @@ module.exports = (bot) => {
                     bot.log(err.message.error);
                 }
             })
-        }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!`)}
+        }catch(err){bot.log(`ERROR WHILE LOADING ${dir.toUpperCase()} FOLDER!\n${err}`)}
     })
     bot.log();
 };

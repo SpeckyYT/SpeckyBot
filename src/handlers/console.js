@@ -1,8 +1,8 @@
 const { readdirSync } = require('fs');
 
 module.exports = async (bot) => {
-
-    let ccommands = readdirSync(`./console/`).filter(d => d.endsWith('.js'));
+    delete require.cache;
+    let ccommands = readdirSync(`./console/`).filter(d => d.match(/(.js|.ts)$/g));
     ccommands.forEach(async file => {
         try{
             let pull = require(`../console/${file}`);
