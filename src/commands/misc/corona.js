@@ -7,30 +7,28 @@ module.exports = {
     aliases: ["coronavirus"]
 }
 
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 const { RichEmbed, Collection } = require('discord.js');
 
-module.exports.run = async (bot, msg) => {
-    let API1 = 'https://coronavirus-tracker-api.herokuapp.com/confirmed';
-    let API2 = 'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases/FeatureServer/1/query?f=json&outStatistics=%5B%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Confirmed%22%2C%22outStatisticFieldName%22%3A%22confirmed%22%7D%2C%20%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Deaths%22%2C%22outStatisticFieldName%22%3A%22deaths%22%7D%2C%20%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Recovered%22%2C%22outStatisticFieldName%22%3A%22recovered%22%7D%5D';
+const API1 = 'https://coronavirus-tracker-api.herokuapp.com/confirmed';
+const API2 = 'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases/FeatureServer/1/query?f=json&outStatistics=%5B%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Confirmed%22%2C%22outStatisticFieldName%22%3A%22confirmed%22%7D%2C%20%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Deaths%22%2C%22outStatisticFieldName%22%3A%22deaths%22%7D%2C%20%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Recovered%22%2C%22outStatisticFieldName%22%3A%22recovered%22%7D%5D';
 
-    let APIs = await Promise.all([
+module.exports.run = async (bot, msg) => {
+    const APIs = await Promise.all([
         fetch(API1, {headers: {Accept: 'application/json'}}),
         fetch(API2, {headers: {Accept: 'application/json'}})
     ]);
-    let JSONs = await Promise.all([
+    const JSONs = await Promise.all([
         APIs[0].json(),
         APIs[1].json()
     ])
-    let {last_updated,latest,locations} = JSONs[0];
-    let {features}                      = JSONs[1];
+    const {last_updated,latest,locations} = JSONs[0];
+    const {features}                      = JSONs[1];
 
     //API1
     let top = new Collection();
-    let topmax = isNaN(msg.args[0]) ? 5 : msg.args[0];
-    if(topmax < 3){
-        topmax = 3;
-    }
+    const topmax = isNaN(msg.args[0]) ? 5 : (msg.args[0] < 5 ? 5 : msg.args[0]);
+
     locations.forEach(object => {
         let t = top.get(object.country);
         if(t){
@@ -53,7 +51,7 @@ module.exports.run = async (bot, msg) => {
     string = string.trim();
 
     //API2
-    let stats = {confirmed: 0,deaths: 0,recovered: 0}
+    let stats = {confirmed:0,deaths:0,recovered:0}
     features.forEach(obj => {
         stats.recovered += obj.attributes.recovered
         stats.confirmed += obj.attributes.confirmed
