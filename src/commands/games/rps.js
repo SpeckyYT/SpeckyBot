@@ -7,75 +7,67 @@ module.exports = {
     aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }
 
-const { int } = require('random');
-
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
-    if(!msg.content) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
+    if(!args[0]) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
 
-    var value = 4;
-    var rng = 4;
-    
-    var hands = args[0];
-    
-    if(         hands == "rock" ||
-                hands == "stone" ||
-                hands == ":fist:" ){
-                    value = 1;
-    }else if(   hands == "paper" ||
-                hands == ":raised_hand:"){
-                    value = 2;
-    }else if(   hands == "scissors" ||
-                hands == "scissor" ||
-                hands == ":v:"){
-                    value = 3;
-    }else{
-        msg.channel.send("Invalid hand sign");
-        return;
+    let value;
+
+    let hand = args[0];
+    if(hand.startsWith('\\')){
+        hand = hand.slice(1);
     }
 
-    rng = (int(1, 3));
-    var rng_str;
-
-    if(rng == 1){
-        rng_str = ':fist: Rock';
-    }else if(rng == 2){
-        rng_str = ':raised_hand: Paper';
-    }else{
-        rng_str = ':v: Scissors';
+    switch(hand){
+        case "rock":
+        case "stone":
+        case "✊":
+            value = 1; break;
+        case "paper":
+        case "🤚":
+            value = 2; break;
+        case "scissors":
+        case "scissor":
+        case "✂️":
+        case "✌️":
+            value = 3; break;
+        default:
+            return bot.cmdError("Invalid hand sign (Rock | Scissors | Paper)");
     }
 
-    var win = 0;    //0 = lose | 1 = draw | 2 = win
-
-    if(value === 1){
-        if(rng == 1){win = 1}
-        if(rng == 2){win = 0}
-        if(rng == 3){win = 2}
-    }else if(value == 2){
-        if(rng == 1){win = 2}
-        if(rng == 2){win = 1}
-        if(rng == 3){win = 0}
-    }else{
-        if(rng == 1){win = 0}
-        if(rng == 2){win = 2}
-        if(rng == 3){win = 1}
+    let rng = Math.ceil(Math.random() * 3);
+    let rng_str;
+    switch(rng){
+        case 1:
+            rng_str = '✊ Rock'; break;
+        case 2:
+            rng_str = '🤚 Paper'; break;
+        case 3:
+            rng_str = '✌️ Scissors'; break;
     }
 
-    let signs = [
-        `:v:`,
-        `:raised_hand:`,
-        `:fist:`
-    ]
+    let win = 0;    //0 = lose | 1 = draw | 2 = win
+    switch(value){
+        case 1:
+            win = rng == 1 ? 1 : (rng == 2 ? 0 : 2); break;
+        case 2:
+            win = rng == 1 ? 2 : (rng == 2 ? 1 : 0); break;
+        case 3:
+            win = rng == 1 ? 0 : (rng == 2 ? 2 : 1); break;
+    }
 
-    msg.channel.send(rng_str);
+    function send(string){
+        msg.channel.send(`${rng_str}\n${string}`)
+    }
 
-    if(win === 0){
-        msg.channel.send('> You lost');
-    }else if(win === 1){
-        msg.channel.send('> This was a draw');
-    }else if(win === 2){
-        msg.channel.send('> You won!!!');
-    }else {
-        msg.channel.send("An error occurred")
+    switch(win){
+        case 0:
+            send('> You lost'); break;
+        case 1:
+            send('> This was a draw'); break;
+        case 2:
+            send('> You won!!!'); break;
+        default:
+            return bot.cmdError("An unknown error occurred")
     }
 }
