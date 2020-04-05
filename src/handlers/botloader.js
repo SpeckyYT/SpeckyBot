@@ -38,13 +38,15 @@ module.exports = async (bot) => {
     bot.config = require('../../config.json');
 
     if(typeof bot.config.apikeys == "object"){
-        forEach(bot.config.apikeys, (value, prop, obj) => {
+        forEach(bot.config.apikeys, (value, prop) => {
             bot.config[prop] = value;
         });
         bot.config.apikeys = null;
     }
 
+    //CoffeeScript 
     require('coffee-register');
+    require.extensions['.coffeescript'] = require.extensions['.coffee'];
 
     require('./botfunctions')(bot);
 

@@ -10,7 +10,7 @@ module.exports = (bot) => {
     .forEach(async dir => {
         try{
             readdirSync(`./commands/${dir}/`)
-            .filter(d => d.match(/.(js|ts|coffee)$/g))
+            .filter(d => d.match(/.(js|ts|coffee|coffeescript|litcoffee)$/g))
             .forEach(async file => {
                 try{
                     let pull = require(`../commands/${dir}/${file}`);
