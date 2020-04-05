@@ -9,8 +9,9 @@ module.exports = (bot) => {
     .map(d => d.slice(d.indexOf('\\')+1))
     .forEach(async dir => {
         try{
-            let commands = readdirSync(`./commands/${dir}/`).filter(d => d.match(/(.js|.ts)$/g));
-            commands.forEach(async file => {
+            readdirSync(`./commands/${dir}/`)
+            .filter(d => d.match(/.(js|ts|coffee)$/g))
+            .forEach(async file => {
                 try{
                     let pull = require(`../commands/${dir}/${file}`);
                     if(!pull.name) throw {message: error = "Name of the command not found!".toUpperCase()};

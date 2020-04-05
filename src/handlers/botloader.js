@@ -44,6 +44,8 @@ module.exports = async (bot) => {
         bot.config.apikeys = null;
     }
 
+    require('coffee-register');
+
     require('./botfunctions')(bot);
 
     ["commands","aliases","console","consoleali"].forEach(async x => 

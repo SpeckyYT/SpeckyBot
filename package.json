@@ -6,6 +6,7 @@
     "dependencies": {
         "child_process": "^1.0.2",
         "cleverbot-free": "^1.0.3",
+        "coffee-register": "^2.2.0",
         "colors": "^1.4.0",
         "discord.js": "^11.6.3",
         "discord.js-musicbot-addon": "^13.9.1",
