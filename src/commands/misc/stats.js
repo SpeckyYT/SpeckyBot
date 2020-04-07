@@ -43,8 +43,10 @@ module.exports.run = async (bot, msg) => {
     let driveUsed, driveFree;
 
     try{
-        await osu.drive.info().then(i => driveUsed = i.usedPercentage)
-        await osu.drive.info().then(i => driveFree = i.freePercentage)
+        await osu.drive.info().then(i => {
+            driveUsed = i.usedPercentage;
+            driveFree = i.freePercentage;
+        })
     }catch(err){driveUsed = false}
 
     let networkUsage, networkUsageIn, networkUsageOut;
@@ -74,7 +76,7 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .addField(`Total Guilds:`,`${bot.guilds.size}`,true)
     .addBlankField()
     .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`,true)
-    .addField(`Slots Winners:`,`${bot.stats.slots}`)
+    .addField(`Slots Winners:`,`${bot.stats.slots}`,true)
     .addField(`Bot Uptime:`,`${bot.formatTime(bot.uptime)}`,true)
     .setTimestamp()
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)

@@ -1,11 +1,11 @@
 const { readdirSync } = require('fs');
 
 module.exports = async (bot) => {
-    delete require.cache;
-    let ccommands = readdirSync(`./console/`).filter(d => d.match(/(.js|.ts)$/g));
-    ccommands.forEach(async file => {
+    readdirSync(`./console/`)
+    .filter(d => d.match(bot.supportedFiles))
+    .forEach(async file => {
         try{
-            let pull = require(`../console/${file}`);
+            let pull = bot.require(`../console/${file}`);
             bot.console.set(pull.name, pull);
             if (pull.aliases) pull.aliases.forEach(a => bot.consoleali.set(a, pull.name));
             bot.log(`${file}`.debug);
@@ -15,8 +15,9 @@ module.exports = async (bot) => {
         }
     })
 
+    if(process.openStdin().listenerCount("data")) return;
 
-    process.openStdin().addListener("data", res => {
+    process.openStdin().addListener("data", async res => {
         let content = res.toString();
         let oargs = res.toString().split(/\s/g).clean();
         
@@ -45,6 +46,7 @@ module.exports = async (bot) => {
         data.ARGS = args.toUpperCase();
         data.Args = args;
         data.args = args.toLowerCase();
+        data.timeStamp = new Date();
 
         if(cmd){
             cmd.run(bot,data)
@@ -78,5 +80,5 @@ module.exports = async (bot) => {
                 console.log(`Command ${command.toUpperCase()} not found`.error)
             })
         }
-    });
+    })
 }

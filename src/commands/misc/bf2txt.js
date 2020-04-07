@@ -7,9 +7,9 @@ module.exports = {
     aliases: ["bf","brainfuck2text","brainfucktostring","bftotxt"]
 }
 
-const MEM_LENGTH = 256
-const MEM_SIZE = 256
-const TIME_LIMIT = 1000 // ms
+const MEM_LENGTH = 2**10;
+const MEM_SIZE = 2**8;
+const TIME_LIMIT = 500; // ms
 
 module.exports.run = async (bot, msg) => {
     if(!msg.args[0]){
@@ -21,38 +21,61 @@ module.exports.run = async (bot, msg) => {
     let Skip = 0;
     let pos = 0;
     let Output = {
-        string: "",
+        string: [],
         numbers: []
     };
     let Cell = 0;
     let Mem = [];
 
+    const end = new Date().getTime() + TIME_LIMIT;
+    let error = false;
+
     Instructions = msg.content.split('');
-    for(let i=0;i<MEM_LENGTH;i++) Mem.push(0);
 
-    const start = new Date();
-
-    const execute = async () => {
+    const exec = async () => {
         while (pos < Instructions.length){
-            let c = Instructions[pos];
 
-            if (c=='['){
-                if(Mem[Cell]!=0) Loops.push(pos);
-                if(Mem[Cell]==0) Skip++;
+            if (new Date().getTime() > end){
+                error = true;
+                break;
             }
 
-            if (c==']'){
-                if(Mem[Cell]!=0){
-                    pos = Loops[Loops.length-1];
-                }else if (Mem[Cell]==0){
-                    if(Skip) Skip--;
-                    if (!Skip) Loops.pop();
+            if(!Mem[Cell] && Mem[Cell] !== 0){
+                Mem.push(0);
+            }
+
+            let c = Instructions[pos];
+
+            console.log(c);
+
+            if (c.includes('[')){
+                if(Mem[Cell]){
+                    Loops.push(pos);
+                }else{
+                    Skip++
                 }
             }
 
-            if (Skip) return;
+            if (c.includes(']')){
+                if(Mem[Cell]){
+                    pos = Loops[Loops.length-1];
+                }else{
+                    if(Skip > 0){
+                        Skip--;
+                    }else{
+                        Loops.pop();
+                    }
+                }
+            }
 
-            if (c=='+'){
+            if(Skip > 0) return;
+
+            if (c.includes('.')){
+                Output.string.push(String.fromCharCode(Mem[Cell]));
+                Output.numbers.push(Mem[Cell]);
+            }
+
+            if (c.includes('+')){
                 if(Mem[Cell]+1 >= MEM_SIZE){
                     Mem[Cell] = 0;
                 }else{
@@ -60,15 +83,15 @@ module.exports.run = async (bot, msg) => {
                 }
             }
 
-            if (c=='-'){
+            if (c.includes('-')){
                 if(Mem[Cell]-1 < 0){
-                    Mem[Cell] = 255;
+                    Mem[Cell] = MEM_SIZE-1;
                 }else{
                     Mem[Cell]--;
                 }
             }
 
-            if (c=='>'){
+            if (c.includes('>')){
                 if(Cell+1 > MEM_LENGTH){
                     Cell = MEM_LENGTH;
                 }else{
@@ -76,36 +99,35 @@ module.exports.run = async (bot, msg) => {
                 }
             }
 
-            if (c=='<'){
-                if(Cell-1 < 0){
+            if (c.includes('<')){
+                if(!Cell-1 < 0){
                     Cell = 0;
                 }else{
                     Cell--;
                 }
             }
 
-            if (c=='.'){
-                Output.string += String.fromCharCode(Mem[Cell]);
-                Output.numbers.push(Mem[Cell]);
-            }
-
             pos++;
-
-            if (new Date() - start > TIME_LIMIT){
-                while(Mem.join(",").endsWith(",0")){
-                    Mem = Mem.slice(0,Mem.length-1);
-                }
-                return bot.cmdError(`**Time Limit Exceded**\n${Output.numbers.length > 0 ? `Output:\n\`\`\`${Output.string}\`\`\`\n\`\`\`js\n${Output.numbers.join(" ")}\n\`\`\`\n`:""}Last cell: \`\`\`${Cell}\`\`\`\nMemory:\n\`\`\`js\n${Mem.join(",")}\n\`\`\``);
-            }
         }
     }
-    await execute();
+    await exec();
 
-    while(Mem.join(",").endsWith(",0")){
+    while(Mem.join(",").endsWith(",0") || Mem.join(",").length > 1800){
         Mem = Mem.slice(0,Mem.length-1);
     }
 
-    let out = `${Output.numbers.length > 0 ? `Output:\n\`\`\`${Output.string}\`\`\`\n\`\`\`js\n${Output.numbers.join(" ")}\n\`\`\`\n`:""}Memory: \n\`\`\`js\n${Mem.join(",")}\n\`\`\``;
+    while(Output.string.join("").length > 1800){
+        Output.string = Output.string.slice(0,Output.string.length);
+        Output.numbers = Output.numbers.slice(0,Output.numbers.length);
+    }
+
+    if(error){
+        return bot.cmdError(`**Time Limit Exceded**\n${Output.numbers.length > 0 ? `Output:\n\`\`\`${Output.string.join('')}\`\`\`\n\`\`\`js\n${Output.numbers.join(" ")}\n\`\`\`\n`:""}Last cell: \`\`\`\n${Cell}\n\`\`\`\nMemory:\n\`\`\`js\n${Mem.join(",")}\n\`\`\``);
+    }
+
+    let out = `${Output.numbers.length > 0 ? `Output:\n\`\`\`${Output.string.join('')}\`\`\`\n\`\`\`js\n${Output.numbers.join(" ")}\n\`\`\`\n`:""}Memory: \n\`\`\`js\n${Mem.join(",")}\n\`\`\``;
+
+    let embed = bot.embed();
 
     return msg.channel.send(out);
 }

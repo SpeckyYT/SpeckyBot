@@ -1,4 +1,4 @@
-const { Client } = require('discord.js')
+const { Client } = require('discord.js');
 
 const bot = new Client({
     autoReconnect: true,

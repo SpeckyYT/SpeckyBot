@@ -2,6 +2,12 @@ const isImageUrl = require('is-image-url');
 const { appendFile, readFile, writeFile } = require('fs');
 
 module.exports = async (bot) => {
+    bot.require = (module) => {
+        try{
+            delete require.cache[require.resolve(module)];
+        }catch(e){}
+        return require(module);
+    }
 
     bot.msToVars = (ms = 0, keep = false) => {
         if(ms < 0){

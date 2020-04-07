@@ -2,17 +2,17 @@ const { readdirSync, lstatSync } = require("fs");
 const { join } = require('path');
 
 module.exports = async (bot) => {
-    delete require.cache;
+    bot.removeAllListeners();
     const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory());
-
     getDirectories('./events/')
     .map(d => d.slice(d.indexOf('\\')+1))
     .forEach(async dir => {    
         try{
-            const events = readdirSync(`./events/${dir}/`).filter(d => d.match(/(.js|.ts)$/g));
-            events.forEach(async file => {
+            readdirSync(`./events/${dir}/`)
+            .filter(d => d.match(bot.supportedFiles))
+            .forEach(async file => {
                 try{
-                    const evt = require(`../events/${dir}/${file}`);
+                    const evt = bot.require(`../events/${dir}/${file}`);
                     let eName = evt.event;
                     if(!eName) throw {message: error = "Event not found!".toUpperCase()};
                     let calltype = evt.type || "on";

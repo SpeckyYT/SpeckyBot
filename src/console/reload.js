@@ -1,15 +1,11 @@
 module.exports = {
-    name: "reload",
-    description: "The bot will reload a specific handler!",
-    usage: `<handler>`,
-    category: `owner`,
-    accessableby: "Bot Owner",
-    aliases: ["rld","rl"]
+    name: 'reload',
+    aliases: ['rl','rld']
 }
 
-module.exports.run = async (bot, msg) => {
-    let { args } = msg;
-    if(!args[0]) return msg.channel.send("You have to define an handler to reload");
+module.exports.run = async (bot, data) => {
+    let { args } = data;
+    if(!args[0]) return console.log("You have to define an handler to reload".error);
     const begin = new Date();
 
     const cmddir = `../handlers/commands.js`;
@@ -39,10 +35,10 @@ module.exports.run = async (bot, msg) => {
                 return bot.cmdError("Module to reload is invalid");
         }
     }catch(e){
-        console.log(`ERROR: ${e.message}`);
+        console.log(`ERROR: ${e.message}`.error);
         return
     }
     const end = new Date();
     const diff = end - begin;
-    msg.channel.send(`**${args[0]}** got reloaded! (${diff}ms)`).catch();
+    console.log(`${String(args[0]).bold} got reloaded! (${diff}ms)`.success);
 }

@@ -1,8 +1,8 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 const { readFile } = require('fs');
-const { createServer } = require('net')
+const { createServer } = require('net');
 
 module.exports = async (bot) => {
     try{

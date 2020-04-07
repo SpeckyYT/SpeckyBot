@@ -36,8 +36,10 @@
         "terminal-image": "^0.2.0",
         "translate": "^1.1.2",
         "ttbf": "^0.10.0",
+        "typescript": "^3.8.3",
         "unfuck": "^0.3.0",
         "urban": "^0.3.2",
+        "vm": "^0.1.0",
         "ytdl-core": "^1.0.9",
         "ytdl-core-discord": "^1.1.0"
     },

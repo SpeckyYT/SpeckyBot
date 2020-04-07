@@ -37,16 +37,14 @@ module.exports = async (bot) => {
     bot.config = {};
     bot.config = require('../../config.json');
 
+    bot.supportedFiles = /.(js|ts|coffee|coffeescript|litcoffee)$/g;
+
     if(typeof bot.config.apikeys == "object"){
         forEach(bot.config.apikeys, (value, prop) => {
             bot.config[prop] = value;
         });
         bot.config.apikeys = null;
     }
-
-    //CoffeeScript 
-    require('coffee-register');
-    require.extensions['.coffeescript'] = require.extensions['.coffee'];
 
     require('./botfunctions')(bot);
 
@@ -56,6 +54,6 @@ module.exports = async (bot) => {
 
     ["events", "commands", "console","music"].forEach(async x => {
         bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
-        require(`./${x}`)(bot)
+        require(`./${x}`)(bot);
     });
 }
