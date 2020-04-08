@@ -46,14 +46,16 @@ module.exports = async (bot) => {
         bot.config.apikeys = null;
     }
 
-    require('./botfunctions')(bot);
-
-    ["commands","aliases","console","consoleali"].forEach(async x => 
+    ["commands","aliases","console","consoleali"].forEach(x => 
         bot[x] = new Collection()
     );
 
-    ["events", "commands", "console","music"].forEach(async x => {
-        bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+    ["botfunctions","events", "commands", "console","music"].forEach(x => {
+        if(bot.log){
+            bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+        }else{
+            console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+        }
         require(`./${x}`)(bot);
     });
 }
