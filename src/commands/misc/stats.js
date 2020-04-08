@@ -7,18 +7,18 @@ module.exports = {
     aliases: ["status","st"]
 }
 
-const { RichEmbed } = require('discord.js')
-const os = require('os')
-const osu = require('node-os-utils')
+const { RichEmbed } = require('discord.js');
+const os = require('os');
+const osu = require('node-os-utils');
 
 module.exports.run = async (bot, msg) => {
     let notSupported = "Operative system not supported"
     let full = '█'
     let empty = '░'
-    let precision = 15
+    let precision = 20
 
-    let usedRAM = os.totalmem() - os.freemem()
     let freeRAM = os.freemem()
+    let usedRAM = os.totalmem() - freeRAM;
 
     let diagramMaker = (used,free) => {
         let total = used + free;
@@ -29,36 +29,45 @@ module.exports.run = async (bot, msg) => {
 
     let cpuUsage;
 
-    osu.cpu.usage()
+    const p1 = osu.cpu.usage()
     .then(cpuPercentage => {
         cpuUsage = cpuPercentage;
     })
 
     let processes;
 
-    osu.proc.totalProcesses().then(process => {
+    const p2 = osu.proc.totalProcesses()
+    .then(process => {
         processes = process;
     })
 
     let driveUsed, driveFree;
 
-    try{
-        await osu.drive.info().then(i => {
-            driveUsed = i.usedPercentage;
-            driveFree = i.freePercentage;
-        })
-    }catch(err){driveUsed = false}
+    const p3 = osu.drive.info()
+    .then(i => {
+        driveUsed = i.usedPercentage;
+        driveFree = i.freePercentage;
+    })
+    .catch(() => {
+        driveUsed = false;
+    })
 
     let networkUsage, networkUsageIn, networkUsageOut;
 
-    try{
-        await osu.netstat.inOut().then(i => networkUsage = i.total)
+    const p4 = osu.netstat.inOut()
+    .then(i => {
+        networkUsage = i.total;
         networkUsageIn = networkUsage.inputMb;
         networkUsageOut = networkUsage.outputMb;
-    }catch(err){networkUsage = false}
+    })
+    .catch(() => {
+        networkUsage = false;
+    })
+
+    await Promise.all([p1,p2,p3,p4]);
 
     let cEmbed = new RichEmbed()
-    .setColor('#FF00AA')
+    .setColor(bot.config.color)
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, bot.user.iconURL)
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
@@ -75,11 +84,12 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .addField(`Total Emotes:`,`${bot.emojis.size}`,true)
     .addField(`Total Guilds:`,`${bot.guilds.size}`,true)
     .addBlankField()
-    .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`,true)
-    .addField(`Slots Winners:`,`${bot.stats.slots}`,true)
+    .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`)
+    .addField(`Slots Winners:`,`${bot.stats.slots}`)
     .addField(`Bot Uptime:`,`${bot.formatTime(bot.uptime)}`,true)
+    .addField(`Process Uptime:`,`${bot.formatTime(process.uptime()*1000)}`,true)
     .setTimestamp()
-    .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
+    .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
 
     msg.channel.send(cEmbed)
 }
