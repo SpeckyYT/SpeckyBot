@@ -10,7 +10,6 @@ module.exports = {
 const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg) => {
-    let { config } = bot;
     if(!msg.content){
         return bot.cmdError(`Message content can't be empty`);
     }

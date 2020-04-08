@@ -15,12 +15,12 @@ module.exports = async () => {
     const tscScript = vm.createScript(fs.readFileSync(tsc, "utf8"), tsc);
     const libPath = path.join(path.dirname(require.resolve("typescript")), "lib.d.ts");
     
-    require.extensions['.ts'] = (module) => {
+    require.extensions['.ts'] = (module, filename) => {
         const compileTS = (module) => {
             let exitCode = 0;
-            let tmpDir = path.join(path.join(process.cwd(), 'ts-comp'), "tsreq");
-            let relativeFolder = path.dirname(path.relative(process.cwd(), module.filename));
-            let jsname = path.join(tmpDir, relativeFolder, path.basename(module.filename, ".ts") + ".js");
+            const tmpDir = path.join(path.join(process.cwd(), 'ts-comp'), "tsreq");
+            const relativeFolder = path.dirname(path.relative(process.cwd(), module.filename));
+            const jsname = path.join(tmpDir, relativeFolder, path.basename(module.filename, ".ts") + ".js");
             let argv = [
                 "node",
                 "tsc.js",
@@ -36,13 +36,13 @@ module.exports = async () => {
                 libPath,
                 module.filename
             ];
-            let proc = Object.assign(Object.assign({}, process), {
-                argv: argv.clean(),
+            let proc = Object.assign(process, {
+                argv: argv,
                 exit: (code) => {
                     exitCode = code;
                 }
             });
-            let sandbox = {
+            tscScript.runInNewContext({
                 process: proc,
                 require: require,
                 module: module,
@@ -50,15 +50,14 @@ module.exports = async () => {
                 setTimeout: setTimeout,
                 clearTimeout: clearTimeout,
                 __filename: tsc
-            }
-            tscScript.runInNewContext(sandbox);
+            });
             if (exitCode !== 0) {
                 throw new Error('Unable to compile TypeScript file.');
             }
             return jsname;
         }
         const runJS = (jsname, module) => {
-            let content = fs.readFileSync(jsname, 'utf8');
+            const content = fs.readFileSync(jsname, 'utf8');
             let sandbox = {};
             for (const k in global) {
                 sandbox[k] = global[k];
@@ -73,6 +72,17 @@ module.exports = async () => {
         }
         runJS(compileTS(module), module);
     };
+
+    //TXT Support (useless ://)
+    require.extensions['.txt'] = (module, filename) => {
+        module.exports = fs.readFileSync(filename,{encoding: 'utf8'});
+    }
+
+    //BrainFuck Support (useless ://)
+    require.extensions['.b'] = (module, filename) => {
+        module.exports = fs.readFileSync(filename,{encoding: 'utf8'}).split('').filter((v) => '[]<>-+,.'.includes(v));
+    }
+    require.extensions['.bf'] = require.extensions['.b'];
 
     //Colored Strings in Terminal
     require('colors').setTheme({

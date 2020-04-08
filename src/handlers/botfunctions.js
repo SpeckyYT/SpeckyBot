@@ -10,9 +10,7 @@ module.exports = async (bot) => {
     }
 
     bot.msToVars = (ms = 0, keep = false) => {
-        if(ms < 0){
-            ms = (-ms)
-        }
+        ms = Math.abs(ms);
         let mil   = Math.floor(ms);
         let sec   = Math.floor(ms /  1000);
         let min   = Math.floor(ms / (1000 * 60));
@@ -130,8 +128,8 @@ module.exports = async (bot) => {
     bot.setLastImageCache = async (msg) => {
         let linkRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
 
-        function setImage(input){
-            bot.cache.lastImage[msg.channel.id] = input;
+        function setImage(l){
+            bot.cache.lastImage[msg.channel.id] = l;
         }
 
         await msg.channel.fetchMessages({limit: 50})
@@ -171,7 +169,7 @@ module.exports = async (bot) => {
 
 
     bot.checkOwner = (id) => {
-        return bot.config.owner.includes(id)
+        return bot.config.owner.includes(id);
     }
 
 
@@ -508,11 +506,7 @@ module.exports = async (bot) => {
             }
         }
 
-        while(memory.last() === 0 && memory.length > 1){
-            memory.pop();
-        }
-
-        while(options.limit && memory.length > 250){
+        while((options.limit && memory.length > 250) || (memory.last() === 0 && memory.length > 1)){
             memory.pop();
         }
 
