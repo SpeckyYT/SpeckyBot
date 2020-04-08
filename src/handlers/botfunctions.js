@@ -463,8 +463,7 @@ module.exports = async (bot) => {
             }
 
             pos++;
-
-            if(skip > 0) return;
+            if(skip > 0) continue;
 
             if (c == '+'){
                 if(memory[cell]+1 >= MEM_SIZE){
@@ -494,7 +493,7 @@ module.exports = async (bot) => {
             }
 
             if (c == '<'){
-                if(!cell-1 < 0){
+                if(cell-1 < 0){
                     cell = 0;
                 }else{
                     cell--;
@@ -509,7 +508,7 @@ module.exports = async (bot) => {
             }
         }
 
-        while(memory.last() === 0){
+        while(memory.last() === 0 && memory.length > 1){
             memory.pop();
         }
 
