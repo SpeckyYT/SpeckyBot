@@ -3,7 +3,8 @@ module.exports = {
 }
 
 const { RichEmbed, Collection } = require('discord.js');
-const leven = require('leven')
+const leven = require('leven');
+const fetch = require('node-fetch');
 
 module.exports.call = async (bot, msg) => {
     if(msg.author.bot || msg.channel.type === "dm") return;
@@ -63,6 +64,12 @@ module.exports.call = async (bot, msg) => {
     msg.ARGS = msg.Args.toUpperCase();
 
     msg.content = msg.content.slice(bot.config.prefix.length).trim().slice(command.length-bot.config.prefix.length).trim();
+
+    if(!msg.content && msg.attachments.size){
+        try{
+            msg.content = await (await fetch(msg.attachments.filter(v => v.filename.endsWith('.txt')).first().url)).text();
+        }catch(e){}
+    }
 
     msg.command = command.slice(bot.config.prefix.length);
 
