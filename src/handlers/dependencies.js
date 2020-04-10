@@ -15,10 +15,10 @@ module.exports = async () => {
     const tscScript = vm.createScript(fs.readFileSync(tsc, "utf8"), tsc);
     const libPath = path.join(path.dirname(require.resolve("typescript")), "lib.d.ts");
     
-    require.extensions['.ts'] = (module, filename) => {
+    require.extensions['.ts'] = (module) => {
         const compileTS = (module) => {
             let exitCode = 0;
-            const tmpDir = path.join(path.join(process.cwd(), 'ts-comp'), "tsreq");
+            const tmpDir = path.join(process.cwd(), "tsreq");
             const relativeFolder = path.dirname(path.relative(process.cwd(), module.filename));
             const jsname = path.join(tmpDir, relativeFolder, path.basename(module.filename, ".ts") + ".js");
             let argv = [

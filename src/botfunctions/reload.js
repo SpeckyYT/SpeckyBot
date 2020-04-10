@@ -1,11 +1,13 @@
+const { join } = require('path');
+
 module.exports = (bot) => {
     bot.reload = (module) => {
         const begin = new Date();
 
-        const cmddir = `../handlers/commands.js`;
-        const eventdir = `../handlers/events.js`;
-        const consdir = `../handlers/console.js`;
-        const bfsdir = `../handlers/botfunctions.js`;
+        const bfsdir = join(process.cwd(),`handlers/botfunctions.js`);
+        const cmddir = join(process.cwd(),`handlers/commands.js`);
+        const eventdir = join(process.cwd(),`handlers/events.js`);
+        const consdir = join(process.cwd(),`handlers/console.js`);
 
         try{
             switch(module){
@@ -29,11 +31,12 @@ module.exports = (bot) => {
                 case "cons":
                     bot.require(consdir)(bot); break;
                 default:
-                    bot.require(bfsdir)(bot); break;
+                    bot.require(bfsdir)(bot);
                     bot.require(eventdir)(bot);
                     bot.require(cmddir)(bot);
                     bot.require(consdir)(bot); break;
             }
+            console.log("Loading done!".success)
         }catch(e){
             console.log(`ERROR: ${e.message}`.error);
             return {time:false}

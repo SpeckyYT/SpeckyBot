@@ -50,7 +50,7 @@ module.exports = async (bot) => {
         bot[x] = new Collection()
     );
 
-    ["botfunctionshandler","events", "commands", "console","music"].forEach(x => {
+    ["botfunctions","events", "commands", "console","music"].forEach(x => {
         if(bot.log){
             bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
         }else{
