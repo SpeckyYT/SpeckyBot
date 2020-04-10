@@ -29,6 +29,7 @@ module.exports = (bot) => {
                 case "cons":
                     bot.require(consdir)(bot); break;
                 default:
+                    bot.require(bfsdir)(bot); break;
                     bot.require(eventdir)(bot);
                     bot.require(cmddir)(bot);
                     bot.require(consdir)(bot); break;
