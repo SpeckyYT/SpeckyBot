@@ -1,16 +1,20 @@
+# Folders
 src/events/private
 src/commands/private
+require-cache/
 db/
 
+# File Types
 *.txt
 *.png
 *.jpg
 *.jpeg
 
+# Secret Files
 template.config.json
 config.json
 
-ts-comp
+
 
 # Logs
 logs

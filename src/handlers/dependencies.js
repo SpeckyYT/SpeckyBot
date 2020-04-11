@@ -18,7 +18,7 @@ module.exports = async () => {
     require.extensions['.ts'] = (module) => {
         const compileTS = (module) => {
             let exitCode = 0;
-            const tmpDir = path.join(process.cwd(), "tsreq");
+            const tmpDir = path.join(process.cwd(), "require-cache");
             const relativeFolder = path.dirname(path.relative(process.cwd(), module.filename));
             const jsname = path.join(tmpDir, relativeFolder, path.basename(module.filename, ".ts") + ".js");
             let argv = [
