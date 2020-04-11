@@ -39,10 +39,10 @@ const copyFolderRecursive = (path, destination) => {
 module.exports.run = async (bot, msg) => {
     try {
         // download new files
-        deleteFolderRecursive('./SpeckyBot') // just incase it's leftover
+        deleteFolderRecursive('./src') // just incase it's leftover
         execSync(`git clone "https://github.com/SpeckyYT/SpeckyBot"`)
         deleteFolderRecursive('./') // delete old files
-        copyFolderRecursive('./SpeckyBot', './') // copy new files
+        copyFolderRecursive('./SpeckyBot', './src') // copy new files
         deleteFolderRecursive('./SpeckyBot') // delete temp download
     } catch (e) {
         console.log("Bot not updated correctly".toUpperCase().fatal);
