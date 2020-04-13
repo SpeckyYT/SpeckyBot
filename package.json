@@ -29,6 +29,7 @@
         "osu": "^3.0.0-0",
         "osureplayparser": "^1.0.1",
         "parse-ms": "^2.1.0",
+        "qrcode": "^1.4.4",
         "random": "^2.2.0",
         "random-animals-api": "^1.2.0",
         "string-similarity": "^3.0.0",

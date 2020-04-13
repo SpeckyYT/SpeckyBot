@@ -16,6 +16,7 @@ module.exports = async () => {
     const libPath = path.join(path.dirname(require.resolve("typescript")), "lib.d.ts");
     
     require.extensions['.ts'] = (module) => {
+        const pArgv = process.argv;
         const compileTS = (module) => {
             let exitCode = 0;
             const tmpDir = path.join(process.cwd(), "require-cache");
@@ -71,6 +72,7 @@ module.exports = async () => {
             return vm.runInNewContext(content, sandbox, { filename: jsname });
         }
         runJS(compileTS(module), module);
+        process.argv = pArgv;
     };
 
     //TXT Support (useless ://)
