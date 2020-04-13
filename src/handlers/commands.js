@@ -1,7 +1,10 @@
 const { readdirSync, lstatSync } = require("fs");
 const { join } = require('path');
+const { Collection } = require('discord.js');
 
 module.exports = (bot) => {
+    bot.commands = new Collection();
+    bot.aliases = new Collection();
     const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory());
     getDirectories('./commands/')
     .map(d => d.slice(d.indexOf('\\')+1))

@@ -46,10 +46,6 @@ module.exports = async (bot) => {
         bot.config.apikeys = null;
     }
 
-    ["commands","aliases","console","consoleali"].forEach(x => 
-        bot[x] = new Collection()
-    );
-
     ["botfunctions","events", "commands", "console","music"].forEach(x => {
         if(bot.log){
             bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);

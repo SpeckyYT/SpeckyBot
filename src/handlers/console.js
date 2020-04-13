@@ -1,6 +1,9 @@
 const { readdirSync } = require('fs');
+const { Collection } = require('discord.js');
 
 module.exports = async (bot) => {
+    bot.console = new Collection();
+    bot.consoleali = new Collection();
     readdirSync(`./console/`)
     .filter(d => d.match(bot.supportedFiles))
     .forEach(async file => {
