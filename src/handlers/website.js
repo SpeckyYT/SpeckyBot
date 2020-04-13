@@ -7,8 +7,8 @@ const { createServer } = require('net');
 module.exports = async (bot) => {
     try{
         app.get('/log', async function (req, res) {
-            readFile('./commands.log',(err,data) => {
-                res.send(data.toString().split("\n").reverse().join("<br>"));
+            readFile('../commands.log',(err,data) => {
+                res.send(String(data).split("\n").reverse().join("<br>"));
             });
         });
         let port = 50000;
