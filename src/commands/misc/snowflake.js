@@ -7,20 +7,33 @@ module.exports = {
     aliases: ['sf','id']
 }
 
-const { RichEmbed } = require('discord.js');
+const { RichEmbed, SnowflakeUtil } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     let lsf, error;
 
-    msg.Args.forEach(async arg => {
-        let snowflake = parseInt(String(arg));
+    let prev = [];
 
-        if(isNaN(snowflake)){
+    msg.Args.forEach(async arg => {
+        let snowflake = arg.split('').filter(c=>"0123456789".includes(c)).join('');
+
+        if(isNaN(snowflake) || !snowflake){
             if(!error){
-                error = bot.cmdError(`Snowflake \`${arg}\` is not a number`);
+                error = bot.cmdError(`Snowflake \`${arg}\` is not a valid number`);
             }
         }else{
-            let timestamp = (snowflake / 4194304) + 1420070400000;
+            let deconstructed = SnowflakeUtil.deconstruct(snowflake);
+            let timestamp = deconstructed.date;
+            let binary = deconstructed.binary;
+            let toobig = binary.includes('-') || snowflake.length > 19;
+
+            console.log(deconstructed)
+
+            if(prev.includes(binary)){
+                return;
+            }else{
+                prev.push(binary)
+            }
 
             let timenow = new Date();
 
@@ -32,14 +45,14 @@ module.exports.run = async (bot, msg) => {
             .setTitle("Snowflake Timestamp")
             .setColor("#FF00AA");
 
-            if(year != Infinity){
-                embed.addField(`${timestamp < timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`);
-            }else{
+            if(year == Infinity || toobig){
                 skip = true;
-                embed.setDescription("The requested Snowflake's age is older than `2^1024` or `10^309` years.\nSuch a big number can't be handled by the bot ;-)");
+                embed.setDescription("The requested Snowflake caused an overflow.");
+            }else{
+                embed.addField(`${timestamp <= timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`);
             }
 
-            if(snowflake > 1056890076895641534463){
+            if(toobig){ // > 9223372036854775807
                 skip = true;
                 embed.setFooter("Time isn't compatible in ISO8601 fomat...");
             }else{
@@ -49,15 +62,8 @@ module.exports.run = async (bot, msg) => {
 
             if(!skip){
                 let item = bot.findSnowflake(snowflake);
-
-                let result = false;
-
                 if(item){
-                    result = item.toString();
-                }
-
-                if(result){
-                    embed.addField(`Resulting snowflake`,result);
+                    embed.addField(`Resulting snowflake`,item.toString());
                 }
             }
 
