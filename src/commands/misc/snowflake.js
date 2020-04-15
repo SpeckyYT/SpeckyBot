@@ -27,8 +27,6 @@ module.exports.run = async (bot, msg) => {
             let binary = deconstructed.binary;
             let toobig = binary.includes('-') || snowflake.length > 19;
 
-            console.log(deconstructed)
-
             if(prev.includes(binary)){
                 return;
             }else{
