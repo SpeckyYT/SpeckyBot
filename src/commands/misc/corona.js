@@ -4,7 +4,7 @@ module.exports = {
     usage: `[number]`,
     category: `misc`,
 	accessableby: "Members",
-    aliases: ["coronavirus"]
+    aliases: ["coronavirus","covid","covid19","covid-19"]
 }
 
 const fetch = require('node-fetch');
