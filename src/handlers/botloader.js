@@ -28,8 +28,6 @@ module.exports = async (bot) => {
     bot.cache.chatbot = {};
     bot.cache.console.debug = false;
 
-    bot.snowflake = require('node-snowflake').Snowflake.nextId;
-
     bot.debugN = 0;
 
     bot.settings = {};

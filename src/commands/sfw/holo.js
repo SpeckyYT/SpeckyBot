@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
         require('./functions/img')('holo', msg)
     }else{
         //NSFW
-        require('../nsfw/functions/img')(["holo","holoEro"].pick(), msg);
+        require('../nsfw/functions/img')(["holo","holoEro"], msg);
     }
 }
 

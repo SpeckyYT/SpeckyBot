@@ -1,10 +1,10 @@
 module.exports = {
-    name: "brainfuck",
-	description: "Converts a Brainf*ck string to a text string!",
-    usage: `[brainf*ck string]`,
+    name: "namelesslanguage",
+	description: "Converts a Nameless Language string to a text string!",
+    usage: `[nll string]`,
     category: `misc`,
 	accessableby: "Members",
-    aliases: ["bf","brainfuck2text","brainfucktostring","bftotxt"]
+    aliases: ["nll"]
 }
 
 module.exports.run = async (bot, msg) => {
@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
 
     insts = msg.content;
 
-    const { error, tOut, memory, string, numbers, cell, time } = bot.bf(insts,{limit:true});
+    const { error, tOut, memory, string, numbers, cell, time } = bot.nll(insts,{limit:true});
 
     if(tOut){
         return bot.cmdError(`**Time Limit Exceded**\n${numbers.length > 0 ? `Output:\n\`\`\`\n${string}\n\`\`\`\n\`\`\`js\n${numbers.join(" ")}\n\`\`\`\n`:""}Last cell: \`\`\`\n${cell}\n\`\`\`\nMemory:\n\`\`\`js\n${memory.join(",")}\n\`\`\`\nTime: **${time}ms**`);

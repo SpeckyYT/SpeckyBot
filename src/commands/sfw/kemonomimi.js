@@ -14,6 +14,6 @@ module.exports.run = async (bot, msg) => {
         require('./functions/img')('kemonomimi', msg);
     }else{
         //NSFW
-        require('../nsfw/functions/img')(["kemonomimi","eroKemonomimi"].pick(), msg);
+        require('../nsfw/functions/img')(["kemonomimi","eroKemonomimi"], msg);
     }
 }

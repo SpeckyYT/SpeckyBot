@@ -120,6 +120,20 @@ module.exports = (bot) => {
                 output.numbers.push(memory[cell]);
                 continue;
             }
+
+            if (!options.extra) continue;
+
+            if (c == ';'){
+                memory[cell] = round(random());
+            }
+
+            if (c == '_'){
+                memory[cell] = 0;
+            }
+
+            if (c == '\\'){
+                cell = 0;
+            }
         }
 
         while((options.limit && memory.length > 250) || (memory.last() === 0 && memory.length > 1)){
@@ -138,4 +152,23 @@ module.exports = (bot) => {
         return {tOut,output,string,numbers,memory,cell,time}
     }
     bot.brainfuck = bot.bf;
+
+    bot.namelesslanguage = (insts,options) => {
+        const input = insts.split("").filter(f=>"01".includes(f)).join('').match(/.{1,4}/g);
+        const instruct = input.map(v=>{
+            if(v == '0000') return '>';
+            if(v == '0001') return '<';
+            if(v == '0010') return '+';
+            if(v == '0011') return '-';
+            if(v == '0100') return '.';
+            if(v == '0101') return ',';
+            if(v == '0110') return '[';
+            if(v == '0111') return ']';
+            if(v == '1010') return ';';
+            if(v == '1011') return '_';
+            if(v == '1100') return '\\';
+        })
+        return bot.bf(instruct,{extra:true, ...options});
+    }
+    bot.nll = bot.namelesslanguage;
 }

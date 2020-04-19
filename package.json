@@ -19,6 +19,7 @@
         "mathjs": "^6.6.2",
         "moment": "^2.24.0",
         "more-array-methods": "^1.1.2",
+        "nekobot-api": "^1.1.5",
         "nekos.life": "^2.0.5",
         "node-fetch": "^2.6.0",
         "node-os-utils": "^1.2.2",
