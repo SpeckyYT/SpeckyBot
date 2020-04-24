@@ -1,15 +1,15 @@
-const fetch = require("node-fetch");
-
 module.exports = {
     name: "meme",
     description: "Sends a meme!",
     usage: "",
     category: "misc",
     accessibleby: "member",
-    aliases: [""]
+    aliases: []
 }
 
-module.exports.run = async (bot, msg, args) => {
+const fetch = require("node-fetch");
+
+module.exports.run = async (bot, msg) => {
     let msg1 = await msg.channel.send("Please Wait, making fresh memes...");
 
     fetch("https://apis.duncte123.me/meme")
@@ -23,5 +23,5 @@ module.exports.run = async (bot, msg, args) => {
             embed.setTitle(body.data.title).setURL(body.data.url);
         }
         msg1.edit(embed);
-    });
-};
+    })
+}
