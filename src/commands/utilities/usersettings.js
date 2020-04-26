@@ -8,7 +8,7 @@ module.exports = {
 }
 
 const { writeFile } = require('fs');
-const dir = '../../u_settings';
+const dir = '../../../db/u_settings';
 
 module.exports.run = async (bot, msg) => {
     let { args } = msg;
