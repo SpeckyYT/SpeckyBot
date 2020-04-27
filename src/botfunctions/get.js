@@ -52,4 +52,8 @@ module.exports = (bot) => {
         }
         return input;
     }
+
+    bot.getCommand = (command) => {
+        return bot.commands.get(command) || bot.commands.get(bot.aliases.get(command));
+    }
 }

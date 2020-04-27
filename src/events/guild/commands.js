@@ -75,8 +75,8 @@ module.exports.call = async (bot, msg) => {
 
     msg.links = (msg.content ? msg.content.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g) : []) || []
 
-    let cmd = bot.commands.get(command.slice(bot.config.prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(bot.config.prefix.length)));
-
+    let cmd = bot.getCommand(command.slice(bot.config.prefix.length));
+    
     const execute = async () => {
         if(cmd){
             bot.stats.commandsExecuted++;
@@ -260,7 +260,10 @@ module.exports.call = async (bot, msg) => {
 }
 
 async function run(cmd, bot, msg, command){
-    await cmd.run(bot, msg)
+    cmd[
+        Object.keys(cmd)
+        .filter(v => typeof cmd[v] == 'function')[0]
+    ](bot, msg)
     .catch(async (err) => {
         let expected;
         try{
