@@ -4,6 +4,7 @@ const { Collection } = require('discord.js');
 module.exports = async (bot) => {
     bot.console = new Collection();
     bot.consoleali = new Collection();
+
     readdirSync(`./console/`)
     .filter(d => d.match(bot.supportedFiles))
     .forEach(async file => {
@@ -18,7 +19,7 @@ module.exports = async (bot) => {
         }
     })
 
-    if(process.openStdin().listenerCount("data")) return;
+    process.openStdin().removeAllListeners();
 
     process.openStdin().addListener("data", async res => {
         let content = res.toString();
