@@ -14,7 +14,7 @@ module.exports.run = async (bot, data) => {
         return bot.cmdError(`${"TIME LIMIT EXCEDED".fatal}\n${numbers.length > 0 ? `Output:\n${string}\n\n${numbers.join(" ")}\n\n`:""}Last cell: \n${cell}\n\nMemory:\n\n${memory.join(",")}\n`);
     }
 
-    let out = `${numbers.length > 0 ? `Output:\n${string.success}\n\n${numbers.join(" ").success}\n\n`:""}Memory: \n\n${Mem.join(",").info}\n`;
+    let out = `${numbers.length > 0 ? `Output:\n${string.success}\n\n${numbers.join(" ").success}\n\n`:""}Memory: \n\n${memory.join(",").info}\n`;
 
     console.log(out);
 }
