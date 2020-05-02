@@ -4,7 +4,7 @@ module.exports = {
     usage: ``,
     category: `misc`,
     accessableby: "Members",
-    aliases: ["cb"]
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {

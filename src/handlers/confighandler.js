@@ -27,7 +27,7 @@ module.exports = async () => {
 
     const items = ["token","prefix","color"]
     const bools = ["extra_apikeys","reply_unexisting_command","load_nsfw"]
-    const apikeys = ["yandex","youtube","osu"]
+    const apikeys = ["youtube","osu"]
     const arrays = ["owner"]
 
     items.forEach(conf => {
