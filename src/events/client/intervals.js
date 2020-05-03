@@ -4,6 +4,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot) => {
+    bot.intervals = [];
     [
         ['interval_1_sec',        1 * 1000],
         ['interval_5_sec',        5 * 1000],
@@ -18,8 +19,10 @@ module.exports.call = async (bot) => {
     ]
     .forEach(async (event) => {
         await bot.emit(event[0]);
-        setInterval(async () => {
-            await bot.emit(event[0])
-        },event[1])
+        bot.intervals.push(
+            setInterval(async () => {
+                await bot.emit(event[0])
+            },event[1])
+        )
     })
 }

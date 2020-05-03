@@ -23,6 +23,7 @@ module.exports = async (bot) => {
     bot.stats.slots = 0;
 
     bot.cache = {};
+    bot.cache.messages = [];
     bot.cache.lastImage = {};
     bot.cache.console = {};
     bot.cache.chatbot = {};

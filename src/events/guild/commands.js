@@ -11,6 +11,12 @@ module.exports.call = async (bot, msg) => {
 
     if(msg.system) return;
 
+    if(bot.cache.messages.includes(msg.id)){
+        return;
+    }else{
+        bot.cache.messages.push(msg.id);
+    }
+
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first() ?
         msg.mentions.users.first().tag == bot.user.tag : false){

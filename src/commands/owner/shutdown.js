@@ -4,16 +4,13 @@ module.exports = {
     usage: ``,
     category: `owner`,
 	accessableby: "Bot Owner",
-    aliases: ["quit","exit","die","kill","reboot"]
+    aliases: ["quit","exit","die","kill"]
 }
 
 module.exports.run = async (bot, msg) => {
     try{
-        await msg.channel.send("Bot is shutting down!")
-        .then(ms => {
-            ms.delete(5000);
-            process.exit();
-        });
+        await msg.channel.send("Bot is shutting down!");
+        process.exit(0);
     }catch(e){
         return bot.cmdError("An error occourred");
     }
