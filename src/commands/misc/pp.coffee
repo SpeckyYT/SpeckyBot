@@ -2,7 +2,7 @@ module.exports =
     name: 'pp'
     description: 'Gives the length of your pp!'
     usage: '<@user>'
-    category: 'helloworld'
+    category: 'misc'
     accessableby: 'Members'
     aliases: []
     run: (bot, msg) ->
