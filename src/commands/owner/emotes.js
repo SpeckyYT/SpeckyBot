@@ -1,10 +1,10 @@
 module.exports = {
-    name: "emotes",
+    name: "allemotes",
     description: "Sends all emotes which the bot can access to.",
     usage: ``,
     category: `owner`,
     accessableby: "Bot Owner",
-    aliases: ["emoji","emojis","emote"]
+    aliases: ["allemojis"]
 }
 
 module.exports.run = async (bot, msg) => {
@@ -17,6 +17,6 @@ module.exports.run = async (bot, msg) => {
         }
     })
     if(arr.length){
-        msg.channel.send(arr.join(''));
+        return msg.channel.send(arr.join(''));
     }
 }
