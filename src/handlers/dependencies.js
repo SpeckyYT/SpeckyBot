@@ -10,7 +10,9 @@ module.exports = async () => {
     require('coffee-register');
     require.extensions['.coffeescript'] = require.extensions['.coffee'];
 
-    //TypeScript Support
+    //TypeScript Support DEPRECATED
+    // reasons: too slow, and has problems (TS2307: Cannot find module 'form-data')
+    /*
     const tsc = path.join(path.dirname(require.resolve("typescript")),"tsc.js");
     const tscScript = vm.createScript(fs.readFileSync(tsc, "utf8"), tsc);
     const libPath = path.join(path.dirname(require.resolve("typescript")), "lib.d.ts");
@@ -74,6 +76,7 @@ module.exports = async () => {
         runJS(compileTS(module), module);
         process.argv = pArgv;
     };
+    */
 
     //TXT Support (useless ://)
     require.extensions['.txt'] = (module, filename) => {
