@@ -2,13 +2,13 @@ module.exports = {
     name: "emote",
     description: "Print a big pixeled emoji made of small emojis :3",
     usage: `<:emoji: or URL>`,
-    category: `misc`,
+    category: "misc",
     accessableby: "Bot Owner",
     aliases: ["e","emoji"]
 };
 
 const Jimp = require('jimp');
-const diff = require('color-diff');
+const { closest } = require('color-diff');
 const twemoji = require('twemoji');
 
 const emojiRgb = [
@@ -32,9 +32,7 @@ const emojiRgb = [
 const size = 17;
 
 module.exports.run = async (bot, msg) => {
-    if(msg.Args.length < 1){
-        return bot.cmdError(":warning: Need one argument. A custom emoji or image url");
-    }
+    if(msg.Args.length < 1) return bot.cmdError("Needs a (default or custom) emoji or an emoji url");
 
     // try arg as emoji
     let emoji = bot.emojis.find(e => e.name == msg.Args[0].split(":")[1]);
@@ -47,44 +45,35 @@ module.exports.run = async (bot, msg) => {
             url = msg.Args[0];
         }else{
             // try use twemoji if it's a default emoji
-            let text = twemoji.parse(msg.Args[0]);
-            if(!text.startsWith("<img")){
-                return bot.cmdError("Only works with custom emojis from this guild / default emojis / png or jpg urls of emojis.");
-            }
-            text = text.substring(text.indexOf("src") + 5);
-            text = text.substring(0, text.length - 3);
-            url = text;
+            url = twemoji.parse(msg.Args[0]);
+            if(!url.startsWith("<img")) return bot.cmdError("Only works with custom emojis from this guild / default emojis / png or jpg urls of emojis.");
+            url = url.substring(url.indexOf("src")+5);
+            url = url.substring(0,url.length-3);
         }
     }
 
     // print image if it was an emoji
-    if(!url){
+    if(emoji){
         url = emoji.url;
         await msg.channel.send(url);
     }
 
     Jimp.read(url, async (err, img) => {
         if(err) return bot.cmdError("Could not read image");
-        return img
-        .contrast(1)
-        .resize(size, -1, async (err,img) => {
+        img.resize(size, Jimp.AUTO, Jimp.RESIZE_BEZIER, async (err,img) => {
             if(err) return bot.cmdError("Could not load image");
             let transColors = [];
-            for(let i = 0; i < size; i++){
-                for(let j = 0; j < size; j++){
+            for(let i = 0; i < img.getHeight(); i++){
+                for(let j = 0; j < img.getWidth(); j++){
                     let rgb = Jimp.intToRGBA(img.getPixelColor(j, i));
-                    const cdiff = diff.closest({R:rgb.r,G:rgb.g,B:rgb.b}, emojiRgb);
+                    const cdiff = closest({R:rgb.r,G:rgb.g,B:rgb.b}, emojiRgb);
                     const found = emojiRgb.find(v => v.R == cdiff.R && v.B == cdiff.B && v.B == cdiff.B);
                     transColors[i] = transColors[i] || [];
                     transColors[i].push(found ? found.E : 'black_large_square');
                 }
             }
-
-            await msg.channel.send(
-                transColors.map(arr => arr.join('')).join('\n'),
-                {split:'\n'}
-            );
-        });
-    });
-};
+            await msg.channel.send(transColors.map(arr=>arr.join('')).join('\n'),{split:'\n'});
+        })
+    })
+}
 
