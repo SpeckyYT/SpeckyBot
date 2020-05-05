@@ -4,7 +4,7 @@ module.exports = {
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
-    aliases: ["cumslut","cs"]
+    aliases: ["cumslut","cum","cumshot","cumshots","cs"]
 }
 
 module.exports.run = async (bot, msg) => {

@@ -29,7 +29,7 @@ const emojiRgb = [
     {R: 193, G: 105, B: 79,  E: ":brown_square:"},          // brown
 ].clean();
 
-const size = 17;
+const size = 16;
 
 module.exports.run = async (bot, msg) => {
     if(msg.Args.length < 1) return bot.cmdError("Needs a (default or custom) emoji or an emoji url");
