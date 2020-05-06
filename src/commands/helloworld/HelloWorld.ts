@@ -6,6 +6,6 @@ module.exports = {
     accessableby: "Members",
     aliases: [],
     run: async (bot:any, msg:any): Promise<void> => {
-        msg.channel.send("`TypeScript`: Hello World!");
+        await msg.channel.send("`TypeScript`: Hello World!");
     }
 }

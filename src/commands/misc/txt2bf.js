@@ -14,5 +14,5 @@ module.exports.run = async (bot, msg) => {
         return bot.cmdError(`Message content can't be empty`);
     }
     let text = convert(msg.content);
-    msg.channel.send(`\`\`\`bf\n${text}\n\`\`\``,{split: {char: '>'}})
+    return msg.channel.send(text);
 }

@@ -42,7 +42,7 @@ module.exports = async (bot) => {
 
         args = oargs.slice(1);
 
-        let cmd = bot.console.get(command) || bot.console.get(bot.consoleali.get(command));
+        let cmd = bot.getConsoleCommand(command);
 
         let data = {}
         data.contento = content;

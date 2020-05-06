@@ -1,5 +1,3 @@
-const vm = require('vm');
-const path = require('path');
 const fs = require('fs');
 
 module.exports = async () => {
@@ -13,6 +11,8 @@ module.exports = async () => {
     //TypeScript Support DEPRECATED
     // reasons: too slow, and has problems (TS2307: Cannot find module 'form-data')
     /*
+    const vm = require('vm');
+    const path = require('path');
     const tsc = path.join(path.dirname(require.resolve("typescript")),"tsc.js");
     const tscScript = vm.createScript(fs.readFileSync(tsc, "utf8"), tsc);
     const libPath = path.join(path.dirname(require.resolve("typescript")), "lib.d.ts");

@@ -3,5 +3,5 @@ module.exports = {
 }
 
 module.exports.call = async bot => {
-    console.log("Bot is ready!".success);
+    bot.log("Bot is ready!".success);
 }

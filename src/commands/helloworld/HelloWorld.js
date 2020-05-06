@@ -6,6 +6,6 @@ module.exports = {
     accessableby: "Members",
     aliases: [],
     run: async (bot, msg) => {
-        msg.channel.send("`JavaScript`: Hello World!");
+        await msg.channel.send("`JavaScript`: Hello World!");
     }
 }

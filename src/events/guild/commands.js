@@ -266,10 +266,7 @@ module.exports.call = async (bot, msg) => {
 }
 
 async function run(cmd, bot, msg, command){
-    cmd[
-        Object.keys(cmd)
-        .filter(v => typeof cmd[v] == 'function')[0]
-    ](bot, msg)
+    bot.getFunction(cmd)(bot, msg)
     .catch(async (err) => {
         let expected;
         try{
@@ -280,7 +277,7 @@ async function run(cmd, bot, msg, command){
             err = err.replace("[EXPECTED]","").trim();
             await msg.channel.send(error(err));
         }else{
-            bot.log(err.error);
+            bot.log(err.message||err.error||err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
             
             if(String(err).includes("Must be 2000 or fewer in length")){

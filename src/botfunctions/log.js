@@ -3,7 +3,7 @@ const { appendFile, readFile, writeFile } = require('fs');
 module.exports = (bot) => {
     bot.log = async (content) => {
         appendFile('../commands.log',`${content ? 
-            content
+            String(content)
             .replace(/[][[][0-9]{2}m/g,'')
             .replace(/\t/g,' ').replace(/ +/g,' ')
             : ''}\n`,
@@ -25,7 +25,7 @@ module.exports = (bot) => {
         })
 
         if(content){
-            console.log(content)
+            console.log(String(content).error)
         }else{
             console.log()
         }
