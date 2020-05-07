@@ -232,23 +232,21 @@ module.exports.call = async (bot, msg) => {
         mostlikely = mostlikely.sort((a,b) => a-b);
         let items = mostlikely.map((val, key) => key).slice(0,9);
         let string = `Command \`${msg.command}\` is unavailable...\nSend a message with the number of the desidered command or \`c\` to cancel.\n\n`;
-        items.forEach((val, ind) => {
-            string += `\`${ind+1}\` ${val}\n`
-        })
-        let ms;
-        await msg.channel.send(bot.embed().setDescription(string)).then(m => ms = m);
-        const filter = m => ((m.author.id == msg.author.id) && Boolean(m.content.match(/[0-9]/g)));
+        items.forEach((val, ind) => string += `\`${ind+1}\` ${val}\n`)
+        let ms = await msg.channel.send(bot.embed().setDescription(string));
+        const regex = /[1-9cC]/g
+        const filter = m => ((m.author.id == msg.author.id) && Boolean(m.content.toLowerCase().match(regex)));
         let collector = msg.channel.createMessageCollector(filter, { time: 15000, errors: ["time"] });
         let runned = false;
         collector.on('collect', async (collected) => {
-            runned = true;
             let m = collected;
-            let numb = m.content.match(/[1-9cC]/g)[0];
+            let numb = m.content.toLowerCase().match(regex)[0];
             await m.delete().catch();
-            await ms.delete().catch();
             if(isNaN(numb)){
                 return collector.stop();
             }
+            await ms.delete().catch();
+            runned = true;
             let com = items[numb-1];
             msg.command = com;
             cmd = bot.commands.get(com) || bot.commands.get(bot.aliases.get(com));
@@ -257,8 +255,7 @@ module.exports.call = async (bot, msg) => {
         });
         collector.on('end', async () => {
             if(runned) return;
-            await ms.delete().catch();
-            return await execute();
+            await ms.edit(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
         });
     }else{
         return await execute();
