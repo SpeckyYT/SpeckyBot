@@ -9,7 +9,7 @@ module.exports.run = async (bot, data) => {
     let toEval = data.content;
     let result;
     try{
-        result = inspect(eval(toEval)).toString().success;
+        result = inspect(eval(toEval),{depth:1}).toString().success;
     }catch(err){
         result = err.toString().error;
     }

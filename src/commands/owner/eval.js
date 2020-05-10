@@ -15,7 +15,7 @@ module.exports.run = async (bot, msg) => {
     let evaluated;
 
     try{
-        evaluated = inspect(eval(toEval,{depth:0}));
+        evaluated = inspect(eval(toEval),{depth:0});
     }catch(e){
         return msg.channel.send(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
     }
@@ -23,6 +23,6 @@ module.exports.run = async (bot, msg) => {
     if (!toEval) {
         return msg.channel.send(`Error while evaluating: \`air\``);
     } else {
-        return msg.channel.send(`\`\`\`js\n${evaluated}\n\`\`\``, { maxLength: 1900 })
+        return msg.channel.send(`${evaluated.length<1990?"```js\n":''}${evaluated}${evaluated.length<1990?"\n```":''}`, { split: '\n' })
     }
 }

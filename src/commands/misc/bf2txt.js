@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
 
     insts = msg.content;
 
-    const { error, tOut, memory, string, numbers, cell, time } = bot.bf(insts,{limit:true});
+    const { error, tOut, memory, string, numbers, cell, time } = await bot.bf(insts,{limit:true});
 
     if(tOut){
         return bot.cmdError(`**Time Limit Exceded**\n${numbers.length > 0 ? `Output:\n\`\`\`\n${string}\n\`\`\`\n\`\`\`js\n${numbers.join(" ")}\n\`\`\`\n`:""}Last cell: \`\`\`\n${cell}\n\`\`\`\nMemory:\n\`\`\`js\n${memory.join(",")}\n\`\`\`\nTime: **${time}ms**`);
