@@ -25,6 +25,10 @@ module.exports.call = async (bot, msg) => {
             msg.react(crafter).catch();
         }
 
+        if(contentl.includes('hai')){
+            msg.react('🦈').catch();
+        }
+
     }
 
 //-----------MESSAGES/RESPONSES-----------------
