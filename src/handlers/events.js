@@ -16,7 +16,7 @@ module.exports = async (bot) => {
                     let eName = evt.event;
                     if(!eName) throw {message: error = "Event not found!".toUpperCase()};
                     let calltype = evt.type || "on";
-                    bot[calltype](eName, evt.call.bind(null, bot));
+                    bot[calltype](eName, bot.getFunction(evt).bind(null, bot));
                     bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}   \t|\t${file} ERROR!`.error)

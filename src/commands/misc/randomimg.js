@@ -1,35 +1,37 @@
 module.exports = {
     name: "randomimg",
-	description: "Gives you a random image from loremflickr.com!",
+    description: "Gives you a random image from loremflickr.com!",
     usage: `<keyword>`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["randomimage","rimg"]
 }
 
 const { RichEmbed } = require("discord.js");
-const { get } = require('superagent')
+const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
-    let mesg = await msg.channel.send("Generating...")
-    let kw;
-    if(args[0]){
-        kw = `${args.join(",")}`;
-    }else{
-        kw = `all`
-    }
-    let {body} = await get(`https://loremflickr.com/json/p/1024/1024/${kw}`)
-    if(!{body}) return msg.channel.send("I broke! Try again.")
+    await msg.channel.send("Generating...")
+    .then(async ms => {
+        let kw;
 
-        let cEmbed = new RichEmbed()
-        .setColor('#FF00AA')
+        let { args } = msg;
+
+        if(args[0]){
+            kw = `${args.join(",")}`;
+        }else{
+            kw = `all`
+        }
+
+        let body = await (await fetch("https://loremflickr.com/json/p/1024/1024/"+kw)).json();
+
+        let embed = new RichEmbed()
+        .setColor(bot.config.color)
         .setAuthor(`Random Image!`, msg.guild.iconURL)
         .setImage(body.file)
         .setTimestamp()
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 
-        msg.channel.send({embed: cEmbed})
-
-        mesg.delete();
+        ms.edit(embed);
+    })
 }

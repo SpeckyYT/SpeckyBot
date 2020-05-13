@@ -45,12 +45,5 @@ module.exports = async (bot) => {
         bot.config.apikeys = null;
     }
 
-    ["botfunctions","events", "commands", "console","music"].forEach(x => {
-        if(bot.log){
-            bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
-        }else{
-            console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
-        }
-        require(`./${x}`)(bot);
-    });
+    require('./loadeverything')(bot);
 }
