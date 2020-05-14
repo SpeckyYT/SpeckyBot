@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['sf','id']
 }
 
-const { RichEmbed, SnowflakeUtil } = require('discord.js');
+const { RichEmbed, SnowflakeUtil: { deconstruct } } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     let lsf, error;
@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg) => {
                 error = bot.cmdError(`Snowflake \`${arg}\` is not a valid number`);
             }
         }else{
-            let deconstructed = SnowflakeUtil.deconstruct(snowflake);
+            let deconstructed = deconstruct(snowflake);
             let timestamp = deconstructed.date;
             let binary = deconstructed.binary;
             let toobig = binary.includes('-') || snowflake.length > 19;

@@ -11,10 +11,10 @@ const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     
-    var cEmbed = new RichEmbed()
+    let cEmbed = new RichEmbed()
         .setTitle("These are the server's most played games at the moment:");
 /*
-    var presences;
+    let presences;
     await msg.guild.members.forEach(memb => {
         if(!presences[memb.presence.game] && memb.presence.game != null){
             presences[memb.presence.game] = []

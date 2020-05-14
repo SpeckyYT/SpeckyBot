@@ -1,9 +1,9 @@
 module.exports = {
     name: "dadjoke",
-	description: "Gives you a dad joke!",
+    description: "Gives you a dad joke!",
     usage: ``,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["dadjokes"]
 }
 
@@ -14,10 +14,9 @@ module.exports.run = async (bot, msg) => {
     let API = 'https://icanhazdadjoke.com/';
 
     let res = await fetch(API, {headers: {Accept: 'application/json'}})
-    let data = await res.json()
-    let joke = data.joke
+    let { joke } = await res.json();
 
-    let embed = new RichEmbed()
+    let embed = bot.embed()
     .setTitle('Dad Joke!')
     .setDescription(joke)
     .setColor('FF00AA')
