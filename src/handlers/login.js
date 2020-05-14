@@ -8,11 +8,10 @@ module.exports = async (bot) => {
     })
     .catch(async () => {
         if(token == "TOKEN_HERE"){
-            console.log(`PLEASE EDIT THE CONFIG.JSON FILE (token is invalid)`.error);
-            await bot.wait(10000);
-            return process.exit(0);
+            console.log("PLEASE EDIT THE CONFIG.JSON FILE (token is invalid)".error);
+            throw process.exit(0);
         }else{
-            console.log(`WASN'T ABLE TO LOGIN IN DISCORD (wrong token or bad connection)`.error);
+            console.log("WASN'T ABLE TO LOGIN IN DISCORD (wrong token or bad connection)".error);
         }
     });
 }

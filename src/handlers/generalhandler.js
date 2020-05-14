@@ -8,10 +8,8 @@ module.exports = async (bot) => {
         }catch(err){
             console.log(`handler\t${handler}.js`.error);
             console.log("FATAL ERROR ON HANDLERS".fatal);
-            console.log(err);
-            setTimeout(async () => {
-                process.exit(1);
-            }, 10000)
+            console.error(err);
+            process.exit(1);
         }
     })
 }
