@@ -230,7 +230,7 @@ module.exports.call = async (bot, msg) => {
             mostlikely.set(item,numb);
         })
         mostlikely = mostlikely.sort((a,b) => a-b);
-        let items = mostlikely.map((val, key) => key).slice(0,9);
+        let items = mostlikely.keyArray().slice(0,9);
         let string = `Command \`${msg.command}\` is unavailable...\nSend a message with the number of the desidered command or \`c\` to cancel.\n\n`;
         items.forEach((val, ind) => string += `\`${ind+1}\` ${val}\n`)
         let ms = await msg.channel.send(bot.embed().setDescription(string));
