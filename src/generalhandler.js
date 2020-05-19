@@ -3,21 +3,22 @@ const { readdirSync } = require('fs');
 module.exports = async (bot) => {
     console.log("\n\n");
 
-    const sequence = ["dependencies","missingdirectories","missingfiles","confighandler","botloader","login","botfunctionsextra"];
+    const sequence =
+    [
+        "dependencies",
+        "missingdirectories",
+        "missingfiles",
+        "confighandler",
+        "botloader",
+        "login",
+        "botfunctionsextra"
+    ];
 
-    let handlers = [...sequence];
-
-    readdirSync('./handlers/')
-    .forEach(file => {
-        file = file.replace(/.[a-zA-Z]+$/g,'');
-        if(!handlers.includes(file)){
-            handlers.push(file);
-        }
-    });
-
-    handlers
+    [
+        ...sequence,
+        ...readdirSync('./handlers/').map(v => sequence && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null).clean()
+    ]
     .forEach(async handler => {
-        if(!handler) return;
         try{
             console.log(`test`.dependency ? `handler\t${handler}.js`.dependency : `handler\t${handler}.js`);
             await require(`./handlers/${handler}.js`)(bot);

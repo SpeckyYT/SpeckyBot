@@ -1,19 +1,4 @@
-const { Collection } = require("discord.js");
-
-//from https://gist.github.com/cferdinandi/42f985de9af4389e7ab3
-const forEach = function (collection, callback, scope) {
-    if (Object.prototype.toString.call(collection) === '[object Object]') {
-        for (let prop in collection) {
-            if (Object.prototype.hasOwnProperty.call(collection, prop)) {
-                callback.call(scope, collection[prop], prop, collection);
-            }
-        }
-    } else {
-        for (let i = 0, len = collection.length; i < len; i++) {
-            callback.call(scope, collection[i], i, collection);
-        }
-    }
-}
+const { readdirSync } = require('fs');
 
 let alreadyLoaded = [];
 
@@ -41,13 +26,23 @@ module.exports = async (bot) => {
     bot.supportedFiles = /.(js|coffee|coffeescript|litcoffee)$/g;
 
     if(typeof bot.config.apikeys == "object"){
-        forEach(bot.config.apikeys, (value, prop) => {
-            bot.config[prop] = value;
-        });
+        for (const [key, value] in bot.config.apikeys){
+            bot.config[key] = value;
+        }
         bot.config.apikeys = null;
     }
 
-    ["botfunctions","prototypes","console","events","commands","music"].forEach(async x => {
+    const sequence =
+    [
+        "prototypes",
+        "botfunctions"
+    ];
+
+    [
+        ...sequence,
+        ...readdirSync('./handlers/botloader/').map(v => sequence && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null).clean()
+    ]
+    .forEach(async x => {
         if(x == 'music'){
             if(alreadyLoaded.includes(x)){
                 return;
