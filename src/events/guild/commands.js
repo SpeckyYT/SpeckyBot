@@ -130,6 +130,7 @@ module.exports.call = async (bot, msg) => {
             let imagesError   =  "🎨 This command requires the \`ATTACH FILES\` permission.";
             let userPermError =  "🚷 You don't have the required permissions for that command.";
             let serverError   =  "⛔ This command isn't available on this server.";
+            let musicError    =  "🎵 Music is broken."
 
             let category = cmd.category;
 
@@ -164,6 +165,12 @@ module.exports.call = async (bot, msg) => {
             if(category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
                 if(check(false, imagesError)){
                     return msg.channel.send(error(imagesError))
+                }
+            }
+
+            if(category == "music"){
+                if(!owner){
+                    return msg.channel.send(error(musicError))
                 }
             }
 

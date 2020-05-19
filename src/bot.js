@@ -8,6 +8,6 @@ module.exports = (bot) => {
         messageCacheLifetime: 432000,
     });
 
-    require('./handlers/generalhandler')(bot);
+    require('./generalhandler')(bot);
 }
 

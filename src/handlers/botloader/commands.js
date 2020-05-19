@@ -14,7 +14,7 @@ module.exports = (bot) => {
             .forEach(async file => {
                 const dir = cdir.slice(1+Math.max(cdir.indexOf('/'),cdir.indexOf('\\')));
                 try{
-                    let pull = bot.require(`../${cdir}/${file}`);
+                    let pull = bot.require(`./${cdir}/${file}`);
                     if(!pull.name) throw {message: error = "Name of the command not found!".toUpperCase()};
                     bot.commands.set(pull.name, pull);
                     if (pull.aliases) pull.aliases.forEach(a => bot.aliases.set(a, pull.name));

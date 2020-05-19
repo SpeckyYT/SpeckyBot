@@ -5,9 +5,9 @@ module.exports = (bot) => {
     .forEach(file => {
         try{
             if(bot.require){
-                bot.require(`../botfunctions/${file}`)(bot);
+                bot.require(`./botfunctions/${file}`)(bot);
             }else{
-                require(`../botfunctions/${file}`)(bot);
+                require(`../../botfunctions/${file}`)(bot);
             }
             console.log(`${file}`.debug);
         }catch(err){

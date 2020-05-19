@@ -15,6 +15,8 @@ const forEach = function (collection, callback, scope) {
     }
 }
 
+let alreadyLoaded = [];
+
 module.exports = async (bot) => {
     bot.setMaxListeners(50);
     
@@ -45,5 +47,20 @@ module.exports = async (bot) => {
         bot.config.apikeys = null;
     }
 
-    require('./loadeverything')(bot);
+    ["botfunctions","prototypes","console","events","commands","music"].forEach(async x => {
+        if(x == 'music'){
+            if(alreadyLoaded.includes(x)){
+                return;
+            }else{
+                alreadyLoaded.push(x)
+            }
+        }
+        
+        if(bot.log){
+            bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+        }else{
+            console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+        }
+        require(`./botloader/${x}`)(bot);
+    });
 }

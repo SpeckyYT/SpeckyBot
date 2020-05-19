@@ -9,7 +9,7 @@ module.exports = async (bot) => {
     .filter(d => d.match(bot.supportedFiles))
     .forEach(async file => {
         try{
-            let pull = bot.require(`../console/${file}`);
+            let pull = bot.require(`./console/${file}`);
             bot.console.set(pull.name, pull);
             if (pull.aliases) pull.aliases.forEach(a => bot.consoleali.set(a, pull.name));
             bot.log(`${file}`.debug);

@@ -12,7 +12,7 @@ module.exports = async (bot) => {
             .forEach(async file => {
                 const dir = edir.slice(1+Math.max(edir.indexOf('/'),edir.indexOf('\\')));
                 try{
-                    const evt = bot.require(`../${edir}/${file}`);
+                    const evt = bot.require(`./${edir}/${file}`);
                     let eName = evt.event;
                     if(!eName) throw {message: error = "Event not found!".toUpperCase()};
                     let calltype = evt.type || "on";

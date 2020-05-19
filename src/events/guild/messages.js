@@ -25,7 +25,7 @@ module.exports.call = async (bot, msg) => {
             msg.react(crafter).catch();
         }
 
-        if(contentl.includes('hai')){
+        if(contentl.replace(/[^a-z0-9]/g,'') == 'hai'){
             msg.react('🦈').catch();
         }
 
