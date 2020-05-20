@@ -40,7 +40,7 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('./handlers/botloader/').map(v => sequence && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null).clean()
+        ...readdirSync('./handlers/botloader/').map(v => sequence && v.match(bot.supportedFiles).length > 0 && !sequence.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
     ]
     .forEach(async x => {
         if(x == 'music'){

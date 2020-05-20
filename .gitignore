@@ -3,7 +3,6 @@ src/events/private
 src/commands/private
 require-cache/
 db/
-.vscode/
 
 # File Types
 *.txt

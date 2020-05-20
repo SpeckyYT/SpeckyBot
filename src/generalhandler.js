@@ -16,7 +16,7 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('./handlers/').map(v => sequence && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
+        ...readdirSync('./handlers/').map(v => sequence && v.match(/.[a-zA-Z]+$/g).length > 0 && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
     ]
     .forEach(async handler => {
         if(!handler) return;
