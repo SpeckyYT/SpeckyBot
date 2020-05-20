@@ -16,9 +16,10 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('./handlers/').map(v => sequence && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null).clean()
+        ...readdirSync('./handlers/').map(v => sequence && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
     ]
     .forEach(async handler => {
+        if(!handler) return;
         try{
             console.log(`test`.dependency ? `handler\t${handler}.js`.dependency : `handler\t${handler}.js`);
             await require(`./handlers/${handler}.js`)(bot);
