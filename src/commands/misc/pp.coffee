@@ -6,4 +6,7 @@ module.exports =
     accessableby: 'Members'
     aliases: []
     run: (bot, msg) ->
-        await return msg.channel.send("""8#{"=".repeat(((if msg.mentions.users.size > 0 then msg.mentions.users.first().id else msg.author.id).substring(4)%13)+1)}D""")
+        user = if msg.mentions.users.size > 0 then msg.mentions.users.first().id else msg.author.id
+        p1 = user.substr(4)
+        pp = p1%13+1
+        await return msg.channel.send("""8#{"=".repeat(pp)}D""")
