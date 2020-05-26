@@ -272,9 +272,8 @@ module.exports.call = async (bot, msg) => {
 async function run(cmd, bot, msg, command){
     bot.getFunction(cmd)(bot, msg)
     .then(async res => {
-        res = res.trim();
         if(cmd.type === 'template' && res && typeof res == "string"){
-            msg.channel.send(res);
+            msg.channel.send(res.trim());
         }
     })
     .catch(async (err) => {
