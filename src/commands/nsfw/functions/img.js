@@ -1,6 +1,5 @@
 const { RichEmbed } = require('discord.js');
 const { nsfw } = new (require('nekos.life'))();
-const { imageEndpoint } = new (require('nekobot-api').NekoBot)();
 
 module.exports = async (method, msg) => {
     if(Array.isArray(method)){
@@ -9,19 +8,11 @@ module.exports = async (method, msg) => {
     
     let url = '';
 
-    if(nsfw[method]){
-        await nsfw[method]()
-        .then(img => {
-            url = img.url;
-        })
-        .catch(()=>{});
-    }else{
-        await imageEndpoint.getImage(method)
-        .then(img => {
-            url = img;
-        })
-        .catch(()=>{});
-    }
+    await nsfw[method]()
+    .then(img => {
+        url = img.url;
+    })
+    .catch(()=>{});
 
     if(!url){
         return msg.channel.send("An unexpected error happened");

@@ -1,10 +1,10 @@
 module.exports = {
-    name: "classic",
+    name: "sex",
 	description: "Gives you a classic endpoint!",
     usage: ``,
     category: `nsfw`,
 	accessableby: "Members",
-    aliases: []
+    aliases: ["classic"]
 }
 
 module.exports.run = async (bot, msg) => {

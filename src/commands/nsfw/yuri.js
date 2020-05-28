@@ -8,5 +8,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(["yuri","eroYuri"].pick(),msg);
+    require('./functions/img')(["yuri","eroYuri"],msg);
 }

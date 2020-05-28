@@ -10,7 +10,6 @@ module.exports = {
 }
 
 const { RichEmbed } = require('discord.js');
-const { randomInt } = require('mathjs')
 
 module.exports.run = async (bot, msg) => {
     let res = msg.content;
@@ -40,7 +39,7 @@ module.exports.run = async (bot, msg) => {
 
     if(msg.flag("rcase")){
         res = res.split('').map(function(l){
-            return l[randomInt(0,2)?'toUpperCase':'toLowerCase']();
+            return l(['toUpperCase','toLowerCase'].pick())();
         }).join('');
     }
 

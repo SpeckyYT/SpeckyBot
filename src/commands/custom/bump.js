@@ -5,18 +5,17 @@ module.exports = {
     category: `custom`,
 	accessableby: "Members",
     aliases: [],
-    servers: ['265505748413448193','525114151077675039']
+    servers: ['265505748413448193']
 }
 
 const { RichEmbed } = require("discord.js");
-const { randomInt } = require('mathjs');
 
 module.exports.run = async (bot, msg) => {
     var random;
     if(bot.checkOwner(msg.author.id)){
-        random = randomInt(1,10000)
+        random = Math.floor(Math.random()*10000+1);
     }else{
-        random = randomInt(1,450)
+        random = Math.floor(Math.random()*666+1);
     }
     let cEmbed = new RichEmbed()
     .setColor('#24B8B8')

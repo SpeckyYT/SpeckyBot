@@ -1,5 +1,4 @@
 const { sfw } = new (require('nekos.life'))();
-const { imageEndpoint } = new (require('nekobot-api').NekoBot)();
 const animals = require('random-animals-api');
 
 module.exports = async (method, msg) => {
@@ -88,13 +87,6 @@ module.exports = async (method, msg) => {
         animals[method]()
         .then(async imgURL => {
             send(imgURL, "")
-        })
-
-    }else if(['gah','coffee','food'].includes(method)){
-
-        imageEndpoint.getImage(method)
-        .then(img => {
-            send(img, "nekobot.xyz");
         })
 
     }else{

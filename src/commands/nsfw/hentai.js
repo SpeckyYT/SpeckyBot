@@ -8,5 +8,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(["randomHentaiGif","hentai"].pick(),msg);
+    require('./functions/img')(["randomHentaiGif","hentai"],msg);
 }

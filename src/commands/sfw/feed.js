@@ -8,5 +8,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(['feed','food'], msg);
+    require('./functions/img')('feed', msg);
 }

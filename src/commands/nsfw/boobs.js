@@ -8,5 +8,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(["tits","boobs"].pick(),msg); //removed: smallBoobs
+    require('./functions/img')(["tits","boobs"],msg); //removed: smallBoobs
 }
