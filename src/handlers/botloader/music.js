@@ -4,7 +4,7 @@ module.exports = async (bot) => {
         youtubeKey: bot.config.youtube,
         ownerID: bot.config.owner[0],
         ownerOverMember: true,
-        botAdmins: [bot.config.owner],
+        botAdmins: bot.config.owner,
         insertMusic: true,
         logging: false,
         inlineEmbeds: true,

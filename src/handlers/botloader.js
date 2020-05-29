@@ -26,16 +26,14 @@ module.exports = async (bot) => {
     bot.supportedFiles = /.(js|coffee|coffeescript|litcoffee)$/g;
 
     if(typeof bot.config.apikeys == "object"){
-        for (const [key, value] in bot.config.apikeys){
-            bot.config[key] = value;
-        }
-        bot.config.apikeys = null;
+        Object.keys(bot.config.apikeys).forEach(prop => {
+            bot.config[prop] = bot.config.apikeys[prop];
+        })
     }
 
     const sequence =
     [
-        "prototypes",
-        "botfunctions"
+        "startup"
     ];
 
     [

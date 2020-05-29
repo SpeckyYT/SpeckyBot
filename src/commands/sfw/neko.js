@@ -14,6 +14,6 @@ module.exports.run = async (bot, msg) => {
         require('./functions/img')(["neko","nekoGif"], msg);
     }else{
         //NSFW
-        require('../nsfw/functions/img')(["neko","nekoGif","eroNeko","hneko"], msg);
+        require('../nsfw/functions/img')(["neko","nekoGif","eroNeko"], msg);
     }
 }
