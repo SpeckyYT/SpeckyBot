@@ -8,6 +8,7 @@
         "ecmaVersion": 2019
     },
     "rules": {
+        "no-inner-declarations":"off",
         "no-cond-assign":"error",
         "no-unused-vars": ["error", { "args": "none" }],
         "arrow-parens":"off",

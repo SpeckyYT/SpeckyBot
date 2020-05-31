@@ -1,7 +1,7 @@
 const { existsSync, appendFileSync } = require('fs');
 
 module.exports = async () => {
-    let template = 
+    const template = 
     {
         token: "TOKEN_HERE",
         prefix: "PREFIX_HERE",

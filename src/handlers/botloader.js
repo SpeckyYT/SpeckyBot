@@ -1,6 +1,6 @@
 const { readdirSync } = require('fs');
 
-let alreadyLoaded = [];
+const alreadyLoaded = [];
 
 module.exports = async (bot) => {
     bot.setMaxListeners(50);

@@ -9,7 +9,7 @@ module.exports = async (bot) => {
     .filter(d => d.match(bot.supportedFiles))
     .forEach(async file => {
         try{
-            let pull = bot.require(`./console/${file}`);
+            const pull = bot.require(`./console/${file}`);
             bot.console.set(pull.name, pull);
             if (pull.aliases) pull.aliases.forEach(a => bot.consoleali.set(a, pull.name));
             bot.log(`${file}`.debug);
@@ -22,14 +22,14 @@ module.exports = async (bot) => {
     process.openStdin().removeAllListeners();
 
     process.openStdin().addListener("data", async res => {
-        let content = res.toString();
+        const content = res.toString();
         let oargs = res.toString().split(/\s/g).clean();
         
         if(!oargs[0]) return;
 
-        let regex = /^[^0-9a-zA-Z]+/g
+        const regex = /^[^0-9a-zA-Z]+/g
 
-        let matches = oargs[0].match(regex)
+        const matches = oargs[0].match(regex)
 
         if(matches){
             oargs[0] = oargs[0].slice(matches[0].length)
@@ -38,13 +38,13 @@ module.exports = async (bot) => {
 
         oargs = oargs.clean();
 
-        let command = oargs[0].toLowerCase();
+        const command = oargs[0].toLowerCase();
 
-        args = oargs.slice(1);
+        const args = oargs.slice(1);
 
-        let cmd = bot.getConsoleCommand(command);
+        const cmd = bot.getConsoleCommand(command);
 
-        let data = {}
+        const data = {}
         data.contento = content;
         data.content = content.slice(command.length).trim();
         data.ARGS = args.toUpperCase();
@@ -70,13 +70,13 @@ module.exports = async (bot) => {
                 }
             })
         }else{
-            let search = bot.console.get('searchchannel');
+            const search = bot.console.get('searchchannel');
             
             data.args[0] = command;
 
             search.run(bot,data)
             .catch(async () => {
-                let draw = bot.console.get('draw');
+                const draw = bot.console.get('draw');
                 data.content = data.contento;
                 return await draw.run(bot,data);
             })

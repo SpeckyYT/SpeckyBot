@@ -1,7 +1,7 @@
-let { writeFileSync, appendFileSync, existsSync } = require('fs')
+const { writeFileSync, appendFileSync, existsSync } = require('fs')
 
 module.exports = async () => {
-    let template = 
+    const template = 
     {
         token: "TOKEN_HERE",
         prefix: "PREFIX_HERE",
@@ -23,7 +23,7 @@ module.exports = async () => {
     }
 
 
-    let nConfig = config;
+    const nConfig = config;
 
     const items = ["token","prefix","color"]
     const bools = ["extra_apikeys","reply_unexisting_command","load_nsfw"]
@@ -61,7 +61,7 @@ module.exports = async () => {
     });
 
     if(Object.is(config, nConfig)){
-        let conf = JSON.stringify(nConfig, null, 4)
+        const conf = JSON.stringify(nConfig, null, 4)
 
         writeFileSync('../config.json', conf, {})
     }

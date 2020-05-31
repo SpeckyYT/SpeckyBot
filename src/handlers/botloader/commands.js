@@ -25,12 +25,12 @@ module.exports = (bot) => {
                     bot.log(`${dir}     \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}     \t|\t${file} ERROR!`.error);
-                    console.error(err);
+                    bot.log(err.message.error);
                 }
             })
         }catch(err){
-            bot.log(`ERROR WHILE LOADING ${cdir.toUpperCase()} FOLDER!`);
-            bot.log(String(err));
+            bot.log(`ERROR WHILE LOADING ${cdir.toUpperCase()} FOLDER!`.error);
+            bot.log(String(err).error);
         }
     })
     bot.log();

@@ -22,13 +22,15 @@ module.exports = async (bot) => {
         }
         async function check(fn){
             ((port,fn)=>{
-                let tester = createServer()
+                const tester = createServer()
                 .once('error', async function (err) {
                     if (err.code != 'EADDRINUSE') return fn(err);
                     fn(null, true)
                 })
                 .once('listening', async function() {
-                    tester.once('close', async function() { fn(null, false) })
+                    tester.once('close', async function() {
+                        fn(null, false) 
+                    })
                     .close()
                 })
                 .listen(port);

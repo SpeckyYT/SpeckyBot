@@ -13,9 +13,13 @@ module.exports = async (bot) => {
                 const dir = edir.slice(1+Math.max(edir.indexOf('/'),edir.indexOf('\\')));
                 try{
                     const evt = bot.require(`./${edir}/${file}`);
-                    let eName = evt.event;
-                    if(!eName) throw {message: error = "Event not found!".toUpperCase()};
-                    let calltype = evt.type || "on";
+                    const eName = evt.event;
+                    if(!eName) throw {
+                        message: {
+                            error: "Event not found!".toUpperCase()
+                        }
+                    }
+                    const calltype = evt.type || "on";
                     bot[calltype](eName, bot.getFunction(evt).bind(null, bot));
                     bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
@@ -23,7 +27,9 @@ module.exports = async (bot) => {
                     bot.log(err.message.error);
                 }
             })
-        }catch(err){bot.log(`ERROR WHILE LOADING ${edir.toUpperCase()} FOLDER!`)}
+        }catch(err){
+bot.log(`ERROR WHILE LOADING ${edir.toUpperCase()} FOLDER!`)
+}
     })
     bot.log();
 };
