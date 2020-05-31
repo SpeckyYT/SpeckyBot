@@ -1,17 +1,17 @@
 module.exports = {
     name: "choose",
-	description: "Bot will choose a random option from your text!",
+    description: "Bot will choose a random option from your text!",
     usage: `<option 1> | <option 2> | <option 3> | <etc>`,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    let { Args } = msg;
-    let options = Args.join(" ").split('|');
+    const { Args } = msg;
+    const options = Args.join(" ").split('|');
 
-    let option = options.pick()
+    const option = options.pick()
 
     if(options.length < 2){
         msg.channel.send(`There isn't much to choose from, but I'll choose: \`${Args.join(' ') ? Args.join(' ') : " "}\``)

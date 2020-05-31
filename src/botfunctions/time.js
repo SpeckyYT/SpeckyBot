@@ -1,6 +1,6 @@
 module.exports = (bot) => {
     bot.formatTime = (ms) => {
-        let {sec,min,hrs,day} = bot.msToVars(ms);
+        const {sec,min,hrs,day} = bot.msToVars(ms);
 
         if(day > 0){
             return `${day} Day${(day == 1) ? '' : 's'}`
@@ -14,7 +14,7 @@ module.exports = (bot) => {
     }
 
     bot.msToTime = (ms) => {
-        let {mil,sec,min,hrs,day} = bot.msToVars(ms);
+        const {mil,sec,min,hrs,day} = bot.msToVars(ms);
         return `${day.padStart(1, "0")}d ${hrs.padStart(2, "0")}h ${min.padStart(2, "0")}m ${sec.padStart(1, "0")}s ${mil.padStart(3, "0")}ms`
     }
 
@@ -35,6 +35,7 @@ module.exports = (bot) => {
             hrs = hrs % 24;
             day = day % 30;
             month = month % 12;
+            year = year;
         }
 
         return {mil,sec,min,hrs,day,month,year}

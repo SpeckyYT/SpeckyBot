@@ -1,9 +1,9 @@
 module.exports = {
     name: "sepia",
-	description: "Applies a sepia filter to the image!",
+    description: "Applies a sepia filter to the image!",
     usage: ``,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

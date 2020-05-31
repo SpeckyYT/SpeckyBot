@@ -7,16 +7,15 @@ module.exports = {
     aliases: ["dadjokes"]
 }
 
-const fetch = require('node-fetch')
-const { RichEmbed } = require('discord.js')
+const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg) => {
-    let API = 'https://icanhazdadjoke.com/';
+    const API = 'https://icanhazdadjoke.com/';
 
-    let res = await fetch(API, {headers: {Accept: 'application/json'}})
-    let { joke } = await res.json();
+    const res = await fetch(API, {headers: {Accept: 'application/json'}})
+    const { joke } = await res.json();
 
-    let embed = bot.embed()
+    const embed = bot.embed()
     .setTitle('Dad Joke!')
     .setDescription(joke)
     .setColor('FF00AA')

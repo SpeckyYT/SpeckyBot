@@ -1,9 +1,9 @@
 module.exports = {
     name: "npm",
-	description: "Updates/installs NPM dependencies!",
+    description: "Updates/installs NPM dependencies!",
     usage: ``,
     category: `owner`,
-	accessableby: "Bot Owner",
+    accessableby: "Bot Owner",
     aliases: []
 }
 

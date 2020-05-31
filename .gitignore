@@ -14,7 +14,8 @@ db/
 template.config.json
 config.json
 
-
+# VSCode Settings
+.vscode/settings.json
 
 # Logs
 logs

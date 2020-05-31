@@ -1,14 +1,14 @@
 module.exports = {
     name: "discrim",
-	description: "You want to change your discriminator without Nitro?",
+    description: "You want to change your discriminator without Nitro?",
     usage: `[discriminator]`,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     let discriminator = msg.author.discriminator.padStart(4,"0");
     if(args[0]){
         if(!isNaN(args[0])){
@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
             }
         }
     }
-    var discrims = [];
+    const discrims = [];
     bot.users.forEach(user => {
         if(discrims.length < 10){
             if(discriminator == user.discriminator && msg.author.username != user.username){

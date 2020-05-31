@@ -20,8 +20,10 @@ module.exports = async (bot) => {
     ]
     .forEach(async handler => {
         if(!handler) return;
-        try{
-            console.log(`test`.dependency ? `handler\t${handler}.js`.dependency : `handler\t${handler}.js`);
+        
+        console.log(`test`.dependency ? `handler\t${handler}.js`.dependency : `handler\t${handler}.js`);
+        
+        try{ 
             await require(`./handlers/${handler}.js`)(bot);
         }catch(err){
             console.log(`handler\t${handler}.js`.error);

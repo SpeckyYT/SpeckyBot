@@ -1,13 +1,13 @@
 module.exports = {
     name: "skip",
-	description: "Skips the playing song!",
+    description: "Skips the playing song!",
     usage: ``,
     category: `music`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["s"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     bot.music.skipFunction(msg, args.join(' '))
 }

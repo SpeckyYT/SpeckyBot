@@ -42,7 +42,9 @@
         "ytdl-core": "^1.0.9",
         "ytdl-core-discord": "^1.2.0"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "eslint": "^7.1.0"
+    },
     "scripts": {
         "start": "node run.js"
     },

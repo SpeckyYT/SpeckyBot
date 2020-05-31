@@ -8,10 +8,10 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    let { economy } = bot;
+    const { economy } = bot;
     let { author } = msg;
 
-    let otheruser = msg.mentions.users.first();
+    const otheruser = msg.mentions.users.first();
     if(otheruser){
         bot.economySummon(bot, otheruser);
         author = otheruser;

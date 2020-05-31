@@ -8,22 +8,22 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    let { economy } = bot;
-    let { author } = msg;
+    const { economy } = bot;
+    const { author } = msg;
 
-    let receiver = msg.mentions.users.first();
+    const receiver = msg.mentions.users.first();
     if(!receiver){
         return bot.cmdError("You have to tag someone to pay.");
     }
     bot.economySummon(bot, receiver);
 
-    let numberRegex = /[\s>-]\d+/g;
-    let matches = msg.content.match(numberRegex);
+    const numberRegex = /[\s>-]\d+/g;
+    const matches = msg.content.match(numberRegex);
     if(!matches){
         return bot.cmdError("You have to define an amount of money to pay.")
     }
 
-    let amount = Number(parseInt(matches[0].slice(1)));
+    const amount = Number(parseInt(matches[0].slice(1)));
     if(amount > economy[author.id].money){
         return bot.cmdError(`You only have ${economy[author.id].money}₪ in the bank.`)
     }

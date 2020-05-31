@@ -1,9 +1,9 @@
 module.exports = {
     name: "sex",
-	description: "Gives you a classic endpoint!",
+    description: "Gives you a classic endpoint!",
     usage: ``,
     category: `nsfw`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["classic"]
 }
 

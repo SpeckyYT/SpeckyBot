@@ -1,14 +1,14 @@
 module.exports = {
     name: "primes",
-	description: "Gives you prime numbers!",
+    description: "Gives you prime numbers!",
     usage: `<base>`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["prime"]
 }
 
 module.exports.run = async (bot, msg) => { 
-    let primes = [];
+    const primes = [];
     let numb = 1;
     let string = "";
 
@@ -20,7 +20,7 @@ module.exports.run = async (bot, msg) => {
     base = Math.min(Math.max(base, 2), 36);
 
     async function prime(){
-        while(true){
+        while(string.length < 2000){
             numb++;
             let temp = 1; 
             while(temp+1 < numb){

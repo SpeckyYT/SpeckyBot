@@ -1,9 +1,9 @@
 module.exports = {
     name: "clean",
-	description: "Deletes a message for you!",
+    description: "Deletes a message for you!",
     usage: `<bots>/<users>`,
     category: `admin`,
-	accessableby: "Server Admins and Moderators",
+    accessableby: "Server Admins and Moderators",
     aliases: ["cls"],
     perms: ['MANAGE_MESSAGES'],
     cmdperms: ['MANAGE_MESSAGES']

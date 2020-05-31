@@ -1,9 +1,9 @@
 module.exports = {
     name: "usersettings",
-	description: "What about customization?",
+    description: "What about customization?",
     usage: `<setting> <values>`,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["us","usersetting"]
 }
 
@@ -11,7 +11,7 @@ const { writeFile } = require('fs');
 const dir = '../../../db/u_settings';
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     const u_settings = require(dir);
     switch(args[0]){
         case "embedcolor":
@@ -20,7 +20,7 @@ module.exports.run = async (bot, msg) => {
             let color = args[1];
             if(color == null) return msg.channel.send("You have to define a color (in HEX format)");
             color = color.replace("#",'');
-            let temp = parseInt(color, 16);
+            const temp = parseInt(color, 16);
             if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
             if(color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
             
@@ -41,7 +41,7 @@ module.exports.run = async (bot, msg) => {
             break;
 
         default:
-            let embed = bot.embed()
+            const embed = bot.embed()
                 .setTitle("User Settings Help Page!")
                 .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
                 .addBlankField()

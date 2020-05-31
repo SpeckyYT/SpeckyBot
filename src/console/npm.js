@@ -3,7 +3,7 @@ module.exports = {
     aliases: []
 }
 
-let npm = require('npm');
+const npm = require('npm');
 
 module.exports.run = async (bot, data) => {
     npm.load({},() => {

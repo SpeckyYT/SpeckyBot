@@ -1,9 +1,9 @@
 module.exports = {
     name: "flip",
-	description: "Flips the image! (Horizontally)",
+    description: "Flips the image! (Horizontally)",
     usage: ``,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []
@@ -13,18 +13,22 @@ const { read } = require('jimp')
 const { unlink } = require('fs')
 
 module.exports.run = async (bot, msg) => {
-    let image    = bot.cache.lastImage[msg.channel.id]; 
-    let id       = bot.snowflake();
+    const image    = bot.cache.lastImage[msg.channel.id]; 
+    const id       = bot.snowflake();
 
-    let fileFormat = "png"
-    let method = "flip"
+    const fileFormat = "png"
+    const method = "flip"
     
-    if(image == undefined){ msg.channel.send("No image found"); return; }
+    if(image == undefined){
+        return msg.channel.send("No image found");
+    }
 
     msg.channel.send("Image is getting processed...").then( response => {
 
         read(image, (err, file) => {
-            if (err){ msg.channel.send("Error happend") };
+            if (err){
+                return msg.channel.send("Error happend")
+            }
 
             file[method](true, false).write(id + `.${fileFormat}`, ()=>{
                 msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{

@@ -35,7 +35,7 @@ module.exports.run = async (bot, msg) => {
     if(msg.Args.length < 1) return bot.cmdError("Needs a (default or custom) emoji or an emoji url");
 
     // try arg as emoji
-    let emoji = bot.emojis.find(e => e.name == msg.Args[0].split(":")[1]);
+    const emoji = bot.emojis.find(e => e.name == msg.Args[0].split(":")[1]);
 
     let url = "";
 
@@ -62,10 +62,10 @@ module.exports.run = async (bot, msg) => {
         if(err) return bot.cmdError("Could not read image");
         img.resize(size, Jimp.AUTO, Jimp.RESIZE_BEZIER, async (err,img) => {
             if(err) return bot.cmdError("Could not load image");
-            let transColors = [];
+            const transColors = [];
             for(let i = 0; i < img.getHeight(); i++){
                 for(let j = 0; j < img.getWidth(); j++){
-                    let rgb = Jimp.intToRGBA(img.getPixelColor(j, i));
+                    const rgb = Jimp.intToRGBA(img.getPixelColor(j, i));
                     const cdiff = closest({R:rgb.r,G:rgb.g,B:rgb.b}, emojiRgb);
                     const found = emojiRgb.find(v => v.R == cdiff.R && v.B == cdiff.B && v.B == cdiff.B);
                     transColors[i] = transColors[i] || [];

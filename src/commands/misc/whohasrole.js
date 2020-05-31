@@ -1,23 +1,23 @@
 module.exports = {
     name: "whohasrole",
-	description: "Returns all users that has this role!",
+    description: "Returns all users that has this role!",
     usage: `[roleID]`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["whr"]
 }
 
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
-    let role = msg.guild.roles.get(msg.Args[0])
+    const role = msg.guild.roles.get(msg.Args[0])
 
     if(role){
-        let membs = [];
+        const membs = [];
         role.members.forEach(member => {
             membs.push(member.toString())
         })
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
         .setTitle(role.name)
         .setDescription(membs.join("\n"))
         .setColor(role.hexColor);

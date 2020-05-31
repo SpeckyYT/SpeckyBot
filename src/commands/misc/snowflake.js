@@ -1,9 +1,9 @@
 module.exports = {
     name: "snowflake",
-	description: "Converts an ID into a timestamp!",
+    description: "Converts an ID into a timestamp!",
     usage: `[ID] [ID]...`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ['sf','id']
 }
 
@@ -12,20 +12,20 @@ const { RichEmbed, SnowflakeUtil: { deconstruct } } = require('discord.js');
 module.exports.run = async (bot, msg) => {
     let lsf, error;
 
-    let prev = [];
+    const prev = [];
 
     msg.Args.forEach(async arg => {
-        let snowflake = arg.split('').filter(c=>"0123456789".includes(c)).join('');
+        const snowflake = arg.split('').filter(c=>"0123456789".includes(c)).join('');
 
         if(isNaN(snowflake) || !snowflake){
             if(!error){
                 error = bot.cmdError(`Snowflake \`${arg}\` is not a valid number`);
             }
         }else{
-            let deconstructed = deconstruct(snowflake);
-            let timestamp = deconstructed.date;
-            let binary = deconstructed.binary;
-            let toobig = binary.includes('-') || snowflake.length > 19;
+            const deconstructed = deconstruct(snowflake);
+            const timestamp = deconstructed.date;
+            const binary = deconstructed.binary;
+            const toobig = binary.includes('-') || snowflake.length > 19;
 
             if(prev.includes(binary)){
                 return;
@@ -33,13 +33,13 @@ module.exports.run = async (bot, msg) => {
                 prev.push(binary)
             }
 
-            let timenow = new Date();
+            const timenow = new Date();
 
-            let {sec, min, hrs, day, month, year} = bot.msToVars(timestamp - timenow);
+            const {sec, min, hrs, day, month, year} = bot.msToVars(timestamp - timenow);
 
             let skip = false;
 
-            let embed = new RichEmbed()
+            const embed = new RichEmbed()
             .setTitle("Snowflake Timestamp")
             .setColor("#FF00AA");
 
@@ -59,20 +59,20 @@ module.exports.run = async (bot, msg) => {
             }
 
             if(!skip){
-                let item = bot.findSnowflake(snowflake);
+                const item = bot.findSnowflake(snowflake);
                 if(item){
                     embed.addField(`Resulting snowflake`,item.toString());
                 }
             }
 
             if(lsf){
-                let diff = Math.abs(timestamp-lsf);
-                let {sec, min, hrs, day, month, year} = bot.msToVars(diff);
+                const diff = Math.abs(timestamp-lsf);
+                const {sec, min, hrs, day, month, year} = bot.msToVars(diff);
                 embed.addField(`Difference from previous snowflake`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`)
             }
             lsf = timestamp;
 
-            await msg.channel.send(embed).catch();
+            await msg.channel.send(embed).catch(()=>{});
         }
     });
 

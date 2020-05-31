@@ -1,9 +1,9 @@
 module.exports = {
     name: "ero",
-	description: "Gives you erotic images!",
+    description: "Gives you erotic images!",
     usage: ``,
     category: `nsfw`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["erotic"]
 }
 

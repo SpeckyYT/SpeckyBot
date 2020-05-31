@@ -1,9 +1,9 @@
 module.exports = {
     name: "posterize",
-	description: "Posterizes the image!",
+    description: "Posterizes the image!",
     usage: `[Amount (2-500)]`,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

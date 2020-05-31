@@ -14,17 +14,24 @@ module.exports = (bot) => {
             .forEach(async file => {
                 const dir = cdir.slice(1+Math.max(cdir.indexOf('/'),cdir.indexOf('\\')));
                 try{
-                    let pull = bot.require(`./${cdir}/${file}`);
-                    if(!pull.name) throw {message: error = "Name of the command not found!".toUpperCase()};
+                    const pull = bot.require(`./${cdir}/${file}`);
+                    if(!pull.name) throw {
+                        message: {
+                            error: "Name of the command not found!".toUpperCase()
+                        }
+                    };
                     bot.commands.set(pull.name, pull);
                     if (pull.aliases) pull.aliases.forEach(a => bot.aliases.set(a, pull.name));
                     bot.log(`${dir}     \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}     \t|\t${file} ERROR!`.error);
-                    bot.log(err.message.error);
+                    console.error(err);
                 }
             })
-        }catch(err){bot.log(`ERROR WHILE LOADING ${cdir.toUpperCase()} FOLDER!\n${err}`)}
+        }catch(err){
+            bot.log(`ERROR WHILE LOADING ${cdir.toUpperCase()} FOLDER!`);
+            bot.log(String(err));
+        }
     })
     bot.log();
 };

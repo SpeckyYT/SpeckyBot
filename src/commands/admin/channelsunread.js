@@ -1,9 +1,9 @@
 module.exports = {
     name: "channelsunread",
-	description: "Turns every channel in an unread one!",
+    description: "Turns every channel in an unread one!",
     usage: ``,
     category: `admin`,
-	accessableby: "Server Admins and Moderators",
+    accessableby: "Server Admins and Moderators",
     aliases: ["cur"],
     perms: ['ADMINISTRATOR']
 }

@@ -10,7 +10,7 @@ module.exports = (bot) => {
         }
         let coppy = [];
 
-        let content = input.split('').filter(v=>inout.includes(v)).join('');
+        const content = input.split('').filter(v=>inout.includes(v)).join('');
 
         let i = 0;
         while(inout.length-coppy.length > 0){

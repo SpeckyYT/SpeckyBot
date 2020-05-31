@@ -1,13 +1,13 @@
 module.exports = {
     name: "pause",
-	description: "Pauses the playing song!",
+    description: "Pauses the playing song!",
     usage: ``,
     category: `music`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["stop","paus"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     bot.music.pauseFunction(msg, args.join(' '))
 }

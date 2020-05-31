@@ -1,14 +1,14 @@
 module.exports = {
     name: "rps",
-	description: "Lets you play Rock Paper Scissors with the bot!",
+    description: "Lets you play Rock Paper Scissors with the bot!",
     usage: `<handsign>`,
     category: `games`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     if(!args[0]) return msg.channel.send("You have to define a handsign (Rock | Scissors | Paper)");
 
     let value;
@@ -35,7 +35,7 @@ module.exports.run = async (bot, msg) => {
             return bot.cmdError("Invalid hand sign (Rock | Scissors | Paper)");
     }
 
-    let rng = Math.ceil(Math.random() * 3);
+    const rng = Math.ceil(Math.random() * 3);
     let rng_str;
     switch(rng){
         case 1:

@@ -1,9 +1,9 @@
 module.exports = {
     name: "rotate",
-	description: "Rotates the image!",
+    description: "Rotates the image!",
     usage: `[Amount (0-360)]`,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

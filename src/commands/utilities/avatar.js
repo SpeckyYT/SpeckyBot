@@ -1,9 +1,9 @@
 module.exports = {
     name: "avatar",
-	description: "Wanna see your profile picture?",
+    description: "Wanna see your profile picture?",
     usage: `[@user]`,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["a","ava"]
 }
 

@@ -1,9 +1,9 @@
 module.exports = {
     name: "contrast",
-	description: "Applies a contrast to the image!",
+    description: "Applies a contrast to the image!",
     usage: `[Amount (-100 - 100)]`,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["real"],
     perms: [],
     cmdperms: []

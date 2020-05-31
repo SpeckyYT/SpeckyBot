@@ -1,9 +1,9 @@
 module.exports = {
     name: "smug",
-	description: "Gives you a smug!",
+    description: "Gives you a smug!",
     usage: ``,
     category: `sfw`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 

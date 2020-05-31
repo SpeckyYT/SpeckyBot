@@ -1,13 +1,13 @@
 module.exports = {
     name: "nowplaying",
-	description: "Gives you the name of the song!",
+    description: "Gives you the name of the song!",
     usage: ``,
     category: `music`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["np"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     bot.music.npFunction(msg, args.join(' '))
 }

@@ -4,7 +4,7 @@ module.exports = (bot) => {
     bot.log = async (content) => {
         appendFile('../commands.log',`${content ? 
             String(content)
-            .replace(/[][[][0-9]{2}m/g,'')
+            .replace(/[\x1b][[][0-9]{2}m/g,'')
             .replace(/\t/g,' ').replace(/ +/g,' ')
             : ''}\n`,
         ()=>{});

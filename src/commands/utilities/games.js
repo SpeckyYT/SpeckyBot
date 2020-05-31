@@ -1,16 +1,16 @@
 module.exports = {
     name: "games",
-	description: "What's the most played game in this server?",
+    description: "What's the most played game in this server?",
     usage: ``,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["game"]
 }
 
 const { RichEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
-    let games = [];
+    const games = [];
 
     await msg.guild.members.forEach(member => {
         if(!member.user.bot){

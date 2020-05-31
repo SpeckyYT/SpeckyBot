@@ -1,9 +1,9 @@
 module.exports = {
     name: "serversettings",
-	description: "You can edit any serversettings!",
+    description: "You can edit any serversettings!",
     usage: `<feature> <depends from feature>`,
     category: `admin`,
-	accessableby: "Server Admins and Moderators",
+    accessableby: "Server Admins and Moderators",
     aliases: ["ss","serversetting","servset","serverset","serversets"],
     perms: ['MANAGE_MESSAGES']
 }
@@ -13,8 +13,10 @@ const { writeFile } = require("fs");
 const dir = '../../../db/s_settings.json'
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
-    let s_settings = require(dir);
+    const { args } = msg;
+    const s_settings = require(dir);
+
+    const channelid = msg.mentions.channels.first().id;
 
     switch(args[0]){
         case "mte":
@@ -29,7 +31,6 @@ module.exports.run = async (bot, msg) => {
             switch(args[1]){
 
                 case "add":
-                    var channelid = msg.mentions.channels.first().id;
                     if(s_settings[msg.guild.id]){
                         if(s_settings[msg.guild.id].mtechannel){
                             if(!s_settings[msg.guild.id].mtechannel.includes(channelid)){
@@ -51,8 +52,7 @@ module.exports.run = async (bot, msg) => {
 
                 case "remove":
                 case "delete":
-                    var channelid = msg.mentions.channels.first().id;
-                    var rest = s_settings[msg.guild.id].mtechannel.filter(function(number) {
+                    const rest = s_settings[msg.guild.id].mtechannel.filter(function(number) {
                         return number != channelid;
                     });
                     s_settings[msg.guild.id] = {
@@ -69,12 +69,12 @@ module.exports.run = async (bot, msg) => {
             }
             break
         default:
-            let cEmbed = new RichEmbed()
+            const embed = new RichEmbed()
                 .setTitle("Server Settings Help Page!")
                 .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
                 .addBlankField()
                 .addField(`Message to Embed feature [mte]`,`\`${bot.config.prefix}serversettings mte add/remove #channel\``);
-            msg.channel.send(cEmbed);
+            msg.channel.send(embed);
         break
     }
 }

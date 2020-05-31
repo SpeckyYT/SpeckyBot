@@ -1,14 +1,14 @@
 module.exports = {
-	name: "member2id",
-	description: "Converts a username and discriminator to the user id.",
-	usage: `<username>#<discriminator>`,
-	category: `utilities`,
-	accessableby: "Members",
+    name: "member2id",
+    description: "Converts a username and discriminator to the user id.",
+    usage: `<username>#<discriminator>`,
+    category: `utilities`,
+    accessableby: "Members",
     aliases: ["m2i"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let user = bot.users.find('tag',msg.Args[0])
+    const user = bot.users.find('tag',msg.Args[0])
     if(user){
         msg.channel.send(user.id)
     }else{

@@ -1,0 +1,30 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2019
+    },
+    "rules": {
+        "no-cond-assign":"error",
+        "no-unused-vars": ["error", { "args": "none" }],
+        "arrow-parens":"off",
+        "no-case-declarations":"off",
+        "no-prototype-builtins":"off",
+        "no-control-regex":"off",
+        "no-tabs":"error",
+        "no-self-assign":"off",
+        "no-empty":"off",
+        "brace-style": "warn",
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "no-var": "error",
+        "prefer-const": "warn",
+        "no-console": "off",
+        "yoda": "error"
+    }
+}

@@ -1,9 +1,9 @@
 module.exports = {
-	name: "invite",
-	description: "Do you want to add this bot to your server?",
+    name: "invite",
+    description: "Do you want to add this bot to your server?",
     usage: ``,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["inv","invit"]
 }
 
@@ -13,8 +13,8 @@ module.exports.run = async (bot, msg) => {
             bot.link = data;
         }).catch(()=>{})
     }
-    let embed = bot.embed()
-		.setTitle('Links!')
+    const embed = bot.embed()
+        .setTitle('Links!')
         .setDescription(`[SpeckyBot Discord Server](https://discord.gg/4EecFku)\n[Bot Invite](${bot.link})\n[Support This Bot](https://patreon.com/SpeckyBot)`)
-	msg.channel.send(embed);
+    msg.channel.send(embed);
 }

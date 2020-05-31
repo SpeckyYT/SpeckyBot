@@ -1,9 +1,9 @@
 module.exports = {
     name: "test",
-	description: "Test!",
+    description: "Test!",
     usage: ``,
     category: `owner`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 

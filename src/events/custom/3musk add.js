@@ -8,8 +8,8 @@ const limited = ["265505748413448193"]
 module.exports.call = async (bot, messageReaction, user) => {
     if(user.bot) return;
     
-    let msg = messageReaction.message;
-    let guild = msg.guild;
+    const msg = messageReaction.message;
+    const guild = msg.guild;
 
     //server limiter
     if(!limited.includes(guild.id)) return;
@@ -20,8 +20,8 @@ module.exports.call = async (bot, messageReaction, user) => {
 
     guild.fetchMember(user)
     .then(async member => {
-        let muskRole = "636272631984947240"
-        let muskGateRole = "663303390620680193"
+        const muskRole = "636272631984947240"
+        const muskGateRole = "663303390620680193"
 
         if(member.roles.has(muskGateRole)){
             try{
@@ -32,5 +32,5 @@ module.exports.call = async (bot, messageReaction, user) => {
                 member.addRole(muskRole)
             }catch{}
         }
-    }).catch()
+    }).catch(()=>{})
 }

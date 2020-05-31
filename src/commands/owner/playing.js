@@ -1,14 +1,14 @@
 module.exports = {
     name: "playing",
-	description: "Some stuff for the bot's presence",
+    description: "Some stuff for the bot's presence",
     usage: `<Playing> <Game>`,
     category: `owner`,
-	accessableby: "Bot Owner",
+    accessableby: "Bot Owner",
     aliases: ["presence","game"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     const playing = args[0];
     const game = msg.content.split(" ").slice(2).join(" ");
     try{

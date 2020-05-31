@@ -1,9 +1,9 @@
 module.exports = {
     name: "membersid",
-	description: "Turns all user IDs into a txt file!",
+    description: "Turns all user IDs into a txt file!",
     usage: ``,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ['membersids','memberids','memberid']
 }
 
@@ -11,12 +11,12 @@ const { appendFile, unlink } = require('fs')
 const { Attachment } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
-    let members = [];
+    const members = [];
     msg.guild.members.forEach(async member => {
         members.push(member.user.id)
     })
     appendFile('./members.txt', members.join('\n'), () => {})
-    let att = new Attachment('./members.txt',"members.txt")
+    const att = new Attachment('./members.txt',"members.txt")
     await msg.channel.send(att);
     unlink('./members.txt', () => {})
 }

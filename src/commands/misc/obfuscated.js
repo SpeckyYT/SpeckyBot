@@ -1,9 +1,12 @@
-let _0x5027=['\x65\x78\x70\x6f\x72\x74\x73','\x6d\x69\x73\x63',
-'\x53\x6f\x6d\x65\x20\x72\x61\x6e\x64\x6f\x6d\x20\x63\x6f\x6d\x6d\x61\x6e\x64\x20\x74\x68\x61\x74\x20\x53\x70\x65\x63\x6b\x79\x20\x74\x72\x69\x65\x64\x20\x74\x6f\x20\x6f\x62\x66\x75\x73\x63\x61\x74\x65\x2e',
-'\x4d\x65\x6d\x62\x65\x72\x73','\x72\x75\x6e','\x6f\x77\x6f'];(function(_0xbef66a,_0x5027d9){let _0x2725d1=function(_0x109d9c){while(--_0x109d9c){_0xbef66a['\x70\x75\x73\x68']
-(_0xbef66a['\x73\x68\x69\x66\x74']())}};_0x2725d1(++_0x5027d9)}(_0x5027,0x96));let _0x2725=function(_0xbef66a,_0x5027d9){_0xbef66a=_0xbef66a-0x0;let _0x2725d1=_0x5027[_0xbef66a]
-;return _0x2725d1};module[_0x2725('0x0')]={'\x6e\x61\x6d\x65':_0x2725('0x5'),'\x64\x65\x73\x63\x72\x69\x70\x74\x69\x6f\x6e':_0x2725('0x2'),'\x75\x73\x61\x67\x65':'',
-'\x63\x61\x74\x65\x67\x6f\x72\x79':_0x2725('0x1'),'\x61\x63\x63\x65\x73\x73\x61\x62\x6c\x65\x62\x79':_0x2725('0x3'),'\x61\x6c\x69\x61\x73\x65\x73'
-:[]};module[_0x2725('0x0')][_0x2725('0x4')]=async(_0x2d2bb7,_0x5db518)=>{let _0x330a=['\x73\x65\x6e\x64','\x63\x68\x61\x6e\x6e\x65\x6c','\x4f\x77\x4f'];(function(_0x134cd8,_0x330acc)
-{let _0x31cf12=function(_0x1d18d3){while(--_0x1d18d3){_0x134cd8['\x70\x75\x73\x68'](_0x134cd8['\x73\x68\x69\x66\x74']())}};_0x31cf12(++_0x330acc)}(_0x330a,
-0xb5));let _0x31cf=function(_0x134cd8,_0x330acc){_0x134cd8=_0x134cd8-0x0;let _0x31cf12=_0x330a[_0x134cd8];return _0x31cf12};_0x5db518[_0x31cf('0x0')][_0x31cf('0x2')](_0x31cf('0x1'))}
+module.exports = {
+    name: "owo",
+    description: "OwO!",
+    usage: ``,
+    category: `misc`,
+    accessableby: "Members",
+    aliases: ['uwu']
+}
+
+module.exports.run = async (bot, msg) => {
+    msg.channel.send("OwO");
+}

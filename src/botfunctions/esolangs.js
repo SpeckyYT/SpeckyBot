@@ -7,15 +7,15 @@ module.exports = (bot) => {
         const TIME_LIMIT = options.time || 1000; // ms
         
         let instructions = [];
-        let loops = [];
+        const loops = [];
         let skip = 0;
         let pos = 0;
-        let output = {
+        const output = {
             string: [],
             numbers: []
         };
         let cell = 0;
-        let memory = [];
+        const memory = [];
 
         if(typeof insts == "string"){
             instructions = insts.split('');
@@ -35,7 +35,7 @@ module.exports = (bot) => {
 
         let tOut = false;
 
-        return await new Promise(async res => {
+        return await new Promise(res => {
             while (pos < instructions.length){
                 if(pos >= instructions.length) return true;
                 
@@ -48,7 +48,7 @@ module.exports = (bot) => {
                     memory.push(0);
                 }
 
-                let c = instructions[pos];
+                const c = instructions[pos];
 
                 if (c == '['){
                     if(memory[cell]){
@@ -122,7 +122,7 @@ module.exports = (bot) => {
                 if (!options.extra) continue;
 
                 if (c == ';'){
-                    memory[cell] = round(random());
+                    memory[cell] = Math.round(Math.random());
                 }
 
                 if (c == '_'){
@@ -142,8 +142,8 @@ module.exports = (bot) => {
     
             output.string = output.string.join('');
     
-            let { string } = output;
-            let { numbers } = output;
+            const { string } = output;
+            const { numbers } = output;
     
             const end = new Date().getTime();
     

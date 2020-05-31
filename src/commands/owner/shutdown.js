@@ -1,9 +1,9 @@
 module.exports = {
     name: "shutdown",
-	description: "Shuts the bot down!",
+    description: "Shuts the bot down!",
     usage: ``,
     category: `owner`,
-	accessableby: "Bot Owner",
+    accessableby: "Bot Owner",
     aliases: ["quit","exit","die","kill"]
 }
 

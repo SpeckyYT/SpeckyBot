@@ -1,9 +1,9 @@
 module.exports = {
     name: "slots",
-	description: "Lets you play slots!",
+    description: "Lets you play slots!",
     usage: `<slots quantity>`,
     category: `games`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["slot"],
     flags: ["stats","win","global"]
 }
@@ -27,7 +27,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     let eArray = [];
-    let neweArray = [];
+    const neweArray = [];
 
     let oldEmote;
     let won = true;

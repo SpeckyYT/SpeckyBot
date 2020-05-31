@@ -1,9 +1,9 @@
 module.exports = {
     name: "hentai",
-	description: "Gives you a hentai!",
+    description: "Gives you a hentai!",
     usage: ``,
     category: `nsfw`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 

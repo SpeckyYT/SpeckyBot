@@ -1,9 +1,9 @@
 module.exports = {
     name: "owofy",
-	description: "This command tuwns yoww nyowmie text into an OwO text ( o͡ w o͡ )",
+    description: "This command tuwns yoww nyowmie text into an OwO text ( o͡ w o͡ )",
     usage: `<text>`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["uwufy"]
 }
 

@@ -1,9 +1,9 @@
 module.exports = {
     name: "dither",
-	description: "Dithers the image!",
+    description: "Dithers the image!",
     usage: ``,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

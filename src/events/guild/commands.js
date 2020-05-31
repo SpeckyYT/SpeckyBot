@@ -206,14 +206,14 @@ module.exports.call = async (bot, msg) => {
                     collector.on('collect', async () => {
                         runned = true;
                         collector.stop();
-                        await ms.delete().catch();
+                        await ms.delete().catch(()=>{});
                         return run(cmd, bot, msg, command);
                     })
                     
                     collector.on('end', async () => {
                         if(runned) return;
-                        await ms.delete().catch();
-                        await msg.delete().catch();
+                        await ms.delete().catch(()=>{});
+                        await msg.delete().catch(()=>{});
                     })
                 })
             }else{
@@ -248,11 +248,11 @@ module.exports.call = async (bot, msg) => {
         collector.on('collect', async (collected) => {
             let m = collected;
             let numb = m.content.toLowerCase().match(regex)[0];
-            await m.delete().catch();
+            await m.delete().catch(()=>{});
             if(isNaN(numb)){
                 return collector.stop();
             }
-            await ms.delete().catch();
+            await ms.delete().catch(()=>{});
             runned = true;
             let com = items[numb-1];
             msg.command = com;
@@ -262,7 +262,7 @@ module.exports.call = async (bot, msg) => {
         });
         collector.on('end', async () => {
             if(runned) return;
-            await ms.edit(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
+            await ms.edit(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`)).catch(()=>{});
         });
     }else{
         return await execute();

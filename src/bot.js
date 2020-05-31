@@ -6,7 +6,7 @@ module.exports = (bot) => {
         messageCacheMaxSize: 10000,
         fetchAllMembers: true,
         messageCacheLifetime: 432000,
-    });
+    })
 
     require('./generalhandler')(bot);
 }

@@ -1,13 +1,13 @@
 module.exports = {
     name: "search",
-	description: "You can search the song you like!",
+    description: "You can search the song you like!",
     usage: ``,
     category: `music`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    let { Args } = msg;
+    const { Args } = msg;
     bot.music.searchFunction(msg, Args.join(' '))
 }

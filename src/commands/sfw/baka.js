@@ -1,9 +1,9 @@
 module.exports = {
     name: "baka",
-	description: "Gives you a baka!",
+    description: "Gives you a baka!",
     usage: ``,
     category: `sfw`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 

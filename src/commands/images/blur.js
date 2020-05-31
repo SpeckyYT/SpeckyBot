@@ -1,9 +1,9 @@
 module.exports = {
     name: "blur",
-	description: "Blurs the image!",
+    description: "Blurs the image!",
     usage: `[Amount (2-100)]`,
     category: `images`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

@@ -1,13 +1,13 @@
 module.exports = {
     name: "loop",
-	description: "Loops the song!",
+    description: "Loops the song!",
     usage: ``,
     category: `music`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["l"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     bot.music.loopFunction(msg, args.join(' '))
 }

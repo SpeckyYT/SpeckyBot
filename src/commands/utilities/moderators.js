@@ -1,16 +1,16 @@
 module.exports = {
-	name: "moderators",
-	description: "Gives you the active/inactive moderators list!",
+    name: "moderators",
+    description: "Gives you the active/inactive moderators list!",
     usage: ``,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["moderator","mods"]
 }
 
 const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
 
 module.exports.run = async (bot, msg) => {
-    let mods = [];
+    const mods = [];
     let list = [];
     msg.guild.members.forEach(async member => {
         if(member.hasPermission('MANAGE_MESSAGES',true,true,false)){
@@ -20,14 +20,12 @@ module.exports.run = async (bot, msg) => {
 
     list = listCreator(mods, list)
 
-    let online, idle, dnd, offline;
+    const online = statusCheckQuantity(list,'online');
+    const idle = statusCheckQuantity(list,'idle');
+    const dnd = statusCheckQuantity(list,'dnd');
+    const offline = statusCheckQuantity(list,'offline');
 
-    online = statusCheckQuantity(list,'online');
-    idle = statusCheckQuantity(list,'idle');
-    dnd = statusCheckQuantity(list,'dnd');
-    offline = statusCheckQuantity(list,'offline');
-
-    let { Eonline, Eidle, Ednd, Eoffline } = emotes;
+    const { Eonline, Eidle, Ednd, Eoffline } = emotes;
 
     membersEmbed("Mods", msg, [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]])
 }

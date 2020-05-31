@@ -1,24 +1,24 @@
 module.exports = {
     name: "gddiff",
-	description: "Gives you one of the difficulty icons of Geometry Dash!",
+    description: "Gives you one of the difficulty icons of Geometry Dash!",
     usage: `<difficulty number (0-10)> <rate value (0-2)>`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["gddifficulty","geometrydashdiff"]
 }
 
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     if(!args[0]){
         msg.channel.send("You have to define a difficulty (a number from 0 to 10)")
         return;
     }
-    let diffNum = args[0];
-    let featured = args[1];
+    const diffNum = args[0];
+    const featured = args[1];
 
-    const bmsg = msg.channel.send("Generating difficulty image...")
+    await msg.channel.send("Generating difficulty image...")
     .then(m =>{
         let rate = '';
         let diff = 0;
@@ -105,7 +105,7 @@ module.exports.run = async (bot, msg) => {
 
         const link = `https://gdicon.net/icons/difficulty_${String(diff).padStart(2, "0")}${rate}.png`
 
-        let cEmbed = new RichEmbed()
+        const embed = new RichEmbed()
         .setColor('#000000')
         .setAuthor(`Geometry Dash`, `https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Geometry_Dash_Logo.PNG/250px-Geometry_Dash_Logo.PNG`)
         .setImage(link)
@@ -113,6 +113,6 @@ module.exports.run = async (bot, msg) => {
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 
 
-        m.edit(cEmbed);
+        m.edit(embed);
     })
 }

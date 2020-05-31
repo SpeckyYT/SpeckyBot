@@ -1,9 +1,9 @@
 module.exports = {
     name: "say",
-	description: "Lets the bot say something for you!",
+    description: "Lets the bot say something for you!",
     usage: `<text> [#channel] [--emb/--sneak]`,
     category: `admin`,
-	accessableby: "Server Admins and Moderators",
+    accessableby: "Server Admins and Moderators",
     aliases: ["send","announcement"],
     perms: ['MANAGE_MESSAGES'],
     flags: ["channel","user","sneak","rcase","emb"]
@@ -18,7 +18,7 @@ module.exports.run = async (bot, msg) => {
     let user = msg.author;
 
     if(msg.flag("channel")){
-        let tempchannel = msg.mentions.channels.first();
+        const tempchannel = msg.mentions.channels.first();
         if(tempchannel){
             channel = tempchannel;
             res = res.replace(channel,'')
@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(msg.flag("user")){
-        let tempuser = msg.mentions.users.first();
+        const tempuser = msg.mentions.users.first();
         if(tempuser){
             user = tempuser;
             res = res.replace(user,'')

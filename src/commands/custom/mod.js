@@ -1,9 +1,9 @@
 module.exports = {
     name: "mod",
-	description: "Moderates stuffs!",
+    description: "Moderates stuffs!",
     usage: ``,
     category: `custom`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: [],
     servers: ['265505748413448193'],
     perms: ['KICK_MEMBERS'],
@@ -11,8 +11,8 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
-    let user = msg.mentions.members.first()
+    const { args } = msg;
+    const user = msg.mentions.members.first()
     
     switch(args[0]){
 

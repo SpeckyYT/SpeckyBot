@@ -1,9 +1,9 @@
 module.exports = {
     name: "minecraft",
-	description: "Gives some informations of a Minecraft Server!",
+    description: "Gives some informations of a Minecraft Server!",
     usage: `<Server IP> [Server Port]`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["minecraftserver","mcs","ms","mineserver"]
 }
 
@@ -11,20 +11,20 @@ const { RichEmbed } = require("discord.js");
 const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
-    var link;
+    const { args } = msg;
+    let link;
     if(!args[0]) return msg.channel.send("You have to define a Server IP");
     if(!args[1]){
         link = `https://mcapi.us/server/status?ip=${args[0]}`;
     }else{
         link = `https://mcapi.us/server/status?ip=${args[0]}&port=${args[1]}`;
     }
-    const response = fetch(link)
+    await fetch(link)
     .then(res => res.json())
     .then(json => {
         try{
         const {status, online, motd, error, players, server} = json;
-        let cEmbed = new RichEmbed()
+        const embed = new RichEmbed()
         .setColor('#00FF00')
         .addField(`Fetch Status:`, status)
         .addField(`Online Status:`, online)
@@ -38,7 +38,7 @@ module.exports.run = async (bot, msg) => {
         .setTimestamp()
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
 
-        msg.channel.send(cEmbed);
+        msg.channel.send(embed);
         }catch(e){
             msg.channel.send("An error occurred (server doesn't exist or wrong port)")
         }

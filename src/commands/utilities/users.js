@@ -1,9 +1,9 @@
 module.exports = {
     name: "users",
-	description: "How many people does this bot know?",
+    description: "How many people does this bot know?",
     usage: ``,
     category: `utilities`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: []
 }
 

@@ -9,7 +9,7 @@ module.exports.run = async (bot, data) => {
             bot.guilds.map(g=>g.channels.sort().map(c => `{${g.id}}\t${g.name}\t[${c.id}]\t${c.name}\t(${c.type})`).join('\n')).join('\n').info
         )
     }else{
-        let guild = bot.guilds.get(data.args[0]);
+        const guild = bot.guilds.get(data.args[0]);
         
         if(guild){
             console.log(

@@ -1,16 +1,16 @@
 module.exports = {
     name: "delete",
-	description: "Deletes a message for you!",
+    description: "Deletes a message for you!",
     usage: `<messageID>`,
     category: `admin`,
-	accessableby: "Server Admins and Moderators",
+    accessableby: "Server Admins and Moderators",
     aliases: ["deletion", "msgdelet","msgdelete"],
     perms: ['MANAGE_MESSAGES'],
     cmdperms: ['MANAGE_MESSAGES']
 }
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     if(!args[0]){
         msg.channel.send("You have to define a message to delete");
         return;

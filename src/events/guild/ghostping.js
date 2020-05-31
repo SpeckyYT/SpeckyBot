@@ -23,7 +23,7 @@ module.exports.call = async (bot, msg) => {
                     .setImage(msg.author.avatarURL)
                     .setFooter(`Date of the ghostping`)
                     .setTimestamp()
-                ).catch();
+                ).catch(()=>{});
             }
         })
     }

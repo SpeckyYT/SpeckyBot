@@ -1,9 +1,9 @@
 ﻿module.exports = {
     name: "speckysays",
-	description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
+    description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
     usage: `#[channel] [start time in seconds]`,
     category: `games`,
-	accessableby: "Server Admins and Moderators",
+    accessableby: "Server Admins and Moderators",
     aliases: ["simonsays", "simon"],
     perms: ["MANAGE_MESSAGES"]
 }
@@ -12,10 +12,10 @@ const { RichEmbed } = require('discord.js')
 const { runGame } = require('./SpeckySays/game');
 
 module.exports.run = async (bot, msg) => {
-    let { args } = msg;
+    const { args } = msg;
     let channel = msg.mentions.channels.first()
 
-    var time;
+    let time;
 
     if (!channel) {
         channel = msg.channel;
@@ -37,21 +37,21 @@ module.exports.run = async (bot, msg) => {
     }
 
     //collect players
-    let startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
+    const startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
     .setDescription(`Hosted by <@${msg.author.id}>`)
     .setColor(msg.member.displayColor)
     .setFooter(`The game will start in ${Math.floor(time / 1000)} seconds.`)
     channel.send(startembed).then(async (msg) => {
         msg.react('🎲')
         
-        let collected = await msg.awaitReactions(() => true, {
+        const collected = await msg.awaitReactions(() => true, {
             time: time
         })
         
         let players = []
-        for (let reaction of collected.array()) {
+        for (const reaction of collected.array()) {
             if(reaction.emoji.name == '🎲'){
-                let users = await reaction.fetchUsers()
+                const users = await reaction.fetchUsers()
                 players = players.concat(users.array())
             }
         }
@@ -60,7 +60,7 @@ module.exports.run = async (bot, msg) => {
         if(players.length < 1 || players.length == null) return channel.send('**Game canceled!** Not enough players!');
 
         channel.send(`The game is starting! Players: ${players.join(', ')}`)
-        let explanationEmbed = new RichEmbed()
+        const explanationEmbed = new RichEmbed()
             .setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
             .setColor('#77ecf2')
         channel.send(explanationEmbed)

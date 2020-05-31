@@ -2,13 +2,13 @@ const { readFile, writeFile } = require('fs');
 
 module.exports = (bot) => {
     bot.parseBet = (economy,author,bet,min) => {
-        let { money } = economy[author.id];
+        const { money } = economy[author.id];
 
         if(!min){
             min = 100
         }
 
-        let nbet = Number(bet);
+        const nbet = Number(bet);
 
         if(nbet > money){
             return 0;

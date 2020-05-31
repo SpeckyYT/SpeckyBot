@@ -1,9 +1,9 @@
 module.exports = {
     name: "checkperms",
-	description: "Checks the permissions of the user in a specific channel!",
+    description: "Checks the permissions of the user in a specific channel!",
     usage: `@[User] #[Channel]`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["checkpermissions","checkp","cp"]
 }
 
@@ -23,11 +23,11 @@ module.exports.run = async (bot, msg) => {
         channel = msg.mentions.channels.first();
     }
 
-    let cEmbed = new RichEmbed()
+    const embed = new RichEmbed()
     .setTitle(`Permissions of ${member.user.username} in #${channel.name}`)
     .setThumbnail(member.user.avatarURL)
     .setColor(member.displayHexColor)
     .addField(`Permissions:`, `\`\`\`${member.permissionsIn(channel).toArray().join('\n')}\`\`\``)
 
-    msg.channel.send(cEmbed);
+    msg.channel.send(embed);
 }

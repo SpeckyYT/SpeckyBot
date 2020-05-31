@@ -1,9 +1,9 @@
 module.exports = {
     name: "stats",
-	description: "Gives some stats about the bot!",
+    description: "Gives some stats about the bot!",
     usage: ``,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["status","st"]
 }
 
@@ -12,16 +12,16 @@ const os = require('os');
 const osu = require('node-os-utils');
 
 module.exports.run = async (bot, msg) => {
-    let notSupported = "Operative system not supported"
-    let full = '█'
-    let empty = '░'
-    let precision = 20
+    const notSupported = "Operative system not supported"
+    const full = '█'
+    const empty = '░'
+    const precision = 20
 
-    let freeRAM = os.freemem()
-    let usedRAM = os.totalmem() - freeRAM;
+    const freeRAM = os.freemem()
+    const usedRAM = os.totalmem() - freeRAM;
 
-    let diagramMaker = (used,free) => {
-        let total = used + free;
+    const diagramMaker = (used,free) => {
+        const total = used + free;
         used = Math.round((used / total) * precision)
         free = Math.round((free / total) * precision)
         return full.repeat(used) + empty.repeat(free)
@@ -66,7 +66,7 @@ module.exports.run = async (bot, msg) => {
 
     await Promise.all([p1,p2,p3,p4]);
 
-    let cEmbed = new RichEmbed()
+    const embed = new RichEmbed()
     .setColor(bot.config.color)
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, bot.user.iconURL)
@@ -93,5 +93,5 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .setTimestamp()
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
 
-    msg.channel.send(cEmbed)
+    msg.channel.send(embed)
 }

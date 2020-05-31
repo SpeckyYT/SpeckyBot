@@ -1,6 +1,6 @@
 module.exports = {
     name: "lockall",
-	description: "Will lock the entire server!",
+    description: "Will lock the entire server!",
     usage: ``,
     category: `custom`,
     aliases: [],

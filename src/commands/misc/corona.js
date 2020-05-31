@@ -1,9 +1,9 @@
 module.exports = {
     name: "corona",
-	description: "Gives you how many people are infected by corona!",
+    description: "Gives you how many people are infected by corona!",
     usage: `[number]`,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["coronavirus","covid","covid19","covid-19"]
 }
 
@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg) => {
     const topmax = isNaN(msg.args[0]) ? 5 : (msg.args[0] < 5 ? 5 : msg.args[0]);
 
     locations.forEach(object => {
-        let t = top.get(object.country);
+        const t = top.get(object.country);
         if(t){
             top.set(object.country, object.latest + t);
         }else{
@@ -51,14 +51,14 @@ module.exports.run = async (bot, msg) => {
     string = string.trim();
 
     //API2
-    let stats = {confirmed:0,deaths:0,recovered:0}
+    const stats = {confirmed:0,deaths:0,recovered:0}
     features.forEach(obj => {
         stats.recovered += obj.attributes.recovered
         stats.confirmed += obj.attributes.confirmed
         stats.deaths += obj.attributes.deaths
     })
 
-    let embed = new RichEmbed()
+    const embed = new RichEmbed()
     .setTitle('CoronaVirus Outbreak')
     .addField("✅ Total confirmed cases",`${latest} cases`)
     .addField("💀 Total deaths", `${stats.deaths} humans`)

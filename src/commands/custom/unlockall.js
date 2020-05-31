@@ -1,6 +1,6 @@
 module.exports = {
     name: "unlockall",
-	description: "Will unlock the entire server!",
+    description: "Will unlock the entire server!",
     usage: ``,
     category: `custom`,
     aliases: [],

@@ -1,9 +1,9 @@
 module.exports = {
     name: "presences",
-	description: "Says how many people are playing different games in the server.",
+    description: "Says how many people are playing different games in the server.",
     usage: ``,
     category: `misc`,
-	accessableby: "Members",
+    accessableby: "Members",
     aliases: ["prsncs","prs"]
 }
 
@@ -11,7 +11,7 @@ const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     
-    let cEmbed = new RichEmbed()
+    const embed = new RichEmbed()
         .setTitle("These are the server's most played games at the moment:");
 /*
     let presences;
@@ -24,7 +24,7 @@ module.exports.run = async (bot, msg) => {
 
     console.log(presences.join('\n'))
 
-    cEmbed.setDescription(presences)
+    embed.setDescription(presences)
 */
-    msg.channel.send(cEmbed)
+    msg.channel.send(embed)
 }
