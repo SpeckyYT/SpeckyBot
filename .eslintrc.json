@@ -8,9 +8,15 @@
         "ecmaVersion": 2019
     },
     "rules": {
+        "spaced-comment":"warn",
         "no-inner-declarations":"off",
         "no-cond-assign":"error",
-        "no-unused-vars": ["error", { "args": "none" }],
+        "no-unused-vars": [
+            "error",
+            {
+                "args": "none"
+            }
+        ],
         "arrow-parens":"off",
         "no-case-declarations":"off",
         "no-prototype-builtins":"off",
@@ -19,9 +25,17 @@
         "no-self-assign":"off",
         "no-empty":"off",
         "brace-style": "warn",
-        "linebreak-style": [
+        "linebreak-style":[
             "error",
             "windows"
+        ],
+        "indent": [
+            "warn",
+            4,
+            {
+                "MemberExpression": 0,
+                "SwitchCase": 1
+            }
         ],
         "no-var": "error",
         "prefer-const": "warn",

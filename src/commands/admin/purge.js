@@ -25,15 +25,15 @@ module.exports.run = async (bot, msg) => {
         let mess = beg
         while(mess > 100){
             await msg.channel.bulkDelete(100)
-                .then()
-                .catch(()=>{});
+            .then()
+            .catch(()=>{});
             mess -= 100;
         }
         beg = mess;
     }
 
     if(beg > 0){
-    await msg.channel.bulkDelete(beg)
+        await msg.channel.bulkDelete(beg)
         .then()
         .catch(()=>{});
     }

@@ -18,17 +18,16 @@ module.exports.call = async (bot, msg) => {
     }
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
-        if(msg.mentions.users.first() ?
-        msg.mentions.users.first().tag == bot.user.tag : false){
-            let clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
+        if(msg.mentions.users.first() ? msg.mentions.users.first().tag == bot.user.tag : false){
+            const clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
             if(msg.cleanContent != clean){
                 msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
             }else{
                 msg.args = [];
                 msg.Args = [];
-                let help = "help";
+                const help = "help";
                 logger(help,true,msg,bot);
-                let helpcmd = bot.commands.get(help);
+                const helpcmd = bot.commands.get(help);
                 run(helpcmd, bot, msg, `${bot.config.prefix}${help}`);
             }
         }
@@ -36,7 +35,7 @@ module.exports.call = async (bot, msg) => {
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
 
-    let flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
+    const flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
     msg.flags = [];
     if(flags){
         flags.forEach((f,index) => {
@@ -56,7 +55,7 @@ module.exports.call = async (bot, msg) => {
     let command = msg.Args[0].toLowerCase();
 
     while(msg.Args[0] == bot.config.prefix && msg.Args.length > 0){
-        let fix = msg.Args[0] + msg.Args[1];
+        const fix = msg.Args[0] + msg.Args[1];
         msg.Args[1] = fix;
         command = fix.toLowerCase();
         msg.Args = msg.Args.slice(1);
@@ -79,7 +78,7 @@ module.exports.call = async (bot, msg) => {
 
     msg.command = command.slice(bot.config.prefix.length);
 
-    msg.links = (msg.content ? msg.content.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g) : []) || []
+    msg.links = (msg.content ? msg.content.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g) : []) || []
 
     let cmd = bot.getCommand(command.slice(bot.config.prefix.length));
     
@@ -100,10 +99,14 @@ module.exports.call = async (bot, msg) => {
             let admin = false;
             let illegal = false;
 
-            if(bot.checkOwner(msg.author.id)){owner = true}
-            if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){admin = true}
+            if(bot.checkOwner(msg.author.id)){
+                owner = true
+            }
+            if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){
+                admin = true
+            }
 
-            let errorReasons = [];
+            const errorReasons = [];
 
             function check(adminAllowed, reason){
                 if(owner){
@@ -124,15 +127,15 @@ module.exports.call = async (bot, msg) => {
                 }
             }
 
-            let ownerError    =  "👮‍♂️ You aren't the bot owner.";
-            let botPermError  =  "🚫 Bot doesn't have required permissions.";
-            let nsfwError     =  "🔞 This command is only allowed in NSFW channels.";
-            let imagesError   =  "🎨 This command requires the \`ATTACH FILES\` permission.";
-            let userPermError =  "🚷 You don't have the required permissions for that command.";
-            let serverError   =  "⛔ This command isn't available on this server.";
-            let musicError    =  "🎵 Music is broken."
+            const ownerError    =  "👮‍♂️ You aren't the bot owner.";
+            const botPermError  =  "🚫 Bot doesn't have required permissions.";
+            const nsfwError     =  "🔞 This command is only allowed in NSFW channels.";
+            const imagesError   =  "🎨 This command requires the `ATTACH FILES` permission.";
+            const userPermError =  "🚷 You don't have the required permissions for that command.";
+            const serverError   =  "⛔ This command isn't available on this server.";
+            const musicError    =  "🎵 Music is broken."
 
-            let category = cmd.category;
+            const category = cmd.category;
 
             if(category == "images"){
                 await bot.setLastImageCache(msg);
@@ -193,13 +196,13 @@ module.exports.call = async (bot, msg) => {
             }
 
             if(illegal){
-                let time = 10;
+                const time = 10;
                 msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${bot.singPlur(errorReasons.length,"Reason",false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
                 .then(async ms => {
-                    let emote = '✅';
+                    const emote = '✅';
                     await ms.react(emote);
                     const filter = (reaction, user) => (user.id == msg.author.id) && (reaction.emoji.name == emote)
-                    let collector =  ms.createReactionCollector(filter, { time: (time*1000), errors: ['time'] })
+                    const collector =  ms.createReactionCollector(filter, { time: (time*1000), errors: ['time'] })
                     
                     let runned = false;
                     
@@ -230,31 +233,31 @@ module.exports.call = async (bot, msg) => {
     }
 
     if(!cmd){
-        let cmdarray = bot.commands.map(c => c.name).concat(bot.aliases.keyArray());
+        const cmdarray = bot.commands.map(c => c.name).concat(bot.aliases.keyArray());
         let mostlikely = new Collection();
         cmdarray.forEach(item => {
-            let numb = leven(msg.command,item);
+            const numb = leven(msg.command,item);
             mostlikely.set(item,numb);
         })
         mostlikely = mostlikely.sort((a,b) => a-b);
-        let items = mostlikely.keyArray().slice(0,9);
+        const items = mostlikely.keyArray().slice(0,9);
         let string = `Command \`${msg.command}\` is unavailable...\nSend a message with the number of the desidered command or \`c\` to cancel.\n\n`;
         items.forEach((val, ind) => string += `\`${ind+1}\` ${val}\n`)
-        let ms = await msg.channel.send(bot.embed().setDescription(string));
+        const ms = await msg.channel.send(bot.embed().setDescription(string));
         const regex = /[1-9cC]/g
         const filter = m => ((m.author.id == msg.author.id) && Boolean(m.content.toLowerCase().match(regex)));
-        let collector = msg.channel.createMessageCollector(filter, { time: 15000, errors: ["time"] });
+        const collector = msg.channel.createMessageCollector(filter, { time: 15000, errors: ["time"] });
         let runned = false;
         collector.on('collect', async (collected) => {
-            let m = collected;
-            let numb = m.content.toLowerCase().match(regex)[0];
+            const m = collected;
+            const numb = m.content.toLowerCase().match(regex)[0];
             await m.delete().catch(()=>{});
             if(isNaN(numb)){
                 return collector.stop();
             }
             await ms.delete().catch(()=>{});
             runned = true;
-            let com = items[numb-1];
+            const com = items[numb-1];
             msg.command = com;
             cmd = bot.commands.get(com) || bot.commands.get(bot.aliases.get(com));
             collector.stop();
@@ -280,7 +283,9 @@ async function run(cmd, bot, msg, command){
         let expected;
         try{
             expected = err.includes("[EXPECTED]")
-        }catch(e){expected = false}
+        }catch(e){
+            expected = false
+        }
 
         if(expected){
             err = err.replace("[EXPECTED]","").trim();

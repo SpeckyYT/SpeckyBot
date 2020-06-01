@@ -20,16 +20,18 @@ module.exports.call = async (bot, msg) => {
         color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
     }
 
-    let perms = msg.guild.me.permissionsIn(msg.channel).toArray();
+    const perms = msg.guild.me.permissionsIn(msg.channel).toArray();
     if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES')){
         if(msg.content.includes(':EMB:')){
-            await msg.delete().catch(()=>{return})
+            await msg.delete().catch(()=>{
+                return
+            })
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
-                let embed = new RichEmbed()
-                    .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-                    .setDescription(`${msg.content}`)
-                    .setColor(`${color}`);
+                const embed = new RichEmbed()
+                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                .setDescription(`${msg.content}`)
+                .setColor(`${color}`);
                 await msg.channel.send(embed);
             }
             await atts(msg,color)
@@ -42,27 +44,28 @@ module.exports.call = async (bot, msg) => {
     try{
         if(s_settings[msg.guild.id] ?
             (s_settings[msg.guild.id].mtechannel ?
-                s_settings[msg.guild.id].mtechannel.includes(msg.channel.id)
-            : false)
-        : false){
+                s_settings[msg.guild.id].mtechannel.includes(msg.channel.id) : false)
+            : false){
             try{
                 await msg.delete();
                 if(msg.content){
-                    var embed = new RichEmbed()
-                        .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
-                        .setDescription(`${msg.content}`)
-                        .setColor(`${color}`);
+                    const embed = new RichEmbed()
+                    .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                    .setDescription(`${msg.content}`)
+                    .setColor(`${color}`);
                     await msg.channel.send(embed);
                 }
                 await atts(msg,color)
             }catch(e){}
         }   
-    }catch(err){console.error(err)}
+    }catch(err){
+        console.error(err)
+    }
 }
 
 async function atts(msg,color) {
     msg.attachments.forEach(async att  => {
-        let emb = new RichEmbed()
+        const emb = new RichEmbed()
         .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
         .setImage(`${att.proxyURL}`)
         .setColor(color);

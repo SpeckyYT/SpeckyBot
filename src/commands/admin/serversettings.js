@@ -70,11 +70,11 @@ module.exports.run = async (bot, msg) => {
             break
         default:
             const embed = new RichEmbed()
-                .setTitle("Server Settings Help Page!")
-                .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
-                .addBlankField()
-                .addField(`Message to Embed feature [mte]`,`\`${bot.config.prefix}serversettings mte add/remove #channel\``);
+            .setTitle("Server Settings Help Page!")
+            .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
+            .addBlankField()
+            .addField(`Message to Embed feature [mte]`,`\`${bot.config.prefix}serversettings mte add/remove #channel\``);
             msg.channel.send(embed);
-        break
+            break
     }
 }
