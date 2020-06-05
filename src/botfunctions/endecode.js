@@ -1,5 +1,5 @@
 module.exports = (bot) => {
-    bot.encrypt = (input) => {
+    bot.encrypt = (input, log) => {
         if(!input){
             return "";
         }
@@ -24,14 +24,17 @@ module.exports = (bot) => {
         inout = inout.clean();
         coppy = coppy.clean();
 
+        if(log) console.table([inout,coppy]);
+
         let output = '';
 
-        content.split('').forEach((v)=>{
+        content.split('').forEach(v=>{
             if(inout.includes(v)){
                 output += coppy[inout.indexOf(v)];
             }else if(coppy.includes(v)){
                 output += inout[coppy.indexOf(v)];
-            }else if(v === ' '){
+            }
+            if(input[output.length] === ' '){
                 output += ' ';
             }
         });

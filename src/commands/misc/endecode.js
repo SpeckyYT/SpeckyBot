@@ -9,7 +9,7 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     if(msg.content){
-        msg.channel.send(bot.encrypt(msg.content));
+        return msg.channel.send("```"+bot.encrypt(msg.content)+"```");
     }else{
         return bot.cmdError("You have to add some text to encode or decode");
     }
