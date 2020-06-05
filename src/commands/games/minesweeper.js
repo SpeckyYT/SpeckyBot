@@ -2,7 +2,7 @@ module.exports = {
     name: "minesweeper",
     description: "Gives you a minesweeper field!",
     usage: ``,
-    category: `misc`,
+    category: `games`,
     accessableby: "Members",
     aliases: ["ms"]
 }
