@@ -17,8 +17,8 @@ module.exports.run = async (bot, msg) => {
     .then(body => {
         if (!body || !body.data.image) return msg.reply("Something went wrong, try again!");
         const embed = bot.embed()
-            .setAuthor(`${bot.user.username} gives you memes!`, msg.guild.iconURL)
-            .setImage(body.data.image);
+        .setAuthor(`${bot.user.username} gives you memes!`, msg.guild.iconURL)
+        .setImage(body.data.image);
         if (body.data.title) {
             embed.setTitle(body.data.title).setURL(body.data.url);
         }

@@ -13,6 +13,8 @@
         "discord.js": "^11.6.4",
         "discord.js-musicbot-addon": "^13.9.1",
         "express": "^4.17.1",
+        "g-i-s": "^2.1.5",
+        "googleapis": "^52.0.0",
         "got": "^10.7.0",
         "is-image-url": "^1.1.8",
         "jimp": "^0.9.8",

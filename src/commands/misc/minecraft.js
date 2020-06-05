@@ -4,7 +4,7 @@ module.exports = {
     usage: `<Server IP> [Server Port]`,
     category: `misc`,
     accessableby: "Members",
-    aliases: ["minecraftserver","mcs","ms","mineserver"]
+    aliases: ["minecraftserver","mcs","mineserver"]
 }
 
 const { RichEmbed } = require("discord.js");
@@ -23,22 +23,22 @@ module.exports.run = async (bot, msg) => {
     .then(res => res.json())
     .then(json => {
         try{
-        const {status, online, motd, error, players, server} = json;
-        const embed = new RichEmbed()
-        .setColor('#00FF00')
-        .addField(`Fetch Status:`, status)
-        .addField(`Online Status:`, online)
-        .addField(`Description:`, `"${motd}"`)
-        .addField(`Errors:`, `${error || "No Errors"}`)
-        .addField(`Active Players:`, players.now)
-        .addField(`Maximal Players:`, players.max)
-        .addField(`Server Version:`, server.name)
-        .addField(`⠀`, "The following image could be not updated")
-        .setImage(`https://mcapi.us/server/image?ip=${args[0]}&theme=dark`)
-        .setTimestamp()
-        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
+            const {status, online, motd, error, players, server} = json;
+            const embed = new RichEmbed()
+            .setColor('#00FF00')
+            .addField(`Fetch Status:`, status)
+            .addField(`Online Status:`, online)
+            .addField(`Description:`, `"${motd}"`)
+            .addField(`Errors:`, `${error || "No Errors"}`)
+            .addField(`Active Players:`, players.now)
+            .addField(`Maximal Players:`, players.max)
+            .addField(`Server Version:`, server.name)
+            .addField(`⠀`, "The following image could be not updated")
+            .setImage(`https://mcapi.us/server/image?ip=${args[0]}&theme=dark`)
+            .setTimestamp()
+            .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
 
-        msg.channel.send(embed);
+            msg.channel.send(embed);
         }catch(e){
             msg.channel.send("An error occurred (server doesn't exist or wrong port)")
         }
