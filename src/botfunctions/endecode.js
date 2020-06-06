@@ -16,14 +16,14 @@ module.exports = (bot) => {
         while(coppy.length < inout.length){
             const pos = (content.length * 5 + Math.floor(inout.length / 2) + i*i) % inout.length;
             coppy.push(inout[pos]);
-            inout = [...inout.delete(pos)];
+            inout = inout.delete(pos);
             i++;
         }
 
-        inout = [...inout.clean()];
-        coppy = [...coppy.clean()];
+        inout = inout.clean();
+        coppy = coppy.clean();
 
-        if(log || true) console.table([inout,coppy]);
+        if(log) console.table([inout,coppy]);
 
         let output = '';
 
