@@ -36,7 +36,7 @@ module.exports.run = async (bot, msg) => {
         msg.channel.send(`Starting game in ${channel}!`)
     }
 
-    //collect players
+    // collect players
     const startembed = new RichEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
     .setDescription(`Hosted by <@${msg.author.id}>`)
     .setColor(msg.member.displayColor)
@@ -61,8 +61,8 @@ module.exports.run = async (bot, msg) => {
 
         channel.send(`The game is starting! Players: ${players.join(', ')}`)
         const explanationEmbed = new RichEmbed()
-            .setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
-            .setColor('#77ecf2')
+        .setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
+        .setColor('#77ecf2')
         channel.send(explanationEmbed)
 
         if(time > 30000 || players.length > 5){
@@ -73,7 +73,7 @@ module.exports.run = async (bot, msg) => {
 
         runGame(channel, players, bot)
         msg.delete()
-        //make game mechanics in game.js
+        // make game mechanics in game.js
     })
 }
 

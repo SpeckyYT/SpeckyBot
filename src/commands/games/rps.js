@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg) => {
             rng_str = '✌️ Scissors'; break;
     }
 
-    let win = 0;    //0 = lose | 1 = draw | 2 = win
+    let win = 0;    // 0 = lose | 1 = draw | 2 = win
     switch(value){
         case 1:
             win = rng == 1 ? 1 : (rng == 2 ? 0 : 2); break;

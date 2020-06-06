@@ -11,17 +11,18 @@ const dices = ["<:dice1:703314664746123345>","<:dice2:703314678679601384>","<:di
 const { RichEmbed } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
-    let quantity = isNaN(msg.args[0]) ? 1 : msg.args[0] <= 1 ? 1 : msg.args[0];
-    let res = [], str = [], index = 0;
+    const quantity = isNaN(msg.args[0]) ? 1 : msg.args[0] <= 1 ? 1 : msg.args[0];
+    const res = [], str = [];
+    let index = 0;
     while(index < quantity){
         if(res.length >= 50) break;
-        let roll = Math.floor(Math.random()*6);
+        const roll = Math.floor(Math.random()*6);
         res.push(roll+1);
         str.push(dices[roll])
         index++;
     }
 
-    let embed = new RichEmbed()
+    const embed = new RichEmbed()
     .setColor('BLACK')
     .setTitle('Dice!')
     .addField('Dice Amount',index)

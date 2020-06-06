@@ -12,12 +12,12 @@ function available(board, row, column) {
 }
 
 module.exports.run = async (bot, msg) => {
-    const length = Math.floor(Math.random()*5+5);
+    const width = Math.floor(Math.random()*5+5);
     const height = Math.floor(Math.random()*5+5);
     const board = [];
-    let bombs = Math.ceil(length*height/5);
+    let bombs = Math.ceil(width*height/5);
 
-    for(let x=0; x<length; x++){
+    for(let x=0; x<width; x++){
         board[x] = [];
 
         for(let y=0; y<height; y++){
@@ -45,7 +45,7 @@ module.exports.run = async (bot, msg) => {
         loops++;
     }
 
-    for(let x=0; x<length; x++){
+    for(let x=0; x<width; x++){
         for(let y=0; y<height; y++){
             let bombs = 0;
             if(typeof board[x][y] === "string") continue;
@@ -75,8 +75,8 @@ module.exports.run = async (bot, msg) => {
         bomb = '<:specky:653319769516146729>';
     }
 
-    // height and length have to be inverted for some reason
-    let text = `Welcome to MineSweeper!\nBoard: ${height}x${length}\nBombs: ${bombs}\n`
+    // height and width have to be inverted for some reason
+    let text = `Welcome to MineSweeper!\nBoard: ${height}x${width}\nBombs: ${bombs}\n`
 
     board.forEach(x => {
         x.forEach(y => {

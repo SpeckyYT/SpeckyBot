@@ -17,14 +17,14 @@ function shuffle(array) {
     // While there remain elements to shuffle...
     while (currentIndex !== 0) {
   
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
   
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
   
     return array;
@@ -33,7 +33,7 @@ function shuffle(array) {
 
 module.exports.run = async (bot, msg) => {
     const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64'; 
-/*    const response = await fetch(link);
+    /*    const response = await fetch(link);
     const json = await response.json();
     msg.channel.send(json);
 */
@@ -56,12 +56,12 @@ module.exports.run = async (bot, msg) => {
                 data.correct_answer = Buffer.from(data.correct_answer, 'base64').toString();
 
                 const embed = new RichEmbed()
-                    .setTitle('Trivia Question!')
-                    .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
-                    .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
-                    .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
-                    .setTimestamp()
-                    .addBlankField();
+                .setTitle('Trivia Question!')
+                .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
+                .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
+                .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
+                .setTimestamp()
+                .addBlankField();
 
                 const answs = ["0","1","2","3"];
                 shuffle(answs);
@@ -70,16 +70,16 @@ module.exports.run = async (bot, msg) => {
                 while(times <4){
                     switch(answs[times]){
                         case "0":
-                                embed.addField(`Response #${times + 1}`, data.correct_answer);
+                            embed.addField(`Response #${times + 1}`, data.correct_answer);
                             break
                         case "1":
-                                embed.addField(`Response #${times + 1}`, data.incorrect_answers[0]);
+                            embed.addField(`Response #${times + 1}`, data.incorrect_answers[0]);
                             break
                         case "2":
-                                embed.addField(`Response #${times + 1}`, data.incorrect_answers[1]);
+                            embed.addField(`Response #${times + 1}`, data.incorrect_answers[1]);
                             break
                         case "3":
-                                embed.addField(`Response #${times + 1}`, data.incorrect_answers[2]);
+                            embed.addField(`Response #${times + 1}`, data.incorrect_answers[2]);
                             break
                     }
                     times++;

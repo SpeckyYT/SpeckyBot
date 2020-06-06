@@ -13,10 +13,11 @@ const { compareTwoStrings } = require('string-similarity')
 
 module.exports.run = async (bot, msg) => {
     const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64'; 
-/*    const response = await fetch(link);
+    /*
+    const response = await fetch(link);
     const json = await response.json();
     msg.channel.send(json);
-*/
+    */
 
     fetch(link, {
         method: 'GET',
@@ -36,18 +37,18 @@ module.exports.run = async (bot, msg) => {
                     times++;
                 });
                 const embed = new RichEmbed()
-                    .setTitle('Trivia Question!')
-                    .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
-                    .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
-                    .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
-                    .setFooter('Say "reveal" once you\'ve written the answer down! (You have 1 minute time)');
+                .setTitle('Trivia Question!')
+                .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
+                .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
+                .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
+                .setFooter('Say "reveal" once you\'ve written the answer down! (You have 1 minute time)');
                 const embed2 = new RichEmbed()
-                    .setTitle('Trivia Question!')
-                    .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
-                    .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
-                    .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
-                    .addField('Correct Answer:', `${Buffer.from(data.correct_answer, 'base64').toString()}`)
-                    .addField('Wrong Answers', `${data.incorrect_answers.join(", ")}`);
+                .setTitle('Trivia Question!')
+                .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
+                .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
+                .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
+                .addField('Correct Answer:', `${Buffer.from(data.correct_answer, 'base64').toString()}`)
+                .addField('Wrong Answers', `${data.incorrect_answers.join(", ")}`);
                 msg.channel.send(embed).then(async resp => {
 
                     const filter =  m => ((m.content.toLowerCase().includes('reveal')) && (m.author.id == msg.author.id)) || 

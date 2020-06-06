@@ -4,36 +4,41 @@ module.exports = (bot) => {
             return "";
         }
 
-        let inout = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789()[]{}!\"§$%&/()=?`´*-+<>\\#'_^°~,.;:|".split('');
+        let inout = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789()[]{}!\"§$%&/=?`´*-+<>\\#'_^°~,.;:|"];
         if(inout.length % 2){
-            inout = inout.pop();
+            inout.pop();
         }
         let coppy = [];
 
         const content = input.split('').filter(v=>inout.includes(v)).join('');
 
         let i = 0;
-        while(inout.length-coppy.length > 0){
-            const pos = (content.length * 5 + i) % inout.length;
+        while(coppy.length < inout.length){
+            const pos = (content.length * 5 + Math.floor(inout.length / 2) + i*i) % inout.length;
             coppy.push(inout[pos]);
-            inout[pos] = null;
-            inout = inout.clean();
+            inout = [...inout.delete(pos)];
             i++;
         }
 
-        inout = inout.clean();
-        coppy = coppy.clean();
+        inout = [...inout.clean()];
+        coppy = [...coppy.clean()];
 
-        if(log) console.table([inout,coppy]);
+        if(log || true) console.table([inout,coppy]);
 
         let output = '';
 
-        content.split('').forEach(v=>{
+        [...content].forEach(v=>{
             if(inout.includes(v)){
                 output += coppy[inout.indexOf(v)];
             }else if(coppy.includes(v)){
                 output += inout[coppy.indexOf(v)];
             }
+
+            // This will shift the second array after each requested letter
+            coppy.unshift('');
+            coppy[0] = coppy[coppy.length-1];
+            coppy.pop();
+
             if(input[output.length] === ' '){
                 output += ' ';
             }
