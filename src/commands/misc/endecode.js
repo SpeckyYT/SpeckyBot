@@ -8,9 +8,10 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(msg.content){
-        return msg.channel.send("```"+bot.encrypt(msg.content)+"```");
+    const res = bot.encrypt(msg.content);
+    if(res){
+        return msg.channel.send("```\n"+res+"\n```");
     }else{
-        return bot.cmdError("You have to add some text to encode or decode");
+        return bot.cmdError("You have to add some valid text to encode or decode");
     }
 }

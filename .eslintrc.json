@@ -41,6 +41,7 @@
         "no-case-declarations":"off",
         "no-console": "off",
         "no-constant-condition":"off",
+        "no-continue":"off",
         "no-control-regex":"off",
         "no-empty":"off",
         "no-inner-declarations":"off",
