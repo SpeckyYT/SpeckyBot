@@ -7,13 +7,18 @@ module.exports = {
     aliases: ['img']
 }
 
+const gis = require('g-i-s');
+
 module.exports.run = async (bot, msg) => {
     if(!msg.content){
         return bot.cmdError("You need to give some text to search an image");
     }
 
-    require('g-i-s')(msg.content, (err,res) => {
-        if(err) return bot.cmdError(err);
-        msg.channel.send(res.pick().url);
+    msg.channel.send("Searching for an image...")
+    .then(m => {
+        gis(msg.content, (err,res) => {
+            if(err) return bot.cmdError(err);
+            m.edit(res.pick().url);
+        })
     })
 }

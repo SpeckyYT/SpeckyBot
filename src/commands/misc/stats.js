@@ -71,12 +71,11 @@ module.exports.run = async (bot, msg) => {
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, bot.user.iconURL)
     .addField(`Ping:`,`${Math.round(bot.ping)}`)
-    .addField(`Used:`,`
-RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]
-CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]
-${bot.user.username.toUpperCase()} PROCESS: ${(process.memoryUsage().heapUsed / 1000000).toFixed(2)}MB
-STORAGE: ${driveUsed ? `${diagramMaker(driveUsed, driveFree)} [${Math.round(driveUsed)}%]` : notSupported}
-PROCESSES: ${processes != 'not supported'? processes : notSupported}`.trim())
+    .addField(`Used:`,(`RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]\n`+
+    `CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]\n`+
+    `${bot.user.username.toUpperCase()} PROCESS: ${(process.memoryUsage().heapUsed / 1000000).toFixed(2)}MB\n`+
+    `STORAGE: ${driveUsed ? `${diagramMaker(driveUsed, driveFree)} [${Math.round(driveUsed)}%]` : notSupported}\n`+
+    `PROCESSES: ${processes != 'not supported'? processes : notSupported}`).trim())
     .addField(`Machine Specs:`,`CPU Count: ${osu.cpu.count()}\nCPU Model: ${os.cpus()[0].model}\nCPU Speed: ${os.cpus()[0].speed}MHz
 ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} [${driveUsed}%]`: ""}`)
     .addField(`System Specs:`,`System Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}\nSystem Platform: ${osu.os.platform()}`)

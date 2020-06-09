@@ -15,7 +15,7 @@ module.exports.run = async (bot, msg) => {
     fetch("https://apis.duncte123.me/meme")
     .then(res => res.json())
     .then(body => {
-        if (!body || !body.data.image) return msg.reply("Something went wrong, try again!");
+        if (!body || !body.data.image) return bot.cmdError("Something went wrong, try again!");
         const embed = bot.embed()
         .setAuthor(`${bot.user.username} gives you memes!`, msg.guild.iconURL)
         .setImage(body.data.image);

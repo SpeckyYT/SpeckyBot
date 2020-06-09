@@ -10,7 +10,7 @@ module.exports = {
 const cleverbot = require("cleverbot-free");
 
 module.exports.run = async (bot, msg) => {
-    let { Args } = msg;
+    const { Args } = msg;
 
     if(!Array.isArray(bot.cache.chatbot[msg.channel.id])) bot.cache.chatbot[msg.channel.id] = [];
 

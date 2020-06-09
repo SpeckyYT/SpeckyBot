@@ -13,14 +13,14 @@ const twemoji = require('twemoji');
 
 const emojiRgb = [
     {R: 230, G: 231, B: 232, E: ":white_large_square:"},    // white
-    //{R: 91,  G: 104, B: 118, E: ":new_moon:"},              // gray (not square)
+    // {R: 91,  G: 104, B: 118, E: ":new_moon:"},              // gray (not square)
     {R: 49,  G: 55,  B: 61,  E: ":black_large_square:"},    // black
     {R: 221, G: 46,  B: 68,  E: ":red_square:"},            // red
     {R: 238, G: 122, B: 139, E: ":womens:"},                // pink
     {R: 255, G: 172, B: 51,  E: ":orange_square:"},         // light orange
     {R: 244, G: 144, B: 12,  E: ":baby_symbol:"},           // orange 
     {R: 253, G: 203, B: 88,  E: ":yellow_square:"},         // yellow
-    //{R: 255, G: 217, B: 131, E: ":full_moon:"},             // yellowish (not square)
+    // {R: 255, G: 217, B: 131, E: ":full_moon:"},             // yellowish (not square)
     {R: 120, G: 177, B: 89,  E: ":green_square:"},          // green
     {R: 85,  G: 172, B: 238, E: ":blue_square:"},           // light blue
     {R: 0,   G: 0,   B: 255, E: ":blue_square:"},           // blue (same as light blue)

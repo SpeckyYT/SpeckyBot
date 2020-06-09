@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg) => {
     const {last_updated,latest,locations} = JSONs[0];
     const {features}                      = JSONs[1];
 
-    //API1
+    // API1
     let top = new Collection();
     const topmax = isNaN(msg.args[0]) ? 5 : (msg.args[0] < 5 ? 5 : msg.args[0]);
 
@@ -50,7 +50,7 @@ module.exports.run = async (bot, msg) => {
     }
     string = string.trim();
 
-    //API2
+    // API2
     const stats = {confirmed:0,deaths:0,recovered:0}
     features.forEach(obj => {
         stats.recovered += obj.attributes.recovered

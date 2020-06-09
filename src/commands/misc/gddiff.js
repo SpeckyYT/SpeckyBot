@@ -25,82 +25,82 @@ module.exports.run = async (bot, msg) => {
         
         switch(diffNum){
         
-        case "0":
-        case "na":
-        case "n.a":
-        case "n.a.":
-            diff = 0; break;
+            case "0":
+            case "na":
+            case "n.a":
+            case "n.a.":
+                diff = 0; break;
 
-        case "1":
-        case "easy":
-        case "ez":
-        case "eas":
-            diff = 1; break;
+            case "1":
+            case "easy":
+            case "ez":
+            case "eas":
+                diff = 1; break;
 
-        case "2":
-        case "normal":
-        case "norm":
-            diff = 2; break;
+            case "2":
+            case "normal":
+            case "norm":
+                diff = 2; break;
 
-        case "3":
-        case "hard":
-        case "difficult":
-            diff = 3; break;
+            case "3":
+            case "hard":
+            case "difficult":
+                diff = 3; break;
 
-        case "4":
-        case "harder":
-            diff = 4; break;
+            case "4":
+            case "harder":
+                diff = 4; break;
 
-        case "5":
-        case "insane":
-        case "insan":
-            diff = 5; break;
+            case "5":
+            case "insane":
+            case "insan":
+                diff = 5; break;
 
-        case "6":
-        case "harddemon":
-        case "hardemon":
-            diff = 6; break;
+            case "6":
+            case "harddemon":
+            case "hardemon":
+                diff = 6; break;
 
-        case "7":
-        case "easydemon":
-        case "ezdemon":
-        case "easdemon":
-            diff = 7; break;
+            case "7":
+            case "easydemon":
+            case "ezdemon":
+            case "easdemon":
+                diff = 7; break;
 
-        case "8":
-        case "mediumdemon":
-        case "meddemon":
-            diff = 8; break;
+            case "8":
+            case "mediumdemon":
+            case "meddemon":
+                diff = 8; break;
 
-        case "9":
-        case "insanedemon":
-        case "insandemon":
-            diff = 9; break;
+            case "9":
+            case "insanedemon":
+            case "insandemon":
+                diff = 9; break;
 
-        case "10":
-        case "extremedemon":
-        case "extremdemon":
-            diff = 10; break;
+            case "10":
+            case "extremedemon":
+            case "extremdemon":
+                diff = 10; break;
 
-        default:
-            diff = 0;
+            default:
+                diff = 0;
         }
 
         switch(featured){
 
-        case "2":
-        case "2cp":
-        case "feature":
-        case "featured":
-            rate = '_featured'; break;
+            case "2":
+            case "2cp":
+            case "feature":
+            case "featured":
+                rate = '_featured'; break;
 
-        case "3":
-        case "3cp":
-        case "epic":
-            rate = '_epic'; break;
+            case "3":
+            case "3cp":
+            case "epic":
+                rate = '_epic'; break;
 
-        default:
-            rate = '';
+            default:
+                rate = '';
         }
 
         const link = `https://gdicon.net/icons/difficulty_${String(diff).padStart(2, "0")}${rate}.png`

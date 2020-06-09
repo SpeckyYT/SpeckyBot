@@ -15,7 +15,7 @@ module.exports.run = async (bot, msg) => {
     .then(async ms => {
         let kw;
 
-        let { args } = msg;
+        const { args } = msg;
 
         if(args[0]){
             kw = `${args.join(",")}`;
@@ -23,9 +23,9 @@ module.exports.run = async (bot, msg) => {
             kw = `all`
         }
 
-        let body = await (await fetch("https://loremflickr.com/json/p/1024/1024/"+kw)).json();
+        const body = await (await fetch("https://loremflickr.com/json/p/1024/1024/"+kw)).json();
 
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
         .setColor(bot.config.color)
         .setAuthor(`Random Image!`, msg.guild.iconURL)
         .setImage(body.file)
