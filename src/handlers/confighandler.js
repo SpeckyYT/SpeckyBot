@@ -28,7 +28,7 @@ module.exports = async () => {
     const items = ["token","prefix","color"]
     const bools = ["extra_apikeys","reply_unexisting_command","load_nsfw"]
     const apikeys = ["youtube"]
-    const arrays = ["owner"]
+    const arrays = ["owner","bannedUsers"]
 
     items.forEach(conf => {
         if(typeof config[conf] == "undefined"){

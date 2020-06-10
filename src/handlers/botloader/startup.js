@@ -6,7 +6,7 @@ module.exports = (bot) => {
         readdirSync(`./${folder}/`)
         .forEach(file => {
             try{
-               if(bot.require){
+                if(bot.require){
                     bot.require(`./${folder}/${file}`)(bot);
                 }else{
                     require(`../../${folder}/${file}`)(bot);

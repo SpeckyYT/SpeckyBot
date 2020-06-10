@@ -33,7 +33,8 @@ module.exports = async (bot) => {
 
     const sequence =
     [
-        "startup"
+        "startup",
+        "events"
     ];
 
     [

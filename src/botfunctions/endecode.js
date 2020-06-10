@@ -16,11 +16,51 @@ module.exports = (bot) => {
         const spacont = [...input].filter(v=>[...inout,...whitespaces].includes(v));
         const content = spacont.filter(v=>inout.includes(v)).join('');
 
+        function getIndex(letter){
+            if(inout.includes(letter)){
+                return inout.indexOf(letter);
+            }else if(coppy.includes(letter)){
+                return coppy.indexOf(letter);
+            }
+            return 0;
+        }
+        function getOppositeLetter(letter){
+            if(inout.includes(letter)){
+                return coppy[getIndex(letter)];
+            }else if(coppy.includes(letter)){
+                return inout[getIndex(letter)];
+            }
+            return '';
+        }
+
+        // Will pick some random characters from the first array and pushes it to the second one
         for(let i = 0; coppy.length < inout.length; i++){
             const pos = (content.length * 5 + floor(inout.length / 2) + i*i) % inout.length;
             coppy.push(inout[pos]);
             inout = inout.delete(pos);
         }
+
+        // This function is for switching two indexes of the two arrays 
+        function change(eq1,eq2){
+            eq1 = isNaN(eq1) ? 0 : floor(abs(eq1)) % inout.length;
+            eq2 = isNaN(eq2) ? 0 : floor(abs(eq2)) % coppy.length;
+            [inout[eq1],coppy[eq2]] = [coppy[eq2],inout[eq1]];
+        }
+        
+        /*
+        // CREATES INSTABILITY
+        // Shuffles the arrays dependent from character usage
+        for(let i = 0; i < content.length-1; i++){
+            change(
+                getIndex(content[i]),
+                i        
+            );
+            change(
+                (content.length-1)^i,
+                getIndex(content[i])       
+            );
+        }
+        */
 
         if(log) console.table([inout,coppy]);
 
@@ -39,13 +79,8 @@ module.exports = (bot) => {
             let char = 0;
 
             // Gets the letter from one or the other array
-            if(inout.includes(v)){
-                char = inout.indexOf(v);
-                output += coppy[inout.indexOf(v)];
-            }else if(coppy.includes(v)){
-                char = coppy.indexOf(v);
-                output += inout[coppy.indexOf(v)];
-            }
+            char = getIndex(v);
+            output += getOppositeLetter(v);
 
             // Manages white spaces
             if(whitespaces.includes(spacont[output.length])){
@@ -61,12 +96,6 @@ module.exports = (bot) => {
                 inout.shift();
             }
 
-            // The next lines of code are just to shuffle the two arrays some more
-            function change(eq1,eq2){
-                eq1 = isNaN(eq1) ? 0 : floor(abs(eq1)) % inout.length;
-                eq2 = isNaN(eq2) ? 0 : floor(abs(eq2)) % coppy.length;
-                [inout[eq1],coppy[eq2]] = [coppy[eq2],inout[eq1]];
-            }
             // This shuffles the arrays for the character's position (changing one letter may result in total chaos after it)
             for(let j = 0; j < char; j++){
                 change(
@@ -83,38 +112,14 @@ module.exports = (bot) => {
                 );
             }
             // This shuffles the arrays with some arbitrary formulas
-            change(
-                0,
-                i+1
-            );
-            change(
-                i+2,
-                i+5
-            );
-            change(
-                i*3,
-                i*5
-            );
-            change(
-                i+1,
-                i*2
-            );
-            change(
-                i*i,
-                i*8
-            );
-            change(
-                tan(i*7)*50,
-                i*3
-            );
-            change(
-                i%3*7,
-                (i*420/69+45)/16
-            );
-            change(
-                cos(i*7)*inout.length,
-                coppy.length-1
-            );
+            change(0,i+1);
+            change(i+2,i+5);
+            change(i*3,i*5);
+            change(i+1,i*2);
+            change(i*i,i*8);
+            change(tan(i*7)*50,i*3);
+            change(i%3*7,(i*420/69+45)/16);
+            change(cos(i*7)*inout.length,coppy.length-1);
 
             // Log
             if(log){
