@@ -117,11 +117,12 @@ module.exports.call = async (bot, msg) => {
                     illegal = true;
                     errorReasons.push(reason.toString());
                     return false;
-                }else if(   adminAllowed &&
-                            admin &&
-                            (category != "owner" &&
-                            category != "private" &&
-                            category != "custom")
+                }else if(   
+                    adminAllowed &&
+                    admin &&
+                    category != "owner" &&
+                    category != "private" &&
+                    category != "custom"
                 ){
                     illegal = true;
                     errorReasons.push(reason);
@@ -163,8 +164,8 @@ module.exports.call = async (bot, msg) => {
                 })
             }
             
-            if(category == "nsfw" && ((msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : true) || !msg.channel.nsfw)){
-                if(check(true, nsfwError)){
+            if(category == "nsfw" && (!msg.channel.nsfw || msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false)){
+                if(check(false, nsfwError)){
                     return msg.channel.send(error(nsfwError))
                 }
             }
