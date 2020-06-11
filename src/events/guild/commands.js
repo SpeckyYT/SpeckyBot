@@ -324,7 +324,7 @@ async function run(cmd, bot, msg, command){
     })
     .finally(async () => {
         bot.cache.cooldown.delete(`${msg.author.id}:${cmd.name}`,new Date());
-        bot.cache.runningcmds.remove(`${msg.author.id}:${cmd.name}`);
+        bot.cache.runningcmds = bot.cache.runningcmds.remove(`${msg.author.id}:${cmd.name}`);
         if(cmd.category == "economy"){
             await bot.economyWrite(bot.economy);
         }

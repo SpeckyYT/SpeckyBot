@@ -4,16 +4,16 @@ module.exports = {
     usage: ``,
     category: `sfw`,
     accessableby: "Members",
-    aliases: ['kemo'],
+    aliases: [],
     flags: ["sfw"]
 }
 
 module.exports.run = async (bot, msg) => {
     if(require('./functions/sfw')(msg)){
-        //SFW
+        // SFW
         require('./functions/img')('holo', msg)
     }else{
-        //NSFW
+        // NSFW
         require('../nsfw/functions/img')(["holo","holoEro"], msg);
     }
 }

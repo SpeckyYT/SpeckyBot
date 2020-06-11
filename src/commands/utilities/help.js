@@ -57,18 +57,22 @@ module.exports.run = async (bot, msg) => {
         if(!categoryCheck(command.category, msg, bot)) return msg.channel.send(invalidcmd(embed,config));
         
         const cmd = bot.highFirst(command.name);
+        const category = command.category;
         const description = command.description || "No Description provided.";
         const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`;
         const aliases = `${command.aliases ? command.aliases.length > 0 ? command.aliases.join(", ") : '' : ''}`;
+        const flags = `${command.flags ? command.flags.length > 0 ? command.flags.join(", ") : '' : ''}`;
         const perms = `${command.perms ? command.perms.length > 0 ? command.perms.join(", ") : '' : ''}`;
         const cmdperms = `${command.cmdperms ? command.cmdperms.length > 0 ? command.cmdperms.join(", ") : '' : ''}`;
 
         let commandinfo = "";
         commandinfo += `The bot's prefix is: \`${config.prefix}\`\n\n`;
         commandinfo += `**Command:** ${cmd}\n`;
+        commandinfo += `**Category:** ${category}\n`;
         commandinfo += `**Description:** ${description}\n`;
         commandinfo += `**Usage:** ${usage}\n`;
         if(aliases) commandinfo += `**Aliases:** ${aliases}\n`;
+        if(flags) commandinfo += `**Available Flags:** ${flags}\n`;
         if(perms) commandinfo += `**Required User Permissions:** ${perms}\n`;
         if(cmdperms) commandinfo += `**Required Bot Permissions:** ${cmdperms}\n`;
 

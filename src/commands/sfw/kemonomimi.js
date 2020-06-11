@@ -10,10 +10,10 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     if(require('./functions/sfw')(msg)){
-        //SFW
+        // SFW
         require('./functions/img')('kemonomimi', msg);
     }else{
-        //NSFW
+        // NSFW
         require('../nsfw/functions/img')(["kemonomimi","eroKemonomimi"], msg);
     }
 }
