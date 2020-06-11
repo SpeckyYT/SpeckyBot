@@ -4,7 +4,7 @@ module.exports = {
     usage: `<command>`,
     category: `utilities`,
     accessableby: "Members",
-    aliases: ["h", "halp", "hel","hwlp","hewlp","cmds","commands","undefined","info","informations","information"]
+    aliases: ["h", "halp", "hel","hwlp","hewlp","cmd","cmds","command","commands","undefined","info","informations","information"]
 }
 
 const { readdirSync } = require("fs")
@@ -44,7 +44,7 @@ module.exports.run = async (bot, msg) => {
             `in any text channel, you can include \`[NO-MEDIA]\` in the channel topic, so nobody can share links/images in the channel!`,
             `in any text channel, you can include \`[NO-NSFW]\` in the channel topic, so every NSFW command is not executable!`,
             `commands usually have aliases? Just execute the command \`${config.prefix}help <command>\` to check them!`,
-            `most of the people don't read the helpful tricks that are here?`
+            `most of the people don't read the helpful tricks that are written here?`
         ];
 
         embed.addField('Did you know that', diduknow.pick())
@@ -59,28 +59,27 @@ module.exports.run = async (bot, msg) => {
         const cmd = bot.highFirst(command.name);
         const description = command.description || "No Description provided.";
         const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`;
-        const aliases = `${command.aliases.length > 0 ? command.aliases.join(", ") : "None"}`;
-        let perms;
-        try{
-            perms = `${command.perms.length > 0 ? command.perms.join(", ") : "None"}`;
-        }catch{
-            perms = "None";
-        }
-        let cmdperms;
-        try{
-            cmdperms = `${command.cmdperms.length > 0 ? command.cmdperms.join(", ") : "None"}`;
-        }catch{
-            cmdperms = "None";
-        }
+        const aliases = `${command.aliases ? command.aliases.length > 0 ? command.aliases.join(", ") : '' : ''}`;
+        const perms = `${command.perms ? command.perms.length > 0 ? command.perms.join(", ") : '' : ''}`;
+        const cmdperms = `${command.cmdperms ? command.cmdperms.length > 0 ? command.cmdperms.join(", ") : '' : ''}`;
 
-        embed.setDescription(`The bot's prefix is: \`${config.prefix}\`\n\n**Command:** ${cmd}\n**Description:** ${description}\n**Usage:** ${usage}\n**Aliases:** ${aliases}\n**Required User Permissions:** ${perms}\n**Required Bot Permissions:** ${cmdperms}`);
+        let commandinfo = "";
+        commandinfo += `The bot's prefix is: \`${config.prefix}\`\n\n`;
+        commandinfo += `**Command:** ${cmd}\n`;
+        commandinfo += `**Description:** ${description}\n`;
+        commandinfo += `**Usage:** ${usage}\n`;
+        if(aliases) commandinfo += `**Aliases:** ${aliases}\n`;
+        if(perms) commandinfo += `**Required User Permissions:** ${perms}\n`;
+        if(cmdperms) commandinfo += `**Required Bot Permissions:** ${cmdperms}\n`;
+
+        embed.setDescription(commandinfo);
         return msg.channel.send(embed);
     }
 }
 
 function invalidcmd(embed,config){
     return embed.setTitle("Invalid Command.")
-                .setDescription(`Do \`${config.prefix}help\` for the list of the commands.`)
+    .setDescription(`Do \`${config.prefix}help\` for the list of the commands.`)
 }
 
 function categoryCheck(category,msg,bot){
@@ -88,16 +87,16 @@ function categoryCheck(category,msg,bot){
 
     switch(category){
 
-    case "owner":
-        return bot.checkOwner(msg.author.id);
+        case "owner":
+            return bot.checkOwner(msg.author.id);
 
-    case "admin":
-        return msg.member.permissions.toArray().join(' ').includes('MANAGE_');
+        case "admin":
+            return msg.member.permissions.toArray().join(' ').includes('MANAGE_');
 
-    case "nsfw":
-        return !(msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false) && msg.channel.nsfw;
+        case "nsfw":
+            return !(msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false) && msg.channel.nsfw;
 
-    default:
-        return true;
+        default:
+            return true;
     }
 }

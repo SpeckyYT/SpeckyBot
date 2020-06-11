@@ -236,7 +236,9 @@ module.exports.call = async (bot, msg) => {
         }
     }
 
-    if(!cmd){
+    if(cmd){
+        return await execute();
+    }else{
         const cmdarray = bot.commands.map(c => c.name).concat(bot.aliases.keyArray());
         let mostlikely = new Collection();
         cmdarray.forEach(item => {
@@ -271,12 +273,25 @@ module.exports.call = async (bot, msg) => {
             if(runned) return;
             await ms.edit(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`)).catch(()=>{});
         });
-    }else{
-        return await execute();
     }
 }
 
 async function run(cmd, bot, msg, command){
+    if(bot.cache.runningcmds.includes(`${msg.author.id}:${cmd.name}`)){
+        return await msg.channel.send(error("This command is already running..."));
+    }
+
+    const cd = bot.cache.cooldown.get(`${msg.author.id}:${cmd.name}`);
+    if(cd){
+        const diff = new Date().getTime() - cd.getTime();
+        if(diff < (cmd.cooldown ? cmd.cooldown : 1000)){
+            return await msg.channel.send(error("This command is on cooldown..."));
+        }
+    }
+
+    bot.cache.cooldown.set(`${msg.author.id}:${cmd.name}`,new Date());
+    bot.cache.runningcmds.push(`${msg.author.id}:${cmd.name}`);
+
     bot.getFunction(cmd)(bot, msg)
     .then(async res => {
         if(cmd.type === 'template' && res && typeof res == "string"){
@@ -293,21 +308,23 @@ async function run(cmd, bot, msg, command){
 
         if(expected){
             err = err.replace("[EXPECTED]","").trim();
-            await msg.channel.send(error(err));
+            msg.channel.send(error(err));
         }else{
             bot.log(err.message||err.error||err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
             
             if(String(err).includes("Must be 2000 or fewer in length")){
-                await msg.channel.send(errdesc(`${bot.user} tried to send a message with 2000 or more characters.`));
+                msg.channel.send(errdesc(`${bot.user} tried to send a message with 2000 or more characters.`));
             }else if(String(err).includes("Request entity too large")){
-                await msg.channel.send(errdesc(`${bot.user} tried to send an attachment with more than 8MB.`));
+                msg.channel.send(errdesc(`${bot.user} tried to send an attachment with more than 8MB.`));
             }else{
-                await msg.channel.send(errdesc(err));
+                msg.channel.send(errdesc(err));
             }
         }
     })
     .finally(async () => {
+        bot.cache.cooldown.delete(`${msg.author.id}:${cmd.name}`,new Date());
+        bot.cache.runningcmds.remove(`${msg.author.id}:${cmd.name}`);
         if(cmd.category == "economy"){
             await bot.economyWrite(bot.economy);
         }

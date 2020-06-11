@@ -1,4 +1,5 @@
 const { readdirSync } = require('fs');
+const { Collection } = require('discord.js');
 
 const alreadyLoaded = [];
 
@@ -13,8 +14,10 @@ module.exports = async (bot) => {
     bot.cache.messages = [];
     bot.cache.lastImage = {};
     bot.cache.console = {};
-    bot.cache.chatbot = {};
     bot.cache.console.debug = false;
+    bot.cache.chatbot = {};
+    bot.cache.cooldown = new Collection();
+    bot.cache.runningcmds = [];
 
     bot.debugN = 0;
 
