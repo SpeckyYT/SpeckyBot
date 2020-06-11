@@ -20,9 +20,9 @@ module.exports.run = async (bot, msg) => {
         return msg.channel.send('Sorry, please input a valid calculation.')
     }
     const embed = bot.embed()
-        .setColor("#FFFFFF")
-        .setTitle('Math Calculation')
-        .addField("Input", `\`\`\`js\n${content}\`\`\``)
-        .addField("Output", `\`\`\`js\n${resp}\`\`\``)
+    .setColor("#FFFFFF")
+    .setTitle('Math Calculation')
+    .addField("Input", `\`\`\`js\n${content}\`\`\``)
+    .addField("Output", `\`\`\`js\n${resp}\`\`\``)
     msg.channel.send(embed);
 }

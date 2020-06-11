@@ -1,5 +1,3 @@
-var fs = require('fs');
-
 module.exports = {
     startMessage: 'send me this in a direct message (DM):',
     defTime: 27000,
@@ -11,15 +9,15 @@ module.exports = {
         const word = alternatives[getRandomInt(alternatives.length)].toLowerCase()
         await channel.send(`**${word}**`)
 
-        //making a bunch of collectors
-        let collectors = []
-        for(let player of players){
+        // making a bunch of collectors
+        const collectors = []
+        for(const player of players){
             await player.createDM()
-            let dmCollector = player.dmChannel.awaitMessages(() => true, { max: 1, time: time })
+            const dmCollector = player.dmChannel.awaitMessages(() => true, { max: 1, time: time })
             collectors.push(dmCollector)
         }
 
-        //when time is up
+        // when time is up
         await sleep(time)
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
@@ -27,20 +25,20 @@ module.exports = {
         await Promise.all(collectors)
         let messages = []
 
-        for(let collected of collectors){
-            let rCollected = await collected
+        for(const collected of collectors){
+            const rCollected = await collected
             messages = messages.concat(rCollected.array())
         }
 
-        let out = []
-        let outIndex = []
-        //check each player to see if they are out
+        const out = []
+        const outIndex = []
+        // check each player to see if they are out
         players.forEach((player, i) => {
-            //check each message
+            // check each message
             let sentCorrectMessage = false
             for (const message of messages) {
                 if (message.author == player && message.content.toLowerCase().includes(word)) {
-                    //if simon didnt say, the player is out
+                    // if simon didnt say, the player is out
                     if (!info.simonSaid) {
                         out.push(player)
                         outIndex.push(i)
@@ -55,7 +53,7 @@ module.exports = {
                 outIndex.push(i)
             }
         })
-        let newPlayers = players.filter( ( el ) => !out.includes( el ) )
+        const newPlayers = players.filter( ( el ) => !out.includes( el ) )
         return ({
             playersOut: out,
             playersLeft: newPlayers,

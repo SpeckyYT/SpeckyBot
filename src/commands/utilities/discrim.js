@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
         }
     })
     const embed = bot.embed()
-        .setTitle(`#${discriminator}`)
-        .setDescription(discrims.length ? discrims.join(`\n`) : 'No user found')
+    .setTitle(`#${discriminator}`)
+    .setDescription(discrims.length ? discrims.join(`\n`) : 'No user found')
     msg.channel.send(embed);
 }

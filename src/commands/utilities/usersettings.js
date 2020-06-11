@@ -13,6 +13,10 @@ const dir = '../../../db/u_settings';
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
     const u_settings = require(dir);
+    let changed = false;
+    if(!u_settings[msg.author.id]){
+        u_settings[msg.author.id] = {}
+    }
     switch(args[0]){
         case "embedcolor":
         case "ec":
@@ -27,36 +31,36 @@ module.exports.run = async (bot, msg) => {
             u_settings[msg.author.id].embedcolor = color.toUpperCase();
             
             msg.channel.send(`Changed your embed color to \`${color.toUpperCase()}\`!`);
+            changed = true;
             break;
 
         case "ghostping":
         case "gp":
-            if(u_settings[msg.author.id]){
-                u_settings[msg.author.id].ghostping = !u_settings[msg.author.id].ghostping;
-            }else{
-                u_settings[msg.author.id].ghostping = true;
-            }
+            u_settings[msg.author.id].ghostping = !u_settings[msg.author.id].ghostping;
 
             msg.channel.send(`Your Ghostping option got changed to \`${u_settings[msg.author.id].ghostping}\``);
+            changed = true;
             break;
 
         default:
             const embed = bot.embed()
-                .setTitle("User Settings Help Page!")
-                .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
-                .addBlankField()
-                .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``)
-                .addField(`Will give you a notification if someone Ghostpinged you:`,`\`${bot.config.prefix}usersettings gp\``)
+            .setTitle("User Settings Help Page!")
+            .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
+            .addBlankField()
+            .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``)
+            .addField(`Will give you a notification if someone Ghostpinged you:`,`\`${bot.config.prefix}usersettings gp\``)
             return msg.channel.send(embed);
 
     }
 
-    writeFile('../db/u_settings.json', JSON.stringify(u_settings, null, 4), err => {
-        if(err){
-            msg.channel.send("Error while saving...");
-            console.error(err);
-        }else{
-            msg.channel.send("Saved sucessfully!");
-        }
-    })
+    if(changed){
+        writeFile('../db/u_settings.json', JSON.stringify(u_settings, null, 4), err => {
+            if(err){
+                msg.channel.send("Error while saving...");
+                console.error(err);
+            }else{
+                msg.channel.send("Saved sucessfully!");
+            }
+        })
+    }
 }

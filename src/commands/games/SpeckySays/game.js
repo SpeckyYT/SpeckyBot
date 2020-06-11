@@ -1,6 +1,6 @@
-let randomStart = require('./randomStart.js')
-var discord = require('discord.js')
-var fs = require('fs')
+const randomStart = require('./randomStart.js')
+const discord = require('discord.js')
+const fs = require('fs')
 
 module.exports.runGame = async (channel, players_, bot) => {
 
@@ -26,15 +26,15 @@ module.exports.runGame = async (channel, players_, bot) => {
     }
     let rounds = 1
     let lastGame = null
-    //example of how to start a game
+    // example of how to start a game
     let settings = require('./settings');
 
     while (gameOn) {
         
-        //chooses a random minigame
+        // chooses a random minigame
         
-        let enabledGames = []
-        for(let game of bot.minigames){
+        const enabledGames = []
+        for(const game of bot.minigames){
             if(settings.minigames[game.name]){
                 if(game.name == 'oppositeDay' && rounds < 5) continue
                 enabledGames.push(game)
@@ -51,7 +51,7 @@ module.exports.runGame = async (channel, players_, bot) => {
             currentGame = enabledGames[getRandomInt(enabledGames.length)]
         }
         
-        //picks a random start of startmessage (67% chance of getting "Simon says")
+        // picks a random start of startmessage (67% chance of getting "Simon says")
         let start
         if (currentGame.name == 'oppositeDay') {
             start = {
@@ -67,16 +67,12 @@ module.exports.runGame = async (channel, players_, bot) => {
             start = randomStart(channel.guild.id, settings)
         }
 
-        let actualTime = (time * currentGame.defTime).clamp(5000, 15000)
-        //sends startmessage
+        const actualTime = (time * currentGame.defTime).clamp(5000, 15000)
+        // sends startmessage
         const startMessage = await channel.send(`**${start.string} ${currentGame.startMessage.toLowerCase()}** *(You have ${Math.floor(actualTime / 1000)} seconds)*`)
-        //runs the game
+        // runs the game
         
-        let {
-            playersOut,
-            playersLeft,
-            settingsOut
-        } = await currentGame.run(channel, players, actualTime, bot, {
+        let { playersOut, playersLeft, settingsOut } = await currentGame.run(channel, players, actualTime, bot, {
             simonSaid: start.real,
             startMessage: startMessage,
             settings: settings
@@ -85,14 +81,14 @@ module.exports.runGame = async (channel, players_, bot) => {
 
         await sleep(1000)
         playersOut = [...new Set(playersOut)]
-        //say whos out
-        var embed = new discord.RichEmbed()
+        // say whos out
+        const embed = new discord.RichEmbed()
         if (playersOut.length > 0) {
             embed.setDescription(`${playersOut.join(', ')} ${playersOut.length > 1 ? "are" : "is"} out!`)
-                .setColor(`#FF230F`)
+            .setColor(`#FF230F`)
         } else {
             embed.setTitle('Good job! Nobody fell out!')
-                .setColor(`#33CC14`)
+            .setColor(`#33CC14`)
         }
 
         channel.send(embed)
@@ -111,10 +107,10 @@ module.exports.runGame = async (channel, players_, bot) => {
     }
 
     if(!prematurelyEnd){
-        var embed = new discord.RichEmbed()
-            .setTitle('The game has ended!')
-            .setDescription(`${winners.join(', ')} won with ${rounds} points! GG!`)
-            .setColor('#FFBE11')
+        const embed = new discord.RichEmbed()
+        .setTitle('The game has ended!')
+        .setDescription(`${winners.join(', ')} won with ${rounds} points! GG!`)
+        .setColor('#FFBE11')
         channel.send(embed)
     }
 }

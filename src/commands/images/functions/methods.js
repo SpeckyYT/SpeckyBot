@@ -2,7 +2,7 @@ const { read } = require('jimp')
 const { unlink } = require('fs')
 
 module.exports = async (bot, msg, method, free, values,fileFormat) => {
-    let { Args } = msg;
+    const { Args } = msg;
 
     let intensity,min,max;
     if(typeof values == "object"){
@@ -32,14 +32,16 @@ module.exports = async (bot, msg, method, free, values,fileFormat) => {
         intensity = null;
     }
 
-    let image    = bot.cache.lastImage[msg.channel.id]; 
-    let id       = bot.snowflake();
+    const image    = bot.cache.lastImage[msg.channel.id]; 
+    const id       = bot.snowflake();
 
     if(image == undefined){
         return await msg.channel.send("No image found");
     }
 
-    if(!fileFormat){fileFormat = "png"}
+    if(!fileFormat){
+        fileFormat = "png"
+    }
     
     let error;
 
@@ -48,7 +50,7 @@ module.exports = async (bot, msg, method, free, values,fileFormat) => {
         return read(image, async (err, file) => {
             if (err){
                 return bot.cmdError("Error happend");
-            };
+            }
 
             async function run(){
                 msg.channel.send( '',  { files: [id + `.${fileFormat}`] })

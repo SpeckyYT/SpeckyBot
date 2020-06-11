@@ -31,16 +31,16 @@ module.exports.run = async (bot, msg) => {
         return bot.cmdError(`You can't pay someone 0₪`);
     }
     if(!amount){
-        return bot.cmdError(`Amount is not a Number`); //This should never happen in theory, but better doing it anyway...
+        return bot.cmdError(`Amount is not a Number`); // This should never happen in theory, but better doing it anyway...
     }
 
     economy[author.id].money -= amount;
     economy[receiver.id].money += amount;
 
     const embed = bot.embed()
-        .setAuthor(author.tag,author.avatarURL)
-        .setThumbnail()
-        .setDescription(`${receiver} has received your ${amount}₪`)
-        .setColor("GREEN")
+    .setAuthor(author.tag,author.avatarURL)
+    .setThumbnail()
+    .setDescription(`${receiver} has received your ${amount}₪`)
+    .setColor("GREEN")
     msg.channel.send(embed);
 };

@@ -28,12 +28,12 @@ module.exports.run = async (bot, msg) => {
     }
 
     const nd = moment(ld)
-        .add(1, "day")
-        .utc()
-        .format();
+    .add(1, "day")
+    .utc()
+    .format();
     const ct = moment()
-        .utc()
-        .format();
+    .utc()
+    .format();
     const cr = moment(ct).isSameOrAfter(nd);
 
     if (cr) {

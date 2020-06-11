@@ -20,20 +20,11 @@ module.exports.run = async (bot, msg) => {
     base = Math.min(Math.max(base, 2), 36);
 
     async function prime(){
-        while(string.length < 2000){
-            numb++;
-            let temp = 1; 
-            while(temp+1 < numb){
-                temp++;
-                if(numb % temp == 0){
-                    temp = false;
-                    break;
-                }
-            }
-            if(temp){
+        while(numb++){
+            if(primes.every(p=>numb%parseInt(p,base))){
                 primes.push(numb.toString(base));
                 string = `\`\`\`${primes.join(" ")}\`\`\``;
-                if(string.length >= 2000){
+                if(string.length >= 1980){
                     primes.pop();
                     break;
                 }

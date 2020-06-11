@@ -1,5 +1,3 @@
-var fs = require('fs');
-
 module.exports = {
     startMessage: 'do this:',
     defTime: 25000,
@@ -15,7 +13,7 @@ module.exports = {
             time: time
         })
         await sleep(time - 1000)
-        //when time is up
+        // when time is up
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         await sleep(1000)
@@ -23,25 +21,25 @@ module.exports = {
         allReactions = allReactions.array()
         
         let allUsers = []
-        for (let reaction of allReactions) {
+        for (const reaction of allReactions) {
             
             if (reaction.emoji.toString() === emoji) {
-                let users = await reaction.fetchUsers()
+                const users = await reaction.fetchUsers()
                 allUsers = allUsers.concat(users.array())
             }
         }
 
-        //console.log(allUsers.map(user => user.name))
+        // console.log(allUsers.map(user => user.name))
 
-        let out = []
-        let outIndex = []
-        //check each player to see if they are out
+        const out = []
+        const outIndex = []
+        // check each player to see if they are out
         players.forEach((player, i) => {
-            //check each message
+            // check each message
             let reacted = false
 
             if (allUsers.includes(player)) {
-                //if simon didnt say, the player is out
+                // if simon didnt say, the player is out
                 if (!info.simonSaid) {
                     out.push(player)
                     outIndex.push(i)
@@ -56,7 +54,7 @@ module.exports = {
                 outIndex.push(i)
             }
         })
-        let newPlayers = players.filter( ( el ) => !out.includes( el ) )
+        const newPlayers = players.filter( ( el ) => !out.includes( el ) )
         return ({
             playersOut: out,
             playersLeft: newPlayers,

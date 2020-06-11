@@ -17,8 +17,6 @@ module.exports.run = async (bot, msg) => {
     }
 
     const embed = bot.embed()
-        .addBlankField()
-        .addField(`Servers Count:`, bot.guilds.size)
-        .addBlankField();
+    .addField(`Servers Count:`, bot.guilds.size);
     msg.channel.send(embed);
 }

@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
     return bot.cmdError("Number is invalid");
 }
 
-//FROM http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
+// FROM http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
 function deromanize (str) {
     str = str.toUpperCase();
     const validator = /^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/g;
@@ -49,8 +49,8 @@ function romanize (num) {
         return false;
     const digits = String(+num).split("");
     const key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
-               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
-               "","I","II","III","IV","V","VI","VII","VIII","IX"];
+        "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+        "","I","II","III","IV","V","VI","VII","VIII","IX"];
     let roman = "";
     let i = 3;
     while (i--)

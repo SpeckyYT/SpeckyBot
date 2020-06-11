@@ -1,6 +1,6 @@
 module.exports = function (guild_id, config) {
     
-    let choice = getRandomInt(4)
+    const choice = getRandomInt(4)
 
     if (choice != 0) {
         return ({

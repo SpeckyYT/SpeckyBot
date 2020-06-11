@@ -1,10 +1,9 @@
-const fs = require('fs')
 module.exports = {
     startMessage: 'it\'s a new day!',
     defTime: 20000,
     name: 'oppositeDay',
     run: async function (channel, players, time, client, info) {
-        var settings = info.settings
+        const settings = info.settings
         
         if (!settings.opposite_day) await channel.send('Opposite day begins soon! Write **ok** in chat if you are ready!')
         else await channel.send('Opposite day has ended! Write **ok** if you are ready to go back to normal!')
@@ -16,7 +15,7 @@ module.exports = {
             collected = collected_
         });
 
-        //when time is up
+        // when time is up
         await sleep(time)
 
         if (!settings.opposite_day) await channel.send('Simon says time\'s up! We\'re ready to start the opposite day! \n **From now and until opposite day ends, do the opposite of what you would normally do to stay in the game!**')
@@ -24,12 +23,12 @@ module.exports = {
 
         collector.stop()
         await sleep(6000)
-        let messages = collected.array()
-        let out = []
-        let outIndex = []
-        //check each player to see if they are out
+        const messages = collected.array()
+        const out = []
+        const outIndex = []
+        // check each player to see if they are out
         players.forEach((player, i) => {
-            //check each message
+            // check each message
             let sentCorrectMessage = false
             for (const message of messages) {
                 if (message.author == player && message.content.toLowerCase().includes("ok")) {
@@ -42,7 +41,7 @@ module.exports = {
                 outIndex.push(i)
             }
         })
-        let newPlayers = players.filter( ( el ) => !out.includes( el ) )
+        const newPlayers = players.filter( ( el ) => !out.includes( el ) )
 
         settings.opposite_day = !settings.opposite_day
         
@@ -53,10 +52,6 @@ module.exports = {
             settingsOut: settings
         })
     }
-}
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
 }
 
 function sleep(ms) {

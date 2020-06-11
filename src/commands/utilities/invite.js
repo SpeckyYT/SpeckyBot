@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
         }).catch(()=>{})
     }
     const embed = bot.embed()
-        .setTitle('Links!')
-        .setDescription(`[SpeckyBot Discord Server](https://discord.gg/4EecFku)\n[Bot Invite](${bot.link})\n[Support This Bot](https://patreon.com/SpeckyBot)`)
+    .setTitle('Links!')
+    .setDescription(`[SpeckyBot Discord Server](https://discord.gg/4EecFku)\n[Bot Invite](${bot.link})\n[Support This Bot](https://patreon.com/SpeckyBot)`)
     msg.channel.send(embed);
 }

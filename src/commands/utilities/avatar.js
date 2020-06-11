@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
         user = msg.author;
     }
 
-    let embed = bot.embed()
+    const embed = bot.embed()
     .setTitle(`${user.username}#${user.discriminator}`)
     .setImage(user.avatarURL)
     .setDescription(`[Link](${user.avatarURL})`);

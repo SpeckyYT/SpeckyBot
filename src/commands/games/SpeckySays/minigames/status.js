@@ -1,5 +1,3 @@
-var fs = require('fs')
-
 module.exports = {
     startMessage: 'change your status to:',
     defTime: 10000,
@@ -12,16 +10,16 @@ module.exports = {
         
         await channel.send(`**${status.replace('dnd', 'do not disturb').replace('offline', 'invisible')}**`)
         
-        //when time is up
+        // when time is up
         await sleep(time)
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         
 
         
-        let out = []
-        let outIndex = []
-        //check each player to see if they are out
+        const out = []
+        const outIndex = []
+        // check each player to see if they are out
         players.forEach((player, i) => {
             
             if(player.presence.status == status){
@@ -36,7 +34,7 @@ module.exports = {
                 } 
             }
         })
-        let newPlayers = players.filter( ( el ) => !out.includes( el ) )
+        const newPlayers = players.filter( ( el ) => !out.includes( el ) )
         return ({
             playersOut: out,
             playersLeft: newPlayers,

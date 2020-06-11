@@ -27,18 +27,18 @@ module.exports.statusCheckQuantity = (list,status) => {
 }
 
 module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]]) => {
-    let { RichEmbed } = require('discord.js');
-    let maxmsglength = 1965;
+    const { RichEmbed } = require('discord.js');
+    const maxmsglength = 1965;
     online = `${Eonline} ${online}`;
     idle = `${Eidle} ${idle}`;
     dnd = `${Ednd} ${dnd}`;
     offline = `${Eoffline} ${offline}`;
 
-    let embed = new RichEmbed()
+    const embed = new RichEmbed()
     .setTitle(`__${title}__:`)
     .setThumbnail(msg.guild.iconURL);
 
-    let statusArray = [online,idle,dnd,offline];
+    const statusArray = [online,idle,dnd,offline];
 
     let currentMessage = '';
 

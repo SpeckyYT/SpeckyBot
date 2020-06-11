@@ -9,6 +9,6 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     const embed = bot.embed()
-        .addField(`Total Users Count:`, `${bot.users.size}`);
+    .addField(`Total Users Count:`, `${bot.users.size}`);
     msg.channel.send(embed);
 }

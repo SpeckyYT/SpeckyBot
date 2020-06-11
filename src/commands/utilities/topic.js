@@ -7,7 +7,7 @@ module.exports = {
     aliases: ["bruh"]
 }
 
-let questions = [
+const questions = [
 
     "Are you a giver or taker?",
     "As a child, what did you want to be when you grew up?",
@@ -56,12 +56,12 @@ let questions = [
 ]
 
 module.exports.run = async (bot, msg) => {
-    let question = questions[Math.floor(Math.random()*questions.length)]
+    const question = questions[Math.floor(Math.random()*questions.length)]
 
     if(msg.command == "topic"){
         msg.channel.send(question)
     }else{
-        let embed = bot.embed()
+        const embed = bot.embed()
         .setTitle(msg.author.username)
         .setDescription(`${msg.author} wants to start talking about this:\n\n**${question}**`)
         .setThumbnail(msg.author.avatarURL)
