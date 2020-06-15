@@ -1,8 +1,8 @@
 const { join } = require('path');
 
 module.exports = (bot) => {
-    bot.require = (module) => {
-        const mod = join(process.cwd(),module);
+    bot.require = (path) => {
+        const mod = join(process.cwd(),path);
         try{
             delete require.cache[mod];
         }catch(e){}

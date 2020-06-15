@@ -42,25 +42,14 @@ module.exports = (bot) => {
 
         // This function is for switching two indexes of the two arrays 
         function change(eq1,eq2){
-            eq1 = isNaN(eq1) ? 0 : floor(abs(eq1)) % inout.length;
-            eq2 = isNaN(eq2) ? 0 : floor(abs(eq2)) % coppy.length;
+            eq1 = isNaN(eq1) ? 0 : abs(eq1);
+            eq2 = isNaN(eq2) ? 0 : abs(eq2);
+            
+            eq1 = floor(eq1) % inout.length;
+            eq2 = floor(eq2) % coppy.length;
+            
             [inout[eq1],coppy[eq2]] = [coppy[eq2],inout[eq1]];
         }
-        
-        /*
-        // CREATES INSTABILITY
-        // Shuffles the arrays dependent from character usage
-        for(let i = 0; i < content.length-1; i++){
-            change(
-                getIndex(content[i]),
-                i        
-            );
-            change(
-                (content.length-1)^i,
-                getIndex(content[i])       
-            );
-        }
-        */
 
         if(log) console.table([inout,coppy]);
 
