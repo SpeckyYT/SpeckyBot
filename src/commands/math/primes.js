@@ -2,12 +2,12 @@ module.exports = {
     name: "primes",
     description: "Gives you prime numbers!",
     usage: ``,
-    category: `misc`,
+    category: `math`,
     accessableby: "Members",
     aliases: ["prime"]
 }
 
-const primesPath = './commands/misc/primes/primes.txt';
+const primesPath = './commands/math/data/primes.json';
 const { writeFile, readFileSync } = require('fs');
 
 module.exports.run = async (bot, msg) => { 
@@ -19,9 +19,7 @@ module.exports.run = async (bot, msg) => {
     try{
         startPrimes.push(...JSON.parse(readFileSync(primesPath,{encoding:'UTF8'})));
         numb = startPrimes.last() || 1;
-    }catch(err){
-        console.log(err);
-    }
+    }catch(e){}
 
     async function prime(){
         while(numb++){
