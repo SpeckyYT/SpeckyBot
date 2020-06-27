@@ -5,7 +5,7 @@ module.exports = {
 module.exports.call = async (bot, msg) => {
     if(!msg.channel.topic) return;
 
-    let text = '[alternate]'
+    const text = '[alternate]'
 
     if(msg.channel.topic.toLowerCase().includes(text.toLowerCase())){
         let prevMsgs;
@@ -20,7 +20,9 @@ module.exports.call = async (bot, msg) => {
         }
         
         if(prevMsgs.filter(ms => ms.author.id == msg.author.id).size > 1){
-            msg.delete().catch(()=>{return})
+            msg.delete().catch(()=>{
+                return
+            })
         }
     }
 }

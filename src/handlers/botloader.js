@@ -18,6 +18,7 @@ module.exports = async (bot) => {
     bot.cache.chatbot = {};
     bot.cache.cooldown = new Collection();
     bot.cache.runningcmds = [];
+    bot.cache.globalchat = new Collection();
 
     bot.debugN = 0;
 

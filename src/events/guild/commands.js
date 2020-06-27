@@ -21,6 +21,10 @@ module.exports.call = async (bot, msg) => {
         return;
     }
 
+    if(msg.channel.topic ? msg.channel.topic.toLowerCase().includes("[global]") : false){
+        return;
+    }
+
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first() ? msg.mentions.users.first().tag == bot.user.tag : false){
             const clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
