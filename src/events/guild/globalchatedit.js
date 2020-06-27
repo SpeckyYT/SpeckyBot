@@ -2,6 +2,8 @@ module.exports = {
     event: "messageUpdate"
 }
 
+const { RichEmbed } = require('discord.js');
+
 module.exports.call = async (bot, _, msg) => {
     if(msg.author.bot) return;
     const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false
@@ -9,11 +11,10 @@ module.exports.call = async (bot, _, msg) => {
         const am = bot.cache.globalchat.get(msg.id);
         if(am){
             am.forEach(async ms => ms.edit(
-                bot.embed()
-                .setAuthor(msg.author.username)
+                new RichEmbed()
+                .setAuthor(msg.author.username,msg.author.avatarURL)
                 .setColor(msg.member.displayHexColor)
                 .setDescription(msg.content ? msg.content : '')
-                .setThumbnail(msg.author.avatarURL)
                 .attachFiles(msg.attachments ? msg.attachments.size ? msg.attachments.map(a=>a.url) : [] : [])
                 .setFooter('(edited)')
             ))
