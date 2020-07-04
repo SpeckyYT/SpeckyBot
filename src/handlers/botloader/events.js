@@ -28,8 +28,8 @@ module.exports = async (bot) => {
                 }
             })
         }catch(err){
-bot.log(`ERROR WHILE LOADING ${edir.toUpperCase()} FOLDER!`)
-}
+            bot.log(`ERROR WHILE LOADING ${edir.toUpperCase()} FOLDER!`)
+        }
     })
     bot.log();
 };

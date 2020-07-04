@@ -1,24 +1,27 @@
 # SpeckyBot
  
-- Created by a unexperienced user
+SpeckyBot is an open-source Discord Bot which allows to be totally customizable for developers!
 
 # Contributors
 
-- SpeckyYT
+## [SpeckyYT](https://github.com/SpeckyYT)
+- coded automatic folder loading system (botfunctions, commands, console, events, handlers/botloader, prototypes)
+- made console commands possible
+- coded most of the commands and events
+- wrote the README
+
+## [GenryMg](https://github.com/GenryMg)
+- coded the base for the economy system
 
 # How to successfully run your own instance of the bot?
 
-- Create a Discord Bot account.
+- Create a Discord Bot Application
 - Download or clone this repository
 - Extract the files
-- Download all NPM dependencies [npm i]
-- Run the .bat file and close it once you get an error
-- Enter the private informations in the config.json file (bot token, prefix, etc.)
-- Run the .bat file once again and you should be done!
-
-# External dependencies
-
-- For the music features, you should have FFMPEG already installed on your machine (not the NPM version)
+- Download all NPM dependencies (`npm i`)
+- Execute `run.bat` and close it once you get an error
+- Enter private informations in the config.json file (bot token, prefix, etc.)
+- Execute `run.bat` once again and you should be done!
 
 # Links and Invites
 

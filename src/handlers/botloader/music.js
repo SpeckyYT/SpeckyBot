@@ -10,6 +10,6 @@ module.exports = async (bot) => {
         inlineEmbeds: true,
         bigPicture: true,
         requesterName: true,
-        botPrefix: "     ",  //"disabled"
+        botPrefix: "     ",  // "disabled"
     })
 };

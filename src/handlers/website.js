@@ -50,4 +50,3 @@ module.exports = async (bot) => {
         await check(end);
     }catch(err){}
 }
-  

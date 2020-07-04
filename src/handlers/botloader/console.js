@@ -53,7 +53,7 @@ module.exports = async (bot) => {
         data.timeStamp = new Date();
 
         if(cmd){
-            cmd.run(bot,data)
+            bot.getFunction(cmd)(bot,data)
             .catch(err => {
                 if(err){
                     if(err.message){
