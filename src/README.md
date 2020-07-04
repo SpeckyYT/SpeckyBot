@@ -31,7 +31,7 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | cmdperms     | Array    | ["BAN_MEMBERS"]                     | permissions that the bot should have            | false    |
 | flags        | Array    | ["funny","fun"]                     | may change the result of the command ("--flag") | false    |
 | cooldown     | Number   | 10000                               | how long to wait for rerunning the command (ms) | false    |
-| <anything>   | Function | (bot,msg) => msg.channel.send("hi") | the function that will be called                | true     |
+| `anything`   | Function | (bot,msg) => msg.channel.send("hi") | the function that will be called                | true     |
 
 Note: You can have **ONLY ONE** function in the entire command file
 
@@ -43,7 +43,7 @@ Console commands are called each time you enter a string in the terminal.
 |--------------|----------|-------------------------|----------------------------------|----------|
 | name         | String   | "hello"                 | lowercase and no spaces          | true     |
 | aliases      | Array    | ["hi","howdy"]          | lowercase and no spaces          | false    |
-| <anything>   | Function | ()=>{console.log("hi")} | the function that will be called | true     |
+| `anything`   | Function | ()=>{console.log("hi")} | the function that will be called | true     |
 
 Note: You can have **ONLY ONE** function in the entire command file
 
@@ -55,7 +55,7 @@ Events get called by the Discord's API or by custom events (e.g. "interval_1_min
 |--------------|----------|-------------------------------|----------------------------------|----------|
 | event        | String   | "message"                     | [Discord.JS](https://discord.js.org/#/docs/main/11.6.4/class/Client) or custom events | true |
 | type         | String   | "once"                        | `on` or `once`                   | false    |
-| <anything>   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | true     |
+| `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | true     |
 
 Note: You can have **ONLY ONE** function in the entire command file
 
