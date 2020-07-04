@@ -168,7 +168,7 @@ module.exports.call = async (bot, msg) => {
                 })
             }
             
-            if(category == "nsfw" && (!msg.channel.nsfw || msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false)){
+            if(category == "nsfw" && (!msg.channel.nsfw || (msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false))){
                 if(check(false, nsfwError)){
                     return msg.channel.send(error(nsfwError))
                 }

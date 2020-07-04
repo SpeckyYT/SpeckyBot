@@ -19,7 +19,7 @@ module.exports.run = async (bot, msg) => {
     }
     const embed = new RichEmbed()
     .setColor('#24B8B8')
-    .setURL('https://disboard.org/server/265505748413448193')
+    .setURL('https://youtu.be/dQw4w9WgXcQ')
     .setTitle(`**DISBOARD: The Public Server List**`)
     .setDescription(`<@${msg.author.id}>,\nBump succeeded :thumbsup:\nYou are now bump level ${random}!`)
     .setImage('https://cdn.discordapp.com/attachments/555484681135587338/599982089089187870/bot-command-image-bump.png')
