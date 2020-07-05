@@ -19,19 +19,19 @@ module.exports = (bot) => {
 
 Commands get loaded in `bot.commands` as a Collection and get called from the event `events/guild/commands.js`.
 
-| Property     | Type     | Example                             | Info                                            | Required |
-|--------------|----------|-------------------------------------|-------------------------------------------------|----------|
-| name         | String   | "hello"                             | lowercase and no spaces                         | true     |
-| description  | String   | "says hi to you"                    | everything works                                | false    |
-| usage        | String   | "<@user>"                           | example result: "sb!hello <@user>"              | false    |
-| category     | String   | "fun"                               | "help" command will sort the categories         | true     |
-| accessableby | String   | "All users"                         | deprecated and no longer used                   | false    |
-| aliases      | Array    | ["hi","howdy"]                      | lowercase and no spaces                         | false    |
-| perms        | Array    | ["ADMINISTRATOR"]                   | permissions that the user should have           | false    |
-| cmdperms     | Array    | ["BAN_MEMBERS"]                     | permissions that the bot should have            | false    |
-| flags        | Array    | ["funny","fun"]                     | may change the result of the command ("--flag") | false    |
-| cooldown     | Number   | 10000                               | how long to wait for rerunning the command (ms) | false    |
-| `anything`   | Function | (bot,msg) => msg.channel.send("hi") | the function that will be called                | true     |
+| Property     | Type     | Example                                | Info                                            | Required |
+|--------------|----------|----------------------------------------|-------------------------------------------------|----------|
+| name         | String   | "hello"                                | lowercase and no spaces                         | true     |
+| description  | String   | "says hi to you"                       | everything works                                | false    |
+| usage        | String   | "<@user>"                              | example result: "sb!hello <@user>"              | false    |
+| category     | String   | "fun"                                  | "help" command will sort the categories         | true     |
+| accessableby | String   | "All users"                            | deprecated and no longer used                   | false    |
+| aliases      | Array    | ["hi","howdy"]                         | lowercase and no spaces                         | false    |
+| perms        | Array    | ["ADMINISTRATOR"]                      | permissions that the user should have           | false    |
+| cmdperms     | Array    | ["BAN_MEMBERS"]                        | permissions that the bot should have            | false    |
+| flags        | Array    | ["funny","fun"]                        | may change the result of the command ("--flag") | false    |
+| cooldown     | Number   | 10000                                  | how long to wait for rerunning the command (ms) | false    |
+| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
 
 Note: You can have **ONLY ONE** function in the entire command file
 
@@ -45,7 +45,7 @@ Console commands are called each time you enter a string in the terminal.
 | aliases      | Array    | ["hi","howdy"]          | lowercase and no spaces          | false    |
 | `anything`   | Function | ()=>{console.log("hi")} | the function that will be called | true     |
 
-Note: You can have **ONLY ONE** function in the entire command file
+Note: You can have **ONLY ONE** function in the entire console command file
 
 ## 1.4. Events
 
@@ -57,7 +57,7 @@ Events get called by the Discord's API or by custom events (e.g. "interval_1_min
 | type         | String   | "once"                        | `on` or `once`                   | false    |
 | `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | true     |
 
-Note: You can have **ONLY ONE** function in the entire command file
+Note: You can have **ONLY ONE** function in the entire event file
 
 ## 1.5. Handlers
 

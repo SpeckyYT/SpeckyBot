@@ -30,6 +30,7 @@
         "node-snowflake": "0.0.1",
         "npm": "^6.14.5",
         "opusscript": "0.0.7",
+        "promisify-func": "0.0.7",
         "qrcode": "^1.4.4",
         "random-animals-api": "^1.2.0",
         "string-similarity": "^3.0.0",

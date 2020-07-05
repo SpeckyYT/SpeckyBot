@@ -1,5 +1,6 @@
 const { readdirSync, lstatSync } = require("fs");
 const { join } = require('path');
+const promisify = require('promisify-func');
 
 module.exports = async (bot) => {
     bot.removeAllListeners();
@@ -20,7 +21,7 @@ module.exports = async (bot) => {
                         }
                     }
                     const calltype = evt.type || "on";
-                    bot[calltype](eName, bot.getFunction(evt).bind(null, bot));
+                    bot[calltype](eName, promisify(bot.getFunction(evt).bind(null, bot)));
                     bot.log(`${dir}   \t|\t${file}`.debug);
                 }catch(err){
                     bot.log(`${dir}   \t|\t${file} ERROR!`.error)

@@ -5,6 +5,7 @@ module.exports = {
 const { RichEmbed, Collection } = require('discord.js');
 const leven = require('leven');
 const fetch = require('node-fetch');
+const promisify = require('promisify-func');
 
 module.exports.call = async (bot, msg) => {
     if(msg.author.bot || msg.channel.type === "dm") return;
@@ -297,7 +298,7 @@ async function run(cmd, bot, msg, command){
     bot.cache.cooldown.set(`${msg.author.id}:${cmd.name}`,new Date());
     bot.cache.runningcmds.push(`${msg.author.id}:${cmd.name}`);
 
-    bot.getFunction(cmd)(bot, msg)
+    promisify(bot.getFunction(cmd))(bot, msg)
     .then(async res => {
         if(cmd.type === 'template' && res && typeof res == "string"){
             msg.channel.send(res.trim());

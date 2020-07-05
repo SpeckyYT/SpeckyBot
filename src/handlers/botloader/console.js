@@ -1,5 +1,6 @@
 const { readdirSync } = require('fs');
 const { Collection } = require('discord.js');
+const promisify = require('promisify-func');
 
 module.exports = async (bot) => {
     bot.console = new Collection();
@@ -53,7 +54,7 @@ module.exports = async (bot) => {
         data.timeStamp = new Date();
 
         if(cmd){
-            bot.getFunction(cmd)(bot,data)
+            promisify(bot.getFunction(cmd))(bot,data)
             .catch(err => {
                 if(err){
                     if(err.message){
