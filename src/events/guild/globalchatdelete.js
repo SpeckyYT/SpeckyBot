@@ -10,6 +10,6 @@ module.exports.call = async (bot, msg) => {
         if(am){
             am.forEach(async ms => ms.delete().catch(()=>{}));
         }
-        bot.cache.globalchat.set(msg.id,undefined);
+        bot.cache.globalchat.delete(msg.id);
     } 
 }
