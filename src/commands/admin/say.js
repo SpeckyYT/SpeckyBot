@@ -3,7 +3,6 @@ module.exports = {
     description: "Lets the bot say something for you!",
     usage: `<text> [#channel] [--emb/--sneak]`,
     category: `admin`,
-    accessableby: "Server Admins and Moderators",
     aliases: ["send","announcement"],
     perms: ['MANAGE_MESSAGES'],
     flags: ["channel","user","sneak","rcase","emb"]

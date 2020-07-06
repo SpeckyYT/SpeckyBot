@@ -3,7 +3,6 @@ module.exports = {
     description: "This command tuwns yoww nyowmie text into an OwO text ( o͡ w o͡ )",
     usage: `<text>`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["uwufy"]
 }
 

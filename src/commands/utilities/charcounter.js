@@ -3,7 +3,6 @@ module.exports = {
     description: "Here you can grab some info from your sentences!",
     usage: `<sentence/word/emotes>`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["cc","ccounter","sentencestats"]
 }
 

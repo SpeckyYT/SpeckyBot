@@ -3,7 +3,6 @@ module.exports = {
     description: "Dithers the image!",
     usage: ``,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a minesweeper field!",
     usage: ``,
     category: `games`,
-    accessableby: "Members",
     aliases: ["ms"]
 }
 

@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you prime numbers!",
     usage: ``,
     category: `math`,
-    accessableby: "Members",
     aliases: ["prime"]
 }
 

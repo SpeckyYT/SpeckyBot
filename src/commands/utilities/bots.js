@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you the online/offline bots list!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["bot","robot","robots"]
 }
 

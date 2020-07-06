@@ -3,7 +3,6 @@ module.exports = {
     description: "Print a big pixeled emoji made of small emojis :3",
     usage: `<:emoji: or URL>`,
     category: "misc",
-    accessableby: "Bot Owner",
     aliases: ["e","emoji"]
 };
 

@@ -3,7 +3,6 @@ module.exports = {
     description: "Posterizes the image!",
     usage: `[Amount (2-500)]`,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

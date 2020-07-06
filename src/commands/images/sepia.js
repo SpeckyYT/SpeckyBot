@@ -3,7 +3,6 @@ module.exports = {
     description: "Applies a sepia filter to the image!",
     usage: ``,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

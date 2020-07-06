@@ -3,7 +3,6 @@ module.exports = {
     description: "Information about how fast the bot is!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["pong", "pin", "pon"]
 }
 

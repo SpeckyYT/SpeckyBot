@@ -4,7 +4,6 @@ module.exports = {
     usage: "<@user> <amount>",
     category: "economy",
     description: "Lets you pay someone else [Experimental]",
-    accessibleby: "member"
 }
 
 module.exports.run = async (bot, msg) => {

@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you the collatz sequence!",
     usage: `[number]`,
     category: `math`,
-    accessableby: "Members",
     aliases: []
 }
 

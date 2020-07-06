@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a random question to trigger a discussion!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["bruh"]
 }
 

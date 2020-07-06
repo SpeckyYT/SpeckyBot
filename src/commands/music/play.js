@@ -3,7 +3,6 @@ module.exports = {
     description: "Plays a song by choice!",
     usage: `<song>`,
     category: `music`,
-    accessableby: "Members",
     aliases: ["p"]
 }
 

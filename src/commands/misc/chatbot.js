@@ -3,7 +3,6 @@ module.exports = {
     description: "What about chatting to an AI?",
     usage: `<text>`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["cb","chatai","cleverbot"]
 }
 

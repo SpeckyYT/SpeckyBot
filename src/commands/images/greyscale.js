@@ -3,7 +3,6 @@ module.exports = {
     description: "Applies a greyscale filter to the image!",
     usage: ``,
     category: `images`,
-    accessableby: "Members",
     aliases: ["grayscale","grey","gray"],
     perms: [],
     cmdperms: []

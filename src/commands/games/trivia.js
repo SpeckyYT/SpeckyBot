@@ -3,7 +3,6 @@ module.exports = {
     description: "A random trivia question from the internet!",
     usage: ``,
     category: `games`,
-    accessableby: "Members",
     aliases: ["trivi", "triv"]
 }
 

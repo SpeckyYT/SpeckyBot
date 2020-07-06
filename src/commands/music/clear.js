@@ -3,7 +3,6 @@ module.exports = {
     description: "Clears the queue!",
     usage: ``,
     category: `music`,
-    accessableby: "Members",
     aliases: ["c"]
 }
 

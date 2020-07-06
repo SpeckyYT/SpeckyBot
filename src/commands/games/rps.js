@@ -3,7 +3,6 @@ module.exports = {
     description: "Lets you play Rock Paper Scissors with the bot!",
     usage: `<handsign>`,
     category: `games`,
-    accessableby: "Members",
     aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }
 

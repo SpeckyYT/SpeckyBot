@@ -3,7 +3,6 @@ module.exports = {
     description: "You want to change your discriminator without Nitro?",
     usage: `[discriminator]`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
 }
 

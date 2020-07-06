@@ -3,7 +3,6 @@ module.exports = {
     description: "Lets you play Tic Tac Toe with the bot!",
     usage: ``,
     category: `games`,
-    accessableby: "Members",
     aliases: []
 }
 

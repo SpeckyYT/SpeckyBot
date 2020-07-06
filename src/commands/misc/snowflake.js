@@ -3,7 +3,6 @@ module.exports = {
     description: "Converts an ID into a timestamp!",
     usage: `[ID] [ID]...`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ['sf','id']
 }
 

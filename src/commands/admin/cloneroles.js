@@ -3,7 +3,6 @@ module.exports = {
     description: "Clones the roles from one user to another one!",
     usage: `<userMention> <userMention>`,
     category: `admin`,
-    accessableby: "Server Admins and Moderators",
     aliases: ["cr"],
     perms: ['MANAGE_ROLES'],
     cmdperms: ['MANAGE_ROLES']

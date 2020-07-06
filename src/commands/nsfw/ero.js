@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you erotic images!",
     usage: ``,
     category: `nsfw`,
-    accessableby: "Members",
     aliases: ["erotic"]
 }
 

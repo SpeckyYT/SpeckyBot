@@ -3,7 +3,6 @@ module.exports = {
     description: "Returns all users that has this role!",
     usage: `[roleID]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["whr"]
 }
 

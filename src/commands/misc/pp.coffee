@@ -3,7 +3,6 @@ module.exports =
     description: 'Gives the length of your pp!'
     usage: '<@user>'
     category: 'misc'
-    accessableby: 'Members'
     aliases: []
     run: (bot, msg) ->
         user = if msg.mentions.users.size > 0 then msg.mentions.users.first().id else msg.author.id

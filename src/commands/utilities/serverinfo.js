@@ -3,7 +3,6 @@ module.exports = {
     description: "Informations about the server you're in!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["si","serveri"]
 }
 

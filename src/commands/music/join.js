@@ -3,7 +3,6 @@ module.exports = {
     description: "Makes the bot join a VC!",
     usage: ``,
     category: `music`,
-    accessableby: "Members",
     aliases: ["j"]
 }
 

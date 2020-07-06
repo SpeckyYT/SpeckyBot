@@ -3,7 +3,6 @@ module.exports = {
     description: "Sends a meme!",
     usage: "",
     category: "misc",
-    accessibleby: "member",
     aliases: []
 }
 

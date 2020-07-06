@@ -3,7 +3,6 @@ module.exports = {
     description: "Turns all user IDs into a txt file!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ['membersids','memberids','memberid']
 }
 

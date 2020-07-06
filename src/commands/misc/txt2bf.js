@@ -3,7 +3,6 @@ module.exports = {
     description: "Converts a text string to a Brainf*ck string!",
     usage: `[text string]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["text2brainfuck","texttobrainfuck","txttobf"]
 }
 

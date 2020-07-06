@@ -3,7 +3,6 @@ module.exports = {
     description: "Repeats a command `n` times!",
     usage: `<command> <number> [content]`,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: ["rpt"]
 }
 

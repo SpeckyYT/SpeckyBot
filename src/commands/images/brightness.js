@@ -3,7 +3,6 @@ module.exports = {
     description: "Changes the brightness of the image!",
     usage: `[Amount (-100 - 100)]`,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

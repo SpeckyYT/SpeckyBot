@@ -3,7 +3,6 @@ module.exports = {
     description: "Creates a QRCode for you!",
     usage: `<text>`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["qr"]
 }
 

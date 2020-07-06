@@ -3,7 +3,6 @@ module.exports = {
     description: "Rotates the image!",
     usage: `[Amount (0-360)]`,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

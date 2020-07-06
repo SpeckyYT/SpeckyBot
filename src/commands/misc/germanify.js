@@ -3,7 +3,6 @@ module.exports = {
     description: "Turns your message to german!",
     usage: "<text>",
     category: "misc",
-    accessibleby: "member",
     aliases: []
 }
 

@@ -3,7 +3,6 @@ module.exports = {
     description: "Says how many people are playing different games in the server.",
     usage: ``,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["prsncs","prs"]
 }
 

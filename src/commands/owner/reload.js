@@ -3,7 +3,6 @@ module.exports = {
     description: "The bot will reload a specific handler!",
     usage: ``,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: ["rld","rl"]
 }
 

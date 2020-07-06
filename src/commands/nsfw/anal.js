@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a anal porn!",
     usage: ``,
     category: `nsfw`,
-    accessableby: "Members",
     aliases: ["ass"]
 }
 

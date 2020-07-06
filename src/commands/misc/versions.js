@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you the versions of the used software of the bot!",
     usage: '',
     category: 'misc',
-    accessableby: "Members",
     aliases: ['v']
 }
 

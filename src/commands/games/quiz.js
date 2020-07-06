@@ -3,7 +3,6 @@ module.exports = {
     description: "A random question with (usually) 4 responses!",
     usage: ``,
     category: `games`,
-    accessableby: "Members",
     aliases: ["qui", "qz","quiz"]
 }
 

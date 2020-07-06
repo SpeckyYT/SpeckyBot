@@ -3,7 +3,6 @@ module.exports = {
     description: "Flips the image! (Vertically)",
     usage: ``,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

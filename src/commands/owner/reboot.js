@@ -3,21 +3,20 @@ module.exports = {
     description: "Reboots the bot down!",
     usage: ``,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
 
-    //Remove Listeners
+    // Remove Listeners
     bot.removeAllListeners();
 
-    //Remove Intervals
+    // Remove Intervals
     bot.intervals.forEach(i => {
         bot.clearInterval(i)
     })
 
-    //Destroys Bot
+    // Destroys Bot
     await bot.destroy();
     
     delete require.cache;

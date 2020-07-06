@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a classic endpoint!",
     usage: ``,
     category: `nsfw`,
-    accessableby: "Members",
     aliases: ["classic"]
 }
 

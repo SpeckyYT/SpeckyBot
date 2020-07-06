@@ -25,7 +25,6 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | description  | String   | "says hi to you"                       | everything works                                | false    |
 | usage        | String   | "<@user>"                              | example result: "sb!hello <@user>"              | false    |
 | category     | String   | "fun"                                  | "help" command will sort the categories         | true     |
-| accessableby | String   | "All users"                            | deprecated and no longer used                   | false    |
 | aliases      | Array    | ["hi","howdy"]                         | lowercase and no spaces                         | false    |
 | perms        | Array    | ["ADMINISTRATOR"]                      | permissions that the user should have           | false    |
 | cmdperms     | Array    | ["BAN_MEMBERS"]                        | permissions that the bot should have            | false    |

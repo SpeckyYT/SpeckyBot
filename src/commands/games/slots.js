@@ -3,7 +3,6 @@ module.exports = {
     description: "Lets you play slots!",
     usage: `<slots quantity>`,
     category: `games`,
-    accessableby: "Members",
     aliases: ["slot"],
     flags: ["stats","win","global"]
 }

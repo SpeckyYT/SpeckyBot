@@ -3,7 +3,6 @@ module.exports = {
     description: "Feeds you!",
     usage: ``,
     category: `sfw`,
-    accessableby: "Members",
     aliases: ['feed','eat']
 }
 

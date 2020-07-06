@@ -3,7 +3,6 @@ module.exports = {
     description: "Checks the permissions of the user in a specific channel!",
     usage: `@[User] #[Channel]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["checkpermissions","checkp","cp"]
 }
 

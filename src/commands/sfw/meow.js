@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a cat!",
     usage: ``,
     category: `sfw`,
-    accessableby: "Members",
     aliases: ["miao","miau","miu","miav","meu","mjaullin","miauw","miaou","miar","mjao","mjaw","mijav","miob","meo","myau"]
 }
 

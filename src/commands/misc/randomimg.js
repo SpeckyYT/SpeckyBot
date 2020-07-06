@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a random image from loremflickr.com!",
     usage: `<keyword>`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["randomimage","rimg"]
 }
 

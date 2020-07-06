@@ -3,7 +3,6 @@ module.exports = {
     description: "Turns every channel in an unread one!",
     usage: ``,
     category: `admin`,
-    accessableby: "Server Admins and Moderators",
     aliases: ["cur"],
     perms: ['ADMINISTRATOR']
 }

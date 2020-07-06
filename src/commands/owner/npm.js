@@ -3,7 +3,6 @@ module.exports = {
     description: "Updates/installs NPM dependencies!",
     usage: ``,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: []
 }
 

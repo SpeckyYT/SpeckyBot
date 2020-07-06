@@ -3,7 +3,6 @@ module.exports = {
     description: "You can edit any serversettings!",
     usage: `<feature> <depends from feature>`,
     category: `admin`,
-    accessableby: "Server Admins and Moderators",
     aliases: ["ss","serversetting","servset","serverset","serversets"],
     perms: ['MANAGE_MESSAGES']
 }

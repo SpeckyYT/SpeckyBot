@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you the active/inactive members list!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["servermembers","allmembers"]
 }
 

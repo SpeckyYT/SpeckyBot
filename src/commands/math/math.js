@@ -3,7 +3,6 @@ module.exports = {
     description: "The math command to evaluate some math!",
     usage: `<problem>`,
     category: `math`,
-    accessableby: "Members",
     aliases: ["maths","mathematic","mathematics","calculator","calc","calculate","cal"]
 }
 

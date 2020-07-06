@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives some informations of a Minecraft Server!",
     usage: `<Server IP> [Server Port]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["minecraftserver","mcs","mineserver"]
 }
 

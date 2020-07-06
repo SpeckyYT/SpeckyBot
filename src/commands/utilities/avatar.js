@@ -3,7 +3,6 @@ module.exports = {
     description: "Wanna see your profile picture?",
     usage: `[@user]`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["a","ava"]
 }
 

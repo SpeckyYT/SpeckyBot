@@ -3,7 +3,6 @@ module.exports = {
     description: "Shuts the bot down!",
     usage: ``,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: ["quit","exit","die","kill"]
 }
 

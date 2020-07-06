@@ -3,7 +3,6 @@ module.exports = {
     description: "Do you want to add this bot to your server?",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["patr","patreo"]
 }
 

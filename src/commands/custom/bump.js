@@ -3,7 +3,6 @@ module.exports = {
     description: "Bumps the server!",
     usage: ``,
     category: `custom`,
-    accessableby: "Members",
     aliases: [],
     servers: ['265505748413448193']
 }

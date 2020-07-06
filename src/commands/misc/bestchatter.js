@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives the best chatters of the chat!",
     usage: `[#channel]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["bestchatter","bc"]
 }
 

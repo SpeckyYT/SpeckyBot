@@ -3,7 +3,6 @@ module.exports = {
     description: "Changes the volume of the player!",
     usage: ``,
     category: `music`,
-    accessableby: "Members",
     aliases: []
 }
 

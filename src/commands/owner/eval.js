@@ -3,7 +3,6 @@ module.exports = {
     description: "Runs custom code directly from Discord!",
     usage: `<code in js>`,
     category: `owner`,
-    accessableby: "Bot Owner",        
     aliases: ["evaluate"],
 }
 

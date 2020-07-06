@@ -3,7 +3,6 @@ module.exports = {
     description: "What about customization?",
     usage: `<setting> <values>`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["us","usersetting"]
 }
 

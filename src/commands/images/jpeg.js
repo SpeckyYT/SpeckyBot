@@ -3,7 +3,6 @@ module.exports = {
     description: "Applies a jpeg filter to the image!",
     usage: `[Amount (1-100)]`,
     category: `images`,
-    accessableby: "Members",
     aliases: ["jpg"],
     perms: [],
     cmdperms: []

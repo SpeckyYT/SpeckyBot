@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you informations about a word you don't know!",
     usage: `[random] <query>`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["urba","urb","ud","urbandictionary","dictionary"]
 }
 

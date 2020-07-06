@@ -3,7 +3,6 @@ module.exports = {
     description: "The bot will leave the desired server!",
     usage: `<serverID>`,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: ["ls","sl","serverleave"]
 }
 

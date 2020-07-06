@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you a virtual bubblewrap!",
     usage: ``,
     category: `games`,
-    accessableby: "Members",
     aliases: ["bw"]
 }
 

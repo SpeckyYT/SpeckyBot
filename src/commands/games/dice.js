@@ -3,7 +3,6 @@ module.exports = {
     description: "Lets you play with dice!",
     usage: `<amount>`,
     category: `games`,
-    accessableby: "Members",
     aliases: []
 }
 

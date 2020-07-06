@@ -3,7 +3,6 @@ module.exports = {
     description: "Can convert from and to roman numerals!",
     usage: `<number>`,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["romannum","romannumber","romannumbers"]
 }
 

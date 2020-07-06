@@ -3,7 +3,6 @@ module.exports = {
     description: "Reproduces an existing embed",
     usage: `#[Channel] [MessageID]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["remb","repemb"]
 }
 

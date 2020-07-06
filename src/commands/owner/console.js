@@ -3,7 +3,6 @@ module.exports = {
     description: "Runs a command on console from Discord!",
     usage: `<command> [args]`,
     category: `owner`,
-    accessableby: "Bot Owner",
     aliases: ["cons"]
 }
 

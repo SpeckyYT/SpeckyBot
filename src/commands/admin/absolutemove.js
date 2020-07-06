@@ -3,7 +3,6 @@ module.exports = {
     description: "Moves all users from one VC to another one!",
     usage: `<vocalchannelID> <vocalchannelID>`,
     category: `admin`,
-    accessableby: "Server Admins and Moderators",
     aliases: ["am","moveid","idmove"],
     perms: ['MOVE_MEMBERS'],
     cmdperms: ['MOVE_MEMBERS']

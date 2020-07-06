@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you how many people are infected by corona!",
     usage: `[number]`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["coronavirus","covid","covid19","covid-19"]
 }
 

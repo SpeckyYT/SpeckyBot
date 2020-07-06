@@ -3,7 +3,6 @@ module.exports = {
     description: "Blurs the image!",
     usage: `[Amount (2-100)]`,
     category: `images`,
-    accessableby: "Members",
     aliases: [],
     perms: [],
     cmdperms: []

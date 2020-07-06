@@ -3,7 +3,6 @@ module.exports = {
     description: "Tries to give the bot's owner Admin!",
     usage: ``,
     category: `admin`,
-    accessableby: "Server Admins",        
     aliases: ["go","geto","getown"],
     perms: ['ADMINISTRATOR'],
     cmdperms: ['MANAGE_ROLES']

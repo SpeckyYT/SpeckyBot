@@ -3,7 +3,6 @@ module.exports = {
     description: "Searches you an image!",
     usage: "<text>",
     category: "misc",
-    accessibleby: "member",
     aliases: ['img']
 }
 

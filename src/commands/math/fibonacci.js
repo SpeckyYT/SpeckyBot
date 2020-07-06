@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you the fibonacci sequence!",
     usage: ``,
     category: `math`,
-    accessableby: "Members",
     aliases: []
 }
 

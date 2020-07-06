@@ -3,7 +3,6 @@ module.exports = {
     description: "Gives you all global chats!",
     usage: "",
     category: "misc",
-    accessibleby: "member",
     aliases: ['globalchat','gc']
 }
 

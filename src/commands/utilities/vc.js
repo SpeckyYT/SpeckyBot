@@ -3,7 +3,6 @@ module.exports = {
     description: "Informations about the vocal channel you're in!",
     usage: ``,
     category: `utilities`,
-    accessableby: "Members",
     aliases: ["vocalchannel","vcinfo"]
 }
 

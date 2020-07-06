@@ -3,7 +3,6 @@ module.exports = {
     description: "Deletes a TON of messages for you!",
     usage: `<message quantity>`,
     category: `admin`,
-    accessableby: "Server Admins and Moderators",
     aliases: [],
     perms: ['MANAGE_MESSAGES'],
     cmdperms: ['MANAGE_MESSAGES']

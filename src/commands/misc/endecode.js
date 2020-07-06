@@ -3,7 +3,6 @@ module.exports = {
     description: "Encodes a String that can be decoded in the same way!",
     usage: `<text>`,
     category: `misc`,
-    accessableby: "Members",
     aliases: ["decode","encrypt","decrypt"]
 }
 
