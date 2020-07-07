@@ -9,6 +9,8 @@ db/
 *.png
 *.jpg
 *.jpeg
+*.mp4
+*.avi
 
 # Secret Files
 template.config.json
