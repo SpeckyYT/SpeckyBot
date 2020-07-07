@@ -6,8 +6,6 @@ module.exports = {
     aliases: ["h", "halp", "hel","hwlp","hewlp","cmd","cmds","command","commands","undefined","info","informations","information"]
 }
 
-const { readdirSync } = require("fs")
-
 module.exports.run = async (bot, msg) => {
     const { config } = bot;
     const { args } = msg;
@@ -16,13 +14,16 @@ module.exports.run = async (bot, msg) => {
     .setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
 
     if(!args[0] || (bot.checkOwner(msg.author.id) && args[0] == "all")) {
-        const categories = readdirSync('./commands/')
+        const categories = bot.commands.map(c=>c.category||'uncategorized').toLowerCase().unique().sort();
 
         embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
         embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
         categories.forEach(category => {
-            const dir = bot.commands.filter(c => (c.category == category && c.category != "private"))
+            const dir = bot.commands.filter(c => {
+                c.category = typeof c.category == "string" ? c.category.toLowerCase() : c.category;
+                return c.category == category && c.category != "private" || (!c.category && category == 'uncategorized')
+            })
 
             const capitalise = bot.highFirst(category)
 

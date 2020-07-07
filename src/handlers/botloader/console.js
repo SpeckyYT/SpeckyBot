@@ -54,6 +54,9 @@ module.exports = async (bot) => {
         data.timeStamp = new Date();
 
         if(cmd){
+            if(typeof bot.getFunction(cmd) != 'function'){
+                return console.log(`Command ${command.toUpperCase()} not found`.error)
+            }
             promisify(bot.getFunction(cmd))(bot,data)
             .catch(err => {
                 if(err){
