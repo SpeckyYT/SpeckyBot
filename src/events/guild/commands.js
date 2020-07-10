@@ -108,7 +108,7 @@ module.exports.call = async (bot, msg) => {
             let admin = false;
             let illegal = false;
 
-            if(bot.checkOwner(msg.author.id)){
+            if(msg.author.id.isOwner()){
                 owner = true
             }
             if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){

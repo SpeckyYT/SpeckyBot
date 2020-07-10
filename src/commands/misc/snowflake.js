@@ -58,7 +58,7 @@ module.exports.run = async (bot, msg) => {
             }
 
             if(!skip){
-                const item = bot.findSnowflake(snowflake);
+                const item = snowflake.findSnowflake();
                 if(item){
                     embed.addField(`Resulting snowflake`,item.toString());
                 }

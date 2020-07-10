@@ -2,7 +2,7 @@ module.exports = {
     event: "messageReactionAdd"
 }
 
-//server limiter
+// server limiter
 const limited = ["265505748413448193"]
 
 module.exports.call = async (bot, messageReaction, user) => {
@@ -11,7 +11,7 @@ module.exports.call = async (bot, messageReaction, user) => {
     const msg = messageReaction.message;
     const guild = msg.guild;
 
-    //server limiter
+    // server limiter
     if(!limited.includes(guild.id)) return;
 
     if(msg.id != '663303735023501314') return;

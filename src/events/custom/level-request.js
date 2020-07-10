@@ -4,16 +4,16 @@ module.exports = {
 
 const { RichEmbed } = require('discord.js')
 
-//channel limiter
+// channel limiter
 const limited = ["643548931007184906"]
 
 module.exports.call = async (bot, msg) => {
-    //channel limiter
+    // channel limiter
     if(!limited.includes(msg.channel.id)) return;
 
     if(msg.author.id == bot.user.id) return;
 
-    let regex = /\b\d{7,10}\b/g
+    const regex = /\b\d{7,10}\b/g
 
     if(msg.content.match(regex)){
         if(msg.content.length > 200){
@@ -31,11 +31,11 @@ module.exports.call = async (bot, msg) => {
         }
     }else{
         msg.channel.send(error("Your message doesn't include an ID (be sure to separate the ID by spaces)."))
-            .then(ms => {
-                try{
-                    ms.delete(15000)
-                }catch{}
-            })
+        .then(ms => {
+            try{
+                ms.delete(15000)
+            }catch{}
+        })
         try{
             msg.delete(15000)
         }catch{}

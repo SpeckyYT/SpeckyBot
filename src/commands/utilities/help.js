@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg) => {
     const embed = bot.embed()
     .setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
 
-    if(!args[0] || (bot.checkOwner(msg.author.id) && args[0] == "all")) {
+    if(!args[0] || (msg.author.id.isOwner() && args[0] == "all")) {
         const categories = bot.commands.map(c=>c.category||'uncategorized').toLowerCase().unique().sort();
 
         embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg) => {
                 return c.category == category && c.category != "private" || (!c.category && category == 'uncategorized')
             })
 
-            const capitalise = bot.highFirst(category)
+            const capitalise = category.highFirst()
 
             try{
                 if(args[0] == "all" || categoryCheck(category, msg, config, bot)){
@@ -57,7 +57,7 @@ module.exports.run = async (bot, msg) => {
 
         if(!categoryCheck(command.category, msg, bot)) return msg.channel.send(invalidcmd(embed,config));
         
-        const cmd = bot.highFirst(command.name);
+        const cmd = command.name.highFirst();
         const category = command.category;
         const description = command.description || "No Description provided.";
         const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`;
@@ -93,7 +93,7 @@ function categoryCheck(category,msg,bot){
     switch(category){
 
         case "owner":
-            return bot.checkOwner(msg.author.id);
+            return msg.author.id.isOwner();
 
         case "admin":
             return msg.member.permissions.toArray().join(' ').includes('MANAGE_');

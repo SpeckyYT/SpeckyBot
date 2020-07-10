@@ -11,7 +11,7 @@ const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     let random;
-    if(bot.checkOwner(msg.author.id)){
+    if(msg.author.id.isOwner()){
         random = Math.floor(Math.random()*10000+1);
     }else{
         random = Math.floor(Math.random()*666+1);

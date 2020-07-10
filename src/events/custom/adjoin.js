@@ -2,15 +2,15 @@ module.exports = {
     event: "guildMemberAdd"
 }
 
-//server limiter
+// server limiter
 const limited = ["265505748413448193"]
 
 module.exports.call = async (bot, member) => {
-    //server limiter
+    // server limiter
     if(!limited.includes(member.guild.id)) return;
 
-    let memberRole = '265519525041143809'
-    let adInStatusRole = '638091940545560639'
+    const memberRole = '265519525041143809'
+    const adInStatusRole = '638091940545560639'
 
     setTimeout(() => {
         if(!member.roles) return;

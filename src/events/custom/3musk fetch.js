@@ -3,7 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async bot => {
-    let channel = '663303308794134529';
-    let chan = bot.channels.get(channel);
+    const channel = '663303308794134529';
+    const chan = bot.channels.get(channel);
     if(chan) chan.fetchMessages({limit: 10}).catch(()=>{});
 }

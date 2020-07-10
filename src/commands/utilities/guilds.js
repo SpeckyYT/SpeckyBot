@@ -9,7 +9,7 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
 
-    if(bot.checkOwner(msg.author.id) && args[0] == "yes"){
+    if(msg.author.id.isOwner() && args[0] == "yes"){
         bot.guilds.forEach(server => {
             msg.channel.send(`${server.name} (${server.id})`);
         })
