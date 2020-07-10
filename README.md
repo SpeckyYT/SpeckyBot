@@ -23,6 +23,14 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 - Enter private informations in the config.json file (bot token, prefix, etc.)
 - Execute `run.bat` once again and you should be done!
 
+# Donators
+
+| Donator      | Donation  |
+|--------------|-----------|
+| Benjiman     | 0.01€     |
+
+[You can donate by clicking on this text](https://www.paypal.me/speckyy)
+
 # Links and Invites
 
 - Discord Server: https://discord.gg/4EecFku

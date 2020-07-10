@@ -10,6 +10,7 @@ module.exports =
         pp = p1%13+1
         if user in [
             "268748318664949760",
+            "525006281703161867",
             ...bot.config.owner
             ] then return bot.cmdError("Too long")
         await return msg.channel.send("8#{"=".repeat(pp)}D")

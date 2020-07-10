@@ -30,22 +30,23 @@
             "error",
             "always"
         ],
-        "no-cond-assign":"error",
-        "no-tabs":"error",
-        "no-var": "error",
-        "yoda": "error",
-        "brace-style": "warn",
-        "prefer-const": "warn",
-        "spaced-comment":"warn",
         "arrow-parens":"off",
+        "brace-style": "warn",
         "no-case-declarations":"off",
+        "no-cond-assign":"error",
         "no-console": "off",
         "no-constant-condition":"off",
         "no-continue":"off",
         "no-control-regex":"off",
         "no-empty":"off",
         "no-inner-declarations":"off",
+        "no-irregular-whitespace":"off",
         "no-prototype-builtins":"off",
-        "no-self-assign":"off"
+        "no-self-assign":"off",
+        "no-tabs":"error",
+        "no-var": "error",
+        "prefer-const": "warn",
+        "spaced-comment":"warn",
+        "yoda": "error"
     }
 }

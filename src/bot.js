@@ -10,4 +10,3 @@ module.exports = (bot) => {
 
     require('./generalhandler')(bot);
 }
-
