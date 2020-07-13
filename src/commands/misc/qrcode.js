@@ -9,7 +9,7 @@ module.exports = {
 const qrcode = require('qrcode');
 
 module.exports.run = async (bot, msg) => {
-    return qrcode.toString(msg.content,(e,s)=>{
+    return qrcode.toString(msg.cmdContent,(e,s)=>{
         return msg.channel.send(`\`\`\`\n${s.replace(/( +)\n( +)/g,'\n').trim()}\n\`\`\``);
     })
 }

@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg) => {
         return false;
     })[0];
 
-    msg.content = msg.content.replace(numb,'').replace(command,'').trim();
+    msg.cmdContent = msg.cmdContent.replace(numb,'').replace(command,'').trim();
 
     const cmd = bot.getCommand(command);
 

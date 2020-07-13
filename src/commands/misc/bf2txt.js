@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg) => {
         return bot.cmdError(`Brainfuck string missing or invalid`);
     }
 
-    const insts = msg.content;
+    const insts = msg.cmdContent;
 
     const { tOut, memory, string, numbers, cell, time } = await bot.bf(insts,{limit:true});
 

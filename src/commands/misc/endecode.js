@@ -7,7 +7,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const res = bot.encrypt(msg.content);
+    const res = bot.encrypt(msg.cmdContent);
     if(res){
         return msg.channel.send("```\n"+res+"\n```");
     }else{

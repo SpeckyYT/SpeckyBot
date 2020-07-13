@@ -6,14 +6,11 @@ module.exports = {
     aliases: ["rn","randname","randn","name"]
 }
 
-const { RichEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
     const { getPersonName } = require('./functions/misc');
 
-    const embed = new RichEmbed()
+    const embed = bot.embed()
     .setAuthor(msg.author.username,msg.author.avatarURL)
-    .setColor("#FF00AA")
     .setTitle('Random Person Name')
     .setDescription(getPersonName());
     msg.channel.send(embed)

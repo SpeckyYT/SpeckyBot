@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
     bot.economySummon(bot, receiver);
 
     const numberRegex = /[\s>-]\d+/g;
-    const matches = msg.content.match(numberRegex);
+    const matches = msg.cmdContent.match(numberRegex);
     if(!matches){
         return bot.cmdError("You have to define an amount of money to pay.")
     }

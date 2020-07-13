@@ -11,7 +11,7 @@ module.exports = {
 const { RichEmbed } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
-    let res = msg.content;
+    let res = msg.cmdContent;
 
     let channel = msg.channel;
     let user = msg.author;

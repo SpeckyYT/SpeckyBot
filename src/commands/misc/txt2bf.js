@@ -9,9 +9,9 @@ module.exports = {
 const { convert } = require('ttbf');
 
 module.exports.run = async (bot, msg) => {
-    if(!msg.content){
+    if(!msg.cmdContent){
         return bot.cmdError(`Message content can't be empty`);
     }
-    const text = convert(msg.content);
+    const text = convert(msg.cmdContent);
     return msg.channel.send(text);
 }

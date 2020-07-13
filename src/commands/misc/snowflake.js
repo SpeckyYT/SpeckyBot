@@ -40,7 +40,7 @@ module.exports.run = async (bot, msg) => {
 
             const embed = new RichEmbed()
             .setTitle("Snowflake Timestamp")
-            .setColor("#FF00AA");
+            .setColor(bot.config.color);
 
             if(year == Infinity || toobig){
                 skip = true;

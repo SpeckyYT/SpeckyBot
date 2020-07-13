@@ -9,7 +9,7 @@ module.exports = {
 const { inspect } = require("util")
 
 module.exports.run = async (bot, msg) => {
-    const toEval = msg.content;
+    const toEval = msg.cmdContent;
 
     let evaluated;
 

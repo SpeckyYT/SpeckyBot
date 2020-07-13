@@ -9,7 +9,7 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
     const playing = args[0];
-    const game = msg.content.split(" ").slice(2).join(" ");
+    const game = msg.cmdContent.split(" ").slice(2).join(" ");
     try{
         bot.user.setPresence({game: {name: `${game}`, type: `${playing}`}});
     }catch(e){

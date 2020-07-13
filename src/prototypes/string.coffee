@@ -1,4 +1,5 @@
 module.exports = (bot) ->
+
     String::snowflake = ->
         require 'discord.js'
         .SnowflakeUtil.deconstruct String(@)

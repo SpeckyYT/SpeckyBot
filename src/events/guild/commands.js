@@ -7,7 +7,9 @@ const leven = require('leven');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
 
-module.exports.call = async (bot, msg) => {
+module.exports.call = async (bot, m) => {
+    const msg = m.extend();
+
     if(msg.author.bot || msg.channel.type === "dm") return;
 
     if(msg.system) return;
@@ -44,40 +46,7 @@ module.exports.call = async (bot, msg) => {
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
 
-    const flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
-    msg.flags = [];
-    if(flags){
-        flags.forEach((f,index) => {
-            msg.flags[index] = flags[index].slice(2);
-        })
-    }
-
-    msg.hasFlag = (input) => {
-        return msg.flags.includes(input.toLowerCase());
-    }
-    msg.flag = msg.hasFlag;
-
-    msg.content = msg.content.replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim();
-
-    msg.Args = msg.content.split(/\s|\n/g);
-
-    let command = msg.Args[0].toLowerCase();
-
-    while(msg.Args[0] == bot.config.prefix && msg.Args.length > 0){
-        const fix = msg.Args[0] + msg.Args[1];
-        msg.Args[1] = fix;
-        command = fix.toLowerCase();
-        msg.Args = msg.Args.slice(1);
-    }
-
-    msg.Args = msg.Args.slice(1);
-
-    msg.Args = msg.Args.clean();
-
-    msg.args = msg.Args.toLowerCase();
-    msg.ARGS = msg.Args.toUpperCase();
-
-    msg.content = msg.content.slice(bot.config.prefix.length).trim().slice(command.length-bot.config.prefix.length).trim();
+    const { command } = msg;
 
     if(!msg.content && msg.attachments.size){
         try{
@@ -86,9 +55,7 @@ module.exports.call = async (bot, msg) => {
     }
 
     msg.command = command.slice(bot.config.prefix.length);
-
-    msg.links = (msg.content ? msg.content.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g) : []) || []
-
+    
     let cmd = bot.getCommand(command.slice(bot.config.prefix.length));
     
     const execute = async () => {

@@ -8,7 +8,7 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     msg.channel.send(
-        msg.content
+        msg.cmdContent
         .toLowerCase()
         .replace(/\bis/g,'ist')
         .replace(/sh/g,'sch')

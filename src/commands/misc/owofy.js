@@ -7,9 +7,9 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(msg.content){
+    if(msg.cmdContent){
         msg.channel.send(
-            bot.owofy(msg.content)
+            bot.owofy(msg.cmdContent)
         );
     }else{
         return bot.cmdError("You need to write some text behind the command UwU")

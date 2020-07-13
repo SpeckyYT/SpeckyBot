@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg) => {
     msg.Args = msg.Args.slice(1);
     msg.ARGS = msg.ARGS.slice(1);
     msg.contento = msg.content;
-    msg.content = msg.content.slice(command.length).trim();
+    msg.content = msg.cmdContent.slice(command.length).trim();
 
     const func = bot.getFunction(bot.getConsoleCommand(command));
 

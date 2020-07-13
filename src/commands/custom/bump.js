@@ -1,6 +1,6 @@
 module.exports = {
     name: "bump",
-    description: "Bumps the server!",
+    description: "Bumps the server! (jk)",
     usage: ``,
     category: `custom`,
     aliases: [],
