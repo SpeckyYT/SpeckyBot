@@ -20,7 +20,7 @@ module.exports.call = async (bot) => {
     .forEach(async (event) => {
         await bot.emit(event[0]);
         bot.intervals.push(
-            setInterval(async () => {
+            bot.setInterval(async () => {
                 await bot.emit(event[0])
             },event[1])
         )
