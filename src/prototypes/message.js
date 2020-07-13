@@ -4,9 +4,11 @@ module.exports = bot => {
 
     Message.prototype.extend = function(){
 
+        // Return if already extended
+        if(this.extended) return this;
+
         /** The Cloned Message Object. */
         const msg = Object.assign(Object.create(Object.getPrototypeOf(this)), this);
-
 
         // Args
         msg.Args = msg.content.split(/\s|\n/g);
@@ -47,6 +49,9 @@ module.exports = bot => {
         }
         msg.flag = msg.hasFlag;
 
+
+        // Safety if extending twice
+        msg.extended = true;
 
         // Returns the new Message object
         return msg;
