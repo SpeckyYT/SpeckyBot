@@ -24,7 +24,7 @@ module.exports.call = async (bot, m) => {
         return;
     }
 
-    if(msg.channel.topic ? msg.channel.topic.toLowerCase().includes("[global]") : false){
+    if(msg.channel.topicSetting("[global]")){
         return;
     }
 
@@ -136,7 +136,7 @@ module.exports.call = async (bot, m) => {
                 })
             }
             
-            if(category == "nsfw" && (!msg.channel.nsfw || (msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false))){
+            if(category == "nsfw" && (!msg.channel.nsfw || msg.channel.topicSetting('no-nsfw'))){
                 if(check(false, nsfwError)){
                     return msg.channel.send(error(nsfwError))
                 }

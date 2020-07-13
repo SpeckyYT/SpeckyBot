@@ -99,7 +99,7 @@ function categoryCheck(category,msg,bot){
             return msg.member.permissions.toArray().join(' ').includes('MANAGE_');
 
         case "nsfw":
-            return !(msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false) && msg.channel.nsfw;
+            return !msg.channel.topicSetting('no-nsfw') && msg.channel.nsfw;
 
         default:
             return true;

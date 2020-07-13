@@ -1,5 +1,5 @@
 module.exports = msg => {
-    if(msg.channel.topic ? msg.channel.topic.toLowerCase().includes('[no-nsfw]') : false){
+    if(msg.channel.topicSetting('no-nsfw')){
         return true;
     }
 
