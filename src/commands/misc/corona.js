@@ -63,7 +63,7 @@ module.exports.run = async (bot, msg) => {
     .addField("💀 Total deaths", `${stats.deaths} humans`)
     .addField("🔁 Total Recovered", `${stats.recovered} people`)
     .addField(`Top ${index} Locations`,string)
-    .setColor('FF00AA')
+    .setColor(bot.config.color)
     .setFooter("Last update")
     .setTimestamp(Date.parse(last_updated));
 

@@ -17,7 +17,6 @@ module.exports.run = async (bot, msg) => {
     const embed = bot.embed()
     .setTitle('Dad Joke!')
     .setDescription(joke)
-    .setColor('FF00AA')
 
     msg.channel.send(embed)
 }

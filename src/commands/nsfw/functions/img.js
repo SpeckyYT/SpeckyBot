@@ -18,9 +18,8 @@ module.exports = async (method, msg) => {
         return msg.channel.send("An unexpected error happened");
     }
 
-    let embed = new RichEmbed()
-    .setImage(url)
-    .setColor('FF00AA');
+    const embed = new RichEmbed()
+    .setImage(url);
 
     return msg.channel.send(embed); 
 }
