@@ -1,10 +1,9 @@
-const { readFileSync } = require('fs');
-
 module.exports = (bot) => {
     bot.loadSettings = async (bot) => {
         ['user','server'].forEach(f => {
             try{
-                bot.settings[f] = JSON.parse(readFileSync(`../db/${f.charAt(0)}_settings.json`).toString());
+                delete require.cache[require.resolve(`../../db/${f.charAt(0)}_settings.json`)];
+                bot.settings[f] = require(`../../db/${f.charAt(0)}_settings.json`);
             }catch(err){
                 console.log(err)
                 console.log(`Your db/${f.charAt(0)}_settings.json file looks like to be corrupted.\nPlease fix it before it becomes an issue.`.error)

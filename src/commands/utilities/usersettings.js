@@ -36,8 +36,13 @@ module.exports.run = async (bot, msg) => {
         case "ghostping":
         case "gp":
             u_settings[msg.author.id].ghostping = !u_settings[msg.author.id].ghostping;
-
             msg.channel.send(`Your Ghostping option got changed to \`${u_settings[msg.author.id].ghostping}\``);
+            changed = true;
+            break;
+
+        case "math":
+            u_settings[msg.author.id].math = !u_settings[msg.author.id].math;
+            msg.channel.send(`Your Math option got changed to \`${u_settings[msg.author.id].math}\``);
             changed = true;
             break;
 
@@ -48,6 +53,7 @@ module.exports.run = async (bot, msg) => {
             .addBlankField()
             .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``)
             .addField(`Will give you a notification if someone Ghostpinged you:`,`\`${bot.config.prefix}usersettings gp\``)
+            .addField(`Will automatically do maths for you:`,`\`${bot.config.prefix}usersettings math\``)
             return msg.channel.send(embed);
 
     }
