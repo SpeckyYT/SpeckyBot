@@ -38,11 +38,8 @@ module.exports = bot => {
         // Flags
         const flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
         msg.flags = [];
-        
         if(flags){
-            flags.forEach((_,index) => {
-                msg.flags[index] = flags[index].slice(2);
-            })
+            msg.flags = flags.map(f=>f.slice(2)); // removes the "--" on the beginning
         }
         msg.hasFlag = (input) => {
             return msg.flags.includes(input.toLowerCase());
