@@ -3,7 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot, msg) => {
-    if(msg.channel.topicSetting('no-bots')){
+    if(msg.channel.topicSetting ? msg.channel.topicSetting('no-bots') : false){
         if(msg.author.bot) msg.delete().catch(()=>{})
     }
 }
