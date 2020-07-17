@@ -42,6 +42,7 @@
         "typescript": "^3.9.6",
         "urban": "^0.3.2",
         "vm": "^0.1.0",
+        "waifulabs": "0.0.2",
         "youtube-dl": "^3.0.2",
         "ytdl-core": "^1.0.9",
         "ytdl-core-discord": "^1.2.1"
