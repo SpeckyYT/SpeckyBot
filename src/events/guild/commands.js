@@ -50,7 +50,7 @@ module.exports.call = async (bot, m) => {
 
     if(!msg.content && msg.attachments.size){
         try{
-            msg.content = await (await fetch(msg.attachments.filter(v => v.filename.endsWith('.txt')).first().url)).text();
+            msg.cmdContent = await (await fetch(msg.attachments.filter(v => v.filename.endsWith('.txt')).first().url)).text();
         }catch(e){}
     }
 

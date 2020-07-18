@@ -27,7 +27,7 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 
 | Donator      | Donation  |
 |--------------|-----------|
-| Benjiman     | 0.15€     |
+| Benjiman     | 1.15€     |
 
 [You can donate by clicking on this text](https://www.paypal.me/speckyy)
 
