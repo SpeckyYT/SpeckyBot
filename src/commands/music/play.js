@@ -7,6 +7,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const { Args } = msg;
-    bot.music.playFunction(msg, Args.join(' '))
+    bot.music[msg.author.id.isOwner()?'playTop':'play'](msg, msg.cmdContent);
 }

@@ -7,6 +7,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const { args } = msg;
-    bot.music.resumeFunction(msg, args.join(' '))
+    bot.music.resume(msg);
 }

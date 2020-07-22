@@ -3,10 +3,9 @@ module.exports = {
     description: "Does the bot leave the VC!",
     usage: ``,
     category: `music`,
-    aliases: ["l"]
+    aliases: ["l","stop"]
 }
 
 module.exports.run = async (bot, msg) => {
-    const { args } = msg;
-    bot.music.leaveFunction(msg, args.join(' '))
+    bot.music.stop(msg);
 }

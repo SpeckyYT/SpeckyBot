@@ -3,10 +3,9 @@ module.exports = {
     description: "Pauses the playing song!",
     usage: ``,
     category: `music`,
-    aliases: ["stop","paus"]
+    aliases: ["paus"]
 }
 
 module.exports.run = async (bot, msg) => {
-    const { args } = msg;
-    bot.music.pauseFunction(msg, args.join(' '))
+    bot.music.pause(msg);
 }

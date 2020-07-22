@@ -46,6 +46,10 @@ module.exports = bot => {
         }
         msg.flag = msg.hasFlag;
 
+        
+        // Client
+        msg.client = msg.client || bot;
+
 
         // Safety if extending twice
         msg.extended = true;
