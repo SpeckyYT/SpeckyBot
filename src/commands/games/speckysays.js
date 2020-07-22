@@ -3,6 +3,7 @@
     description: "Users have to complete the challenges in order to survive!\nThanks to **Mantevian / Manteex** and **Spu7Nix / SputNix** for this awesome module!\nhttps://github.com/Mantevian/simonsaysbot",
     usage: `#[channel] [start time in seconds]`,
     category: `games`,
+    cooldown: 30000,
     aliases: ["simonsays", "simon"],
     perms: ["MANAGE_MESSAGES"]
 }

@@ -250,7 +250,7 @@ module.exports.call = async (bot, m) => {
 }
 
 async function run(cmd, bot, msg, command){
-    if(bot.cache.runningcmds.includes(`${msg.author.id}:${cmd.name}`)){
+    if(bot.cache.runningcmds.includes(`${msg.channel.id}:${cmd.name}`)){
         return await msg.channel.send(error("This command is already running..."));
     }
 
@@ -262,8 +262,8 @@ async function run(cmd, bot, msg, command){
         }
     }
 
-    bot.cache.cooldown.set(`${msg.author.id}:${cmd.name}`,new Date());
-    bot.cache.runningcmds.push(`${msg.author.id}:${cmd.name}`);
+    bot.cache.cooldown.set(`${msg.author.id}:${cmd.name}`, new Date());
+    bot.cache.runningcmds.push(`${msg.channel.id}:${cmd.name}`);
 
     promisify(bot.getFunction(cmd))(bot, msg)
     .then(async res => {
@@ -296,8 +296,7 @@ async function run(cmd, bot, msg, command){
         }
     })
     .finally(async () => {
-        bot.cache.cooldown.delete(`${msg.author.id}:${cmd.name}`,new Date());
-        bot.cache.runningcmds = bot.cache.runningcmds.remove(`${msg.author.id}:${cmd.name}`);
+        bot.cache.runningcmds = bot.cache.runningcmds.remove(`${msg.channel.id}:${cmd.name}`);
         if(cmd.category == "economy"){
             await bot.economyWrite(bot.economy);
         }

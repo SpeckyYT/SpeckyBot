@@ -6,18 +6,24 @@ module.exports = {
     aliases: []
 }
 
-const dices = ["<:dice1:703314664746123345>","<:dice2:703314678679601384>","<:dice3:703314688347471963>","<:dice4:703314697180545065>","<:dice5:703314706013880451>","<:dice6:703314715052474388>"];
+const dice = [
+    "<:dice1:735388205062291507>",
+    "<:dice2:735388205527990282>",
+    "<:dice3:735388205469270026>",
+    "<:dice4:735388205540573194>",
+    "<:dice5:735388205247103049>",
+    "<:dice6:735388204932399186>"
+];
 const { RichEmbed } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     const quantity = isNaN(msg.args[0]) ? 1 : msg.args[0] <= 1 ? 1 : msg.args[0];
     const res = [], str = [];
     let index = 0;
-    while(index < quantity){
-        if(res.length >= 50) break;
+    while(index < quantity && res.length < 50){
         const roll = Math.floor(Math.random()*6);
         res.push(roll+1);
-        str.push(dices[roll])
+        str.push(dice[roll])
         index++;
     }
 

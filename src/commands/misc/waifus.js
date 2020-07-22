@@ -3,6 +3,7 @@ module.exports = {
     description: "Gives you waifus to choose from!",
     usage: '',
     category: 'misc',
+    cooldown: 30000,
     aliases: ['ws']
 }
 
@@ -44,9 +45,11 @@ module.exports.run = async (bot, msg) => {
                     "Finish with your favourite pose!"
                 ][step]+
                 "\n```\n"+
+
                 "```md\n"+
                 (step != 0 ? "# C to cancel\n# S to skip\n# B to go back\n":"")+"# R to reload the grid"+
                 "\n```\n"+
+                
                 "```c\n"+
                 "| 1  | 2  | 3  | 4  |\n"+
                 "| 5  | 6  | 7  | 8  |\n"+
