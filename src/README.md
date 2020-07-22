@@ -76,3 +76,11 @@ module.exports = () => {
     }
 }
 ```
+
+# 2. Addidional Informations
+
+## 2.1. Supported Programming Languages
+
+- JavaScript (.js)
+- CoffeeScript (.coffee)
+- LiveScript (.ls)

@@ -4,24 +4,6 @@ module.exports = async () => {
     // More Array Methods    
     require('more-array-methods')();
 
-    // CoffeeScript Support
-    require('coffee-register');
-    require.extensions['.coffeescript'] = require.extensions['.coffee'];
-
-    // TypeScript Support DEPRECATED
-    // is too slow
-
-    // TXT Support (useless ://)
-    require.extensions['.txt'] = (module, filename) => {
-        module.exports = fs.readFileSync(filename,{encoding: 'utf8'});
-    }
-
-    // BrainFuck Support (useless ://)
-    require.extensions['.b'] = (module, filename) => {
-        module.exports = fs.readFileSync(filename,{encoding: 'utf8'}).split('').filter((v) => '[]<>-+,.'.includes(v));
-    }
-    require.extensions['.bf'] = require.extensions['.b'];
-
     // Colored Strings in Terminal
     require('colors').setTheme({
         silly: 'rainbow',
@@ -44,4 +26,17 @@ module.exports = async () => {
         dependency: 'cyan',
         cli: 'cyan'
     });
+
+    // Require all languages
+    console.log("\n\nLoading LANGUAGES!\n".info);
+    fs.readdirSync(__dirname+'/languages')
+    .forEach(language => {
+        try{
+            require('./languages/'+language)();
+            console.log(language.data);
+        }catch(err){
+            console.log(`COULD NOT LOAD ${language.toUpperCase()} CORRECTLY`.error)
+        }
+    })
+    console.log('\n')
 }

@@ -20,6 +20,7 @@
         "is-image-url": "^1.1.8",
         "jimp": "^0.9.8",
         "leven": "^3.1.0",
+        "livescript": "^1.6.0",
         "mathjs": "^7.1.0",
         "moment": "^2.27.0",
         "more-array-methods": "^1.1.2",

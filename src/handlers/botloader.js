@@ -27,7 +27,7 @@ module.exports = async (bot) => {
     bot.config = {};
     bot.config = require('../../config.json');
 
-    bot.supportedFiles = /.(js|coffee|coffeescript|litcoffee)$/g;
+    bot.supportedFiles = /.(js|coffee|coffeescript|litcoffee|ls)$/g;
 
     if(typeof bot.config.apikeys == "object"){
         Object.keys(bot.config.apikeys).forEach(prop => {
