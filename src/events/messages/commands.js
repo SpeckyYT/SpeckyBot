@@ -10,7 +10,7 @@ const promisify = require('promisify-func');
 module.exports.call = async (bot, m) => {
     const msg = m.extend();
 
-    if(msg.author.bot || msg.channel.type === "dm") return;
+    if(msg.author.bot) return;
 
     if(msg.system) return;
 
@@ -24,15 +24,16 @@ module.exports.call = async (bot, m) => {
         return;
     }
 
-    if(msg.channel.topicSetting("[global]")){
+    if(msg.channel.type == "dm" ? false : msg.channel.topicSetting("[global]")){
         return;
     }
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first() ? msg.mentions.users.first().tag == bot.user.tag : false){
-            const clean = `@${msg.guild.me.nickname ? msg.guild.me.nickname : bot.user.username}`;
+            const clean = `@${msg.guild.me.nickname || bot.user.username}`;
             if(msg.cleanContent != clean){
                 msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
+                msg.cmdContent = msg.content;
             }else{
                 msg.args = [];
                 msg.Args = [];
@@ -46,6 +47,13 @@ module.exports.call = async (bot, m) => {
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
 
+    msg.command = msg.content.trim().slice(bot.config.prefix.length).trim().split(' ')[0];
+
+    msg.cmdContent = msg.content
+    .replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim()
+    .slice(bot.config.prefix.length).trim()
+    .slice(msg.command.length-bot.config.prefix.length).trim();
+
     const { command } = msg;
 
     if(!msg.content && msg.attachments.size){
@@ -53,10 +61,8 @@ module.exports.call = async (bot, m) => {
             msg.cmdContent = await (await fetch(msg.attachments.filter(v => v.filename.endsWith('.txt')).first().url)).text();
         }catch(e){}
     }
-
-    msg.command = command.slice(bot.config.prefix.length);
     
-    let cmd = bot.getCommand(command.slice(bot.config.prefix.length));
+    let cmd = bot.getCommand(command);
     
     const execute = async () => {
         if(cmd){
@@ -65,9 +71,9 @@ module.exports.call = async (bot, m) => {
             msg.bot = bot;
             bot.cache.msg = msg;
 
-            logger(command.slice(bot.config.prefix.length),true,msg,bot);
+            logger(command,true,msg,bot);
 
-            if(!msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')){
+            if(msg.channel.type == "dm" && !msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')){
                 return
             }
 
@@ -201,10 +207,10 @@ module.exports.call = async (bot, m) => {
             }
 
         }else{
-            logger(command.slice(bot.config.prefix.length),false,msg, bot);
+            logger(command,false,msg, bot);
             
             if(bot.config.reply_unexisting_command){
-                await msg.channel.send(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`));
+                await msg.channel.send(error(`🛑 Command \`${command || "null"}\` doesn't exist or isn't loaded correctly.`));
             }
         }
     }
@@ -304,7 +310,7 @@ async function run(cmd, bot, msg, command){
 }
 
 function logger(cmd, actived, msg, bot){
-    bot.log(`${cmd.toUpperCase()}: (${actived?"activated":"rejected"}) ${msg.author.tag} (${msg.author.id}, ${msg.channel.id}, ${msg.guild.id})`.cmd)
+    bot.log(`${cmd.toUpperCase()}: (${actived?"activated":"rejected"}) ${msg.author.tag} (${msg.author.id}, ${(msg.channel || {}).id}, ${(msg.guild || {}).id})`.cmd)
 }
 
 function error(error){
