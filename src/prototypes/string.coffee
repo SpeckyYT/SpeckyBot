@@ -8,7 +8,7 @@ module.exports = (bot) ->
         bot.config.owner.includes String(@)
 
     String::highFirst = ->
-        if @.length > 0 then @.charAt(0).toUpperCase() + (@.slice 1 if @.length > 1) else @
+        if @.length > 0 then @.charAt(0).toUpperCase() + (if @.length > 1 then @.slice 1 else '') else @
 
     String::findSnowflake = -> 
         bot.users.get String(@) or

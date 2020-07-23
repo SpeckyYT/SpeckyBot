@@ -24,7 +24,7 @@ module.exports.call = async (bot, m) => {
         return;
     }
 
-    if(msg.channel.type == "dm" ? false : msg.channel.topicSetting("[global]")){
+    if(msg.channel.type != "dm" && msg.channel.topicSetting("[global]")){
         return;
     }
 
@@ -51,8 +51,7 @@ module.exports.call = async (bot, m) => {
 
     msg.cmdContent = msg.content
     .replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim()
-    .slice(bot.config.prefix.length).trim()
-    .slice(msg.command.length-bot.config.prefix.length).trim();
+    .slice(msg.command.length+bot.config.prefix.length).trim();
 
     const { command } = msg;
 
@@ -61,7 +60,7 @@ module.exports.call = async (bot, m) => {
             msg.cmdContent = await (await fetch(msg.attachments.filter(v => v.filename.endsWith('.txt')).first().url)).text();
         }catch(e){}
     }
-    
+
     let cmd = bot.getCommand(command);
     
     const execute = async () => {
@@ -73,7 +72,7 @@ module.exports.call = async (bot, m) => {
 
             logger(command,true,msg,bot);
 
-            if(msg.channel.type == "dm" && !msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')){
+            if(msg.channel.type != "dm" && !msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')){
                 return
             }
 
@@ -84,7 +83,7 @@ module.exports.call = async (bot, m) => {
             if(msg.author.id.isOwner()){
                 owner = true
             }
-            if(msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){
+            if(msg.channel.type != "dm" && msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){
                 admin = true
             }
 
@@ -160,7 +159,7 @@ module.exports.call = async (bot, m) => {
                 }
             }
 
-            if(!(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
+            if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
                 if(cmd.perms){
                     if(!msg.member.hasPermission(cmd.perms)){
                         if(check(false, userPermError)){
@@ -296,6 +295,8 @@ async function run(cmd, bot, msg, command){
                 msg.channel.send(errdesc(`${bot.user} tried to send a message with 2000 or more characters.`));
             }else if(String(err).includes("Request entity too large")){
                 msg.channel.send(errdesc(`${bot.user} tried to send an attachment with more than 8MB.`));
+            }else if(msg.channel.type == "dm"){
+                msg.channel.send(errdesc(`${bot.user} tried to execute this command, but encountered an error (probably because it's in a DM)`))
             }else{
                 msg.channel.send(errdesc(err));
             }
