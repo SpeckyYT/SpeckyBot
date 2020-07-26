@@ -14,27 +14,35 @@ const { Attachment } = require('discord.js');
 const waifuSize = 200;
 
 module.exports.run = async (bot, msg) => {
+    const stepsWaifus = []
+
+    async function generateWaifuAttachment(prevWaifu){
+        const waifuImage = await (await waifulabs.generateBigWaifu(prevWaifu)).image;
+        const waifuBuffer = Buffer.from(waifuImage, 'base64');
+        const waifuAttachment = new Attachment(waifuBuffer, "waifu.png");
+        return waifuAttachment;
+    }
+
     const canvas = Canvas.createCanvas(waifuSize*4, waifuSize*4);
     const waifuCanvas = canvas.getContext("2d", {alpha: false});
 
     async function request(prevWaifu, step = 0){
-        if(step > 3){
-            return waifulabs.generateBigWaifu(prevWaifu)
-            .then(w => {
-                msg.channel.send(new Attachment(Buffer.from(w.image, 'base64'), "waifu.png"));
-            })
-        }
+        if(step > 3) return prevWaifu && msg.channel.send(await generateWaifuAttachment(prevWaifu));
         let newWaifus;
-        await waifulabs.generateWaifus(prevWaifu || undefined, step || 0)
-        .then(async waifus => {
-            newWaifus = waifus;
-            return waifus.forEach((w,i) => {
-                Canvas.loadImage(Buffer.from(w.image, 'base64'))
-                .then(img => waifuCanvas.drawImage(img, (i%4)*waifuSize, Math.floor(i/4)*waifuSize))
-            })
-        }).then(() => {
-            if(step > 0){
-                msg.channel.send(new Attachment(Buffer.from(prevWaifu.image, 'base64'), "waifu.png"));
+        Promise.all([
+            (async () => stepsWaifus[step] || waifulabs.generateWaifus(prevWaifu || undefined, step || 0))()
+            .then(waifus => {
+                newWaifus = waifus;
+                stepsWaifus[step] = newWaifus
+                return waifus.forEach((w,i) => {
+                    Canvas.loadImage(Buffer.from(w.image, 'base64'))
+                    .then(img => waifuCanvas.drawImage(img, (i%4)*waifuSize, Math.floor(i/4)*waifuSize))
+                })
+            }),
+            prevWaifu && generateWaifuAttachment(prevWaifu)
+        ]).then(async ([_,att]) => {
+            if(step > 0 && att){
+                await msg.channel.send(att);
             }
             return msg.channel.send(
                 "```diff\n+ "
@@ -66,10 +74,11 @@ module.exports.run = async (bot, msg) => {
                     collector.stop();
                     switch(m.content.toLowerCase()){
                         case "c":
-                            if(prevWaifu) msg.channel.send(new Attachment(Buffer.from((await waifulabs.generateBigWaifu(prevWaifu)).image, 'base64'), "waifu.png")); break;
+                            att && msg.channel.send(att); break;
                         case "s":
                             request(prevWaifu, step+1); break;
                         case "b":
+                            stepsWaifus[step] = null;
                             request(prevWaifu, step-1); break;
                         case "r":
                             request(prevWaifu, step); break;
@@ -80,7 +89,7 @@ module.exports.run = async (bot, msg) => {
                 collector.on('end', async () => {
                     if(!runned && prevWaifu){
                         m.edit(m.content+"\nTIME ELAPSED!");
-                        msg.channel.send(new Attachment(Buffer.from((await waifulabs.generateBigWaifu(prevWaifu)).image, 'base64'), "waifu.png"));
+                        att && msg.channel.send(att);
                     }
                 })
             })

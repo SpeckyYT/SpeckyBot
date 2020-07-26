@@ -55,7 +55,7 @@ module.exports.call = async (bot, m) => {
 
     const { command } = msg;
 
-    if(!msg.content && msg.attachments.size){
+    if(!msg.cmdContent && msg.attachments.size){
         try{
             msg.cmdContent = await (await fetch(msg.attachments.filter(v => v.filename.endsWith('.txt')).first().url)).text();
         }catch(e){}
