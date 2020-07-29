@@ -4,6 +4,11 @@ module.exports = {
 }
 
 module.exports.run = async (bot, data) => {
-    const { time } = bot.reload();
-    console.log(`${"everything".bold} got reloaded! (${time}ms)`.success);
+    if(data.args[0] == "bot"){
+        delete require.cache;
+        require('../bot')(bot);
+    }else{
+        const { time } = bot.reload();
+        console.log(`${"everything".bold} got reloaded! (${time}ms)`.success);
+    }
 }
