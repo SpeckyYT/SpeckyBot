@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
     .then(m => {
         gis(msg.cmdContent, (err,res) => {
             if(err) return bot.cmdError(err);
-            m.edit(res.pick().url);
+            m.edit(res[Math.floor(res.length*Math.min(...Array(10).fill(Math.random())))].url);
         })
     })
 }

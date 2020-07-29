@@ -24,7 +24,7 @@ module.exports.call = async (bot, m) => {
         return;
     }
 
-    if(msg.channel.type != "dm" && msg.channel.topicSetting("[global]")){
+    if(msg.channel.topicSetting && msg.channel.topicSetting("global")){
         return;
     }
 

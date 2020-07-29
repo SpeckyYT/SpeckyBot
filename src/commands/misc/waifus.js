@@ -14,8 +14,6 @@ const { Attachment } = require('discord.js');
 const waifuSize = 200;
 
 module.exports.run = async (bot, msg) => {
-    const stepsWaifus = []
-
     async function generateWaifuAttachment(prevWaifu){
         const waifuImage = await (await waifulabs.generateBigWaifu(prevWaifu)).image;
         const waifuBuffer = Buffer.from(waifuImage, 'base64');
@@ -23,6 +21,7 @@ module.exports.run = async (bot, msg) => {
         return waifuAttachment;
     }
 
+    const stepsWaifus = []
     const canvas = Canvas.createCanvas(waifuSize*4, waifuSize*4);
     const waifuCanvas = canvas.getContext("2d", {alpha: false});
 
@@ -81,6 +80,7 @@ module.exports.run = async (bot, msg) => {
                             stepsWaifus[step] = null;
                             request(prevWaifu, step-1); break;
                         case "r":
+                            stepsWaifus[step] = null;
                             request(prevWaifu, step); break;
                         default:
                             request(newWaifus[Number(m.content-1)], step+1);
