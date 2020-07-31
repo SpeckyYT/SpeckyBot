@@ -47,13 +47,11 @@ module.exports.call = async (bot, m) => {
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
 
-    msg.command = msg.content.trim().slice(bot.config.prefix.length).trim().split(' ')[0];
+    msg.command = msg.content.trim().slice(bot.config.prefix.length).trim().split(' ')[0].toLowerCase();
 
     msg.cmdContent = msg.content
     .replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim()
     .slice(msg.command.length+bot.config.prefix.length).trim();
-
-    const { command } = msg;
 
     if(!msg.cmdContent && msg.attachments.size){
         try{
@@ -61,7 +59,7 @@ module.exports.call = async (bot, m) => {
         }catch(e){}
     }
 
-    let cmd = bot.getCommand(command);
+    let cmd = bot.getCommand(msg.command);
     
     const execute = async () => {
         if(cmd){
@@ -70,7 +68,7 @@ module.exports.call = async (bot, m) => {
             msg.bot = bot;
             bot.cache.msg = msg;
 
-            logger(command,true,msg,bot);
+            logger(msg.command,true,msg,bot);
 
             if(msg.channel.type != "dm" && !msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')){
                 return
@@ -192,7 +190,7 @@ module.exports.call = async (bot, m) => {
                         runned = true;
                         collector.stop();
                         await ms.delete().catch(()=>{});
-                        return run(cmd, bot, msg, command);
+                        return run(cmd, bot, msg, msg.command);
                     })
                     
                     collector.on('end', async () => {
@@ -202,14 +200,14 @@ module.exports.call = async (bot, m) => {
                     })
                 })
             }else{
-                await run(cmd, bot, msg, command);
+                await run(cmd, bot, msg, msg.command);
             }
 
         }else{
-            logger(command,false,msg, bot);
+            logger(msg.command,false,msg, bot);
             
             if(bot.config.reply_unexisting_command){
-                await msg.channel.send(error(`🛑 Command \`${command || "null"}\` doesn't exist or isn't loaded correctly.`));
+                await msg.channel.send(error(`🛑 Command \`${msg.command || "null"}\` doesn't exist or isn't loaded correctly.`));
             }
         }
     }
@@ -228,7 +226,7 @@ module.exports.call = async (bot, m) => {
         let string = `Command \`${msg.command}\` is unavailable...\nSend a message with the number of the desidered command or \`c\` to cancel.\n\n`;
         items.forEach((val, ind) => string += `\`${ind+1}\` ${val}\n`)
         const ms = await msg.channel.send(bot.embed().setDescription(string));
-        const regex = /[1-9cC]/g
+        const regex = /^[1-9c]$/g
         const filter = m => ((m.author.id == msg.author.id) && Boolean(m.content.toLowerCase().match(regex)));
         const collector = msg.channel.createMessageCollector(filter, { time: 15000, errors: ["time"] });
         let runned = false;
@@ -249,7 +247,7 @@ module.exports.call = async (bot, m) => {
         });
         collector.on('end', async () => {
             if(runned) return;
-            await ms.edit(error(`🛑 Command \`${command}\` doesn't exist or isn't loaded correctly.`)).catch(()=>{});
+            await ms.edit(error(`🛑 Command \`${msg.command}\` doesn't exist or isn't loaded correctly.`)).catch(()=>{});
         });
     }
 }
