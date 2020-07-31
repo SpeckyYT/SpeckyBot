@@ -8,7 +8,7 @@ module.exports.call = async (bot, _, msg) => {
     if(check(msg.channel)){
         const am = bot.cache.globalchat.get(msg.id);
         if(am){
-            am.forEach(async ms => ms.edit(bot.globalChatEmbed(msg)))
+            am.forEach(ms => ms.edit(bot.globalChatEmbed(msg)).catch(()=>{}))
         }
     } 
 }

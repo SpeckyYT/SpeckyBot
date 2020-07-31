@@ -8,8 +8,8 @@ module.exports.call = async (bot, msg) => {
     if(check(msg.channel)){
         const am = bot.cache.globalchat.get(msg.id);
         if(am){
-            am.forEach(async ms => ms.delete().catch(()=>{}));
+            am.forEach(ms => ms.delete().catch(()=>{}));
         }
         bot.cache.globalchat.delete(msg.id);
-    } 
+    }
 }
