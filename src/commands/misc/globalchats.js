@@ -7,10 +7,13 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const channels = bot.channels.filter(c => c.topic ? c.topic.toLowerCase().includes('[global]') : false);
+    const channels = bot.channels
+    .filter(c => c.topic ? c.topic.toLowerCase().includes('[global]') : false)
+    .sort((a,b) => a.name.localeCompare(b.name));
     return msg.channel.send(
         bot.embed()
         .setTitle('Global Chats!')
-        .setDescription(`${channels.map(c => `${c} \`${c.name}\``).join('\n')}`)
+        .setDescription(channels.map(c => `\`${c.name}\` \`${c.guild.name}\``).join('\n'))
+        .setFooter(`${channels.size} Globlal Chats`)
     )
 }

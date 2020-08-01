@@ -10,7 +10,7 @@ module.exports.call = (bot, msg) => {
     if(u_settings[msg.author.id] ? u_settings[msg.author.id].math : false){
         try{
             const res = String(evaluate(msg.content));
-            if(res.length < 50 && res != msg.content){
+            if(res.length < 50 && res != msg.content && res !== "undefined"){
                 msg.channel.send("```js\n"+res+"\n```");
             }
         }catch(err){}
