@@ -58,7 +58,7 @@ module.exports.run = async (bot, msg) => {
         if(!categoryCheck(command.category, msg, bot)) return msg.channel.send(invalidcmd(embed,config));
         
         const cmd = command.name.highFirst();
-        const category = command.category;
+        const category = command.category || "uncategorized";
         const description = command.description || "No Description provided.";
         const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`;
         const aliases = `${command.aliases ? command.aliases.length > 0 ? command.aliases.join(", ") : '' : ''}`;
@@ -88,7 +88,8 @@ function invalidcmd(embed,config){
 }
 
 function categoryCheck(category,msg,bot){
-    category = category.toLowerCase()
+    if(typeof category != "string") return true;
+    category = category.toLowerCase();
 
     switch(category){
 
