@@ -47,7 +47,7 @@ module.exports.call = async (bot, m) => {
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)) return;
 
-    msg.command = msg.content.trim().slice(bot.config.prefix.length).trim().split(' ')[0].toLowerCase();
+    msg.command = msg.content.trim().slice(bot.config.prefix.length).trim().split(/[\s\n]/g)[0].toLowerCase();
 
     msg.cmdContent = msg.content
     .replace(/(\s?--[a-zA-Z]+\s?)+/g,' ').trim()
@@ -60,12 +60,10 @@ module.exports.call = async (bot, m) => {
     }
 
     let cmd = bot.getCommand(msg.command);
-    
+
     const execute = async () => {
         if(cmd){
             bot.stats.commandsExecuted++;
-
-            msg.bot = bot;
             bot.cache.msg = msg;
 
             logger(msg.command,true,msg,bot);
@@ -92,7 +90,7 @@ module.exports.call = async (bot, m) => {
                     illegal = true;
                     errorReasons.push(reason.toString());
                     return false;
-                }else if(   
+                }else if(
                     adminAllowed &&
                     admin &&
                     category != "owner" &&
@@ -138,7 +136,7 @@ module.exports.call = async (bot, m) => {
                     }
                 })
             }
-            
+
             if(category == "nsfw" && (!msg.channel.nsfw || msg.channel.topicSetting('no-nsfw'))){
                 if(check(false, nsfwError)){
                     return msg.channel.send(error(nsfwError))
@@ -157,7 +155,7 @@ module.exports.call = async (bot, m) => {
                 }
             }
 
-            if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){ 
+            if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){
                 if(cmd.perms){
                     if(!msg.member.hasPermission(cmd.perms)){
                         if(check(false, userPermError)){
@@ -183,16 +181,16 @@ module.exports.call = async (bot, m) => {
                     await ms.react(emote);
                     const filter = (reaction, user) => (user.id == msg.author.id) && (reaction.emoji.name == emote)
                     const collector =  ms.createReactionCollector(filter, { time: (time*1000), errors: ['time'] })
-                    
+
                     let runned = false;
-                    
+
                     collector.on('collect', async () => {
                         runned = true;
                         collector.stop();
                         await ms.delete().catch(()=>{});
                         return run(cmd, bot, msg, msg.command);
                     })
-                    
+
                     collector.on('end', async () => {
                         if(runned) return;
                         await ms.delete().catch(()=>{});
@@ -205,7 +203,7 @@ module.exports.call = async (bot, m) => {
 
         }else{
             logger(msg.command,false,msg, bot);
-            
+
             if(bot.config.reply_unexisting_command){
                 await msg.channel.send(error(`🛑 Command \`${msg.command || "null"}\` doesn't exist or isn't loaded correctly.`));
             }
@@ -288,7 +286,7 @@ async function run(cmd, bot, msg, command){
         }else{
             bot.log(err.message||err.error||err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
-            
+
             if(String(err).includes("Must be 2000 or fewer in length")){
                 msg.channel.send(errdesc(`${bot.user} tried to send a message with 2000 or more characters.`));
             }else if(String(err).includes("Request entity too large")){

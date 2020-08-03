@@ -5,7 +5,7 @@ module.exports = async (method, msg) => {
     if(Array.isArray(method)){
         method = method.pick();
     }
-    
+
     let sendt, user;
     let mention = msg.mentions.users.first();
 
@@ -69,7 +69,7 @@ module.exports = async (method, msg) => {
     }
 
     function send(imgURL, poweredby){
-        let embed = msg.bot.embed().setImage(imgURL);
+        const embed = msg.client.embed().setImage(imgURL);
         if(poweredby) embed.setFooter("Powered by " + poweredby);
         if(sendt) embed.setDescription(sendt);
         return msg.channel.send(embed);
