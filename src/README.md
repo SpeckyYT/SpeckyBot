@@ -82,5 +82,6 @@ module.exports = () => {
 ## 2.1. Supported Programming Languages
 
 - JavaScript (.js)
+- TypeScript (.ts)
 - CoffeeScript (.coffee)
 - LiveScript (.ls)
