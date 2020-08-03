@@ -25,7 +25,7 @@ module.exports = async (bot) => {
     process.openStdin().addListener("data", async res => {
         const content = res.toString();
         let oargs = res.toString().split(/\s/g).clean();
-        
+
         if(!oargs[0]) return;
 
         const regex = /^[^0-9a-zA-Z]+/g
@@ -75,7 +75,7 @@ module.exports = async (bot) => {
             })
         }else{
             const search = bot.console.get('searchchannel');
-            
+
             data.args[0] = command;
 
             search.run(bot,data)

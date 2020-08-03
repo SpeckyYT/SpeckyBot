@@ -5,32 +5,41 @@ const promisify = require('promisify-func');
 module.exports = async (bot) => {
     bot.removeAllListeners();
     const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory());
-    getDirectories('./events/')
-    .forEach(async edir => {    
-        try{
-            readdirSync(`./${edir}/`)
-            .filter(d => d.match(bot.supportedFiles))
-            .forEach(async file => {
-                const dir = edir.slice(1+Math.max(edir.indexOf('/'),edir.indexOf('\\')));
+    const getFiles = source => readdirSync(source).map(name => join(source, name)).filter(source => !lstatSync(source).isDirectory()).map(f => f.slice(f.lastIndexOf('\\')+1));
+
+    function loadFolders(path = []){
+        const currPath = path.join('/');
+        const stringPath = currPath.slice(currPath.indexOf('\\')+1);
+
+        const files = getFiles(`./${currPath}/`);
+        if(!files.includes('.ignorefiles')){
+            files.filter(d => d.match(bot.supportedFiles))
+            .forEach(file => {
                 try{
-                    const evt = bot.require(`./${edir}/${file}`);
+                    const evt = bot.require(`./${currPath}/${file}`);
                     const eName = evt.event;
-                    if(!eName) throw {
-                        message: {
-                            error: "Event not found!".toUpperCase()
-                        }
-                    }
-                    const calltype = evt.type || "on";
+                    if(!eName) throw new Error("Event not found!".toUpperCase());
+                    const calltype = evt.type == "once" ? "once" : "on";
                     bot[calltype](eName, promisify(bot.getFunction(evt).bind(null, bot)));
-                    bot.log(`${dir}   \t|\t${file}`.debug);
+                    bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file}`.debug);
                 }catch(err){
-                    bot.log(`${dir}   \t|\t${file} ERROR!`.error)
+                    bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file} ERROR!`.error);
                     bot.log(err.message.error);
                 }
             })
-        }catch(err){
-            bot.log(`ERROR WHILE LOADING ${edir.toUpperCase()} FOLDER!`)
         }
-    })
-    bot.log();
+
+        if(!files.includes('.ignoredirs')){
+            getDirectories(`./${currPath}/`)
+            .forEach(dir => {
+                try{
+                    loadFolders([dir]);
+                }catch(err){
+                    bot.log(`ERROR WHILE LOADING ${stringPath+"/"+dir} FOLDER!`.error);
+                    bot.log(String(err).error);
+                }
+            })
+        }
+    }
+    loadFolders(['events']);
 };
