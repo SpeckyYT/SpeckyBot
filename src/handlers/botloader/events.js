@@ -17,10 +17,11 @@ module.exports = async (bot) => {
             .forEach(file => {
                 try{
                     const evt = bot.require(`./${currPath}/${file}`);
-                    const eName = evt.event;
+                    let eName = evt.event;
                     if(!eName) throw new Error("Event not found!".toUpperCase());
                     const calltype = evt.type == "once" ? "once" : "on";
-                    bot[calltype](eName, promisify(bot.getFunction(evt).bind(null, bot)));
+                    if(!Array.isArray(eName)) eName = [eName];
+                    eName.forEach(event => bot[calltype](event, promisify(bot.getFunction(evt).bind(null, bot))))
                     bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file}`.debug);
                 }catch(err){
                     bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file} ERROR!`.error);

@@ -15,3 +15,6 @@ module.exports = (bot) ->
         bot.channels.get String(@) or
         bot.guilds.get String(@) or
         bot.emojis.get String(@)
+
+    String::singPlur = (number, outputNumb = true) ->
+        "#{if outputNumb then number else ''} #{this}#{if number == 1 then '' else 's'}".trim()

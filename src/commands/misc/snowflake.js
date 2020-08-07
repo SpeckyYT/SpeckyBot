@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg) => {
                 skip = true;
                 embed.setDescription("The requested Snowflake caused an overflow.");
             }else{
-                embed.addField(`${timestamp <= timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`);
+                embed.addField(`${timestamp <= timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${"year".singPlur(year)} ${"month".singPlur(month)} ${"day".singPlur(day)} ${"hour".singPlur(hrs)} ${"minute".singPlur(min)} and ${"second".singPlur(sec)}`);
             }
 
             if(toobig){ // > 9223372036854775807
@@ -67,7 +67,7 @@ module.exports.run = async (bot, msg) => {
             if(lsf){
                 const diff = Math.abs(timestamp-lsf);
                 const {sec, min, hrs, day, month, year} = bot.msToVars(diff);
-                embed.addField(`Difference from previous snowflake`,`${bot.singPlur(year,"year")} ${bot.singPlur(month,"month")} ${bot.singPlur(day,"day")} ${bot.singPlur(hrs,"hour")} ${bot.singPlur(min,"minute")} and ${bot.singPlur(sec,"second")}`)
+                embed.addField(`Difference from previous snowflake`,`${"year".singPlur(year)} ${"month".singPlur(month)} ${"day".singPlur(day)} ${"hour".singPlur(hrs,)} ${"minute".singPlur(min)} and ${"second".singPlur(sec)}`)
             }
             lsf = timestamp;
 
