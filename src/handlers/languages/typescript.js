@@ -1,6 +1,4 @@
 module.exports = () => {
-    // TypeScript Support DEPRECATED
-    // is too slow
     require.extensions['.ts'] = (module, filename) => {
         module._compile(
             new (require('@swc/core')).Compiler().transformSync(

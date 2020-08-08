@@ -11,7 +11,8 @@ module.exports = () => {
                     header: true,
                     filename: filename
                 }
-            ), filename
+            ),
+            filename
         )
     }
 }
