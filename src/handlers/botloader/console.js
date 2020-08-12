@@ -15,6 +15,9 @@ module.exports = async (bot) => {
         const stringPath = currPath.slice(currPath.indexOf('\\')+1);
 
         const files = getFiles(`./${currPath}/`);
+
+        if(files.includes('.ignoreall')) return;
+
         if(!files.includes('.ignorefiles')){
             files.filter(d => d.match(bot.supportedFiles))
             .forEach(file => {
