@@ -1,8 +1,8 @@
-const { TextChannel } = require('discord.js');
+const { Channel } = require('discord.js');
 
 module.exports = () => {
 
-    TextChannel.prototype.topicSetting = function(string=''){
+    Channel.prototype.topicSetting = function(string=''){
         return this.topic ? this.topic.toLowerCase().includes(`[${string}]`) : false;
     }
 

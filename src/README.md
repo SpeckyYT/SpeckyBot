@@ -84,4 +84,3 @@ module.exports = () => {
 - JavaScript (.js)
 - TypeScript (.ts)
 - CoffeeScript (.coffee)
-- LiveScript (.ls)

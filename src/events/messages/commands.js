@@ -33,14 +33,8 @@ module.exports.call = async (bot, m) => {
             const clean = `@${msg.guild.me.nickname || bot.user.username}`;
             if(msg.cleanContent != clean){
                 msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
-                msg.cmdContent = msg.content;
             }else{
-                msg.args = [];
-                msg.Args = [];
-                const help = "help";
-                logger(help,true,msg,bot);
-                const helpcmd = bot.commands.get(help);
-                run(helpcmd, bot, msg, `${bot.config.prefix}${help}`);
+                msg.content = bot.config.prefix
             }
         }
     }
@@ -59,7 +53,7 @@ module.exports.call = async (bot, m) => {
         }catch(e){}
     }
 
-    let cmd = bot.getCommand(msg.command);
+    let cmd = bot.getCommand(msg.command || 'help');
 
     const execute = async () => {
         if(cmd){
