@@ -1,10 +1,10 @@
 module.exports = (bot) => {
     bot.debug = () => {
-        console.log(bot.debugN++)
+        console.log(bot._debugN++)
     }
 
     bot.resetDebug = () => {
-        bot.debugN = 0;
+        bot._debugN = 0;
     }
 
     bot.cmdError = (error) => {

@@ -6,6 +6,7 @@ const { RichEmbed, Collection } = require('discord.js');
 const leven = require('leven');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
+const vm = require('vm');
 
 module.exports.call = async (bot, m) => {
     const msg = m.extend();
@@ -260,7 +261,14 @@ async function run(cmd, bot, msg, command){
     bot.cache.cooldown.set(`${msg.author.id}:${cmd.name}`, new Date());
     bot.cache.runningcmds.push(`${msg.channel.id}:${cmd.name}`);
 
-    promisify(bot.getFunction(cmd))(bot, msg)
+    const context = {
+        bot,
+        msg,
+        f:promisify(bot.getFunction(cmd))
+    };
+
+    vm.createContext(context);
+    vm.runInContext('f(bot,msg)', context)
     .then(async res => {
         if(cmd.type === 'template' && res && typeof res == "string"){
             msg.channel.send(res.trim());
