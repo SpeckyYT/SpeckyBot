@@ -43,11 +43,11 @@ module.exports.run = async (bot, msg) => {
     .setFooter(`The game will start in ${Math.floor(time / 1000)} seconds.`)
     channel.send(startembed).then(async (msg) => {
         msg.react('🎲')
-        
+
         const collected = await msg.awaitReactions(() => true, {
             time: time
         })
-        
+
         let players = []
         for (const reaction of collected.array()) {
             if(reaction.emoji.name == '🎲'){

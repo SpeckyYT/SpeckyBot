@@ -1,8 +1,8 @@
 module.exports = function (guild_id, config) {
-    
-    const choice = getRandomInt(4)
 
-    if (choice != 0) {
+    const choice = [0,1,1,1].pick();
+
+    if (choice) {
         return ({
             string: 'Simon says',
             real: config.opposite_day ? false : true
@@ -10,11 +10,8 @@ module.exports = function (guild_id, config) {
     }
 
     return ({
-        string: config.fakeStarts[getRandomInt(config.fakeStarts.length)],
+        string: config.fakeStarts.pick(),
         real: config.opposite_day ? true : false
     })
 }
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}

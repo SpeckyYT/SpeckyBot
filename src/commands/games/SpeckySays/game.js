@@ -5,18 +5,14 @@ const fs = require('fs')
 module.exports.runGame = async (channel, players_, bot) => {
 
     bot.minigames = []
-    const gameFiles = fs.readdirSync('./commands/games/SpeckySays/minigames').filter(file => file.endsWith('.js'))
+    const gameFiles = fs.readdirSync('./commands/games/SpeckySays/minigames').filter(file => file.match(bot.supportedFiles))
 
     for (const file of gameFiles) {
         const game = require(`./minigames/${file}`)
         bot.minigames.push(game)
     }
 
-    let players = players_
-    let time = 1
-    let winners
-    let gameOn
-    let prematurelyEnd
+    let players = players_, time = 1, winners, gameOn, prematurelyEnd;
     if(players_.length < 1){
         prematurelyEnd = true
         gameOn = false
@@ -30,9 +26,9 @@ module.exports.runGame = async (channel, players_, bot) => {
     let settings = require('./settings');
 
     while (gameOn) {
-        
+
         // chooses a random minigame
-        
+
         const enabledGames = []
         for(const game of bot.minigames){
             if(settings.minigames[game.name]){
@@ -45,12 +41,12 @@ module.exports.runGame = async (channel, players_, bot) => {
             channel.send('You need to have at least one game enabled to play. Enable/disable with the config command.')
             return
         }
-        let currentGame  = enabledGames[getRandomInt(enabledGames.length)]
-        
+        let currentGame  = enabledGames.pick();
+
         while(currentGame == lastGame){
-            currentGame = enabledGames[getRandomInt(enabledGames.length)]
+            currentGame = enabledGames.pick();
         }
-        
+
         // picks a random start of startmessage (67% chance of getting "Simon says")
         let start
         if (currentGame.name == 'oppositeDay') {
@@ -62,7 +58,7 @@ module.exports.runGame = async (channel, players_, bot) => {
             start = {
                 string: 'Simon says',
                 real: true
-            } 
+            }
         } else {
             start = randomStart(channel.guild.id, settings)
         }
@@ -71,12 +67,16 @@ module.exports.runGame = async (channel, players_, bot) => {
         // sends startmessage
         const startMessage = await channel.send(`**${start.string} ${currentGame.startMessage.toLowerCase()}** *(You have ${Math.floor(actualTime / 1000)} seconds)*`)
         // runs the game
-        
-        let { playersOut, playersLeft, settingsOut } = await currentGame.run(channel, players, actualTime, bot, {
+
+        const res = await currentGame.run(channel, players, actualTime, bot, {
             simonSaid: start.real,
             startMessage: startMessage,
             settings: settings
         })
+
+        let { playersOut } = res;
+        const { playersLeft, settingsOut } = res;
+
         settings = settingsOut
 
         await sleep(1000)
@@ -93,7 +93,7 @@ module.exports.runGame = async (channel, players_, bot) => {
 
         channel.send(embed)
         await sleep(1000)
-        
+
 
         if (playersLeft.length < 1) {
             winners = playersOut
@@ -109,20 +109,12 @@ module.exports.runGame = async (channel, players_, bot) => {
     if(!prematurelyEnd){
         const embed = new discord.RichEmbed()
         .setTitle('The game has ended!')
-        .setDescription(`${winners.join(', ')} won with ${rounds} points! GG!`)
+        .setDescription(`${winners.join(', ')} won with ${rounds} point${rounds !== 1 ? 's' : ''}! GG!`)
         .setColor('#FFBE11')
         channel.send(embed)
     }
 }
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-Number.prototype.clamp = function (min, max) { 
-    return Math.min(Math.max(this, min), max);
-};

@@ -6,7 +6,7 @@ module.exports = {
 
         // when time is up
         const settings = info.settings
-        
+
         // making a bunch of collectors
         const collectors = []
         for(const player of players){
@@ -27,8 +27,8 @@ module.exports = {
             const rCollected = await collected
             messages = messages.concat(rCollected.array())
         }
-        
-        
+
+
         const out = []
         const outIndex = []
         // check each player to see if they are out

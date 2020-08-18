@@ -6,7 +6,7 @@ module.exports = {
         const settings = info.settings
         const alternatives = settings.tasks.react
 
-        const emoji = alternatives[getRandomInt(alternatives.length)]
+        const emoji = alternatives.pick();
         const startMessage = await channel.send(`React to this message with this emoji: ${emoji}`)
 
         let allReactions = startMessage.awaitReactions(() => true, {
@@ -19,10 +19,10 @@ module.exports = {
         await sleep(1000)
         allReactions = await allReactions
         allReactions = allReactions.array()
-        
+
         let allUsers = []
         for (const reaction of allReactions) {
-            
+
             if (reaction.emoji.toString() === emoji) {
                 const users = await reaction.fetchUsers()
                 allUsers = allUsers.concat(users.array())
@@ -65,9 +65,5 @@ module.exports = {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
 }
 

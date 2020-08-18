@@ -9,7 +9,7 @@ module.exports = {
         const collector = channel.createMessageCollector(() => true);
 
         const settings = info.settings
- 
+
 
         let collected
         collector.on('end', collected_ => {

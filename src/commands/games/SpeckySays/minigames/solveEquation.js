@@ -4,7 +4,7 @@ module.exports = {
     name: 'solveEquation',
     run: async function (channel, players, time, client, info) {
         const symbols = ['+', '-', '*'] // ×
-        const symbol = symbols[getRandomInt(symbols.length)]
+        const symbol = symbols.pick();
         const equation = `${getRandomInt(symbol == '*' ? 10 : 20)} ${symbol} ${getRandomInt(symbol == '*' ? 10 : 20)}`
         await channel.send(`**${equation.toUpperCase().replace('*', '×')}**`)
         const answer = eval(equation)

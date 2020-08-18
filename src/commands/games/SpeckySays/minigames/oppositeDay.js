@@ -4,7 +4,7 @@ module.exports = {
     name: 'oppositeDay',
     run: async function (channel, players, time, client, info) {
         const settings = info.settings
-        
+
         if (!settings.opposite_day) await channel.send('Opposite day begins soon! Write **ok** in chat if you are ready!')
         else await channel.send('Opposite day has ended! Write **ok** if you are ready to go back to normal!')
 
@@ -44,7 +44,7 @@ module.exports = {
         const newPlayers = players.filter( ( el ) => !out.includes( el ) )
 
         settings.opposite_day = !settings.opposite_day
-        
+
 
         return ({
             playersOut: out,

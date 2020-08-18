@@ -6,7 +6,7 @@ module.exports = {
         const settings = info.settings
         const alternatives = settings.tasks.say
 
-        const word = alternatives[getRandomInt(alternatives.length)].toLowerCase()
+        const word = alternatives.pick().toLowerCase()
         await channel.send(`**${word}**`)
 
         const collector = channel.createMessageCollector(() => true);
@@ -53,10 +53,6 @@ module.exports = {
             settingsOut: settings
         })
     }
-}
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
 }
 
 function sleep(ms) {
