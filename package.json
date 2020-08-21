@@ -6,6 +6,7 @@
     "dependencies": {
         "@discordjs/opus": "^0.3.2",
         "@swc/core": "^1.2.11",
+        "async": "^3.2.0",
         "brain.js": "^2.0.0-beta.1",
         "canvas": "^2.6.1",
         "child_process": "^1.0.2",
@@ -16,6 +17,7 @@
         "discord.js": "^11.6.4",
         "express": "^4.17.1",
         "g-i-s": "^2.1.6",
+        "gifencoder": "^2.0.1",
         "googleapis": "^52.1.0",
         "got": "^10.7.0",
         "is-image-url": "^1.1.8",
