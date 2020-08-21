@@ -115,7 +115,7 @@ module.exports.call = async (bot, m) => {
             }
 
             if(category == "economy"){
-                await bot.economyRead(bot,msg);
+                await bot.economyRead(msg);
             }
 
             if((category == "owner" || cmd.category === "private") && !owner){

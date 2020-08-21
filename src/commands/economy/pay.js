@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
     if(!receiver){
         return bot.cmdError("You have to tag someone to pay.");
     }
-    bot.economySummon(bot, receiver);
+    bot.economySummon(receiver);
 
     const numberRegex = /[\s>-]\d+/g;
     const matches = msg.cmdContent.match(numberRegex);

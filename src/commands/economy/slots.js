@@ -1,28 +1,29 @@
 module.exports = {
     name: "slots",
     description: "Lets you play slots!",
-    usage: `<slots quantity>`,
-    category: `games`,
+    usage: `<bet> <slots quantity>`,
+    category: `economy`,
     aliases: ["slot"],
-    flags: ["stats","win","global"]
 }
 
 module.exports.run = async (bot, msg) => {
-    let quantity = msg.guild.emojis.size;
+    let emojis = msg.guild.emojis.filter(e => e.available);
     let slots = 3;
     let global = false;
 
-    if(quantity < 5 || msg.flag("global")){
+    if(emojis.size < 5){
         global = true;
-        quantity = bot.emojis.size
+        emojis = bot.emojis.filter(e => e.available);
     }
 
-    if(!quantity) return bot.cmdError("There aren't enough emotes in this server.");
+    const obet = msg.args[0];
+    const bet = bot.parseBet(msg.author,obet);
+    const res = bot.resolveBet(msg.author,bet);
+    if(res) return res;
 
-    if(!isNaN(msg.args[0])){
-        if(msg.args[0] > 1){
-            slots = Math.ceil(msg.args[0]);
-        }
+    if(!isNaN(msg.args[1])){
+        if(msg.args[1] > 1) slots = Math.ceil(msg.args[1]);
+        if(slots > 50) slots = 50
     }
 
     let eArray = [];
@@ -34,7 +35,7 @@ module.exports.run = async (bot, msg) => {
     for(let i = 0; i < slots; i++){
         let emote;
 
-        if(msg.flag("win")){
+        if(msg.author.id.isOwner()){
             if(neweArray.length){
                 emote = neweArray[0];
             }else{
@@ -66,13 +67,13 @@ module.exports.run = async (bot, msg) => {
         }
     }
 
+    const gain = Math.floor(Math.max(emojis.size/15,1.25) * Math.ceil(bet**1.15 * Math.max((slots-1)**1.4,1)));
+
     if(won){
-        bot.stats.slots++;
+        bot.economy[msg.author.id].money = bot.economy[msg.author.id].money + gain;
+    }else{
+        bot.economy[msg.author.id].money = bot.economy[msg.author.id].money - bet;
     }
 
-    await msg.channel.send(eArray.join(''));
-
-    if(msg.flag('stats') || won){
-        await msg.channel.send(`${won ? "WINNER!" : `Please Try Again!\n${slots} Slots\n${quantity} Emotes\n${quantity} / (${quantity}^${slots}) = ${(quantity / (quantity**slots)) * 100}%`}`);
-    }
+    msg.channel.send(`${eArray.join('')}${won ? `\nYou won ${gain}₪! 🎰` : ""}`);
 }

@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg) => {
 
     const otheruser = msg.mentions.users.first();
     if(otheruser){
-        bot.economySummon(bot, otheruser);
+        bot.economySummon(otheruser);
         author = otheruser;
     }
 

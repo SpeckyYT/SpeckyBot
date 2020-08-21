@@ -1,29 +1,34 @@
 const { readFile, writeFile } = require('fs');
 
 module.exports = (bot) => {
-    bot.parseBet = (economy,author,bet,min) => {
-        const { money } = economy[author.id];
+    bot.parseBet = (author,bet,min) => {
+        const { money } = bot.economy[author.id];
 
-        if(!min){
-            min = 100
-        }
+        if(isNaN(min)) min = 100
 
         const nbet = Number(bet);
 
-        if(nbet > money){
-            return 0;
-        }else if(nbet < (min ? min : 100)){
-            return "0";
-        }else if(bet === "all"){
-            return money;
-        }else if(isNaN(nbet)){
-            return false;
-        }else{
-            return nbet;
+        if(nbet > money) return 0;
+        else if(nbet < (min ? min : 100)) return "0";
+        else if(bet === "all") return money;
+        else if(isNaN(nbet)) return false;
+        else return nbet;
+    }
+
+    bot.resolveBet = (author,parsedBet,min) => {
+        switch(parsedBet){
+            case 0:
+                return bot.cmdError(`You only have ${bot.economy[author.id].money}₪ in the bank.`);
+            case "0":
+                return bot.cmdError(`Minimum bet is ${min == undefined ? 100 : min}`);
+            case false:
+                return bot.cmdError("Bet it not a Number")
+            default:
+                return false;
         }
     }
 
-    bot.economyRead = async (bot,author) => {
+    bot.economyRead = async (author) => {
         return await new Promise((resolve,reject) => {
             readFile("../db/userdata.json", "utf8", async (err,data) => {
                 if(err){
@@ -33,7 +38,7 @@ module.exports = (bot) => {
                     author = author.author || author;
                     author = author.id || author;
                     if(author){
-                        await bot.economySummon(bot, author);
+                        await bot.economySummon(author);
                         resolve();
                     }
                 }
@@ -41,8 +46,7 @@ module.exports = (bot) => {
         })
     }
 
-    bot.economySummon = async (bot, user) => {
-        if(!bot) return;
+    bot.economySummon = async (user) => {
         if(!bot.economy) return;
 
         if(user){
@@ -73,10 +77,11 @@ module.exports = (bot) => {
         }
     }
 
-    bot.economyWrite = async (economy) => {
+    bot.economyWrite = async () => {
+        if(!bot.economy) return;
+
         return await new Promise((resolve, reject) => {
-            economy = economy.economy || economy;
-            writeFile("../db/userdata.json", JSON.stringify(economy,null,4), (err) => {
+            writeFile("../db/userdata.json", JSON.stringify(bot.economy,null,4), (err) => {
                 if(err){
                     reject(err);
                 }else{
