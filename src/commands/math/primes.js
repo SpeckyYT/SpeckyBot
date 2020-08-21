@@ -9,7 +9,7 @@ module.exports = {
 const primesPath = './commands/math/data/primes.json';
 const { writeFile, readFileSync } = require('fs');
 
-module.exports.run = async (bot, msg) => { 
+module.exports.run = async (bot, msg) => {
     const startPrimes = [];
     const primes = [];
     let numb = 1;
@@ -21,16 +21,16 @@ module.exports.run = async (bot, msg) => {
     }catch(e){}
 
     async function prime(){
-        while(numb++){
-            if([...primes,...startPrimes].every(p=>numb%p)){
-                primes.push(numb);
-                string = `\`\`\`${primes.join(" ")}\`\`\``;
-                if(string.length >= 1980){
-                    primes.pop();
-                    break;
-                }
-            }
+        numb++;
+        if([...primes,...startPrimes].every(p=>numb%p)){
+            primes.push(numb);
+            string = `\`\`\`${primes.join(" ")}\`\`\``;
         }
+        if(string.length >= 1980){
+            primes.pop();
+            return;
+        }
+        await prime();
     }
     await prime();
 

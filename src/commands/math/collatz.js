@@ -3,14 +3,14 @@ module.exports = {
     description: "Gives you the collatz sequence!",
     usage: `[number]`,
     category: `math`,
-    aliases: []
+    aliases: ["coll"]
 }
 
 
 const collatzPath = './commands/math/data/collatz.txt';
 const { writeFile, readFileSync } = require('fs');
 
-module.exports.run = async (bot, msg) => { 
+module.exports.run = async (bot, msg) => {
     const collatz = [];
     let numb = 2;
 
@@ -26,16 +26,16 @@ module.exports.run = async (bot, msg) => {
     }
 
     async function coll(){
-        while(true){
-            collatz.push(numb);
-            if(numb == 1){
-                break;
-            }
-            numb = numb%2 ? 3*numb+1 : numb/2;
-            if(collatz.join(" ").length >= 1980){
-                collatz.pop();
-                break;
-            }
+        collatz.push(numb);
+        if(numb == 1){
+            return;
+        }
+        numb = numb%2 ? 3*numb+1 : numb/2;
+        if(collatz.join(" ").length >= 1980){
+            collatz.pop();
+            return;
+        }else{
+            await coll();
         }
     }
     await coll();
