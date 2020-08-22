@@ -1,7 +1,6 @@
 const { Attachment } = require('discord.js');
 const { Canvas } = require('canvas');
 const GIFEncoder = require('gifencoder');
-require('more-array-methods')();
 
 const size = 100;
 

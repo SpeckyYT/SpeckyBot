@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 module.exports = async () => {
-    // More Array Methods    
+    // More Array Methods
     require('more-array-methods')();
 
     // Colored Strings in Terminal
