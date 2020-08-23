@@ -1,7 +1,7 @@
 module.exports = {
     name: "reboot",
     description: "Reboots the bot down!",
-    usage: ``,
+    usage: "",
     category: `owner`,
     aliases: []
 }
@@ -18,8 +18,8 @@ module.exports.run = async (bot, msg) => {
 
     // Destroys Bot
     await bot.destroy();
-    
+
     delete require.cache;
 
-    return require(process.cwd()+'/bot.js')(bot);
+    return require(process.cwd()+'\\bot.js')(bot);
 }

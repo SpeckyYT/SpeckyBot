@@ -1,7 +1,7 @@
 module.exports = {
     name: "dither",
     description: "Dithers the image!",
-    usage: ``,
+    usage: "",
     category: `images`,
     aliases: [],
     perms: [],
@@ -9,5 +9,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('./functions/methods')(bot, msg,'dither565',false,false,"png");
+    return require('.\\functions\\methods')(bot, msg,'dither565',false,false,"png");
 }

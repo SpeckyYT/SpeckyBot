@@ -1,12 +1,12 @@
 module.exports = {
     name: "primes",
     description: "Gives you prime numbers!",
-    usage: ``,
+    usage: "",
     category: `math`,
     aliases: ["prime"]
 }
 
-const primesPath = './commands/math/data/primes.json';
+const primesPath = '.\\commands\\math\\data\\primes.json';
 const { writeFile, readFileSync } = require('fs');
 
 module.exports.run = async (bot, msg) => {

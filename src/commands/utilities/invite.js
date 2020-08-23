@@ -1,7 +1,7 @@
 module.exports = {
     name: "invite",
     description: "Do you want to add this bot to your server?",
-    usage: ``,
+    usage: "",
     category: `utilities`,
     aliases: ["inv","invit"]
 }

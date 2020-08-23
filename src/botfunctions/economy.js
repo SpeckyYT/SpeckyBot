@@ -30,7 +30,7 @@ module.exports = (bot) => {
 
     bot.economyRead = async (author) => {
         return await new Promise((resolve,reject) => {
-            readFile("../db/userdata.json", "utf8", async (err,data) => {
+            readFile("..\\db\\userdata.json", "utf8", async (err,data) => {
                 if(err){
                     reject(err);
                 }else{
@@ -81,7 +81,7 @@ module.exports = (bot) => {
         if(!bot.economy) return;
 
         return await new Promise((resolve, reject) => {
-            writeFile("../db/userdata.json", JSON.stringify(bot.economy,null,4), (err) => {
+            writeFile("..\\db\\userdata.json", JSON.stringify(bot.economy,null,4), (err) => {
                 if(err){
                     reject(err);
                 }else{

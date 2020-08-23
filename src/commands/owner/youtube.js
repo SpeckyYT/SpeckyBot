@@ -12,6 +12,6 @@ const youtubedl = require('youtube-dl')
 module.exports.run = (bot, msg) => {
     const video = youtubedl(msg.cmdContent,['--format=18'],{cwd:__dirname});
     video.on('info', info => {
-        video.pipe(fs.createWriteStream("../"+"YT-"+info._filename));
+        video.pipe(fs.createWriteStream("..\\"+"YT-"+info._filename));
     })
 }

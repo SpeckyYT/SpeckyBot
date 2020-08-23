@@ -1,11 +1,11 @@
 module.exports = {
     name: "hentai",
     description: "Gives you a hentai!",
-    usage: ``,
+    usage: "",
     category: `nsfw`,
     aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(["randomHentaiGif","hentai"],msg);
+    require('.\\functions\\img')(["randomHentaiGif","hentai"],msg);
 }

@@ -1,7 +1,7 @@
 module.exports = {
     name: "channelsunread",
     description: "Turns every channel in an unread one!",
-    usage: ``,
+    usage: "",
     category: `admin`,
     aliases: ["cur"],
     perms: ['ADMINISTRATOR']

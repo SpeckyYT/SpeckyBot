@@ -7,7 +7,7 @@ module.exports = {
 }
 
 const { writeFile } = require('fs');
-const dir = '../../../db/u_settings';
+const dir = '..\\..\\..\\db\\u_settings';
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
@@ -26,9 +26,9 @@ module.exports.run = async (bot, msg) => {
             const temp = parseInt(color, 16);
             if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
             if(color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
-            
+
             u_settings[msg.author.id].embedcolor = color.toUpperCase();
-            
+
             msg.channel.send(`Changed your embed color to \`${color.toUpperCase()}\`!`);
             changed = true;
             break;
@@ -59,7 +59,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(changed){
-        writeFile('../db/u_settings.json', JSON.stringify(u_settings, null, 4), err => {
+        writeFile('..\\db\\u_settings.json', JSON.stringify(u_settings, null, 4), err => {
             if(err){
                 msg.channel.send("Error while saving...");
                 console.error(err);

@@ -1,14 +1,14 @@
-const randomStart = require('./randomStart.js')
+const randomStart = require('.\\randomStart.js')
 const discord = require('discord.js')
 const fs = require('fs')
 
 module.exports.runGame = async (channel, players_, bot) => {
 
     bot.minigames = []
-    const gameFiles = fs.readdirSync('./commands/games/SpeckySays/minigames').filter(file => file.match(bot.supportedFiles))
+    const gameFiles = fs.readdirSync('.\\commands\\games\\SpeckySays\\minigames').filter(file => file.match(bot.supportedFiles))
 
     for (const file of gameFiles) {
-        const game = require(`./minigames/${file}`)
+        const game = require(`.\\minigames\\${file}`)
         bot.minigames.push(game)
     }
 
@@ -23,7 +23,7 @@ module.exports.runGame = async (channel, players_, bot) => {
     let rounds = 1
     let lastGame = null
     // example of how to start a game
-    let settings = require('./settings');
+    let settings = require('.\\settings');
 
     while (gameOn) {
 

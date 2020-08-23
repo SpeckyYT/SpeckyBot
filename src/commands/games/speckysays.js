@@ -9,7 +9,7 @@
 }
 
 const { RichEmbed } = require('discord.js')
-const { runGame } = require('./SpeckySays/game');
+const { runGame } = require('.\\SpeckySays\\game');
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;

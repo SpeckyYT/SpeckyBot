@@ -1,7 +1,7 @@
 module.exports = {
     name: "chessboard",
     description: "Gives you a Chess Board!",
-    usage: ``,
+    usage: "",
     category: `misc`,
     aliases: []
 }

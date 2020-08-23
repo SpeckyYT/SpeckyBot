@@ -7,13 +7,13 @@ module.exports.call = async (bot, msg) => {
     if(msg.channel.type !== 'text') return;
     if((new Date().getTime() - msg.createdTimestamp) > 60000) return;
 
-    const u_settings = require('../../../db/u_settings.json');
+    const u_settings = require('..\\..\\..\\db\\u_settings.json');
 
     if(msg.mentions.members.first()){
         msg.mentions.members.forEach(member => {
             if(msg.author.id != member.user.id && !member.user.bot){
                 if(u_settings[member.user.id] ? !u_settings[member.user.id].ghostping : true) return;
-                
+
                 return member.send(
                     bot.embed()
                     .setTitle('Ghostping')

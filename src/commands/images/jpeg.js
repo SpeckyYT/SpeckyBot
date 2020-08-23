@@ -9,5 +9,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('./functions/methods')(bot, msg,'quality',false,[50,1,100],msg.command);
+    return require('.\\functions\\methods')(bot, msg,'quality',false,[50,1,100],msg.command);
 }

@@ -31,8 +31,6 @@ module.exports.run = async (bot,msg) => {
     encoder.setDelay(5);
     encoder.setQuality(10);
 
-    encoder.out.data
-
     const array = Array(size).fill(0).map((_,i) => i+1).shuffle();
     let groupSize;
 
@@ -62,7 +60,7 @@ module.exports.run = async (bot,msg) => {
             array.forEach((v,i,a) => {
                 ctx.fillRect(i,size,1,-v)
                 if(i+1 == a.length){
-                // fs.writeFile("./test/img/"+iterations+".png", canvas.toBuffer(),()=>{})
+                // fs.writeFile(".\\test\\img\\"+iterations+".png", canvas.toBuffer(),()=>{})
                     encoder.addFrame(ctx);
                 }
             });

@@ -1,7 +1,7 @@
 module.exports = {
     name: "owo",
     description: "OwO!",
-    usage: ``,
+    usage: "",
     category: `misc`,
     aliases: ['uwu']
 }

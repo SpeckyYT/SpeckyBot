@@ -1,11 +1,11 @@
 module.exports = {
     name: "kuni",
     description: "Gives you a kuni!",
-    usage: ``,
+    usage: "",
     category: `nsfw`,
     aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')('kuni', msg);
+    require('.\\functions\\img')('kuni', msg);
 }

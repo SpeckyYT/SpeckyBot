@@ -9,7 +9,7 @@ module.exports = {
 
 const { RichEmbed } = require('discord.js');
 const { writeFile } = require("fs");
-const dir = '../../../db/s_settings.json'
+const dir = '..\\..\\..\\db\\s_settings.json'
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
@@ -41,9 +41,9 @@ module.exports.run = async (bot, msg) => {
                     }else{
                         s_settings[msg.guild.id] = {
                             mtechannel: [channelid],
-                        }; 
+                        };
                     }
-                    writeFile('./s_settings.json', JSON.stringify(s_settings, null, 4), err => {
+                    writeFile('.\\s_settings.json', JSON.stringify(s_settings, null, 4), err => {
                         if(err) throw err;
                         msg.channel.send("Added! :ok_hand:")
                     });
@@ -57,7 +57,7 @@ module.exports.run = async (bot, msg) => {
                     s_settings[msg.guild.id] = {
                         mtechannel: rest,
                     };
-                    writeFile('./s_settings.json', JSON.stringify(s_settings, null, 4), err => {
+                    writeFile('.\\s_settings.json', JSON.stringify(s_settings, null, 4), err => {
                         if(err) throw err;
                         msg.channel.send("Removed! :ok_hand:")
                     });

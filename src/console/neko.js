@@ -10,7 +10,7 @@ const neko = new (require('nekos.life'))();
 const execute = async (bot,f) => {
     if(f){
         await f().then(async img => {
-            require('./functions/drawbuffer')(bot,img.url);
+            require('.\\functions\\drawbuffer')(bot,img.url);
         })
     }else{
         console.log(`${sfw}/${met} doesn't exist`.error);

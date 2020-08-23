@@ -9,5 +9,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('./functions/methods')(bot, msg,'pixelate',false,[5,2,50],"png");
+    return require('.\\functions\\methods')(bot, msg,'pixelate',false,[5,2,50],"png");
 }

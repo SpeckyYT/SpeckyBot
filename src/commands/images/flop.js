@@ -1,7 +1,7 @@
 module.exports = {
     name: "flop",
     description: "Flips the image! (Vertically)",
-    usage: ``,
+    usage: "",
     category: `images`,
     aliases: [],
     perms: [],
@@ -12,7 +12,7 @@ const { read } = require('jimp')
 const { unlink } = require('fs')
 
 module.exports.run = async (bot, msg) => {
-    const image    = bot.cache.lastImage[msg.channel.id]; 
+    const image    = bot.cache.lastImage[msg.channel.id];
     const id       = bot.snowflake();
 
     const fileFormat = "png"
@@ -32,7 +32,7 @@ module.exports.run = async (bot, msg) => {
             file[method](false, true).write(id + `.${fileFormat}`, ()=>{
                 msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
                     response.delete();
-                    unlink("./" + id + `.${fileFormat}`, () => {})
+                    unlink(".\\" + id + `.${fileFormat}`, () => {})
                     bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
                 })
             })

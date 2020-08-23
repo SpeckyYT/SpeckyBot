@@ -5,5 +5,5 @@ module.exports = async (bot,url) => {
     const matches = String(url).match(linkregex);
     url = matches[0] ? matches[0] : url;
     bot.cache.console.drawlink = url;
-    spawn('node',[`${__dirname}/child/drawB.js`,url],{stdio:[process.stdin,process.stdout,process.stderr]});
+    spawn('node',[`${__dirname}\\child\\drawB.js`,url],{stdio:[process.stdin,process.stdout,process.stderr]});
 }

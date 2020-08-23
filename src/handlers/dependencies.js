@@ -29,10 +29,10 @@ module.exports = async () => {
 
     // Require all languages
     console.log("\n\nLoading LANGUAGES!\n".info);
-    fs.readdirSync(__dirname+'/languages')
+    fs.readdirSync(__dirname+'\\languages')
     .forEach(language => {
         try{
-            require('./languages/'+language)();
+            require('.\\languages\\'+language)();
             console.log(language.data);
         }catch(err){
             console.log(`COULD NOT LOAD ${language.toUpperCase()} CORRECTLY`.error)

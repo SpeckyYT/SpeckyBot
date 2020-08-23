@@ -7,7 +7,7 @@ module.exports = {
 }
 
 
-const collatzPath = './commands/math/data/collatz.txt';
+const collatzPath = '.\\commands\\math\\data\\collatz.txt';
 const { writeFile, readFileSync } = require('fs');
 
 module.exports.run = async (bot, msg) => {

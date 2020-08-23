@@ -5,7 +5,7 @@ const alreadyLoaded = [];
 
 module.exports = async (bot) => {
     bot.setMaxListeners(50);
-    
+
     bot.stats = {};
     bot.stats.commandsExecuted = 0;
     bot.stats.slots = 0;
@@ -25,7 +25,7 @@ module.exports = async (bot) => {
     bot.settings = {};
 
     bot.config = {};
-    bot.config = require('../../config.json');
+    bot.config = require('..\\..\\config.json');
 
     const sF = [];
     for (const a in require.extensions) sF.push(a);
@@ -45,7 +45,7 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('./handlers/botloader/').map(v => sequence && v.match(bot.supportedFiles).length > 0 && !sequence.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
+        ...readdirSync('.\\handlers\\botloader\\').map(v => sequence && v.match(bot.supportedFiles).length > 0 && !sequence.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
     ]
     .forEach(async x => {
         if(x == 'music'){
@@ -55,12 +55,12 @@ module.exports = async (bot) => {
                 alreadyLoaded.push(x)
             }
         }
-        
+
         if(bot.log){
             bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
         }else{
             console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
         }
-        require(`./botloader/${x}`)(bot);
+        require(`.\\botloader\\${x}`)(bot);
     });
 }

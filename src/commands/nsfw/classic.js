@@ -1,11 +1,11 @@
 module.exports = {
     name: "sex",
     description: "Gives you a classic endpoint!",
-    usage: ``,
+    usage: "",
     category: `nsfw`,
     aliases: ["classic"]
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')("classic",msg);
+    require('.\\functions\\img')("classic",msg);
 }

@@ -1,11 +1,11 @@
 module.exports = {
     name: "shiba",
     description: "Gives you a shiba!",
-    usage: ``,
+    usage: "",
     category: `sfw`,
     aliases: ['shibe']
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')('shiba', msg);
+    require('.\\functions\\img')('shiba', msg);
 }

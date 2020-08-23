@@ -32,7 +32,7 @@ module.exports = async (bot, msg, method, free, values,fileFormat) => {
         intensity = null;
     }
 
-    const image    = bot.cache.lastImage[msg.channel.id]; 
+    const image    = bot.cache.lastImage[msg.channel.id];
     const id       = bot.snowflake();
 
     if(image == undefined){
@@ -42,7 +42,7 @@ module.exports = async (bot, msg, method, free, values,fileFormat) => {
     if(!fileFormat){
         fileFormat = "png"
     }
-    
+
     let error;
 
     return await msg.channel.send("Image is getting processed...").then( response => {
@@ -59,7 +59,7 @@ module.exports = async (bot, msg, method, free, values,fileFormat) => {
                 })
                 .then(async (ree)=>{
                     await response.delete();
-                    unlink(`./${id}.${fileFormat}`, () => {});
+                    unlink(`.\\${id}.${fileFormat}`, () => {});
                     if(!error){
                         bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
                     }

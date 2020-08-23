@@ -1,11 +1,11 @@
 module.exports = {
     name: "ero",
     description: "Gives you erotic images!",
-    usage: ``,
+    usage: "",
     category: `nsfw`,
     aliases: ["erotic"]
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(["holoEro","eroFeet","ero","eroKitsune","eroKemonomimi","eroNeko","eroYuri"],msg);
+    require('.\\functions\\img')(["holoEro","eroFeet","ero","eroKitsune","eroKemonomimi","eroNeko","eroYuri"],msg);
 }

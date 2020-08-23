@@ -1,7 +1,7 @@
 module.exports = {
     name: "npm",
     description: "Updates/installs NPM dependencies!",
-    usage: ``,
+    usage: "",
     category: `owner`,
     aliases: []
 }

@@ -1,7 +1,7 @@
 module.exports = {
     name: "flip",
     description: "Flips the image! (Horizontally)",
-    usage: ``,
+    usage: "",
     category: `images`,
     aliases: [],
     perms: [],
@@ -12,12 +12,12 @@ const { read } = require('jimp')
 const { unlink } = require('fs')
 
 module.exports.run = async (bot, msg) => {
-    const image    = bot.cache.lastImage[msg.channel.id]; 
+    const image    = bot.cache.lastImage[msg.channel.id];
     const id       = bot.snowflake();
 
     const fileFormat = "png"
     const method = "flip"
-    
+
     if(image == undefined){
         return msg.channel.send("No image found");
     }
@@ -32,7 +32,7 @@ module.exports.run = async (bot, msg) => {
             file[method](true, false).write(id + `.${fileFormat}`, ()=>{
                 msg.channel.send( '',  { files: [id + `.${fileFormat}`] }).then((ree)=>{
                     response.delete();
-                    unlink("./" + id + `.${fileFormat}`, () => {})
+                    unlink(".\\" + id + `.${fileFormat}`, () => {})
                     bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
                 })
             })

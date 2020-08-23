@@ -1,11 +1,11 @@
 module.exports = {
     name: "pussy",
     description: "Gives you a pussy!",
-    usage: ``,
+    usage: "",
     category: `nsfw`,
     aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')(["pussy","pussyWankGif","pussyArt"],msg);
+    require('.\\functions\\img')(["pussy","pussyWankGif","pussyArt"],msg);
 }

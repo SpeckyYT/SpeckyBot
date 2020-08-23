@@ -1,7 +1,7 @@
 module.exports = {
     name: "minesweeper",
     description: "Gives you a minesweeper field!",
-    usage: ``,
+    usage: "",
     category: `games`,
     aliases: ["ms"]
 }

@@ -1,7 +1,7 @@
 module.exports = {
     name: "fibonacci",
     description: "Gives you the fibonacci sequence!",
-    usage: ``,
+    usage: "",
     category: `math`,
     aliases: ["fibo"]
 }

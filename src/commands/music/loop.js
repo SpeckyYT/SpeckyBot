@@ -1,7 +1,7 @@
 module.exports = {
     name: "loop",
     description: "Loops the song!",
-    usage: ``,
+    usage: "",
     category: `music`,
     aliases: ["l"]
 }

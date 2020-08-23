@@ -1,7 +1,7 @@
 module.exports = {
     name: "greyscale",
     description: "Applies a greyscale filter to the image!",
-    usage: ``,
+    usage: "",
     category: `images`,
     aliases: ["grayscale","grey","gray"],
     perms: [],
@@ -9,5 +9,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('./functions/methods')(bot, msg,'greyscale',false,[false,false,false],"png");
+    return require('.\\functions\\methods')(bot, msg,'greyscale',false,[false,false,false],"png");
 }

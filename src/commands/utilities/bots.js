@@ -1,12 +1,12 @@
 module.exports = {
     name: "bots",
     description: "Gives you the online/offline bots list!",
-    usage: ``,
+    usage: "",
     category: `utilities`,
     aliases: ["bot","robot","robots"]
 }
 
-const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('./functions/misc.js')
+const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('.\\functions\\misc.js')
 
 module.exports.run = async (bot, msg) => {
     const bots = [];

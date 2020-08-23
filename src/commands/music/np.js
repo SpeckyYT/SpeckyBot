@@ -1,7 +1,7 @@
 module.exports = {
     name: "nowplaying",
     description: "Gives you the name of the song!",
-    usage: ``,
+    usage: "",
     category: `music`,
     aliases: ["np"]
 }

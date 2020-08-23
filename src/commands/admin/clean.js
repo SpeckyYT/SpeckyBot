@@ -1,7 +1,7 @@
 module.exports = {
     name: "clean",
     description: "Deletes a message for you!",
-    usage: `<bots>/<users>`,
+    usage: `<bots/users>`,
     category: `admin`,
     aliases: ["cls"],
     perms: ['MANAGE_MESSAGES'],
@@ -20,7 +20,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(isNaN(size)){
-        size = 25; 
+        size = 25;
     }
 
     if(size < 1){

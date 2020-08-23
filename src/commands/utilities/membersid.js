@@ -1,7 +1,7 @@
 module.exports = {
     name: "membersid",
     description: "Turns all user IDs into a txt file!",
-    usage: ``,
+    usage: "",
     category: `utilities`,
     aliases: ['membersids','memberids','memberid']
 }
@@ -14,8 +14,8 @@ module.exports.run = async (bot, msg) => {
     msg.guild.members.forEach(async member => {
         members.push(member.user.id)
     })
-    appendFile('./members.txt', members.join('\n'), () => {})
-    const att = new Attachment('./members.txt',"members.txt")
+    appendFile('.\\members.txt', members.join('\n'), () => {})
+    const att = new Attachment('.\\members.txt',"members.txt")
     await msg.channel.send(att);
-    unlink('./members.txt', () => {})
+    unlink('.\\members.txt', () => {})
 }

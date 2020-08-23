@@ -11,10 +11,10 @@ module.exports = async (bot) => {
     const getFiles = source => readdirSync(source).map(name => join(source, name)).filter(source => !lstatSync(source).isDirectory()).map(f => f.slice(f.lastIndexOf('\\')+1));
 
     function loadFolders(path = []){
-        const currPath = path.join('/');
+        const currPath = path.join('\\');
         const stringPath = currPath.slice(currPath.indexOf('\\')+1);
 
-        const files = getFiles(`./${currPath}/`);
+        const files = getFiles(`.\\${currPath}`);
 
         if(files.includes('.ignoreall')) return;
 
@@ -22,7 +22,7 @@ module.exports = async (bot) => {
             files.filter(d => d.match(bot.supportedFiles))
             .forEach(file => {
                 try{
-                    const pull = bot.require(`./console/${file}`);
+                    const pull = bot.require(`.\\console\\${file}`);
                     bot.console.set(pull.name, pull);
                     if (pull.aliases) pull.aliases.forEach(a => bot.consoleali.set(a, pull.name));
                     bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file}`.debug);
@@ -34,12 +34,12 @@ module.exports = async (bot) => {
         }
 
         if(!files.includes('.ignoredirs')){
-            getDirectories(`./${currPath}/`)
+            getDirectories(`.\\${currPath}`)
             .forEach(dir => {
                 try{
                     loadFolders([dir]);
                 }catch(err){
-                    bot.log(`ERROR WHILE LOADING ${stringPath+"/"+dir} FOLDER!`.error);
+                    bot.log(`ERROR WHILE LOADING ${stringPath+"\\"+dir} FOLDER!`.error);
                     bot.log(String(err).error);
                 }
             })

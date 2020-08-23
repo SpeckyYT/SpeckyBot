@@ -2,7 +2,7 @@ const { appendFile, readFile, writeFile } = require('fs');
 
 module.exports = (bot) => {
     bot.log = async (content) => {
-        appendFile('../commands.log',`${content ? 
+        appendFile('..\\commands.log',`${content ?
             String(content)
             .replace(/[\x1b][[][0-9]{2}m/g,'')
             .replace(/\t/g,' ').replace(/ +/g,' ')
@@ -11,7 +11,7 @@ module.exports = (bot) => {
 
         let file;
 
-        readFile('../commands.log', async (err,data)=>{
+        readFile('..\\commands.log', async (err,data)=>{
 
             file = data.toString().split('\n');
 
@@ -19,7 +19,7 @@ module.exports = (bot) => {
                 while(file.length > 99000){
                     file.shift();
                 }
-                writeFile('../commands.log',file.join("\n"),()=>{})
+                writeFile('..\\commands.log',file.join("\n"),()=>{})
             }
 
         })

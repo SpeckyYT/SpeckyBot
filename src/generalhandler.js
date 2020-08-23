@@ -16,15 +16,15 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('./handlers/').map(v => sequence && v.match(/.[a-zA-Z]+$/g).length > 0 && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
+        ...readdirSync('.\\handlers\\').map(v => sequence && v.match(/.[a-zA-Z]+$/g).length > 0 && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
     ]
     .forEach(async handler => {
         if(!handler) return;
-        
+
         console.log(`test`.dependency ? `handler\t${handler}.js`.dependency : `handler\t${handler}.js`);
-        
-        try{ 
-            await require(`./handlers/${handler}.js`)(bot);
+
+        try{
+            await require(`.\\handlers\\${handler}.js`)(bot);
         }catch(err){
             console.log(`handler\t${handler}.js`.error);
             console.log("FATAL ERROR ON HANDLERS".fatal);

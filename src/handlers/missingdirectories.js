@@ -6,12 +6,12 @@ module.exports = async () => {
         'commands'
     ]
     .forEach(dir => {
-        if (!existsSync(`./${dir}/private`)) mkdirSync(`./${dir}/private`);
+        if (!existsSync(`.\\${dir}\\private`)) mkdirSync(`.\\${dir}\\private`);
     });
     [
         'db'
     ]
     .forEach(dir => {
-        if (!existsSync(`../${dir}`)) mkdirSync(`../${dir}`);
+        if (!existsSync(`..\\${dir}`)) mkdirSync(`..\\${dir}`);
     });
 }

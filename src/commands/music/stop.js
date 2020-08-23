@@ -1,7 +1,7 @@
 module.exports = {
     name: "leave",
     description: "Does the bot leave the VC!",
-    usage: ``,
+    usage: "",
     category: `music`,
     aliases: ["l","stop"]
 }

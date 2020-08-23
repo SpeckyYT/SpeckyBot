@@ -1,11 +1,11 @@
 module.exports = {
     name: "food",
     description: "Feeds you!",
-    usage: ``,
+    usage: "",
     category: `sfw`,
     aliases: ['feed','eat']
 }
 
 module.exports.run = async (bot, msg) => {
-    require('./functions/img')('feed', msg);
+    require('.\\functions\\img')('feed', msg);
 }

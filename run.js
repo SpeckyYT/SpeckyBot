@@ -1,3 +1,3 @@
-const mainfolder = './src'
+const mainfolder = '.\\src'
 process.chdir(mainfolder);
-require(mainfolder+'/bot.js')();
+require(mainfolder+'\\bot.js')();
