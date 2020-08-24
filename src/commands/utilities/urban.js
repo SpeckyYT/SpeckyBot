@@ -52,10 +52,20 @@ module.exports.run = async (bot, msg) => {
             const embed = bot.embed()
             .setColor("#134FE6")
             .setAuthor(`Urban Dictionary | ${word}`, image)
-            .setThumbnail(image)
-            .setDescription(`**Defintion:** ${await replaceLinks(definition) || "No Definition"}\n\n**Example:** ${await replaceLinks(example) || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
-            .setFooter(`Written by ${author || "unknown"}`);
-            msg.channel.send(embed)
+            .setFooter(`Written by ${author || "unknown"}`)
+            .setDescription(`**Defintion:** ${definition || "No Definition"}\n\n**Example:** ${example || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
+            .setThumbnail(image);
+
+            return msg.channel.send(embed)
+            .then(async m => {
+                const newDesc = `**Defintion:** ${await replaceLinks(definition) || "No Definition"}\n\n**Example:** ${await replaceLinks(example) || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`
+                if(newDesc != embed.description){
+                    return m.edit(
+                        embed
+                        .setDescription(newDesc)
+                    )
+                }
+            })
         });
     } catch(e) {
         console.error(e)
