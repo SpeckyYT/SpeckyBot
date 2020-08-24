@@ -4,17 +4,17 @@ module.exports = {
     startMessage: 'react to this message!',
     defTime: 20000,
     name: 'react',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
 
 
         let allReactions = info.startMessage.awaitReactions(() => true, {
             time: time
         })
-        await sleep(time - 1000)
+        await bot.sleep(time - 1000)
         // when time is up
         if (info.settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
-        await sleep(1000)
+        await bot.sleep(1000)
         allReactions = await allReactions
         allReactions = allReactions.array()
 
@@ -56,8 +56,4 @@ module.exports = {
             settingsOut: info.settings
         })
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

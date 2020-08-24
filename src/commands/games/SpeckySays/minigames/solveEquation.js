@@ -2,7 +2,7 @@ module.exports = {
     startMessage: 'write the correct answer to this equation:',
     defTime: 16000,
     name: 'solveEquation',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
         const symbols = ['+', '-', '*'] // ×
         const symbol = symbols.pick();
         const equation = `${getRandomInt(symbol == '*' ? 10 : 20)} ${symbol} ${getRandomInt(symbol == '*' ? 10 : 20)}`
@@ -19,7 +19,7 @@ module.exports = {
         });
 
         // when time is up
-        await sleep(time)
+        await bot.sleep(time)
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         collector.stop()
@@ -59,8 +59,4 @@ module.exports = {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

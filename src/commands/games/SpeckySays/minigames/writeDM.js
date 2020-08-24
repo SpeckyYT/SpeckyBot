@@ -2,7 +2,7 @@ module.exports = {
     startMessage: 'send me a direct message (DM)!',
     defTime: 20000,
     name: 'writeDM',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
 
         // when time is up
         const settings = info.settings
@@ -16,7 +16,7 @@ module.exports = {
         }
 
         // when time is up
-        await sleep(time)
+        await bot.sleep(time)
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
 
@@ -59,8 +59,4 @@ module.exports = {
             settingsOut: settings
         })
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

@@ -2,7 +2,7 @@ module.exports = {
     startMessage: 'do this:',
     defTime: 25000,
     name: 'reactSpecific',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
         const settings = info.settings
         const alternatives = settings.tasks.react
 
@@ -12,11 +12,11 @@ module.exports = {
         let allReactions = startMessage.awaitReactions(() => true, {
             time: time
         })
-        await sleep(time - 1000)
+        await bot.sleep(time - 1000)
         // when time is up
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
-        await sleep(1000)
+        await bot.sleep(1000)
         allReactions = await allReactions
         allReactions = allReactions.array()
 
@@ -62,8 +62,3 @@ module.exports = {
         })
     }
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-

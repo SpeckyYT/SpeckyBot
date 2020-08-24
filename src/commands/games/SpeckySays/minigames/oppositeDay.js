@@ -2,7 +2,7 @@ module.exports = {
     startMessage: 'it\'s a new day!',
     defTime: 20000,
     name: 'oppositeDay',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
         const settings = info.settings
 
         if (!settings.opposite_day) await channel.send('Opposite day begins soon! Write **ok** in chat if you are ready!')
@@ -16,13 +16,13 @@ module.exports = {
         });
 
         // when time is up
-        await sleep(time)
+        await bot.sleep(time)
 
         if (!settings.opposite_day) await channel.send('Simon says time\'s up! We\'re ready to start the opposite day! \n **From now and until opposite day ends, do the opposite of what you would normally do to stay in the game!**')
         else await channel.send('Alright time\'s up! We\'ve ended the opposite day!')
 
         collector.stop()
-        await sleep(6000)
+        await bot.sleep(6000)
         const messages = collected.array()
         const out = []
         const outIndex = []
@@ -52,8 +52,4 @@ module.exports = {
             settingsOut: settings
         })
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

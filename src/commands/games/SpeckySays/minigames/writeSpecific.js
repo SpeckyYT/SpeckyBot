@@ -2,7 +2,7 @@ module.exports = {
     startMessage: 'write this in chat:',
     defTime: 20000,
     name: 'writeSpecific',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
         const settings = info.settings
         const alternatives = settings.tasks.say
 
@@ -17,7 +17,7 @@ module.exports = {
         });
 
         // when time is up
-        await sleep(time)
+        await bot.sleep(time)
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
         collector.stop()
@@ -53,8 +53,4 @@ module.exports = {
             settingsOut: settings
         })
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

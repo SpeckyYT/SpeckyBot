@@ -2,7 +2,7 @@ module.exports = {
     startMessage: 'change your status to:',
     defTime: 10000,
     name: 'status',
-    run: async function (channel, players, time, client, info) {
+    run: async function (channel, players, time, bot, info) {
         const settings = info.settings
         const alternatives = settings.tasks.status
 
@@ -11,7 +11,7 @@ module.exports = {
         await channel.send(`**${status.replace('dnd', 'do not disturb').replace('offline', 'invisible')}**`)
 
         // when time is up
-        await sleep(time)
+        await bot.sleep(time)
         if (settings.opposite_day) await channel.send('Alright time\'s up!')
         else await channel.send('Simon says time\'s up!')
 
@@ -42,8 +42,3 @@ module.exports = {
         })
     }
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-

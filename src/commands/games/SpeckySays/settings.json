@@ -1,27 +1,23 @@
 { 
-   "minigames":{ 
-      "dontWrite":true,
-      "react":true,
-      "reactSpecific":true,
-      "solveEquation":true,
-      "write":true,
-      "writeSpecific":true,
-      "oppositeDay":true,
-      "status":true,
-      "writeDM":true,
-      "writeDMSpecific":true
-   },
-   "fakeStarts":[ 
+   "fakeStarts":[
       "Alright,",
       "Okay,",
       "Now,",
-      "Simoon says",
+      "So,",
+      "Please",
+      "Garfield says",
+      "Luigi says",
+      "Mario says",
+      "Samuel says",
+      "Sean says",
       "Simmon says",
       "Simone says",
-      "Please"
+      "Simoon says",
+      "SimOwOn says",
+      "Steve says"
    ],
-   "tasks":{ 
-      "say":[ 
+   "tasks":{
+      "say":[
          "hello",
          "hi",
          "boom",
@@ -32,7 +28,7 @@
          "you are cool",
          "bruh"
       ],
-      "react":[ 
+      "react":[
          "🤖",
          "👍",
          "🔥",
@@ -40,7 +36,7 @@
          "🐭",
          "🍌"
       ],
-      "status":[ 
+      "status":[
          "online",
          "idle",
          "dnd",
