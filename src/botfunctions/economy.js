@@ -22,7 +22,7 @@ module.exports = (bot) => {
             case "0":
                 return bot.cmdError(`Minimum bet is ${min == undefined ? 100 : min}`);
             case false:
-                return bot.cmdError("Bet it not a Number")
+                return bot.cmdError("Bet it not a Number");
             default:
                 return false;
         }
@@ -30,11 +30,17 @@ module.exports = (bot) => {
 
     bot.economyRead = async (author) => {
         return await new Promise((resolve,reject) => {
-            readFile("..\\db\\userdata.json", "utf8", async (err,data) => {
+            readFile("..\\db\\economy.json", "utf8", async (err,data) => {
                 if(err){
                     reject(err);
                 }else{
-                    bot.economy = JSON.parse(data);
+                    const economy = JSON.parse(data);
+                    for(const [id,eco] of Object.entries(economy)){
+                        bot.economy[id] = bot.economy[id] || {};
+                        for(const [prop,value] of Object.entries(eco)){
+                            bot.economy[id][prop] = value;
+                        }
+                    }
                     author = author.author || author;
                     author = author.id || author;
                     if(author){
@@ -72,7 +78,7 @@ module.exports = (bot) => {
                 changes = true;
             }
             if(changes){
-                await bot.economyWrite(bot.economy);
+                return bot.economyWrite(bot.economy);
             }
         }
     }
@@ -80,8 +86,8 @@ module.exports = (bot) => {
     bot.economyWrite = async () => {
         if(!bot.economy) return;
 
-        return await new Promise((resolve, reject) => {
-            writeFile("..\\db\\userdata.json", JSON.stringify(bot.economy,null,4), (err) => {
+        return new Promise((resolve, reject) => {
+            writeFile("..\\db\\economy.json", JSON.stringify(bot.economy,null,4), (err) => {
                 if(err){
                     reject(err);
                 }else{
