@@ -3,11 +3,9 @@ module.exports = {
     description: "Applies a sepia filter to the image!",
     usage: "",
     category: `images`,
-    aliases: [],
-    perms: [],
-    cmdperms: []
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('.\\functions\\methods')(bot, msg,'sepia',false,[false,false,false],"png");
+    return require('.\\functions\\methods')(bot, msg,'sepia',false,false,"png");
 }

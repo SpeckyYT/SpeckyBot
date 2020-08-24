@@ -3,11 +3,9 @@ module.exports = {
     description: "Rotates the image!",
     usage: `[Amount (0-360)]`,
     category: `images`,
-    aliases: [],
-    perms: [],
-    cmdperms: []
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('.\\functions\\methods')(bot, msg,'rotate',true,[0,0,0],"png");
+    return require('.\\functions\\methods')(bot, msg,'rotate',true,[msg.args[0]],"png");
 }

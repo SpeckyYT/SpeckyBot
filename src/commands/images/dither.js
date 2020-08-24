@@ -3,9 +3,7 @@ module.exports = {
     description: "Dithers the image!",
     usage: "",
     category: `images`,
-    aliases: [],
-    perms: [],
-    cmdperms: []
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {

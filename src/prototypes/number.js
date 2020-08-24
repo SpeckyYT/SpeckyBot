@@ -13,8 +13,11 @@ module.exports = bot => {
     Number.prototype.wait = Number.prototype.sleep;
     Number.prototype.pause = Number.prototype.sleep;
 
-    Number.prototype.clamp = function (min, max) {
-        return Math.min(Math.max(this, min), max);
+    Number.prototype.clamp = function (min, max){
+        let temp = this.valueOf();
+        if(typeof min === "number") temp = Math.max(temp,min);
+        if(typeof max === "number") temp = Math.min(temp,max);
+        return temp;
     }
 
     Number.prototype.times = function(cb){

@@ -3,9 +3,7 @@ module.exports = {
     description: "Invert the color of the image!",
     usage: "",
     category: `images`,
-    aliases: [],
-    perms: [],
-    cmdperms: []
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {

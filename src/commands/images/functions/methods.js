@@ -1,82 +1,50 @@
-const { read } = require('jimp')
-const { unlink } = require('fs')
+const { read, MIME_PNG, MIME_JPEG } = require('jimp');
+const { Attachment } = require('discord.js');
 
-module.exports = async (bot, msg, method, free, values,fileFormat) => {
+module.exports = async (bot, msg, method, free, values, fileFormat) => {
+    let [intensity,min,max] = Array.isArray(values) ? values : [];
     const { Args } = msg;
 
-    let intensity,min,max;
-    if(typeof values == "object"){
-        intensity = values[0];
-        min = values[1];
-        max = values[2];
+    let tempIntensity = Args[0] ? parseInt(Args[0]) : null;
+
+    if(typeof tempIntensity == "number") intensity = tempIntensity.clamp(min,max);
+
+    if(isNaN(intensity) && (free || typeof min == "number" || typeof max == "number")){
+        return bot.cmdError(`${intensity} is not a number`);
     }
 
-    Args[0] = parseFloat(Args[0])
+    const image = bot.cache.lastImage[msg.channel.id];
+    if(image == undefined) return bot.cmdError("No image found");
 
-    if(typeof intensity != "boolean"){
+    if(!fileFormat) fileFormat = "png";
 
-        if(!free){
-            if(!isNaN(Args[0])){
-                intensity = Number(Args[0]);
-            }
-            if(intensity > max){
-                intensity = max
-            }
-            if(intensity < min){
-                intensity = min
-            }
-        }else{
-            intensity = Number(Args[0])
-        }
-    }else{
-        intensity = null;
-    }
+    return new Promise((res) => {
+        return msg.channel.send("Image is getting processed...")
+        .then(response => {
+            return read(image, async (err, file) => {
+                if(err) return res(bot.cmdError("Error happend"));
 
-    const image    = bot.cache.lastImage[msg.channel.id];
-    const id       = bot.snowflake();
+                async function run(){
+                    file.autocrop();
+                    response.delete().catch(()=>{});
+                    return msg.channel.send(new Attachment(await file.getBufferAsync(!fileFormat || fileFormat == 'png' ?  MIME_PNG : MIME_JPEG), `image.png`))
+                    .then(async (ree) => {
+                        return res(bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL);
+                    });
+                }
 
-    if(image == undefined){
-        return await msg.channel.send("No image found");
-    }
+                console.table({intensity,min,max})
 
-    if(!fileFormat){
-        fileFormat = "png"
-    }
-
-    let error;
-
-    return await msg.channel.send("Image is getting processed...").then( response => {
-
-        return read(image, async (err, file) => {
-            if (err){
-                return bot.cmdError("Error happend");
-            }
-
-            async function run(){
-                msg.channel.send( '',  { files: [id + `.${fileFormat}`] })
-                .catch((err) => {
-                    error = new Promise((res,rej) => rej(err));
-                })
-                .then(async (ree)=>{
-                    await response.delete();
-                    unlink(`.\\${id}.${fileFormat}`, () => {});
-                    if(!error){
-                        bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL;
-                    }
-                });
-            }
-
-            if(intensity != null){
-                file[method](intensity);
-                file.autocrop().write(id + `.${fileFormat}`, ()=>{
-                    return run();
-                })
-            }else{
-                file[method]();
-                file.autocrop().write(id + `.${fileFormat}`, ()=>{
-                    return run();
-                })
-            }
+                if(!method){
+                }else if(typeof intensity == "boolean" && typeof min == "boolean" && typeof max == "undefined"){
+                    file[method](intensity,min);
+                }else if(!isNaN(intensity)){
+                    file[method](intensity);
+                }else{
+                    file[method]()
+                }
+                return run();
+            })
         })
     })
 }

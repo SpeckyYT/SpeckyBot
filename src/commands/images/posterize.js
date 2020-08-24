@@ -3,9 +3,7 @@ module.exports = {
     description: "Posterizes the image!",
     usage: `[Amount (2-500)]`,
     category: `images`,
-    aliases: [],
-    perms: [],
-    cmdperms: []
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
