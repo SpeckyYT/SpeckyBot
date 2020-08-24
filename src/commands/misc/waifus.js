@@ -4,7 +4,7 @@ module.exports = {
     usage: '',
     category: 'misc',
     cooldown: 30000,
-    aliases: ['ws']
+    aliases: ['ws','waifulabs']
 }
 
 const waifulabs = new (require('waifulabs'))();
@@ -15,7 +15,7 @@ const waifuSize = 200;
 
 module.exports.run = async (bot, msg) => {
     async function generateWaifuAttachment(prevWaifu){
-        const waifuImage = await (await waifulabs.generateBigWaifu(prevWaifu)).image;
+        const waifuImage = (await waifulabs.generateBigWaifu(prevWaifu)).image;
         const waifuBuffer = Buffer.from(waifuImage, 'base64');
         const waifuAttachment = new Attachment(waifuBuffer, "waifu.png");
         return waifuAttachment;
@@ -56,7 +56,7 @@ module.exports.run = async (bot, msg) => {
                 "```md\n"+
                 (step != 0 ? "# C to cancel\n# S to skip\n# B to go back\n":"")+"# R to reload the grid"+
                 "\n```\n"+
-                
+
                 "```c\n"+
                 "| 1  | 2  | 3  | 4  |\n"+
                 "| 5  | 6  | 7  | 8  |\n"+
@@ -87,9 +87,9 @@ module.exports.run = async (bot, msg) => {
                     }
                 })
                 collector.on('end', async () => {
-                    if(!runned && prevWaifu){
-                        m.edit(m.content+"\nTIME ELAPSED!");
+                    if(!runned){
                         att && msg.channel.send(att);
+                        return m.edit(m.content+"\nTIME ELAPSED!");
                     }
                 })
             })

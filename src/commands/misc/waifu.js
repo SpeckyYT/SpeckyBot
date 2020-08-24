@@ -3,7 +3,7 @@ module.exports = {
     description: "Gives you a waifu!",
     usage: '',
     category: 'misc',
-    aliases: ['w','waifulabs']
+    aliases: ['w']
 }
 
 const { Attachment } = require('discord.js');
