@@ -5,7 +5,6 @@ require-cache/
 db/
 
 # File Types
-*.txt
 *.png
 *.jpg
 *.jpeg
