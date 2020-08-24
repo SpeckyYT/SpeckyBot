@@ -7,7 +7,6 @@ module.exports = {
 }
 
 const { inspect } = require("util");
-const { createContext, runInContext } = require('vm');
 
 module.exports.run = async (bot, msg) => {
     const toEval = msg.cmdContent;
@@ -17,12 +16,10 @@ module.exports.run = async (bot, msg) => {
     if (!toEval) return bot.cmdError("You need to insert valid JavaScript code");
 
     try{
-        const context = {bot,msg};
-        createContext(context);
-        evaluated = inspect(runInContext(toEval,context),{depth:0});
+        evaluated = inspect(eval(toEval),{depth:0});
     }catch(e){
         return msg.channel.send(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
     }
 
-    return msg.channel.send(`${evaluated.length<1990?"```js\n":''}${evaluated}${evaluated.length<1990?"\n```":''}`, { split: '\n' })
+    return msg.channel.send(`${evaluated.length<1980?"```js\n":''}${evaluated}${evaluated.length<1990?"\n```":''}`, { split: '\n' })
 }
