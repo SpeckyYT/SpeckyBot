@@ -27,14 +27,10 @@ module.exports = bot => {
 
 
         // Flags
-        const flags = msg.content.toLowerCase().match(/--([a-z]+)/g);
+        const flags = msg.content.toLowerCase().match(/--(\w+)/g);
         msg._flags = [];
-        if(flags){
-            msg._flags = flags.map(f=>f.slice(2)); // removes the "--" on the beginning
-        }
-        msg.hasFlag = (input) => {
-            return msg._flags.includes(input.toLowerCase());
-        }
+        if(flags) msg._flags = flags.map(f=>f.slice(2)); // removes the "--" on the beginning
+        msg.hasFlag = (input) => msg._flags.includes(input.toLowerCase());
         msg.flag = msg.hasFlag;
 
 

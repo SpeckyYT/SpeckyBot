@@ -5,7 +5,7 @@ module.exports = (bot) => {
         const MEM_LENGTH = options.length || 2**32-1;
         const MEM_SIZE = options.size || 2**8;
         const TIME_LIMIT = options.time || 1000; // ms
-        
+
         let instructions = [];
         const loops = [];
         let skip = 0;
@@ -32,13 +32,10 @@ module.exports = (bot) => {
         }
 
         const start = new Date().getTime();
-
         let tOut = false;
 
         return await new Promise(res => {
-            while (pos < instructions.length){
-                if(pos >= instructions.length) return true;
-                
+            while(pos < instructions.length){
                 if (new Date().getTime() > (start+TIME_LIMIT)){
                     tOut = true;
                     break;
@@ -135,41 +132,22 @@ module.exports = (bot) => {
             }
             res();
         })
-        .then(async () => {
+        .then(() => {
             while((options.limit && memory.length > 250) || (memory.last() === 0 && memory.length > 1)){
                 memory.pop();
             }
-    
+
             output.string = output.string.join('');
-    
+
             const { string } = output;
             const { numbers } = output;
-    
+
             const end = new Date().getTime();
-    
+
             const time = end - start;
-    
+
             return {tOut,output,string,numbers,memory,cell,time}
         })
     }
     bot.brainfuck = bot.bf;
-
-    bot.namelesslanguage = (insts,options) => {
-        const input = insts.split("").filter(f=>"01".includes(f)).join('').match(/.{1,4}/g);
-        const instruct = input.map(v=>{
-            if(v == '0000') return '>';
-            if(v == '0001') return '<';
-            if(v == '0010') return '+';
-            if(v == '0011') return '-';
-            if(v == '0100') return '.';
-            if(v == '0101') return ',';
-            if(v == '0110') return '[';
-            if(v == '0111') return ']';
-            if(v == '1010') return ';';
-            if(v == '1011') return '_';
-            if(v == '1100') return '\\';
-        })
-        return bot.bf(instruct,{extra:true, ...options});
-    }
-    bot.nll = bot.namelesslanguage;
 }
