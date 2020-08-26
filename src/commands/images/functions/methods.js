@@ -25,15 +25,12 @@ module.exports = async (bot, msg, method, free, values, fileFormat) => {
                 if(err) return res(bot.cmdError("Error happend"));
 
                 async function run(){
-                    file.autocrop();
                     response.delete().catch(()=>{});
-                    return msg.channel.send(new Attachment(await file.getBufferAsync(!fileFormat || fileFormat == 'png' ?  MIME_PNG : MIME_JPEG), `image.png`))
+                    return msg.channel.send(new Attachment(await file.getBufferAsync(!fileFormat || fileFormat == 'png' ?  MIME_PNG : MIME_JPEG), `image.${fileFormat||'png'}`))
                     .then(async (ree) => {
                         return res(bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL);
                     });
                 }
-
-                console.table({intensity,min,max})
 
                 if(!method){
                 }else if(typeof intensity == "boolean" && typeof min == "boolean" && typeof max == "undefined"){

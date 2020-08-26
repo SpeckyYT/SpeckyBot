@@ -7,5 +7,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    return require('.\\functions\\methods')(bot,msg,null,false,false,"png");
+    return require('.\\functions\\methods')(bot,msg,"autocrop",false,false,"png");
 }
