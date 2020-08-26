@@ -30,6 +30,7 @@ module.exports.run = async (bot, msg) => {
                 return new Promise((res,rej) => {
                     try{
                         const subwords = string.match(/\[[^[\]]+\]/g);
+                        if(!subwords) res(false);
                         const sub = subwords.map(v => urban(v.slice(1,v.length-1)));
                         let s = string;
                         let proof = 0;
@@ -44,25 +45,50 @@ module.exports.run = async (bot, msg) => {
                             })
                         })
                     }catch(err){
-                        rej(err);
+                        res(string);
                     }
                 })
             }
 
-            const embed = bot.embed()
-            .setColor("#134FE6")
-            .setAuthor(`Urban Dictionary | ${word}`, image)
-            .setFooter(`Written by ${author || "unknown"}`)
-            .setDescription(`**Defintion:** ${definition || "No Definition"}\n\n**Example:** ${example || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
-            .setThumbnail(image);
+            function slice(string){
+                if(typeof string == "string"){
+                    if(string.length > 1000){
+                        return string.slice(0,1000).trim()+"...";
+                    }else{
+                        return string;
+                    }
+                }else{
+                    return null;
+                }
+            }
 
-            return msg.channel.send(embed)
+            function baseEmbed(){
+                return bot.embed()
+                .setColor("#134FE6")
+                .setAuthor(`Urban Dictionary | ${word}`, image)
+                .setFooter(`Written by ${author || "unknown"}`)
+                .setThumbnail(image);
+            }
+
+            return msg.channel.send(
+                baseEmbed()
+                .addField("**Definition**", slice(definition) || "No Definition")
+                .addField("**Example**", slice(example) || "No Example")
+                .addField("**Upvotes**", thumbs_up || 0)
+                .addField("**Downvotes**", thumbs_down || 0)
+                .addField("**Link**", `[link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
+            )
             .then(async m => {
-                const newDesc = `**Defintion:** ${await replaceLinks(definition) || "No Definition"}\n\n**Example:** ${await replaceLinks(example) || "No Example"}\n\n**Upvotes:** ${thumbs_up || 0}\n**Downvotes:** ${thumbs_down || 0}\n\n**Link:** [link to ${word}](${permalink || "https://www.urbandictionary.com/"})`
-                if(newDesc != embed.description){
-                    return m.edit(
-                        embed
-                        .setDescription(newDesc)
+                const newDefi = await replaceLinks(definition);
+                const newExem = await replaceLinks(example);
+                if(newDefi||newExem){
+                    m.edit(
+                        baseEmbed()
+                        .addField("**Definition**", slice(newDefi) || "No Definition")
+                        .addField("**Example**", slice(newExem) || "No Example")
+                        .addField("**Upvotes**", thumbs_up || 0)
+                        .addField("**Downvotes**", thumbs_down || 0)
+                        .addField("**Link**", `[link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
                     )
                 }
             })
