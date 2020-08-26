@@ -74,8 +74,8 @@ module.exports.run = async (bot, msg) => {
                 baseEmbed()
                 .addField("**Definition**", slice(definition) || "No Definition")
                 .addField("**Example**", slice(example) || "No Example")
-                .addField("**Upvotes**", thumbs_up || 0)
-                .addField("**Downvotes**", thumbs_down || 0)
+                .addField("**Upvotes**", thumbs_up || 0, true)
+                .addField("**Downvotes**", thumbs_down || 0, true)
                 .addField("**Link**", `[link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
             )
             .then(async m => {
@@ -86,8 +86,8 @@ module.exports.run = async (bot, msg) => {
                         baseEmbed()
                         .addField("**Definition**", slice(newDefi) || "No Definition")
                         .addField("**Example**", slice(newExem) || "No Example")
-                        .addField("**Upvotes**", thumbs_up || 0)
-                        .addField("**Downvotes**", thumbs_down || 0)
+                        .addField("**Upvotes**", thumbs_up || 0, true)
+                        .addField("**Downvotes**", thumbs_down || 0, true)
                         .addField("**Link**", `[link to ${word}](${permalink || "https://www.urbandictionary.com/"})`)
                     )
                 }
