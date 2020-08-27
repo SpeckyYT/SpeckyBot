@@ -3,7 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot, guild) => {
-    const channel = bot.channels.get("738849306643267674");
+    const channel = bot.channels.get("738850039459479585");
     if(!channel) return;
 
     const data = [
