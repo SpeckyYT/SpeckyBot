@@ -1,9 +1,7 @@
 module.exports = {
-    event: "ready",
-    type: "on"
+    event: "ready"
 }
 
 module.exports.call = async (bot) => {
-    await bot.generateInvite(2147483135)
-    .then(l => bot.link = l)
+    bot.link = await bot.generateInvite(2147483135);
 }
