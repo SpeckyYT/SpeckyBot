@@ -10,5 +10,5 @@ module.exports.call = async (bot, _, msg) => {
         if(am){
             am.forEach(ms => ms.edit(bot.globalChatEmbed(msg)).catch(()=>{}))
         }
-    } 
+    }
 }

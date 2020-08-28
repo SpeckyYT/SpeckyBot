@@ -7,5 +7,5 @@ module.exports.call = async (bot, channel) => {
         bot.embed()
         .setTitle("This channel got successfully removed from the `Global Chat`!")
         .setDescription("Now you can talk without letting it know to the entire world!")
-    )
+    ).catch(()=>{})
 }
