@@ -14,7 +14,8 @@ module.exports.run = async (bot, msg) => {
     const u_settings = require(dir);
     let changed = false;
     if(!u_settings[msg.author.id]){
-        u_settings[msg.author.id] = {}
+        u_settings[msg.author.id] = {};
+        changed = true;
     }
     switch(args[0]){
         case "embedcolor":
@@ -46,6 +47,13 @@ module.exports.run = async (bot, msg) => {
             changed = true;
             break;
 
+        case "messagelink":
+        case "ml":
+            u_settings[msg.author.id].messagelink = !u_settings[msg.author.id].messagelink;
+            msg.channel.send(`Your MessageLink option got changed to \`${u_settings[msg.author.id].messagelink}\``);
+            changed = true;
+            break;
+
         default:
             const embed = bot.embed()
             .setTitle("User Settings Help Page!")
@@ -54,8 +62,8 @@ module.exports.run = async (bot, msg) => {
             .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``)
             .addField(`Will give you a notification if someone Ghostpinged you:`,`\`${bot.config.prefix}usersettings gp\``)
             .addField(`Will automatically do maths for you:`,`\`${bot.config.prefix}usersettings math\``)
+            .addField(`Will quote your message's message-links:`,`\`${bot.config.prefix}usersettings ml\``)
             return msg.channel.send(embed);
-
     }
 
     if(changed){

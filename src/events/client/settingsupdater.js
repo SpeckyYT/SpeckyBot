@@ -3,5 +3,5 @@ module.exports = {
 }
 
 module.exports.call = async (bot) => {
-    bot.loadSettings(bot);
+    bot.loadSettings();
 }

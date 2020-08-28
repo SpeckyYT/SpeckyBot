@@ -5,12 +5,12 @@ module.exports = {
 const { RichEmbed } = require('discord.js');
 
 module.exports.call = async (bot, msg) => {
-    if (msg.author.id == bot.user.id || msg.author.bot || msg.channel.type != "text") return;
+    if (msg.author.bot) return;
 
-    await bot.loadSettings(bot);
+    await bot.loadSettings();
 
-    const s_settings = bot.settings.server;
-    const u_settings = bot.settings.user;
+    const s_settings = bot.settings.server || {};
+    const u_settings = bot.settings.user || {};
 
     let color;
 
@@ -57,7 +57,7 @@ module.exports.call = async (bot, msg) => {
                 }
                 await atts(msg,color)
             }catch(e){}
-        }   
+        }
     }catch(err){
         console.error(err)
     }

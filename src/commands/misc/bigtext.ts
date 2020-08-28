@@ -35,19 +35,15 @@ module.exports = {
             w: "🇼",
             x: "🇽",
             y: "🇾",
-            z: "🇿"
+            z: "🇿",
+            " ": " ",
+            "\n": "\n"
         }
 
         let text:string|Array<string> = msg.cmdContent.toLowerCase().trim();
-
-        text = [...text].filter(c => characters[c] || [' ','\n'].includes(c));
-
-        if(!text.filter(c => [' ','\n'].includes(c)).length) return bot.cmdError("You need to include a valid string");
-        
-        const string = [];
-
-        text.forEach(l => string.push((characters[l] || l)+(l=='\n'?'':' ')))
-
-        return msg.channel.send(string.join(''));
+        text = [...text].filter(c => characters[c]);
+        if(!msg.cmdContent) return bot.cmdError("You need to include a valid string");
+        text = text.map(l => characters[l] + (l == "\n" ? "" : " ")).join('');
+        return msg.channel.send(text);
     }
 }
