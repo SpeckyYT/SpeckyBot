@@ -19,23 +19,25 @@ module.exports.run = async (bot, msg) => {
     const image = bot.cache.lastImage[msg.channel.id];
     if(image == undefined) return bot.cmdError("No image found");
 
-    return jimp.read(image, (err, image) => {
-        image.getWidth().repeat(x => {
-            image.getHeight().repeat(y => {
-                jimp.intToRGBA(image.getPixelColor(x,y), (err, rgba) =>{
-                    let {r,g,b} = simulate(rgba,filter);
-                    r = Math.floor(r).clamp(0,255);
-                    g = Math.floor(g).clamp(0,255);
-                    b = Math.floor(b).clamp(0,255);
-                    image.setPixelColor(jimp.rgbaToInt(r,g,b,255),x,y);
-                    if(x+1 >= image.getWidth() && y+1 >= image.getHeight()){
-                        return image.getBufferAsync(jimp.MIME_PNG)
-                        .then(buffer => {
-                            return msg.channel.send(buffer.toAttachment('image.png'))
-                        })
-                    }
+    new Promise((res,rej) =>
+        jimp.read(image, (err, image) => {
+            image.getWidth().repeat(x => {
+                image.getHeight().repeat(y => {
+                    jimp.intToRGBA(image.getPixelColor(x,y), (err, rgba) =>{
+                        let {r,g,b} = simulate(rgba,filter);
+                        r = Math.floor(r).clamp(0,255);
+                        g = Math.floor(g).clamp(0,255);
+                        b = Math.floor(b).clamp(0,255);
+                        image.setPixelColor(jimp.rgbaToInt(r,g,b,rgba.a),x,y);
+                        if(x+1 >= image.getWidth() && y+1 >= image.getHeight()){
+                            return image.getBufferAsync(jimp.MIME_PNG)
+                            .then(buffer => {
+                                res(msg.channel.send(buffer.toAttachment('image.png')))
+                            })
+                        }
+                    })
                 })
             })
         })
-    })
+    )
 }
