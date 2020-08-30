@@ -7,7 +7,6 @@ module.exports = {
 }
 
 const { Canvas } = require('canvas');
-const { Attachment } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     const level = msg.cmdContent
@@ -58,7 +57,7 @@ module.exports.run = async (bot, msg) => {
             }
 
             if(i+1 >= a.length){
-                return msg.channel.send(new Attachment(canvas.toBuffer(),'level.png'));
+                return msg.channel.send(canvas.toBuffer().toAttachment('level.png'));
             }
         })
 

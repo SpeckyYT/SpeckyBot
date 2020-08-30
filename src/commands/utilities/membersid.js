@@ -6,16 +6,11 @@ module.exports = {
     aliases: ['membersids','memberids','memberid']
 }
 
-const { appendFile, unlink } = require('fs')
-const { Attachment } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
     const members = [];
     msg.guild.members.forEach(async member => {
         members.push(member.user.id)
     })
-    appendFile('.\\members.txt', members.join('\n'), () => {})
-    const att = new Attachment('.\\members.txt',"members.txt")
-    await msg.channel.send(att);
-    unlink('.\\members.txt', () => {})
+    const att = Buffer.from(members.join('\n'),'ascii').toAttachment("members.txt")
+    return msg.channel.send(att);
 }

@@ -9,7 +9,6 @@ module.exports = {
 
 const waifulabs = new (require('waifulabs'))();
 const Canvas = require('canvas');
-const { Attachment } = require('discord.js');
 
 const waifuSize = 200;
 
@@ -17,7 +16,7 @@ module.exports.run = async (bot, msg) => {
     async function generateWaifuAttachment(prevWaifu){
         const waifuImage = (await waifulabs.generateBigWaifu(prevWaifu)).image;
         const waifuBuffer = Buffer.from(waifuImage, 'base64');
-        const waifuAttachment = new Attachment(waifuBuffer, "waifu.png");
+        const waifuAttachment = waifuBuffer.toAttachment("waifu.png");
         return waifuAttachment;
     }
 
@@ -63,7 +62,8 @@ module.exports.run = async (bot, msg) => {
                 "| 9  | 10 | 11 | 12 |\n"+
                 "| 13 | 14 | 15 | 16 |\n"+
                 "\n```\n",
-                new Attachment(canvas.toBuffer(), "waifus.png"))
+                canvas.toBuffer().toAttachment("waifus.png")
+            )
             .then(m => {
                 const filter = (ms) => (ms.author.id == msg.author.id) && [...(step != 0 ? ['c','s','b'] : []),'r',...Array(16).fill().map((_,i)=>(i+1).toString())].some(v => ms.content.toLowerCase() == v.toLowerCase());
                 let runned = false;

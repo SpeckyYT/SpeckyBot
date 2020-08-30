@@ -1,4 +1,3 @@
-const { Attachment } = require('discord.js');
 const { Canvas } = require('canvas');
 const GIFEncoder = require('gifencoder');
 
@@ -66,7 +65,7 @@ module.exports.run = async (bot,msg) => {
             });
             if(isSorted(array)){
                 encoder.finish();
-                return res(new Attachment(Buffer.from(encoder.out.data),'SpeckySort.gif'));
+                return res(Buffer.from(encoder.out.data).toAttachment('SpeckySort.gif'));
             }else{
                 sort();
             }

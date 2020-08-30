@@ -1,5 +1,4 @@
 const { read, MIME_PNG, MIME_JPEG } = require('jimp');
-const { Attachment } = require('discord.js');
 
 module.exports = async (bot, msg, method, free, values, fileFormat) => {
     let [intensity,min,max] = Array.isArray(values) ? values : [];
@@ -26,7 +25,7 @@ module.exports = async (bot, msg, method, free, values, fileFormat) => {
 
                 async function run(){
                     response.delete().catch(()=>{});
-                    return msg.channel.send(new Attachment(await file.getBufferAsync(!fileFormat || fileFormat == 'png' ?  MIME_PNG : MIME_JPEG), `image.${fileFormat||'png'}`))
+                    return msg.channel.send((await file.getBufferAsync(!fileFormat || fileFormat == 'png' ?  MIME_PNG : MIME_JPEG)).toAttachment(`image.${fileFormat||'png'}`))
                     .then(async (ree) => {
                         return res(bot.cache.lastImage[msg.channel.id] = ree.attachments.first().proxyURL);
                     });
