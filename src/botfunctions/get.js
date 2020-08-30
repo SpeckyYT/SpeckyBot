@@ -80,6 +80,6 @@ module.exports = (bot) => {
     }
 
     bot.getFunction = (cmd) => {
-        return (typeof cmd == 'object') ? cmd[Object.keys(cmd).filter(v => typeof cmd[v] == 'function')[0]] : null;
+        return (typeof cmd == 'object') ? cmd[Object.keys(cmd).filter(v => typeof cmd[v] == 'function')[0]] : async ()=>{};
     }
 }
