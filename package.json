@@ -4,6 +4,7 @@
     "description": "This is an awesome bot made by SpeckyYT",
     "main": "run.js",
     "dependencies": {
+        "@bjornlu/colorblind": "^1.0.2",
         "@discordjs/opus": "^0.3.2",
         "@swc/core": "^1.2.11",
         "async": "^3.2.0",
