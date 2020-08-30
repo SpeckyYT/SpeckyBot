@@ -124,7 +124,7 @@ module.exports.call = async (bot, m) => {
 
             if(cmd.cmdperms){
                 cmd.cmdperms.forEach(perm => {
-                    if(!msg.guild.me.hasPermission(perm)){
+                    if(!(msg.guild ? msg.guild.me.hasPermission(perm) : true)){
                         if(check(false, botPermError)){
                             return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perm}\``))
                         }
@@ -138,7 +138,7 @@ module.exports.call = async (bot, m) => {
                 }
             }
 
-            if(category == "images" && !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES')){
+            if(category == "images" && (msg.guild ? !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES') : false)){
                 if(check(false, imagesError)){
                     return msg.channel.send(error(imagesError))
                 }

@@ -9,14 +9,14 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const { config } = bot;
     const { args } = msg;
-    
+
     const embed = bot.embed()
-    .setAuthor(`${msg.guild.me.displayName} Help`, msg.guild.iconURL)
+    .setAuthor(`${bot.user.username} Help`, bot.user.avatarURL)
 
     if(!args[0] || (msg.author.id.isOwner() && args[0] == "all")) {
         const categories = bot.commands.map(c=>c.category||'uncategorized').toLowerCase().unique().sort();
 
-        embed.setDescription(`These are the avaliable commands for ${msg.guild.me.displayName}\nThe bot prefix is: **${config.prefix}**`)
+        embed.setDescription(`These are the avaliable commands for ${bot.user.username}\nThe bot prefix is: **${config.prefix}**`)
         embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
 
         categories.forEach(category => {
@@ -56,7 +56,7 @@ module.exports.run = async (bot, msg) => {
         if(!command) return msg.channel.send(invalidcmd(embed,config));
 
         if(!categoryCheck(command.category, msg, bot)) return msg.channel.send(invalidcmd(embed,config));
-        
+
         const cmd = command.name.highFirst();
         const category = command.category || "uncategorized";
         const description = command.description || "No Description provided.";

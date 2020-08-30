@@ -20,6 +20,8 @@ module.exports = async (bot) => {
     bot.cache.runningcmds = [];
     bot.cache.globalchat = new Collection();
 
+    bot.economy = {}
+
     bot.globalchats = new Collection();
 
     bot.debugN = 0;

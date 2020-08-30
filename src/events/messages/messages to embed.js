@@ -20,12 +20,10 @@ module.exports.call = async (bot, msg) => {
         color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
     }
 
-    const perms = msg.guild.me.permissionsIn(msg.channel).toArray();
-    if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES')){
+    const perms = msg.guild ? msg.guild.me.permissionsIn(msg.channel).toArray() : [];
+    if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES') || !msg.guild){
         if(msg.content.includes(':EMB:')){
-            await msg.delete().catch(()=>{
-                return
-            })
+            await msg.delete().catch(()=>{})
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
                 const embed = new RichEmbed()
@@ -40,6 +38,8 @@ module.exports.call = async (bot, msg) => {
     }else{
         return;
     }
+
+    if(!msg.guild) return
 
     try{
         if(s_settings[msg.guild.id] ?
