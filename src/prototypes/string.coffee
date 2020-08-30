@@ -18,3 +18,6 @@ module.exports = (bot) ->
 
     String::singPlur = (number, outputNumb = true) ->
         "#{if outputNumb then number else ''} #{this}#{if number == 1 then '' else 's'}".trim()
+
+    String::toBuffer = (offset) ->
+        Buffer.from(@, offset or 'base64')

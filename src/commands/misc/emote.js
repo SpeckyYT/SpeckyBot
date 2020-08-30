@@ -17,7 +17,7 @@ const emojiRgb = [
     {R: 221, G: 46,  B: 68,  E: ":red_square:"},            // red
     {R: 238, G: 122, B: 139, E: ":womens:"},                // pink
     {R: 255, G: 172, B: 51,  E: ":orange_square:"},         // light orange
-    {R: 244, G: 144, B: 12,  E: ":baby_symbol:"},           // orange 
+    {R: 244, G: 144, B: 12,  E: ":baby_symbol:"},           // orange
     {R: 253, G: 203, B: 88,  E: ":yellow_square:"},         // yellow
     // {R: 255, G: 217, B: 131, E: ":full_moon:"},             // yellowish (not square)
     {R: 120, G: 177, B: 89,  E: ":green_square:"},          // green
@@ -57,9 +57,9 @@ module.exports.run = async (bot, msg) => {
         await msg.channel.send(url);
     }
 
-    Jimp.read(url, async (err, img) => {
+    Jimp.read(url, (err, img) => {
         if(err) return bot.cmdError("Could not read image");
-        img.resize(size, Jimp.AUTO, Jimp.RESIZE_BEZIER, async (err,img) => {
+        img.resize(size, Jimp.AUTO, Jimp.RESIZE_BEZIER, (err,img) => {
             if(err) return bot.cmdError("Could not load image");
             const transColors = [];
             for(let i = 0; i < img.getHeight(); i++){
@@ -71,7 +71,7 @@ module.exports.run = async (bot, msg) => {
                     transColors[i].push(found ? found.E : 'black_large_square');
                 }
             }
-            await msg.channel.send(transColors.map(arr=>arr.join('')).join('\n'),{split:'\n'});
+            return msg.channel.send(transColors.map(arr=>arr.join('')).join('\n'),{split:'\n'});
         })
     })
 }

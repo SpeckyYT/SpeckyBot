@@ -14,7 +14,8 @@ module.exports.run = async (bot, data) => {
     })
     .catch(() => {
         console.log("Logged without success".fail);
-        bot.login(bot.config.token).catch(()=>{
+        bot.login(bot.config.token)
+        .catch(()=>{
             console.log("WASN'T ABLE TO LOG BACK TO THE MAIN TOKEN!".fatal);
             process.exit(1)
         })

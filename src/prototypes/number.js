@@ -26,5 +26,6 @@ module.exports = bot => {
             cb(i);
         }
     }
+    Number.prototype.repeat = Number.prototype.times;
 
 }

@@ -1,7 +1,7 @@
 module.exports = {
     name: "gddiff",
     description: "Gives you one of the difficulty icons of Geometry Dash!",
-    usage: `<difficulty number (0-10)> <rate value (0-2)>`,
+    usage: `<difficulty number (0-10)> <rate value (featured-epic)>`,
     category: `misc`,
     aliases: ["gddifficulty","geometrydashdiff"]
 }
@@ -21,9 +21,9 @@ module.exports.run = async (bot, msg) => {
     .then(m =>{
         let rate = '';
         let diff = 0;
-        
+
         switch(diffNum){
-        
+
             case "0":
             case "na":
             case "n.a":
@@ -112,6 +112,6 @@ module.exports.run = async (bot, msg) => {
         .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
 
 
-        m.edit(embed);
+        return m.edit(embed);
     })
 }

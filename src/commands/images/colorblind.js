@@ -1,6 +1,6 @@
 module.exports = {
     name: "colorblind",
-    description: "Changes the brightness of the image!",
+    description: "Filters the image with a colorblind filter!",
     usage: "<achromatopsia|deuteranopia|protanopia|tritanopia>",
     category: "images",
     aliases: ["colourblind","colorblindness","colourblindness"]

@@ -18,5 +18,5 @@ module.exports.run = async (bot, msg) => {
     .setTitle('Dad Joke!')
     .setDescription(joke)
 
-    msg.channel.send(embed)
+    return msg.channel.send(embed)
 }

@@ -3,9 +3,8 @@ module.exports = {
     description: "OwO!",
     usage: "",
     category: `misc`,
+    type: "template",
     aliases: ['uwu']
 }
 
-module.exports.run = async (bot, msg) => {
-    msg.channel.send("OwO");
-}
+module.exports.run = async (bot, msg) => "OwO"

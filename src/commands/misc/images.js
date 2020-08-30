@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg) => {
         return bot.cmdError("You need to give some text to search an image");
     }
 
-    msg.channel.send("Searching for an image...")
+    return msg.channel.send("Searching for an image...")
     .then(m => {
         gis(msg.cmdContent, (err,res) => {
             if(err) return bot.cmdError(err);
