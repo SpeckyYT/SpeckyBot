@@ -16,4 +16,13 @@ module.exports = () => {
         return obj;
     }
 
+    Object.prototype.array = function(){
+        const arr = [];
+        for(const prop in this){
+            if(Object.prototype[prop]) continue;
+            arr.push(this[prop]);
+        }
+        return arr;
+    }
+
 }

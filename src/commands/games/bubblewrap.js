@@ -7,5 +7,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    return msg.channel.send(('||pop||'.repeat(Math.ceil(Math.random()*5+5))+'\n').repeat(Math.ceil(Math.random()*5+5)));
+    return msg.channel.send(('||pop||'.repeat(Math.ceil(Math.random()*3+7))+'\n').repeat(Math.ceil(Math.random()*3+7)));
 }

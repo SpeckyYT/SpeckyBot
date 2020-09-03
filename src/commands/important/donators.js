@@ -7,8 +7,8 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     const don = {
-        Benjiman: [1.15,'€'], // 525006281703161867
-        "Dav!d" : [1.16,'€']  // 555791735607787580
+        Benjiman: [1.22,'€'], // 525006281703161867
+        "Dav!d" : [1.19,'€']  // 555791735607787580
     };
     const donators = don.toCollection().sort((a, b) => b[0] - a[0]);
 

@@ -11,8 +11,8 @@ function available(board, row, column) {
 }
 
 module.exports.run = async (bot, msg) => {
-    const width = Math.floor(Math.random()*5+5);
-    const height = Math.floor(Math.random()*5+5);
+    const width = Math.floor(Math.random()*2+10);
+    const height = Math.floor(Math.random()*2+10);
     const board = [];
     let bombs = Math.ceil(width*height/5);
 
@@ -65,6 +65,9 @@ module.exports.run = async (bot, msg) => {
     switch(msg.guild.id){
         case '265505748413448193':
             bomb = '<:crafter:646808734483611669>';
+            break;
+        case '491274461111123969':
+            bomb = '<:wow:713448200878424255>'
             break;
         default:
             bomb = '🎆';

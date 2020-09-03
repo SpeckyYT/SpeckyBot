@@ -5,4 +5,4 @@ module.exports =
     category: 'helloworld'
     aliases: [],
     type: 'template',
-    run: (bot, msg) => """#{await''}#{ '`CoffeeScript (templates)`: Hello World!'}"""
+    run: (bot, msg) => "#{ '`CoffeeScript (templates)`: Hello World!'}"

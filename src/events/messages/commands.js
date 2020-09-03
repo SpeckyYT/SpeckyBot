@@ -285,7 +285,7 @@ async function run(cmd, bot, msg, command){
             err = err.replace("[EXPECTED]","").trim();
             msg.channel.send(error(err));
         }else{
-            bot.log(err.message||err.error||err);
+            bot.log(err&&(err.message||err.error)||err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
 
             if(String(err).includes("Must be 2000 or fewer in length")){
