@@ -8,6 +8,7 @@ module.exports = {
 
 const Canvas = require('canvas');
 const gec = require('gifencoder');
+const { Collection } = require('discord.js');
 
 const size = 512;
 const sortedField = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
@@ -57,70 +58,91 @@ module.exports.run = async (bot, msg) => {
     let moves = 0;
     const start = new Date();
 
-    function recursion(m){
-        if(m) m.delete().catch(()=>{});
-        return msg.channel.send(
-            ["up","down","left","right",null,"u","d","l","f",null,"8","5","4","6"]
-            .map(v => v ? "`"+v+"`," : '\n')
-            .join(' '),
-            draw(field,encoder))
-        .then(ms => {
-            const collector = ms.channel.createCollector(m => m.author.id == msg.author.id, {time: 30000});
-            let runned = false;
-            collector.on('collect', m => {
-                if(['up','down','left','right','u','d','l','r','4','5','6','8'].includes(m.content.toLowerCase())){
-                    m.delete().catch(()=>{});
-                    runned = true;
-                    moves++;
-                    const index0 = field.indexOf(0);
-                    const [x,y] = toPosition(index0);
-                    switch(m.content.toLowerCase()){
-                        case 'up':
-                        case 'u':
-                        case '8':
-                            if(y > 0)
-                                [field[index0],field[index0-4]] = [field[index0-4],field[index0]];
-                            break;
-                        case 'down':
-                        case 'd':
-                        case '5':
-                            if(y < 3)
-                                [field[index0],field[index0+4]] = [field[index0+4],field[index0]];
-                            break;
-                        case 'left':
-                        case 'l':
-                        case '4':
-                            if(x > 0)
-                                [field[index0],field[index0-1]] = [field[index0-1],field[index0]];
-                            break;
-                        case 'right':
-                        case 'r':
-                        case '6':
-                            if(x < 3)
-                                [field[index0],field[index0+1]] = [field[index0+1],field[index0]];
-                            break;
-                    }
-                    collector.stop();
-                    if(isSorted(field)){
-                        ms.delete().catch(()=>{});
-                        msg.channel.send(`YOU WON!\nMoves: ${moves}\nTime: ${Math.floor((new Date().getTime()-start.getTime())/1000)} seconds`, draw(field,encoder));
-                        encoder.finish();
-                        return msg.channel.send(Buffer.from(encoder.out.data).toAttachment('SlidingPuzzle.gif'))
-                    }else{
-                        return recursion(ms);
-                    }
-                }
+    const messages = new Collection();
+    const pending = [];
+    let awaiting = false;
+
+    async function sendMessage(LF){
+        if(LF && pending.lastIndexOf(LF)+2 > pending.length) return;
+
+        pending.push(field.join(' '));
+
+        if(!awaiting){
+            awaiting = true;
+
+            const lastField = [...pending[pending.length-1].split(' ')];
+
+            msg.channel.send(
+                ["up","down","left","right",null,"u","d","l","f",null,"8","5","4","6"]
+                .map(v => v ? "`"+v+"`," : '\n')
+                .join(' '), draw(lastField, encoder)
+            )
+            .then(ms => {
+                messages.forEach(m => {
+                    m.delete()
+                    .catch(() => messages.delete(m.id))
+                    .finally(() => messages.delete(m.id))
+                })
+                messages.set(ms.id, ms);
             })
-            collector.on('end', () => {
-                if(!runned){
-                    return ms.edit(`${ms.content}\n\nTIME ELAPSED`);
-                }
+            .catch(()=>{})
+            .finally(() => {
+                awaiting = false;
+                sendMessage(lastField.join(' '));
             })
-        })
-        .catch(e => bot.cmdError('Unexpected error happened'));
+        }
     }
 
-    return recursion();
+    sendMessage()
+
+    const collector = msg.channel.createMessageCollector(m => m.author.id == msg.author.id, {time: 10*60*1000});
+
+    collector.on('collect', m => {
+        if(['up','down','left','right','u','d','l','r','4','5','6','8'].includes(m.content.toLowerCase())){
+            m.delete().catch(()=>{});
+            moves++;
+            const index0 = field.indexOf(0);
+            const [x,y] = toPosition(index0);
+            switch(m.content.toLowerCase()){
+                case 'up':
+                case 'u':
+                case '8':
+                    if(y > 0)
+                        [field[index0],field[index0-4]] = [field[index0-4],field[index0]];
+                    break;
+                case 'down':
+                case 'd':
+                case '5':
+                    if(y < 3)
+                        [field[index0],field[index0+4]] = [field[index0+4],field[index0]];
+                    break;
+                case 'left':
+                case 'l':
+                case '4':
+                    if(x > 0)
+                        [field[index0],field[index0-1]] = [field[index0-1],field[index0]];
+                    break;
+                case 'right':
+                case 'r':
+                case '6':
+                    if(x < 3)
+                        [field[index0],field[index0+1]] = [field[index0+1],field[index0]];
+                    break;
+            }
+            sendMessage();
+            if(isSorted(field)){
+                msg.channel.send(`YOU WON!\nMoves: ${moves}\nTime: ${Math.floor((new Date().getTime()-start.getTime())/1000)} seconds`, draw(field,encoder));
+                encoder.finish();
+                collector.stop();
+                return msg.channel.send(Buffer.from(encoder.out.data).toAttachment('SlidingPuzzle.gif'))
+            }
+        }
+    })
+    collector.on('end', () => {
+        if(!isSorted(field)){
+            return msg.channel.send("Time Elapsed");
+        }
+    })
 }
 
 function draw(arr,encoder){
