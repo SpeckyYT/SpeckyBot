@@ -21,3 +21,6 @@ module.exports = (bot) ->
 
     String::toBuffer = (offset) ->
         Buffer.from(@, offset or 'base64')
+
+    String::randomCase = ->
+        [@...].map((c) -> if Math.round(Math.random()) then c.toUpperCase() else c.toLowerCase()).join('')
