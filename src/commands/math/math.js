@@ -12,11 +12,15 @@ module.exports.run = async (bot, msg) => {
     const { cmdContent } = msg;
     if(!cmdContent) return bot.cmdError('Input a calculation');
 
+    if(!bot.cache.math[msg.author.id]){
+        bot.cache.math[msg.author.id] = {}
+    }
+
     let resp;
     try{
-        resp = await evaluate(cmdContent);
+        resp = evaluate(cmdContent, bot.cache.math[msg.author.id]);
     } catch (e){
-        return bot.cmdError('Input a valid calculation')
+        return bot.cmdError(e.toString());
     }
     const embed = bot.embed()
     .setColor("#FFFFFF")

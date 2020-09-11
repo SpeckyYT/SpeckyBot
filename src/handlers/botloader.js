@@ -19,6 +19,7 @@ module.exports = async (bot) => {
     bot.cache.cooldown = new Collection();
     bot.cache.runningcmds = [];
     bot.cache.globalchat = new Collection();
+    bot.cache.math = {};
 
     bot.economy = {}
 
