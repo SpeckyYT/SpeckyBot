@@ -15,7 +15,7 @@ module.exports.call = async (bot, msg) => {
     const contentl = msg.content.toLowerCase();       // Lower Case one
     // const contentu = msg.content.toUpperCase();       // Upper Case one
 
-    // --------------REACTIONS-----------------------
+    // REACTIONS
     if(msg.guild.me.hasPermission('ADD_REACTIONS')){
         if(contentl.includes('specky')){
             msg.react(specky).catch(()=>{});
@@ -31,16 +31,16 @@ module.exports.call = async (bot, msg) => {
 
     }
 
-    // -----------MESSAGES/RESPONSES-----------------
+    // MESSAGES/RESPONSES
     if(msg.guild.me.hasPermission('SEND_MESSAGES')){
 
 
     }
 
-    // ---------------OTHER--------------------------
+    // OTHER
     if(msg.guild.me.hasPermission('MANAGE_MESSAGES')){
 
-  
+
     }
 
 

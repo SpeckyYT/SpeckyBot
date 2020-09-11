@@ -64,17 +64,13 @@ module.exports.run = async (bot, msg) => {
         )
 
         if(time > 30000 || players.length > 5){
-            await sleep(10000)
+            await bot.sleep(10000)
         } else {
-            await sleep(5000)
+            await bot.sleep(5000)
         }
 
         msg.delete()
         return runGame(channel, players, bot);
         // make game mechanics in game.js
     })
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

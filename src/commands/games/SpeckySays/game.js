@@ -80,7 +80,7 @@ module.exports.runGame = async (channel, players_, bot) => {
 
         settings = settingsOut
 
-        await sleep(1000)
+        await bot.sleep(1000)
         playersOut = [...new Set(playersOut)]
         // say whos out
         const embed = new RichEmbed()
@@ -93,7 +93,7 @@ module.exports.runGame = async (channel, players_, bot) => {
         }
 
         channel.send(embed)
-        await sleep(1000)
+        await bot.sleep(1000)
 
         if (playersLeft.length < 1) {
             winners = playersOut
@@ -114,8 +114,4 @@ module.exports.runGame = async (channel, players_, bot) => {
         .setColor('#FFBE11');
         return channel.send(embed);
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

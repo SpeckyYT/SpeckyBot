@@ -46,7 +46,7 @@ module.exports.call = async (bot, m) => {
 
     msg.cmdContent = msg.content
     .replace(/(\s*--\w+\s*)+/g,' ').trim()
-    .slice(msg.command.length+bot.config.prefix.length).trim();
+    .slice(bot.config.prefix.length+msg.command.length).trim();
 
     if(!msg.cmdContent && msg.attachments.size){
         try{
