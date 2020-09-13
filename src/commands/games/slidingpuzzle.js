@@ -65,6 +65,8 @@ module.exports.run = async (bot, msg) => {
     async function sendMessage(LF){
         if(LF && pending.lastIndexOf(LF)+2 > pending.length) return;
 
+        if(isSorted(field)) return;
+
         pending.push(field.join(' '));
 
         if(!awaiting){
@@ -75,7 +77,7 @@ module.exports.run = async (bot, msg) => {
             msg.channel.send(
                 ["up","down","left","right",null,"u","d","l","f",null,"8","5","4","6"]
                 .map(v => v ? "`"+v+"`," : '\n')
-                .join(' '), draw(lastField, encoder)
+                .join(' '), draw(lastField,encoder)
             )
             .then(ms => {
                 messages.forEach(m => {
@@ -90,12 +92,14 @@ module.exports.run = async (bot, msg) => {
                 awaiting = false;
                 sendMessage(lastField.join(' '));
             })
+        }else{
+            draw(field, encoder);
         }
     }
 
     sendMessage()
 
-    const collector = msg.channel.createMessageCollector(m => m.author.id == msg.author.id, {time: 10*60*1000});
+    const collector = msg.channel.createMessageCollector(m => m.author.id == msg.author.id, {idle: 60*1000});
 
     collector.on('collect', m => {
         if(['up','down','left','right','u','d','l','r','4','5','6','8'].includes(m.content.toLowerCase())){
