@@ -1,10 +1,8 @@
 module.exports = {
     name: "owo",
     description: "OwO!",
-    usage: "",
-    category: `misc`,
+    category: "misc",
     type: "template",
-    aliases: ['uwu']
+    aliases: ["uwu"],
+    run: () => "OwO"
 }
-
-module.exports.run = async (bot, msg) => "OwO"
