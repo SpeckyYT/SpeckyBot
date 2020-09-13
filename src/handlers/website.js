@@ -12,7 +12,7 @@ module.exports = async (bot) => {
             });
         });
         let port = 50000;
-        async function end(err){
+        function end(err){
             if(err){
                 console.log(`Wasn't able to access any port`.error);
             }else{
@@ -20,25 +20,25 @@ module.exports = async (bot) => {
                 app.listen(port,()=>{});
             }
         }
-        async function check(fn){
+        function check(fn){
             ((port,fn)=>{
                 const tester = createServer()
-                .once('error', async function (err) {
+                .once('error', function (err) {
                     if (err.code != 'EADDRINUSE') return fn(err);
                     fn(null, true)
                 })
-                .once('listening', async function() {
-                    tester.once('close', async function() {
+                .once('listening', function() {
+                    tester.once('close', function() {
                         fn(null, false)
                     })
                     .close()
                 })
                 .listen(port);
-            })(port, async (err,taken) => {
+            })(port, (err,taken) => {
                 if(err || taken){
                     port++;
                     if(port < 2**16){
-                        await check(end);
+                        check(end);
                     }else{
                         return fn(true);
                     }
@@ -47,6 +47,6 @@ module.exports = async (bot) => {
                 }
             });
         }
-        await check(end);
+        check(end);
     }catch(err){}
 }

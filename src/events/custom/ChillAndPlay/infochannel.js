@@ -3,7 +3,7 @@ module.exports = {
     call: async (bot) => {
         const guild = bot.guilds.get('265505748413448193');
         if(!guild) return;
-        
+
         function update(it=[],ch){
             Promise.all([...it])
             .then(inf => {
@@ -20,7 +20,7 @@ module.exports = {
             guild.fetchBans(),
             guild.fetchInvites(),
             guild.emojis.filter(e => !e.animated),
-            guild.emojis.filter(e => e.animated)  
+            guild.emojis.filter(e => e.animated)
         ], '714465197032734760');
 
         update([
