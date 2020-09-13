@@ -1,3 +1,2 @@
-const mainfolder = '.\\src'
-process.chdir(mainfolder);
-require(mainfolder+'\\bot.js')();
+process.chdir('.\\src');
+require(process.cwd()+'\\bot.js')();
