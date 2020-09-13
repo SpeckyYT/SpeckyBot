@@ -6,8 +6,6 @@ module.exports = {
 const specky = `specky:653319769516146729`
 const crafter = `crafter:646808734483611669`
 
-
-
 module.exports.call = async (bot, msg) => {
     if (msg.author.bot || msg.channel.type === "dm") return;
 
@@ -17,18 +15,13 @@ module.exports.call = async (bot, msg) => {
 
     // REACTIONS
     if(msg.guild.me.hasPermission('ADD_REACTIONS')){
-        if(contentl.includes('specky')){
-            msg.react(specky).catch(()=>{});
-        }
-
-        if(contentl.includes('crafter')){
-            msg.react(crafter).catch(()=>{});
-        }
-
-        if(contentl.replace(/[^a-z0-9]/g,'') == 'hai'){
-            msg.react('🦈').catch(()=>{});
-        }
-
+        [
+            [contentl.includes('specky'),specky],
+            [contentl.includes('crafter'),crafter],
+            [contentl.replace(/[^a-z0-9]/g,'') == 'hai','🦈'],
+            [contentl.includes('juan'),'🐴'],
+        ]
+        .forEach(([c,e]) => c ? msg.react(e).catch() : null)
     }
 
     // MESSAGES/RESPONSES
