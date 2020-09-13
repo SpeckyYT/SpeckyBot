@@ -11,14 +11,13 @@ const { evaluate } = require("mathjs");
 module.exports.run = async (bot, msg) => {
     const { cmdContent } = msg;
     if(!cmdContent) return bot.cmdError('Input a calculation');
-
-    if(!bot.cache.math[msg.author.id]){
-        bot.cache.math[msg.author.id] = {}
-    }
-
+    const scope = bot.cache.math[msg.author.id] || {}
     let resp;
     try{
-        resp = evaluate(cmdContent, bot.cache.math[msg.author.id]);
+        resp = evaluate(cmdContent, scope);
+        if(Object.keys(scope).length > 0){
+            bot.cache.math[msg.author.id] = scope;
+        }
     } catch (e){
         return bot.cmdError(e.toString());
     }
