@@ -3,7 +3,6 @@ module.exports = {
     description: "Deletes a TON of messages for you!",
     usage: `<message quantity>`,
     category: `admin`,
-    aliases: [],
     perms: ['MANAGE_MESSAGES'],
     cmdperms: ['MANAGE_MESSAGES']
 }
@@ -16,7 +15,7 @@ module.exports.run = async (bot, msg) => {
     }
     const maxpurge = 10000;
 
-    let beg = args[0] 
+    let beg = args[0]
     msg.delete();
     if(beg > maxpurge) return msg.channel.send(`You can't purge more than ${maxpurge} messages at once!`);
     if(beg < 0) return;

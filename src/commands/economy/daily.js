@@ -1,6 +1,5 @@
 module.exports = {
     name: "daily",
-    aliases: [],
     category: "economy",
     description: "Claim your Daily Reward [Experimental]",
 }

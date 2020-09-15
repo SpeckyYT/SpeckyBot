@@ -2,7 +2,6 @@ module.exports = {
     name: "holo",
     description: "Gives you a holo!",
     category: `sfw`,
-    aliases: [],
     flags: ["sfw"]
 }
 

@@ -1,6 +1,5 @@
 module.exports = {
     name: "pay",
-    aliases: [],
     usage: "<@user> <amount>",
     category: "economy",
     description: "Lets you pay someone else [Experimental]",

@@ -5,7 +5,6 @@ module.exports = {
     name: "hwtts",
     description: "Hello World!",
     category: 'helloworld',
-    aliases: [],
     type: 'template',
     run: async (bot:SpeckyClient, msg:CmdMessage): Promise<string> => "`TypeScript (templates)`: Hello World!"
 }
