@@ -33,6 +33,8 @@ Promise.all(promises)
 let corner, refresh;
 
 module.exports.run = async (bot, msg) => {
+    await Promise.all(promises);
+
     let { list } = this;
 
     if(!list)
