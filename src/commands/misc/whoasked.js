@@ -1,7 +1,6 @@
 module.exports = {
     name: "whoasked",
     description: "Searching who asked!",
-    usage: '',
     category: 'misc',
     type: 'template',
     aliases: []

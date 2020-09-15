@@ -1,7 +1,6 @@
 module.exports = {
     name: "sliding",
     description: "Lets you play a sliding puzzle!",
-    usage: "",
     category: "games",
     aliases: ["slide","slidingpuzzle"]
 }

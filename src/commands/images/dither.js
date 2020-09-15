@@ -1,7 +1,6 @@
 module.exports = {
     name: "dither",
     description: "Dithers the image!",
-    usage: "",
     category: `images`,
     aliases: []
 }

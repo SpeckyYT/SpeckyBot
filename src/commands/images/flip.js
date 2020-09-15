@@ -1,7 +1,6 @@
 module.exports = {
     name: "flip",
     description: "Flips the image! (Horizontally)",
-    usage: "",
     category: `images`,
     aliases: []
 }

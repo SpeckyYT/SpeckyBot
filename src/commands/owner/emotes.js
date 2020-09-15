@@ -1,7 +1,6 @@
 module.exports = {
     name: "allemotes",
     description: "Sends all emotes which the bot can access to.",
-    usage: "",
     category: `owner`,
     aliases: ["allemojis"]
 }

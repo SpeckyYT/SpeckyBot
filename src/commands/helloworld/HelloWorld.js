@@ -1,7 +1,6 @@
 module.exports = {
     name: "hwjs",
     description: "Hello World!",
-    usage: '',
     category: 'helloworld',
     aliases: [],
     run: async (bot, msg) => {

@@ -1,7 +1,6 @@
 module.exports = {
     name: "primes",
     description: "Gives you prime numbers!",
-    usage: "",
     category: `math`,
     aliases: ["prime"]
 }

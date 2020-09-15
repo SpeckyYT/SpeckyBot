@@ -1,7 +1,6 @@
 module.exports = {
     name: "greyscale",
     description: "Applies a greyscale filter to the image!",
-    usage: "",
     category: `images`,
     aliases: ["grayscale","grey","gray"]
 }

@@ -4,7 +4,6 @@ import { CmdMessage } from "../../../typings/Message";
 module.exports = {
     name: "hwts",
     description: "Hello World!",
-    usage: '',
     category: 'helloworld',
     aliases: [],
     run: async (bot:SpeckyClient, msg:CmdMessage): Promise<void> => {

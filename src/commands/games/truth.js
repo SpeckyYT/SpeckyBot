@@ -1,7 +1,6 @@
 module.exports = {
     name: "truth",
     description: "Gives you a question which you should answer honestly!",
-    usage: "",
     category: "games",
     aliases: []
 }

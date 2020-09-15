@@ -1,7 +1,6 @@
 module.exports = {
     name: "bots",
     description: "Gives you the online/offline bots list!",
-    usage: "",
     category: `utilities`,
     aliases: ["bot","robot","robots"]
 }

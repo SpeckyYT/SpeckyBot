@@ -1,7 +1,6 @@
 module.exports = {
     name: "waifu",
     description: "Gives you a waifu!",
-    usage: '',
     category: 'misc',
     aliases: ['w']
 }

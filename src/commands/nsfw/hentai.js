@@ -1,7 +1,6 @@
 module.exports = {
     name: "hentai",
     description: "Gives you a hentai!",
-    usage: "",
     category: `nsfw`,
     aliases: []
 }

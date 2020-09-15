@@ -1,7 +1,6 @@
 module.exports = {
     name: "shuffle",
     description: "Shuffles the queue!",
-    usage: "",
     category: `music`,
     aliases: ["shuffl"]
 }

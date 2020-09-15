@@ -1,7 +1,6 @@
 module.exports = {
     name: "meow",
     description: "Gives you a cat!",
-    usage: "",
     category: `sfw`,
     aliases: ["miao","miau","miu","miav","meu","mjaullin","miauw","miaou","miar","mjao","mjaw","mijav","miob","meo","myau"]
 }

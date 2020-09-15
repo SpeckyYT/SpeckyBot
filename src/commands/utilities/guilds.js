@@ -1,7 +1,6 @@
 module.exports = {
     name: "guilds",
     description: "How many servers does this bot know?",
-    usage: "",
     category: `utilities`,
     aliases: ["servers"]
 }

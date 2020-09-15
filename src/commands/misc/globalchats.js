@@ -1,7 +1,6 @@
 module.exports = {
     name: "globalchats",
     description: "Gives you all global chats!",
-    usage: "",
     category: "misc",
     aliases: ['globalchat','gc']
 }

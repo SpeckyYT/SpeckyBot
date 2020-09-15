@@ -1,7 +1,6 @@
 module.exports = {
     name: "games",
     description: "What's the most played game in this server?",
-    usage: "",
     category: `utilities`,
     aliases: ["game"]
 }

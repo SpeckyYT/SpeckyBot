@@ -4,7 +4,6 @@ import { CmdMessage } from "../../../typings/Message";
 module.exports = {
     name: "hwtts",
     description: "Hello World!",
-    usage: '',
     category: 'helloworld',
     aliases: [],
     type: 'template',

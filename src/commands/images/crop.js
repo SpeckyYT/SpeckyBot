@@ -1,7 +1,6 @@
 module.exports = {
     name: "crop",
     description: "Crops the image!",
-    usage: "",
     category: `images`,
     aliases: ["autocrop"]
 }

@@ -1,7 +1,6 @@
 module.exports = {
     name: "stats",
     description: "Gives some stats about the bot!",
-    usage: "",
     category: `misc`,
     aliases: ["status","st"]
 }

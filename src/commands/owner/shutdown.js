@@ -1,7 +1,6 @@
 module.exports = {
     name: "shutdown",
     description: "Shuts the bot down!",
-    usage: "",
     category: `owner`,
     aliases: ["quit","exit","die","kill"]
 }

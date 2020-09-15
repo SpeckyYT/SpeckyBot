@@ -1,7 +1,6 @@
 module.exports = {
     name: "hwtjs",
     description: "Hello World!",
-    usage: '',
     category: 'helloworld',
     aliases: [],
     type: "template",

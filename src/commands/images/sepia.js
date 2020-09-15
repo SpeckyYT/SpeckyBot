@@ -1,7 +1,6 @@
 module.exports = {
     name: "sepia",
     description: "Applies a sepia filter to the image!",
-    usage: "",
     category: `images`,
     aliases: []
 }

@@ -1,7 +1,6 @@
 module.exports = {
     name: "balance",
     aliases: ["bal", "bank", "money"],
-    usage: "",
     category: "economy",
     description: "Gets your current bot balance [Experimental]",
 }

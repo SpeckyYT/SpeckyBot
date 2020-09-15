@@ -1,7 +1,6 @@
 module.exports = {
     name: "invert",
     description: "Invert the color of the image!",
-    usage: "",
     category: `images`,
     aliases: []
 }

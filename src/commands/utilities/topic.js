@@ -1,7 +1,6 @@
 module.exports = {
     name: "topic",
     description: "Gives you a random question to trigger a discussion!",
-    usage: "",
     category: `utilities`,
     aliases: ["bruh"]
 }
@@ -51,7 +50,7 @@ const questions = [
     "Would you rather be the best player on a horrible team or the worst player on a great team?",
     "Would you rather be the smartest moron or dumbest genius?",
     "Would you rather not be able to use your hands or not be able to walk?"
-    
+
 ]
 
 module.exports.run = async (bot, msg) => {

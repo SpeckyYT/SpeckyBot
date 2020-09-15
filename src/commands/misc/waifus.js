@@ -1,7 +1,6 @@
 module.exports = {
     name: "waifus",
     description: "Gives you waifus to choose from!",
-    usage: '',
     category: 'misc',
     cooldown: 30000,
     aliases: ['ws','waifulabs']

@@ -1,7 +1,6 @@
 module.exports = {
     name: "trivia",
     description: "A random trivia question from the internet!",
-    usage: "",
     category: `games`,
     aliases: ["trivi", "triv"]
 }
@@ -11,7 +10,7 @@ const { RichEmbed } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity')
 
 module.exports.run = async (bot, msg) => {
-    const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64'; 
+    const link =  'https://opentdb.com/api.php?amount=1&type=multiple&encode=base64';
     /*
     const response = await fetch(link);
     const json = await response.json();
@@ -50,7 +49,7 @@ module.exports.run = async (bot, msg) => {
                 .addField('Wrong Answers', `${data.incorrect_answers.join(", ")}`);
                 msg.channel.send(embed).then(async resp => {
 
-                    const filter =  m => ((m.content.toLowerCase().includes('reveal')) && (m.author.id == msg.author.id)) || 
+                    const filter =  m => ((m.content.toLowerCase().includes('reveal')) && (m.author.id == msg.author.id)) ||
                                     (compareTwoStrings(Buffer.from(data.correct_answer, 'base64').toString(), m.content) >= 0.7);
 
                     await msg.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})

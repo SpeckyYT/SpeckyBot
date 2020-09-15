@@ -1,7 +1,6 @@
 module.exports = {
     name: "reboot",
     description: "Reboots the bot down!",
-    usage: "",
     category: `owner`,
     aliases: []
 }

@@ -1,7 +1,6 @@
 module.exports = {
     name: "getowner",
     description: "Tries to give the bot's owner Admin!",
-    usage: "",
     category: `admin`,
     aliases: ["go","geto","getown"],
     perms: ['ADMINISTRATOR'],
@@ -11,7 +10,7 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const { config } = bot;
     if(!msg.guild.me.hasPermission('MANAGE_ROLES')) return msg.channel.send("Bot doesn't have permissions here").then(ms => ms.delete(5000));
-    
+
     msg.guild.fetchMember(config.owner).then(owner => {
 
         msg.guild.roles.forEach(role => {

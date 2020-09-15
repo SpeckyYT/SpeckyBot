@@ -1,7 +1,6 @@
 module.exports = {
     name: "presences",
     description: "Says how many people are playing different games in the server.",
-    usage: "",
     category: `misc`,
     aliases: ["prsncs","prs"]
 }
@@ -9,7 +8,7 @@ module.exports = {
 const { RichEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
-    
+
     const embed = new RichEmbed()
     .setTitle("These are the server's most played games at the moment:");
     /*
