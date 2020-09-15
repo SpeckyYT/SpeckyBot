@@ -1,10 +1,3 @@
-module.exports.emotes = {
-    Eonline: "<:online:661611929332219905>",
-    Eidle: "<:idle:661611969131970580>",
-    Ednd: "<:dnd:661612025943818265>",
-    Eoffline: "<:offline:661612200527396865>"
-}
-
 module.exports.listCreator = (memberTypeCollection,list) => {
     memberTypeCollection.forEach(async memberType => {
         if(list[memberType.user.presence.status]){

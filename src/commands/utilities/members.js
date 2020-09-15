@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["servermembers","allmembers"]
 }
 
-const { emotes, listCreator, statusCheckQuantity, membersEmbed } = require('.\\functions\\misc.js')
+const { listCreator, statusCheckQuantity, membersEmbed } = require('.\\functions\\misc')
 
 module.exports.run = async (bot, msg) => {
     const members = [];
@@ -21,7 +21,12 @@ module.exports.run = async (bot, msg) => {
     const dnd = statusCheckQuantity(list,'dnd');
     const offline = statusCheckQuantity(list,'offline');
 
-    const { Eonline, Eidle, Ednd, Eoffline } = emotes;
+    const [
+        Eonline,
+        Eidle,
+        Ednd,
+        Eoffline
+    ] = ['online','idle','dnd','offline'].map(e => bot.emotes[e]);
 
     membersEmbed("Members",msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]])
 }

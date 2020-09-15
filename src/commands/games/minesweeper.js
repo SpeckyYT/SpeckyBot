@@ -63,17 +63,17 @@ module.exports.run = async (bot, msg) => {
 
     switch(msg.guild.id){
         case '265505748413448193':
-            bomb = '<:crafter:646808734483611669>';
+            bomb = bot.emotes.crafter;
             break;
         case '491274461111123969':
-            bomb = '<:wow:713448200878424255>'
+            bomb = bot.emotes.megaflushed;
             break;
         default:
             bomb = '🎆';
     }
 
     if(msg.guild.name.toLowerCase().includes('specky')){
-        bomb = '<:specky:653319769516146729>';
+        bomb = bot.emotes.specky;
     }
 
     // height and width have to be inverted for some reason
