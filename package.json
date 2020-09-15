@@ -42,7 +42,7 @@
         "string-similarity": "^3.0.0",
         "superagent": "^5.3.1",
         "terminal-image": "^0.2.0",
-        "tictactoe_model": "^1.0.3",
+        "tictactoejs": "^1.0.3",
         "ttbf": "^0.10.0",
         "twemoji": "^12.1.6",
         "typescript": "^3.9.7",
