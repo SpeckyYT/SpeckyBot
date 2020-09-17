@@ -1,4 +1,5 @@
 const { Client } = require('discord.js');
+const { join } = require('path');
 
 module.exports = async (bot) => {
     if(bot && bot.destroy) await bot.destroy();
@@ -10,5 +11,5 @@ module.exports = async (bot) => {
         messageCacheLifetime: 432000,
     })
 
-    require('.\\generalhandler')(bot);
+    require(join(__dirname,'generalhandler'))(bot);
 }

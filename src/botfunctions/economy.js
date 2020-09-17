@@ -1,4 +1,5 @@
 const { readFile, writeFile } = require('fs');
+const { join } = require('path');
 
 module.exports = (bot) => {
     bot.parseBet = (author,bet,min) => {
@@ -29,8 +30,8 @@ module.exports = (bot) => {
     }
 
     bot.economyRead = async (author) => {
-        return await new Promise((resolve,reject) => {
-            readFile("..\\db\\economy.json", "utf8", async (err,data) => {
+        return new Promise((resolve,reject) => {
+            readFile(join(process.cwd(),"..","db","economy.json"), "utf8", async (err,data) => {
                 if(err){
                     reject(err);
                 }else{
@@ -87,7 +88,7 @@ module.exports = (bot) => {
         if(!bot.economy) return;
 
         return new Promise((resolve, reject) => {
-            writeFile("..\\db\\economy.json", JSON.stringify(bot.economy,null,4), (err) => {
+            writeFile(join(process.cwd(),"..","db","economy.json"), JSON.stringify(bot.economy,null,4), (err) => {
                 if(err){
                     reject(err);
                 }else{

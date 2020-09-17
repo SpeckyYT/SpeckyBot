@@ -1,15 +1,17 @@
 const { readdirSync } = require('fs');
+const { join } = require('path');
 
 module.exports = (bot) => {
     ['prototypes','botfunctions']
     .forEach(folder => {
-        readdirSync(`.\\${folder}\\`)
+        readdirSync(join(process.cwd(),folder))
         .forEach(file => {
             try{
-                if(bot.require){
-                    bot.require(`.\\${folder}\\${file}`)(bot);
+                const path = join(process.cwd(),folder,file);
+                if(typeof bot.require == "function"){
+                    bot.require(path)(bot);
                 }else{
-                    require(`..\\..\\${folder}\\${file}`)(bot);
+                    require(path)(bot);
                 }
                 console.log(`${file}`.debug);
             }catch(err){

@@ -1,5 +1,6 @@
 const { readdirSync } = require('fs');
 const { Collection } = require('discord.js');
+const { join } = require('path');
 
 const alreadyLoaded = [];
 
@@ -32,7 +33,7 @@ module.exports = async (bot) => {
     bot.settings = {};
 
     bot.config = {};
-    bot.config = require('..\\..\\config.json');
+    bot.config = require(join(process.cwd(),'..','config.json'));
 
     const sF = [];
     for (const a in require.extensions) sF.push(a);
@@ -52,7 +53,7 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('.\\handlers\\botloader\\').map(v => sequence && v.match(bot.supportedFiles).length > 0 && !sequence.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
+        ...readdirSync(join(__dirname,'botloader')).map(v => sequence && v.match(bot.supportedFiles).length > 0 && !sequence.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
     ]
     .forEach(async x => {
         if(x == 'music'){
@@ -68,6 +69,6 @@ module.exports = async (bot) => {
         }else{
             console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
         }
-        require(`.\\botloader\\${x}`)(bot);
+        require(join(__dirname,'botloader',x))(bot);
     });
 }

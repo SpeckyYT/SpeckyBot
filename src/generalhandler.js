@@ -1,4 +1,5 @@
 const { readdirSync } = require('fs');
+const { join } = require('path');
 
 module.exports = async (bot) => {
     console.log("\n\n");
@@ -16,7 +17,7 @@ module.exports = async (bot) => {
 
     [
         ...sequence,
-        ...readdirSync('.\\handlers\\').map(v => sequence && v.match(/.[a-zA-Z]+$/g).length > 0 && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
+        ...readdirSync(join(__dirname,'handlers')).map(v => sequence && v.match(/.[a-zA-Z]+$/g).length > 0 && !sequence.includes(v.replace(/.[a-zA-Z]+$/g,'')) ? v.replace(/.[a-zA-Z]+$/g,'') : null)
     ]
     .forEach(async handler => {
         if(!handler) return;
@@ -24,7 +25,7 @@ module.exports = async (bot) => {
         console.log(`test`.dependency ? `handler\t${handler}.js`.dependency : `handler\t${handler}.js`);
 
         try{
-            await require(`.\\handlers\\${handler}.js`)(bot);
+            await require(join(__dirname,"handlers",handler))(bot);
         }catch(err){
             console.log(`handler\t${handler}.js`.error);
             console.log("FATAL ERROR ON HANDLERS".fatal);

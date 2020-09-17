@@ -1,8 +1,13 @@
-const { join } = require('path');
+const { join, isAbsolute } = require('path');
 
 module.exports = (bot) => {
     bot.require = (path) => {
-        const mod = join(process.cwd(),path);
+        let mod;
+        if(isAbsolute(path)){
+            mod = path;
+        }else{
+            mod = join(process.cwd(),path);
+        }
         try{
             delete require.cache[mod];
         }catch(e){}

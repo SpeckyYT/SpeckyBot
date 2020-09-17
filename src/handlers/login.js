@@ -1,6 +1,6 @@
 module.exports = async (bot) => {
     const { token, prefix } = bot.config;
-        
+
     return bot.login(token)
     .then(() => {
         bot.log(`Bot prefix: ${prefix}`.startupinfo);
