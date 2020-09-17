@@ -30,16 +30,11 @@ module.exports.run = async (bot, msg) => {
         .setDescription("Loading...")
     );
 
-    const promises = [];
-
-    promises.push(aki.start());
-    for(let a in answers){
-        if(typeof answers[a] == "string"){
-            promises.push(message.react(answers[a]))
-        }
-    }
-
-    await Promise.all(promises);
+    await Promise.all([
+        aki.start(),
+        ...Object.values(answers)
+        .map(r => message.react(r))
+    ])
 
     message.edit(
         bot.embed()
@@ -52,13 +47,14 @@ module.exports.run = async (bot, msg) => {
         await aki.step(
             Object.keys(answers)[Object.values(answers).indexOf(r.emoji.name)]
         );
-        if(aki.progress > 75){
+        if(aki.progress > 80){
             await aki.win()
+            const guess = aki.answers.last();
             message.edit(
                 bot.embed()
                 .setTitle("Akinator")
-                .addField("My Guess", aki.answers[0].name)
-                .setImage(aki.answers[0].absolute_picture_path)
+                .addField("My Guess", guess.name)
+                .setImage(guess.absolute_picture_path)
             )
             collector.stop()
         }else{

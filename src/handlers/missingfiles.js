@@ -14,7 +14,7 @@ module.exports = async () => {
         appendFileSync(config, JSON.stringify(template,null,4));
 
     ['s_settings','u_settings','economy'].forEach(file => {
-        const db = join(process.cwd(),'..',`${file}.json`);
+        const db = join(process.cwd(),'..','db',`${file}.json`);
         if (!existsSync(db))
             appendFileSync(db, '{}');
     });

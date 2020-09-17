@@ -5,7 +5,8 @@ module.exports = {
     aliases: ["moderator","mods"]
 }
 
-const { listCreator, statusCheckQuantity, membersEmbed } = require('.\\functions\\misc')
+const { join } = require('path');
+const { listCreator, statusCheckQuantity, membersEmbed } = require(join(__dirname,'functions','misc'))
 
 module.exports.run = async (bot, msg) => {
     const mods = [];

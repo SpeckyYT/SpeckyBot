@@ -5,12 +5,14 @@ module.exports = {
 
 let sfw,met;
 
+const { join } = require('path');
 const neko = new (require('nekos.life'))();
 
 const execute = async (bot,f) => {
     if(f){
-        await f().then(async img => {
-            require('.\\functions\\drawbuffer')(bot,img.url);
+        f()
+        .then(async img => {
+            require(join(__dirname,'functions','drawbuffer'))(bot,img.url);
         })
     }else{
         console.log(`${sfw}/${met} doesn't exist`.error);

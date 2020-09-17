@@ -1,14 +1,15 @@
 const { RichEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const config = require('./settings');
+const { join } = require('path');
+const config = require(join(__dirname,'settings'));
 
 module.exports.runGame = async (channel, players_, bot) => {
     bot.minigames = Array.isArray(bot.minigames) ? bot.minigames : [];
 
-    const gameFiles = readdirSync('.\\commands\\games\\SpeckySays\\minigames').filter(file => file.match(bot.supportedFiles))
+    const gameFiles = readdirSync(join(__dirname,'minigames')).filter(file => file.match(bot.supportedFiles))
 
     for (const file of gameFiles) {
-        const game = require(`.\\minigames\\${file}`);
+        const game = require(join(__dirname,"minigames",file));
         if(bot.minigames.length){
             bot.minigames.some((val,ind,arr) => {
                 if(val.startMessage == game.startMessage){
@@ -36,7 +37,7 @@ module.exports.runGame = async (channel, players_, bot) => {
     let rounds = 1
     let lastGame = null
     // example of how to start a game
-    let settings = require('.\\settings');
+    let settings = require(join(__dirname,'settings'));
 
     await (async function gameLoop(){
         // chooses a random minigame

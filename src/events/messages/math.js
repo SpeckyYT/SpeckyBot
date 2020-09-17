@@ -5,7 +5,7 @@ module.exports = {
 const { evaluate } = require('mathjs');
 
 module.exports.call = (bot, msg) => {
-    const u_settings = require('..\\..\\..\\db\\u_settings.json');
+    const u_settings = bot.settings.user;
     if(!msg.content) return;
     const scope = bot.cache.math[msg.author.id] || {}
     if(u_settings[msg.author.id] ? u_settings[msg.author.id].math : false){

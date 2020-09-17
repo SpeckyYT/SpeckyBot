@@ -6,9 +6,9 @@ module.exports = {
     aliases: ["coll"]
 }
 
-
-const collatzPath = '.\\commands\\math\\data\\collatz.txt';
 const { writeFile, readFileSync } = require('fs');
+const { join } = require('path');
+const collatzPath = join(__dirname,'data','collatz.txt');
 
 module.exports.run = async (bot, msg) => {
     const collatz = [];

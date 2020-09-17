@@ -7,7 +7,8 @@ module.exports = {
 }
 
 const { writeFile } = require('fs');
-const dir = '..\\..\\..\\db\\u_settings';
+const { join } = require('path');
+const dir = join(process.cwd(),'..','db','u_settings');
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
@@ -67,7 +68,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(changed){
-        writeFile('..\\db\\u_settings.json', JSON.stringify(u_settings, null, 4), err => {
+        writeFile(join(process.cwd(),'..','db','u_settings.json'), JSON.stringify(u_settings, null, 4), err => {
             if(err){
                 msg.channel.send("Error while saving...");
                 console.error(err);

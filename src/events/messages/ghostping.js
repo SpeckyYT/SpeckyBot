@@ -2,12 +2,14 @@ module.exports = {
     event: "messageDelete"
 }
 
+const { join } = require('path');
+
 module.exports.call = async (bot, msg) => {
     if(msg.author.bot) return;
     if(msg.channel.type !== 'text') return;
     if((new Date().getTime() - msg.createdTimestamp) > 60000) return;
 
-    const u_settings = require('..\\..\\..\\db\\u_settings.json');
+    const u_settings = require(join(process.cwd(),'..','db','u_settings.json'));
 
     if(msg.mentions.members.first()){
         msg.mentions.members.forEach(member => {

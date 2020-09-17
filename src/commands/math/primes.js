@@ -5,8 +5,9 @@ module.exports = {
     aliases: ["prime"]
 }
 
-const primesPath = '.\\commands\\math\\data\\primes.json';
 const { writeFile, readFileSync } = require('fs');
+const { join } = require('path');
+const primesPath = join(__dirname,'data','primes.json');
 
 module.exports.run = async (bot, msg) => {
     const startPrimes = [];

@@ -8,8 +8,9 @@
     perms: ["MANAGE_MESSAGES"]
 }
 
-const { RichEmbed } = require('discord.js')
-const { runGame } = require('.\\SpeckySays\\game');
+const { RichEmbed } = require('discord.js');
+const { join } = require('path');
+const { runGame } = require(join(__dirname,'SpeckySays','game'));
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
