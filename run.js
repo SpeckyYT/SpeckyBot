@@ -1,3 +1,3 @@
-console.log(require('fs').readdirSync(__dirname))
-process.chdir(__dirname+'\\src');
-require(__dirname+'\\src\\bot.js')();
+const { join } = require('path');
+process.chdir(join(__dirname,'src'));
+require(join(__dirname,'src','bot.js'))();
