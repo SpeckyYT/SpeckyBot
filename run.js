@@ -1,2 +1,2 @@
-process.chdir('.\\src');
-require(process.cwd()+'\\bot.js')();
+process.chdir(__dirname+'\\src');
+require(__dirname+'\\src\\bot.js')();
