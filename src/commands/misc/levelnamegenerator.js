@@ -19,15 +19,15 @@ const promises = [];
 
 const fts = (url,fn) => fetch(url)
 .then(d => d.buffer())
-.then(l => fs.writeFileSync(`${__dirname}\\assets\\${fn}`,l));
+.then(l => fs.writeFileSync(`.\\assets\\${fn}`,l));
 
-if(!fs.existsSync(__dirname+'\\assets')) fs.mkdirSync(__dirname+'\\assets');
-if(!fs.existsSync(__dirname+'\\assets\\corner.png')) promises.push(fts(cornerURL,'corner.png'));
-if(!fs.existsSync(__dirname+'\\assets\\refresh.png')) promises.push(fts(refreshURL,'refresh.png'));
-if(!fs.existsSync(__dirname+'\\assets\\pusab.ttf')) promises.push(fts(pusabURL,'pusab.ttf'));
+if(!fs.existsSync('.\\assets')) fs.mkdirSync('.\\assets');
+if(!fs.existsSync('.\\assets\\corner.png')) promises.push(fts(cornerURL,'corner.png'));
+if(!fs.existsSync('.\\assets\\refresh.png')) promises.push(fts(refreshURL,'refresh.png'));
+if(!fs.existsSync('.\\assets\\pusab.ttf')) promises.push(fts(pusabURL,'pusab.ttf'));
 
 Promise.all(promises)
-.then(()=>Canvas.registerFont(__dirname+'\\assets\\pusab.ttf',{family: 'Pusab'}))
+.then(()=>Canvas.registerFont('.\\assets\\pusab.ttf',{family: 'Pusab'}))
 .catch(()=>{});
 
 let corner, refresh;
@@ -105,14 +105,14 @@ module.exports.run = async (bot, msg) => {
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     // CORNERS
-    if(!corner) corner = await Canvas.loadImage(__dirname+'\\assets\\corner.png');
+    if(!corner) corner = await Canvas.loadImage('.\\assets\\corner.png');
     ctx.drawImage(corner,0,canvas.height-corner.height);
     ctx.scale(-1,1);
     ctx.drawImage(corner,-canvas.width,canvas.height-corner.height)
     ctx.scale(-1,1);
 
     // REFRESH
-    if(!refresh) refresh = await Canvas.loadImage(__dirname+'\\assets\\refresh.png');
+    if(!refresh) refresh = await Canvas.loadImage('.\\assets\\refresh.png');
     ctx.drawImage(refresh,canvas.width/2-refresh.width/2,canvas.height*0.5);
 
     // TEXT
