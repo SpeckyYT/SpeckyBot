@@ -33,7 +33,7 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | flags        | Array    | ["funny","fun"]                   | may change the result of the command `"--flag"` | false    |
 | cooldown     | Number   | 10000                             | how long to wait for rerunning the command (ms) | false    |
 
-Note: You can have **ONLY ONE** function in the entire file
+Note: You can have **ONLY ONE** exported function in the entire file
 
 ## 1.3. Console
 
@@ -45,9 +45,24 @@ Console commands are called each time you enter a string in the terminal.
 | aliases      | Array    | ["hi","howdy"]          | lowercase and no spaces          | false    |
 | `anything`   | Function | ()=>{console.log("hi")} | the function that will be called | false    |
 
-Note: You can have **ONLY ONE** function in the entire file
+Note: You can have **ONLY ONE** exported function in the entire file
 
-## 1.4. Events
+## 1.4. Emotes
+
+This folder makes it easier to save and use emojis without having to write them multiple times over different files.
+
+| Property   | Type   | Example    |
+|------------|--------|------------|
+| `anything` | String | joy: "😂" |
+
+Example:
+```js
+function(bot,msg){
+    msg.channel.send(bot.emotes.joy)
+}
+```
+
+## 1.5. Events
 
 Events get called by the Discord's API or by custom events (e.g. "interval_1_min").
 
@@ -57,7 +72,7 @@ Events get called by the Discord's API or by custom events (e.g. "interval_1_min
 | type         | String   | "once"                        | `on` or `once`                   | false    |
 | `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | false    |
 
-Note: You can have **ONLY ONE** function in the entire file
+Note: You can have **ONLY ONE** exported function in the entire file
 
 ## 1.5. Handlers
 
