@@ -1,7 +1,7 @@
 module.exports = {
     name: "quiz",
     description: "A random question with (usually) 4 responses!",
-    category: `games`,
+    category: "games",
     aliases: ["qui", "qz","quiz"]
 }
 

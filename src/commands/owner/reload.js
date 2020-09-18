@@ -1,7 +1,7 @@
 module.exports = {
     name: "reload",
     description: "The bot will reload a specific handler!",
-    category: `owner`,
+    category: "owner",
     aliases: ["rld","rl"]
 }
 

@@ -2,7 +2,7 @@ module.exports = {
     name: "rps",
     description: "Lets you play Rock Paper Scissors with the bot!",
     usage: `<handsign>`,
-    category: `games`,
+    category: "games",
     aliases: ["rsp", "rockpaperscissors","rockscissorspaper"]
 }
 

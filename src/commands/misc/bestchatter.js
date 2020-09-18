@@ -2,7 +2,7 @@ module.exports = {
     name: "bestchatters",
     description: "Gives the best chatters of the chat!",
     usage: `[#channel]`,
-    category: `misc`,
+    category: "misc",
     aliases: ["bestchatter","bc"]
 }
 

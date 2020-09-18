@@ -1,7 +1,7 @@
 module.exports = {
     name: "queue",
     description: "Gives you the songs queue!",
-    category: `music`,
+    category: "music",
     aliases: ["q","qu","que"]
 }
 

@@ -1,7 +1,7 @@
 module.exports = {
     name: "vc",
     description: "Informations about the vocal channel you're in!",
-    category: `utilities`,
+    category: "utilities",
     aliases: ["vocalchannel","vcinfo"]
 }
 

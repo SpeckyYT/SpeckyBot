@@ -2,7 +2,7 @@ module.exports = {
     name: "member2id",
     description: "Converts a username and discriminator to the user id.",
     usage: `<username>#<discriminator>`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["m2i"]
 }
 

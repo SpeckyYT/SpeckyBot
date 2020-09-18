@@ -2,7 +2,7 @@ module.exports = {
     name: "encode",
     description: "Encodes a String that can be decoded in the same way!",
     usage: `<text>`,
-    category: `misc`,
+    category: "misc",
     aliases: ["decode","encrypt","decrypt"]
 }
 

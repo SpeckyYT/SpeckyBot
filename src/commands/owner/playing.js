@@ -2,7 +2,7 @@ module.exports = {
     name: "playing",
     description: "Some stuff for the bot's presence",
     usage: `<Playing> <Game>`,
-    category: `owner`,
+    category: "owner",
     aliases: ["presence","game"]
 }
 

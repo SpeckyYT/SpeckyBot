@@ -2,7 +2,7 @@ module.exports = {
     name: "dice",
     description: "Lets you play with dice!",
     usage: `<amount>`,
-    category: `games`,
+    category: "games",
     aliases: []
 }
 

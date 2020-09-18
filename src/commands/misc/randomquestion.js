@@ -1,7 +1,7 @@
 module.exports = {
     name: "randomquestion",
     description: "Thanks to Nickguimond for the randomQuestions module\nhttps://github.com/nickguimond/randomQuestions",
-    category: `misc`,
+    category: "misc",
     aliases: ["rq","randquest","randq","question"]
 }
 

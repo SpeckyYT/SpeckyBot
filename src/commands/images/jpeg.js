@@ -2,7 +2,7 @@ module.exports = {
     name: "jpeg",
     description: "Applies a jpeg filter to the image!",
     usage: `[Amount (1-100)]`,
-    category: `images`,
+    category: "images",
     aliases: ["jpg"]
 }
 

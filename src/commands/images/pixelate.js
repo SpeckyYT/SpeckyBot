@@ -2,7 +2,7 @@ module.exports = {
     name: "pixelate",
     description: "Blurs the image!",
     usage: `[Amount (2-100)]`,
-    category: `images`,
+    category: "images",
     aliases: ["pixel"]
 }
 

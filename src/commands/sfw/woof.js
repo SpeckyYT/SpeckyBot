@@ -1,7 +1,7 @@
 module.exports = {
     name: "woof",
     description: "Gives you a dog!",
-    category: `sfw`,
+    category: "sfw",
     aliases: ["dog"]
 }
 

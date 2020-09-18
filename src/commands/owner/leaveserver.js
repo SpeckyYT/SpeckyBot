@@ -2,7 +2,7 @@ module.exports = {
     name: "leaveserver",
     description: "The bot will leave the desired server!",
     usage: `<serverID>`,
-    category: `owner`,
+    category: "owner",
     aliases: ["ls","sl","serverleave"]
 }
 

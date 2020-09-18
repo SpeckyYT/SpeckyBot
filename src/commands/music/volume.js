@@ -1,7 +1,7 @@
 module.exports = {
     name: "volume",
     description: "Changes the volume of the player!",
-    category: `music`,
+    category: "music",
     aliases: []
 }
 

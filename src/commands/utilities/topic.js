@@ -1,7 +1,7 @@
 module.exports = {
     name: "topic",
     description: "Gives you a random question to trigger a discussion!",
-    category: `utilities`,
+    category: "utilities",
     aliases: ["bruh"]
 }
 

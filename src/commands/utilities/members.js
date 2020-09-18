@@ -1,7 +1,7 @@
 module.exports = {
     name: "members",
     description: "Gives you the active/inactive members list!",
-    category: `utilities`,
+    category: "utilities",
     aliases: ["servermembers","allmembers"]
 }
 

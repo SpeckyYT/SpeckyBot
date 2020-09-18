@@ -2,7 +2,7 @@ module.exports = {
     name: "help",
     description: "The help for this bot!",
     usage: `<command>`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["h", "halp", "hel","hwlp","hewlp","cmd","cmds","command","commands","undefined","info","informations","information"]
 }
 

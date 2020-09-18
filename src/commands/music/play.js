@@ -2,7 +2,7 @@ module.exports = {
     name: "play",
     description: "Plays a song by choice!",
     usage: `<song>`,
-    category: `music`,
+    category: "music",
     aliases: ["p"]
 }
 

@@ -2,7 +2,7 @@ module.exports = {
     name: "eval",
     description: "Runs custom code directly from Discord!",
     usage: `<code in js>`,
-    category: `owner`,
+    category: "owner",
     aliases: ["evaluate"],
 }
 

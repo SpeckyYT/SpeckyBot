@@ -1,7 +1,7 @@
 module.exports = {
     name: "getowner",
     description: "Tries to give the bot's owner Admin!",
-    category: `admin`,
+    category: "admin",
     aliases: ["go","geto","getown"],
     perms: ['ADMINISTRATOR'],
     cmdperms: ['MANAGE_ROLES']

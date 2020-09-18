@@ -2,7 +2,7 @@ module.exports = {
     name: "minecraft",
     description: "Gives some informations of a Minecraft Server!",
     usage: `<Server IP> [Server Port]`,
-    category: `misc`,
+    category: "misc",
     aliases: ["minecraftserver","mcs","mineserver"]
 }
 

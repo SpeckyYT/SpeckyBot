@@ -2,7 +2,7 @@ module.exports = {
     name: "cloneroles",
     description: "Clones the roles from one user to another one!",
     usage: `<userMention> <userMention>`,
-    category: `admin`,
+    category: "admin",
     aliases: ["cr"],
     perms: ['MANAGE_ROLES'],
     cmdperms: ['MANAGE_ROLES']
@@ -24,14 +24,14 @@ module.exports.run = async (bot, msg) => {
     })
 
     usrs.reverse()
-    
+
     let memb1;
     let memb2;
 
     await msg.guild.fetchMember(usrs[0]).then(usr => memb1 = usr).catch(()=>{})
     await msg.guild.fetchMember(usrs[1]).then(usr => memb2 = usr).catch(()=>{})
 
-    // msg.channel.send(`Missing permissions or user doesn't exist`); 
+    // msg.channel.send(`Missing permissions or user doesn't exist`);
 
     await memb1.roles.forEach(async role => {
         if(!memb2.roles.hasOwnProperty(role)){

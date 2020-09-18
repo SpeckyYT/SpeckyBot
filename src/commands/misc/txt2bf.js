@@ -2,7 +2,7 @@ module.exports = {
     name: "txt2bf",
     description: "Converts a text string to a Brainf*ck string!",
     usage: `[text string]`,
-    category: `misc`,
+    category: "misc",
     aliases: ["text2brainfuck","texttobrainfuck","txttobf"]
 }
 

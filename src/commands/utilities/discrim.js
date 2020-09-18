@@ -1,8 +1,8 @@
 module.exports = {
     name: "discrim",
     description: "You want to change your discriminator without Nitro?",
-    usage: `[discriminator]`,
-    category: `utilities`,
+    usage: "[discriminator]",
+    category: "utilities",
     aliases: ["discrims","discriminator","discriminators","discrimin","discrimins"]
 }
 

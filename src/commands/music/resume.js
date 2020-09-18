@@ -1,7 +1,7 @@
 module.exports = {
     name: "resume",
     description: "Resumes the paused song!",
-    category: `music`,
+    category: "music",
     aliases: ["resum"]
 }
 

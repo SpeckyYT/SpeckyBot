@@ -2,7 +2,7 @@ module.exports = {
     name: "retrodave",
     description: "Creates an image from Retro Dave's level data!",
     usage: `<level data>`,
-    category: `owner`,
+    category: "owner",
     aliases: ["rd"]
 }
 

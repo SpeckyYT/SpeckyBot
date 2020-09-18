@@ -2,7 +2,7 @@ module.exports = {
     name: "f",
     description: "F",
     usage: `<anything>`,
-    category: `misc`,
+    category: "misc",
     aliases: []
 }
 

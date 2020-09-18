@@ -1,7 +1,7 @@
 module.exports = {
     name: "serverinfo",
     description: "Informations about the server you're in!",
-    category: `utilities`,
+    category: "utilities",
     aliases: ["si","serveri"]
 }
 

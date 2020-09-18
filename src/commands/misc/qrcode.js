@@ -2,7 +2,7 @@ module.exports = {
     name: "qrcode",
     description: "Creates a QRCode for you!",
     usage: `<text>`,
-    category: `misc`,
+    category: "misc",
     aliases: ["qr"]
 }
 

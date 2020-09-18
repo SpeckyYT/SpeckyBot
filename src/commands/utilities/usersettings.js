@@ -2,7 +2,7 @@ module.exports = {
     name: "usersettings",
     description: "What about customization?",
     usage: `<setting> <values>`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["us","usersetting"]
 }
 

@@ -1,7 +1,7 @@
 module.exports = {
     name: "delet",
     description: "Deletes the last 3 messages!",
-    category: `admin`,
+    category: "admin",
     aliases: ["..","."],
     perms: ['MANAGE_MESSAGES'],
     cmdperms: ['MANAGE_MESSAGES']

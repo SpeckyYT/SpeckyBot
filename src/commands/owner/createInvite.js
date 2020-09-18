@@ -2,7 +2,7 @@ module.exports = {
     name: "createinvite",
     description: "Creates an invite to a server and deletes it when you join.",
     usage: `<guildID>`,
-    category: `owner`,
+    category: "owner",
     aliases: ["ci"]
 }
 

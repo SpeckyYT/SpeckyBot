@@ -2,7 +2,7 @@ module.exports = {
     name: "repeat",
     description: "Repeats a command `n` times!",
     usage: `<command> <number> [content]`,
-    category: `owner`,
+    category: "owner",
     aliases: ["rpt"]
 }
 

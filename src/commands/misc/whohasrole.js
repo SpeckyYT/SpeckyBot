@@ -1,8 +1,8 @@
 module.exports = {
     name: "whohasrole",
     description: "Returns all users that has this role!",
-    usage: `[roleID]`,
-    category: `misc`,
+    usage: "[roleID]",
+    category: "misc",
     aliases: ["whr"]
 }
 

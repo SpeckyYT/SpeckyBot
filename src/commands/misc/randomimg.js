@@ -2,7 +2,7 @@ module.exports = {
     name: "randomimg",
     description: "Gives you a random image from loremflickr.com!",
     usage: `<keyword>`,
-    category: `misc`,
+    category: "misc",
     aliases: ["randomimage","rimg"]
 }
 

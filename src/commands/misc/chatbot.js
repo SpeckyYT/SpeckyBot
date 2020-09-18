@@ -2,7 +2,7 @@ module.exports = {
     name: "chatbot",
     description: "What about chatting to an AI?",
     usage: `<text>`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["cb","chatai","cleverbot"]
 }
 

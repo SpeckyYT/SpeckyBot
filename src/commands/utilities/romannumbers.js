@@ -2,7 +2,7 @@ module.exports = {
     name: "roman",
     description: "Can convert from and to roman numerals!",
     usage: `<number>`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["romannum","romannumber","romannumbers"]
 }
 
@@ -33,9 +33,9 @@ function deromanize (str) {
     const key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1}
     let num = 0;
     let m = 1;
-    
+
     if (!(str && validator.test(str))) return false;
-    
+
     while (m){
         m = token.exec(str);
         num += key[m[0]];

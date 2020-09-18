@@ -2,7 +2,7 @@ module.exports = {
     name: "contrast",
     description: "Applies a contrast to the image!",
     usage: `[Amount (-100 - 100)]`,
-    category: `images`,
+    category: "images",
     aliases: ["real"]
 }
 

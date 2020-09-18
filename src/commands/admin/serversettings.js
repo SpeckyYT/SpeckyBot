@@ -2,7 +2,7 @@ module.exports = {
     name: "serversettings",
     description: "You can edit any serversettings!",
     usage: `<feature> <depends from feature>`,
-    category: `admin`,
+    category: "admin",
     aliases: ["ss","serversetting","servset","serverset","serversets"],
     perms: ['MANAGE_MESSAGES']
 }

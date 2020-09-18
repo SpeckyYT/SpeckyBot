@@ -2,7 +2,7 @@ module.exports = {
     name: "say",
     description: "Lets the bot say something for you!",
     usage: `<text> [#channel]`,
-    category: `admin`,
+    category: "admin",
     aliases: ["send","announcement"],
     perms: ['MANAGE_MESSAGES'],
     flags: ["channel","user","sneak","rcase","emb"]

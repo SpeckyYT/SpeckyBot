@@ -2,7 +2,7 @@ module.exports = {
     name: "brainfuck",
     description: "Converts a Brainf*ck string to a text string!",
     usage: `[brainf*ck string]`,
-    category: `misc`,
+    category: "misc",
     aliases: ["bf","brainfuck2text","brainfucktostring","bftotxt"],
     flags: ['32bit','16bit','8bit','4bit','2bit']
 }

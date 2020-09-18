@@ -1,8 +1,8 @@
 module.exports = {
     name: "collatz",
     description: "Gives you the collatz sequence!",
-    usage: `[number]`,
-    category: `math`,
+    usage: "[number]",
+    category: "math",
     aliases: ["coll"]
 }
 

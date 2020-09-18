@@ -1,7 +1,7 @@
 module.exports = {
     name: "presences",
     description: "Says how many people are playing different games in the server.",
-    category: `misc`,
+    category: "misc",
     aliases: ["prsncs","prs"]
 }
 

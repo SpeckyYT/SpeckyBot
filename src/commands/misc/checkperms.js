@@ -2,7 +2,7 @@ module.exports = {
     name: "checkperms",
     description: "Checks the permissions of the user in a specific channel!",
     usage: `@[User] #[Channel]`,
-    category: `misc`,
+    category: "misc",
     aliases: ["checkpermissions","checkp","cp"]
 }
 
@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
     if(msg.mentions.members.size > 0){
         member = msg.mentions.members.first();
     }
-    
+
     if(msg.mentions.channels.size > 0){
         channel = msg.mentions.channels.first();
     }

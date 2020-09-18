@@ -2,13 +2,13 @@ module.exports = {
     name: "avatar",
     description: "Wanna see your profile picture?",
     usage: `[@user]`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["a","ava"]
 }
 
 module.exports.run = async (bot, msg) => {
     let user;
-    
+
     if(msg.mentions.users.first()){
 
         user = msg.mentions.users.first();

@@ -2,7 +2,7 @@ module.exports = {
     name: "slots",
     description: "Lets you play slots!",
     usage: `<bet> <slots quantity>`,
-    category: `economy`,
+    category: "economy",
     aliases: ["slot"],
 }
 

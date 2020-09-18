@@ -1,7 +1,7 @@
 module.exports = {
     name: "bump",
     description: "Bumps the server! (jk)",
-    category: `custom`,
+    category: "custom",
     servers: ['265505748413448193']
 }
 

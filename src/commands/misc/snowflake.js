@@ -2,7 +2,7 @@ module.exports = {
     name: "snowflake",
     description: "Converts an ID into a timestamp!",
     usage: `[ID] [ID]...`,
-    category: `misc`,
+    category: "misc",
     aliases: ['sf','id']
 }
 

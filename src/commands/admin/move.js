@@ -1,7 +1,7 @@
 module.exports = {
     name: "move",
     description: "Moves all users from one VC to another one!",
-    category: `admin`,
+    category: "admin",
     aliases: ["moveuser","moveu","mu","mov"],
     perms: ['MOVE_MEMBERS'],
     cmdperms: ['MOVE_MEMBERS']

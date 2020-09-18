@@ -1,7 +1,7 @@
 module.exports = {
     name: "futanari",
     description: "Gives you a futa!",
-    category: `nsfw`,
+    category: "nsfw",
     aliases: ["futa"]
 }
 

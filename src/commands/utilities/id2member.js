@@ -2,7 +2,7 @@ module.exports = {
     name: "id2member",
     description: "Converts a user id to the username and discriminator.",
     usage: `<userid>`,
-    category: `utilities`,
+    category: "utilities",
     aliases: ["i2m"]
 }
 
@@ -16,4 +16,4 @@ module.exports.run = async (bot, msg) => {
     .catch(err => {
         msg.channel.send("User not found.")
     })
-} 
+}

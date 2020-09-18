@@ -2,7 +2,7 @@ module.exports = {
     name: "gddiff",
     description: "Gives you one of the difficulty icons of Geometry Dash!",
     usage: `<difficulty number (0-10)> <rate value (featured-epic)>`,
-    category: `misc`,
+    category: "misc",
     aliases: ["gddifficulty","geometrydashdiff"]
 }
 

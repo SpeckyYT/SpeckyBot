@@ -2,7 +2,7 @@ module.exports = {
     name: "posterize",
     description: "Posterizes the image!",
     usage: `[Amount (2-500)]`,
-    category: `images`,
+    category: "images",
     aliases: []
 }
 
