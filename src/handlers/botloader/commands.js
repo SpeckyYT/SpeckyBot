@@ -11,7 +11,7 @@ module.exports = (bot) => {
 
     function loadFolders(path = []){
         const currPath = join(process.cwd(),...path);
-        const stringPath = path.join('\\');
+        const stringPath = path.slice(1).join('\\') || path[0];
 
         const files = getFiles(currPath);
 
