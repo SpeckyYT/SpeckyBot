@@ -5,10 +5,10 @@ module.exports = {
 const { evaluate } = require('mathjs');
 
 module.exports.call = (bot, msg) => {
-    const u_settings = bot.settings.user;
+    const set = bot.settings.user;
     if(!msg.content) return;
     const scope = bot.cache.math[msg.author.id] || {}
-    if(u_settings[msg.author.id] ? u_settings[msg.author.id].math : false){
+    if((set||{})[msg.author.id] ? set[msg.author.id].math : false){
         try{
             const res = String(evaluate(msg.content, scope));
             if(Object.keys(scope).length > 0){
