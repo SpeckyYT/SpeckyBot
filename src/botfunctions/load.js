@@ -1,3 +1,4 @@
+const {  readFile } = require('fs');
 const { join } = require('path');
 
 module.exports = (bot) => {
@@ -12,13 +13,18 @@ module.exports = (bot) => {
         })
     }
 
-    bot.loadConfig = (bot) => {
+    bot.loadConfig = async () => {
         const path = join(process.cwd(),"..","config.json");
-        delete require.cache[path];
-        try{
-            bot.config = require(path);
-        }catch(err){
-            console.log("YOUR CONFIG.JSON FILE LOOKS LIKE TO BE CORRUPTED!\nPLEASE FIX IT BEFORE IT BECOMES AN ISSUE.".fatal)
-        }
+        return new Promise((res,rej) => {
+            bot.config = readFile(path,{encoding:'utf-8'},(err,data) => {
+                if(err) rej(err);
+                try{
+                    bot.config = JSON.parse(data);
+                    res();
+                }catch(e){
+                    rej(e);
+                }
+            });
+        });
     }
 }
