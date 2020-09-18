@@ -15,7 +15,6 @@ const fts = (url,fn) => fetch(url)
 .then(d => d.buffer())
 .then(l => fs.writeFileSync(`.\\assets\\${fn}`,l));
 
-if(!fs.existsSync('.\\assets')) fs.mkdirSync('.\\assets');
 if(!fs.existsSync('.\\assets\\broke.jpg')) promises.push(fts("https://i.imgflip.com/1qge7m.jpg",'broke.jpg'));
 
 module.exports.run = async (bot, msg) => {

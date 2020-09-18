@@ -1,7 +1,7 @@
 module.exports = {
     name: "advertisement",
     description: "Gives you a SpeckyBot Advertisement!",
-    category: `misc`,
+    category: "important",
     aliases: ["advertisements","adv"]
 }
 

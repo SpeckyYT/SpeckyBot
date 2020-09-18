@@ -21,7 +21,6 @@ const fts = (url,fn) => fetch(url)
 .then(d => d.buffer())
 .then(l => fs.writeFileSync(`.\\assets\\${fn}`,l));
 
-if(!fs.existsSync('.\\assets')) fs.mkdirSync('.\\assets');
 if(!fs.existsSync('.\\assets\\corner.png')) promises.push(fts(cornerURL,'corner.png'));
 if(!fs.existsSync('.\\assets\\refresh.png')) promises.push(fts(refreshURL,'refresh.png'));
 if(!fs.existsSync('.\\assets\\pusab.ttf')) promises.push(fts(pusabURL,'pusab.ttf'));
