@@ -5,4 +5,4 @@ module.exports = {
     type: "template"
 }
 
-module.exports.run = async (bot, msg) => `${bot.emojis.find(e=>e.name=="fratm")}🤝🐴`
+module.exports.run = async (bot, msg) => `${bot.emotes.fratm}🤝🐴`
