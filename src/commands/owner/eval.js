@@ -7,19 +7,32 @@ module.exports = {
 }
 
 const { inspect } = require("util");
+const i = (c) => inspect(c,{depth:0});
 
 module.exports.run = async (bot, msg) => {
-    const toEval = msg.cmdContent;
-
     let evaluated;
 
-    if (!toEval) return bot.cmdError("You need to insert valid JavaScript code");
+    if (!msg.cmdContent) return bot.cmdError("You need to insert valid JavaScript code");
 
     try{
-        evaluated = inspect(eval(toEval),{depth:0});
+        if(msg.flag('coffee')){
+            evaluated = require('coffeescript')
+            .eval(
+                msg.cmdContent,
+                {
+                    sandbox: {bot,msg}
+                }
+            )
+        }else{
+            evaluated = i(
+                eval(
+                    msg.cmdContent
+                )
+            )
+        }
     }catch(e){
-        return msg.channel.send(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
+        return bot.cmdError(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
     }
-
-    return msg.channel.send(`${evaluated.length<1980?"```js\n":''}${evaluated}${evaluated.length<1990?"\n```":''}`, { split: '\n' })
+    evaluated = typeof evaluated != 'object' ? String(evaluated) : evaluated;
+    return msg.channel.send(`${evaluated.length<1980?"```js\n":''}${evaluated}${(evaluated||'').length<1990?"\n```":''}`, { split: '\n' })
 }
