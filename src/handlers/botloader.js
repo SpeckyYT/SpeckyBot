@@ -1,4 +1,4 @@
-const { readdirSync } = require('fs');
+const { readdirSync, readFileSync } = require('fs');
 const { Collection } = require('discord.js');
 const { join } = require('path');
 
@@ -32,8 +32,7 @@ module.exports = async (bot) => {
 
     bot.settings = {};
 
-    bot.config = {};
-    bot.config = require(join(process.cwd(),'..','config.json'));
+    bot.config = JSON.parse(readFileSync(join(process.cwd(),'..','config.json')));
 
     const sF = [];
     for (const a in require.extensions) sF.push(a);

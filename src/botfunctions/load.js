@@ -16,7 +16,7 @@ module.exports = (bot) => {
     bot.loadConfig = async () => {
         const path = join(process.cwd(),"..","config.json");
         return new Promise((res,rej) => {
-            bot.config = readFile(path,{encoding:'utf-8'},(err,data) => {
+            readFile(path,{encoding:'utf-8'},(err,data) => {
                 if(err) rej(err);
                 try{
                     bot.config = JSON.parse(data);
