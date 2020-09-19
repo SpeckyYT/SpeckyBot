@@ -7,18 +7,16 @@ module.exports = {
 }
 
 module.exports.run = (bot, msg) => {
-    // return bot.cmdError("Command not implemented");
-
     let { userphone } = bot;
 
     const exists = userphone.find(p => p.includes(msg.author.id));
 
     if(exists){
-        if(['cancel','c'].includes(msg.cmdContent)){
+        if(['cancel','c'].includes(msg.args[0])){
             userphone = userphone.delete(userphone.indexOf(exists));
-            return msg.channel.send("You was removed from the call list");
+            return msg.channel.send("You were removed from the call list");
         }
-        return bot.cmdError("You are already waiting for or in a call");
+        return bot.cmdError("You are already waiting for a call or you are already in one");
     }
 
     const group = bot.userphone.find(p => p.length < 2);
@@ -47,13 +45,15 @@ module.exports.run = (bot, msg) => {
     .then(([userDM1,userDM2]) => {
         [userDM1,userDM2].forEach(u=>u.send(`You are now in the call between **${user1.tag}** and **${user2.tag}**\nType \`c\` or \`cancel\` to end the call.`))
 
-        const listener = (message) => {
-            if(message.author.bot) return;
-            if([userDM1.id,userDM2.id].includes(message.channel.id)){
+        const collectors = [userDM1,userDM2].map(DMChannel => DMChannel.createMessageCollector(m => !m.author.bot, {idle: 3*60*1000}))
+
+        let ended = false;
+
+        collectors.forEach(coll => {
+            coll.on('collect', message => {
                 if(['c','cancel'].includes(message.content.toLowerCase())){
                     userphone = userphone.delete(userphone.indexOf(group));
-                    bot.off('message', listener);
-                    return [userDM1,userDM2].forEach(dm => dm.send("Call ended"));
+                    coll.stop();
                 }
                 switch(message.channel.id){
                     case userDM1.id:
@@ -61,13 +61,20 @@ module.exports.run = (bot, msg) => {
                     case userDM2.id:
                         userDM1.send(`**${userDM2.recipient.tag}:** ${message.content || '...'}`); break;
                 }
-            }
-        }
+            })
+            coll.on('end', () => collectors.forEach(c => {
+                [userDM1,userDM2].forEach(dm => {
+                    c.stop()
+                    if(!ended){
+                        ended = true;
+                        dm.send("Call ended");
+                    }
+                })
+            }))
+        })
 
-        bot.on('message', listener)
     })
     .catch(() => {
         userphone = userphone.delete(userphone.indexOf(group));
     })
-
 }
