@@ -10,18 +10,17 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 - coded most of the commands and events
 - wrote the README
 
-## [GenryMg](https://github.com/GenryMg)
+## [hng12](https://github.com/hng12)
 - coded the base for the economy system
 
 # How to successfully run your own instance of the bot?
 
-- Create a Discord Bot Application
-- Download or clone this repository
-- Extract the files
-- Download all NPM dependencies (`npm i`)
-- Execute `run.bat` and close it once you get an error
-- Enter private informations in the config.json file (bot token, prefix, etc.)
-- Execute `run.bat` once again and you should be done!
+1. Create a Discord Bot Application
+2. Download or clone this repository
+3. Download all NPM dependencies inside the SpeckyBot folder `npm i`
+4. Execute `run.bat` and close it once you get an error
+5. Enter private informations in the config.json file (bot token, prefix, etc.)
+6. Execute `run.bat` once again and you should be done!
 
 # Donators
 
@@ -36,5 +35,5 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 
 # Links and Invites
 
-- Discord Server: https://discord.gg/4EecFku
-- Invite Bot in your Server: https://discordapp.com/api/oauth2/authorize?client_id=398157933315227649&permissions=2147483135&scope=bot
+- [Discord Server](https://discord.gg/4EecFku)
+- [Invite Bot](https://discordapp.com/api/oauth2/authorize?client_id=398157933315227649&permissions=2147483135&scope=bot)
