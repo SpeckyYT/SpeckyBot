@@ -1,8 +1,7 @@
 module.exports = {
     name: "dare",
     description: "Gives you a task which you accomplish!",
-    category: "games",
-    aliases: []
+    category: "games"
 }
 
 // Tasks from:

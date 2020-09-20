@@ -2,8 +2,7 @@ module.exports = {
     name: "dice",
     description: "Lets you play with dice!",
     usage: `<amount>`,
-    category: "games",
-    aliases: []
+    category: "games"
 }
 
 const { RichEmbed } = require('discord.js');
