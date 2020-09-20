@@ -2,8 +2,7 @@ module.exports = {
     name: "blur",
     description: "Blurs the image!",
     usage: `[Amount (2-100)]`,
-    category: "images",
-    aliases: []
+    category: "images"
 }
 
 module.exports.run = async (bot, msg) => {

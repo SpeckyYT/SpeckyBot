@@ -1,8 +1,7 @@
 module.exports = {
     name: "reboot",
     description: "Reboots the bot down!",
-    category: "owner",
-    aliases: []
+    category: "owner"
 }
 
 module.exports.run = async (bot, msg) => {

@@ -1,8 +1,7 @@
 module.exports = {
     name: "npm",
     description: "Updates/installs NPM dependencies!",
-    category: "owner",
-    aliases: []
+    category: "owner"
 }
 
 const npm = require('npm');

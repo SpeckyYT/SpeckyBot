@@ -1,8 +1,7 @@
 module.exports = {
     name: "dither",
     description: "Dithers the image!",
-    category: "images",
-    aliases: []
+    category: "images"
 }
 
 module.exports.run = async (bot, msg) => {

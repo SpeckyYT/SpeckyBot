@@ -1,6 +1,5 @@
 module.exports = {
-    name: 'npm',
-    aliases: []
+    name: 'npm'
 }
 
 const npm = require('npm');

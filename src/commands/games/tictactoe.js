@@ -1,6 +1,7 @@
 module.exports = {
     name: 'tictactoe',
     description: 'Lets you play Tic-Tac-Toe',
+    category: 'games',
     aliases: ['ttt']
 }
 

@@ -2,8 +2,7 @@ module.exports = {
     name: "choose",
     description: "Bot will choose a random option from your text!",
     usage: `<option 1> | <option 2> | <option 3> | <etc>`,
-    category: "utilities",
-    aliases: []
+    category: "utilities"
 }
 
 module.exports.run = async (bot, msg) => {

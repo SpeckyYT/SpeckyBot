@@ -1,8 +1,7 @@
 module.exports = {
     name: "users",
     description: "How many people does this bot know?",
-    category: "utilities",
-    aliases: []
+    category: "utilities"
 }
 
 module.exports.run = async (bot, msg) => {

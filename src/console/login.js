@@ -1,6 +1,5 @@
 module.exports = {
-    name: 'login',
-    aliases: []
+    name: 'login'
 }
 
 module.exports.run = async (bot, data) => {

@@ -1,8 +1,7 @@
 module.exports = {
     name: "yuri",
     description: "Gives you yuris!",
-    category: "nsfw",
-    aliases: []
+    category: "nsfw"
 }
 
 module.exports.run = async (bot, msg) => {

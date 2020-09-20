@@ -6,8 +6,7 @@ const size = 100;
 module.exports = {
     name: "speckysort",
     description: "Will sort an array with SpeckySort!",
-    category: "misc",
-    aliases: []
+    category: "misc"
 }
 
 function isSorted(array=[]){

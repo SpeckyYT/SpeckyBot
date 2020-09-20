@@ -1,8 +1,7 @@
 module.exports = {
     name: "invert",
     description: "Invert the color of the image!",
-    category: "images",
-    aliases: []
+    category: "images"
 }
 
 module.exports.run = async (bot, msg) => {

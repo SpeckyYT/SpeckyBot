@@ -1,6 +1,5 @@
 module.exports = {
-    name: 'draw',
-    aliases: []
+    name: 'draw'
 }
 
 const { join } = require('path');

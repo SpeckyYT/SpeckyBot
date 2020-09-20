@@ -1,8 +1,7 @@
 module.exports = {
     name: "volume",
     description: "Changes the volume of the player!",
-    category: "music",
-    aliases: []
+    category: "music"
 }
 
 module.exports.run = async (bot, msg) => {

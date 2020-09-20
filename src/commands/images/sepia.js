@@ -1,8 +1,7 @@
 module.exports = {
     name: "sepia",
     description: "Applies a sepia filter to the image!",
-    category: "images",
-    aliases: []
+    category: "images"
 }
 
 module.exports.run = async (bot, msg) => {

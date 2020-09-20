@@ -1,6 +1,5 @@
 module.exports = {
-    name: 'uptime',
-    aliases: []
+    name: 'uptime'
 }
 
 module.exports.run = async (bot, data) => {

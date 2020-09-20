@@ -1,8 +1,7 @@
 module.exports = {
     name: "truth",
     description: "Gives you a question which you should answer honestly!",
-    category: "games",
-    aliases: []
+    category: "games"
 }
 
 // Questions from:

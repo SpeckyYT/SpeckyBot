@@ -2,8 +2,7 @@ module.exports = {
     name: "state",
     description: "Some stuff for the bot's presence",
     usage: `<State>`,
-    category: "owner",
-    aliases: []
+    category: "owner"
 }
 
 module.exports.run = async (bot, msg) => {

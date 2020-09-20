@@ -2,8 +2,7 @@ module.exports = {
     name: "brightness",
     description: "Changes the brightness of the image!",
     usage: `[Amount (-100 - 100)]`,
-    category: "images",
-    aliases: []
+    category: "images"
 }
 
 module.exports.run = async (bot, msg) => {

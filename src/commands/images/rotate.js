@@ -2,8 +2,7 @@ module.exports = {
     name: "rotate",
     description: "Rotates the image!",
     usage: `[Amount (0-360)]`,
-    category: "images",
-    aliases: []
+    category: "images"
 }
 
 module.exports.run = async (bot, msg) => {

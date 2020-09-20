@@ -2,8 +2,7 @@ module.exports = {
     name: "whoasked",
     description: "Searching who asked!",
     category: 'misc',
-    type: 'template',
-    aliases: []
+    type: 'template'
 }
 
 module.exports.run = () => [

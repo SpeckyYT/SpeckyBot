@@ -1,8 +1,7 @@
 module.exports = {
     name: "poop",
     description: "Poop!",
-    category: "misc",
-    aliases: []
+    category: "misc"
 }
 
 const size = 1024;

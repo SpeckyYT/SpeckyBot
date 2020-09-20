@@ -1,6 +1,5 @@
 module.exports = {
-    name: 'channels',
-    aliases: []
+    name: 'channels'
 }
 
 module.exports.run = async (bot, data) => {
@@ -10,7 +9,7 @@ module.exports.run = async (bot, data) => {
         )
     }else{
         const guild = bot.guilds.get(data.args[0]);
-        
+
         if(guild){
             console.log(
                 guild.channels.sort().map(c => `{${c.guild.id}}\t${c.guild.name}\t[${c.id}]\t(${c.type.toUpperCase()})\t${c.name}`).join('\n').info

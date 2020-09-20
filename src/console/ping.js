@@ -1,6 +1,5 @@
 module.exports = {
-    name: 'ping',
-    aliases: []
+    name: 'ping'
 }
 
 module.exports.run = async (bot, data) => {

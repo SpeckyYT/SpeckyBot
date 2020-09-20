@@ -1,8 +1,7 @@
 module.exports = {
     name: "meme",
     description: "Sends a meme!",
-    category: "misc",
-    aliases: []
+    category: "misc"
 }
 
 const fetch = require("node-fetch");
