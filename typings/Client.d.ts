@@ -5,6 +5,7 @@ declare class SpeckyClient extends Client {
     aliases:Collection<string,string>
     cache:Cache
     cmdError(error:string):Error
+    cmdSuccess(success:string):string
     commands:Collection<string,Command>
     config:Config
     console:Collection<string,ConsoleCommand>

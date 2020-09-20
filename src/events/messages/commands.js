@@ -261,16 +261,24 @@ async function run(cmd, bot, msg, command){
     bot.cache.cooldown.set(`${msg.author.id}:${cmd.name}`, new Date());
     bot.cache.runningcmds.push(`${msg.channel.id}:${cmd.name}`);
 
-    new vm({
-        sandbox: {
-            bot,
-            msg,
-            f:promisify(bot.getFunction(cmd))
-        }
-    }).run('f(bot,msg)')
-    .then(async res => {
+    promisify(bot.getFunction(cmd))(bot,msg)
+    .then(res => {
         if(cmd.type === 'template' && res && typeof res == "string"){
-            msg.channel.send(res.trim());
+            return msg.channel.send(res.trim());
+        }
+        return res
+    })
+    .then((ret) => {
+        let suc;
+        try{
+            suc = ret.includes("[SUCCESS]")
+        }catch(e){
+            suc = false
+        }
+
+        if(suc){
+            ret = ret.replace("[SUCCESS]","").trim();
+            msg.channel.send(success(ret));
         }
     })
     .catch(async (err) => {
@@ -328,4 +336,11 @@ function errdesc(err){
     .setTitle('ERROR DESCRIPTION')
     .setDescription(`${err}\n\nFile: ${err ? err.fileName : undefined}\nLine: ${err ? err.lineNumber : undefined}`)
     .setColor('FF0000')
+}
+
+function success(suc){
+    return new RichEmbed()
+    .setTitle('SUCCESS!')
+    .setDescription(suc)
+    .setColor('00FF00')
 }
