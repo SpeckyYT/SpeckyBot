@@ -14,7 +14,7 @@ module.exports = {
             return fetch(fileURL)
             .then(d => d.buffer())
             .then(b => global.assets[filename.slice(0,filename.lastIndexOf('.'))] = b)
-            .then(l => fs.writeFileSync(pathToFile));
+            .then(l => fs.writeFileSync(pathToFile, l, {encoding:'base64'}));
         }else{
             return new Promise((res,rej) => {
                 fs.readFile(
