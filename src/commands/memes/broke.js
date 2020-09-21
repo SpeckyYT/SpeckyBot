@@ -5,17 +5,13 @@ module.exports = {
     category: "memes"
 }
 
-const fetch = require('node-fetch');
 const Canvas = require('canvas');
-const fs = require('fs');
+const { join } = require('path');
+const { save } = require(join(process.cwd(),'modules','assets'));
 
-const promises = [];
-
-const fts = (url,fn) => fetch(url)
-.then(d => d.buffer())
-.then(l => fs.writeFileSync(`.\\assets\\${fn}`,l));
-
-if(!fs.existsSync('.\\assets\\broke.jpg')) promises.push(fts("https://i.imgflip.com/1qge7m.jpg",'broke.jpg'));
+const promises = [
+    ["https://i.imgflip.com/1qge7m.jpg",'broke.jpg']
+].map(save);
 
 module.exports.run = async (bot, msg) => {
     await Promise.all(promises);
@@ -24,7 +20,7 @@ module.exports.run = async (bot, msg) => {
     const ctx = canvas.getContext('2d');
 
     let { broke } = this;
-    if(!broke) broke = await Canvas.loadImage('.\\assets\\broke.jpg');
+    if(!broke) broke = await Canvas.loadImage(global.assets.broke);
 
     ctx.font = "90px IMPACT";
     ctx.fillStyle = "rgb(255,255,255)";

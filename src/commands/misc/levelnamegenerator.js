@@ -8,25 +8,22 @@ module.exports = {
 
 const fetch = require('node-fetch');
 const Canvas = require('canvas');
-const fs = require('fs');
+const { join } = require('path');
+const { save } = require(join(process.cwd(),'modules','assets'));
 
 const listURL = "https://gdcolon.com/tools/gdname/list";
 const cornerURL = "https://gdbrowser.com/assets/corner.png";
 const refreshURL = "https://gdbrowser.com/assets/refresh.png";
 const pusabURL = "https://gdcolon.com/assets/Pusab.ttf";
 
-const promises = [];
-
-const fts = (url,fn) => fetch(url)
-.then(d => d.buffer())
-.then(l => fs.writeFileSync(`.\\assets\\${fn}`,l));
-
-if(!fs.existsSync('.\\assets\\corner.png')) promises.push(fts(cornerURL,'corner.png'));
-if(!fs.existsSync('.\\assets\\refresh.png')) promises.push(fts(refreshURL,'refresh.png'));
-if(!fs.existsSync('.\\assets\\pusab.ttf')) promises.push(fts(pusabURL,'pusab.ttf'));
+const promises = [
+    [cornerURL,'corner.png'],
+    [refreshURL,'refresh.png'],
+    [pusabURL,'pusab.ttf']
+].map(save);
 
 Promise.all(promises)
-.then(()=>Canvas.registerFont('.\\assets\\pusab.ttf',{family: 'Pusab'}))
+.then(()=>Canvas.registerFont(join(process.cwd(),'assets','pusab.ttf'),{family: 'Pusab'}))
 .catch(()=>{});
 
 let corner, refresh;
@@ -104,14 +101,14 @@ module.exports.run = async (bot, msg) => {
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     // CORNERS
-    if(!corner) corner = await Canvas.loadImage('.\\assets\\corner.png');
+    if(!corner) corner = await Canvas.loadImage(global.assets.corner);
     ctx.drawImage(corner,0,canvas.height-corner.height);
     ctx.scale(-1,1);
     ctx.drawImage(corner,-canvas.width,canvas.height-corner.height)
     ctx.scale(-1,1);
 
     // REFRESH
-    if(!refresh) refresh = await Canvas.loadImage('.\\assets\\refresh.png');
+    if(!refresh) refresh = await Canvas.loadImage(global.assets.refresh);
     ctx.drawImage(refresh,canvas.width/2-refresh.width/2,canvas.height*0.5);
 
     // TEXT
