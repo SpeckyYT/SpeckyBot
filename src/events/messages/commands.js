@@ -6,7 +6,6 @@ const { RichEmbed, Collection } = require('discord.js');
 const leven = require('leven');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
-const vm = require('vm2').VM;
 
 module.exports.call = async (bot, m) => {
     const msg = m.extend();
@@ -107,6 +106,7 @@ module.exports.call = async (bot, m) => {
             const userPermError =  "🚷 You don't have the required permissions for that command.";
             const serverError   =  "⛔ This command isn't available on this server.";
             const musicError    =  "🎵 Music is broken."
+            const officialError =  "🤖 This is the official SpeckyBot."
 
             const category = cmd.category;
 
@@ -118,8 +118,13 @@ module.exports.call = async (bot, m) => {
                 await bot.economyRead(msg);
             }
 
-            if((category == "owner" || cmd.category === "private") && !owner){
-                return msg.channel.send(error(ownerError))
+            if(category == "owner" || cmd.category === "private"){
+                if(owner && bot.user.id == '398157933315227649'){
+                    errorReasons.push(officialError);
+                    illegal = true;
+                }else if(!owner){
+                    return msg.channel.send(error(ownerError));
+                }
             }
 
             if(cmd.cmdperms){
