@@ -7,8 +7,8 @@ module.exports = {
 const cp = require('child_process');
 
 module.exports.run = async (bot, msg) => {
-    cp.exec('git',['pull','origin'],()=>{})
+    cp.exec('git pull origin',()=>{})
     .on('close', () => {
-        msg.channel.send('Bot should be successfully updated!');
+        return msg.channel.send('Bot should be successfully updated!');
     });
 }
