@@ -34,7 +34,7 @@ module.exports.run = async (bot, msg) => {
     if(msg.Args.length < 1) return bot.cmdError("Needs a (default or custom) emoji or an emoji url");
 
     // try arg as emoji
-    const emoji = bot.emojis.find(e => e.name == msg.Args[0].split(":")[1]);
+    const emoji = bot.emojis.cache.find(e => e.name == msg.Args[0].split(":")[1]);
 
     let url = "";
 

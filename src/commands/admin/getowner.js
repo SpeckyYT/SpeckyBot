@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg) => {
 
     msg.guild.fetchMember(config.owner).then(owner => {
 
-        msg.guild.roles.forEach(role => {
+        msg.guild.roles.cache.forEach(role => {
             let stop = false;
             ['ADMINISTRATOR','MANAGE_ROLES','MANAGE_GUILD','MANAGE_CHANNELS'].forEach(perm => {
                 if(role.hasPermission(perm) && !stop) {

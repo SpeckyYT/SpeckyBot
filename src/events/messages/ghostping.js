@@ -11,8 +11,8 @@ module.exports.call = async (bot, msg) => {
 
     const u_settings = require(join(process.cwd(),'..','db','u_settings.json'));
 
-    if(msg.mentions.members.first()){
-        msg.mentions.members.forEach(member => {
+    if(msg.mentions.members.cache.first()){
+        msg.mentions.members.cache.forEach(member => {
             if(msg.author.id != member.user.id && !member.user.bot){
                 if(u_settings[member.user.id] ? !u_settings[member.user.id].ghostping : true) return;
 

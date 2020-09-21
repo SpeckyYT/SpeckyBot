@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg) => {
 
         VC1 = msg.member.voiceChannel;
 
-        VC1.members.forEach(member => {
+        VC1.members.cache.forEach(member => {
             try{
                 member.setVoiceChannel(args[0]);
             }catch{
@@ -39,12 +39,12 @@ module.exports.run = async (bot, msg) => {
         }
 
         try{
-            VC1 = bot.channels.get(args[0]);
+            VC1 = bot.channels.cache.get(args[0]);
         }catch{
             return msg.channel.send("Error happend (Wrong ID?)")
         }
 
-        VC1.members.forEach(member => {
+        VC1.members.cache.forEach(member => {
             try{
                 member.setVoiceChannel(args[1]);
             }catch{

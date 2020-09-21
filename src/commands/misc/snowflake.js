@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['sf','id']
 }
 
-const { RichEmbed, SnowflakeUtil: { deconstruct } } = require('discord.js');
+const { MessageEmbed, SnowflakeUtil: { deconstruct } } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     let lsf, error;
@@ -38,7 +38,7 @@ module.exports.run = async (bot, msg) => {
 
             let skip = false;
 
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
             .setTitle("Snowflake Timestamp")
             .setColor(bot.config.color);
 

@@ -11,10 +11,10 @@ module.exports = (bot) ->
         if @.length > 0 then @.charAt(0).toUpperCase() + (if @.length > 1 then @.slice 1 else '') else @
 
     String::findSnowflake = -> 
-        bot.users.get String(@) or
-        bot.channels.get String(@) or
-        bot.guilds.get String(@) or
-        bot.emojis.get String(@)
+        bot.users.cache.get String(@) or
+        bot.channels.cache.get String(@) or
+        bot.guilds.cache.get String(@) or
+        bot.emojis.cache.get String(@)
 
     String::singPlur = (number, outputNumb = true) ->
         "#{if outputNumb then number else ''} #{this}#{if number == 1 then '' else 's'}".trim()

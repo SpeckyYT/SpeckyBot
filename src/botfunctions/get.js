@@ -2,7 +2,7 @@ module.exports = (bot) => {
     bot.getUser = (input, guild) => {
         let us;
 
-        us = guild.members.find( item => {
+        us = guild.members.cache.find( item => {
             try{
                 return item.user.username.toLowerCase() === input.toLowerCase()
             }catch(err){
@@ -14,7 +14,7 @@ module.exports = (bot) => {
             return us.user
         }
 
-        us = guild.members.get(input);
+        us = guild.members.cache.get(input);
 
         if(typeof us != undefined && typeof us != undefined){
             return us.user
@@ -26,7 +26,7 @@ module.exports = (bot) => {
     bot.getMember = (input, guild) => {
         let mmb;
 
-        mmb = guild.members.find( item => {
+        mmb = guild.members.cache.find( item => {
             try{
                 return item.user.username.toLowerCase() === input.toLowerCase()
             }catch(err){
@@ -38,7 +38,7 @@ module.exports = (bot) => {
             return mmb
         }
 
-        mmb = guild.members.get(input);
+        mmb = guild.members.cache.get(input);
 
         if(typeof mmb != undefined && typeof mmb != undefined){
             return mmb

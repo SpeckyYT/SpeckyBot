@@ -11,7 +11,7 @@ const { listCreator, statusCheckQuantity, membersEmbed } = require(join(__dirnam
 module.exports.run = async (bot, msg) => {
     const mods = [];
     let list = [];
-    msg.guild.members.forEach(async member => {
+    msg.guild.members.cache.forEach(async member => {
         if(member.hasPermission('MANAGE_MESSAGES',true,true,false)){
             if(!mods.includes(member) && !member.user.bot) mods.push(member);
         }

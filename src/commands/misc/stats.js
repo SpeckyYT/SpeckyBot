@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["status","st"]
 }
 
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const os = require('os');
 const osu = require('node-os-utils');
 
@@ -64,7 +64,7 @@ module.exports.run = async (bot, msg) => {
 
     await Promise.all([p1,p2,p3,p4]);
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setColor(bot.config.color)
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, bot.user.iconURL)
@@ -79,9 +79,9 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .addField(`System Specs:`,`System Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}\nSystem Platform: ${osu.os.platform()}`)
     .addField(`Network Stats:`,`${networkUsage ? `Input Speed: ${networkUsageIn}\nOutput Speed: ${networkUsageOut}` : notSupported}`)
     .addBlankField()
-    .addField(`Total Users:`,`${bot.users.size}`,true)
-    .addField(`Total Emotes:`,`${bot.emojis.size}`,true)
-    .addField(`Total Guilds:`,`${bot.guilds.size}`,true)
+    .addField(`Total Users:`,`${bot.users.cache.size}`,true)
+    .addField(`Total Emotes:`,`${bot.emojis.cache.size}`,true)
+    .addField(`Total Guilds:`,`${bot.guilds.cache.size}`,true)
     .addBlankField()
     .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`)
     .addField(`Slots Winners:`,`${bot.stats.slots}`)

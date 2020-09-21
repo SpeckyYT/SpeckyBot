@@ -5,7 +5,7 @@ module.exports = {
     category: "games"
 }
 
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     const dice = [
@@ -27,7 +27,7 @@ module.exports.run = async (bot, msg) => {
         index++;
     }
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setColor('BLACK')
     .setTitle('Dice!')
     .addField('Dice Amount',index)

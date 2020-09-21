@@ -4,7 +4,7 @@ module.exports = {
 
 module.exports.call = async (bot, reaction, user) => {
     if(bot.globalchats.has(reaction.message.channel.id)){
-        if(!(reaction.emoji.id === null || bot.emojis.has(reaction.emoji.id))) reaction.removeAll().catch(()=>{});
+        if(!(reaction.emoji.id === null || bot.emojis.cache.has(reaction.emoji.id))) reaction.removeAll().catch(()=>{});
         if(user.bot) return;
         const am = bot.cache.globalchat.get(reaction.message.id) || bot.cache.globalchat.find(ma => ma.find(m => m.id === reaction.message.id));
         if(am){

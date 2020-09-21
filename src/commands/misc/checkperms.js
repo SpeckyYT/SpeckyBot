@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["checkpermissions","checkp","cp"]
 }
 
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     let member, channel;
@@ -14,15 +14,15 @@ module.exports.run = async (bot, msg) => {
     member = msg.member;
     channel = msg.channel;
 
-    if(msg.mentions.members.size > 0){
-        member = msg.mentions.members.first();
+    if(msg.mentions.members.cache.size > 0){
+        member = msg.mentions.members.cache.first();
     }
 
     if(msg.mentions.channels.size > 0){
         channel = msg.mentions.channels.first();
     }
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setTitle(`Permissions of ${member.user.username} in #${channel.name}`)
     .setThumbnail(member.user.avatarURL)
     .setColor(member.displayHexColor)

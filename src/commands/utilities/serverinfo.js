@@ -10,7 +10,7 @@ module.exports.run = async (bot, msg) => {
     let bots = 0;
     let humans = 0;
 
-    msg.guild.members.forEach(member => {
+    msg.guild.members.cache.forEach(member => {
         if(member.user.bot){
             bots++;
         }else{

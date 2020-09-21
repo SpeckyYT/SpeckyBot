@@ -30,7 +30,7 @@ module.exports.run = (bot, msg) => {
 
     const [userID1, userID2] = userphone[userphone.indexOf(group)];
 
-    const [user1,user2] = [bot.users.get(userID1), bot.users.get(userID2)];
+    const [user1,user2] = [bot.users.cache.get(userID1), bot.users.cache.get(userID2)];
 
     if(!user1){
         userphone = userphone.delete(userphone.indexOf(group));

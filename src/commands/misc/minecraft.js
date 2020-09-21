@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["minecraftserver","mcs","mineserver"]
 }
 
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg) => {
@@ -23,7 +23,7 @@ module.exports.run = async (bot, msg) => {
     .then(json => {
         try{
             const {status, online, motd, error, players, server} = json;
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
             .setColor('#00FF00')
             .addField(`Fetch Status:`, status)
             .addField(`Online Status:`, online)

@@ -3,7 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot, guild) => {
-    const channel = bot.channels.get("738850039459479585");
+    const channel = bot.channels.cache.get("738850039459479585");
     if(!channel) return;
 
     const data = [
@@ -18,7 +18,7 @@ module.exports.call = async (bot, guild) => {
         .setDescription(
             data.map(d => `**${d[0]}:** ${d[1]}`).join("\n")
         )
-        .setFooter(`${bot.guilds.size} Guilds`)
+        .setFooter(`${bot.guilds.cache.size} Guilds`)
         .setColor("#00FF00")
     );
 }

@@ -4,10 +4,10 @@ module.exports = {
 
 module.exports.call = async (bot) => {
     const statuses = [
-        `${bot.guilds.size} servers!`,
+        `${bot.guilds.cache.size} servers!`,
         `${bot.config.prefix}help`,
         `${bot.config.prefix}invite`,
-        `over ${bot.users.size} users!`
+        `over ${bot.users.cache.size} users!`
     ];
 
     bot.user.setActivity(statuses.pick(), {type: "WATCHING", url:"https://github.com/SpeckyYT/SpeckyBot"});

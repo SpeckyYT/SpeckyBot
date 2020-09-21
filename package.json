@@ -18,7 +18,7 @@
         "color-convert": "^2.0.1",
         "color-diff": "^1.2.0",
         "colors": "^1.4.0",
-        "discord.js": "^11.6.4",
+        "discord.js": "^12.3.1",
         "express": "^4.17.1",
         "g-i-s": "^2.1.6",
         "gifencoder": "^2.0.1",

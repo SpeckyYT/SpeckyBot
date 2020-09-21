@@ -6,17 +6,17 @@ module.exports = {
     aliases: ["whr"]
 }
 
-const { RichEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
-    const role = msg.guild.roles.get(msg.Args[0])
+    const role = msg.guild.roles.cache.get(msg.Args[0])
 
     if(role){
         const membs = [];
-        role.members.forEach(member => {
+        role.members.cache.forEach(member => {
             membs.push(member.toString())
         })
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setTitle(role.name)
         .setDescription(membs.join("\n"))
         .setColor(role.hexColor);

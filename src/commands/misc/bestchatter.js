@@ -16,7 +16,7 @@ module.exports.run = async (bot, msg) => {
     .then(m => m.map(m => m.author))
     .then(a => a.forEach(a => peoples.set(a.id, peoples.get(a.id) ? [a, peoples.get(a.id)[1] + 1] : [a, 1])));
 
-    if(msg.guild.id == "265505748413448193") peoples.set("525006281703161867", [bot.users.get("525006281703161867"), 42069]);
+    if(msg.guild.id == "265505748413448193") peoples.set("525006281703161867", [bot.users.cache.get("525006281703161867"), 42069]);
 
     return msg.channel.send(
         bot.embed()

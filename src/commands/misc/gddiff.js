@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["gddifficulty","geometrydashdiff"]
 }
 
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
@@ -104,7 +104,7 @@ module.exports.run = async (bot, msg) => {
 
         const link = `https://gdicon.net/icons/difficulty_${String(diff).padStart(2, "0")}${rate}.png`
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setColor('#000000')
         .setAuthor(`Geometry Dash`, `https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Geometry_Dash_Logo.PNG/250px-Geometry_Dash_Logo.PNG`)
         .setImage(link)

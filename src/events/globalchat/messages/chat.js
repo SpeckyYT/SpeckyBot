@@ -4,7 +4,7 @@ module.exports = {
 
 module.exports.call = async (bot, msg) => {
     const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false;
-    bot.channels.filter(chan => check(chan) && msg.channel.id != chan.id).forEach(chan => {
+    bot.channels.cache.filter(chan => check(chan) && msg.channel.id != chan.id).forEach(chan => {
         chan.send(bot.globalChatEmbed(msg))
         .then(m => {
             if(bot.cache.globalchat.has(msg.id)){

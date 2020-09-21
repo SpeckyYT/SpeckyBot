@@ -2,7 +2,7 @@ module.exports = {
     event: "message"
 }
 
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports.call = async (bot, msg) => {
     if (msg.author.bot) return;
@@ -26,7 +26,7 @@ module.exports.call = async (bot, msg) => {
             await msg.delete().catch(()=>{})
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
-                const embed = new RichEmbed()
+                const embed = new MessageEmbed()
                 .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
                 .setDescription(`${msg.content}`)
                 .setColor(`${color}`);
@@ -49,7 +49,7 @@ module.exports.call = async (bot, msg) => {
             try{
                 await msg.delete();
                 if(msg.content){
-                    const embed = new RichEmbed()
+                    const embed = new MessageEmbed()
                     .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
                     .setDescription(`${msg.content}`)
                     .setColor(`${color}`);
@@ -65,7 +65,7 @@ module.exports.call = async (bot, msg) => {
 
 async function atts(msg,color) {
     msg.attachments.forEach(async att  => {
-        const emb = new RichEmbed()
+        const emb = new MessageEmbed()
         .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
         .setImage(`${att.proxyURL}`)
         .setColor(color);

@@ -3,12 +3,12 @@ module.exports = {
 }
 
 module.exports.call = async (bot) => {
-    const guild = bot.guilds.get("538028973058424832");
+    const guild = bot.guilds.cache.get("538028973058424832");
     if(!guild) return;
 
     const memberRole = "755858124946014208";
 
-    guild.members
-    .filter(m => !m.roles.has(memberRole))
+    guild.members.cache
+    .filter(m => !m.roles.cache.has(memberRole))
     .forEach(m => m.addRole(memberRole).catch(()=>{}))
 }

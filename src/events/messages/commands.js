@@ -2,7 +2,7 @@ module.exports = {
     event: "message"
 }
 
-const { RichEmbed, Collection } = require('discord.js');
+const { MessageEmbed, Collection } = require('discord.js');
 const leven = require('leven');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
@@ -325,7 +325,7 @@ function logger(cmd, actived, msg, bot){
 }
 
 function error(error){
-    return new RichEmbed()
+    return new MessageEmbed()
     .setTitle('ERROR!')
     .setDescription(error.substr(0,1950))
     .setColor('FF0000')
@@ -337,14 +337,14 @@ function errdesc(err){
     }catch(e){
         err = null;
     }
-    return new RichEmbed()
+    return new MessageEmbed()
     .setTitle('ERROR DESCRIPTION')
     .setDescription(`${err}\n\nFile: ${err ? err.fileName : undefined}\nLine: ${err ? err.lineNumber : undefined}`)
     .setColor('FF0000')
 }
 
 function success(suc){
-    return new RichEmbed()
+    return new MessageEmbed()
     .setTitle('SUCCESS!')
     .setDescription(suc)
     .setColor('00FF00')

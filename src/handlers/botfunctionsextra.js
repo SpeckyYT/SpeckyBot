@@ -1,8 +1,8 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = async (bot) => {
     bot.embed = () => {
-        return new RichEmbed()
+        return new MessageEmbed()
         .setColor(bot.config.color)
         .setThumbnail(bot.user.avatarURL)
         .setTimestamp(new Date())

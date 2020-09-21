@@ -5,15 +5,15 @@ module.exports = {
     aliases: ["prsncs","prs"]
 }
 
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setTitle("These are the server's most played games at the moment:");
     /*
     let presences;
-    await msg.guild.members.forEach(memb => {
+    await msg.guild.members.cache.forEach(memb => {
         if(!presences[memb.presence.game] && memb.presence.game != null){
             presences[memb.presence.game] = []
         }

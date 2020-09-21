@@ -7,7 +7,7 @@ const limited = ["265505748413448193"]
 
 module.exports.call = async (bot, messageReaction, user) => {
     if(user.bot) return;
-    
+
     const msg = messageReaction.message;
     const guild = msg.guild;
 
@@ -15,7 +15,7 @@ module.exports.call = async (bot, messageReaction, user) => {
     if(!limited.includes(guild.id)) return;
 
     if(msg.id != '663303735023501314') return;
-    
+
     if(["offline","idle"].includes(user.presence.status)) return;
 
     guild.fetchMember(user)
@@ -23,7 +23,7 @@ module.exports.call = async (bot, messageReaction, user) => {
         const muskRole = "636272631984947240"
         const muskGateRole = "663303390620680193"
 
-        if(member.roles.has(muskGateRole)){
+        if(member.roles.cache.has(muskGateRole)){
             try{
                 member.removeRole(muskGateRole)
             }catch{}

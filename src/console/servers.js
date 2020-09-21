@@ -4,5 +4,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, data) => {
-    console.table(bot.guilds.map(g=>[g.id,g.name]))
+    console.table(bot.guilds.cache.map(g=>[g.id,g.name]))
 }
