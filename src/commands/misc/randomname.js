@@ -5,8 +5,10 @@ module.exports = {
     aliases: ["rn","randname","randn","name"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    const { getPersonName } = require('.\\functions\\misc');
+    const { getPersonName } = require(join(__dirname,'functions','misc'));
 
     const embed = bot.embed()
     .setAuthor(msg.author.username,msg.author.avatarURL)

@@ -4,6 +4,8 @@ module.exports = {
     category: "images"
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    return require('.\\functions\\methods')(bot, msg,'dither565',false,false,"png");
+    return require(join(__dirname,'functions','methods'))(bot, msg,'dither565',false,false,"png");
 }

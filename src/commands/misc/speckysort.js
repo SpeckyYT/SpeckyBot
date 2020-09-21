@@ -57,7 +57,6 @@ module.exports.run = async (bot,msg) => {
             array.forEach((v,i,a) => {
                 ctx.fillRect(i,size,1,-v)
                 if(i+1 == a.length){
-                // fs.writeFile(".\\test\\img\\"+iterations+".png", canvas.toBuffer(),()=>{})
                     encoder.addFrame(ctx);
                 }
             });

@@ -5,6 +5,8 @@ module.exports = {
     aliases: ["grayscale","grey","gray"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    return require('.\\functions\\methods')(bot, msg,'greyscale',false,false,"png");
+    return require(join(__dirname,'functions','methods'))(bot, msg,'greyscale',false,false,"png");
 }

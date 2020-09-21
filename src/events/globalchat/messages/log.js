@@ -3,9 +3,10 @@ module.exports = {
 }
 
 const fs = require('fs');
+const { join } = require('path');
 
 module.exports.call = async (bot, msg) => {
-    const file = __dirname+'\\log\\log.json';
+    const file = join(__dirname,'log','log.json');
     fs.readFile(file, {encoding:"utf-8"}, (err,data) => {
         if(err){
             return fs.writeFile(file,JSON.stringify([msg.content||''],null,0),{encoding:"utf-8"},()=>{});

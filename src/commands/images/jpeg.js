@@ -6,6 +6,8 @@ module.exports = {
     aliases: ["jpg"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    return require('.\\functions\\methods')(bot, msg,'quality',false,[20,1,100],msg.command);
+    return require(join(__dirname,'functions','methods'))(bot, msg,'quality',false,[20,1,100],msg.command);
 }

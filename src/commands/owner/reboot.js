@@ -4,6 +4,8 @@ module.exports = {
     category: "owner"
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
 
     // Remove Listeners
@@ -19,5 +21,5 @@ module.exports.run = async (bot, msg) => {
 
     delete require.cache;
 
-    return require(process.cwd()+'\\bot.js')(bot);
+    return require(join(process.cwd(),'bot.js'))(bot);
 }
