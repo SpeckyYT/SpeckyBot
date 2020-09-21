@@ -4,21 +4,11 @@ module.exports = {
     category: "owner"
 }
 
-const { join } = require('path');
-const nodegit = require('nodegit');
+const cp = require('child_process');
 
 module.exports.run = async (bot, msg) => {
-    nodegit.Repository.open(join(process.cwd(),'..',".git"))
-    .then(function(repo) {
-        return repo.fetch("origin", {
-            callbacks: {
-                credentials: function(url, userName) {
-                    return nodegit.Cred.sshKeyFromAgent(userName);
-                }
-            }
-        });
-    })
-    .done(function() {
-        msg.channel.send('Updated!');
+    cp.exec('git',['pull','origin'],()=>{})
+    .on('close', () => {
+        msg.channel.send('Bot should be successfully updated!');
     });
 }
