@@ -5,6 +5,8 @@ module.exports = {
     aliases: ["miao","miau","miu","miav","meu","mjaullin","miauw","miaou","miar","mjao","mjaw","mijav","miob","meo","myau"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    require('.\\functions\\img')('meow', msg);
+    require(join(__dirname,'functions','img'))('meow', msg);
 }

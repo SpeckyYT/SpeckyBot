@@ -6,12 +6,14 @@ module.exports = {
     flags: ["sfw"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
     if(require('.\\functions\\sfw')(msg)){
         // SFW
-        require('.\\functions\\img')(["neko","nekoGif"], msg);
+        require(join(__dirname,'functions','img'))(["neko","nekoGif"], msg);
     }else{
         // NSFW
-        require('..\\nsfw\\functions\\img')(["neko","nekoGif","eroNeko"], msg);
+        require(join(process.cwd(),'commands','nsfw','functions','img'))(["neko","nekoGif","eroNeko"], msg);
     }
 }

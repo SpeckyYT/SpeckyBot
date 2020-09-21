@@ -5,6 +5,8 @@ module.exports = {
     aliases: ["boob","titts","tits","tit","titt"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    require('.\\functions\\img')(["tits","boobs"],msg); // removed: smallBoobs
+    require(join(__dirname,'functions','img'))(["tits","boobs"],msg); // removed: smallBoobs
 }

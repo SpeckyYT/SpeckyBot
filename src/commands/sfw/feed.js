@@ -5,6 +5,8 @@ module.exports = {
     aliases: ['feed','eat']
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    require('.\\functions\\img')('feed', msg);
+    require(join(__dirname,'functions','img'))('feed', msg);
 }

@@ -5,6 +5,8 @@ module.exports = {
     aliases: ["cumslut","cum","cumshot","cumshots","cs"]
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    require('.\\functions\\img')(["cumsluts","cumArts"],msg);
+    require(join(__dirname,'functions','img'))(["cumsluts","cumArts"],msg);
 }

@@ -4,6 +4,8 @@ module.exports = {
     category: "nsfw"
 }
 
+const { join } = require('path');
+
 module.exports.run = async (bot, msg) => {
-    require('.\\functions\\img')(["yuri","eroYuri"],msg);
+    require(join(__dirname,'functions','img'))(["yuri","eroYuri"],msg);
 }
