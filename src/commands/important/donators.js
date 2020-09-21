@@ -5,12 +5,20 @@ module.exports = {
     aliases: ["donations","donation","donator","patreon"]
 }
 
+const { join } = require('path');
+const { readFileSync } = require('fs');
+const { Collection } = require('discord.js');
+
 module.exports.run = async (bot, msg) => {
-    const don = {
-        Benjiman: [1.22,'€'], // 525006281703161867
-        "Dav!d" : [1.19,'€']  // 555791735607787580
-    };
-    const donators = don.toCollection().sort((a, b) => b[0] - a[0]);
+    const don = JSON.parse(
+        readFileSync(join(__dirname,'data','donations.json'),{encoding:'utf-8'})
+    )
+
+    const obj = new Collection();
+    Object.keys(don)
+    .map(k => obj.set(k,don[k]))
+
+    const donators = obj.sort((a, b) => console.table({a,b}) || b[0] - a[0]);
 
     const string = donators.map((donation, donator) => `**${donator}**: ${donation[0].toFixed(2)}${donation[1]||'€'}`).join('\n');
 

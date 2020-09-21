@@ -35,7 +35,7 @@ module.exports.run = async (bot, msg) => {
 
     // START
     const loading = msg.channel.send("Loading...");
-    //    await msg.channel.send("Listen to the music for full experience!", new Attachment(this.battle,'battle.mp3'));
+    await msg.channel.send("Listen to the music for full experience!", new Attachment(this.battle,'battle.mp3'));
     (await loading).delete();
 
     await bot.wait(1500);

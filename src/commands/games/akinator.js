@@ -9,7 +9,6 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    // return bot.cmdError('Bro, this command is not fully implemented now')
     if(!regions.includes(msg.args[0])){
         return bot.cmdError(`You have to enter a valid region\nAvailable regions: \`${regions.join(', ')}\``)
     }
