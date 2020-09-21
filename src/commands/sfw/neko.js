@@ -9,7 +9,7 @@ module.exports = {
 const { join } = require('path');
 
 module.exports.run = async (bot, msg) => {
-    if(require('.\\functions\\sfw')(msg)){
+    if(require(join(__dirname,'functions','sfw'))(msg)){
         // SFW
         require(join(__dirname,'functions','img'))(["neko","nekoGif"], msg);
     }else{
