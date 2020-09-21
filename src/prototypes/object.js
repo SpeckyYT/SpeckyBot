@@ -1,7 +1,7 @@
 const { Collection } = require('discord.js');
 
 module.exports = () => {
-
+    /* BREAKS UBUNTU
     // HAS ISSUES WITH SUPERAGENT AND MATHJS
     Object.prototype.getFunction = function(){
         return this[Object.keys(this).filter(v => typeof this[v] == 'function')[0]] || (async ()=>{});
@@ -15,14 +15,6 @@ module.exports = () => {
         }
         return obj;
     }
-
-    Object.prototype.array = function(){
-        const arr = [];
-        for(const prop in this){
-            if(Object.prototype[prop]) continue;
-            arr.push(this[prop]);
-        }
-        return arr;
-    }
+    */
 
 }
