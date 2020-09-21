@@ -27,12 +27,12 @@ module.exports.call = async (bot, msg) => {
         const [, serverID, channelID, messageID] = discordLink;
         const server = bot.guilds.cache.get(serverID);
         const channel = bot.channels.cache.get(channelID);
-        const message = await (channel && channel.fetchMessage && channel.fetchMessage(messageID));
+        const message = await (channel && channel.messages.fetch && channel.messages.fetch(messageID));
 
         try{
             await msg.channel.send(
                 new MessageEmbed()
-                .setAuthor(message ? `${message.author.tag} (ID: ${message.author.id})` : "Unknown User", message ? message.author.avatarURL : poop)
+                .setAuthor(message ? `${message.author.tag} (ID: ${message.author.id})` : "Unknown User", message ? message.author.avatarURL() : poop)
                 .setDescription(`[Message](${link}) in <#${channelID}>\n${message ? message.content || "" : "Unknown Message"}`)
                 .setFooter(`${server ? server.name : "Unknown Server"} - Quoted by ${msg.author.tag}`, server ? server.iconURL : poop)
                 .setTimestamp(message && message.createdAt || messageID.snowflake && messageID.snowflake().date)

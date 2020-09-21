@@ -27,8 +27,8 @@ module.exports.run = async (bot, msg) => {
 
     const embed = bot.embed()
     .setTitle(`${user.username}#${user.discriminator}`)
-    .setImage(user.avatarURL)
-    .setDescription(`[Link](${user.avatarURL})`);
+    .setImage(user.avatarURL())
+    .setDescription(`[Link](${user.avatarURL()})`);
 
     msg.channel.send(embed);
 }

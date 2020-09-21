@@ -27,7 +27,7 @@ module.exports.call = async (bot, msg) => {
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
                 const embed = new MessageEmbed()
-                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL()}`)
                 .setDescription(`${msg.content}`)
                 .setColor(`${color}`);
                 await msg.channel.send(embed);
@@ -50,7 +50,7 @@ module.exports.call = async (bot, msg) => {
                 await msg.delete();
                 if(msg.content){
                     const embed = new MessageEmbed()
-                    .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+                    .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL()}`)
                     .setDescription(`${msg.content}`)
                     .setColor(`${color}`);
                     await msg.channel.send(embed);
@@ -66,7 +66,7 @@ module.exports.call = async (bot, msg) => {
 async function atts(msg,color) {
     msg.attachments.forEach(async att  => {
         const emb = new MessageEmbed()
-        .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL}`)
+        .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL()}`)
         .setImage(`${att.proxyURL}`)
         .setColor(color);
         msg.channel.send(emb);

@@ -36,7 +36,7 @@ module.exports.run = async (bot, msg) => {
     economy[receiver.id].money += amount;
 
     const embed = bot.embed()
-    .setAuthor(author.tag,author.avatarURL)
+    .setAuthor(author.tag,author.avatarURL())
     .setThumbnail()
     .setDescription(`${receiver} has received your ${amount}₪`)
     .setColor("GREEN")

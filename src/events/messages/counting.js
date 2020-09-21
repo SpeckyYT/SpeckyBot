@@ -14,7 +14,7 @@ module.exports.call = async (bot, msg) => {
             let prevMsg;
             let prevMsgs;
 
-            await msg.channel.fetchMessages({ limit: 2 })
+            await msg.channel.messages.fetch({ limit: 2 })
             .then(msgs => {
                 prevMsgs = msgs;
                 prevMsg = msgs.last();
@@ -44,7 +44,7 @@ module.exports.call = async (bot, msg) => {
                     })
                 }
             }else if(alttrue && number > 5){
-                msg.channel.fetchMessages({ limit: 2 })
+                msg.channel.messages.fetch({ limit: 2 })
                 .then(msgs => {
                     if(msgs.filter(ms => ms.author.id == msg.author.id && !msg.author.bot).size < 2){
                         if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alt.toUpperCase()}`);

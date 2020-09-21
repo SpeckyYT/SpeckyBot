@@ -20,7 +20,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     args.forEach(async arg => {
-        chan.fetchMessage(arg).then(msg => {
+        chan.messages.fetch(arg).then(msg => {
             if(msg){
                 msg.embeds.forEach(emb => {
                     msg.channel.send(new MessageEmbed(emb))

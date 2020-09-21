@@ -45,7 +45,7 @@ module.exports.run = async (bot, msg) => {
     if(msg.flag("emb")){
         res = new MessageEmbed()
         .setDescription(res)
-        .setAuthor(user.username, user.avatarURL);
+        .setAuthor(user.username, user.avatarURL());
     }
 
     if(!res) return msg.channel.send("Message is too short.")

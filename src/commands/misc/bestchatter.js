@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg) => {
     const channel = msg.mentions.channels.first() || msg.channel;
     const peoples = new Collection();
 
-    await channel.fetchMessages({limit: 100})
+    await channel.messages.fetch({limit: 100})
     .then(m => m.map(m => m.author))
     .then(a => a.forEach(a => peoples.set(a.id, peoples.get(a.id) ? [a, peoples.get(a.id)[1] + 1] : [a, 1])));
 

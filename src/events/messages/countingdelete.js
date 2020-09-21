@@ -8,7 +8,7 @@ module.exports.call = async (bot, msg) => {
     const text = 'Next number: '
     if(msg.channel.topic.toLowerCase().startsWith(text.toLowerCase())){
         const number = parseInt(msg.channel.topic.slice(text.length).trim());
-        msg.channel.fetchMessages({limit: 1})
+        msg.channel.messages.fetch({limit: 1})
         .then(msgl => {
             if(msgl.first().mentions.users.id == msg.author.id) return;
             if(msg.id > msgl.first().id && msg.author.id != msgl.first().author.id){

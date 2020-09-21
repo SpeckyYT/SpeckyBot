@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg) => {
     const { getQuestion } = require(join(__dirname,'functions','misc'));
 
     const embed = bot.embed()
-    .setAuthor(msg.author.username,msg.author.avatarURL)
+    .setAuthor(msg.author.username,msg.author.avatarURL())
     .setTitle('Random Question')
     .setDescription(getQuestion());
     msg.channel.send(embed)
