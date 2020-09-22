@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
     .setTitle(`Permissions of ${member.user.username} in #${channel.name}`)
     .setThumbnail(member.user.avatarURL())
     .setColor(member.displayHexColor)
-    .addField(`Permissions:`, `\`\`\`${member.permissionsIn(channel).toArray().join('\n')}\`\`\``)
+    .addField(`Permissions:`, member.permissionsIn(channel).toArray().join('\n').code())
 
     msg.channel.send(embed);
 }

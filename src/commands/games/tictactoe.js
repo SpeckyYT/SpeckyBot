@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg) => {
 
     // UTILITIES FUNCTIONS
     function draw(){
-        return "```\n"+game.ascii()+"\n```";
+        return game.ascii().code();
     }
     function legalMoves(){
         return game.legalMoves().map(({x,y}) => positionToNumber(x,y));

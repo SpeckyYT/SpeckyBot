@@ -24,3 +24,8 @@ module.exports = (bot) ->
 
     String::randomCase = ->
         [@...].map((c) -> if Math.round(Math.random()) then c.toUpperCase() else c.toLowerCase()).join('')
+
+    String::code = (script) ->
+        scriptName = if typeof script is 'string' then script else ''
+        "```#{scriptName}\n#{String(this).replace(/```/g, '`\u200b``')}\n```"
+

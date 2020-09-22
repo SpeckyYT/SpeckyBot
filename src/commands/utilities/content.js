@@ -8,7 +8,6 @@ module.exports = {
 module.exports.run = (bot,msg) => {
     const {content, args, Args, ARGS, cmdContent, command, links, _flags} = msg;
     return msg.channel.send(
-        "```js\n"+
         JSON.stringify({
             command,
             content,
@@ -19,6 +18,6 @@ module.exports.run = (bot,msg) => {
             links,
             _flags
         },null,2)
-        +"\n```"
+        .code('json')
     );
 }
