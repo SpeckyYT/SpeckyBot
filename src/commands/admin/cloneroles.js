@@ -28,8 +28,8 @@ module.exports.run = async (bot, msg) => {
     let memb1;
     let memb2;
 
-    await msg.guild.fetchMember(usrs[0]).then(usr => memb1 = usr).catch(()=>{})
-    await msg.guild.fetchMember(usrs[1]).then(usr => memb2 = usr).catch(()=>{})
+    await msg.guild.members.fetch(usrs[0]).then(usr => memb1 = usr).catch(()=>{})
+    await msg.guild.members.fetch(usrs[1]).then(usr => memb2 = usr).catch(()=>{})
 
     // msg.channel.send(`Missing permissions or user doesn't exist`);
 

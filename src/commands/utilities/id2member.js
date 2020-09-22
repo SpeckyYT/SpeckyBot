@@ -9,7 +9,7 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const id = parseInt(msg.args[0]);
 
-    await bot.fetchUser(id)
+    await bot.users.fetch(id)
     .then(user => {
         msg.channel.send(user.tag)
     })

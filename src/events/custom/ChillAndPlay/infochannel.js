@@ -19,8 +19,8 @@ module.exports = {
         update([
             guild.fetchBans(),
             guild.fetchInvites(),
-            guild.emojis.filter(e => !e.animated),
-            guild.emojis.filter(e => e.animated)
+            guild.emojis.cache.filter(e => !e.animated),
+            guild.emojis.cache.filter(e => e.animated)
         ], '714465197032734760');
 
         update([
