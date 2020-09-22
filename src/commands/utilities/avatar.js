@@ -15,7 +15,7 @@ module.exports.run = async (bot, msg) => {
 
     }else if(msg.Args[0]){
 
-        msg.guild.fetchMember(msg.Args[0])
+        await msg.guild.members.fetch(msg.Args[0])
         .then(member => {
             user = member.user
         })
