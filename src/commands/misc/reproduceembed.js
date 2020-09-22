@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["remb","repemb"]
 }
 
-const { RichEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
@@ -20,10 +20,10 @@ module.exports.run = async (bot, msg) => {
     }
 
     args.forEach(async arg => {
-        chan.fetchMessage(arg).then(msg => {
+        chan.messages.fetch(arg).then(msg => {
             if(msg){
                 msg.embeds.forEach(emb => {
-                    msg.channel.send(new RichEmbed(emb))
+                    msg.channel.send(new MessageEmbed(emb))
                 })
             }
         })

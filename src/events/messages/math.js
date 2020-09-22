@@ -15,7 +15,7 @@ module.exports.call = (bot, msg) => {
                 bot.cache.math[msg.author.id] = scope
             }
             if(res.length < 50 && res != msg.content && res !== "undefined"){
-                msg.channel.send("```js\n"+res+"\n```");
+                msg.channel.send(String(res).code('js'));
             }
         }catch(err){}
     }

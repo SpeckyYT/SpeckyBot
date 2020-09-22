@@ -41,6 +41,5 @@ module.exports.run = async (bot, msg) => {
     await coll();
 
     if(startNumb) writeFile(collatzPath,startNumb+1,e=>e?console.error(e):null);
-
-    return msg.channel.send(`\`\`\`${collatz.join(" ")}\`\`\``);
+    return msg.channel.send(collatz.join(" "),{code:'js'});
 }

@@ -1,11 +1,11 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { nsfw } = new (require('nekos.life'))();
 
 module.exports = async (method, msg) => {
     if(Array.isArray(method)){
         method = method.pick();
     }
-    
+
     let url = '';
 
     await nsfw[method]()
@@ -18,8 +18,8 @@ module.exports = async (method, msg) => {
         return msg.channel.send("An unexpected error happened");
     }
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setImage(url);
 
-    return msg.channel.send(embed); 
+    return msg.channel.send(embed);
 }

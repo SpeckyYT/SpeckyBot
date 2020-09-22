@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
         }
     }
     const discrims = [];
-    bot.users.forEach(user => {
+    bot.users.cache.forEach(user => {
         if(discrims.length < 10){
             if(discriminator == user.discriminator && msg.author.username != user.username){
                 discrims.push(user.tag)

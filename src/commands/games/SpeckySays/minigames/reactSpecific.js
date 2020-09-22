@@ -24,7 +24,7 @@ module.exports = {
         for (const reaction of allReactions) {
 
             if (reaction.emoji.toString() === emoji) {
-                const users = await reaction.fetchUsers()
+                const { users } = await reaction.fetch();
                 allUsers = allUsers.concat(users.array())
             }
         }

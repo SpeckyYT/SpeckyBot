@@ -5,7 +5,7 @@ module.exports = {
     servers: ['265505748413448193']
 }
 
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     let random;
@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
     }else{
         random = Math.floor(Math.random()*666+1);
     }
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setColor('#24B8B8')
     .setURL('https://youtu.be/dQw4w9WgXcQ')
     .setTitle(`**DISBOARD: The Public Server List**`)

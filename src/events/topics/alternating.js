@@ -11,7 +11,7 @@ module.exports.call = async (bot, msg) => {
     if(msg.channel.topic.toLowerCase().includes(text.toLowerCase())){
         let prevMsgs;
 
-        await msg.channel.fetchMessages({ limit: 2 })
+        await msg.channel.messages.fetch({ limit: 2 })
         .then(msgs => {
             prevMsgs = msgs;
         });
@@ -19,7 +19,7 @@ module.exports.call = async (bot, msg) => {
         if(msg.deleted){
             return;
         }
-        
+
         if(prevMsgs.filter(ms => ms.author.id == msg.author.id).size > 1){
             msg.delete().catch(()=>{
                 return

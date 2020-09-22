@@ -8,7 +8,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    await msg.channel.fetchMessages({ limit: 3 })
+    await msg.channel.messages.fetch({ limit: 3 })
     .then(messages => {
         messages.forEach(async message => {
             message.delete();

@@ -8,7 +8,7 @@ module.exports = (bot) => {
             bot.cache.lastImage[msg.channel.id] = l;
         }
 
-        await msg.channel.fetchMessages({limit: 50})
+        await msg.channel.messages.fetch({limit: 50})
         .then(msgs => {
             msgs.array().reverse().some(message => {
                 const matches = message.content.match(linkRegex);

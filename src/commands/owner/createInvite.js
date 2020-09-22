@@ -9,7 +9,7 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const guildID = msg.args[0];
     if(!guildID) return bot.cmdError("No GuildID provided");
-    const guild = bot.guilds.get(guildID);
+    const guild = bot.guilds.cache.get(guildID);
     if(!guild) return bot.cmdError(`${guildID} is not a valid guild`);
     if(!guild.me.permissions.has("CREATE_INSTANT_INVITE")) return bot.cmdError("Bot doesn't have the permissions on that guild");
     const channel = guild.channels.filter(c => c.type == "text").random();

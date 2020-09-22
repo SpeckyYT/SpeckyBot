@@ -19,10 +19,10 @@ module.exports.call = async (bot, msg) => {
                 return member.send(
                     bot.embed()
                     .setTitle('Ghostping')
-                    .setThumbnail(msg.guild.iconURL)
+                    .setThumbnail(msg.guild.iconURL())
                     .setColor('#000000')
                     .setDescription(`You have been Ghostpinged by\n\n**${msg.author.tag}** [${msg.author.id}]\n\nin the server\n\n**${msg.guild}** [${msg.guild.id}]`)
-                    .setImage(msg.author.avatarURL)
+                    .setImage(msg.author.avatarURL())
                     .setFooter(`Date of the ghostping`)
                     .setTimestamp()
                 ).catch(()=>{});

@@ -28,19 +28,19 @@ module.exports.run = async (bot, msg) => {
     let memb1;
     let memb2;
 
-    await msg.guild.fetchMember(usrs[0]).then(usr => memb1 = usr).catch(()=>{})
-    await msg.guild.fetchMember(usrs[1]).then(usr => memb2 = usr).catch(()=>{})
+    await msg.guild.members.fetch(usrs[0]).then(usr => memb1 = usr).catch(()=>{})
+    await msg.guild.members.fetch(usrs[1]).then(usr => memb2 = usr).catch(()=>{})
 
     // msg.channel.send(`Missing permissions or user doesn't exist`);
 
-    await memb1.roles.forEach(async role => {
-        if(!memb2.roles.hasOwnProperty(role)){
+    await memb1.roles.cache.forEach(async role => {
+        if(!memb2.roles.cache.hasOwnProperty(role)){
             await memb2.addRole(role.id).catch(()=>{})
         }
     })
 
-    await memb2.roles.forEach(async role => {
-        if(memb1.roles.hasOwnProperty(role)){
+    await memb2.roles.cache.forEach(async role => {
+        if(memb1.roles.cache.hasOwnProperty(role)){
             await memb2.removeRole(role.id).catch(()=>{})
         }
     })

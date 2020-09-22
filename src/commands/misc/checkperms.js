@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["checkpermissions","checkp","cp"]
 }
 
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (bot, msg) => {
     let member, channel;
@@ -22,11 +22,11 @@ module.exports.run = async (bot, msg) => {
         channel = msg.mentions.channels.first();
     }
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setTitle(`Permissions of ${member.user.username} in #${channel.name}`)
-    .setThumbnail(member.user.avatarURL)
+    .setThumbnail(member.user.avatarURL())
     .setColor(member.displayHexColor)
-    .addField(`Permissions:`, `\`\`\`${member.permissionsIn(channel).toArray().join('\n')}\`\`\``)
+    .addField(`Permissions:`, member.permissionsIn(channel).toArray().join('\n').code())
 
     msg.channel.send(embed);
 }

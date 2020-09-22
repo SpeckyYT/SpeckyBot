@@ -24,7 +24,7 @@ module.exports.run = async (bot, msg) => {
         numb++;
         if([...primes,...startPrimes].every(p=>numb%p)){
             primes.push(numb);
-            string = `\`\`\`${primes.join(" ")}\`\`\``;
+            string = primes.join(" ");
         }
         if(string.length >= 1980){
             primes.pop();
@@ -36,5 +36,5 @@ module.exports.run = async (bot, msg) => {
 
     writeFile(primesPath,JSON.stringify([...startPrimes,...primes]),e=>e?console.error(e):null);
 
-    return msg.channel.send(`\`\`\`${primes.join(" ")}\`\`\``)
+    return msg.channel.send(primes.join(" "),{code:'js'})
 }

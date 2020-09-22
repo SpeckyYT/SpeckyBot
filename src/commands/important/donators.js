@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
     .setTitle("Donators!")
     .setURL("https://www.paypal.me/speckyy")
     .setDescription(`Here you'll find the donators of SpeckyBot!\n\n${string}`)
-    .setFooter("Thank you all for the support!", bot.user.avatarURL);
+    .setFooter("Thank you all for the support!", bot.user.avatarURL());
 
     return msg.channel.send(embed);
 }

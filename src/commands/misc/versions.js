@@ -6,5 +6,5 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    msg.channel.send("```json\n"+JSON.stringify(process.versions,null,4)+"\n```");
+    msg.channel.send(JSON.stringify(process.versions,null,4).code('json'));
 }

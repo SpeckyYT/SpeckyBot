@@ -20,7 +20,7 @@ module.exports = {
 
         let allUsers = []
         for(const reaction of allReactions){
-            const users = await reaction.fetchUsers()
+            const { users } = await reaction.fetch();
             allUsers = allUsers.concat(users.array())
         }
 

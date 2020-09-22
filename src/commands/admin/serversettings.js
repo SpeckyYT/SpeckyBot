@@ -7,7 +7,7 @@ module.exports = {
     perms: ['MANAGE_MESSAGES']
 }
 
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { writeFile } = require("fs");
 const { join } = require("path");
 
@@ -70,7 +70,7 @@ module.exports.run = async (bot, msg) => {
             }
             break
         default:
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
             .setTitle("Server Settings Help Page!")
             .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
             .addBlankField()

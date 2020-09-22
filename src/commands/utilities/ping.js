@@ -8,6 +8,6 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     msg.channel.send('Pinging...').then(m =>{
         const ping = m.createdTimestamp - msg.createdTimestamp;
-        m.edit(`Bot Latency: \`${ping}ms\`\nAPI Latency: \`${Math.round(bot.ping)}ms\``)
+        m.edit(`Bot Latency: \`${ping}ms\`\nAPI Latency: \`${Math.round(bot.ws.ping)}ms\``)
     });
 }

@@ -1,4 +1,4 @@
-import { Client, Collection, RichEmbed } from "discord.js";
+import { Client, Collection, MessageEmbed } from "discord.js";
 import { CmdMessage } from "./Message";
 
 declare class SpeckyClient extends Client {
@@ -13,7 +13,7 @@ declare class SpeckyClient extends Client {
     debug():void
     debugN:number
     delay(time:number):Promise<void>
-    embed:RichEmbed
+    embed:MessageEmbed
     log(input:string):void
     resetDebug():void
     sleep(time:number):Promise<void>

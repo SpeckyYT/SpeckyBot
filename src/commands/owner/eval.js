@@ -31,8 +31,8 @@ module.exports.run = async (bot, msg) => {
             )
         }
     }catch(e){
-        return bot.cmdError(`Error while evaluating.\n\n\`\`\`${e.message}\`\`\``);
+        return bot.cmdError(`Error while evaluating.\n\n${String(e.message).code()}`);
     }
     evaluated = typeof evaluated != 'object' ? String(evaluated) : evaluated;
-    return msg.channel.send(`${evaluated.length<1980?"```js\n":''}${evaluated}${(evaluated||'').length<1990?"\n```":''}`, { split: '\n' })
+    return msg.channel.send(String(evaluated).slice(0,1980).code('js'), { split: '\n' })
 }

@@ -2,7 +2,7 @@ module.exports = {
     event: "message"
 }
 
-const { RichEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 
 // channel limiter
 const limited = ["643548931007184906"]
@@ -43,7 +43,7 @@ module.exports.call = async (bot, msg) => {
 }
 
 function error(text){
-    return new RichEmbed()
+    return new MessageEmbed()
     .setTitle('ERROR!')
     .setColor('FF0000')
     .setDescription(text + "\nYour message will be deleted in 15 seconds.")

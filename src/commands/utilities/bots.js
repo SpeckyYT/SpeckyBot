@@ -11,7 +11,7 @@ const { listCreator, statusCheckQuantity, membersEmbed } = require(join(__dirnam
 module.exports.run = async (bot, msg) => {
     const bots = [];
     let list = [];
-    msg.guild.members.forEach(async member => {
+    msg.guild.members.cache.forEach(async member => {
         if(member.user.bot){
             if(!bots.includes(member)) bots.push(member);
         }

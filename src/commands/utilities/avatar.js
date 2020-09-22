@@ -15,7 +15,7 @@ module.exports.run = async (bot, msg) => {
 
     }else if(msg.Args[0]){
 
-        msg.guild.fetchMember(msg.Args[0])
+        await msg.guild.members.fetch(msg.Args[0])
         .then(member => {
             user = member.user
         })
@@ -27,8 +27,8 @@ module.exports.run = async (bot, msg) => {
 
     const embed = bot.embed()
     .setTitle(`${user.username}#${user.discriminator}`)
-    .setImage(user.avatarURL)
-    .setDescription(`[Link](${user.avatarURL})`);
+    .setImage(user.avatarURL())
+    .setDescription(`[Link](${user.avatarURL()})`);
 
     msg.channel.send(embed);
 }

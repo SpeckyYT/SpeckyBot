@@ -32,7 +32,7 @@ module.exports.run = async (bot, msg) => {
         case "bot":
         case "robot":
         case "robots":
-            msg.channel.fetchMessages({limit: size}).then(msgs => {
+            msg.channel.messages.fetch({limit: size}).then(msgs => {
                 msgs.forEach(ms => {
                     if(ms.author.bot){
                         ms.delete();
@@ -44,7 +44,7 @@ module.exports.run = async (bot, msg) => {
         case "user":
         case "member":
         case "members":
-            msg.channel.fetchMessages({limit: size}).then(msgs => {
+            msg.channel.messages.fetch({limit: size}).then(msgs => {
                 msgs.forEach(ms => {
                     if(!ms.author.bot){
                         ms.delete();

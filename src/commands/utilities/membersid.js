@@ -7,7 +7,7 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     const members = [];
-    msg.guild.members.forEach(member => {
+    msg.guild.members.cache.forEach(member => {
         members.push(member.user.id)
     })
     const att = Buffer.from(members.join('\n'),'ascii').toAttachment("members.txt")

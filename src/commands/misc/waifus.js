@@ -42,25 +42,28 @@ module.exports.run = async (bot, msg) => {
                 await msg.channel.send(att);
             }
             return msg.channel.send(
-                "```diff\n+ "
-                +[
-                    "Choose your initial waifu",
-                    "Tune the color palette",
-                    "Fine tune the details",
-                    "Finish with your favourite pose!"
-                ][step]+
-                "\n```\n"+
-
-                "```md\n"+
-                (step != 0 ? "# C to cancel\n# S to skip\n# B to go back\n":"")+"# R to reload the grid"+
-                "\n```\n"+
-
-                "```c\n"+
-                "| 1  | 2  | 3  | 4  |\n"+
-                "| 5  | 6  | 7  | 8  |\n"+
-                "| 9  | 10 | 11 | 12 |\n"+
-                "| 13 | 14 | 15 | 16 |\n"+
-                "\n```\n",
+                String(
+                    [
+                        "+ Choose your initial waifu",
+                        "+ Tune the color palette",
+                        "+ Fine tune the details",
+                        "+ Finish with your favourite pose!"
+                    ][step]
+                )
+                .code('diff')
+                +
+                String(
+                    (step != 0 ? "# C to cancel\n# S to skip\n# B to go back\n":"")+"# R to reload the grid"
+                )
+                .code('md')
+                +
+                String(
+                    "| 1  | 2  | 3  | 4  |\n"+
+                    "| 5  | 6  | 7  | 8  |\n"+
+                    "| 9  | 10 | 11 | 12 |\n"+
+                    "| 13 | 14 | 15 | 16 |"
+                )
+                .code('c'),
                 canvas.toBuffer().toAttachment("waifus.png")
             )
             .then(m => {

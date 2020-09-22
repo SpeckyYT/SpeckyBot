@@ -5,18 +5,18 @@ module.exports = {
     aliases: ["game"]
 }
 
-const { RichEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 
 module.exports.run = async (bot, msg) => {
     const games = [];
 
-    await msg.guild.members.forEach(member => {
+    await msg.guild.members.cache.forEach(member => {
         if(!member.user.bot){
-            if(member.presence.game){
-                if(!games[String(member.presence.game.name)]){
-                    games[String(member.presence.game.name)] = [];
+            if(member.presence.activities){
+                if(!games[String(member.presence.activities.name)]){
+                    games[String(member.presence.activities.name)] = [];
                 }
-                games[String(member.presence.game.name)].push(member.presence.game.name);
+                games[String(member.presence.activities.name)].push(member.presence.activities.name);
             }
         }
     })
@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg) => {
     })
 
     await msg.channel.send(
-        new RichEmbed()
+        new MessageEmbed()
         .setDescription(stringGames)
     )
 }

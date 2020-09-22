@@ -5,7 +5,7 @@ module.exports = {
     aliases: ["status","st"]
 }
 
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const os = require('os');
 const osu = require('node-os-utils');
 
@@ -64,11 +64,11 @@ module.exports.run = async (bot, msg) => {
 
     await Promise.all([p1,p2,p3,p4]);
 
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
     .setColor(bot.config.color)
     .setDescription('Here are some stats about the bot and other stuff')
-    .setAuthor(`${bot.user.username}`, bot.user.iconURL)
-    .addField(`Ping:`,`${Math.round(bot.ping)}`)
+    .setAuthor(`${bot.user.username}`, bot.user.iconURL())
+    .addField(`Ping:`,`${Math.round(bot.ws.ping)}`)
     .addField(`Used:`,(`RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]\n`+
     `CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]\n`+
     `${bot.user.username.toUpperCase()} PROCESS: ${(process.memoryUsage().heapUsed / 1000000).toFixed(2)}MB\n`+
@@ -79,16 +79,16 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .addField(`System Specs:`,`System Type: ${osu.os.type()}\nSystem Architecture: ${osu.os.arch()}\nSystem Platform: ${osu.os.platform()}`)
     .addField(`Network Stats:`,`${networkUsage ? `Input Speed: ${networkUsageIn}\nOutput Speed: ${networkUsageOut}` : notSupported}`)
     .addBlankField()
-    .addField(`Total Users:`,`${bot.users.size}`,true)
-    .addField(`Total Emotes:`,`${bot.emojis.size}`,true)
-    .addField(`Total Guilds:`,`${bot.guilds.size}`,true)
+    .addField(`Total Users:`,`${bot.users.cache.size}`,true)
+    .addField(`Total Emotes:`,`${bot.emojis.cache.size}`,true)
+    .addField(`Total Guilds:`,`${bot.guilds.cache.size}`,true)
     .addBlankField()
     .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`)
     .addField(`Slots Winners:`,`${bot.stats.slots}`)
     .addField(`Bot Uptime:`,`${bot.formatTime(bot.uptime)}`,true)
     .addField(`Process Uptime:`,`${bot.formatTime(process.uptime()*1000)}`,true)
     .setTimestamp()
-    .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
+    .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL());
 
     msg.channel.send(embed)
 }

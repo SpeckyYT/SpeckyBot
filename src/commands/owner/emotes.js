@@ -7,7 +7,7 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     let arr = [];
-    bot.emojis.forEach(emoji => {
+    bot.emojis.cache.forEach(emoji => {
         arr.push(emoji);
         if(arr.join('').length > 1950){
             msg.channel.send(arr.join(''));

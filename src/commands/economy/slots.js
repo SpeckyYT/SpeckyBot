@@ -7,13 +7,13 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    let emojis = msg.guild.emojis.filter(e => e.available);
+    let emojis = msg.guild.emojis.cache.filter(e => e.available);
     let slots = 3;
     let global = false;
 
     if(emojis.size < 5){
         global = true;
-        emojis = bot.emojis.filter(e => e.available);
+        emojis = bot.emojis.cache.filter(e => e.available);
     }
 
     const obet = msg.args[0];
@@ -40,15 +40,15 @@ module.exports.run = async (bot, msg) => {
                 emote = neweArray[0];
             }else{
                 if(global){
-                    emote = bot.emojis.random().toString();
+                    emote = bot.emojis.cache.random().toString();
                 }else{
-                    emote = msg.guild.emojis.random().toString();
+                    emote = msg.guild.emojis.cache.random().toString();
                 }
             }
         }else if(global){
-            emote = bot.emojis.random().toString();
+            emote = bot.emojis.cache.random().toString();
         }else{
-            emote = msg.guild.emojis.random().toString();
+            emote = msg.guild.emojis.cache.random().toString();
         }
 
         if(won){

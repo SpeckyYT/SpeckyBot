@@ -24,7 +24,7 @@ module.exports.run = async (bot, msg) => {
     const embed = bot.embed()
     .setColor("#FFFFFF")
     .setTitle('Math Calculation')
-    .addField("Input", `\`\`\`js\n${cmdContent}\`\`\``)
-    .addField("Output", `\`\`\`js\n${resp}\`\`\``)
+    .addField("Input", String(cmdContent).code('js'))
+    .addField("Output", String(resp).code('js'))
     return msg.channel.send(embed);
 }
