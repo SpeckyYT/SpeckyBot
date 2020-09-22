@@ -12,11 +12,11 @@ module.exports.run = async (bot, msg) => {
 
     await msg.guild.members.cache.forEach(member => {
         if(!member.user.bot){
-            if(member.presence.game){
-                if(!games[String(member.presence.game.name)]){
-                    games[String(member.presence.game.name)] = [];
+            if(member.presence.activities){
+                if(!games[String(member.presence.activities.name)]){
+                    games[String(member.presence.activities.name)] = [];
                 }
-                games[String(member.presence.game.name)].push(member.presence.game.name);
+                games[String(member.presence.activities.name)].push(member.presence.activities.name);
             }
         }
     })

@@ -68,7 +68,7 @@ module.exports.run = async (bot, msg) => {
     .setColor(bot.config.color)
     .setDescription('Here are some stats about the bot and other stuff')
     .setAuthor(`${bot.user.username}`, bot.user.iconURL)
-    .addField(`Ping:`,`${Math.round(bot.ping)}`)
+    .addField(`Ping:`,`${Math.round(bot.ws.ping)}`)
     .addField(`Used:`,(`RAM: ${diagramMaker(usedRAM, freeRAM)} [${Math.round(100 * usedRAM / (usedRAM + freeRAM))}%]\n`+
     `CPU: ${diagramMaker(cpuUsage, 100-cpuUsage)} [${Math.round(cpuUsage)}%]\n`+
     `${bot.user.username.toUpperCase()} PROCESS: ${(process.memoryUsage().heapUsed / 1000000).toFixed(2)}MB\n`+
