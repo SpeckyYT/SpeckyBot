@@ -19,15 +19,15 @@ module.exports.run = async (bot, msg) => {
     let VC1;
     if(!args[1]){
 
-        if(!msg.member.voiceChannel){
+        if(!msg.member.voice.channel){
             return msg.channel.send("You aren't in a Voice Channel.")
         }
 
-        VC1 = msg.member.voiceChannel;
+        VC1 = msg.member.voice.channel;
 
-        VC1.members.cache.forEach(member => {
+        VC1.members.forEach(member => {
             try{
-                member.setVoiceChannel(args[0]);
+                member.voice.setChannel(args[0]);
             }catch{
                 return msg.channel.send("Error happend (Wrong ID?)")
             }
@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg) => {
 
         VC1.members.cache.forEach(member => {
             try{
-                member.setVoiceChannel(args[1]);
+                member.voice.setChannel(args[1]);
             }catch{
                 return msg.channel.send("Error happend (Wrong ID?)")
             }
