@@ -14,8 +14,8 @@ module.exports.run = async (bot, msg) => {
     member = msg.member;
     channel = msg.channel;
 
-    if(msg.mentions.members.cache.size > 0){
-        member = msg.mentions.members.cache.first();
+    if(msg.mentions.members.size > 0){
+        member = msg.mentions.members.first();
     }
 
     if(msg.mentions.channels.size > 0){
