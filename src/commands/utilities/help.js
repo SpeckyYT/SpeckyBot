@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
         const categories = bot.commands.map(c=>c.category||'uncategorized').toLowerCase().unique().sort();
 
         embed.setDescription(`These are the avaliable commands for ${bot.user.username}\nThe bot prefix is: **${config.prefix}**`)
-        embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL);
+        embed.setFooter(`Based on SpeckyBot | Total Commands: ${bot.commands.size}`, bot.user.displayAvatarURL());
 
         categories.forEach(category => {
             const dir = bot.commands.filter(c => {

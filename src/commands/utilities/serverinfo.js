@@ -21,7 +21,7 @@ module.exports.run = async (bot, msg) => {
     const embed = bot.embed()
     .setAuthor(msg.author.username)
     .setDescription("These are the informations about the server you're in!")
-    .setImage(msg.guild.iconURL)
+    .setImage(msg.guild.iconURL())
     .addField("Server name", `${msg.guild.name}`)
     .addField("Server ID", `${msg.guild.id}`)
     .addField("Server region", `${msg.guild.region}`)

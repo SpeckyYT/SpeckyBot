@@ -35,7 +35,7 @@ module.exports.run = async (bot, msg) => {
             .addField(`⠀`, "The following image could be not updated")
             .setImage(`https://mcapi.us/server/image?ip=${args[0]}&theme=dark`)
             .setTimestamp()
-            .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL);
+            .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL());
 
             msg.channel.send(embed);
         }catch(e){

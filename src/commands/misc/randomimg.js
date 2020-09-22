@@ -26,10 +26,10 @@ module.exports.run = async (bot, msg) => {
 
         const embed = new MessageEmbed()
         .setColor(bot.config.color)
-        .setAuthor(`Random Image!`, msg.guild.iconURL)
+        .setAuthor(`Random Image!`, msg.guild.iconURL())
         .setImage(body.file)
         .setTimestamp()
-        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
+        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL())
 
         ms.edit(embed);
     })

@@ -109,7 +109,7 @@ module.exports.run = async (bot, msg) => {
         .setAuthor(`Geometry Dash`, `https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Geometry_Dash_Logo.PNG/250px-Geometry_Dash_Logo.PNG`)
         .setImage(link)
         .setTimestamp()
-        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL)
+        .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL())
 
 
         return m.edit(embed);

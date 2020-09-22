@@ -34,7 +34,7 @@ module.exports.call = async (bot, msg) => {
                 new MessageEmbed()
                 .setAuthor(message ? `${message.author.tag} (ID: ${message.author.id})` : "Unknown User", message ? message.author.avatarURL() : poop)
                 .setDescription(`[Message](${link}) in <#${channelID}>\n${message ? message.content || "" : "Unknown Message"}`)
-                .setFooter(`${server ? server.name : "Unknown Server"} - Quoted by ${msg.author.tag}`, server ? server.iconURL : poop)
+                .setFooter(`${server ? server.name : "Unknown Server"} - Quoted by ${msg.author.tag}`, server ? server.iconURL() : poop)
                 .setTimestamp(message && message.createdAt || messageID.snowflake && messageID.snowflake().date)
                 .setColor(message ? 'GREEN' : 'RED')
             )

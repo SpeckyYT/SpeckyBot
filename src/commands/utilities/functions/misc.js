@@ -29,7 +29,7 @@ module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Edn
 
     const embed = new MessageEmbed()
     .setTitle(`__${title}__:`)
-    .setThumbnail(msg.guild.iconURL);
+    .setThumbnail(msg.guild.iconURL());
 
     const statusArray = [online,idle,dnd,offline];
 
