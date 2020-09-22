@@ -8,7 +8,7 @@ const { join } = require('path');
 module.exports = async (bot) => {
     try{
         app.get('/log', async function (req, res) {
-            readFile(join(process.cwd(),'commands.log'),(err,data) => {
+            readFile(join(process.cwd(),'..','commands.log'),(err,data) => {
                 res.send(String(data).split("\n").reverse().join("<br>"));
             });
         });
