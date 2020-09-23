@@ -50,7 +50,7 @@ module.exports.run = async (bot, msg) => {
         for (const reaction of collected.array()) {
             if(reaction.emoji.name == '🎲'){
                 const { users } = await reaction.fetch();
-                players = players.concat(users.array())
+                players = players.concat(users.cache.array())
             }
         }
         players = players.filter(player => !player.bot)

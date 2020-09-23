@@ -21,7 +21,7 @@ module.exports = {
         let allUsers = []
         for(const reaction of allReactions){
             const { users } = await reaction.fetch();
-            allUsers = allUsers.concat(users.array())
+            allUsers = allUsers.concat(users.cache.array())
         }
 
         // console.log(allUsers.map(user => user.name))
