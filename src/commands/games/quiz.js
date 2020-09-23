@@ -59,7 +59,7 @@ module.exports.run = async (bot, msg) => {
                 .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
                 .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
                 .setTimestamp()
-                .addBlankField();
+                .addField('\u200b','\u200b');
 
                 const answs = ["0","1","2","3"];
                 shuffle(answs);
@@ -83,7 +83,7 @@ module.exports.run = async (bot, msg) => {
                     times++;
                 }
                 msg.channel.send(embed).then(async resp => {
-                    embed.addBlankField()
+                    embed.addField('\u200b','\u200b')
 
                     const filter =  m => m.author.id == msg.author.id;
                     await msg.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})

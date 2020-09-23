@@ -59,7 +59,7 @@ module.exports.run = async (bot, msg) => {
             const embed = bot.embed()
             .setTitle("User Settings Help Page!")
             .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
-            .addBlankField()
+            .addField('\u200b','\u200b')
             .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``)
             .addField(`Will give you a notification if someone Ghostpinged you:`,`\`${bot.config.prefix}usersettings gp\``)
             .addField(`Will automatically do maths for you:`,`\`${bot.config.prefix}usersettings math\``)

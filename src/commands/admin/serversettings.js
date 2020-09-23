@@ -73,7 +73,7 @@ module.exports.run = async (bot, msg) => {
             const embed = new MessageEmbed()
             .setTitle("Server Settings Help Page!")
             .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
-            .addBlankField()
+            .addField('\u200b','\u200b')
             .addField(`Message to Embed feature [mte]`,`\`${bot.config.prefix}serversettings mte add/remove #channel\``);
             msg.channel.send(embed);
             break
