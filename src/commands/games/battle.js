@@ -5,7 +5,6 @@ module.exports = {
     aliases: ['boss','bossfight']
 }
 
-const { Attachment } = require('discord.js');
 const { join } = require('path');
 const { save } = require(join(process.cwd(),'modules','assets'));
 
@@ -35,7 +34,7 @@ module.exports.run = async (bot, msg) => {
 
     // START
     const loading = msg.channel.send("Loading...");
-    await msg.channel.send("Listen to the music for full experience!", new Attachment(global.assets.battle,'battle.mp3'));
+    await msg.channel.send("Listen to the music for full experience!", global.assets.battle.toAttachment('battle.mp3'));
     (await loading).delete();
 
     await bot.wait(1500);
@@ -43,7 +42,7 @@ module.exports.run = async (bot, msg) => {
 
     const currBoss = Math.ceil(Math.random()*amountOfBosses);
 
-    await msg.channel.send("A wild boss appeared!",new Attachment(global.assets[`b${currBoss}`],'boss.jpg'));
+    await msg.channel.send("A wild boss appeared!",global.assets[`b${currBoss}`].toAttachment('boss.jpg'));
 
     const words = [
         'fight',
@@ -62,7 +61,7 @@ module.exports.run = async (bot, msg) => {
     let damage = 1;
     let won = false;
 
-    let dmgmessage = await msg.channel.send(new Attachment(global.assets.boss1));
+    let dmgmessage = await msg.channel.send(global.assets.boss1.toAttachment('health.jpg'));
     const message = await msg.channel.send(`Type \`${word}\` to damage it!`);
 
     const collector = msg.channel.createMessageCollector((m) => !m.author.bot, {idle: 15000});
@@ -72,7 +71,7 @@ module.exports.run = async (bot, msg) => {
             word = Infinity;
             damage++;
             await (await dmgmessage).delete();
-            dmgmessage = msg.channel.send(new Attachment(global.assets[`boss${damage}`]));
+            dmgmessage = msg.channel.send(global.assets[`boss${damage}`].toAttachment('health.jpg'));
             if(damage >= 6){
                 message.delete();
                 won = true;
@@ -85,7 +84,7 @@ module.exports.run = async (bot, msg) => {
     });
     collector.on('end', () => {
         if(won){
-            return msg.channel.send("You won!",new Attachment(global.assets.won,'won.mp3'));
+            return msg.channel.send("You won!",global.assets.won.toAttachment('won.mp3'));
         }else{
             return msg.channel.send("The boss ran away...")
         }
