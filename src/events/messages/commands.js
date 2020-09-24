@@ -105,7 +105,8 @@ module.exports.call = async (bot, m) => {
             const imagesError   =  "🎨 This command requires the `ATTACH FILES` permission.";
             const userPermError =  "🚷 You don't have the required permissions for that command.";
             const serverError   =  "⛔ This command isn't available on this server.";
-            const musicError    =  "🎵 Music is broken."
+            const musicError1   =  "🎵 You have to be in a vocal channel to perform this command.";
+            const musicError2   =  `🎵 You have to be in the same vocal channel of ${bot.user} to run this command.`
             const officialError =  "🤖 This is the official SpeckyBot."
 
             const category = cmd.category;
@@ -150,9 +151,15 @@ module.exports.call = async (bot, m) => {
             }
 
             if(category == "music"){
-                if(!owner){
-                    return msg.channel.send(error(musicError))
+                if(!(msg.member.voice && msg.member.voice.channel)){
+                    return msg.channel.send(error(musicError1))
                 }
+                if(msg.guild.me.voice && msg.guild.me.voice.channel){
+                    if(msg.member.voice.channel.id != msg.guild.me.voice.channel.id){
+                        return msg.channel.send(error(musicError2))
+                    }
+                }
+
             }
 
             if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){
@@ -302,14 +309,30 @@ async function run(cmd, bot, msg, command){
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
 
             if(String(err).includes("Must be 2000 or fewer in length")){
-                msg.channel.send(errdesc(`${bot.user} tried to send a message with 2000 or more characters.`));
-            }else if(String(err).includes("Request entity too large")){
-                msg.channel.send(errdesc(`${bot.user} tried to send an attachment with more than 8MB.`));
-            }else if(msg.channel.type == "dm"){
-                msg.channel.send(errdesc(`${bot.user} tried to execute this command, but encountered an error (probably because it's in a DM)`))
-            }else{
-                msg.channel.send(errdesc(err));
+                return msg.channel.send(
+                    errdesc(`${bot.user} tried to send a message with 2000 or more characters.`)
+                );
             }
+
+            if(String(err).includes("Request entity too large")){
+                return msg.channel.send(
+                    errdesc(`${bot.user} tried to send an attachment with more than 8MB.`)
+                );
+            }
+
+            if(String(err).includes("Not playing")){
+                return msg.channel.send(
+                    errdesc(`${bot.user} is not playing music in this guild, do \`${bot.config.prefix}play <song>\` to play one.`)
+                );
+            }
+
+            if(msg.channel.type == "dm"){
+                return msg.channel.send(
+                    errdesc(`${bot.user} tried to execute this command, but encountered an error (probably because it's in a DM)`)
+                );
+            }
+
+            return msg.channel.send(errdesc(err));
         }
     })
     .finally(async () => {
@@ -339,7 +362,7 @@ function errdesc(err){
     }
     return new MessageEmbed()
     .setTitle('ERROR DESCRIPTION')
-    .setDescription(`${err}\n\nFile: ${err ? err.fileName : undefined}\nLine: ${err ? err.lineNumber : undefined}`)
+    .setDescription(String(err))
     .setColor('FF0000')
 }
 

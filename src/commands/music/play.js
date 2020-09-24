@@ -7,5 +7,14 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    bot.music[msg.author.id.isOwner()?'playTop':'play'](msg, msg.cmdContent);
+    const { song } = await (bot.music.isPlaying(msg.guild.id) ?
+        bot.music.addToQueue(msg.guild.id, msg.cmdContent, msg.author.tag) :
+        bot.music.play(msg.member.voice.channel, msg.cmdContent));
+    return msg.channel.send(
+        bot.embed()
+        .setTitle(song.name)
+        .setDescription(`Author: ${song.author.name}\nDuration: ${song.duration}\nRequested by: ${song.requestedBy}`)
+        .setURL(song.url)
+        .setImage(song.thumbnail)
+    )
 }

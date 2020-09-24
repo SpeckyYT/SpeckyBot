@@ -6,5 +6,6 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    bot.music.skip(msg)
+    const song = await bot.music.skip(msg.guild.id);
+    return msg.channel.send(`${song.name} got skipped!`)
 }

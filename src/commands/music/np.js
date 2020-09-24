@@ -6,5 +6,12 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    bot.music.nowPlaying(msg);
+    const song = await bot.music.nowPlaying(msg.guild.id);
+    return msg.channel.send(
+        bot.embed()
+        .setTitle(song.name)
+        .setDescription(`Author: ${song.author.name}\nDuration: ${song.duration}\nRequested by: ${song.requestedBy}`)
+        .setURL(song.url)
+        .setImage(song.thumbnail)
+    )
 }

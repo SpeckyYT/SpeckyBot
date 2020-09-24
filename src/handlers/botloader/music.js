@@ -1,6 +1,14 @@
-const musicClient = require('la-music-core');
+const { Player } = require('discord-music-player');
 
 module.exports = async (bot) => {
     if(!(bot.config && bot.config.youtube)) return;
-    bot.music = new musicClient(bot.config.youtube);
+    bot.music = new Player(
+        bot,
+        bot.config.youtube,
+        {
+            leaveOnEmpty: true,
+            leaveOnEnd: false,
+            leaveOnStop: false
+        }
+    )
 };

@@ -6,5 +6,6 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    bot.music.resume(msg);
+    await bot.music.resume(msg.guild.id);
+    return msg.channel.send('Playback resumed.')
 }

@@ -1,10 +1,11 @@
 module.exports = {
-    name: "leave",
-    description: "Does the bot leave the VC!",
+    name: "stop",
+    description: "Pauses the music!",
     category: "music",
-    aliases: ["l","stop"]
+    aliases: ["pause"]
 }
 
 module.exports.run = async (bot, msg) => {
-    bot.music.stop(msg);
+    await bot.music.pause(msg.guild.id);
+    return msg.channel.send('Playback paused.')
 }
