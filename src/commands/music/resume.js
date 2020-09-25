@@ -6,6 +6,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
+    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing')
     await bot.music.resume(msg.guild.id);
-    return msg.channel.send('Playback resumed.')
+    return bot.cmdSuccess('Playback resumed.');
 }

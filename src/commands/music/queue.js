@@ -6,7 +6,9 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
+    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing');
     const queue = await bot.music.getQueue(msg.guild.id);
+    if(!queue) return bot.cmdError('No queue found.');
     return msg.channel.send(
         bot.embed()
         .setTitle("Queue")

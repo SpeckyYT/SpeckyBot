@@ -6,6 +6,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
+    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing')
     const song = await bot.music.nowPlaying(msg.guild.id);
     return msg.channel.send(
         bot.embed()
