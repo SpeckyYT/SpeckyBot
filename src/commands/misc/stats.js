@@ -84,7 +84,6 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .addField(`Total Guilds:`,`${bot.guilds.cache.size}`,true)
     .addField('\u200b','\u200b')
     .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`)
-    .addField(`Slots Winners:`,`${bot.stats.slots}`)
     .addField(`Bot Uptime:`,`${bot.formatTime(bot.uptime)}`,true)
     .addField(`Process Uptime:`,`${bot.formatTime(process.uptime()*1000)}`,true)
     .setTimestamp()
