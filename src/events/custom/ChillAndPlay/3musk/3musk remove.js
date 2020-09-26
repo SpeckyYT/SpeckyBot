@@ -18,7 +18,7 @@ module.exports.call = async (bot, oldPresence, newPresence) => {
     const muskRole = "636272631984947240"
     const muskGateRole = "663303390620680193"
 
-    if(member.roles.has(muskRole)){
+    if(member.roles.cache.has(muskRole)){
         try{
             member.removeRole(muskRole)
         }catch{}

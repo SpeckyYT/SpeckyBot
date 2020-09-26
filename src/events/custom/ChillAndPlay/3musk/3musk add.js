@@ -19,7 +19,7 @@ module.exports.call = async (bot, messageReaction, user) => {
     if(["offline","idle"].includes(user.presence.status)) return;
 
     guild.members.fetch(user)
-    .then(async member => {
+    .then(member => {
         const muskRole = "636272631984947240"
         const muskGateRole = "663303390620680193"
 
