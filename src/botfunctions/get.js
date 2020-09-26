@@ -50,7 +50,7 @@ module.exports = (bot) => {
     bot.getChannel = (input, guild) => {
         let ch;
 
-        ch = guild.channels.find( item => {
+        ch = guild.channels.cache.find( item => {
             try{
                 return item.name.toLowerCase() === input.toLowerCase()
             }catch(err){
@@ -62,7 +62,7 @@ module.exports = (bot) => {
             return ch
         }
 
-        ch = guild.channels.get(input);
+        ch = guild.channels.cache.get(input);
 
         if(typeof ch != undefined && typeof ch != undefined){
             return ch
