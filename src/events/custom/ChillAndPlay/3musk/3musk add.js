@@ -25,11 +25,11 @@ module.exports.call = async (bot, messageReaction, user) => {
 
         if(member.roles.cache.has(muskGateRole)){
             try{
-                member.removeRole(muskGateRole)
+                member.roles.remove(muskGateRole)
             }catch{}
 
             try{
-                member.addRole(muskRole)
+                member.roles.add(muskRole)
             }catch{}
         }
     }).catch(()=>{})

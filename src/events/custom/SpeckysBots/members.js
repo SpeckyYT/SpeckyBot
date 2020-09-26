@@ -10,5 +10,5 @@ module.exports.call = async (bot) => {
 
     guild.members.cache
     .filter(m => !m.roles.cache.has(memberRole))
-    .forEach(m => m.addRole(memberRole).catch(()=>{}))
+    .forEach(m => m.roles.add(memberRole).catch(()=>{}))
 }

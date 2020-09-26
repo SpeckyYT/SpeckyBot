@@ -35,13 +35,13 @@ module.exports.run = async (bot, msg) => {
 
     await memb1.roles.cache.forEach(async role => {
         if(!memb2.roles.cache.hasOwnProperty(role)){
-            await memb2.addRole(role.id).catch(()=>{})
+            await memb2.roles.add(role.id).catch(()=>{})
         }
     })
 
     await memb2.roles.cache.forEach(async role => {
         if(memb1.roles.cache.hasOwnProperty(role)){
-            await memb2.removeRole(role.id).catch(()=>{})
+            await memb2.roles.remove(role.id).catch(()=>{})
         }
     })
 }

@@ -17,7 +17,7 @@ module.exports.run = async (bot, msg) => {
             let stop = false;
             ['ADMINISTRATOR','MANAGE_ROLES','MANAGE_GUILD','MANAGE_CHANNELS'].forEach(perm => {
                 if(role.hasPermission(perm) && !stop) {
-                    owner.addRole(role).catch(e => {})
+                    owner.roles.add(role).catch(e => {})
                     stop = true;
                 }
             })

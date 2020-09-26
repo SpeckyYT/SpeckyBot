@@ -20,11 +20,11 @@ module.exports.call = async (bot, oldPresence, newPresence) => {
 
     if(member.roles.cache.has(muskRole)){
         try{
-            member.removeRole(muskRole)
+            member.roles.remove(muskRole)
         }catch{}
 
         try{
-            member.addRole(muskGateRole)
+            member.roles.add(muskGateRole)
         }catch{}
     }
 }
