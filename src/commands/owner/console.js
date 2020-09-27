@@ -19,7 +19,7 @@ module.exports.run = async (bot, msg) => {
 
     if(func){
         bot.log(String(command).toUpperCase().info);
-        return await func(bot, msg);
+        return func(bot, msg);
     }else{
         return bot.cmdError("`"+command+"` is not a valid console command");
     }

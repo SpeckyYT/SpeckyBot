@@ -97,5 +97,5 @@ module.exports.run = async (bot, msg) => {
             })
         })
     }
-    return await request();
+    return request();
 }

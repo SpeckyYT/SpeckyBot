@@ -109,7 +109,7 @@ module.exports = async (bot) => {
             .catch(async () => {
                 const draw = bot.console.get('draw');
                 data.content = data.contento;
-                return await draw.run(bot,data);
+                return draw.run(bot,data);
             })
             .catch(() => {
                 console.log(`Command ${command.toUpperCase()} not found`.error)

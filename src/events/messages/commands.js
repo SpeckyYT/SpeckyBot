@@ -218,7 +218,7 @@ module.exports.call = async (bot, m) => {
     }
 
     if(cmd){
-        return await execute();
+        return execute();
     }else{
         const cmdarray = bot.commands
         .map(c => c.name)
@@ -251,7 +251,7 @@ module.exports.call = async (bot, m) => {
             msg.command = com;
             cmd = bot.commands.get(com) || bot.commands.get(bot.aliases.get(com));
             collector.stop();
-            return await execute();
+            return execute();
         });
         collector.on('end', async () => {
             if(runned) return;
@@ -262,14 +262,14 @@ module.exports.call = async (bot, m) => {
 
 async function run(cmd, bot, msg, command){
     if(bot.cache.runningcmds.includes(`${msg.channel.id}:${cmd.name}`)){
-        return await msg.channel.send(error("This command is already running..."));
+        return msg.channel.send(error("This command is already running..."));
     }
 
     const cd = bot.cache.cooldown.get(`${msg.author.id}:${cmd.name}`);
     if(cd){
         const diff = new Date().getTime() - cd.getTime();
         if(diff < (cmd.cooldown ? cmd.cooldown : 1000)){
-            return await msg.channel.send(error("This command is on cooldown..."));
+            return msg.channel.send(error("This command is on cooldown..."));
         }
     }
 
