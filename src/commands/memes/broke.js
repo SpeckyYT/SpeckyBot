@@ -9,10 +9,10 @@ const Canvas = require('canvas');
 const { join } = require('path');
 const { save } = require(join(process.cwd(),'modules','assets'));
 
-const promises = Promise.all([
+const promises = [
     ["https://i.imgflip.com/1qge7m.jpg",'broke.jpg'],
     ["https://www.wfonts.com/download/data/2014/05/29/impact/impact.ttf",'impact.ttf']
-].map(save));
+].map(save);
 
 Promise.all(promises)
 .then(()=>Canvas.registerFont(join(process.cwd(),'assets','impact.ttf'),{family: 'Impact'}))
