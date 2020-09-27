@@ -1,4 +1,4 @@
-const { writeFileSync, appendFileSync, existsSync } = require('fs');
+const { writeFileSync, appendFileSync, existsSync, readFileSync } = require('fs');
 const { join } = require('path');
 
 module.exports = async () => {
@@ -12,7 +12,11 @@ module.exports = async () => {
     let config;
 
     try{
-        config = require(join(process.cwd(),'..','config.json'));
+        config = JSON.parse(
+            readFileSync(
+                join(process.cwd(),'..','config.json')
+            )
+        );
     }catch(err){
         console.log("Wasn't able to load config.json a new file got created: template.config.json".error);
 
@@ -20,7 +24,7 @@ module.exports = async () => {
             appendFileSync(join(process.cwd(),'..','template.config.json'), JSON.stringify(template,null,4));
         }
 
-        return new Promise((resolve, reject) => reject("config.json is invalid".error))
+        throw new Error("config.json is invalid".error);
     }
 
 

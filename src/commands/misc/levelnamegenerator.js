@@ -26,12 +26,10 @@ Promise.all(promises)
 .then(()=>Canvas.registerFont(join(process.cwd(),'assets','pusab.ttf'),{family: 'Pusab'}))
 .catch(()=>{});
 
-let corner, refresh;
-
 module.exports.run = async (bot, msg) => {
     await Promise.all(promises);
 
-    let { list } = this;
+    let { list, corner, refresh } = this;
 
     if(!list)
         await fetch(listURL)
