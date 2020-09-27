@@ -9,9 +9,14 @@ const Canvas = require('canvas');
 const { join } = require('path');
 const { save } = require(join(process.cwd(),'modules','assets'));
 
-const promises = [
-    ["https://i.imgflip.com/1qge7m.jpg",'broke.jpg']
-].map(save);
+const promises = Promise.all([
+    ["https://i.imgflip.com/1qge7m.jpg",'broke.jpg'],
+    ["https://www.wfonts.com/download/data/2014/05/29/impact/impact.ttf",'impact.ttf']
+].map(save));
+
+Promise.all(promises)
+.then(()=>Canvas.registerFont(join(process.cwd(),'assets','impact.ttf'),{family: 'Impact'}))
+.catch(()=>{});
 
 module.exports.run = async (bot, msg) => {
     await Promise.all(promises);
@@ -22,7 +27,7 @@ module.exports.run = async (bot, msg) => {
     let { broke } = this;
     if(!broke) broke = await Canvas.loadImage(global.assets.broke);
 
-    ctx.font = "90px IMPACT";
+    ctx.font = "90px Impact";
     ctx.fillStyle = "rgb(255,255,255)";
     ctx.strokeStyle = "rgb(0,0,0)";
     ctx.lineWidth = 15;
