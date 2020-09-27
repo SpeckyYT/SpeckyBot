@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg) => {
 
             const VC2 = singmsg.member.voice.channel;
 
-            VC1.members.cache.forEach(member => {
+            VC1.members.forEach(member => {
                 member.voice.setChannel(VC2)
             })
 
