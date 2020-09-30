@@ -14,11 +14,11 @@ module.exports.call = async (bot, oldMember, newMember) => {
         const isOffline = newMember.presence.status == 'offline';
         const hasOffline = newMember.roles.cache.has(offlineRole);
         if(isOffline && !hasOffline){
-            newMember.roles.add(offlineRole)
+            await newMember.roles.add(offlineRole)
             .catch(()=>{});
         }
         if(!isOffline && hasOffline){
-            newMember.roles.remove(offlineRole)
+            await newMember.roles.remove(offlineRole)
             .catch(()=>{});
         }
     }
@@ -26,5 +26,5 @@ module.exports.call = async (bot, oldMember, newMember) => {
     guild.members.cache
     .filter(m => !m.user.bot)
     .filter(m => (m.presence.status == 'offline') ^ (m.roles.cache.has(offlineRole)))
-    .forEach(m => m.roles[m.roles.cache.has(offlineRole)?'remove':'add'](offlineRole));
+    .forEach(async m => await m.roles[m.roles.cache.has(offlineRole)?'remove':'add'](offlineRole));
 }
