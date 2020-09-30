@@ -1,72 +1,38 @@
-const { Canvas } = require('canvas');
-const GIFEncoder = require('gifencoder');
-
-const size = 100;
-
 module.exports = {
     name: "speckysort",
     description: "Will sort an array with SpeckySort!",
     category: "misc"
 }
 
-function isSorted(array=[]){
-    let prev = -Infinity;
-    for(const item of array){
-        if(item < prev) return false;
-        prev = item;
-    }
-    return true;
-}
+const { exec } = require('child_process');
+const { join } = require('path');
 
 module.exports.run = async (bot,msg) => {
-    const canvas = new Canvas(size,size);
-    const ctx = canvas.getContext('2d', {alpha:false});
-    const encoder = new GIFEncoder(size,size);
+    const msgs = await msg.channel.send("Generating your epic SpeckySort GIF!\n(this usually takes some time...)")
 
-    encoder.start();
-    encoder.setRepeat(0);
-    encoder.setDelay(5);
-    encoder.setQuality(10);
+    const path =         [
+        'node',
+        '"'+join(__dirname,'children','speckysort.js')+'"'
+    ].join(' ');
 
-    const array = Array(size).fill(0).map((_,i) => i+1).shuffle();
-    let groupSize;
-
-    if(!array) return;
-    if(!groupSize) groupSize = Math.ceil(Math.sqrt(array.length));
-    if(groupSize < 2) groupSize = 2;
-    let index = 0;
-    let loops = 0;
-    return new Promise((res) => {
-        function sort(){
-            const group = array.slice(index, index+groupSize);
-            let smallest = [Infinity, array.length];
-            for(const [i, object] of group.entries()){
-                if(object < smallest[0]){
-                    smallest = [object, i];
+    msg.channel.send(
+        await new Promise((res,rej) =>
+            exec(
+                path,
+                {},
+                (err,stdout,stderr) => {
+                    if(stderr||err){
+                        console.table({
+                            stderr, err
+                        })
+                        res(bot.cmdError("Error happend"))
+                    }
+                    if(stdout){
+                        res(Buffer.from(stdout,'base64').toAttachment("bouncy.gif"))
+                    }
                 }
-            }
-            [array[index], array[index+smallest[1]]] = [array[index+smallest[1]], array[index]];
-            index++;
-            if(index > array.length-2 || index > Math.ceil(array.length-(loops*(groupSize-1))-2)){
-                index = 0;
-                loops++;
-            }
-            ctx.fillStyle = 'black'
-            ctx.fillRect(0,0,size,size);
-            ctx.fillStyle = 'blue'
-            array.forEach((v,i,a) => {
-                ctx.fillRect(i,size,1,-v)
-                if(i+1 == a.length){
-                    encoder.addFrame(ctx);
-                }
-            });
-            if(isSorted(array)){
-                encoder.finish();
-                return res(Buffer.from(encoder.out.data).toAttachment('SpeckySort.gif'));
-            }else{
-                sort();
-            }
-        }
-        sort();
-    }).then(gif => msg.channel.send(gif));
+            )
+        )
+    )
+    .then(() => msgs.delete())
 }

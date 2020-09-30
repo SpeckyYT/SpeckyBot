@@ -8,11 +8,11 @@ const { exec } = require('child_process');
 const { join } = require('path');
 
 module.exports.run = async (bot, msg) => {
-    const msgs = await msg.channel.send("Generating your epic bouncing ball GIF!\n(this usually takes a lot of time...)")
+    const msgs = await msg.channel.send("Generating your epic bouncing cube GIF!\n(this usually takes a lot of time...)")
 
     const path =         [
         'node',
-        '"'+join(__dirname,'functions','childs','bouncy.js')+'"',
+        '"'+join(__dirname,'children','bouncy.js')+'"',
         '"'+bot.user.avatarURL({format:'png',size:32})+'"'
     ].join(' ');
 
@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg) => {
                 path,
                 {},
                 (err,stdout,stderr) => {
-                    if(stderr){
+                    if(stderr||err){
                         res(bot.cmdError("Error happend"))
                     }
                     if(stdout){
