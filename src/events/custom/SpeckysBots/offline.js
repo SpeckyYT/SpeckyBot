@@ -1,31 +1,20 @@
 module.exports = {
-    event: ["interval_1_min","presenceUpdate"]
+    event: ["interval_5_min","presenceUpdate"]
 }
 
 const speckysBots = "538028973058424832";
 const offlineRole = "760554589040279592";
 
 module.exports.call = async (bot, oldPresence, newPresence) => {
-    if(newMember.user.bot) return;
+    if(newPresence && newPresence.user.bot) return;
+
     const guild = bot.guilds.cache.get(speckysBots);
     if(!guild) return;
-    /*
-    if(oldMember && newMember){
-        if(newMember.guild.id != speckysBots) return;
-        const isOffline = newMember.presence.status == 'offline';
-        const hasOffline = newMember.roles.cache.has(offlineRole);
-        if(isOffline && !hasOffline){
-            await newMember.roles.add(offlineRole)
-            .catch(()=>{});
-        }
-        if(!isOffline && hasOffline){
-            await newMember.roles.remove(offlineRole)
-            .catch(()=>{});
-        }
-    }
-    */
-    guild.members.cache
+
+    const members = await guild.members.fetch();
+
+    members
     .filter(m => !m.user.bot)
     .filter(m => (m.presence.status == 'offline') ^ (m.roles.cache.has(offlineRole)))
-    .forEach(async m => await m.roles[m.roles.cache.has(offlineRole)?'remove':'add'](offlineRole));
+    .forEach(m => m.roles[m.roles.cache.has(offlineRole)?'remove':'add'](offlineRole));
 }
