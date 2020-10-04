@@ -10,25 +10,18 @@ module.exports.run = async (bot, msg) => {
     let user;
 
     if(msg.mentions.users.first()){
-
         user = msg.mentions.users.first();
-
     }else if(msg.Args[0]){
-
-        await msg.guild.members.fetch(msg.Args[0])
-        .then(member => {
-            user = member.user
-        })
+        await bot.users.fetch(msg.Args[0])
+        .then(newUser => user = newUser)
+        .catch(()=>{});
     }
-
-    if(typeof user == "undefined"){
-        user = msg.author;
-    }
+    user = user || msg.author;
 
     const embed = bot.embed()
     .setTitle(`${user.username}#${user.discriminator}`)
-    .setImage(user.avatarURL())
+    .setImage(user.avatarURL({format:'png',size:4096,dynamic:true}))
     .setDescription(`[Link](${user.avatarURL()})`);
 
-    msg.channel.send(embed);
+    return msg.channel.send(embed);
 }
