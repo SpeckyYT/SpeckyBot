@@ -9,6 +9,7 @@ module.exports = {
 const { writeFile } = require('fs');
 const { join } = require('path');
 const dir = join(process.cwd(),'..','db','u_settings');
+const { resolveColor } = global.modules;
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
@@ -22,16 +23,11 @@ module.exports.run = async (bot, msg) => {
         case "embedcolor":
         case "ec":
         case "embcol":
-            let color = args[1];
-            if(color == null) return msg.channel.send("You have to define a color (in HEX format)");
-            color = color.replace("#",'');
-            const temp = parseInt(color, 16);
-            if(temp.toString(16) != color.toLowerCase()) return msg.channel.send("The provided HEX color is invalid (wrong characters)");
-            if(color.length != 6) return msg.channel.send("The provided HEX color is invalid (wrong length)")
+            const color = resolveColor(args[1].toUpperCase());
+            if(!color) return bot.cmdError('Invalid color');
+            u_settings[msg.author.id].embedcolor = color;
 
-            u_settings[msg.author.id].embedcolor = color.toUpperCase();
-
-            msg.channel.send(`Changed your embed color to \`${color.toUpperCase()}\`!`);
+            msg.channel.send(`Changed your embed color to \`${args[1].toUpperCase()}\`!`);
             changed = true;
             break;
 

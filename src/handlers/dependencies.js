@@ -1,7 +1,4 @@
-const fs = require('fs');
-const { join } = require('path');
-
-module.exports = async () => {
+module.exports = () => {
     // More Array Methods
     require('more-array-methods')();
 
@@ -27,17 +24,4 @@ module.exports = async () => {
         dependency: 'cyan',
         cli: 'cyan'
     });
-
-    // Require all languages
-    console.log("\n\nLoading LANGUAGES!\n".info);
-    fs.readdirSync(join(__dirname,'languages'))
-    .forEach(language => {
-        try{
-            require(join(__dirname,'languages',language))();
-            console.log(language.data);
-        }catch(err){
-            console.log(`COULD NOT LOAD ${language.toUpperCase()} CORRECTLY`.error)
-        }
-    })
-    console.log('\n')
 }

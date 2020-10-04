@@ -5,8 +5,7 @@ module.exports = {
     aliases: ['boss','bossfight']
 }
 
-const { join } = require('path');
-const { save } = require(join(process.cwd(),'modules','assets'));
+const save = global.modules.saveAsset;
 
 const promises = [
     ["https://media.discordapp.net/attachments/671851100290285568/757301181620944916/image0.jpg",'boss1.jpg'],

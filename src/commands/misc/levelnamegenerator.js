@@ -9,7 +9,7 @@ module.exports = {
 const fetch = require('node-fetch');
 const Canvas = require('canvas');
 const { join } = require('path');
-const { save } = require(join(process.cwd(),'modules','assets'));
+const save = global.modules.saveAsset;
 
 const listURL = "https://gdcolon.com/tools/gdname/list";
 const cornerURL = "https://gdbrowser.com/assets/corner.png";

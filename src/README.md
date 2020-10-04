@@ -77,7 +77,7 @@ Note: You can have **ONLY ONE** exported function in the entire file
 ## 1.5. Handlers
 
 Handlers are files, which get called from the `generalhandler.js` file.
-Files in `handlers/botloader` will be automatically called.
+Files in `handlers/loader` will be automatically called.
 
 ## 1.6. Prototypes
 

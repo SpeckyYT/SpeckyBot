@@ -49,7 +49,7 @@ module.exports = async (bot) => {
 
     process.openStdin().removeAllListeners();
 
-    process.openStdin().addListener("data", async res => {
+    process.openStdin().addListener("data", res => {
         const content = res.toString();
         let oargs = res.toString().split(/\s/g).clean();
 
@@ -106,7 +106,7 @@ module.exports = async (bot) => {
             data.args[0] = command;
 
             search.run(bot,data)
-            .catch(async () => {
+            .catch(() => {
                 const draw = bot.console.get('draw');
                 data.content = data.contento;
                 return draw.run(bot,data);

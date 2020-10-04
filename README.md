@@ -5,7 +5,7 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 # Contributors
 
 ## [SpeckyYT](https://github.com/SpeckyYT)
-- coded automatic folder loading system (botfunctions, commands, console, events, handlers/botloader, prototypes)
+- coded automatic folder loading system (botfunctions, commands, console, events, handlers/loader, prototypes)
 - made console commands possible
 - coded most of the commands and events
 - wrote the README

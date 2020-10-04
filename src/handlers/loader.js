@@ -2,8 +2,6 @@ const { readdirSync, readFileSync } = require('fs');
 const { Collection } = require('discord.js');
 const { join } = require('path');
 
-const alreadyLoaded = [];
-
 module.exports = async (bot) => {
     bot.setMaxListeners(50);
 
@@ -34,40 +32,33 @@ module.exports = async (bot) => {
 
     bot.config = JSON.parse(readFileSync(join(process.cwd(),'..','config.json')));
 
-    const sF = [];
-    for (const a in require.extensions) sF.push(a);
-    bot.supportedFiles = new RegExp("("+sF.join('|')+")$");
-
     if(typeof bot.config.apikeys == "object"){
         Object.keys(bot.config.apikeys).forEach(prop => {
             bot.config[prop] = bot.config.apikeys[prop];
         })
     }
 
-    const sequence =
-    [
+    function load(array){
+        array.forEach(x => {
+            if(bot.log){
+                bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+            }else{
+                console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
+            }
+            require(join(__dirname,'loader',x))(bot);
+        });
+    }
+
+    const priority = [
+        "languages",
         "startup",
+        "modules",
         "events"
     ];
-
-    [
-        ...sequence,
-        ...readdirSync(join(__dirname,'botloader')).map(v => sequence && v.match(bot.supportedFiles).length > 0 && !sequence.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
-    ]
-    .forEach(async x => {
-        if(x == 'music'){
-            if(alreadyLoaded.includes(x)){
-                return;
-            }else{
-                alreadyLoaded.push(x)
-            }
-        }
-
-        if(bot.log){
-            bot.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
-        }else{
-            console.log(`\n\nLoading ${x.toUpperCase()}!\n`.info);
-        }
-        require(join(__dirname,'botloader',x))(bot);
-    });
+    load(priority);
+    load(
+        [
+            ...readdirSync(join(__dirname,'loader')).map(v => priority && v.match(bot.supportedFiles).length > 0 && !priority.includes(v.replace(bot.supportedFiles,'')) ? v.replace(bot.supportedFiles,'') : null).clean()
+        ]
+    )
 }

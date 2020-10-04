@@ -7,7 +7,7 @@ module.exports = {
 
 const Canvas = require('canvas');
 const { join } = require('path');
-const { save } = require(join(process.cwd(),'modules','assets'));
+const save = global.modules.saveAsset;
 
 const promises = [
     ["https://www.wfonts.com/download/data/2014/05/29/impact/impact.ttf",'impact.ttf']

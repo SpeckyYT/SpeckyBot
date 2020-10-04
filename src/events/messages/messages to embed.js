@@ -3,6 +3,7 @@ module.exports = {
 }
 
 const { MessageEmbed } = require('discord.js');
+const { resolveColor } = global.modules;
 
 module.exports.call = async (bot, msg) => {
     if (msg.author.bot) return;
@@ -15,24 +16,24 @@ module.exports.call = async (bot, msg) => {
     let color;
 
     if(u_settings[msg.author.id] ? u_settings[msg.author.id].embedcolor : false){
-        color = `${u_settings[msg.author.id].embedcolor}`;
+        color = resolveColor(u_settings[msg.author.id].embedcolor);
     }else{
-        color = `${(Math.random()*0xFFFFFF<<0).toString(16)}`;
+        color = (Math.random()*0xFFFFFF<<0).toString(16);
     }
 
     const perms = msg.guild ? msg.guild.me.permissionsIn(msg.channel).toArray() : [];
     if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES') || !msg.guild){
         if(msg.content.includes(':EMB:')){
-            await msg.delete().catch(()=>{})
+            msg.delete().catch(()=>{})
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
                 const embed = new MessageEmbed()
                 .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL()}`)
                 .setDescription(`${msg.content}`)
-                .setColor(`${color}`);
-                await msg.channel.send(embed);
+                .setColor(color);
+                msg.channel.send(embed);
             }
-            await atts(msg,color)
+            atts(msg,color)
             return;
         }
     }else{
@@ -47,15 +48,15 @@ module.exports.call = async (bot, msg) => {
                 s_settings[msg.guild.id].mtechannel.includes(msg.channel.id) : false)
             : false){
             try{
-                await msg.delete();
+                msg.delete();
                 if(msg.content){
                     const embed = new MessageEmbed()
                     .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL()}`)
                     .setDescription(`${msg.content}`)
-                    .setColor(`${color}`);
-                    await msg.channel.send(embed);
+                    .setColor(color);
+                    msg.channel.send(embed);
                 }
-                await atts(msg,color)
+                atts(msg,color)
             }catch(e){}
         }
     }catch(err){
@@ -63,7 +64,7 @@ module.exports.call = async (bot, msg) => {
     }
 }
 
-async function atts(msg,color) {
+function atts(msg,color) {
     msg.attachments.forEach(async att  => {
         const emb = new MessageEmbed()
         .setAuthor(`${msg.author.username}`, `${msg.author.avatarURL()}`)
