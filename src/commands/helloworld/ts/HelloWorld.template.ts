@@ -1,5 +1,5 @@
-import { SpeckyClient } from "../../../typings/Client";
-import { CmdMessage } from "../../../typings/Message";
+import { SpeckyClient } from "../../../../typings/Client";
+import { CmdMessage } from "../../../../typings/Message";
 
 module.exports = {
     name: "hwtts",
