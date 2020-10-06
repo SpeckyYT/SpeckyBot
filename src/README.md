@@ -69,6 +69,7 @@ Events get called by the Discord's API or by custom events (e.g. "interval_1_min
 | Property     | Type     | Example                       | Info                             | Required |
 |--------------|----------|-------------------------------|----------------------------------|----------|
 | event        | String   | "message"                     | [Discord.JS](https://discord.js.org/#/docs/main/11.6.4/class/Client) or custom events | true |
+| emitter      | String   | "bot"                         | `bot` or `process`               | false    |
 | type         | String   | "once"                        | `on` or `once`                   | false    |
 | `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | false    |
 

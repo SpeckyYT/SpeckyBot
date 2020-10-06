@@ -1,7 +1,7 @@
 const { writeFileSync, appendFileSync, existsSync, readFileSync } = require('fs');
 const { join } = require('path');
 
-module.exports = async () => {
+module.exports = (bot) => {
     const template =
     {
         token: "TOKEN_HERE",
@@ -17,6 +17,9 @@ module.exports = async () => {
                 join(process.cwd(),'..','config.json')
             )
         );
+        if(typeof config.apikeys == "object"){
+            Object.keys(config.apikeys).forEach(prop => config[prop] = config.apikeys[prop])
+        }
     }catch(err){
         console.log("Wasn't able to load config.json a new file got created: template.config.json".error);
 
@@ -70,4 +73,6 @@ module.exports = async () => {
 
         writeFileSync(join(process.cwd(),'..','config.json'), conf, {})
     }
+
+    bot.config = config;
 }

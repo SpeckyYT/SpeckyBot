@@ -7,10 +7,11 @@ const { join } = require('path');
 
 module.exports = async (bot) => {
     try{
-        app.get('/log', async function (req, res) {
-            readFile(join(process.cwd(),'..','commands.log'),(err,data) => {
-                res.send(String(data).split("\n").reverse().join("<br>"));
-            });
+        app.get('/log', (req, res) => {
+            readFile(
+                join(process.cwd(),'..','commands.log'),
+                (err,data) => res.send(String(data).split("\n").reverse().slice(0,1500).join("<br>"))
+            );
         });
         let port = 50000;
         function end(err){
@@ -18,7 +19,8 @@ module.exports = async (bot) => {
                 console.log(`Wasn't able to access any port`.error);
             }else{
                 console.log(`${"Logged on port".warn} ${port.toString().black.bgYellow}`)
-                app.listen(port,()=>{});
+                const server = app.listen(port,()=>{});
+                global.website = server;
             }
         }
         function check(fn){

@@ -4,6 +4,7 @@ const promisify = require('promisify-func');
 
 module.exports = async (bot) => {
     bot.removeAllListeners();
+    process.removeAllListeners();
 
     const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory()).map(f => basename(f));
     const getFiles = source => readdirSync(source).map(name => join(source, name)).filter(source => !lstatSync(source).isDirectory()).map(f => basename(f));
@@ -24,8 +25,20 @@ module.exports = async (bot) => {
                     let eName = evt.event;
                     if(!eName) throw new Error("Event not found!".toUpperCase());
                     const calltype = evt.type == "once" ? "once" : "on";
+                    const emitter = evt.emitter || 'bot';
                     if(!Array.isArray(eName)) eName = [eName];
-                    eName.forEach(event => bot[calltype](event, promisify(bot.getFunction(evt).bind(null, bot))))
+                    for(let event of eName){
+                        let emit;
+                        switch(emitter){
+                            case 'process':
+                                emit = process; break;
+                            case 'bot':
+                                emit = bot; break;
+                            default:
+                                throw new Error("Event Emitter not found!");
+                        }
+                        emit[calltype](event, promisify(bot.getFunction(evt).bind(null, bot)));
+                    }
                     bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file}`.debug);
                 }catch(err){
                     bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file} ERROR!`.error);
