@@ -12,7 +12,7 @@ module.exports.run = async (bot, msg) => {
     const mods = [];
     let list = [];
     msg.guild.members.cache.forEach(async member => {
-        if(member.hasPermission('MANAGE_MESSAGES',true,true,false)){
+        if(member.pemissions.has('MANAGE_MESSAGES')){
             if(!mods.includes(member) && !member.user.bot) mods.push(member);
         }
     })

@@ -76,7 +76,9 @@ module.exports.run = async (bot, msg) => {
                 won = true;
                 collector.stop()
             }else{
-                word = words.pick();
+                while(typeof word != 'string' || message.content.includes(word)){
+                    word = words.pick();
+                }
                 message.edit(`Type \`${word}\` to damage it!`)
             }
         }
