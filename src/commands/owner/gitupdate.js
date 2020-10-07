@@ -10,7 +10,6 @@ module.exports.run = async (bot, msg) => {
     function run(command){
         return new Promise((res,rej) => {
             cp.exec('',()=>{})
-            .on('error', () => rej())
             .on('close', () => res());
         })
     }
