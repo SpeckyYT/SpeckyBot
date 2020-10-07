@@ -9,13 +9,13 @@ const cp = require('child_process');
 module.exports.run = async (bot, msg) => {
     function run(command){
         return new Promise((res,rej) => {
-            cp.exec('',()=>{})
+            cp.exec(command,()=>{})
             .on('close', () => res());
         })
     }
 
     try{
-        await run('git reset --hard origin/master');
+        await run('git reset --hard');
         await run('git fetch --all');
         await run('git pull origin');
         return bot.cmdSuccess('Bot should be successfully updated!');
