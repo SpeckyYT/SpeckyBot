@@ -11,7 +11,7 @@ module.exports.call = async (bot, msg) => {
     const u_settings = bot.settings.user || {};
     if(!(u_settings[msg.author.id] ? u_settings[msg.author.id].messagelink : false)) return;
 
-    const m = msg.extend();
+    const m = msg.extend().cmdExtend();
     if(!m.links.length) return;
 
     const perms = msg.guild.me.permissionsIn(msg.channel).toArray();

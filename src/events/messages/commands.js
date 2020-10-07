@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 const promisify = require('promisify-func');
 
 module.exports.call = async (bot, m) => {
-    const msg = m.extend();
+    const msg = m.extend().cmdExtend();
 
     if(msg.author.bot) return;
 
