@@ -5,7 +5,6 @@ module.exports = (bot) => {
 
     bot.stats = {};
     bot.stats.commandsExecuted = 0;
-    bot.stats.slots = 0;
 
     bot.cache = {};
     bot.cache.messages = [];

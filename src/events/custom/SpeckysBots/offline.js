@@ -7,11 +7,12 @@ const offlineRole = "760554589040279592";
 
 module.exports.call = async (bot, oldPresence, newPresence) => {
     if(newPresence && newPresence.user.bot) return;
+    if(newPresence && !bot.guilds.cache.get(speckysBots).members.cache.has(newPresence.user.id)) return;
 
     const guild = bot.guilds.cache.get(speckysBots);
     if(!guild) return;
 
-    const members = await guild.members.fetch();
+    const members = await guild.members.fetch({force: !newPresence});
 
     members
     .filter(m => !m.user.bot)
