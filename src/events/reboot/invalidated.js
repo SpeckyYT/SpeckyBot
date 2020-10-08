@@ -2,7 +2,7 @@ module.exports = {
     event: 'invalidated'
 }
 
-module.exports.call = (bot) => {
-    bot.log('REBOOT! REASON: invalidated');
+module.exports.call = async (bot) => {
+    await bot.log('REBOOT! REASON: invalidated'.fatal);
     process.exit(0);
 }

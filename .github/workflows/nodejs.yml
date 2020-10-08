@@ -20,10 +20,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install
+    - name: Install Dependencies
       run: |
         npm ci
-    - name: run bot
+    - name: Test Bot
       run: |
         npm start
       env:

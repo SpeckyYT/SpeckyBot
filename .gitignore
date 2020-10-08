@@ -14,6 +14,9 @@ db/
 *.csv
 *.ttf
 
+# Package
+package-lock.json
+
 # Secret Files
 template.config.json
 config.json
