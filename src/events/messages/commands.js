@@ -24,9 +24,8 @@ module.exports.call = async (bot, m) => {
         return;
     }
 
-    if(msg.channel.topicSetting && msg.channel.topicSetting("global")){
-        return;
-    }
+    if(msg.channel.topicSetting("global")) return;
+    if(msg.channel.topicSetting("no-bots")) return;
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first() ? msg.mentions.users.first().tag == bot.user.tag : false){
