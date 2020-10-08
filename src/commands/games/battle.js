@@ -63,26 +63,32 @@ module.exports.run = async (bot, msg) => {
     let dmgmessage = await msg.channel.send(global.assets.boss1.toAttachment('health.jpg'));
     const message = await msg.channel.send(`Type \`${word}\` to damage it!`);
 
-    const collector = msg.channel.createMessageCollector((m) => !m.author.bot, {idle: 15000});
+    const filter = m => {
+        if(m.author.bot) return false;
+        if(typeof word == "number") return false;
+        if(m.content.toLowerCase() === word.toLowerCase()) return true;
+        return false;
+    }
+
+    const collector = msg.channel.createMessageCollector(filter, {idle: 15000});
+
     collector.on('collect', async (m) => {
-        if(typeof word == "number") return;
-        if(m.content.toLowerCase() === word.toLowerCase()){
-            word = Infinity;
-            damage++;
-            await (await dmgmessage).delete();
-            dmgmessage = msg.channel.send(global.assets[`boss${damage}`].toAttachment('health.jpg'));
-            if(damage >= 6){
-                message.delete();
-                won = true;
-                collector.stop()
-            }else{
-                while(typeof word != 'string' || message.content.includes(word)){
-                    word = words.pick();
-                }
-                message.edit(`Type \`${word}\` to damage it!`)
+        word = Infinity;
+        damage++;
+        await (await dmgmessage).delete();
+        dmgmessage = msg.channel.send(global.assets[`boss${damage}`].toAttachment('health.jpg'));
+        if(damage >= 6){
+            message.delete();
+            won = true;
+            collector.stop()
+        }else{
+            while(typeof word != 'string' || message.content.includes(word)){
+                word = words.pick();
             }
+            return message.edit(`Type \`${word}\` to damage it!`)
         }
     });
+
     collector.on('end', () => {
         if(won){
             return msg.channel.send("You won!",global.assets.won.toAttachment('won.mp3'));
