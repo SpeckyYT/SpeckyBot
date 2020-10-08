@@ -13,5 +13,6 @@ module.exports.call = async (bot, data) => {
     if(data.includes("token")) return;
     if(data.includes('Preparing to connect')) return;
     if(data.includes("READY")) return;
+    if(data.includes('Swept')) return;
     return channel.send(data);
 }
