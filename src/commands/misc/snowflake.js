@@ -13,13 +13,13 @@ module.exports.run = async (bot, msg) => {
 
     const prev = [];
 
+    if(!msg.args.length) return bot.cmdError('No valid Snowflake provided')
+
     msg.Args.forEach(async arg => {
         const snowflake = arg.split('').filter(c=>"0123456789".includes(c)).join('');
 
         if(isNaN(snowflake) || !snowflake){
-            if(!error){
-                error = bot.cmdError(`Snowflake \`${arg}\` is not a valid number`);
-            }
+            if(!error) error = bot.cmdError(`Snowflake \`${arg}\` is not a valid number`);
         }else{
             const deconstructed = deconstruct(snowflake);
             const timestamp = deconstructed.date;
