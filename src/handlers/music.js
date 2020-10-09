@@ -7,8 +7,7 @@ module.exports = async (bot) => {
         bot.config.youtube,
         {
             leaveOnEmpty: true,
-            leaveOnEnd: false,
-            leaveOnStop: false
+            leaveOnEnd: true
         }
     )
 };
