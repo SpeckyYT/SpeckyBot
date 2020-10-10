@@ -9,10 +9,12 @@ module.exports = {
 // https://improb.com/best-truth-or-dare-questions/
 
 const { join } = require('path');
+const { readFileSync } = require('fs');
 
 module.exports.run = async (bot, msg) => {
-    const questions = (require(join(__dirname,'data','tod-t')) || '').split('\n');
-    const question = questions.pick();
+    let { truth } = this;
+    if(!truth) truth = readFileSync(join(__dirname,'data','tod-t.txt'),{encoding:'utf8'}).split('\n');
+    const question = truth.pick();
     return msg.channel.send(
         bot.embed()
         .setTitle("Truth!")
