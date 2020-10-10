@@ -278,17 +278,17 @@ async function run(cmd, bot, msg, command){
 
     promisify(bot.getFunction(cmd))(bot,msg)
     .then(res => {
-        if(cmd.type === 'template' && res && typeof res == "string"){
-            return msg.channel.send(res.trim());
+        if(res && cmd.type == 'template'){
+            return msg.channel.send(res);
         }
-        return res
+        return res;
     })
     .then((ret) => {
         let suc;
         try{
-            suc = ret.includes("[SUCCESS]")
+            suc = String(ret).includes("[SUCCESS]");
         }catch(e){
-            suc = false
+            suc = false;
         }
 
         if(suc){
@@ -308,7 +308,6 @@ async function run(cmd, bot, msg, command){
             err = err.replace("[EXPECTED]","").trim();
             msg.channel.send(error(err));
         }else{
-            bot.log(err&&(err.message||err.error)||err);
             await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
 
             if(String(err).includes("Must be 2000 or fewer in length")){
@@ -335,6 +334,8 @@ async function run(cmd, bot, msg, command){
                 );
             }
 
+            bot.emit('commandError',err,msg);
+
             return msg.channel.send(errdesc(err));
         }
     })
@@ -358,11 +359,7 @@ function error(error){
 }
 
 function errdesc(err){
-    try{
-        err = err.stack ? err.stack.substr(0,1950) : err.substr(0,1950);
-    }catch(e){
-        err = null;
-    }
+    err = String(err).split('\n').slice(0,5).join('\n');
     return new MessageEmbed()
     .setTitle('ERROR DESCRIPTION')
     .setDescription(String(err))
