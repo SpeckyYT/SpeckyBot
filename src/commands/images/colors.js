@@ -38,10 +38,7 @@ module.exports.run = async (bot, msg) => {
     const group = allColors.group();
     const hsv = Array(360).fill(0);
 
-    group.toCollection()
-    .forEach((v,k) => {
-        hsv[k] = v;
-    })
+    for(let key in group) hsv[key] = group[key];
 
     let max = Math.max(...hsv);
     const canvas = Canvas.createCanvas(360,750);
