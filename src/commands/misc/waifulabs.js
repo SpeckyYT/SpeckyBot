@@ -1,9 +1,9 @@
 module.exports = {
-    name: "waifus",
+    name: "waifulabs",
     description: "Gives you waifus to choose from!",
     category: 'misc',
     cooldown: 30000,
-    aliases: ['ws','waifulabs']
+    aliases: ['ws','waifus']
 }
 
 const waifulabs = new (require('waifulabs'))();
