@@ -2,6 +2,7 @@ module.exports = {
     name: "topic",
     description: "Gives you a random question to trigger a discussion!",
     category: "utilities",
+    type: 'template',
     aliases: ["bruh"]
 }
 
@@ -54,19 +55,11 @@ const questions = [
 ]
 
 module.exports.run = async (bot, msg) => {
-    const question = questions[Math.floor(Math.random()*questions.length)]
-
-    if(msg.command == "topic"){
-        msg.channel.send(question)
-    }else{
-        const embed = bot.embed()
-        .setTitle(msg.author.username)
-        .setDescription(`${msg.author} wants to start talking about this:\n\n**${question}**`)
-        .setThumbnail(msg.author.avatarURL())
-        .setColor(msg.member.displayHexColor)
-        .setFooter("User joined")
-        .setTimestamp(msg.member.joinedTimestamp);
-
-        msg.channel.send(embed)
-    }
+    return bot.embed()
+    .setTitle(msg.author.username)
+    .setDescription(`${msg.author} wants to start talking about this:\n\n**${questions.pick()}**`)
+    .setThumbnail(msg.author.avatarURL())
+    .setColor(msg.member.displayHexColor)
+    .setFooter("User joined")
+    .setTimestamp(msg.member.joinedTimestamp);
 }
