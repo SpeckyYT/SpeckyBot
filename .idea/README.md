@@ -15,6 +15,11 @@ The setup is really easy. Just include `[GLOBAL]` in any channel that you would 
 Did you ever want to get your message into an embed?
 Well, now you can with ease! Just type `:EMB:` in your message, and it will be converted into and embed!
 
+### Music Commands
+
+Dont you like chatting with people and showing your music to them via Discord?
+Well guess what! Speckybot can help you with that!
+
 ## Any commands to try out?
 
 SpeckyBot has to date, more than 150 commands.
