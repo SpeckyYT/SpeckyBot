@@ -20,6 +20,12 @@ Well, now you can with ease! Just type `:EMB:` in your message, and it will be c
 Dont you like chatting with people and showing your music to them via Discord?
 Well guess what! Speckybot can help you with that!
 
+### Channel Topic Filters
+
+You want to have certain restrictions on channels without having a lot of trouble setting it up? Well, Specky Bot has what you need!
+Just add one of the channel topic filters in the channel description and you are good to go!
+`[NO-BOTS]`, `[ALTERNATING]`, `[ONE-WORD]`, `[NO-NSFW]` and `[NO-MEDIA]` are the available filters.
+
 ## Any commands to try out?
 
 SpeckyBot has to date, more than 150 commands.
