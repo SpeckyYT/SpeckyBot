@@ -32,6 +32,7 @@
         ],
         "arrow-parens":"off",
         "brace-style": "warn",
+        "no-async-promise-executor":"off",
         "no-case-declarations":"off",
         "no-cond-assign":"error",
         "no-console": "off",
