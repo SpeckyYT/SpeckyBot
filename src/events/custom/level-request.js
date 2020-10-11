@@ -20,11 +20,11 @@ module.exports.call = async (bot, msg) => {
             msg.channel.send(error("You exceed the massage length of 200 letters."))
             .then(ms => {
                 try{
-                    ms.delete(15000)
+                    ms.delete({timeout:15000})
                 }catch{}
             })
             try{
-                msg.delete(15000)
+                msg.delete({timeout:15000})
             }catch{}
         }else{
             return;
@@ -33,11 +33,11 @@ module.exports.call = async (bot, msg) => {
         msg.channel.send(error("Your message doesn't include an ID (be sure to separate the ID by spaces)."))
         .then(ms => {
             try{
-                ms.delete(15000)
+                ms.delete({timeout:15000})
             }catch{}
         })
         try{
-            msg.delete(15000)
+            msg.delete({timeout:15000})
         }catch{}
     }
 }

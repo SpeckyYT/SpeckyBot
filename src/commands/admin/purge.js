@@ -37,6 +37,6 @@ module.exports.run = async (bot, msg) => {
     }
 
     msg.channel.send("Finished purging!")
-    .then(ms => ms.delete(5000))
+    .then(ms => ms.delete({timeout:5000}))
     .catch(()=>{});
 }
