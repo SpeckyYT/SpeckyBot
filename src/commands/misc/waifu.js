@@ -9,13 +9,8 @@ const waifulabs = new (require('waifulabs'))();
 
 module.exports.run = async (bot, msg) => {
     const waifu = [];
-    (16).repeat(() => waifu.push(Math.floor(Math.random()*2**16)));
-    waifu.push(0);
-    waifu.push([
-        Math.random()*255,
-        Math.random()*255,
-        Math.random()*255
-    ]);
+    for(let i=0;i<16;i++) waifu.push(Math.floor(Math.random()*2**32));
+    waifu.push(0,[0,0,0]);
     const waifuBig = (await waifulabs.generateBigWaifu(waifu)).image;
     const waifuImg = Buffer.from(waifuBig, 'base64');
     const waifuAtt = waifuImg.toAttachment('waifu.png');
