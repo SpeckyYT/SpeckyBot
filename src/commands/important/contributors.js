@@ -1,6 +1,7 @@
 module.exports = {
     name: 'contributors',
     description: 'Lists the contributors of SpeckyBot!',
+    category: 'important',
     type: 'template',
     aliases: ['contributions','contributor','contribution']
 }
