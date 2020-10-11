@@ -22,8 +22,8 @@ Well guess what! Speckybot can help you with that!
 
 ### Channel Topic Filters
 
-You want to have certain restrictions on channels without having a lot of trouble setting it up? Well, Specky Bot has what you need!
-Just add one of the channel topic filters in the channel description and you are good to go!
+You want to have certain restrictions on your channels without having a lot of trouble setting it up? Well, SpeckyBot has what you need!
+Just add one or more of these channel topic filters in the channel's description and you are good to go!
 `[NO-BOTS]`, `[ALTERNATING]`, `[ONE-WORD]`, `[NO-NSFW]` and `[NO-MEDIA]` are the available filters.
 
 ## Any commands to try out?
