@@ -14,9 +14,9 @@ module.exports.call = (bot) => {
             const arr = Object.keys(parsed).map((k,i) => [k,Object.values(parsed)[i]]).sort((a,b)=>b[1][0]-a[1][0]);
             const dnt = arr.map(([n,v],i) => `| ${n} | ${Number(v[0]).toFixed(2)}${v[1] || '€'} |`).join('\r\n');
             const string = `\r\n| Donator | Donation |\r\n|-|-|\r\n${dnt}\r\n`;
-            const regex = /(?<=<!---s-donators--->)(\r|\n|.)*(?=<!---e-donators--->)/;
+            const regex = /(?<=<!---donators--->)(\r|\n|.)*(?=<!---donators--->)/;
             if(string == data.match(regex)[0]) return;
-            fs.writeFile(readmepath,data.replace(/(?<=<!---s-donators--->)(\r|\n|.)*(?=<!---e-donators--->)/,string),{encoding:'utf-8'},()=>{})
+            fs.writeFile(readmepath,data.replace(/(?<=<!---donators--->)(\r|\n|.)*(?=<!---donators--->)/,string),{encoding:'utf-8'},()=>{})
         })
     })
 }
