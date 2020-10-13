@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['ws','waifus']
 }
 
-const waifulabs = new (require('waifulabs'))();
+const waifulabs = require('waifulabs');
 const Canvas = require('canvas');
 
 const waifuSize = 200;

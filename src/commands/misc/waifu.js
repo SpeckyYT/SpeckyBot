@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['w']
 }
 
-const waifulabs = new (require('waifulabs'))();
+const waifulabs = require('waifulabs');
 
 module.exports.run = async (bot, msg) => {
     const waifu = [];
