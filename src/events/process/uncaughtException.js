@@ -4,7 +4,7 @@ module.exports = {
 }
 
 module.exports.call = (bot, error, origin) => {
-    console.log("UNCAUGHT EXCEPTION HAPPENED!".fatal);
-    console.error(origin);
-    console.error(error);
+    bot.log("UNCAUGHT EXCEPTION HAPPENED!".fatal);
+    bot.error(origin);
+    bot.error(error);
 }

@@ -86,8 +86,6 @@ module.exports.run = async (bot, msg) => {
     Promise.all([replaceLinks(definition),replaceLinks(example),m])
     .then(([newDefi,newExem,m]) => {
         if(newDefi||newExem){
-            console.log(newDefi);
-            console.log(newExem);
             return m.edit(
                 baseEmbed()
                 .addField("**Definition**", slice(newDefi || definition || "No Definition"))

@@ -16,9 +16,9 @@ module.exports = async (bot) => {
         let port = 50000;
         function end(err){
             if(err){
-                console.log(`Wasn't able to access any port`.error);
+                bot.log(`Wasn't able to access any port`.error);
             }else{
-                console.log(`${"Logged on port".warn} ${port.toString().black.bgYellow}`)
+                bot.log(`${"Logged on port".warn} ${port.toString().black.bgYellow}`)
                 const server = app.listen(port,()=>{});
                 global.website = server;
             }

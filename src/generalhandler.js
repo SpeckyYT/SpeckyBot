@@ -5,12 +5,7 @@ module.exports = async (bot) => {
     function load(handlers){
         for(let handler of handlers){
 
-            let log;
-            if(bot.log){
-                log = bot.log;
-            }else{
-                log = console.log;
-            }
+            const log = bot.log || console.log;
 
             let loading = `\n\nLoading ${handler.toUpperCase()}!\n`;
 
@@ -23,9 +18,9 @@ module.exports = async (bot) => {
             try{
                 require(join(process.cwd(),'handlers',handler))(bot);
             }catch(err){
-                console.log(`handler\t${handler}`.toUpperCase().error);
-                console.log("FATAL ERROR ON HANDLERS".fatal);
-                console.error(err);
+                log(`handler\t${handler}`.toUpperCase().error);
+                log("FATAL ERROR ON HANDLERS".fatal);
+                log(err);
                 process.exit(1);
             }
         }

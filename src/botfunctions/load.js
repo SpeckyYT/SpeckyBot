@@ -8,7 +8,7 @@ module.exports = (bot) => {
                 bot.settings[f] = bot.require(join(process.cwd(),"..","db",f.charAt(0)+"_settings"));
             }catch(err){
                 // console.log(err)
-                console.log(`Your db\\${f.charAt(0)}_settings.json file looks like to be corrupted.\nPlease fix it before it becomes an issue.`.error)
+                bot.log(`Your db\\${f.charAt(0)}_settings.json file looks like to be corrupted.\nPlease fix it before it becomes an issue.`.error)
             }
         })
     }
