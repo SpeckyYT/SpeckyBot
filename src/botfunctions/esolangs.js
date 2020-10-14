@@ -34,8 +34,9 @@ module.exports = (bot) => {
         const start = new Date().getTime();
         let tOut = false;
 
-        return new Promise(res => {
+        return new Promise(async res => {
             while(pos < instructions.length){
+                await new Promise(res => bot.setImmediate(res));
                 if (new Date().getTime() > (start+TIME_LIMIT)){
                     tOut = true;
                     break;
