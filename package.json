@@ -6,7 +6,7 @@
     "dependencies": {
         "@bjornlu/colorblind": "^1.0.2",
         "@discordjs/opus": "^0.3.2",
-        "@swc/core": "^1.2.34",
+        "@swc/core": "^1.2.36",
         "aki-api": "^5.1.1",
         "async": "^3.2.0",
         "brain.js": "^2.0.0-beta.2",
@@ -31,8 +31,8 @@
         "jimp": "^0.9.8",
         "leven": "^3.1.0",
         "libsodium-wrappers": "^0.7.8",
-        "mathjs": "^7.3.0",
-        "moment": "^2.29.0",
+        "mathjs": "^7.5.1",
+        "moment": "^2.29.1",
         "more-array-methods": "^1.1.2",
         "nekos.life": "^2.0.7",
         "node-fetch": "^2.6.1",
@@ -63,7 +63,7 @@
         "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
-        "eslint": "^7.10.0"
+        "eslint": "^7.11.0"
     },
     "scripts": {
         "start": "node run.js"

@@ -1,4 +1,5 @@
 module.exports = () => {
+    /* DEPRECATED (once again)
     require.extensions['.ts'] = (module, filename) => {
         module._compile(
             new (require('@swc/core')).Compiler().transformSync(
@@ -14,4 +15,5 @@ module.exports = () => {
             filename
         )
     }
+    */
 }
