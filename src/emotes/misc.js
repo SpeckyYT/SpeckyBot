@@ -3,5 +3,4 @@ module.exports = {
     megaflushed: "<:wow:713448200878424255>",
     crafter: "<:crafter:646808734483611669>",
     aaaaa: "<a:AAAAA:756148651583340705>",
-    fratm: "<:fratm:739548545631125535>",
 }
