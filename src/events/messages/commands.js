@@ -28,8 +28,8 @@ module.exports.call = async (bot, m) => {
     if(msg.channel.topicSetting("no-bots")) return;
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
-        if(msg.mentions.users.first() ? msg.mentions.users.first().tag == bot.user.tag : false){
-            const clean = `@${msg.guild.me.nickname || bot.user.username}`;
+        if(msg.mentions.users.first() ? msg.mentions.users.first().id == bot.user.id : false){
+            const clean = `@\u200b\u200b${msg.guild.me.nickname || bot.user.username}`;
             if(msg.cleanContent != clean){
                 msg.content = msg.cleanContent.replace(clean, bot.config.prefix).trim();
             }else{
