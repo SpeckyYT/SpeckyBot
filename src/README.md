@@ -26,7 +26,9 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | description  | String   | "says hi to you"                  | everything works                                | false    |
 | usage        | String   | "<@user>"                         | example result: "sb!hello <@user>"              | false    |
 | type         | String   | "template"                        | if "template", then you have to return a string | false    |
-| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | false    |
+| template     | String   | "test"                            | the command template to use for the command     | false    |
+| data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
+| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
 | aliases      | Array    | ["hi","howdy"]                    | lowercase and no spaces                         | false    |
 | perms        | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
 | cmdperms     | Array    | ["BAN_MEMBERS"]                   | permissions that the bot should have            | false    |
@@ -34,6 +36,7 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | cooldown     | Number   | 10000                             | how long to wait for rerunning the command (ms) | false    |
 
 Note: You can have **ONLY ONE** exported function in the entire file
+Note: Creating a template counts as one exported function
 
 ## 1.3. Console
 
@@ -75,12 +78,20 @@ Events get called by the Discord's API or by custom events (e.g. "interval_1_min
 
 Note: You can have **ONLY ONE** exported function in the entire file
 
-## 1.5. Handlers
+## 1.6. Handlers
 
 Handlers are files, which get called from the `generalhandler.js` file.
 Files in `handlers/loader` will be automatically called.
 
-## 1.6. Prototypes
+## 1.7. Languages
+
+The language files get loaded into `require.extensions` for extending the languages supported.
+
+## 1.8. Modules
+
+The module files get loaded into `bot.modules` for easier access to common functions and properties.
+
+## 1.9. Prototypes
 
 The prototypes folder is code which adds (or modifies) prototypes.
 
@@ -93,10 +104,22 @@ module.exports = () => {
 }
 ```
 
+## 1.10. Templates
+
+Templates offer an easier way to create commands with similar code without having to copy and paste.
+
+Example:
+```js
+module.exports.test = function({text}){
+    return function(bot,msg){
+        return msg.channel.send("msg.content\n"+text);
+    }
+}
+```
+
 # 2. Addidional Informations
 
 ## 2.1. Supported Programming Languages
 
 - JavaScript (.js)
-- TypeScript (.ts)
 - CoffeeScript (.coffee)
