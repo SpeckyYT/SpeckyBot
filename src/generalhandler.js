@@ -39,6 +39,7 @@ module.exports = async (bot) => {
         "botfunctionsextra",
         "prototypes",
         "modules",
+        "templates",
         "events"
     ];
 
