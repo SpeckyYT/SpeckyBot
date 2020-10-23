@@ -22,8 +22,6 @@ module.exports = (bot) => {
 
     bot.globalchats = new Collection();
 
-    bot.userphone = []
-
     bot.debugN = 0;
 
     bot.settings = {};
