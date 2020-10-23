@@ -3,7 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot) => {
-    const statuses = [
+    bot.statuses = bot.statuses || [
         `${bot.guilds.cache.size} servers!`,
         `${bot.config.prefix}help`,
         `${bot.config.prefix}invite`,
@@ -11,5 +11,5 @@ module.exports.call = async (bot) => {
         `${bot.commands.size} commands!`
     ];
 
-    bot.user.setActivity(statuses.pick(), {type: "WATCHING", url:"https://github.com/SpeckyYT/SpeckyBot"});
+    bot.user.setActivity(bot.statuses.pick(), {type: "WATCHING", url:"https://github.com/SpeckyYT/SpeckyBot"});
 }
