@@ -3,8 +3,8 @@ module.exports = {
     emitter: "process"
 }
 
-module.exports.call = (bot, error, origin) => {
-    bot.log("UNCAUGHT EXCEPTION HAPPENED!".fatal);
-    bot.error(origin);
-    bot.error(error);
+module.exports.call = async (bot, error, origin) => {
+    await bot.log("UNCAUGHT EXCEPTION HAPPENED!".fatal);
+    await bot.log(origin);
+    await bot.log(error);
 }
