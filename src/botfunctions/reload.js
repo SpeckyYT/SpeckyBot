@@ -29,16 +29,16 @@ module.exports = (bot) => {
         }
 
         const reloadable = [
+            "dependencies",
+            "languages",
+            "prototypes",
             "botfunctions",
+            "modules",
+            "events",
+            "templates",
             "commands",
             "console",
-            "dependencies",
-            "emotes",
-            "events",
-            "languages",
-            "modules",
-            "prototypes",
-            "templates"
+            "emotes"
         ];
 
         load(reloadable);
