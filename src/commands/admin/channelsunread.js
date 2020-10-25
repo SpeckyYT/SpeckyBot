@@ -7,12 +7,8 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    try{
-        msg.delete();
-    }catch{}
-    msg.guild.channels.cache.forEach(async channel => {
-        try{
-            channel.send('New').then(msg => msg.delete());
-        }catch{}
+    msg.delete().catch(()=>{});
+    msg.guild.channels.cache.forEach(channel => {
+        channel.send('New').then(msg => msg.delete()).catch(()=>{});
     })
 }
