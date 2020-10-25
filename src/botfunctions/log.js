@@ -2,7 +2,7 @@ const { appendFile, readFile, writeFile } = require('fs');
 const { join } = require('path');
 
 module.exports = (bot) => {
-    bot.log = (content) => {
+    bot.log = async (content) => {
         if(content){
             console.log(String(content).error)
         }else{
