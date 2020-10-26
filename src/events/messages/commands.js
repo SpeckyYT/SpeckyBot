@@ -220,6 +220,7 @@ module.exports.call = async (bot, m) => {
     if(cmd){
         return execute();
     }else{
+        return;
         const cmdarray = bot.commands
         .map(c => c.name)
         .concat(bot.aliases.keyArray())
