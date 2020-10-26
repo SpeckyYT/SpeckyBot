@@ -9,9 +9,10 @@ const { join } = require('path');
 const { listCreator, statusCheckQuantity, membersEmbed } = require(join(__dirname,'functions','misc'))
 
 module.exports.run = async (bot, msg) => {
+    await msg.guild.members.fetch();
     const members = [];
     let list = [];
-    msg.guild.members.cache.forEach(async member => {
+    msg.guild.members.cache.forEach(member => {
         if(!members.includes(member)) members.push(member);
     })
 

@@ -9,12 +9,11 @@ const { join } = require('path');
 const { listCreator, statusCheckQuantity, membersEmbed } = require(join(__dirname,'functions','misc'))
 
 module.exports.run = async (bot, msg) => {
+    await msg.guild.members.fetch();
     const mods = [];
     let list = [];
-    msg.guild.members.cache.forEach(async member => {
-        if(member.pemissions.has('MANAGE_MESSAGES')){
-            if(!mods.includes(member) && !member.user.bot) mods.push(member);
-        }
+    msg.guild.members.cache.forEach(member => {
+        if(member.permissions.has('MANAGE_MESSAGES') && !member.user.bot) mods.push(member);
     })
 
     list = listCreator(mods, list)

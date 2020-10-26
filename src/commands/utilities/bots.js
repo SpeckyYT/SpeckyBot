@@ -9,12 +9,11 @@ const { join } = require('path');
 const { listCreator, statusCheckQuantity, membersEmbed } = require(join(__dirname,'functions','misc'))
 
 module.exports.run = async (bot, msg) => {
+    await msg.guild.members.fetch();
     const bots = [];
     let list = [];
-    msg.guild.members.cache.forEach(async member => {
-        if(member.user.bot){
-            if(!bots.includes(member)) bots.push(member);
-        }
+    msg.guild.members.cache.forEach(member => {
+        if(member.user.bot) bots.push(member);
     })
 
     list = listCreator(bots, list)
