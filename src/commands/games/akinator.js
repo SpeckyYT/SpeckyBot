@@ -41,7 +41,7 @@ module.exports.run = async (bot, msg) => {
         .setDescription(aki.question)
     )
 
-    const collector = message.createReactionCollector(r => r.users.has(msg.author.id) && Object.values(answers).includes(r.emoji.name));
+    const collector = message.createReactionCollector((r,user) => user.id == msg.author.id && Object.values(answers).includes(r.emoji.name));
     collector.on('collect', async r => {
         await aki.step(
             Object.keys(answers)[Object.values(answers).indexOf(r.emoji.name)]
