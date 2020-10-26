@@ -212,7 +212,7 @@ module.exports.call = async (bot, m) => {
             logger(msg.command,false,msg, bot);
 
             if(bot.config.reply_unexisting_command){
-                await msg.channel.send(error(`🛑 Command \`${msg.command || "null"}\` doesn't exist or isn't loaded correctly.`));
+                return msg.channel.send(error(`🛑 Command \`${msg.command || "null"}\` doesn't exist or isn't loaded correctly.`));
             }
         }
     }
@@ -312,31 +312,31 @@ async function run(cmd, bot, msg, command){
 
             if(String(err).includes("Must be 2000 or fewer in length")){
                 return msg.channel.send(
-                    errdesc(`${bot.user} tried to send a message with 2000 or more characters.`)
+                    errdesc(`${bot.user} tried to send a message with 2000 or more characters.`,command)
                 );
             }
 
             if(String(err).includes("Request entity too large")){
                 return msg.channel.send(
-                    errdesc(`${bot.user} tried to send an attachment with more than 8MB.`)
+                    errdesc(`${bot.user} tried to send an attachment that is too big.`,command)
                 );
             }
 
             if(String(err).includes("Not playing")){
                 return msg.channel.send(
-                    errdesc(`${bot.user} is not playing music in this guild, do \`${bot.config.prefix}play <song>\` to play one.`)
+                    errdesc(`${bot.user} is not playing music in this guild, do \`${bot.config.prefix}play <song>\` to play one.`,command)
                 );
             }
 
             if(msg.channel.type == "dm"){
                 return msg.channel.send(
-                    errdesc(`${bot.user} tried to execute this command, but encountered an error (probably because it's in a DM)`)
+                    errdesc(`${bot.user} tried to execute this command, but encountered an error (probably because it's in a DM)`,command)
                 );
             }
 
             bot.emit('commandError',err,msg);
 
-            return msg.channel.send(errdesc(err));
+            return msg.channel.send(errdesc(err,command));
         }
     })
     .finally(async () => {
@@ -358,11 +358,11 @@ function error(error){
     .setColor('FF0000')
 }
 
-function errdesc(err){
+function errdesc(err,cmd){
     err = String(err).split('\n').slice(0,5).join('\n');
     return new MessageEmbed()
-    .setTitle('ERROR DESCRIPTION')
-    .setDescription(String(err))
+    .setTitle('ERROR!')
+    .setDescription(`🚸 An unexpected error happend at \`${cmd}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.\n\n`+String(err))
     .setColor('FF0000')
 }
 
