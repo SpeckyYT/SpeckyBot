@@ -12,7 +12,7 @@ module.exports = async (bot) => {
         messageCacheLifetime: 86400,
         messageSweepInterval: 60,
         retryLimit: 3,
-        disableMentions: 'everyone'
+        disableMentions: 'all'
     })
 
     require(join(__dirname,'generalhandler'))(bot);
