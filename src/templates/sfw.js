@@ -4,7 +4,7 @@ const animals = require('random-animals-api');
 module.exports.sfw = ({methods,methodsNSFW}) =>
     function(bot,msg){
         const method = Array.isArray(methods) ? methods.pick() : methods;
-        console.log(method)
+
         let sendt, user;
         let mention = msg.mentions.users.first();
 
