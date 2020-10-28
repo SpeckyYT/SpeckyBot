@@ -1,5 +1,26 @@
-module.exports.listCreator = (memberTypeCollection,list) => {
-    memberTypeCollection.forEach(async memberType => {
+module.exports.statuses = ({type,check}) => {
+    return async function(bot,msg){
+        const list = listCreator(msg.guild.members.cache.filter(member => check(member)));
+
+        const online = statusCheckQuantity(list,'online');
+        const idle = statusCheckQuantity(list,'idle');
+        const dnd = statusCheckQuantity(list,'dnd');
+        const offline = statusCheckQuantity(list,'offline');
+
+        const [
+            Eonline,
+            Eidle,
+            Ednd,
+            Eoffline
+        ] = ['online','idle','dnd','offline'].map(e => bot.emotes[e]);
+
+        return msg.channel.send(await membersEmbed(type, msg, [[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]]))
+    }
+}
+
+function listCreator(memberTypeCollection){
+    const list = [];
+    memberTypeCollection.forEach(memberType => {
         if(list[memberType.user.presence.status]){
             list[memberType.user.presence.status].push([memberType.user.username]);
         }else{
@@ -9,7 +30,7 @@ module.exports.listCreator = (memberTypeCollection,list) => {
     return list;
 }
 
-module.exports.statusCheckQuantity = (list,status) => {
+function statusCheckQuantity(list,status){
     if(!list[status]){
         return "[0] *Nobody*";
     }else if(list[status].join(', ').length > 1965){
@@ -19,7 +40,7 @@ module.exports.statusCheckQuantity = (list,status) => {
     }
 }
 
-module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]]) => {
+async function membersEmbed(title,msg,[[online,Eonline],[idle,Eidle],[dnd,Ednd],[offline,Eoffline]]){
     const { MessageEmbed } = require('discord.js');
     const maxmsglength = 1965;
     online = `${Eonline} ${online}`;
@@ -29,6 +50,7 @@ module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Edn
 
     const embed = new MessageEmbed()
     .setTitle(`__${title}__:`)
+    .setFooter('Note: Only cached users will show up')
     .setThumbnail(msg.guild.iconURL());
 
     const statusArray = [online,idle,dnd,offline];
@@ -38,16 +60,12 @@ module.exports.membersEmbed = (title,msg,[[online,Eonline],[idle,Eidle],[dnd,Edn
     for (const message of statusArray) {
 
         if (currentMessage.length + message.length > maxmsglength) {
-            msg.channel.send(embed.setDescription(currentMessage));
+            await msg.channel.send(embed.setDescription(currentMessage));
             currentMessage = '';
         }
 
         currentMessage = `${currentMessage}\n${message}`;
     }
-
-    if (currentMessage.length < maxmsglength) {
-
-        msg.channel.send(embed.setDescription(currentMessage));
-
-    }
+    return embed.setDescription(currentMessage);
 }
+
