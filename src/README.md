@@ -28,7 +28,7 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | type         | String   | "template"                        | if "template", then you have to return a string | false    |
 | template     | String   | "test"                            | the command template to use for the command     | false    |
 | data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
-| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
+| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | false    |
 | aliases      | Array    | ["hi","howdy"]                    | lowercase and no spaces                         | false    |
 | perms        | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
 | cmdperms     | Array    | ["BAN_MEMBERS"]                   | permissions that the bot should have            | false    |
