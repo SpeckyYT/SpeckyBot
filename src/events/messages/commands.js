@@ -80,11 +80,7 @@ module.exports.call = async (bot, m) => {
             const errorReasons = [];
 
             function check(adminAllowed, reason){
-                if(owner){
-                    illegal = true;
-                    errorReasons.push(reason.toString());
-                    return false;
-                }else if(
+                if(owner ||
                     adminAllowed &&
                     admin &&
                     category != "owner" &&
@@ -92,7 +88,7 @@ module.exports.call = async (bot, m) => {
                     category != "custom"
                 ){
                     illegal = true;
-                    errorReasons.push(reason);
+                    if(!errorReasons.includes(reason.toString)) errorReasons.push(reason.toString());
                     return false;
                 }else{
                     return true;
@@ -129,13 +125,10 @@ module.exports.call = async (bot, m) => {
             }
 
             if(cmd.cmdperms){
-                cmd.cmdperms.forEach(perm => {
-                    if(!(msg.guild ? msg.guild.me.hasPermission(perm) : true)){
-                        if(check(false, botPermError)){
-                            return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perm}\``))
-                        }
-                    }
-                })
+                const perms = cmd.cmdperms.filter(perm => msg.guild ? !msg.guild.me.hasPermission(perm) : false)
+                if(perms.length && check(false, botPermError)){
+                    return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perms.join(', ')}\``))
+                }
             }
 
             if(category == "nsfw" && (!msg.channel.nsfw || msg.channel.topicSetting('no-nsfw'))){
