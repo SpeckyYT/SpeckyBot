@@ -1,8 +1,9 @@
-const got = require('got');
+const fetch = require('node-fetch');
 const { buffer } = require('terminal-image');
 
-(async () => {
-    const { body } = await got(process.argv[2], {responseType: 'buffer'});
-    console.log((await buffer(body)));
-    process.exit(0);
-})()
+
+fetch(process.argv[2])
+.then(data => data.buffer())
+.then(data => buffer(data))
+.then(data => console.log(data))
+.then(() => process.exit(0))
