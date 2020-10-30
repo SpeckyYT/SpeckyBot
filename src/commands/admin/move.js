@@ -9,7 +9,7 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     if(!msg.member.voice.channel){
-        return msg.channel.send("You aren't in a Voice Channel.")
+        return bot.cmdError("You aren't in a Voice Channel.")
     }
 
     const VC1 = msg.member.voice.channel;
@@ -20,7 +20,7 @@ module.exports.run = async (bot, msg) => {
     .then(mess => {
         mess.forEach(singmsg => {
             if(!singmsg.member.voice.channel){
-                return msg.channel.send("You aren't in a Voice Channel.")
+                return bot.cmdError("You aren't in a Voice Channel.")
             }
 
             const VC2 = singmsg.member.voice.channel;

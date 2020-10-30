@@ -48,7 +48,7 @@ module.exports.run = async (bot, msg) => {
         .setAuthor(user.username, user.avatarURL());
     }
 
-    if(!res) return msg.channel.send("Message is too short.")
+    if(!res) return bot.cmdError("Message is too short.")
 
     channel.send(res)
 }

@@ -12,7 +12,7 @@ const fetch = require('node-fetch');
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
     let link;
-    if(!args[0]) return msg.channel.send("You have to define a Server IP");
+    if(!args[0]) return bot.cmdError("You have to define a Server IP");
     if(!args[1]){
         link = `https://mcapi.us/server/status?ip=${args[0]}`;
     }else{

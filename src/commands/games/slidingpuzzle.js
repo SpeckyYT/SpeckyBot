@@ -143,7 +143,7 @@ module.exports.run = async (bot, msg) => {
     })
     collector.on('end', () => {
         if(!isSorted(field)){
-            return msg.channel.send("Time Elapsed");
+            return bot.cmdError("Time Elapsed");
         }
     })
 }
