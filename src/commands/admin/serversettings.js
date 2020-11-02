@@ -4,7 +4,7 @@ module.exports = {
     usage: `<feature> <depends from feature>`,
     category: "admin",
     aliases: ["ss","serversetting","servset","serverset","serversets"],
-    perms: ['MANAGE_MESSAGES']
+    userPerms: ['MANAGE_MESSAGES']
 }
 
 const { MessageEmbed } = require('discord.js');

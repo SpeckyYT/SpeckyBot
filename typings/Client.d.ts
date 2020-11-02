@@ -47,8 +47,8 @@ type Command = {
     type?:string
     run?(bot:SpeckyClient,msg:CmdMessage):Promise<any>
     aliases?:Array<string>
-    perms?:Array<string>
-    cmdperms?:Array<string>
+    userPerms?:Array<string>
+    botPerms?:Array<string>
     flags?:Array<string>
     cooldown?:number
 }

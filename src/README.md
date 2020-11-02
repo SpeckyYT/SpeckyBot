@@ -30,8 +30,8 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
 | `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | false    |
 | aliases      | Array    | ["hi","howdy"]                    | lowercase and no spaces                         | false    |
-| perms        | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
-| cmdperms     | Array    | ["BAN_MEMBERS"]                   | permissions that the bot should have            | false    |
+| userPerms        | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
+| botPerms     | Array    | ["BAN_MEMBERS"]                   | permissions that the bot should have            | false    |
 | flags        | Array    | ["funny","fun"]                   | may change the result of the command `"--flag"` | false    |
 | cooldown     | Number   | 10000                             | how long to wait for rerunning the command (ms) | false    |
 

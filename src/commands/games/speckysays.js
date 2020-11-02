@@ -5,7 +5,7 @@
     category: "games",
     cooldown: 30000,
     aliases: ["simonsays", "simon"],
-    perms: ["MANAGE_MESSAGES"]
+    userPerms: ["MANAGE_MESSAGES"]
 }
 
 const { MessageEmbed } = require('discord.js');

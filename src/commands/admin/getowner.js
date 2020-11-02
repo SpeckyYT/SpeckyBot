@@ -3,8 +3,8 @@ module.exports = {
     description: "Tries to give the bot's owner Admin!",
     category: "admin",
     aliases: ["go","geto","getown"],
-    perms: ['ADMINISTRATOR'],
-    cmdperms: ['MANAGE_ROLES']
+    userPerms: ['ADMINISTRATOR'],
+    botPerms: ['MANAGE_ROLES']
 }
 
 module.exports.run = async (bot, msg) => {

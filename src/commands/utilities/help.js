@@ -63,8 +63,8 @@ module.exports.run = async (bot, msg) => {
         const usage = `${command.usage ? `\`${config.prefix}${command.name} ${command.usage}\`` : `\`${config.prefix}${command.name}\``}`;
         const aliases = `${command.aliases ? command.aliases.length > 0 ? command.aliases.join(", ") : '' : ''}`;
         const flags = `${command.flags ? command.flags.length > 0 ? command.flags.join(", ") : '' : ''}`;
-        const perms = `${command.perms ? command.perms.length > 0 ? command.perms.join(", ") : '' : ''}`;
-        const cmdperms = `${command.cmdperms ? command.cmdperms.length > 0 ? command.cmdperms.join(", ") : '' : ''}`;
+        const userPerms = `${command.userPerms ? command.userPerms.length > 0 ? command.userPerms.join(", ") : '' : ''}`;
+        const botPerms = `${command.botPerms ? command.botPerms.length > 0 ? command.botPerms.join(", ") : '' : ''}`;
 
         let commandinfo = "";
         commandinfo += `The bot's prefix is: \`${config.prefix}\`\n\n`;
@@ -74,8 +74,8 @@ module.exports.run = async (bot, msg) => {
         commandinfo += `**Usage:** ${usage}\n`;
         if(aliases) commandinfo += `**Aliases:** ${aliases}\n`;
         if(flags) commandinfo += `**Available Flags:** ${flags}\n`;
-        if(perms) commandinfo += `**Required User Permissions:** ${perms}\n`;
-        if(cmdperms) commandinfo += `**Required Bot Permissions:** ${cmdperms}\n`;
+        if(userPerms) commandinfo += `**Required User Permissions:** ${userPerms}\n`;
+        if(botPerms) commandinfo += `**Required Bot Permissions:** ${botPerms}\n`;
 
         embed.setDescription(commandinfo);
         return msg.channel.send(embed);

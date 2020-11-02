@@ -124,8 +124,8 @@ module.exports.call = async (bot, m) => {
                 }
             }
 
-            if(cmd.cmdperms){
-                const perms = cmd.cmdperms.filter(perm => msg.guild ? !msg.guild.me.hasPermission(perm) : false)
+            if(cmd.botPerms){
+                const perms = cmd.botPerms.filter(perm => msg.guild ? !msg.guild.me.hasPermission(perm) : false)
                 if(perms.length && check(false, botPermError)){
                     return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perms.join(', ')}\``))
                 }
@@ -156,8 +156,8 @@ module.exports.call = async (bot, m) => {
             }
 
             if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){
-                if(cmd.perms){
-                    if(!msg.member.hasPermission(cmd.perms)){
+                if(cmd.userPerms){
+                    if(!msg.member.hasPermission(cmd.userPerms)){
                         if(check(false, userPermError)){
                             return msg.channel.send(error(userPermError))
                         }

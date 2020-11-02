@@ -4,8 +4,8 @@ module.exports = {
     usage: `<userMention> <userMention>`,
     category: "admin",
     aliases: ["cr"],
-    perms: ['MANAGE_ROLES'],
-    cmdperms: ['MANAGE_ROLES']
+    userPerms: ['MANAGE_ROLES'],
+    botPerms: ['MANAGE_ROLES']
 }
 
 module.exports.run = async (bot, msg) => {

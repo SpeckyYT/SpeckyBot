@@ -3,7 +3,7 @@ module.exports = {
     description: "Turns every channel in an unread one!",
     category: "admin",
     aliases: ["cur"],
-    perms: ['ADMINISTRATOR']
+    userPerms: ['ADMINISTRATOR']
 }
 
 module.exports.run = async (bot, msg) => {

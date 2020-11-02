@@ -3,8 +3,8 @@ module.exports = {
     description: "Deletes the last 3 messages!",
     category: "admin",
     aliases: ["..","."],
-    perms: ['MANAGE_MESSAGES'],
-    cmdperms: ['MANAGE_MESSAGES']
+    userPerms: ['MANAGE_MESSAGES'],
+    botPerms: ['MANAGE_MESSAGES']
 }
 
 module.exports.run = async (bot, msg) => {
