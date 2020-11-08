@@ -22,6 +22,13 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 5. Enter private informations in the config.json file (bot token, prefix, etc.)
 6. Execute `run.bat` once again and you should be done!
 
+# Help us!
+
+Help us having a better code!
+
+![](https://www.code-inspector.com/project/14889/score/svg)
+![](https://www.code-inspector.com/project/14889/status/svg)
+
 # Donators
 
 <!---donators--->
