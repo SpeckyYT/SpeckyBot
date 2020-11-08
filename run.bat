@@ -1,3 +1,1 @@
-:a
-node run.js
-goto a
+call node run.js
