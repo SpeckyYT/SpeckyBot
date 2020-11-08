@@ -11,7 +11,7 @@ const { MessageEmbed } = require('discord.js');
 const { writeFile } = require("fs");
 const { join } = require("path");
 
-const dir = join(process.cwd(),'db','s_settings.json');
+const dir = join(process.cwd(),'..','db','s_settings.json');
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
