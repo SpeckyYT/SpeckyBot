@@ -37,9 +37,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(msg.flag("rcase")){
-        res = res.split('').map(function(l){
-            return l(['toUpperCase','toLowerCase'].pick())();
-        }).join('');
+        res = res.split('').map(l => l[['toUpperCase','toLowerCase'].pick()]()).join('');
     }
 
     if(msg.flag("emb")){
