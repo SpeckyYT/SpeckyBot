@@ -10,6 +10,6 @@ In this folder you can help writing some awesome advetisements or anything else 
 - Specky
 - ZuckerHeld
 
-## Discord.md
+## Discord.txt
 
 - *nobody*
