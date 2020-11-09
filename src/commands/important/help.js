@@ -1,8 +1,8 @@
 module.exports = {
     name: "help",
-    description: "The help for this bot!",
+    description: "Gives you the help page for this bot!",
     usage: `<command>`,
-    category: "utilities",
+    category: "important",
     aliases: ["h", "halp", "hel","hwlp","hewlp","cmd","cmds","command","commands","undefined","info","informations","information"]
 }
 
@@ -27,11 +27,9 @@ module.exports.run = async (bot, msg) => {
 
             const capitalise = category.highFirst()
 
-            try{
-                if(args[0] == "all" || categoryCheck(category, msg, config, bot)){
-                    embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.map(c => `\`${c.name}\``).join(" ")}`)
-                }
-            }catch{}
+            if(args[0] == "all" || categoryCheck(category, msg, config, bot)){
+                embed.addField(`❯ ${capitalise} [${dir.size}]:`, `${dir.array().sort().map(c => `\`${c.name}\``).join(" ")}`)
+            }
         })
         const diduknow = [
             `you can use the \`${config.prefix}serversettings\` command to personalize your server!`,
