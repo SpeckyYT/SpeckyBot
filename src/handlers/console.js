@@ -7,45 +7,15 @@ module.exports = async (bot) => {
     bot.console = new Collection();
     bot.consoleali = new Collection();
 
-    const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(source => lstatSync(source).isDirectory()).map(f => basename(f));
-    const getFiles = source => readdirSync(source).map(name => join(source, name)).filter(source => !lstatSync(source).isDirectory()).map(f => basename(f));
-
-    function loadFolders(path = []){
-        const currPath = join(process.cwd(),...path);
-        const stringPath = path.slice(1).join('\\') || path[0];
-
-        const files = getFiles(currPath);
-
-        if(files.includes('.ignoreall')) return;
-
-        if(!files.includes('.ignorefiles')){
-            files.filter(d => d.match(bot.supportedFiles))
-            .forEach(file => {
-                try{
-                    const pull = bot.require(join(currPath,file));
-                    bot.console.set(pull.name, pull);
-                    if (pull.aliases) pull.aliases.forEach(a => bot.consoleali.set(a, pull.name));
-                    bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file}`.debug);
-                }catch(err){
-                    bot.log(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file} ERROR!`.error);
-                    bot.log(err.message.error);
-                }
-            })
+    global.modules.loader(bot, 'console', ({filePath}) => {
+        const pull = bot.require(filePath);
+        bot.console.set(pull.name, pull);
+        if(Array.isArray(pull.aliases)){
+            pull.aliases.forEach(a => bot.consoleali.set(a, pull.name));
+        }else if(typeof pull.aliases === 'string'){
+            bot.consoleali.set(pull.aliases, pull.name);
         }
-
-        if(!files.includes('.ignoredirs')){
-            getDirectories(currPath)
-            .forEach(dir => {
-                try{
-                    loadFolders([...path,dir]);
-                }catch(err){
-                    bot.log(`ERROR WHILE LOADING ${stringPath+"\\"+dir} FOLDER!`.error);
-                    bot.log(String(err).error);
-                }
-            })
-        }
-    }
-    loadFolders(['console']);
+    })
 
     process.openStdin().removeAllListeners();
 

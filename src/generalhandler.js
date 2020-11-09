@@ -16,7 +16,7 @@ module.exports = async (bot) => {
             log(loading);
 
             try{
-                require(join(process.cwd(),'handlers',handler))(bot);
+                (bot.require||require)(join(process.cwd(),'handlers',handler))(bot);
             }catch(err){
                 log(`handler\t${handler}`.toUpperCase().error);
                 log("FATAL ERROR ON HANDLERS".fatal);
@@ -31,6 +31,7 @@ module.exports = async (bot) => {
         "dependencies",
         "languages",
         "botcache",
+        "modules",
         "botfunctions",
         "missingdirectories",
         "missingfiles",
@@ -38,7 +39,6 @@ module.exports = async (bot) => {
         "login",
         "botfunctionsextra",
         "prototypes",
-        "modules",
         "templates",
         "events"
     ];
