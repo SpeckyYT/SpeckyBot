@@ -43,7 +43,7 @@ module.exports.run = async (bot, msg) => {
     if(msg.flag("emb")){
         res = new MessageEmbed()
         .setDescription(res)
-        .setAuthor(user.username, user.avatarURL());
+        .setAuthor(user.username, user.displayAvatarURL());
     }
 
     if(!res) return bot.cmdError("Message is too short.")

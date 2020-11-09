@@ -3,7 +3,7 @@
 module.exports = (bot) -> 
     bot.globalChatEmbed = (msg) ->
         new MessageEmbed()
-        .setAuthor(msg.author.username,msg.author.avatarURL(),msg.url)
+        .setAuthor(msg.author.username,msg.author.displayAvatarURL(),msg.url)
         .setColor(bot.settings.user?[msg.author.id]?.embedcolor or msg.member.displayHexColor)
         .setDescription(msg.content or '')
         .setFooter(msg.guild.name, msg.guild.iconURL())

@@ -21,7 +21,7 @@ module.exports.run = async (bot, msg) => {
         economy[author.id].money = economy[author.id].money + bet;
         msg.channel.send(
             bot.embed()
-            .setAuthor(author.tag,author.avatarURL())
+            .setAuthor(author.tag,author.displayAvatarURL())
             .setDescription(`Your little chicken won the fight!\n${bet}₪ got added to your bank! :rooster:`)
             .setColor('GREEN')
         );
@@ -29,7 +29,7 @@ module.exports.run = async (bot, msg) => {
         economy[author.id].money = economy[author.id].money - bet;
         msg.channel.send(
             bot.embed()
-            .setAuthor(author.tag,author.avatarURL())
+            .setAuthor(author.tag,author.displayAvatarURL())
             .setDescription(`Your chicken died... `)
             .setColor('RED')
         );

@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg) => {
     const { args } = msg;
 
     const embed = bot.embed()
-    .setAuthor(`${bot.user.username} Help`, bot.user.avatarURL())
+    .setAuthor(`${bot.user.username} Help`, bot.user.displayAvatarURL())
 
     if(!args[0] || (msg.author.id.isOwner() && args[0] == "all")) {
         const categories = bot.commands.map(c=>c.category||'uncategorized').toLowerCase().unique().sort();

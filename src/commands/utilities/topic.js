@@ -58,7 +58,7 @@ module.exports.run = async (bot, msg) => {
     return bot.embed()
     .setTitle(msg.author.username)
     .setDescription(`${msg.author} wants to start talking about this:\n\n**${questions.pick()}**`)
-    .setThumbnail(msg.author.avatarURL())
+    .setThumbnail(msg.author.displayAvatarURL({format:'png'}))
     .setColor(msg.member.displayHexColor)
     .setFooter("User joined")
     .setTimestamp(msg.member.joinedTimestamp);
