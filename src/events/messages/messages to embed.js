@@ -3,7 +3,7 @@ module.exports = {
 }
 
 const { MessageEmbed } = require('discord.js');
-const { resolveColor } = global.modules;
+const { Util: { resolveColor } } = require('discord.js');
 
 module.exports.call = async (bot, msg) => {
     if (msg.author.bot) return;

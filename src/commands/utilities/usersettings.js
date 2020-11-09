@@ -8,8 +8,8 @@ module.exports = {
 
 const { writeFile } = require('fs');
 const { join } = require('path');
+const { Util: { resolveColor } } = require('discord.js');
 const dir = join(process.cwd(),'..','db','u_settings');
-const { resolveColor } = global.modules;
 
 module.exports.run = async (bot, msg) => {
     const { args } = msg;
