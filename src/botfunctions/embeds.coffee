@@ -1,6 +1,13 @@
 { MessageEmbed } = require('discord.js');
 
-module.exports = (bot) -> 
+module.exports = (bot) ->
+    bot.embed = ->
+        new MessageEmbed()
+        .setColor(bot.config.color)
+        .setThumbnail(bot.user.displayAvatarURL({format:'png'}))
+        .setTimestamp(new Date())
+        .setAuthor(bot.user.username, bot.user.displayAvatarURL(), "https://github.com/SpeckyYT/SpeckyBot");
+
     bot.globalChatEmbed = (msg) ->
         new MessageEmbed()
         .setAuthor(msg.author.username,msg.author.displayAvatarURL(),msg.url)
