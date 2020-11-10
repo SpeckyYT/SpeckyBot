@@ -33,8 +33,8 @@ module.exports.loader = (bot,path,cb) => {
                 try{
                     return loadFolders([...path,dir]);
                 }catch(err){
-                    bot.log(`ERROR WHILE LOADING ${stringPath+sep+dir} FOLDER!`.error);
-                    bot.log(String(err).error);
+                    (bot.log||console.log)(`ERROR WHILE LOADING ${stringPath+sep+dir} FOLDER!`.error);
+                    (bot.log||console.log)(String(err).error);
                 }
             })
         }
