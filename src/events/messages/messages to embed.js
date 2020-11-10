@@ -27,11 +27,10 @@ module.exports.call = async (bot, msg) => {
             msg.delete().catch(()=>{})
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
             if(msg.content){
-                const embed = new MessageEmbed()
-                .setAuthor(`${msg.author.username}`, `${msg.author.displayAvatarURL()}`)
-                .setDescription(`${msg.content}`)
-                .setColor(color);
-                msg.channel.send(embed);
+                msg.channel.send(
+                    bot.globalChatEmbed(msg)
+                    .setColor(color)
+                );
             }
             atts(msg,color)
             return;
