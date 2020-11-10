@@ -1,7 +1,7 @@
 module.exports = (bot) => {
     bot.templates = {}
 
-    global.modules.loader(bot, 'botfunctions', ({filePath}) => {
+    global.modules.loader(bot, 'templates', ({filePath}) => {
         const tmplts = bot.require(filePath);
         if(!tmplts) return;
         const values = Object.values(tmplts);
