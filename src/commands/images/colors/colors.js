@@ -40,14 +40,40 @@ module.exports.run = async (bot, msg) => {
 
     for(let key in group) hsv[key] = group[key];
 
-    let max = Math.max(...hsv);
+    const newhsv = [];
+    const dev = [
+        100,
+        95,
+        90,
+        80,
+        60,
+        30,
+        20,
+        15,
+        10,
+        5,
+        2,
+        1
+    ];
+
+    const tmax = Math.max(...dev);
+    for(let ind = 0; ind < 360; ind++){
+        newhsv[ind] =
+            dev.map(
+                (d,i) => (i ? hsv[(ind+i+360)%360]+hsv[(ind-i+360)%360] : hsv[ind]) * (d/tmax)
+            ).reduce(
+                (n,c)=>n+c
+            )
+    }
+
+    const max = Math.max(...newhsv);
     const canvas = Canvas.createCanvas(360,750);
     const ctx = canvas.getContext('2d');
-    const rainbow = 200;
+    const rainbow = 150;
     ctx.fillStyle = "rgb(0,0,0)"
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    for(let i = 0; i < 359; i++){
-        const c = hsv[i];
+    for(let i = 0; i < 360; i++){
+        const c = newhsv[i];
         const b = c?(c/max)*(canvas.height-rainbow):0;
         ctx.fillStyle = "rgb(255,255,255)"
         ctx.fillRect(i,canvas.height,1,-b);
