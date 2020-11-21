@@ -16,10 +16,11 @@ module.exports.loader = (bot,path,cb) => {
         if(!files.includes('.ignorefiles')){
             files.filter(d => d.match(bot.supportedFiles))
             .forEach(file => {
+                const start = new Date().getTime();
                 try{
                     const filePath = join(currPath,file);
                     cb({filePath});
-                    (bot.log||console.log)(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file}`.debug);
+                    (bot.log||console.log)(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file.padEnd(32,' ')}|${' '.repeat(4)}${new Date().getTime() - start}ms`.debug);
                 }catch(err){
                     (bot.log||console.log)(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file} ERROR!`.error);
                     (bot.log||console.log)(err.message.error);
