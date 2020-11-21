@@ -1,6 +1,6 @@
 module.exports = {
     name: "challengeaccepted",
-    description: "Take the Mr. Ping Challenge!",
+    description: "Challenge Accepted!",
     category: "memes",
     template: 'sendbuffer',
     data: {
