@@ -11,7 +11,7 @@ const Canvas = require('canvas');
 const save = global.modules.saveAsset;
 
 const promises = [
-    ["https://i.imgur.com/3A27Ron.png",'wll.png']
+    ["https://i.imgur.com/P2NQffa.png",'wll2.png']
 ].map(save);
 
 module.exports.run = async (bot,msg) => {
@@ -21,7 +21,7 @@ module.exports.run = async (bot,msg) => {
     if(image == undefined) return bot.cmdError("No image found");
 
     let { logo } = this;
-    if(!logo) logo = await Canvas.loadImage(global.assets.wll);
+    if(!logo) logo = await Canvas.loadImage(global.assets.wll2);
     const img = await Canvas.loadImage(image);
 
     const canvas = Canvas.createCanvas(img.width,img.height);
@@ -32,7 +32,7 @@ module.exports.run = async (bot,msg) => {
     const sq = Math.min(img.width,img.height);
 
     ctx.drawImage(img, 0, 0);
-    ctx.drawImage(logo, 0, img.height - (sq * size), sq*size, sq*size);
+    ctx.drawImage(logo, 0, img.height - (sq*size), sq*size, sq*size);
 
-    return msg.channel.send(canvas.toBuffer().toAttachment(path.basename(url.parse(image).pathname)));
+    return msg.channel.send(canvas.toBuffer(...((img.height + img.width < 2000) ? ['image/png'] : ['image/jpeg',{quality: 0.7}])).toAttachment(path.basename(url.parse(image).pathname)));
 }
