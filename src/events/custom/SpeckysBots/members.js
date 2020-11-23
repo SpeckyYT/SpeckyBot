@@ -1,5 +1,5 @@
 module.exports = {
-    event: ["interval_5_min","guildMemberAdd"]
+    event: ["*/5 * * * *","guildMemberAdd"]
 }
 
 module.exports.call = async (bot) => {

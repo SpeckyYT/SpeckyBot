@@ -1,6 +1,8 @@
 module.exports = {
-    event: "interval_10_sec"
+    event: "*/15 * * * * *"
 }
+
+let lastStatus = '';
 
 module.exports.call = async (bot) => {
     bot.statuses = bot.statuses || [
@@ -11,5 +13,9 @@ module.exports.call = async (bot) => {
         `${bot.commands.size} commands!`
     ];
 
-    bot.user.setActivity(bot.statuses.pick(), {type: "WATCHING", url:"https://github.com/SpeckyYT/SpeckyBot"});
+    let newStatus = lastStatus;
+
+    while(lastStatus == newStatus) newStatus = bot.statuses.pick();
+
+    bot.user.setActivity(newStatus, {type: "WATCHING"});
 }

@@ -28,9 +28,9 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | type         | String   | "template"                        | if "template", then you have to return a string | false    |
 | template     | String   | "test"                            | the command template to use for the command     | false    |
 | data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
-| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | false    |
+| `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
 | aliases      | Array    | ["hi","howdy"]                    | lowercase and no spaces                         | false    |
-| userPerms        | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
+| userPerms    | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
 | botPerms     | Array    | ["BAN_MEMBERS"]                   | permissions that the bot should have            | false    |
 | flags        | Array    | ["funny","fun"]                   | may change the result of the command `"--flag"` | false    |
 | cooldown     | Number   | 10000                             | how long to wait for rerunning the command (ms) | false    |
@@ -46,7 +46,7 @@ Console commands are called each time you enter a string in the terminal.
 |--------------|----------|-------------------------|----------------------------------|----------|
 | name         | String   | "hello"                 | lowercase and no spaces          | true     |
 | aliases      | Array    | ["hi","howdy"]          | lowercase and no spaces          | false    |
-| `anything`   | Function | ()=>{console.log("hi")} | the function that will be called | false    |
+| `anything`   | Function | ()=>{console.log("hi")} | the function that will be called | true     |
 
 Note: You can have **ONLY ONE** exported function in the entire file
 
@@ -67,14 +67,14 @@ function(bot,msg){
 
 ## 1.5. Events
 
-Events get called by the Discord's API or by custom events (e.g. "interval_1_min").
+Events get called by the [Discord.js](https://discord.js.org/#/docs/main/stable/class/Client), [node-cron](https://www.npmjs.com/package/node-cron) (e.g. "0 20 4 * * *") or by custom events (e.g. "commandError").
 
 | Property     | Type     | Example                       | Info                             | Required |
 |--------------|----------|-------------------------------|----------------------------------|----------|
-| event        | String   | "message"                     | [Discord.JS](https://discord.js.org/#/docs/main/11.6.4/class/Client) or custom events | true |
+| event        | String   | "message"                     | any event emitted from one above | true     |
 | emitter      | String   | "bot"                         | `bot` or `process`               | false    |
 | type         | String   | "once"                        | `on` or `once`                   | false    |
-| `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | false    |
+| `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | true     |
 
 Note: You can have **ONLY ONE** exported function in the entire file
 

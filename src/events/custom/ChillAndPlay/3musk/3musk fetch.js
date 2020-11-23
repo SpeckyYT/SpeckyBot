@@ -1,5 +1,5 @@
 module.exports = {
-    event: "interval_1_min"
+    event: "* * * * *"
 }
 
 module.exports.call = async bot => {

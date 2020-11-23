@@ -1,5 +1,5 @@
 module.exports = {
-    event: 'interval_1_min'
+    event: '*/15 * * * * *'
 }
 
 const os = require('os');

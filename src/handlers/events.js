@@ -1,27 +1,38 @@
 const promisify = require('promisify-func');
+const { validate, schedule } = require('node-cron');
+const { EventEmitter } = require('events');
 
 module.exports = async (bot) => {
-    bot.removeAllListeners();
     process.removeAllListeners();
+    bot.removeAllListeners();
+    bot.cache.schedules.forEach(s=>s.destroy());
+    bot.cache.schedules = [];
 
     global.modules.loader(bot, 'events', ({filePath}) => {
         const evt = bot.require(filePath);
         let eName = evt.event;
         if(!eName) throw new Error("Event not found!".toUpperCase());
         const calltype = evt.type == "once" ? "once" : "on";
-        const emitter = evt.emitter || 'bot';
+        const emi = evt.emitter || 'bot';
         if(!Array.isArray(eName)) eName = [eName];
         for(let event of eName){
-            let emit;
-            switch(emitter){
+            let emitter;
+            switch(emi){
                 case 'process':
-                    emit = process; break;
+                    emitter = process; break;
                 case 'bot':
-                    emit = bot; break;
-                default:
-                    throw new Error("Event Emitter not found!");
+                    emitter = bot; break;
             }
-            emit[calltype](event, promisify(bot.getFunction(evt).bind(null, bot)));
+            if(!(emitter instanceof EventEmitter)){
+                throw new Error("Event Emitter not found!");
+            }
+            if(validate(event)){
+                if(!emitter.eventNames().includes(event)){
+                    const sched = schedule(event, () => emitter.emit(event));
+                    bot.cache.schedules.push(sched);
+                }
+            }
+            emitter[calltype](event, promisify(bot.getFunction(evt).bind(null, bot)));
         }
     })
 };

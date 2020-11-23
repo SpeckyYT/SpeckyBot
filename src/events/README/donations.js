@@ -1,5 +1,5 @@
 module.exports = {
-    event: ['ready','interval_10_min']
+    event: ['ready','*/10 * * * *']
 }
 
 const fs = require('fs');

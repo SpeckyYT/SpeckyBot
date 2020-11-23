@@ -1,5 +1,5 @@
 module.exports = {
-    event: "interval_1_min",
+    event: "* * * * *",
     call: async (bot) => {
         const guild = bot.guilds.cache.get('265505748413448193');
         if(!guild) return;

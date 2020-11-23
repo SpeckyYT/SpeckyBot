@@ -1,5 +1,5 @@
 module.exports = {
-    event: ["interval_5_min","presenceUpdate"]
+    event: ["*/5 * * * *","presenceUpdate"]
 }
 
 const speckysBots = "538028973058424832";
