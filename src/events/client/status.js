@@ -5,17 +5,18 @@ module.exports = {
 let lastStatus = '';
 
 module.exports.call = async (bot) => {
-    bot.statuses = bot.statuses || [
+    const statuses = [
         `${bot.guilds.cache.size} servers!`,
         `${bot.config.prefix}help`,
         `${bot.config.prefix}invite`,
         `over ${bot.users.cache.size} users!`,
-        `${bot.commands.size} commands!`
+        `${bot.commands.size} commands!`,
+        ...bot.cache.statuses
     ];
 
     let newStatus = lastStatus;
 
-    while(lastStatus == newStatus) newStatus = bot.statuses.pick();
+    while(lastStatus == newStatus) newStatus = statuses.pick();
 
     bot.user.setActivity(newStatus, {type: "WATCHING"});
 }

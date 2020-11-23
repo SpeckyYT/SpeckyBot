@@ -18,6 +18,7 @@ module.exports = (bot) => {
     bot.cache.globalchatsent = [];
     bot.cache.math = {};
     bot.cache.schedules = [];
+    bot.cache.statuses = [];
 
     bot.economy = {}
 
