@@ -1,9 +1,9 @@
 const error = 'Image not loaded correctly';
 
-module.exports.sendbuffer = ({image,name}) =>
+module.exports.sendbuffer = ({image,data,buffer,file,name}) =>
     (bot,msg) => {
-        if(!image) throw error;
-        const img = typeof image == 'function' ? image() : image;
-        if(!(img instanceof Buffer)) throw error;
-        return msg.channel.send(img.toAttachment(name));
+        const toCheck = image || data || buffer || file;
+        const toSend = typeof toCheck == 'function' ? toCheck() : toCheck;
+        if(!(toSend instanceof Buffer)) throw error;
+        return msg.channel.send(toSend.toAttachment(name||'file'));
     }
