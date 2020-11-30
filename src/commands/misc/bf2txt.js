@@ -16,7 +16,8 @@ module.exports.run = async (bot, msg) => {
 
     const data = await bot.bf(insts,{
         limit:true,
-        size: 2**([32,16,8,4,2].find(n => msg.flag(n+'bit')) || 8)
+        size: 2**([32,16,8,4,2].find(n => msg.flag(n+'bit')) || 8),
+        time: 10000
     });
 
     const { tOut, memory, string, numbers, cell, time } = data;
