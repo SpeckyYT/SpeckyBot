@@ -6,7 +6,8 @@ module.exports = async (bot) => {
         {
             token: bot.config.youtube,
             leaveOnEmpty: true,
-            leaveOnEnd: true
+            leaveOnEnd: true,
+            quality: 'high'
         }
     )
 };
