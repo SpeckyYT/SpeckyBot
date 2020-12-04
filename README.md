@@ -35,8 +35,8 @@ Help us having a better code!
 | Donator | Donation |
 |-|-|
 | Nicsi | 20.00€ |
+| Dav!d | 2.29€ |
 | Benjiman | 2.22€ |
-| Dav!d | 1.19€ |
 <!---donators--->
 
 [You can donate by clicking on this text](https://www.paypal.me/speckyy)
