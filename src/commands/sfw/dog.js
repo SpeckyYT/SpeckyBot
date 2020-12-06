@@ -2,9 +2,9 @@ module.exports = {
     name: "dog",
     description: "Gives you a dog!",
     category: "sfw",
-    aliases: ['doggo'],
+    aliases: ['doggo','woof'],
     template: 'sfw',
     data: {
-        methods: 'dog'
+        methods: ['dog','woof']
     }
 }
