@@ -6,18 +6,29 @@ module.exports = (bot) => {
 
     global.modules.loader(bot, 'commands', ({filePath}) => {
         const pull = bot.require(filePath);
-        if(!pull.name) throw new Error("Name of the command not found!".toUpperCase());
-        if(pull.template) {
-            const tmplt = bot.templates[pull.template];
-            if(tmplt){
-                pull[Math.random().toString(36).substring(2, 15) || 'run'] = tmplt(pull.data||{});
-            }
+
+        if(!pull.name){
+            throw new Error("Name property of the command not found".toUpperCase());
         }
+
+        if(bot.commands.has(pull.name) || bot.aliases.has(pull.name)){
+            throw new Error("Command invocation already exists (name)".toUpperCase());
+        }
+
+        if(!Array.isArray(pull.aliases)){
+            pull.aliases = [pull.aliases].filter(x=>x);
+        }
+
+        if(pull.aliases.some(alias => bot.aliases.has(alias) || bot.commands.has(alias))){
+            throw new Error("Command invocation already exists (alias)".toUpperCase());
+        }
+
+        if(pull.template){
+            const template = bot.templates[pull.template];
+            if(template) pull.templateRun = template(pull.data||{});
+        }
+
         bot.commands.set(pull.name, pull);
-        if(Array.isArray(pull.aliases)){
-            pull.aliases.forEach(a => bot.aliases.set(a, pull.name));
-        }else if(typeof pull.aliases === 'string'){
-            bot.aliases.set(pull.aliases, pull.name);
-        }
+        for(let alias of pull.aliases) bot.aliases.set(alias, pull.name);
     })
 };
