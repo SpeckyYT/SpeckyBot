@@ -9,15 +9,15 @@
         "aki-api": "^5.2.0",
         "canvas": "^2.6.1",
         "child_process": "^1.0.2",
-        "cleverbot-free": "^1.0.4",
+        "cleverbot-free": "^1.0.5",
         "coffee-register": "^2.2.0",
         "coffeescript": "^2.5.1",
         "color-convert": "^2.0.1",
         "color-diff": "^1.2.0",
         "colors": "^1.4.0",
         "deepai": "^1.0.16",
-        "discord-music-player": "^6.1.1-fix3",
-        "discord.js": "^12.4.1",
+        "discord-music-player": "^6.2.0",
+        "discord.js": "^12.5.1",
         "express": "^4.17.1",
         "g-i-s": "^2.1.6",
         "gifencoder": "^2.0.1",
@@ -33,7 +33,7 @@
         "node-fetch": "^2.6.1",
         "node-os-utils": "^1.3.2",
         "node-snowflake": "0.0.1",
-        "npm": "^6.14.8",
+        "npm": "^6.14.9",
         "opusscript": "0.0.7",
         "promisify-func": "0.0.7",
         "qrcode": "^1.4.4",
@@ -51,7 +51,7 @@
         "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
-        "eslint": "^7.13.0"
+        "eslint": "^7.15.0"
     },
     "scripts": {
         "start": "node run.js"
