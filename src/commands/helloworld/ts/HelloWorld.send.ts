@@ -2,8 +2,9 @@ import { SpeckyClient } from '../../../../typings/Client';
 import { CmdMessage } from '../../../../typings/Message';
 
 module.exports = {
-    name: 'hwts',
+    name: 'hwsts',
     description: 'Hello World!',
     category: 'helloworld',
-    run: (bot:SpeckyClient, msg:CmdMessage): Promise<any> => msg.channel.send('`TypeScript`: Hello World!')
+    type: 'send',
+    run: (bot:SpeckyClient, msg:CmdMessage): string => '`TypeScript (send)`: Hello World!'
 }
