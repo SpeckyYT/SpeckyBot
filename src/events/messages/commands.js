@@ -272,7 +272,7 @@ async function run(cmd, bot, msg, command){
 
     promisify(bot.getFunction(cmd))(bot,msg)
     .then(res => {
-        if(res && cmd.type == 'template'){
+        if(res && cmd.type == 'send'){
             return msg.channel.send(res);
         }
         return res;

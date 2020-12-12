@@ -2,7 +2,7 @@ module.exports = {
     name: 'contributors',
     description: 'Lists the contributors of SpeckyBot!',
     category: 'important',
-    type: 'template',
+    type: 'send',
     aliases: ['contributions','contributor','contribution']
 }
 

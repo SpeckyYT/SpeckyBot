@@ -2,7 +2,7 @@ module.exports = {
     name: "topic",
     description: "Gives you a random question to trigger a discussion!",
     category: "utilities",
-    type: 'template',
+    type: 'send',
     aliases: ["bruh"]
 }
 
@@ -54,12 +54,11 @@ const questions = [
 
 ]
 
-module.exports.run = async (bot, msg) => {
-    return bot.embed()
+module.exports.run = async (bot, msg) =>
+    bot.embed()
     .setTitle(msg.author.username)
     .setDescription(`${msg.author} wants to start talking about this:\n\n**${questions.pick()}**`)
     .setThumbnail(msg.author.displayAvatarURL({format:'png'}))
     .setColor(msg.member.displayHexColor)
     .setFooter("User joined")
     .setTimestamp(msg.member.joinedTimestamp);
-}

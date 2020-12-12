@@ -3,7 +3,7 @@ module.exports = {
     description: "Ask it to the 8-Ball!",
     usage: "[question]",
     category: "misc",
-    type: 'template',
+    type: 'send',
     aliases: ["8b","magic8ball","m8b"]
 }
 

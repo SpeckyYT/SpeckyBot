@@ -25,7 +25,7 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | category     | String   | "fun"                             | "help" command will show the various categories | false    |
 | description  | String   | "says hi to you"                  | everything works                                | false    |
 | usage        | String   | "<@user>"                         | example result: "sb!hello <@user>"              | false    |
-| type         | String   | "template"                        | if "template", then you have to return a string | false    |
+| type         | String   | "send"                            | if "send", it will send the returned value      | false    |
 | template     | String   | "test"                            | the command template to use for the command     | false    |
 | data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
 | `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
