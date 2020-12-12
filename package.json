@@ -6,6 +6,7 @@
     "dependencies": {
         "@bjornlu/colorblind": "^1.0.3",
         "@discordjs/opus": "^0.3.3",
+        "@yerkopalma/morsee": "^1.0.6",
         "aki-api": "^5.2.0",
         "canvas": "^2.6.1",
         "child_process": "^1.0.2",
