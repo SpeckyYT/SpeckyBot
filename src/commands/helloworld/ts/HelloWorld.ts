@@ -5,7 +5,5 @@ module.exports = {
     name: "hwts",
     description: "Hello World!",
     category: 'helloworld',
-    run: async (bot:SpeckyClient, msg:CmdMessage): Promise<void> => {
-        await msg.channel.send("`TypeScript`: Hello World!");
-    }
+    run: (bot:SpeckyClient, msg:CmdMessage): Promise<any> => msg.channel.send("`TypeScript`: Hello World!");
 }

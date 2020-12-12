@@ -6,5 +6,5 @@ module.exports = {
     description: "Hello World!",
     category: 'helloworld',
     type: 'template',
-    run: async (bot:SpeckyClient, msg:CmdMessage): Promise<string> => "`TypeScript (templates)`: Hello World!"
+    run: (bot:SpeckyClient, msg:CmdMessage): string => "`TypeScript (templates)`: Hello World!"
 }

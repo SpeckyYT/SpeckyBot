@@ -3,5 +3,5 @@ module.exports = {
     description: "Hello World!",
     category: 'helloworld',
     type: "template",
-    run: async (bot, msg) => `${"`JavaScript (templates)`: Hello World!"}`
+    run: (bot, msg) => `${"`JavaScript (templates)`: Hello World!"}`
 }
