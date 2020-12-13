@@ -2,6 +2,7 @@
 src/assets
 src/events/private
 src/commands/private
+src/tmp
 require-cache/
 db/
 

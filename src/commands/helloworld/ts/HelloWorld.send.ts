@@ -1,10 +1,7 @@
-import { SpeckyClient } from '../../../../typings/Client';
-import { CmdMessage } from '../../../../typings/Message';
-
-module.exports = {
+export = {
     name: 'hwsts',
     description: 'Hello World!',
     category: 'helloworld',
     type: 'send',
-    run: (bot:SpeckyClient, msg:CmdMessage): string => '`TypeScript (send)`: Hello World!'
+    run: (bot:any, msg:any): string => '`TypeScript (send)`: Hello World!'
 }
