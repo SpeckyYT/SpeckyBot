@@ -13,6 +13,9 @@ SpeckyBot is an open-source Discord Bot which allows to be totally customizable 
 ## [hng12](https://github.com/hng12)
 - coded the base for the economy system
 
+## [NaruDevnote](https://github.com/NaruDevnote)
+- coded banuser & unbanuser commands
+
 # How to successfully run your own instance of the bot?
 
 1. Create a Discord Bot Application
