@@ -8,11 +8,13 @@ const { inspect } = require('util')
 module.exports.run = async (bot, data) => {
     const toEval = data.content;
     let result;
+    let error = false;
     try{
-        result = inspect(eval(toEval),{depth:3}).success;
+        result = inspect(eval(toEval),{depth:3});
     }catch(err){
-        result = err.toString().error;
+        error = true;
+        result = err.toString();
     }
 
-    console.log(result);
+    console.log(JSON.stringify(result,null,4)[error?'error':'success']);
 }
