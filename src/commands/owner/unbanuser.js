@@ -1,24 +1,24 @@
-const db = require('quick-db');
-
 module.exports = {
     name: 'unbanuser',
     description: 'Unbas a user from using bot commands',
     usage: '<@User/ID>',
     category: 'owner',
-    userPerms: ['ADMINISTRATOR'],
-    botPerms: ['MANAGE_MESSAGES'],
+    aliases: ['unban']
 }
 
+const db = require('quick.db');
+
 module.exports.run = async (bot, msg) => {
-    const {args} = msg;
-    if (args.length < 1) return msg.channel.send({embed:{title:'Error! 🛑',description:'No one specified.\nUsage: `unbanuser <@User/ID>`',color:'RED'}});
-    const target = msg.mentions.users.first() || bot.users.cache.get(args[0]);
-    if (!target) return msg.channel.send({embed:{title:'Error! 🛑',description:'Invalid User Mention/ID.\nUsage: `unbanuser <@User/ID>`',color:'RED'}});
-    let bannedUsers = db.get('bannedUsers');
-    if (bannedUsers.includes(target.id)) {
-        bannedUsers.delete('bannedUsers', target.id)
-        msg.channel.send({embed:{title:'Success!',description:`<@${target.id}> was unbanned from using SpeckyBot!`,color:'GREEN'}});
-    } else {
-        msg.channel.send({embed:{title:'Error! 🛑',description:`User <@${target.id}> is not banned.\nUsage: \`unbanuser <@User/ID>\``,color:'RED'}});
-    }
+    const res = msg.cmdContent.match(/\d+/g);
+    if (!res) return bot.cmdError('No user to ban specified.');
+
+    const target = await bot.users.fetch(res[0]);
+    if (!target) return bot.cmdError('Invalid User Mention/ID.');
+
+    if (!db.get('bannedUsers').includes(target.id))
+        return bot.cmdError(`User ${target} is not banned.`);
+
+    db.set('bannedUsers', db.get('bannedUsers').remove(target.id));
+
+    return bot.cmdSuccess(`${target} is no longer banned from using ${bot.user}.`);
 }
