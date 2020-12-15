@@ -4,14 +4,12 @@ module.exports = {
     name: 'banuser',
     description: 'Bans a user from using all bot commands',
     usage: '<@User/ID>',
-    category: 'admin',
+    category: 'owner',
     userPerms: ['ADMINISTRATOR'],
     botPerms: ['MANAGE_MESSAGES'],
 }
 
 module.exports.run = async (bot, msg) => {
-    const owners = await Promise.all(bot.config.owner.map(o => msg.guild.members.fetch(o).catch(()=>{})))
-    if (!owners.length < 1) return;
     const {args} = msg;
     if (args.length < 1) return msg.channel.send({embed:{title:'Error! 🛑',description:'No one specified.\nUsage: `banuser <@User/ID>`',color:'RED'}});
     const target = msg.mentions.users.first() || bot.users.cache.get(args[0]);
