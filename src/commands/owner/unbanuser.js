@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg) => {
     if (args.length < 1) return msg.channel.send({embed:{title:'Error! 🛑',description:'No one specified.\nUsage: `unbanuser <@User/ID>`',color:'RED'}});
     const target = msg.mentions.users.first() || bot.users.cache.get(args[0]);
     if (!target) return msg.channel.send({embed:{title:'Error! 🛑',description:'Invalid User Mention/ID.\nUsage: `unbanuser <@User/ID>`',color:'RED'}});
-    let bannedUsers = db.all('bannedUsers');
+    let bannedUsers = db.get('bannedUsers');
     if (bannedUsers.includes(target.id)) {
         bannedUsers.delete('bannedUsers', target.id)
         msg.channel.send({embed:{title:'Success!',description:`<@${target.id}> was unbanned from using SpeckyBot!`,color:'GREEN'}});
