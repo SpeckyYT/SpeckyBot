@@ -36,7 +36,7 @@ module.exports = (bot) => {
     const items = ["token","prefix","color"]
     const bools = ["extra_apikeys","reply_unexisting_command","load_nsfw"]
     const apikeys = ["youtube"]
-    const arrays = ["owner","bannedUsers"]
+    const arrays = ["owner"]
 
     items.forEach(conf => {
         if(typeof config[conf] == "undefined"){

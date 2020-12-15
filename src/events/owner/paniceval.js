@@ -1,5 +1,5 @@
 module.exports = {
-    event: "message"
+    event: "filteredMessage"
 }
 
 const { inspect } = require("util");

@@ -1,5 +1,5 @@
 module.exports = {
-    event: "message"
+    event: "filteredMessage"
 }
 
 const { MessageEmbed, Collection } = require('discord.js');
@@ -10,18 +10,10 @@ const promisify = require('promisify-func');
 module.exports.call = async (bot, m) => {
     const msg = m.extend().cmdExtend();
 
-    if(msg.author.bot) return;
-
-    if(msg.system) return;
-
     if(bot.cache.messages.includes(msg.id)){
         return;
     }else{
         bot.cache.messages.push(msg.id);
-    }
-
-    if(bot.config.bannedUsers.includes(msg.author.id)){
-        return;
     }
 
     if(msg.channel.topicSetting("global")) return;
