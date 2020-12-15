@@ -13,6 +13,7 @@ db/
 *.avi
 *.csv
 *.ttf
+*.sqlite
 
 # Secret Files
 template.config.json
