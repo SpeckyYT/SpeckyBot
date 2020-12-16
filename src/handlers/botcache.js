@@ -20,8 +20,6 @@ module.exports = (bot) => {
     bot.cache.schedules = [];
     bot.cache.statuses = [];
 
-    bot.economy = {}
-
     bot.globalchats = new Collection();
 
     bot.debugN = 0;

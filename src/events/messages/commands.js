@@ -104,7 +104,7 @@ module.exports.call = async (bot, m) => {
             }
 
             if(category == "economy"){
-                await bot.economyRead(msg);
+                bot.economySummon(msg.author);
             }
 
             if(category == "owner" || cmd.category === "private"){
@@ -327,9 +327,6 @@ async function run(cmd, bot, msg, command){
     })
     .finally(async () => {
         bot.cache.runningcmds = bot.cache.runningcmds.remove(`${msg.channel.id}:${cmd.name}`);
-        if(cmd.category == "economy"){
-            await bot.economyWrite(bot.economy);
-        }
     })
 }
 

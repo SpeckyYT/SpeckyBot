@@ -5,20 +5,24 @@ module.exports = {
     description: "Gets your current bot balance [Experimental]",
 }
 
+const db = require('quick.db');
+const economy = new db.table('economy');
+
 module.exports.run = async (bot, msg) => {
-    const { economy } = bot;
-    let { author } = msg;
+    let user;
 
     const otheruser = msg.mentions.users.first();
     if(otheruser){
         bot.economySummon(otheruser);
-        author = otheruser;
+        user = otheruser;
     }
+
+    user = user || msg.author;
 
     const embed = bot.embed()
     .setTitle('Bank')
-    .setAuthor(author.tag,author.displayAvatarURL({format:'png'}))
-    .setThumbnail(author.displayAvatarURL({format:'png'}))
-    .addField("Balance", economy[author.id].money + "₪", true)
+    .setAuthor(user.tag,user.displayAvatarURL({format:'png'}))
+    .setThumbnail(user.displayAvatarURL({format:'png'}))
+    .addField("Balance", economy.get(user.id).money + "₪", true)
     msg.channel.send(embed);
 };
