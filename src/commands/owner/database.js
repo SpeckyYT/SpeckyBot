@@ -2,6 +2,7 @@ module.exports = {
     name: 'database',
     description: 'Gives you the entire database!',
     category: 'owner',
+    flags: ['file'],
     aliases: ['db']
 }
 
