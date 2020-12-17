@@ -1,9 +1,9 @@
 module.exports = {
-    name: "math",
+    name: "calc",
     description: "The math command to evaluate some math!",
-    usage: `<problem>`,
+    usage: "<problem>",
     category: "math",
-    aliases: ["maths","mathematic","mathematics","calculator","calc","calculate","cal"]
+    aliases: ["calculator","calculate","cal"]
 }
 
 const { evaluate } = require("mathjs");
