@@ -8,8 +8,8 @@ module.exports = {
 const Canvas = require('canvas');
 const GIFEncoder = require('gifencoder');
 
-const pixels = 25;
-const multiplier = 4;
+const pixels = 50;
+const multiplier = 2;
 const size = pixels * multiplier;
 
 module.exports.run = async (bot, msg) => {
@@ -59,7 +59,7 @@ module.exports.run = async (bot, msg) => {
     const encoder = new GIFEncoder(size,size);
     encoder.start();
     encoder.setRepeat(-1);
-    encoder.setDelay(5);
+    encoder.setDelay(250);
     encoder.setQuality(0);
 
     for(let ctx of frames){
