@@ -7,7 +7,6 @@ module.exports = {
 }
 
 const asciiTable = require('ascii-table');
-const AsciiTable = require('ascii-table/ascii-table');
 
 module.exports.run = async (bot, msg) => {
     const { config } = bot;
@@ -33,7 +32,7 @@ module.exports.run = async (bot, msg) => {
     .setAuthor(`${bot.user.username} Help`, bot.user.displayAvatarURL())
 
     if(!args[0]) {
-        const table = new AsciiTable();
+        const table = new asciiTable();
         table.setHeading('category', 'commands')
         bot.commands.filter(
             c => c.category == 'category' && bot.checkCategory(c.category, msg)
