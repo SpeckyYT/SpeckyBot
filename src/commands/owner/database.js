@@ -6,8 +6,15 @@ module.exports = {
 }
 
 const db = require('quick.db');
+const { promises: { readFile } } = require('fs');
+const { join } = require('path');
 
 module.exports.run = async (bot, msg) => {
+    if(msg.flag('file')){
+        const name = 'json.sqlite';
+        const file = await readFile(join(process.cwd(),name));
+        return msg.channel.send(file.toAttachment(name));
+    }
     const databases = [
         ['General',''],
         ['Economy','economy']
