@@ -1,6 +1,6 @@
 module.exports.categoryhelp = ({category}) => {
     return function(bot,msg){
-        if(!bot.checkCategory(category,msg)){
+        if(!msg.author.id.isOwner() && !bot.checkCategory(category,msg)){
             return bot.cmdError("You don't have the permissions to look at the commands in this category")
         }
         return msg.channel.send(
