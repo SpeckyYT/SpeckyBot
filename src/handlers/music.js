@@ -1,6 +1,6 @@
 const { Player } = require('discord-music-player');
 
-module.exports = async (bot) => {
+module.exports = (bot) => {
     bot.music = new Player(
         bot,
         {

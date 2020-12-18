@@ -1,4 +1,4 @@
-module.exports = async (bot) => {
+module.exports = (bot) => {
     const { token, prefix } = bot.config;
 
     return bot.login(token)

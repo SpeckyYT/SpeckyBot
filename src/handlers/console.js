@@ -1,9 +1,7 @@
-const { readdirSync, lstatSync } = require('fs');
-const { join, basename } = require('path');
 const { Collection } = require('discord.js');
 const promisify = require('promisify-func');
 
-module.exports = async (bot) => {
+module.exports = (bot) => {
     bot.console = new Collection();
     bot.consoleali = new Collection();
 

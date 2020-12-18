@@ -1,7 +1,7 @@
 const { existsSync, mkdirSync } = require('fs')
 const { join } = require('path');
 
-module.exports = async () => {
+module.exports = () => {
     // SRC FOLDER
     [
         'assets'

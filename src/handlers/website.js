@@ -5,7 +5,7 @@ const { readFile } = require('fs');
 const { createServer } = require('net');
 const { join } = require('path');
 
-module.exports = async (bot) => {
+module.exports = (bot) => {
     try{
         app.get('/log', (req, res) => {
             readFile(

@@ -2,7 +2,7 @@ const promisify = require('promisify-func');
 const { validate, schedule } = require('node-cron');
 const { EventEmitter } = require('events');
 
-module.exports = async (bot) => {
+module.exports = (bot) => {
     process.removeAllListeners();
     bot.removeAllListeners();
     bot.cache.schedules.forEach(s=>s.destroy());

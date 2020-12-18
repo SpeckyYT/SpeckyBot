@@ -1,7 +1,7 @@
 const { existsSync, appendFileSync } = require('fs');
 const { join } = require('path');
 
-module.exports = async () => {
+module.exports = () => {
     const template =
     {
         token: "TOKEN_HERE",
