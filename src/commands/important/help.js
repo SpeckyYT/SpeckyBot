@@ -34,6 +34,7 @@ module.exports.run = async (bot, msg) => {
     if(!args[0]) {
         const table = new asciiTable();
         table.setHeading('category', 'commands')
+        .setBorder('█')
         bot.commands.filter(
             c => c.category == 'category' && bot.checkCategory(c.category, msg)
         )
