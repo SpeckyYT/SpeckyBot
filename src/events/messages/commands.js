@@ -10,14 +10,7 @@ const promisify = require('promisify-func');
 module.exports.call = async (bot, m) => {
     const msg = m.extend().cmdExtend();
 
-    if(bot.cache.messages.includes(msg.id)){
-        return;
-    }else{
-        bot.cache.messages.push(msg.id);
-    }
-
     if(msg.channel.topicSetting("global")) return;
-    if(msg.channel.topicSetting("no-bots")) return;
 
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first() ? msg.mentions.users.first().id == bot.user.id : false){

@@ -7,7 +7,6 @@ module.exports = (bot) => {
     bot.stats.commandsExecuted = 0;
 
     bot.cache = {};
-    bot.cache.messages = [];
     bot.cache.lastImage = {};
     bot.cache.console = {};
     bot.cache.console.debug = false;
