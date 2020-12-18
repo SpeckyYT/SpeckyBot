@@ -28,8 +28,13 @@ module.exports = (bot) => {
             }
             if(validate(event)){
                 if(!emitter.eventNames().includes(event)){
-                    const sched = schedule(event, () => emitter.emit(event));
-                    bot.cache.schedules.push(sched);
+                    bot.cache.schedules.push(
+                        schedule(
+                            event,
+                            () => emitter.emit(event),
+                            {timezone: evt.timezone || undefined}
+                        )
+                    );
                 }
             }
             emitter[calltype](event, promisify(bot.getFunction(evt).bind(null, bot)));
