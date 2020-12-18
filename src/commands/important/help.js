@@ -36,7 +36,7 @@ module.exports.run = async (bot, msg) => {
         table.setHeading('category', 'commands')
         .setBorder('█')
         bot.commands.filter(
-            c => c.category == 'category' && bot.checkCategory(c.category, msg)
+            c => c.category == 'category' && bot.checkCategory(c.name, msg)
         )
         .map(c => [c.name,bot.commands.filter(csub => csub.category == c.name).size])
         .forEach(([cat,cmds]) => table.addRow(cat,cmds))

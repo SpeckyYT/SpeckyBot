@@ -2,7 +2,9 @@ const { Message, User, GuildMember } = require('discord.js');
 
 module.exports = (bot) => {
     bot.checkCategory = (category, item) => {
-        if(!category) return true;
+        if(!category || typeof category != 'string') return true;
+
+        category = category.toLowerCase();
 
         let id, channel, member;
 
@@ -22,7 +24,7 @@ module.exports = (bot) => {
             id = '';
         }
 
-        if(id.isOwner()) return true;
+        if(category == 'owner') return false;
 
         if(channel){
             if(category == 'nsfw') return !channel.topicSetting('no-nsfw') && channel.nsfw;
