@@ -32,7 +32,9 @@ module.exports = (bot) => {
                         schedule(
                             event,
                             () => emitter.emit(event),
-                            {timezone: evt.timezone || undefined}
+                            {
+                                timezone: evt.timezone
+                            }
                         )
                     );
                 }
