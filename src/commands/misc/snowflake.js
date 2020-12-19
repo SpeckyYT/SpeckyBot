@@ -3,6 +3,7 @@ module.exports = {
     description: "Converts an ID into a timestamp!",
     usage: `[ID] [ID]...`,
     category: "misc",
+    flags: ['full'],
     aliases: ['sf','id']
 }
 
@@ -15,7 +16,7 @@ module.exports.run = async (bot, msg) => {
 
     if(!msg.args.length) return bot.cmdError('No valid Snowflake provided')
 
-    msg.Args.forEach(async arg => {
+    msg.Args.forEach(arg => {
         const snowflake = arg.split('').filter(c=>"0123456789".includes(c)).join('');
 
         if(isNaN(snowflake) || !snowflake){
@@ -38,7 +39,7 @@ module.exports.run = async (bot, msg) => {
 
             let skip = false;
 
-            const embed = new MessageEmbed()
+            const embed = bot.embed()
             .setTitle("Snowflake Timestamp")
             .setColor(bot.config.color);
 
@@ -57,6 +58,13 @@ module.exports.run = async (bot, msg) => {
                 embed.setTimestamp(timestamp);
             }
 
+            if(msg.flag('full')){
+                embed.addField('Timestamp',deconstructed.timestamp)
+                .addField('Worker ID',deconstructed.workerID)
+                .addField('Process ID',deconstructed.processID)
+                .addField('Increment',deconstructed.increment)
+            }
+
             if(!skip){
                 const item = snowflake.findSnowflake();
                 if(item){
@@ -71,7 +79,7 @@ module.exports.run = async (bot, msg) => {
             }
             lsf = timestamp;
 
-            await msg.channel.send(embed).catch(()=>{});
+            return msg.channel.send(embed);
         }
     });
 
