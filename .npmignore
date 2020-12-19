@@ -15,6 +15,7 @@ db/
 *.csv
 *.ttf
 *.sqlite
+*.log
 
 template.config.json
 config.json
