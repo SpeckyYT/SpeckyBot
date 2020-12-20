@@ -13,7 +13,7 @@ module.exports = () => {
     if (!existsSync(config))
         appendFileSync(config, JSON.stringify(template,null,4));
 
-    ['s_settings','u_settings','economy'].forEach(file => {
+    ['s_settings','u_settings'].forEach(file => {
         const db = join(process.cwd(),'..','db',`${file}.json`);
         if (!existsSync(db))
             appendFileSync(db, '{}');
