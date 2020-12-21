@@ -2,12 +2,12 @@ module.exports = {
     name: "snowflake",
     description: "Converts an ID into a timestamp!",
     usage: `[ID] [ID]...`,
-    category: "misc",
+    category: "dev",
     flags: ['full'],
     aliases: ['sf','id']
 }
 
-const { MessageEmbed, SnowflakeUtil: { deconstruct } } = require('discord.js');
+const { SnowflakeUtil: { deconstruct } } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
     let lsf, error;

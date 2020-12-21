@@ -1,6 +1,6 @@
 module.exports = {
     name: "content",
-    category: "utilities",
+    category: "dev",
     description: "Checks all the content types of the message",
     usage: "<text>"
 }

@@ -1,7 +1,7 @@
 module.exports = {
     name: "versions",
     description: "Gives you the versions of the used software of the bot!",
-    category: 'misc',
+    category: 'dev',
     aliases: ['v']
 }
 

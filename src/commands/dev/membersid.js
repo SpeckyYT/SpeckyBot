@@ -1,7 +1,7 @@
 module.exports = {
     name: "membersid",
     description: "Turns all user IDs into a txt file!",
-    category: "utilities",
+    category: "dev",
     aliases: ['membersids','memberids','memberid']
 }
 
