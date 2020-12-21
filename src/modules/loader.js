@@ -11,9 +11,9 @@ module.exports.loader = (bot,path,cb) => {
 
         const files = getFiles(currPath);
 
-        if(files.includes('.ignoreall')) return;
+        if(files.some(f => f.startsWith('.ignoreall'))) return;
 
-        if(!files.includes('.ignorefiles')){
+        if(!files.some(f => f.startsWith('.ignorefiles'))){
             files.filter(d => d.match(bot.supportedFiles))
             .forEach(file => {
                 const start = new Date().getTime();
@@ -28,7 +28,7 @@ module.exports.loader = (bot,path,cb) => {
             })
         }
 
-        if(!files.includes('.ignoredirs')){
+        if(!files.some(f => f.startsWith('.ignoredirs'))){
             getDirectories(currPath)
             .forEach(dir => {
                 try{
