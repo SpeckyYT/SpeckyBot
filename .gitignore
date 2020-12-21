@@ -15,7 +15,7 @@ db/
 *.csv
 *.ttf
 *.sqlite
-*.ingore
+*.ignore
 
 # Secret Files
 template.config.json
