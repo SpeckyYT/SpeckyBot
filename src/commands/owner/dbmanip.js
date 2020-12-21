@@ -1,6 +1,6 @@
 module.exports = {
     name: 'dbmanip',
-    description: 'Lets you meanipulate you the database!',
+    description: 'Lets you meanipulate the database!',
     category: 'owner',
     usage: '{<database>} [<property>] (<action>) <JSON>',
     aliases: ['dbm']
