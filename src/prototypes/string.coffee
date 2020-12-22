@@ -27,7 +27,7 @@ module.exports = (bot) ->
 
     String::code = (script) ->
         scriptName = if typeof script is 'string' then script else ''
-        "```#{scriptName}\n#{String(this).replace(/```/g, '`\u200b``')}\n```"
+        "```#{scriptName}\n#{String(@).trim().replace(/```/g, '`\u200b``')}\n```"
 
     String::id = (length) ->
         @.match(/\d{10,}/g)?[0]
