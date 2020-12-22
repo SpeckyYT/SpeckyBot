@@ -4,9 +4,9 @@ module.exports = (bot) => {
     bot.music = new Player(
         bot,
         {
-            token: bot.config.youtube,
             leaveOnEmpty: true,
             leaveOnEnd: true,
+            timeout: 15000,
             quality: 'high'
         }
     )

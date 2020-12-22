@@ -18,7 +18,7 @@
         "color-diff": "^1.2.0",
         "colors": "^1.4.0",
         "deepai": "^1.0.16",
-        "discord-music-player": "^6.2.0",
+        "discord-music-player": "^6.3.4",
         "discord.js": "^12.5.1",
         "express": "^4.17.1",
         "g-i-s": "^2.1.6",
