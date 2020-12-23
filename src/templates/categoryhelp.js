@@ -11,8 +11,9 @@ module.exports.categoryhelp = ({category}) => {
                 `❯ **${category.highFirst()}**\n`+
                 bot.commands
                 .filter(c => c.category == category)
-                .map(c => `\`${c.name}\`\n`)
-                .join(' ')
+                .map(c => `+ ${c.name}`)
+                .join('\n')
+                .code('diff')
             )
         );
     }
