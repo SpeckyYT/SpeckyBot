@@ -3,7 +3,7 @@ module.exports = {
     aliases: ["cockfight", "cf"],
     usage: "<bet>",
     category: "economy",
-    description: "Gets your current bot balance [Experimental]",
+    description: "Lets you play Chicken Fight! (illegal in California)",
 }
 
 const db = require('quick.db');
