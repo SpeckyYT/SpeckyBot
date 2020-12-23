@@ -27,8 +27,11 @@ module.exports.run = async (bot, msg) => {
     .then(r => {
         if(typeof r == 'string') return bot.cmdError(r);
 
-        const string = r.docs
+        const animes = r.docs;
+
+        const string = animes
         .slice(0,10)
+        .filter((a,i) => !animes.slice(0,i-1).some(an => an.anime == a.anime || an.title_english == a.title_english))
         .map(a => animeToString(a))
         .join('\n\n')
         .code('');
