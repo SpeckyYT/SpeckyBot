@@ -37,6 +37,7 @@ Help us having a better code!
 <!---donators--->
 | Donator | Donation |
 |-|-|
+| TheHDCrafter | 20.00€ |
 | Nicsi | 20.00€ |
 | Dav!d | 2.29€ |
 | Benjiman | 2.22€ |
