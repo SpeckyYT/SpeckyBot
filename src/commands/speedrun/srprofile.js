@@ -16,12 +16,13 @@ module.exports.run = async (bot, msg) => {
 
     if(!msg.cmdContent && !me) return bot.cmdError('No user found');
 
-    const name = msg.cmdContent || me;
+    const name = msg.cmdContent || me.name;
 
-    const user = await speedrun.get(`/users?name=${name}`);
-    if(!user.data.length) return bot.cmdError('User not found');
+    const user = await speedrun.users.get(name);
 
-    const {id, names, weblink, 'name-style': namestyle, location} = user.data[0];
+    if(!user.data) return bot.cmdError('User not found');
+
+    const {id, names, weblink, 'name-style': namestyle, location} = user.data;
 
     const pbs = await speedrun.get(`/users/${id}/personal-bests?embed=game,category`);
 
