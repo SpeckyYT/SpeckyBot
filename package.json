@@ -25,7 +25,6 @@
         "gifencoder": "^2.0.1",
         "is-image-url": "^1.1.8",
         "jimp": "^0.9.8",
-        "leven": "^3.1.0",
         "libsodium-wrappers": "^0.7.8",
         "mathjs": "^7.6.0",
         "moment": "^2.29.1",

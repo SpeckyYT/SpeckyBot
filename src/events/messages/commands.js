@@ -3,7 +3,7 @@ module.exports = {
 }
 
 const { MessageEmbed, Collection } = require('discord.js');
-const leven = require('leven');
+const { compareTwoStrings } = require('string-similarity');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
 
@@ -205,7 +205,7 @@ module.exports.call = async (bot, m) => {
         .filter(c => categoryCheck((bot.getCommand(c)||{}).category, msg));
         let mostlikely = new Collection();
         cmdarray.forEach(item => {
-            const numb = leven(msg.command,item);
+            const numb = compareTwoStrings(msg.command,item);
             mostlikely.set(item,numb);
         })
         mostlikely = mostlikely.sort((a,b) => a-b);
