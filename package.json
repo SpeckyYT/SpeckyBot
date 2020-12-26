@@ -2,7 +2,7 @@
     "name": "speckybot",
     "version": "0.0.1",
     "description": "This is an awesome bot made by SpeckyYT",
-    "main": "run.js",
+    "main": "src/bot.js",
     "dependencies": {
         "@bjornlu/colorblind": "^1.0.3",
         "@discordjs/opus": "^0.3.3",
@@ -59,7 +59,7 @@
         "eslint": "^7.15.0"
     },
     "scripts": {
-        "start": "node run.js"
+        "start": "node src/bot.js"
     },
     "repository": {
         "type": "git",
@@ -70,5 +70,5 @@
     },
     "homepage": "https://github.com/SpeckyYT/SpeckyBot#readme",
     "author": "SpeckyYT",
-    "license": "MIT"
+    "license": "GPL-3.0"
 }
