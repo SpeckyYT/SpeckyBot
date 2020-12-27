@@ -1,0 +1,6 @@
+module.exports =
+    name: 'hwkoffee'
+    description: 'Hello World!'
+    category: 'helloworld'
+    run: (bot, msg) ->
+        msg.channel.send '`Koffee`: Hello World!'

@@ -1,0 +1,7 @@
+module.exports =
+    name: 'hwkoffee'
+    description: 'Hello World!'
+    category: 'helloworld'
+    template: 'helloworld',
+    data:
+        language: 'Koffee'

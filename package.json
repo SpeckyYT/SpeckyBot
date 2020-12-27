@@ -26,6 +26,7 @@
         "iced-coffee-script": "^108.0.14",
         "is-image-url": "^1.1.8",
         "jimp": "^0.9.8",
+        "koffee": "^1.14.0",
         "libsodium-wrappers": "^0.7.8",
         "mathjs": "^7.6.0",
         "moment": "^2.29.1",
