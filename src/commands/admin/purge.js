@@ -7,36 +7,25 @@ module.exports = {
     botPerms: ['MANAGE_MESSAGES']
 }
 
+const maxpurge = 10000;
+
 module.exports.run = async (bot, msg) => {
-    const { args } = msg;
-    if(!args[0] || isNaN(args[0])){
-        msg.channel.send("You have to define message quantity to delete");
-        return;
-    }
-    const maxpurge = 10000;
-
-    let beg = args[0]
-    msg.delete();
-    if(beg > maxpurge) return msg.channel.send(`You can't purge more than ${maxpurge} messages at once!`);
-    if(beg < 0) return;
-    if(beg > 100){
-        let mess = beg
-        while(mess > 100){
-            await msg.channel.bulkDelete(100)
-            .then()
-            .catch(()=>{});
-            mess -= 100;
-        }
-        beg = mess;
+    if(!msg.args[0] || isNaN(msg.args[0])){
+        return bot.cmdError("You have to define message quantity to delete");
     }
 
-    if(beg > 0){
-        await msg.channel.bulkDelete(beg)
-        .then()
-        .catch(()=>{});
+    let beg = Number(msg.args[0]);
+
+    if(beg > maxpurge) return bot.cmdError(`You can't purge more than ${maxpurge} messages at once!`);
+    if(beg < 0) beg = -beg;
+
+    while(beg > 0){
+        const amount = beg > 100 ? 100 : beg;
+        beg -= amount;
+        await msg.channel.bulkDelete(amount)
+        .catch(() => beg = 0);
     }
 
-    msg.channel.send("Finished purging!")
-    .then(ms => ms.delete({timeout:5000}))
-    .catch(()=>{});
+    return bot.cmdSuccess("Finished purging!");
 }
+
