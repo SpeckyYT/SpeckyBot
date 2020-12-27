@@ -9,6 +9,7 @@
         "@yerkopalma/morsee": "^1.0.6",
         "aki-api": "^5.2.0",
         "ascii-table": "0.0.9",
+        "blackjack-n-deck": "^1.0.0",
         "canvas": "^2.6.1",
         "child_process": "^1.0.2",
         "cleverbot-free": "^1.0.5",
