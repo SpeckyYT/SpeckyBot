@@ -1,5 +1,5 @@
 module.exports =
-    name: 'hwkoffee'
+    name: 'hwskoffee'
     description: 'Hello World!'
     category: 'helloworld'
     type: 'send'

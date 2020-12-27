@@ -1,5 +1,5 @@
 module.exports =
-    name: 'hwkoffee'
+    name: 'hwtkoffee'
     description: 'Hello World!'
     category: 'helloworld'
     template: 'helloworld',
