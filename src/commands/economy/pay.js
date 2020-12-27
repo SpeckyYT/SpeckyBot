@@ -2,7 +2,7 @@ module.exports = {
     name: "pay",
     usage: "<@user> <amount>",
     category: "economy",
-    description: "Lets you pay someone else [Experimental]",
+    description: "Lets you pay someone else",
 }
 
 const db = require('quick.db');

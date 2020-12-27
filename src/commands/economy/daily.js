@@ -1,7 +1,7 @@
 module.exports = {
     name: "daily",
     category: "economy",
-    description: "Claim your Daily Reward [Experimental]",
+    description: "Claim your Daily Reward",
 }
 
 const moment = require("moment");

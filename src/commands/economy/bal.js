@@ -2,7 +2,7 @@ module.exports = {
     name: "balance",
     aliases: ["bal", "bank", "money"],
     category: "economy",
-    description: "Gets your current bot balance [Experimental]",
+    description: "Gets your current bot balance",
 }
 
 const db = require('quick.db');
