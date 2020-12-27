@@ -1,7 +1,0 @@
-module.exports =
-    name: 'hwtkoffee'
-    description: 'Hello World!'
-    category: 'helloworld'
-    template: 'helloworld',
-    data:
-        language: 'Koffee'
