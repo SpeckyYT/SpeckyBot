@@ -18,7 +18,9 @@ module.exports.run = async (bot, msg) => {
     }
     const databases = [
         ['General',''],
-        ['Economy','economy']
+        ['Economy','economy'],
+        ['User Settings','usersettings'],
+        ['Math Scopes','mathscopes']
     ].map(([name,path])=>{
         const database = path ? new db.table(path) : db;
         const json = {}
@@ -26,5 +28,5 @@ module.exports.run = async (bot, msg) => {
         return `${name}\n${JSON.stringify(json,null,2).code('json')}\u200b`
     })
 
-    return msg.channel.send(databases.join('\n'),{split: {chat:'\u200b\n'}});
+    return msg.channel.send(databases.join('\n'),{split: {char:'\u200b\n'}});
 }

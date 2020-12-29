@@ -2,14 +2,14 @@ module.exports = {
     event: "filteredMessage"
 }
 
+const qdb = require('quick.db');
+const usersettings = new qdb.table('usersettings');
 const { MessageEmbed } = require('discord.js');
 const poop = "https://images-ext-1.discordapp.net/external/qDr7Y7SwTvJ3D_jZOYRNU-Vak5cGKw3zlZfFT2t-Ihc/https/i.imgur.com/jNz2Dwp.png"
 
 module.exports.call = async (bot, msg) => {
-    if (msg.author.bot) return;
-    await bot.loadSettings();
-    const u_settings = bot.settings.user || {};
-    if(!(u_settings[msg.author.id] ? u_settings[msg.author.id].messagelink : false)) return;
+    if(msg.author.bot) return;
+    if(!usersettings.get(`${msg.author.id}.messagelink`)) return;
 
     const m = msg.extend().cmdExtend();
     if(!m.links.length) return;
