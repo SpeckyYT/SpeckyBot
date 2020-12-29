@@ -7,7 +7,7 @@ module.exports = (bot) ->
         new MessageEmbed()
         .setColor(bot.config.color)
         .setThumbnail(bot.user.displayAvatarURL({format:'png'}))
-        .setTimestamp(new Date())
+        .setTimestamp()
         .setAuthor(bot.user.username, bot.user.displayAvatarURL(), "https://github.com/SpeckyYT/SpeckyBot");
 
     bot.globalChatEmbed = (msg) ->
