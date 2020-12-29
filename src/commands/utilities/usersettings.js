@@ -53,12 +53,13 @@ module.exports.run = async (bot, msg) => {
             }
         }
         if (typeof option.type == 'function'){
-            const value = option.type(
+            let value = option.type(
                 {
                     arg: msg.args[1] || '',
                     args: msg.args.slice(1)
                 }
             )
+            if(isNaN(value) && typeof value == 'number') value = 0;
             usersettings.set(dbstring,value);
             return bot.cmdSuccess(draw(option.dbkey,value));
         }
