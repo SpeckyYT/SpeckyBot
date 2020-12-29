@@ -11,15 +11,6 @@ module.exports = () => {
         if (!existsSync(path)) mkdirSync(path);
     });
 
-    // ROOT
-    [
-        'db'
-    ]
-    .forEach(dir => {
-        const path = join(process.cwd(),'..',dir);
-        if (!existsSync(path)) mkdirSync(path);
-    });
-
     // PRIVATE COMMANDS/EVENTS
     [
         'events',

@@ -13,12 +13,6 @@ module.exports = () => {
     if (!existsSync(config))
         appendFileSync(config, JSON.stringify(template,null,4));
 
-    ['s_settings','u_settings'].forEach(file => {
-        const db = join(process.cwd(),'..','db',`${file}.json`);
-        if (!existsSync(db))
-            appendFileSync(db, '{}');
-    });
-
     ["commands.log"].forEach(file => {
         const log = join(process.cwd(),'..',file)
         if (!existsSync(log))
