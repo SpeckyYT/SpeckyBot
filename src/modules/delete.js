@@ -3,6 +3,7 @@ const { join } = require('path');
 
 module.exports.deleteFolder =
     async function deleteRecursive(folder){
+        if(!fs.existsSync(folder)) return;
         const data = await fs.promises.readdir(folder);
 
         const files = data.filter(d => fs.lstatSync(join(folder,d)).isFile());
