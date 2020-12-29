@@ -34,8 +34,7 @@ module.exports = (bot) => {
     const nConfig = config;
 
     const items = ["token","prefix","color"]
-    const bools = ["extra_apikeys","reply_unexisting_command","load_nsfw"]
-    const apikeys = ["youtube"]
+    const bools = ["reply_unexisting_command","load_nsfw"]
     const arrays = ["owner"]
 
     items.forEach(conf => {
@@ -52,14 +51,6 @@ module.exports = (bot) => {
 
     if(typeof config.apikeys != "object"){
         nConfig.apikeys = {}
-    }
-
-    if(config.extra_apikeys == true){
-        apikeys.forEach(conf => {
-            if(typeof config.apikeys[conf] == "undefined"){
-                nConfig.apikeys[conf] = conf.toUpperCase()
-            }
-        })
     }
 
     arrays.forEach(conf => {
