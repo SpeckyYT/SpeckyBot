@@ -11,6 +11,7 @@ const usersettings = new qdb.table('usersettings');
 const { Util: { resolveColor } } = require('discord.js');
 
 module.exports.run = async (bot, msg) => {
+    if (!args.length === 2) return bot.cmdError('Insufficient Arguments Provided! Use `sb!usersettings` to see the available commands.');
     const options = [
         {
             names: ['embedcolor','embcol','ec'],
