@@ -56,7 +56,7 @@ module.exports.run = async (bot, msg) => {
         if (typeof option.type == 'function'){
             const value = option.type(
                 {
-                    arg: msg.args[1],
+                    arg: msg.args[1] || 000000,
                     args: msg.args.slice(1)
                 }
             )
