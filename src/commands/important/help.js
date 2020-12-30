@@ -12,8 +12,7 @@ module.exports.run = async (bot, msg) => {
     const { args } = msg;
 
     const diduknow = [
-        `you can use the \`${bot.config.prefix}serversettings\` command to personalize your server!`,
-        `you can use the \`${bot.config.prefix}usersettings\` command to personalize your profile!`,
+        `you can use the \`${bot.config.prefix}usersettings\` command to personalize your experience!`,
         `you can send a message that contains \`:EMB:\` to turn your message into an embed!`,
         `you can include \`--emb\` in the \`${bot.config.prefix}say\` command to turn the text into an embed!`,
         `you can type in a channel topic \`Next number: 1\` to turn it into a counting-up channel!`,
