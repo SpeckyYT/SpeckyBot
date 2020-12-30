@@ -8,7 +8,7 @@ const npm = require('npm');
 const { promisify } = require('util');
 
 module.exports.run = async (bot, msg) => {
-    await promisify(npm.load)();
-    await promisify(npm.commands.install)([]);
+    await promisify(npm.load)({});
+    await promisify(npm.commands.install)(msg.Args || []);
     return bot.cmdSuccess("Dependencies should be updated!");
 }
