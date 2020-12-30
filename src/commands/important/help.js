@@ -3,7 +3,7 @@ module.exports = {
     description: "Gives you the help page for this bot!",
     usage: `<command>`,
     category: "important",
-    aliases: ["h", "halp", "hel","hwlp","hewlp","cmd","cmds","command","commands","undefined","info","informations","information"]
+    aliases: ["h", "halp", "hel","hwlp","hewlp","cmd","cmds","command","commands","undefined","info","informations","information","?"]
 }
 
 const asciiTable = require('ascii-table');
