@@ -75,7 +75,7 @@ module.exports.run = async (bot,msg) => {
         ctxs.push(ctx);
     }
 
-    await m.edit('Finised sorting!\nGenerating the GIF...')
+    await m.edit('Finished sorting!\nGenerating the GIF...')
 
     for(let ctx of ctxs){
         await new Promise(res => bot.setImmediate(res));
