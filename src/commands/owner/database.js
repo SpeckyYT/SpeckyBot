@@ -20,6 +20,7 @@ module.exports.run = async (bot, msg) => {
         ['General',''],
         ['Economy','economy'],
         ['User Settings','usersettings'],
+        ['Speedrun Profiles','speedrun'],
         ['Math Scopes','mathscopes']
     ].map(([name,path])=>{
         const database = path ? new db.table(path) : db;
