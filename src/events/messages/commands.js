@@ -202,7 +202,7 @@ module.exports.call = async (bot, m) => {
         const cmdarray = bot.commands
         .map(c => c.name)
         .concat(bot.aliases.keyArray())
-        .filter(c => categoryCheck((bot.getCommand(c)||{}).category, msg));
+        .filter(c => bot.checkCategory((bot.getCommand(c)||{}).category, msg));
         let mostlikely = new Collection();
         cmdarray.forEach(item => {
             const numb = compareTwoStrings(msg.command,item);
@@ -347,19 +347,4 @@ function success(suc){
     .setTitle('SUCCESS!')
     .setDescription(suc)
     .setColor('00FF00')
-}
-
-function categoryCheck(category,msg){
-    if(typeof category != "string") return true;
-    category = category.toLowerCase();
-    switch(category){
-        case "owner":
-            return msg.author.id.isOwner();
-        case "admin":
-            return msg.member.permissions.toArray().join(' ').includes('MANAGE_');
-        case "nsfw":
-            return !msg.channel.topicSetting('no-nsfw') && msg.channel.nsfw;
-        default:
-            return true;
-    }
 }
