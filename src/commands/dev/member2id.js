@@ -7,7 +7,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const user = bot.users.cache.find('tag',msg.Args[0])
+    const user = bot.users.cache.find(u => u.tag == msg.Args[0])
     if(user){
         msg.channel.send(user.id)
     }else{
