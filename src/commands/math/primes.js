@@ -5,9 +5,8 @@ module.exports = {
     aliases: ["prime"]
 }
 
-const { writeFile, readFileSync } = require('fs');
-const { join } = require('path');
-const primesPath = join(__dirname,'data','primes.json');
+const qdb = require('quick.db');
+const misc = new qdb.table('misc');
 
 module.exports.run = async (bot, msg) => {
     const startPrimes = [];
@@ -16,7 +15,7 @@ module.exports.run = async (bot, msg) => {
     let string = "";
 
     try{
-        startPrimes.push(...JSON.parse(readFileSync(primesPath,{encoding:'UTF8'})));
+        startPrimes.push(...(misc.get('primes')||[]));
         numb = startPrimes.last() || 1;
     }catch(e){}
 
@@ -34,7 +33,7 @@ module.exports.run = async (bot, msg) => {
     }
     await prime();
 
-    writeFile(primesPath,JSON.stringify([...startPrimes,...primes]),e=>e?console.error(e):null);
+    misc.set('primes',[...startPrimes,...primes]);
 
     return msg.channel.send(primes.join(" "),{code:'js'})
 }
