@@ -10,19 +10,20 @@ const speedrun = new (require('node-speedrun'))({userAgent: 'Specky'});
 const qdb = require('quick.db');
 const SRdb = new qdb.table('speedrun');
 const { MessageEmbed } = require('discord.js');
+const size = 30;
 
 module.exports.run = async (bot, msg) => {
     const me = SRdb.get(msg.author.id);
 
-    if(!msg.cmdContent && !me) return bot.cmdError('No user found');
-
-    const name = msg.cmdContent || me.name;
+    const name = msg.cmdContent || me.name || msg.author.username;
 
     const user = await speedrun.users.get(name);
 
     if(!user.data) return bot.cmdError('User not found');
 
     const {id, names, weblink, 'name-style': namestyle, location} = user.data;
+
+    const m = await msg.channel.send(bot.embed().setTitle('Loading...'));
 
     const pbs = await speedrun.get(`/users/${id}/personal-bests?embed=game,category`);
 
@@ -34,23 +35,43 @@ module.exports.run = async (bot, msg) => {
         }
     }
 
-    return msg.channel.send(
+    // remove duplicate runs
+    const tmppbs = [];
+    const npbs = pbs.data
+    .filter(r => {
+        const string = `${r.place}|${r.game.data.names.international}|${r.category.data.name}`;
+        if(tmppbs.includes(string)) return false;
+        return tmppbs.push(string) || true;
+    })
+
+    const defembed = () =>
         new MessageEmbed()
         .setThumbnail(`https://speedrun.com/themes/user/${names.international}/image.png`)
         .setTitle(`${names.international}${names.japanese?` (${names.japanese})`:''}`)
         .setURL(weblink)
         .setColor(color)
+
+    const grouppbs = []
+    npbs.forEach((pb,i) => {
+        const group = Math.floor(i/size);
+        if(!grouppbs[group]) grouppbs[group] = [];
+        grouppbs[group].push(pb);
+    })
+
+    const pages = grouppbs.map(pbs =>
+        defembed()
         .setDescription(
             [
                 location && location.country && location.country.code ? `Country: :flag_${location.country.code}:`: '',
                 '',
-                pbs.data
-                .slice(0,10)
+                pbs
                 .map(run => `[#${String(run.place).padEnd(5,' ')}] ${run.game.data.names.international} (${run.category.data.name})`)
                 .join('\n')
                 .code('')
             ]
             .join('\n')
         )
-    )
+    );
+
+    return m.edit(pages[0]);
 }
