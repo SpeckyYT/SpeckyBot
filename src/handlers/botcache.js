@@ -21,6 +21,4 @@ module.exports = (bot) => {
 
     bot.globalchats = new Collection();
 
-    bot.debugN = 0;
-
 }
