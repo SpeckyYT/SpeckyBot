@@ -27,7 +27,7 @@ module.exports = (bot) => {
         if(category == 'owner') return false;
 
         if(channel){
-            if(category == 'nsfw') return !channel.isNSFW();
+            if(category == 'nsfw') return channel.isNSFW();
         }
 
         if(member){
