@@ -6,7 +6,7 @@ module.exports = {
     flags: ["sfw"],
     template: 'sfw',
     data: {
-        methods: ["neko","nekoGif"],
+        methods: ["neko","nekogif"],
         methodsNSFW: ["neko","nekoGif","eroNeko"]
     }
 }
