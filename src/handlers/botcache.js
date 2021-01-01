@@ -15,7 +15,6 @@ module.exports = (bot) => {
     bot.cache.runningcmds = [];
     bot.cache.globalchat = new Collection();
     bot.cache.globalchatsent = [];
-    bot.cache.math = {};
     bot.cache.schedules = [];
     bot.cache.statuses = [];
 
