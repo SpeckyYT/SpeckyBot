@@ -23,5 +23,4 @@ module.exports = (bot) => {
 
     bot.debugN = 0;
 
-    bot.settings = {};
 }
