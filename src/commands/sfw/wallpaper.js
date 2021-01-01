@@ -4,6 +4,7 @@ module.exports = {
     category: "sfw",
     template: 'sfw',
     data: {
-        methods: ['wallpaper','mobileWallpaper']
+        methods: ['wallpaper','mobileWallpaper'],
+        methodsNSFW: ['wallpaper','nsfwMobileWallpaper']
     }
 }

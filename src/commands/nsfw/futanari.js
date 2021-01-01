@@ -5,6 +5,6 @@ module.exports = {
     aliases: ["futa"],
     template: 'nsfw',
     data: {
-        methods: "futanari"
+        methods: "futarani"
     }
 }

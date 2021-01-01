@@ -6,6 +6,6 @@ module.exports = {
     template: 'sfw',
     data: {
         methods: "yuri",
-        methodsNSFW: ["yuri","eroYuri"]
+        methodsNSFW: ["yuri","eroyuri"]
     }
 }

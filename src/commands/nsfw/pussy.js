@@ -5,6 +5,6 @@ module.exports = {
     aliases: ['kuni'],
     template: 'nsfw',
     data: {
-        methods: ["kuni","pussy","pussyWankGif","pussyArt"]
+        methods: ["kuni","pussy","pwankg","pussyJpg","vagina","pantsu"]
     }
 }

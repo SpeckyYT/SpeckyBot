@@ -1,10 +1,10 @@
 module.exports = {
     name: "cumsluts",
-    description: "Gives you a cumslut!",
+    description: "Gives you cumsluts!",
     category: "nsfw",
     aliases: ["cumslut","cum","cumshot","cumshots","cs",'orra'],
     template: 'nsfw',
     data: {
-        methods: ["cumsluts","cumArts"]
+        methods: ["cumJpg","cum"]
     }
 }

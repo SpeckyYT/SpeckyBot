@@ -5,6 +5,6 @@ module.exports = {
     aliases: ["foot"],
     template: 'nsfw',
     data: {
-        methods: ["feetGif","eroFeet","feet"]
+        methods: ["feet","erofeet","foot"]
     }
 }

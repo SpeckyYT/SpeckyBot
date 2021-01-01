@@ -4,6 +4,6 @@ module.exports = {
     category: "nsfw",
     template: 'nsfw',
     data: {
-        methods: ["randomHentaiGif","hentai"]
+        methods: ["hentai","gif"]
     }
 }
