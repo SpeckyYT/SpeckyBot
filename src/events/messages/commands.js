@@ -86,6 +86,8 @@ module.exports.call = async (bot, m) => {
             const imagesError   =  "🎨 This command requires the `ATTACH FILES` permission.";
             const userPermError =  "🚷 You don't have the required permissions for that command.";
             const serverError   =  "⛔ This command isn't available on this server.";
+            const channelError  =  "⛔ This command isn't available in this channel.";
+            const userError     =  "⛔ This command isn't available for you.";
             const musicError1   =  "🎵 You have to be in a vocal channel to perform this command.";
             const musicError2   =  `🎵 You have to be in the same vocal channel of ${bot.user} to run this command.`
             const officialError =  "🤖 This is the official SpeckyBot."
@@ -150,11 +152,23 @@ module.exports.call = async (bot, m) => {
                 }
             }
 
-            if(cmd.servers){
-                if(cmd.servers.indexOf(msg.guild.id.toString()) < 0){
-                    if(check(false, serverError)){
+            if(cmd.limited){
+                const { user, channel, guild } = cmd.limited;
+
+                if(guild){
+                    const guilds = Array.isArray(guild) ? guild : [guild];
+                    if(!guilds.includes(msg.guild.id) && check(false, serverError))
                         return msg.channel.send(error(serverError));
-                    }
+                }
+                if(channel){
+                    const channels = Array.isArray(channel) ? channel : [channel];
+                    if(!channels.includes(msg.channel.id) && check(false, channelError))
+                        return msg.channel.send(error(channelError));
+                }
+                if(user){
+                    const users = Array.isArray(user) ? user : [user];
+                    if(!users.includes(msg.author.id) && check(false, userError))
+                        return msg.channel.send(error(userError));
                 }
             }
 

@@ -28,6 +28,7 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | type         | String   | "send"                            | if "send", it will send the returned value      | false    |
 | template     | String   | "test"                            | the command template to use for the command     | false    |
 | data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
+| limited      | Object   | { guild, channel, user }          | properties should be a string or array of IDs   | false    |
 | `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
 | aliases      | Array    | ["hi","howdy"]                    | lowercase and no spaces                         | false    |
 | userPerms    | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
