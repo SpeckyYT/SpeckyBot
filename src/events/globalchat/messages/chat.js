@@ -6,7 +6,7 @@ module.exports.call = async (bot, msg) => {
     const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false;
     bot.channels.cache.filter(chan => check(chan) && msg.channel.id != chan.id)
     .forEach(chan => {
-        const inviteRegex = /(https?:\/\/)?(www\.)?((discord\.(gg|io|me|li)|discordapp\.com\/invite|invite\.gg))(\/|\\\/|\\)[A-z+0-9]{1,}/g;
+        const inviteRegex = /(?:https?)?(?::\/\/)?(?:di?sc(?:ord(?:app)?)?|top)\.(?:com|gg|invite|net)\/+[\w/]+/gi;
         msg.content = msg.content.replace(inviteRegex,'https://discord.gg/4EecFku');
         bot.cache.globalchatsent.push(
             chan.send(bot.globalChatEmbed(msg))
