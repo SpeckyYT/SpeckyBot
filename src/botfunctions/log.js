@@ -9,8 +9,9 @@ module.exports = (bot) => {
             const log = join(process.cwd(),'..','commands.log');
 
             appendFile(log,`${content
-            .replace(/[\x1b][[][0-9]{2}m/g,'')
-            .replace(/\t/g,' ').replace(/ +/g,' ')
+            .replace(bot.regex.logColors,'')
+            .replace(bot.regex.tabs,' ')
+            .replace(bot.regex.spaces,' ')
             }\n`)
             .then(()=>res())
             .catch((err)=>rej(err))

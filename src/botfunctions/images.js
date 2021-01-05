@@ -2,8 +2,6 @@ const isImageUrl = require('is-image-url');
 
 module.exports = (bot) => {
     bot.setLastImageCache = async (msg) => {
-        const linkRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
-
         function setImage(l){
             bot.cache.lastImage[msg.channel.id] = l;
         }
@@ -11,7 +9,7 @@ module.exports = (bot) => {
         await msg.channel.messages.fetch({limit: 50})
         .then(msgs => {
             msgs.array().reverse().some(message => {
-                const matches = message.content.match(linkRegex);
+                const matches = message.content.match(bot.regex.link);
 
                 if(message.attachments.first()){
                     setImage(message.attachments.first().proxyURL);

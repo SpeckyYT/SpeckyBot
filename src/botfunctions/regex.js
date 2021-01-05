@@ -1,0 +1,16 @@
+module.exports = (bot) => {
+    bot.regex = {
+        logColors: /[\x1b][[][0-9]{2}m/g,
+        tabs: /\t/g,
+        trimLeftRight: / +\n +/g,
+        trimLeft: / +\n/g,
+        trimRight: /\n +/g,
+        trimStart: /^\s+/g,
+        trimEnd: /\s+$/g,
+        spaces: / +/g,
+        id: /\d{10,}/g,
+        messageLink: /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/gi,
+        inviteLink: /(?:https?)?(?::\/\/)?(?:di?sc(?:ord(?:app)?)?|top)\.(?:com|gg|invite|net)\/+[\w/]+/gi,
+        link: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\\/=]*)/gi,
+    }
+}

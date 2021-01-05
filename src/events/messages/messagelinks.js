@@ -17,12 +17,10 @@ module.exports.call = async (bot, msg) => {
     const perms = msg.guild.me.permissionsIn(msg.channel).toArray();
     if(!perms.includes('SEND_MESSAGES')) return;
 
-    const regex = /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/g;
-
     m.links.unique().forEach(async link => {
         if(m.content.includes(`<${link}>`)) return;
 
-        const discordLink = regex.exec(link);
+        const discordLink = bot.regex.messageLink.exec(link);
         if(!discordLink) return;
         const [, serverID, channelID, messageID] = discordLink;
         const server = bot.guilds.cache.get(serverID);

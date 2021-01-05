@@ -30,5 +30,5 @@ module.exports = (bot) ->
         "```#{scriptName}\n#{String(@).trimRight().replace(/```/g, '`\u200b``')}\n```"
 
     String::id = (length) ->
-        @.match(/\d{10,}/g)?[0]
+        @.match(bot.regex.id)?[0]
 

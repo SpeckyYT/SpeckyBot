@@ -10,6 +10,6 @@ const qrcode = require('qrcode');
 
 module.exports.run = async (bot, msg) => {
     return qrcode.toString(msg.cmdContent,(e,s)=>{
-        return msg.channel.send(s.replace(/( +)\n( +)/g,'\n').trim(),{code:'js'});
+        return msg.channel.send(s.trimLeft().trimRight(),{code:'js'});
     })
 }

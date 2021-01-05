@@ -85,7 +85,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     // TRIM AND RANDOM CASE
-    name = name.trim().replace(/\s+/g,' ').randomCase();
+    name = name.trim().replace(bot.regex.spaces,' ').randomCase();
 
     // CANVAS SETUP
     const canvas = Canvas.createCanvas(800,600);
