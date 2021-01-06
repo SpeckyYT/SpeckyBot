@@ -7,7 +7,7 @@
         "@bjornlu/colorblind": "^1.0.3",
         "@discordjs/opus": "^0.3.3",
         "@yerkopalma/morsee": "^1.0.6",
-        "aki-api": "^5.2.0",
+        "aki-api": "^5.2.1",
         "ascii-art": "^2.5.0",
         "ascii-table": "0.0.9",
         "blackjack-n-deck": "^1.0.1",
@@ -62,7 +62,7 @@
         "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
-        "eslint": "^7.16.0"
+        "eslint": "^7.17.0"
     },
     "scripts": {
         "start": "node src/bot.js"
