@@ -9,7 +9,9 @@ module.exports = (bot) => {
         if(!badwords){
             badwords = await fetch(bwsource)
             .then(res => res.text())
-            .then(text => text.split('\n'));
+            .then(text => text.split('\n'))
+            .then(text => text.map(a=>a.trim()))
+            .then(text => text.filter(a=>a));
         }
         const censures = [
             bot.emotes.censure1,
