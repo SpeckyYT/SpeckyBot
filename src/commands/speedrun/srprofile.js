@@ -15,7 +15,7 @@ const size = 30;
 module.exports.run = async (bot, msg) => {
     const me = SRdb.get(msg.author.id);
 
-    const name = msg.cmdContent || me.name || msg.author.username;
+    const name = msg.cmdContent || (me||{}).name || msg.author.username;
 
     const user = await speedrun.users.get(name);
 
