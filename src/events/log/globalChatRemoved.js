@@ -12,7 +12,7 @@ module.exports.call = async (bot, c) => {
     ]
 
     const gcs = bot.channels.cache
-    .filter(c => c.topic ? c.topic.toLowerCase().includes('[global]') : false)
+    .filter(c => c.topicSetting('global'))
     .size;
 
     return channel.send(

@@ -3,8 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot, msg) => {
-    const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false
-    if(check(msg.channel)){
+    if(msg.channel.topicSetting('global')){
         bot.emit('globalMessage', msg);
     }
 }
