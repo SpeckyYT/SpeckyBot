@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const badwords = fetch('https://raw.githubusercontent.com/RobertJGabriel/Google-profanity-words/master/list.txt')
+const badwords = fetch('https://raw.githubusercontent.com/chucknorris-io/swear-words/master/en')
 .then(res => res.text())
 .then(text => text.trimLeft().trimRight().split('\n'));
 
