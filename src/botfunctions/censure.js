@@ -6,12 +6,11 @@ const badwords = fetch('https://raw.githubusercontent.com/RobertJGabriel/Google-
 
 module.exports = (bot) => {
 
-    const censures = [
-        bot.emotes.censure1,
-        bot.emotes.censure2
-    ];
-
     bot.censureText = async (string) => {
+        const censures = [
+            bot.emotes.censure1,
+            bot.emotes.censure2
+        ];
         const bw = await badwords;
         let newString = string;
         for(let badword of bw){
