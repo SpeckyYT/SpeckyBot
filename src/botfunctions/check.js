@@ -24,7 +24,7 @@ module.exports = (bot) => {
             id = '';
         }
 
-        if(category == 'owner') return false;
+        if(['owner','private','tmp'].includes(category)) return false;
 
         if(channel){
             if(category == 'nsfw') return channel.isNSFW();
