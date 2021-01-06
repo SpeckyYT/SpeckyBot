@@ -11,18 +11,13 @@ module.exports = (bot) => {
             bot.emotes.censure1,
             bot.emotes.censure2
         ];
-        const bw = await badwords;
-        let newString = string;
-        for(let badword of bw){
-            newString = newString.replace(
-                new RegExp(`(?<=\\b)${badword}(?=\\b)`,'gi'),
-                Array(Math.ceil(badword.length/4))
-                .fill('')
-                .map(()=>censures.pick())
-                .join('')
-            )
-        }
-        return newString;
+        return string.replace(
+            new RegExp(`(?<=\\b)(${(await badwords).join('|')})(?=\\b)`,'gi'),
+            Array(Math.ceil(Math.random()*4))
+            .fill('')
+            .map(()=>censures.pick())
+            .join('')
+        )
     }
 
 }
