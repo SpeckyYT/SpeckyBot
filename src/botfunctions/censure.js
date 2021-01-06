@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const badwords = fetch('https://raw.githubusercontent.com/chucknorris-io/swear-words/master/en')
 .then(res => res.text())
-.then(text => text.trimLeft().trimRight().split('\n'));
+.then(text => text.split('\n'));
 
 module.exports = (bot) => {
 
