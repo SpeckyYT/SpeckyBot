@@ -58,20 +58,52 @@ module.exports.run = async (bot, msg) => {
         grouppbs[group].push(pb);
     })
 
-    const pages = grouppbs.map(pbs =>
+    const pages = await Promise.all(grouppbs.map(async (pbs) =>
         defembed()
         .setDescription(
             [
                 location && location.country && location.country.code ? `Country: :flag_${location.country.code}:`: '',
                 '',
-                pbs
-                .map(run => `[#${String(run.place).padEnd(5,' ')}] ${run.game.data.names.international} (${run.category.data.name})`)
-                .join('\n')
-                .code('')
+                (await pbsAsString(pbs)).join('\n').code('')
             ]
             .join('\n')
         )
-    );
+    ));
 
     return m.edit(pages[0]);
+}
+
+async function getSubcategories(run) {
+    const variables = run.run.values;
+
+    const ret = [];
+
+    for (let _variable of Object.keys(variables)) {
+        const variable = (await speedrun.get(`/variables/${_variable}`)).data;
+        if (variable["is-subcategory"]) {
+            ret.push(
+                variable.values.values[variables[_variable]].label
+            )
+        }
+    }
+
+    return ret;
+}
+
+async function pbsAsString(pbs) {
+    const pbsAsString = [];
+
+    for (let run of pbs) {
+        const subcat = await getSubcategories(run);
+        let subcategoriesAsString = "";
+        if (subcat.length > 0) {
+            subcategoriesAsString = ` (${subcat.join(", ")})`
+        }
+
+        pbsAsString.push(
+            `[#${String(run.place).padEnd(5,' ')}] ${run.game.data.names.international} (${run.category.data.name})${subcategoriesAsString}`
+        )
+    }
+
+    return pbsAsString
 }
