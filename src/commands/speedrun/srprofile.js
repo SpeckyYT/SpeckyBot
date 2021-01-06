@@ -10,7 +10,6 @@ const speedrun = new (require('node-speedrun'))({userAgent: 'Specky'});
 const qdb = require('quick.db');
 const SRdb = new qdb.table('speedrun');
 const { MessageEmbed } = require('discord.js');
-const { xgcd } = require('mathjs');
 const size = 30;
 
 module.exports.run = async (bot, msg) => {
@@ -77,7 +76,7 @@ module.exports.run = async (bot, msg) => {
 async function getSubcategories(run) {
     const variables = run.run.values;
 
-    var ret = [];
+    const ret = [];
 
     for (let _variable of Object.keys(variables)) {
         const variable = (await speedrun.get(`/variables/${_variable}`)).data;
@@ -92,11 +91,11 @@ async function getSubcategories(run) {
 }
 
 async function pbsAsString(pbs) {
-    var pbsAsString = [];
+    const pbsAsString = [];
 
     for (let run of pbs) {
         const subcat = await getSubcategories(run);
-        var subcategoriesAsString = "";
+        let subcategoriesAsString = "";
         if (subcat.length > 0) {
             subcategoriesAsString = ` (${subcat.join(", ")})`
         }
