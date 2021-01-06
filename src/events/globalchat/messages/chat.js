@@ -3,11 +3,15 @@ module.exports = {
 }
 
 module.exports.call = async (bot, msg) => {
-    const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false;
-    bot.channels.cache.filter(chan => check(chan) && msg.channel.id != chan.id)
+    const emotes = msg.content.match(bot.regex.emote);
+    if(emotes && emotes.length)
+        if(emotes.some(e => !bot.emojis.cache.has(e))) return;
+
+    msg.content = msg.content.replace(bot.regex.inviteLink,'https://discord.gg/4EecFku');
+    msg.content = await bot.censureText(msg.content);
+
+    bot.channels.cache.filter(chan => chan.topicSetting('global') && msg.channel.id != chan.id)
     .forEach(async chan => {
-        msg.content = msg.content.replace(bot.regex.inviteLink,'https://discord.gg/4EecFku');
-        msg.content = await bot.censureText(msg.content);
         bot.cache.globalchatsent.push(
             chan.send(bot.globalChatEmbed(msg))
             .then(m => {

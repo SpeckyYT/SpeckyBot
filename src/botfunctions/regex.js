@@ -8,9 +8,10 @@ module.exports = (bot) => {
         trimStart: /^\s+/g,
         trimEnd: /\s+$/g,
         spaces: / +/g,
-        id: /\d{10,}/g,
+        id: /\d{17,19}/g,
         messageLink: /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/gi,
         inviteLink: /(?:https?)?(?::\/\/)?(?:di?sc(?:ord(?:app)?)?|top)\.(?:com|gg|invite|net)\/+[\w/]+/gi,
         link: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\\/=]*)/gi,
+        emote: /(?<=<a?:[\w]+:)\d{17,19}(?=>)/gi
     }
 }
