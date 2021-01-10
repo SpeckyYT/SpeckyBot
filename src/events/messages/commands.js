@@ -7,6 +7,8 @@ const { compareTwoStrings } = require('string-similarity');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
 
+const deleteTime = 30000;
+
 module.exports.call = async (bot, m) => {
     const msg = m.extend().cmdExtend();
 
@@ -277,29 +279,25 @@ async function run(cmd, bot, msg, command){
         return res;
     })
     .then((ret) => {
-        let suc;
-        try{
-            suc = String(ret).includes("[SUCCESS]");
-        }catch(e){
-            suc = false;
-        }
+        let suc = String(ret).includes("[SUCCESS]");
 
         if(suc){
             ret = ret.replace("[SUCCESS]","").trim();
-            msg.channel.send(success(ret));
+            msg.channel.send(success(ret))
+            .then(m => bot.wait(deleteTime,m))
+            .then(m => m.delete())
+            .catch(()=>{});
         }
     })
     .catch(async (err) => {
-        let expected;
-        try{
-            expected = err.includes("[EXPECTED]")
-        }catch(e){
-            expected = false
-        }
+        let expected = String(err).includes("[EXPECTED]");
 
         if(expected){
             err = err.replace("[EXPECTED]","").trim();
-            msg.channel.send(error(err));
+            msg.channel.send(error(err))
+            .then(m => bot.wait(deleteTime,m))
+            .then(m => m.delete())
+            .catch(()=>{});
         }else{
             // await msg.channel.send(error(`🚸 An unexpected error happend at \`${command}\` command.\nIf this error happens frequently, report it to the SpeckyBot creators.`));
 
