@@ -8,6 +8,12 @@ module.exports = {
 const save = global.modules.saveAsset;
 
 const promises = [
+    ["https://media.discordapp.net/attachments/671851100290285568/757301181620944916/image0.jpg",'boss1.jpg'],
+    ["https://media.discordapp.net/attachments/671851100290285568/757301085223256304/image0.png",'boss2.jpg'],
+    ["https://media.discordapp.net/attachments/671851100290285568/757301092219355156/image0.png",'boss3.jpg'],
+    ["https://media.discordapp.net/attachments/671851100290285568/757301096946597947/image0.png",'boss4.jpg'],
+    ["https://media.discordapp.net/attachments/671851100290285568/757301103304900728/image0.png",'boss5.jpg'],
+    ["https://media.discordapp.net/attachments/671851100290285568/757301109189509222/image0.png",'boss6.jpg'],
     ["https://vgmdownloads.com/soundtracks/pokemon-diamond-and-pearl-super-music-collection/kbqajyde/1-20%20Battle%21%20Trainer.mp3",'battle.mp3'],
     ["https://vgmdownloads.com/soundtracks/pokemon-gold-silver-crystal/rylwnmtd/011%20Victory%21%20%28Wild%20Pok%C3%A9mon%29.mp3",'won.mp3']
 ].map(save);
