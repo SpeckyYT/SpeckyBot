@@ -3,6 +3,9 @@ qdb = require('quick.db');
 usersettings = new qdb.table('usersettings')
 
 module.exports = (bot) ->
+    bot.membed = ->
+        new MessageEmbed()
+
     bot.embed = ->
         new MessageEmbed()
         .setColor(bot.config.color)
