@@ -6,4 +6,3 @@ module.exports =
     template: 'categoryhelp'
     data:
         category: category
-    aliases: ['porn']
