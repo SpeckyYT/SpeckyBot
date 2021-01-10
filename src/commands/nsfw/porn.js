@@ -11,10 +11,10 @@ module.exports.run = async (bot, msg) => {
     const res = await fetch({
         type: 'custom',
         subreddit: subreddits,
-        total: 1
+        total: 20
     });
 
-    return msg.channel.send(bot.membed().setImage(res[0].image));
+    return msg.channel.send(bot.membed().setImage(res.pick().image));
 }
 
 // Reference:
