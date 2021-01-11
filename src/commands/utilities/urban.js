@@ -1,7 +1,7 @@
 module.exports = {
     name: "urban",
     description: "Gives you informations about a word you don't know!",
-    usage: `[random] <query>`,
+    usage: `<query>`,
     category: "utilities",
     aliases: ["urba","urb","ud","urbandictionary","dictionary"],
     flags: ['random','r']

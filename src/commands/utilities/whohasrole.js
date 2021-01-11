@@ -6,14 +6,12 @@ module.exports = {
     aliases: ["whr"]
 }
 
-const { MessageEmbed } = require('discord.js')
-
 module.exports.run = async (bot, msg) => {
     const role = msg.guild.roles.cache.get(msg.Args[0])
 
     if(role){
         const membs = role.members.map(member => member.toString())
-        const embed = new MessageEmbed()
+        const embed = bot.membed()
         .setTitle(role.name)
         .setDescription(membs.join("\n"))
         .setColor(role.hexColor);

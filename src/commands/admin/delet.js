@@ -7,11 +7,4 @@ module.exports = {
     botPerms: ['MANAGE_MESSAGES']
 }
 
-module.exports.run = async (bot, msg) => {
-    await msg.channel.messages.fetch({ limit: 3 })
-    .then(messages => {
-        messages.forEach(async message => {
-            message.delete();
-        })
-    })
-}
+module.exports.run = (bot, msg) => msg.channel.bulkDelete(3);
