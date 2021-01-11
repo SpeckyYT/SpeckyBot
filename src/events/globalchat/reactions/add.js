@@ -12,8 +12,6 @@ module.exports.call = async (bot, reaction, user) => {
         ) reaction.remove().catch(()=>{});
         if(user.bot) return;
         const am = bot.cache.globalchat.get(reaction.message.id) || bot.cache.globalchat.find(ma => ma.find(m => m.id === reaction.message.id));
-        if(am){
-            am.forEach(ms => ms.react(reaction.emoji).catch(()=>{}));
-        }
+        if(am) am.forEach(ms => ms.react(reaction.emoji).catch(()=>{}));
     }
 }

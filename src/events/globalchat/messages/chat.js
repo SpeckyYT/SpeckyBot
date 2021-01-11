@@ -10,8 +10,8 @@ module.exports.call = async (bot, msg) => {
     msg.content = msg.content.replace(bot.regex.inviteLink,'https://discord.gg/4EecFku');
     msg.content = await bot.censureText(msg.content);
 
-    bot.channels.cache.filter(chan => chan.topicSetting('global') && msg.channel.id != chan.id)
-    .forEach(async chan => {
+    bot.globalchats.filter(chan => msg.channel.id != chan.id)
+    .forEach(chan => {
         bot.cache.globalchatsent.push(
             chan.send(bot.globalChatEmbed(msg))
             .then(m => {

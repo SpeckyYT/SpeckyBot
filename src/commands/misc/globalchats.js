@@ -6,8 +6,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const channels = bot.channels.cache
-    .filter(c => c.topicSetting('global'))
+    const channels = bot.globalchats
     .sort((a,b) => a.name.localeCompare(b.name));
     return msg.channel.send(
         bot.embed()
