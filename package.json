@@ -23,6 +23,7 @@
         "discord-canvas": "^1.4.1",
         "discord-music-player": "^6.3.5",
         "discord.js": "^12.5.1",
+        "discord.js-docs": "^0.1.2",
         "express": "^4.17.1",
         "gifencoder": "^2.0.1",
         "hmfull": "^1.2.1",
