@@ -37,6 +37,12 @@ module.exports.run = async (bot, msg) => {
             dbkey: 'messagelink',
             type: 'boolean'
         },
+        {
+            names: ['invalidcommand','ic'],
+            description: "Tries to guess the command you wanted to run if it doesn't exist!",
+            dbkey: 'invalidcommand',
+            type: 'boolean'
+        }
     ];
 
     const option = options.find(opt => opt.names.includes(msg.args[0]));

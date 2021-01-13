@@ -6,6 +6,8 @@ const { MessageEmbed, Collection } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
+const qdb = require('quick.db');
+const usersettings = new qdb.table('usersettings');
 
 const deleteTime = 30000;
 
@@ -214,7 +216,7 @@ module.exports.call = async (bot, m) => {
     if(cmd){
         return execute();
     }else{
-        return;
+        if(!usersettings.get(`${msg.author.id}.invalidcommand`)) return;
         const cmdarray = bot.commands
         .map(c => c.name)
         .concat(bot.aliases.keyArray())
