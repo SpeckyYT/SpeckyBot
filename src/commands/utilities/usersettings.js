@@ -43,6 +43,12 @@ module.exports.run = async (bot, msg) => {
             description: "Tries to guess the command you wanted to run if it doesn't exist!",
             dbkey: 'invalidcommand',
             type: 'boolean'
+        },
+        {
+            names: ['reactions','r'],
+            description: "Enables reactions on your messages if they contain specific words!",
+            dbkey: 'reactions',
+            type: 'boolean'
         }
     ];
 
