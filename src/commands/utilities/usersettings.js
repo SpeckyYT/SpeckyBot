@@ -3,6 +3,7 @@ module.exports = {
     description: "What about customization?",
     usage: `<setting> <values>`,
     category: "utilities",
+    flags: ['showall','deleteall'],
     aliases: ["us","usersetting"]
 }
 
@@ -69,6 +70,17 @@ module.exports.run = async (bot, msg) => {
             usersettings.set(dbstring,value);
             return bot.cmdSuccess(draw(option.dbkey,value));
         }
+    }else if(msg.flag('showall')){
+        return msg.channel.send(
+            JSON.stringify(
+                usersettings.get(`${msg.author.id}`),
+                null,
+                2
+            ).code('json')
+        )
+    }else if(msg.flag('deleteall')){
+        usersettings.delete(`${msg.author.id}`);
+        return bot.cmdSuccess('Deleted all your usersettings!');
     }else{
         return msg.channel.send(
             bot.embed()
