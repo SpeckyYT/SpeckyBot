@@ -220,10 +220,7 @@ module.exports.call = async (bot, m) => {
         .concat(bot.aliases.keyArray())
         .filter(c => bot.checkCategory((bot.getCommand(c)||{}).category, msg));
         let mostlikely = new Collection();
-        cmdarray.forEach(item => {
-            const numb = compareTwoStrings(msg.command,item);
-            mostlikely.set(item,numb);
-        })
+        cmdarray.forEach(item => mostlikely.set(item,compareTwoStrings(msg.command,item)))
         mostlikely = mostlikely.sort((a,b) => a-b);
         const items = mostlikely.keyArray().slice(0,9);
         let string = `Command \`${msg.command}\` is unavailable...\nSend a message with the number of the desidered command or \`c\` to cancel.\n\n`;
@@ -237,9 +234,7 @@ module.exports.call = async (bot, m) => {
             const m = collected;
             const numb = m.content.toLowerCase().match(regex)[0];
             await m.delete().catch(()=>{});
-            if(isNaN(numb)){
-                return collector.stop();
-            }
+            if(isNaN(numb)) return collector.stop();
             await ms.delete().catch(()=>{});
             runned = true;
             const com = items[numb-1];
@@ -248,10 +243,11 @@ module.exports.call = async (bot, m) => {
             collector.stop();
             return execute();
         });
-        collector.on('end', async () => {
-            if(runned) return;
-            await ms.edit(error(`🛑 Command \`${msg.command}\` doesn't exist or isn't loaded correctly.`)).catch(()=>{});
-        });
+        collector.on('end', () =>
+            runned && ms.edit(
+                error(`🛑 Command \`${msg.command}\` doesn't exist or isn't loaded correctly.`)
+            ).catch(()=>{})
+        );
     }
 }
 
