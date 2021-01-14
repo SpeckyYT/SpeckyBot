@@ -22,7 +22,8 @@ module.exports.call = async (bot, msg) => {
         ]
         .forEach(([c,e]) =>
             c &&
-            msg.react(typeof e == 'string' ? e.match(bot.regex.id)[0] : e).catch(()=>{})
+            msg.react(typeof e == 'string' && e.length > 10 ? e.match(bot.regex.id)[0] : e)
+            .catch(()=>{})
         )
     }
 }
