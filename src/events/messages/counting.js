@@ -6,8 +6,7 @@ module.exports.call = async (bot, msg) => {
     if(!msg.channel.topic) return;
     const text = 'Next number: '
     if(msg.channel.topic.toLowerCase().startsWith(text.toLowerCase())){
-        const alt = '[alternate]'
-        const alttrue = msg.channel.topic.toLowerCase().includes(alt);
+        const alttrue = msg.channel.topicSetting('alternate');
         const number = parseInt(msg.channel.topic.slice(text.length).trim());
         if(!isNaN(number)){
 
@@ -37,7 +36,7 @@ module.exports.call = async (bot, msg) => {
                     return;
                 }
                 if(prevMsgs.filter(ms => ms.author.id == msg.author.id && !msg.author.bot).size < 2){
-                    if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alt.toUpperCase()}`);
+                    if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${'[alternate]'.toUpperCase()}`);
                 }else{
                     msg.delete().catch(()=>{
                         return
@@ -47,7 +46,7 @@ module.exports.call = async (bot, msg) => {
                 msg.channel.messages.fetch({ limit: 2 })
                 .then(msgs => {
                     if(msgs.filter(ms => ms.author.id == msg.author.id && !msg.author.bot).size < 2){
-                        if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alt.toUpperCase()}`);
+                        if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${'[alternate]'.toUpperCase()}`);
                     }else{
                         msg.delete().catch(()=>{
                             return
@@ -55,7 +54,7 @@ module.exports.call = async (bot, msg) => {
                     }
                 })
             }else if(msg.content == number){
-                if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alttrue ? alt.toUpperCase() : ''}`);
+                if(!msg.deleted) msg.channel.setTopic(`${text}${number + 1} ${alttrue ? '[alternate]'.toUpperCase() : ''}`);
             }
         }
     }

@@ -6,9 +6,7 @@ module.exports.call = async (bot, msg) => {
     if(msg.channel.type == 'dm') return;
     if(!msg.channel.topic) return;
 
-    const text = '[alternate]'
-
-    if(msg.channel.topic.toLowerCase().includes(text.toLowerCase())){
+    if(msg.channel.topicSetting('alternate')){
         let prevMsgs;
 
         await msg.channel.messages.fetch({ limit: 2 })
