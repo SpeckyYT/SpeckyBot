@@ -223,7 +223,7 @@ module.exports.call = async (bot, m) => {
         .filter(c => bot.checkCategory((bot.getCommand(c)||{}).category, msg));
         let mostlikely = new Collection();
         cmdarray.forEach(item => mostlikely.set(item,compareTwoStrings(msg.command,item)))
-        mostlikely = mostlikely.sort((a,b) => a-b);
+        mostlikely = mostlikely.sort((a,b) => b-a);
         const items = mostlikely.keyArray().slice(0,9);
         let string = `Command \`${msg.command}\` is unavailable...\nSend a message with the number of the desidered command or \`c\` to cancel.\n\n`;
         items.forEach((val, ind) => string += `\`${ind+1}\` ${val}\n`)
