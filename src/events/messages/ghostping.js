@@ -15,6 +15,7 @@ module.exports.call = async (bot, msg) => {
     msg.mentions.members.forEach(member => {
         if(msg.author.id != member.user.id && !member.user.bot){
             if(!usersettings.get(`${member.user.id}.ghostping`)) return;
+            if(!member.permissionsIn(msg.channel).has('VIEW_CHANNEL')) return;
 
             return member.send(
                 bot.embed()
