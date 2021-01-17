@@ -8,10 +8,10 @@ module.exports = (bot) => {
             console.log(content.error)
             const log = join(process.cwd(),'..','commands.log');
 
-            appendFile(log,`${content
+            appendFile(log,`${bot.regex ? content
             .replace(bot.regex.logColors,'')
             .replace(bot.regex.tabs,' ')
-            .replace(bot.regex.spaces,' ')
+            .replace(bot.regex.spaces,' ') : content
             }\n`)
             .then(()=>res())
             .catch((err)=>rej(err))
