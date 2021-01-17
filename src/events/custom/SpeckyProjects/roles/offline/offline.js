@@ -6,6 +6,7 @@ const speckysBots = "538028973058424832";
 const offlineRole = "760554589040279592";
 
 module.exports.call = async (bot, oldPresence, newPresence) => {
+    return; // disabled
     if(newPresence && newPresence.user.bot) return;
     if(newPresence && !bot.guilds.cache.get(speckysBots).members.cache.has(newPresence.user.id)) return;
 
