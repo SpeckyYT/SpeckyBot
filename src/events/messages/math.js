@@ -4,22 +4,16 @@ module.exports = {
 
 const qdb = require('quick.db');
 const usersettings = new qdb.table('usersettings');
-const mathscopes = new qdb.table('mathscopes');
-const { evaluate } = require('mathjs');
+const { inspect } = require('util');
 
 module.exports.call = (bot, msg) => {
     if(!msg.content) return;
     if(!usersettings.get(`${msg.author.id}.math`)) return;
 
-    const scope = mathscopes.get(`${msg.author.id}`) || {}
+    const { result } = bot.matheval(msg.content, msg);
 
-    try{
-        const res = String(evaluate(msg.content, scope));
+    if(typeof result == 'undefined') return;
+    if(result == msg.content) return;
 
-        if(Object.keys(scope).length > 0) mathscopes.set(`${msg.author.id}`, scope);
-
-        if(res != msg.content && res !== "undefined"){
-            msg.channel.send(String(res).slice(0,50).code('js'));
-        }
-    }catch(err){}
+    return msg.channel.send(inspect(result).slice(0,100).code('js'));
 }

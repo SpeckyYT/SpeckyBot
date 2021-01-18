@@ -9,7 +9,7 @@ module.exports = {
 
 const qdb = require('quick.db');
 const mathscopes = new qdb.table('mathscopes');
-const { evaluate } = require("mathjs");
+const { inspect } = require('util');
 
 module.exports.run = async (bot, msg) => {
     if(msg.flag('scopes') || msg.flag('scope')){
@@ -24,19 +24,15 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(!msg.cmdContent) return bot.cmdError('Input a calculation');
-    const scopes = mathscopes.get(`${msg.author.id}`) || {}
-    let resp;
-    try{
-        resp = evaluate(msg.cmdContent, scopes);
-        if(Object.keys(scopes).length > 0) mathscopes.set(`${msg.author.id}`, scopes)
-    } catch (e){
-        return bot.cmdError(e.toString());
-    }
+
+    const { result, error } = bot.matheval(msg.cmdContent, msg);
+
+    if(error) return bot.cmdError(error)
+
     return msg.channel.send(
         bot.embed()
-        .setColor("#FFFFFF")
         .setTitle('Math Calculation')
-        .addField("Input", String(msg.cmdContent).code('js'))
-        .addField("Output", String(resp).code('js'))
+        .addField("Input", msg.cmdContent.code('js'))
+        .addField("Output", inspect(result).slice(0,1950).code('js'))
     );
 }
