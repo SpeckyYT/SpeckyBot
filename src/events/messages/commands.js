@@ -77,33 +77,14 @@ module.exports.call = async (bot, m) => {
                     ).catch(()=>{});
             }
 
-            let owner = false;
-            let admin = false;
+            const owner = msg.author.id.isOwner();
             let illegal = false;
-
-            if(msg.author.id.isOwner()){
-                owner = true
-            }
-            if(msg.channel.type != "dm" && msg.channel.permissionsFor(msg.member).has("ADMINISTRATOR")){
-                admin = true
-            }
 
             const errorReasons = [];
 
-            function check(adminAllowed, reason){
-                if(owner ||
-                    adminAllowed &&
-                    admin &&
-                    category != "owner" &&
-                    category != "private" &&
-                    category != "custom"
-                ){
-                    illegal = true;
-                    if(!errorReasons.includes(reason.toString)) errorReasons.push(reason.toString());
-                    return false;
-                }else{
-                    return true;
-                }
+            function check(reason){
+                errorReasons.push(reason.toString());
+                return !(illegal = owner);
             }
 
             const ownerError    =  "👮‍♂️ You aren't the bot owner.";
@@ -133,13 +114,13 @@ module.exports.call = async (bot, m) => {
 
             if(cmd.botPerms){
                 const perms = cmd.botPerms.filter(perm => msg.guild ? !msg.guild.me.hasPermission(perm) : false)
-                if(perms.length && check(false, botPermError)){
+                if(perms.length && check(botPermError)){
                     return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perms.join(', ')}\``))
                 }
             }
 
             if(category == "nsfw" && !msg.channel.isNSFW()){
-                if(check(false, nsfwError)){
+                if(check(nsfwError)){
                     return msg.channel.send(error(nsfwError))
                 }
             }
@@ -159,7 +140,7 @@ module.exports.call = async (bot, m) => {
             if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){
                 if(cmd.userPerms){
                     if(!msg.member.hasPermission(cmd.userPerms)){
-                        if(check(false, userPermError)){
+                        if(check(userPermError)){
                             return msg.channel.send(error(userPermError))
                         }
                     }
@@ -171,17 +152,17 @@ module.exports.call = async (bot, m) => {
 
                 if(guild){
                     const guilds = Array.isArray(guild) ? guild : [guild];
-                    if(!guilds.includes(msg.guild.id) && check(false, serverError))
+                    if(!guilds.includes(msg.guild.id) && check(serverError))
                         return msg.channel.send(error(serverError));
                 }
                 if(channel){
                     const channels = Array.isArray(channel) ? channel : [channel];
-                    if(!channels.includes(msg.channel.id) && check(false, channelError))
+                    if(!channels.includes(msg.channel.id) && check(channelError))
                         return msg.channel.send(error(channelError));
                 }
                 if(user){
                     const users = Array.isArray(user) ? user : [user];
-                    if(!users.includes(msg.author.id) && check(false, userError))
+                    if(!users.includes(msg.author.id) && check(userError))
                         return msg.channel.send(error(userError));
                 }
             }
