@@ -129,7 +129,7 @@ module.exports.call = async (bot, m) => {
             }
 
             if(cmd.botPerms){
-                const perms = msg.guild ? msg.channel.permissionsFor(bot.user) : bot.perms.default;
+                const perms = msg.guild ? msg.channel.permissionsFor(bot.user) : Permissions.DEFAULT;
                 if(!perms.has(cmd.botPerms) && check(botPermError))
                     return msg.channel.send(
                         error(
@@ -142,7 +142,7 @@ module.exports.call = async (bot, m) => {
             }
 
             if(cmd.userPerms){
-                const perms = msg.guild ? msg.channel.permissionsFor(msg.author) : bot.perms.default;
+                const perms = msg.guild ? msg.channel.permissionsFor(msg.author) : Permissions.DEFAULT;
                 if(!perms.has(cmd.userPerms) && check(userPermError))
                     return msg.channel.send(
                         error(
