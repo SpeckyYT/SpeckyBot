@@ -1,4 +1,4 @@
-const { Collection } = require('discord.js');
+const { Collection, Permissions } = require('discord.js');
 
 module.exports = (bot) => {
     bot.commands = new Collection();
@@ -22,6 +22,9 @@ module.exports = (bot) => {
         if(pull.aliases.some(alias => bot.aliases.has(alias) || bot.commands.has(alias))){
             throw new Error("Command invocation already exists (alias)".toUpperCase());
         }
+
+        if(pull.botPerms) Permissions.resolve(pull.botPerms);
+        if(pull.userPerms) Permissions.resolve(pull.userPerms);
 
         if(pull.template){
             const template = bot.templates[pull.template];
