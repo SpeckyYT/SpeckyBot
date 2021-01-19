@@ -1,3 +1,6 @@
+const { Permissions } = require('discord.js');
+const { DEFAULT } = Permissions;
+
 const send = 'SEND_MESSAGES';
 const view = 'VIEW_CHANNEL';
 const files = 'ATTACH_FILES';
@@ -7,5 +10,6 @@ module.exports = (bot) => {
     bot.perms = {
         globalchat: [view,send,files,embed],
         commands: [files,embed],
+        default: new Permissions(DEFAULT),
     }
 }

@@ -2,7 +2,7 @@ module.exports = {
     event: "filteredMessage"
 }
 
-const { MessageEmbed, Collection } = require('discord.js');
+const { MessageEmbed, Collection, Permissions } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity');
 const fetch = require('node-fetch');
 const promisify = require('promisify-func');
@@ -47,7 +47,6 @@ module.exports.call = async (bot, m) => {
     const execute = async () => {
         if(cmd){
             bot.stats.commandsExecuted++;
-            bot.cache.msg = msg;
 
             logger(msg.command,true,msg,bot);
 
@@ -112,13 +111,6 @@ module.exports.call = async (bot, m) => {
                 }
             }
 
-            if(cmd.botPerms){
-                const perms = cmd.botPerms.filter(perm => msg.guild ? !msg.guild.me.hasPermission(perm) : false)
-                if(perms.length && check(botPermError)){
-                    return msg.channel.send(error(`${botPermError}\nMissing permission: \`${perms.join(', ')}\``))
-                }
-            }
-
             if(category == "nsfw" && !msg.channel.isNSFW()){
                 if(check(nsfwError)){
                     return msg.channel.send(error(nsfwError))
@@ -134,17 +126,32 @@ module.exports.call = async (bot, m) => {
                         return msg.channel.send(error(musicError2))
                     }
                 }
-
             }
 
-            if(msg.channel.type != "dm" && !(msg.member.hasPermission(["ADMINISTRATOR"]))){
-                if(cmd.userPerms){
-                    if(!msg.member.hasPermission(cmd.userPerms)){
-                        if(check(userPermError)){
-                            return msg.channel.send(error(userPermError))
-                        }
-                    }
-                }
+            if(cmd.botPerms){
+                const perms = msg.guild ? msg.channel.permissionsFor(bot.user) : bot.perms.default;
+                if(!perms.has(cmd.botPerms) && check(botPermError))
+                    return msg.channel.send(
+                        error(
+                            `${botPermError}\n\n` +
+                            `Missing permissions:\n` +
+                            new Permissions(cmd.botPerms)
+                            .remove(perms).toArray().join('\n').code('')
+                        )
+                    )
+            }
+
+            if(cmd.userPerms){
+                const perms = msg.guild ? msg.channel.permissionsFor(msg.author) : bot.perms.default;
+                if(!perms.has(cmd.userPerms) && check(userPermError))
+                    return msg.channel.send(
+                        error(
+                            `${userPermError}\n\n` +
+                            `Missing permissions:\n` +
+                            new Permissions(cmd.userPerms)
+                            .remove(perms).toArray().join('\n').code('')
+                        )
+                    )
             }
 
             if(cmd.limited){
@@ -152,12 +159,12 @@ module.exports.call = async (bot, m) => {
 
                 if(guild){
                     const guilds = Array.isArray(guild) ? guild : [guild];
-                    if(!guilds.includes(msg.guild.id) && check(serverError))
+                    if(!msg.guild || (!guilds.includes(msg.guild.id) && check(serverError)))
                         return msg.channel.send(error(serverError));
                 }
                 if(channel){
                     const channels = Array.isArray(channel) ? channel : [channel];
-                    if(!channels.includes(msg.channel.id) && check(channelError))
+                    if(!msg.guild || (!channels.includes(msg.channel.id) && check(channelError)))
                         return msg.channel.send(error(channelError));
                 }
                 if(user){
