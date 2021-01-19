@@ -51,8 +51,30 @@ module.exports.call = async (bot, m) => {
 
             logger(msg.command,true,msg,bot);
 
-            if(msg.channel.type != "dm" && !msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')){
-                return
+            if(msg.channel.permissionsFor){
+                const botperms = msg.channel.permissionsFor(bot.user);
+
+                if(!botperms.has('SEND_MESSAGES'))
+                    return msg.author.send(
+                        bot.embed()
+                        .setTitle('Missing permissions')
+                        .setDescription(
+                            "SpeckyBot doesn't have the permissions to type in that channel.\n" +
+                            "You can retry in another channel or directly here in DM."
+                        )
+                    ).catch(()=>{});
+
+                if(!botperms.has(bot.perms.commands))
+                    return msg.channel.send(
+                        "Required permissions for commands:".code('yaml') +
+                        "\n" +
+                        [
+                            ['ATTACH_FILES','Images'],
+                            ['EMBED_LINKS','Embeds'],
+                        ].map(([perm,name]) =>
+                            `[${botperms.has(perm) ? "X" : " "}] ${name}`
+                        ).join('\n').code('ini')
+                    ).catch(()=>{});
             }
 
             let owner = false;
@@ -87,7 +109,6 @@ module.exports.call = async (bot, m) => {
             const ownerError    =  "👮‍♂️ You aren't the bot owner.";
             const botPermError  =  "🚫 Bot doesn't have required permissions.";
             const nsfwError     =  "🔞 This command is only allowed in NSFW channels.";
-            const imagesError   =  "🎨 This command requires the `ATTACH FILES` permission.";
             const userPermError =  "🚷 You don't have the required permissions for that command.";
             const serverError   =  "⛔ This command isn't available on this server.";
             const channelError  =  "⛔ This command isn't available in this channel.";
@@ -98,13 +119,8 @@ module.exports.call = async (bot, m) => {
 
             const category = cmd.category;
 
-            if(category == "images"){
-                await bot.setLastImageCache(msg);
-            }
-
-            if(category == "economy"){
-                bot.economySummon(msg.author);
-            }
+            if(category == "images") await bot.setLastImageCache(msg);
+            if(category == "economy") bot.economySummon(msg.author);
 
             if(category == "owner" || cmd.category === "private"){
                 if(owner && bot.user.id == '398157933315227649'){
@@ -125,12 +141,6 @@ module.exports.call = async (bot, m) => {
             if(category == "nsfw" && !msg.channel.isNSFW()){
                 if(check(false, nsfwError)){
                     return msg.channel.send(error(nsfwError))
-                }
-            }
-
-            if(category == "images" && (msg.guild ? !msg.channel.permissionsFor(msg.guild.me).has('ATTACH_FILES') : false)){
-                if(check(false, imagesError)){
-                    return msg.channel.send(error(imagesError))
                 }
             }
 
