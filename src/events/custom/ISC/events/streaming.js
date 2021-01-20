@@ -15,13 +15,12 @@ module.exports.run = async (bot,oldPresence,newPresence) => {
 
 const checkStreaming = (bot,presence) => {
     const isStreaming = presence.activities.some(act => act.type == 'STREAMING');
-    let { streaming } = bot.cache;
-    if(isStreaming && !streaming.includes(presence.userID)){
-        streaming.push(presence.userID);
+    if(isStreaming && !bot.cache.streaming.includes(presence.userID)){
+        bot.cache.streaming.push(presence.userID);
         bot.emit('streamingStart',presence);
     }
-    if(!isStreaming && streaming.includes(presence.userID)){
-        streaming = streaming.filter(id => id == presence.userID);
+    if(!isStreaming && bot.cache.streaming.includes(presence.userID)){
+        bot.cache.streaming = bot.cache.streaming.filter(id => id == presence.userID);
         bot.emit('streamingStop',presence);
     }
 }
