@@ -2,11 +2,14 @@ module.exports = {
     event: ['presenceUpdate','* * * * *']
 }
 
-module.exports.run = (bot,oldPresence,newPresence) => {
+module.exports.run = async (bot,oldPresence,newPresence) => {
     if(newPresence){
         checkStreaming(bot,newPresence);
     }else{
-        bot.users.cache.forEach(user => checkStreaming(bot,user.presence))
+        for(const user of bot.users.cache.array()){
+            await bot.async();
+            if(user.presence) checkStreaming(bot,user.presence)
+        }
     }
 }
 
