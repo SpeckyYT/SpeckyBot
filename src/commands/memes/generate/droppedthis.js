@@ -3,7 +3,7 @@ module.exports = {
     description: "You dropped this",
     usage: "[text]",
     category: "memes",
-    aliases: ['youdroppedthis','udroppedthis']
+    aliases: ['dropped','youdroppedthis','udroppedthis']
 }
 
 const Canvas = require('canvas');
