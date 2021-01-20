@@ -45,7 +45,7 @@ module.exports.run = async (bot,msg) => {
     encoder.setQuality(0);
 
     while(!isSorted(array)){
-        await new Promise(res => bot.setImmediate(res));
+        await bot.async();
 
         const group = array.slice(index, index+groupSize);
         const smallest = [Infinity, array.length];
@@ -78,7 +78,7 @@ module.exports.run = async (bot,msg) => {
     await m.edit('Finished sorting!\nGenerating the GIF...')
 
     for(let ctx of ctxs){
-        await new Promise(res => bot.setImmediate(res));
+        await bot.async();
         encoder.addFrame(ctx)
     }
     encoder.finish();

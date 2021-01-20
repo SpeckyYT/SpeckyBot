@@ -23,7 +23,7 @@ module.exports.run = async (bot, msg) => {
 
         for(let x=0; x<pixels; x++){
             for(let y=0; y<pixels; y++){
-                await new Promise(res => bot.setImmediate(res));
+                await bot.async();
                 let aliveNear = 0;
                 for(let i=-1; i<=1; i++){
                     for(let j=-1; j<=1; j++){
