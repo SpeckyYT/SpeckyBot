@@ -5,7 +5,7 @@ const promisify = require('promisify-func');
 async function handle(bot, msg, methods, sfw){
     const method = Array.isArray(methods) ? methods.pick() : methods;
 
-    const api = [Nekos, NekoLove, Miss, HMtai, Freaker]
+    const api = [NekoLove, Miss, HMtai, Freaker]
     .filter(api => api[sfw][method])
     .pick();
 
