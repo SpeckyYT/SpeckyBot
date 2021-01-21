@@ -1,5 +1,5 @@
 module.exports = {
-    event: "*/15 * * * * *"
+    event: ["ready","*/15 * * * * *"]
 }
 
 let lastStatus = '';
