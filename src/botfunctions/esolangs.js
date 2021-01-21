@@ -109,7 +109,10 @@ module.exports = (bot) => {
                         }
                     )
                     await m.delete().catch(()=>{});
-                    if(res.size) memory[cell] = parseInt(res.first().content);
+                    if(res.size){
+                        const int = parseInt(res.first().content);
+                        if(!isNaN(int)) memory[cell] = int;
+                    }
                     continue;
                 }
             }
