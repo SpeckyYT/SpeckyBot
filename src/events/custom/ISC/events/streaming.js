@@ -20,7 +20,7 @@ const checkStreaming = (bot,presence) => {
         bot.emit('streamingStart',presence);
     }
     if(!isStreaming && bot.cache.streaming.includes(presence.userID)){
-        bot.cache.streaming = bot.cache.streaming.filter(id => id == presence.userID);
+        bot.cache.streaming = bot.cache.streaming.filter(id => id != presence.userID);
         bot.emit('streamingStop',presence);
     }
 }
