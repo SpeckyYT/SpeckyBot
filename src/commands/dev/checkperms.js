@@ -6,8 +6,6 @@ module.exports = {
     aliases: ["checkpermissions","checkp","cp"]
 }
 
-const { MessageEmbed } = require("discord.js");
-
 module.exports.run = async (bot, msg) => {
     let member, channel;
 
@@ -22,7 +20,7 @@ module.exports.run = async (bot, msg) => {
         channel = msg.mentions.channels.first();
     }
 
-    const embed = new MessageEmbed()
+    const embed = bot.membed()
     .setTitle(`Permissions of ${member.user.username} in #${channel.name}`)
     .setThumbnail(member.user.displayAvatarURL())
     .setColor(member.displayHexColor)

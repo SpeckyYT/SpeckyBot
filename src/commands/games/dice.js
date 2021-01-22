@@ -5,8 +5,6 @@ module.exports = {
     category: "games"
 }
 
-const { MessageEmbed } = require('discord.js');
-
 module.exports.run = async (bot, msg) => {
     const dice = [
         bot.emotes.dice1,
@@ -27,7 +25,7 @@ module.exports.run = async (bot, msg) => {
         index++;
     }
 
-    const embed = new MessageEmbed()
+    const embed = bot.membed()
     .setColor('BLACK')
     .setTitle('Dice!')
     .addField('Dice Amount',index)

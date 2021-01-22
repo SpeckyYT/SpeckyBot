@@ -8,8 +8,6 @@ module.exports = {
     flags: ["channel","user","sneak","rcase","emb"]
 }
 
-const { MessageEmbed } = require('discord.js');
-
 module.exports.run = async (bot, msg) => {
     let res = msg.cmdContent;
 
@@ -41,7 +39,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     if(msg.flag("emb")){
-        res = new MessageEmbed()
+        res = bot.membed()
         .setDescription(res)
         .setAuthor(user.username, user.displayAvatarURL());
     }

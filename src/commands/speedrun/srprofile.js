@@ -9,7 +9,6 @@ module.exports = {
 const speedrun = new (require('node-speedrun'))({userAgent: 'Specky'});
 const qdb = require('quick.db');
 const SRdb = new qdb.table('speedrun');
-const { MessageEmbed } = require('discord.js');
 const size = 30;
 
 module.exports.run = async (bot, msg) => {
@@ -45,7 +44,7 @@ module.exports.run = async (bot, msg) => {
     })
 
     const defembed = () =>
-        new MessageEmbed()
+        bot.membed()
         .setThumbnail(`https://speedrun.com/themes/user/${names.international}/image.png`)
         .setTitle(`${names.international}${names.japanese?` (${names.japanese})`:''}`)
         .setURL(weblink)

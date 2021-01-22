@@ -4,7 +4,6 @@ module.exports = {
 
 const qdb = require('quick.db');
 const usersettings = new qdb.table('usersettings');
-const { MessageEmbed } = require('discord.js');
 const poop = "https://images-ext-1.discordapp.net/external/qDr7Y7SwTvJ3D_jZOYRNU-Vak5cGKw3zlZfFT2t-Ihc/https/i.imgur.com/jNz2Dwp.png"
 
 module.exports.call = async (bot, msg) => {
@@ -29,7 +28,7 @@ module.exports.call = async (bot, msg) => {
 
         try{
             await msg.channel.send(
-                new MessageEmbed()
+                bot.membed()
                 .setAuthor(message ? `${message.author.tag} (ID: ${message.author.id})` : "Unknown User", message ? message.author.displayAvatarURL() : poop)
                 .setDescription(`[Message](${link}) in <#${channelID}>\n${message ? message.content || "" : "Unknown Message"}`)
                 .setFooter(`${server ? server.name : "Unknown Server"} - Quoted by ${msg.author.tag}`, server ? server.iconURL() : poop)
@@ -38,7 +37,7 @@ module.exports.call = async (bot, msg) => {
             )
             if(message && message.embeds && message.embeds.length){
                 message.embeds.forEach(embed =>
-                    msg.channel.send(new MessageEmbed(embed)).catch(()=>{})
+                    msg.channel.send(bot.membed(embed)).catch(()=>{})
                 )
             }
         }catch(e){}

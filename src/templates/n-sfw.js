@@ -1,4 +1,3 @@
-const { MessageEmbed } = require('discord.js');
 const { Nekos, NekoLove, Miss, HMtai, Freaker } = require('hmfull');
 const promisify = require('promisify-func');
 
@@ -13,7 +12,7 @@ async function handle(bot, msg, methods, sfw){
 
     return msg.channel.send(
         await promisify(api[sfw][method]())()
-        .then(img => new MessageEmbed().setImage(img.url))
+        .then(img => bot.membed().setImage(img.url))
     )
 }
 

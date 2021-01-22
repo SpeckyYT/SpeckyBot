@@ -6,7 +6,6 @@ module.exports = {
 }
 
 const fetch = require('node-fetch');
-const { MessageEmbed } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity')
 
 module.exports.run = async (bot, msg) => {
@@ -34,13 +33,13 @@ module.exports.run = async (bot, msg) => {
                     data.incorrect_answers[times] = Buffer.from(inc, 'base64').toString()
                     times++;
                 });
-                const embed = new MessageEmbed()
+                const embed = bot.membed()
                 .setTitle('Trivia Question!')
                 .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
                 .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
                 .addField('Question:', `${Buffer.from(data.question, 'base64').toString()}`)
                 .setFooter('Say "reveal" once you\'ve written the answer down! (You have 1 minute time)');
-                const embed2 = new MessageEmbed()
+                const embed2 = bot.membed()
                 .setTitle('Trivia Question!')
                 .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
                 .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)
