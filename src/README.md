@@ -17,7 +17,7 @@ module.exports = (bot) => {
 
 ## 1.2. Commands
 
-Commands get loaded in `bot.commands` as a Collection and get called from the event `events/guild/commands.js`.
+Commands get loaded in `bot.commands` as a Collection and get called from the event `events/messages/commands.js`.
 
 | Property     | Type     | Example                           | Info                                            | Required |
 |--------------|----------|-----------------------------------|-------------------------------------------------|----------|
@@ -83,15 +83,15 @@ Note: You can have **ONLY ONE** exported function in the entire file
 ## 1.6. Handlers
 
 Handlers are files, which get called from the `generalhandler.js` file.
-Files in `handlers/loader` will be automatically called.
+Every file in the `handlers` folder will be automatically called on boot-up.
 
 ## 1.7. Languages
 
-The language files get loaded into `require.extensions` for extending the languages supported.
+The language files which manipulates `require.extensions` for extending the programming languages supported.
 
 ## 1.8. Modules
 
-The module files get loaded into `bot.modules` for easier access to common functions and properties.
+The module files get loaded into `bot.modules` and `global.modules` for easier access to common functions and properties.
 
 ## 1.9. Prototypes
 
