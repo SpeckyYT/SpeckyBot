@@ -1,3 +1,5 @@
+# This hello world works for most of the CoffeeScript flavoured languages
+
 module.exports =
     name: 'hwcoffee'
     description: 'Hello World!'
