@@ -5,7 +5,8 @@
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2019
+        "ecmaVersion": 2021,
+        "sourceType": "script"
     },
     "rules": {
         "indent": [
