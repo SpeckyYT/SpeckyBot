@@ -125,6 +125,11 @@ module.exports.test = function({text}){
 
 - JavaScript (.js)
 - CoffeeScript (.coffee)
-- Koffee (.koffee)
-- Iced CoffeeScript (.iced)
+  - LiveScript (.ls)
+  - Iced CoffeeScript (.iced)
+  - Koffee (.koffee)
+  - BlackCoffee (.blackcoffee)
+  - ToffeeScript (.toffee)
+  - Caffeine (.caffeine)
+  - Coco (.coco)
 - SpeckyBotScript (.sbs)
