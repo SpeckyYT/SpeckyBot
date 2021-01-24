@@ -22,3 +22,4 @@ const summon = async (bot) => {
 module.exports = summon;
 
 if(module.children.length <= 1) summon();
+// lol
