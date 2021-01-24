@@ -5,7 +5,6 @@
     "main": "src/bot.js",
     "dependencies": {
         "@bjornlu/colorblind": "^1.0.3",
-        "@discordjs/opus": "^0.3.3",
         "@yerkopalma/morsee": "^1.0.6",
         "aki-api": "^5.2.1",
         "ascii-art": "^2.5.0",
