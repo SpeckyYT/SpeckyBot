@@ -7,8 +7,6 @@ const usersettings = new qdb.table('usersettings');
 const { MessageEmbed } = require('discord.js');
 
 module.exports.call = async (bot, msg) => {
-    if (msg.author.bot) return;
-
     const setting = usersettings.get(`${msg.author.id}.embedcolor`);
     const color = typeof setting == 'number' ? setting : (Math.random()*0xFFFFFF<<0).toString(16);
 
@@ -23,8 +21,7 @@ module.exports.call = async (bot, msg) => {
                     .setColor(color)
                 );
             }
-            atts(msg,color)
-            return;
+            return atts(msg,color);
         }
     }
 }

@@ -35,10 +35,9 @@ module.exports.call = async (bot, msg) => {
                 .setTimestamp(message && message.createdAt || messageID.snowflake && messageID.snowflake().date)
                 .setColor(message ? 'GREEN' : 'RED')
             )
-            if(message && message.embeds && message.embeds.length){
-                message.embeds.forEach(embed =>
-                    msg.channel.send(bot.membed(embed)).catch(()=>{})
-                )
+            if(message && message.embeds){
+                for(const embed of message.embeds)
+                    msg.channel.send(bot.membed(embed)).catch(()=>{});
             }
         }catch(e){}
     })
