@@ -4,19 +4,19 @@ module.exports = (bot) => {
         const MEM_SIZE = options.size || 2**8;
         const TIME_LIMIT = options.time || 1000; // ms
 
-        let instructions = [];
+        const instructions = [];
         const loops = [];
         let skip = 0;
         let pos = 0;
+        let cell = 0;
         const output = {
             string: [],
             numbers: []
         };
-        let cell = 0;
         const memory = [];
 
         if(typeof insts == "string"){
-            instructions = insts.split('');
+            instructions.push(...insts.split(''));
         }else if(Array.isArray(insts)){
             insts.forEach(v => {
                 if(typeof v == "string"){
