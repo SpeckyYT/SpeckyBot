@@ -14,8 +14,6 @@ const deleteTime = 30000;
 module.exports.call = async (bot, m) => {
     const msg = m.extend().cmdExtend();
 
-    if(msg.channel.topicSetting("global")) return;
-
     if(!msg.content.toLowerCase().startsWith(bot.config.prefix)){
         if(msg.mentions.users.first() ? msg.mentions.users.first().id == bot.user.id : false){
             const clean = `@\u200b\u200b${msg.guild.me.nickname || bot.user.username}`;
