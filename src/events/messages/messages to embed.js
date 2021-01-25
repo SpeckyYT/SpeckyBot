@@ -1,5 +1,5 @@
 module.exports = {
-    event: "filteredMessage"
+    event: "cleanMessage"
 }
 
 const qdb = require('quick.db');

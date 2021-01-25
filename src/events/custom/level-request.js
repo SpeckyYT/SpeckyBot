@@ -1,5 +1,5 @@
 module.exports = {
-    event: "filteredMessage"
+    event: "cleanMessage"
 }
 
 const { MessageEmbed } = require('discord.js')

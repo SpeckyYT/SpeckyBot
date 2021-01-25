@@ -1,5 +1,5 @@
 module.exports = {
-    event: "filteredMessage"
+    event: "cleanMessage"
 }
 
 module.exports.call = async (bot, msg) => {
