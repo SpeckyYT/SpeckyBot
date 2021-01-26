@@ -22,7 +22,7 @@
         "colors": "^1.4.0",
         "deepai": "^1.0.17",
         "discord-canvas": "^1.4.1",
-        "discord-music-player": "^6.3.6",
+        "discord-music-player": "^6.3.7",
         "discord.js": "^12.5.1",
         "discord.js-docs": "^0.1.2",
         "express": "^4.17.1",
