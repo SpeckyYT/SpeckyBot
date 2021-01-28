@@ -1,6 +1,0 @@
-@exp = {
-    §name 'hwsbs'
-    §description 'Hello World!'
-    §category 'helloworld'
-    @run @bm @send ('\`SpeckyBotScript\`: Hello World!')
-}

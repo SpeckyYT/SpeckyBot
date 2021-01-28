@@ -132,4 +132,3 @@ module.exports.test = function({text}){
   - ToffeeScript (.toffee)
   - Caffeine (.caffeine)
   - Coco (.coco)
-- SpeckyBotScript (.sbs)
