@@ -25,7 +25,8 @@ module.exports = () => {
             'koffee'
         ],
         [
-            'blackcoffee'
+            'blackcoffee',
+            ['black','blackcoffee']
         ],
         [
             'toffee-script',
