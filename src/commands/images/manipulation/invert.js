@@ -7,9 +7,3 @@ module.exports = {
         method: 'invert'
     },
 }
-
-const { join } = require('path');
-
-module.exports.run = async (bot, msg) => {
-    return require(join(__dirname,'functions','methods'))(bot, msg,'invert',false,false,"png");
-}
