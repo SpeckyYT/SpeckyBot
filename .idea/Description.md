@@ -1,6 +1,6 @@
 # SpeckyBot
 
-SpeckyBot is an open-source Discord Bot with music, games, SFW, NSFW and much more!
+SpeckyBot is an open-source Discord Bot with music, games, SFW, utilities and much more!
 
 ## What are the main features?
 
