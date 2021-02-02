@@ -4,7 +4,6 @@ module.exports = {
 
 const qdb = require('quick.db');
 const usersettings = new qdb.table('usersettings');
-const { inspect } = require('util');
 
 module.exports.call = (bot, msg) => {
     if(!msg.content) return;
@@ -12,8 +11,10 @@ module.exports.call = (bot, msg) => {
 
     const { result } = bot.matheval(msg.content, msg);
 
-    if(typeof result == 'undefined') return;
-    if(result == msg.content) return;
+    const string = `${result}`;
 
-    return msg.channel.send(inspect(result).slice(0,100).code('js'));
+    if(typeof string == 'undefined') return;
+    if(string == msg.content) return;
+
+    return msg.channel.send(`${string}`.slice(0,100).code('js'));
 }
