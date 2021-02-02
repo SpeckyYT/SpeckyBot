@@ -11,9 +11,9 @@ module.exports.call = (bot, msg) => {
 
     const { result } = bot.matheval(msg.content, msg);
 
-    const string = `${result}`;
+    if(typeof result == 'undefined') return;
 
-    if(typeof string == 'undefined') return;
+    const string = `${result}`;
     if(string == msg.content) return;
 
     return msg.channel.send(`${string}`.slice(0,100).code('js'));
