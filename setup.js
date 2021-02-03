@@ -21,10 +21,10 @@ const prompts = [
 
 inquirer.prompt(prompts).then((answers) => {
 	const replies = (JSON.stringify(answers, null, ' '));
-	fs.appendFile('test.json', replies, function(err) {
+	fs.appendFile('config.json', replies, function(err) {
 		if (err) {
 			throw err;
 		}
-		console.log('Created a test.json for you :)');
+		console.log('Created a config.json for you :)');
 	});
 });
