@@ -1,12 +1,13 @@
-const { writeFileSync, appendFileSync, existsSync, readFileSync } = require('fs');
-const { join } = require('path');
+const { writeFileSync, appendFileSync, existsSync, readFileSync } = require('fs'),
+    { join } = require('path'),
+    config = require('../../config.json');
 
 module.exports = (bot) => {
     const template =
     {
-        token: "TOKEN_HERE",
-        prefix: "PREFIX_HERE",
-        owner: ["BOT_OWNER1_ID_HERE", "BOT_OWNER2_ID_HERE"]
+        token: config.token,
+        prefix: config.prefix,
+        owner: config.owner
     }
 
     let config;
