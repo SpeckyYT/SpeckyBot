@@ -2,7 +2,7 @@
  
 SpeckyBot is an open-source Discord Bot which allows to be totally customizable for developers!
 
-NOTE: being open-source, doesn't mean that you're legally allowed to pubblish this Discord Bot without permission.
+NOTE: being open-source, doesn't mean that you're legally allowed to publish this Discord Bot without permission.
 If you want to discuss any details, join the [Discord Server](https://discord.gg/4EecFku).
 Be sure to invite the [original SpeckyBot](https://discordapp.com/api/oauth2/authorize?client_id=398157933315227649&permissions=2147483135&scope=bot)!
 
