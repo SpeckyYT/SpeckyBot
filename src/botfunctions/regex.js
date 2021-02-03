@@ -10,7 +10,7 @@ module.exports = (bot) => {
         spaces: / +/g,
         id: /(\d{17,19})/g,
         messageLink: /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/gi,
-        inviteLink: /(?:https?)?(?::\/\/)?(?:di?sc(?:ord(?:app)?)?|top)\.(?:com|gg|invite|net)\/+[\w/]+/gi,
+        inviteLink: /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/(.+[a-z])/gi,
         link: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\\/=]*)/gi,
         emote: /(?<=<a?:[\w]+:)(\d{17,19})(?=>)/gi
     }
