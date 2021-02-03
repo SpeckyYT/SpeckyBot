@@ -40,9 +40,11 @@ Be sure to invite the [original SpeckyBot](https://discordapp.com/api/oauth2/aut
 1. Create a Discord Bot Application
 2. Download or clone this repository
 3. Download all NPM dependencies inside the SpeckyBot folder `npm i`
-4. Execute `run.bat` and close it once you get an error
-5. Enter private informations in the config.json file (bot token, prefix, etc.)
-6. Execute `run.bat` once again and you should be done!
+4. Delete the `config.json` and run `setup.js` in your console.
+5. Follow the prompts and enter the details
+6. Execute `run.bat` and close it once you get an error
+7. Enter private informations in the config.json file (bot token, prefix, etc.)
+8. Execute `run.bat` once again and you should be done!
 
 # Help us!
 
