@@ -34,7 +34,7 @@ module.exports = (bot) => {
     const nConfig = config;
 
     const items = ["token","prefix","color"]
-    const bools = ["reply_unexisting_command"]
+    const bools = []
     const arrays = ["owner"]
 
     items.forEach(conf => {

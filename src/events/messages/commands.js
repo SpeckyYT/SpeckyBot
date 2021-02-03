@@ -45,27 +45,26 @@ module.exports.call = async (bot, m) => {
     let cmd = bot.getCommand(msg.command || 'help');
 
     const execute = async () => {
-        if(cmd){
-            bot.stats.commandsExecuted++;
+        bot.stats.commandsExecuted++;
 
-            logger(msg.command,true,msg,bot);
+        logger(msg.command,true,msg,bot);
 
-            if(msg.channel.permissionsFor){
-                const botperms = msg.channel.permissionsFor(bot.user);
+        if(msg.channel.permissionsFor){
+            const botperms = msg.channel.permissionsFor(bot.user);
 
-                if(!botperms.has('SEND_MESSAGES'))
-                    return msg.author.send(
-                        bot.embed()
-                        .setTitle('Missing permissions')
-                        .setDescription(
-                            "SpeckyBot doesn't have the permissions to type in that channel.\n" +
+            if(!botperms.has('SEND_MESSAGES'))
+                return msg.author.send(
+                    bot.embed()
+                    .setTitle('Missing permissions')
+                    .setDescription(
+                        "SpeckyBot doesn't have the permissions to type in that channel.\n" +
                             "You can retry in another channel or directly here in DM."
-                        )
-                    ).catch(()=>{});
+                    )
+                ).catch(()=>{});
 
-                if(!botperms.has(bot.perms.commands))
-                    return msg.channel.send(
-                        "Required permissions for commands:".code('yaml') +
+            if(!botperms.has(bot.perms.commands))
+                return msg.channel.send(
+                    "Required permissions for commands:".code('yaml') +
                         "\n" +
                         [
                             ['ATTACH_FILES','Images'],
@@ -73,135 +72,131 @@ module.exports.call = async (bot, m) => {
                         ].map(([perm,name]) =>
                             `[${botperms.has(perm) ? "X" : " "}] ${name}`
                         ).join('\n').code('ini')
-                    ).catch(()=>{});
+                ).catch(()=>{});
+        }
+
+        const owner = msg.author.id.isOwner();
+        let illegal = false;
+
+        const errorReasons = [];
+
+        function check(reason){
+            errorReasons.push(reason.toString());
+            return !(illegal = owner);
+        }
+
+        const ownerError    =  "👮‍♂️ You aren't the bot owner.";
+        const botPermError  =  "🚫 Bot doesn't have required permissions.";
+        const nsfwError     =  "🔞 This command is only allowed in NSFW channels.";
+        const userPermError =  "🚷 You don't have the required permissions for that command.";
+        const serverError   =  "⛔ This command isn't available on this server.";
+        const channelError  =  "⛔ This command isn't available in this channel.";
+        const userError     =  "⛔ This command isn't available for you.";
+        const musicError1   =  "🎵 You have to be in a vocal channel to perform this command.";
+        const musicError2   =  `🎵 You have to be in the same vocal channel of ${bot.user} to run this command.`
+        const officialError =  "🤖 This is the official SpeckyBot."
+
+        const category = cmd.category;
+
+        if(category == "images") await bot.setLastImageCache(msg);
+        if(category == "economy") bot.economySummon(msg.author);
+
+        if(category == "owner" || cmd.category === "private"){
+            if(owner && bot.user.id == '398157933315227649'){
+                errorReasons.push(officialError);
+                illegal = true;
+            }else if(!owner){
+                return msg.channel.send(error(ownerError));
             }
+        }
 
-            const owner = msg.author.id.isOwner();
-            let illegal = false;
-
-            const errorReasons = [];
-
-            function check(reason){
-                errorReasons.push(reason.toString());
-                return !(illegal = owner);
+        if(category == "nsfw" && !msg.channel.isNSFW()){
+            if(check(nsfwError)){
+                return msg.channel.send(error(nsfwError))
             }
+        }
 
-            const ownerError    =  "👮‍♂️ You aren't the bot owner.";
-            const botPermError  =  "🚫 Bot doesn't have required permissions.";
-            const nsfwError     =  "🔞 This command is only allowed in NSFW channels.";
-            const userPermError =  "🚷 You don't have the required permissions for that command.";
-            const serverError   =  "⛔ This command isn't available on this server.";
-            const channelError  =  "⛔ This command isn't available in this channel.";
-            const userError     =  "⛔ This command isn't available for you.";
-            const musicError1   =  "🎵 You have to be in a vocal channel to perform this command.";
-            const musicError2   =  `🎵 You have to be in the same vocal channel of ${bot.user} to run this command.`
-            const officialError =  "🤖 This is the official SpeckyBot."
-
-            const category = cmd.category;
-
-            if(category == "images") await bot.setLastImageCache(msg);
-            if(category == "economy") bot.economySummon(msg.author);
-
-            if(category == "owner" || cmd.category === "private"){
-                if(owner && bot.user.id == '398157933315227649'){
-                    errorReasons.push(officialError);
-                    illegal = true;
-                }else if(!owner){
-                    return msg.channel.send(error(ownerError));
+        if(category == "music"){
+            if(!(msg.member.voice && msg.member.voice.channel)){
+                return msg.channel.send(error(musicError1))
+            }
+            if(msg.guild.me.voice && msg.guild.me.voice.channel){
+                if(msg.member.voice.channel.id != msg.guild.me.voice.channel.id){
+                    return msg.channel.send(error(musicError2))
                 }
             }
+        }
 
-            if(category == "nsfw" && !msg.channel.isNSFW()){
-                if(check(nsfwError)){
-                    return msg.channel.send(error(nsfwError))
-                }
-            }
-
-            if(category == "music"){
-                if(!(msg.member.voice && msg.member.voice.channel)){
-                    return msg.channel.send(error(musicError1))
-                }
-                if(msg.guild.me.voice && msg.guild.me.voice.channel){
-                    if(msg.member.voice.channel.id != msg.guild.me.voice.channel.id){
-                        return msg.channel.send(error(musicError2))
-                    }
-                }
-            }
-
-            if(cmd.botPerms){
-                const perms = msg.guild ? msg.channel.permissionsFor(bot.user) : Permissions.DEFAULT;
-                if(!perms.has(cmd.botPerms) && check(botPermError))
-                    return msg.channel.send(
-                        error(
-                            `${botPermError}\n\n` +
+        if(cmd.botPerms){
+            const perms = msg.guild ? msg.channel.permissionsFor(bot.user) : Permissions.DEFAULT;
+            if(!perms.has(cmd.botPerms) && check(botPermError))
+                return msg.channel.send(
+                    error(
+                        `${botPermError}\n\n` +
                             `Missing permissions:\n` +
                             new Permissions(cmd.botPerms)
                             .remove(perms).toArray().join('\n').code('')
-                        )
                     )
-            }
+                )
+        }
 
-            if(cmd.userPerms){
-                const perms = msg.guild ? msg.channel.permissionsFor(msg.author) : Permissions.DEFAULT;
-                if(!perms.has(cmd.userPerms) && check(userPermError))
-                    return msg.channel.send(
-                        error(
-                            `${userPermError}\n\n` +
+        if(cmd.userPerms){
+            const perms = msg.guild ? msg.channel.permissionsFor(msg.author) : Permissions.DEFAULT;
+            if(!perms.has(cmd.userPerms) && check(userPermError))
+                return msg.channel.send(
+                    error(
+                        `${userPermError}\n\n` +
                             `Missing permissions:\n` +
                             new Permissions(cmd.userPerms)
                             .remove(perms).toArray().join('\n').code('')
-                        )
                     )
+                )
+        }
+
+        if(cmd.limited){
+            const { user, channel, guild } = cmd.limited;
+
+            if(guild){
+                const guilds = Array.isArray(guild) ? guild : [guild];
+                if(!msg.guild || (!guilds.includes(msg.guild.id) && check(serverError)))
+                    return msg.channel.send(error(serverError));
             }
-
-            if(cmd.limited){
-                const { user, channel, guild } = cmd.limited;
-
-                if(guild){
-                    const guilds = Array.isArray(guild) ? guild : [guild];
-                    if(!msg.guild || (!guilds.includes(msg.guild.id) && check(serverError)))
-                        return msg.channel.send(error(serverError));
-                }
-                if(channel){
-                    const channels = Array.isArray(channel) ? channel : [channel];
-                    if(!msg.guild || (!channels.includes(msg.channel.id) && check(channelError)))
-                        return msg.channel.send(error(channelError));
-                }
-                if(user){
-                    const users = Array.isArray(user) ? user : [user];
-                    if(!users.includes(msg.author.id) && check(userError))
-                        return msg.channel.send(error(userError));
-                }
+            if(channel){
+                const channels = Array.isArray(channel) ? channel : [channel];
+                if(!msg.guild || (!channels.includes(msg.channel.id) && check(channelError)))
+                    return msg.channel.send(error(channelError));
             }
+            if(user){
+                const users = Array.isArray(user) ? user : [user];
+                if(!users.includes(msg.author.id) && check(userError))
+                    return msg.channel.send(error(userError));
+            }
+        }
 
-            if(illegal){
-                const time = 10;
-                msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${"Reason".singPlur(errorReasons.length,false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
-                .then(async ms => {
-                    const emote = '✅';
-                    await ms.react(emote);
-                    const filter = (reaction, user) => (user.id == msg.author.id) && (reaction.emoji.name == emote)
-                    const collector =  ms.createReactionCollector(filter, { time: (time*1000), errors: ['time'] })
+        if(illegal){
+            const time = 10;
+            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${"Reason".singPlur(errorReasons.length,false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
+            .then(async ms => {
+                const emote = '✅';
+                await ms.react(emote);
+                const filter = (reaction, user) => (user.id == msg.author.id) && (reaction.emoji.name == emote)
+                const collector =  ms.createReactionCollector(filter, { time: (time*1000), errors: ['time'] })
 
-                    let runned = false;
+                let runned = false;
 
-                    collector.on('collect', async () => {
-                        runned = true;
-                        collector.stop();
-                        await ms.delete().catch(()=>{});
-                        return run(cmd, bot, msg, msg.command);
-                    })
-
-                    collector.on('end', async () => {
-                        if(runned) return;
-                        await ms.delete().catch(()=>{});
-                        await msg.delete().catch(()=>{});
-                    })
+                collector.on('collect', async () => {
+                    runned = true;
+                    collector.stop();
+                    await ms.delete().catch(()=>{});
+                    return run(cmd, bot, msg, msg.command);
                 })
-            }else{
-                await run(cmd, bot, msg, msg.command);
-            }
 
+                collector.on('end', async () => {
+                    if(runned) return;
+                    await ms.delete().catch(()=>{});
+                    await msg.delete().catch(()=>{});
+                })
+            })
         }else{
             logger(msg.command,false,msg, bot);
 
