@@ -1,3 +1,3 @@
 :a
-node run.js
+node ..
 goto a

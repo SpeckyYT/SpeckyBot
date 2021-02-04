@@ -1,3 +1,3 @@
 while true; do
-node run.js
+node ..
 done
