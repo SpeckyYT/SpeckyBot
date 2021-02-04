@@ -18,7 +18,7 @@ module.exports = (bot) => {
             bot.emotes.censure2
         ];
         return string.replace(
-            new RegExp(`(?<=\\b)(${badwords.join('|')})(?=\\b)`,'gi'),
+            new RegExp(`(?<=\\b)(${badwords.join('|')})+`,'gi'),
             Array(Math.ceil(Math.random()*4))
             .fill('')
             .map(()=>censures.pick())
