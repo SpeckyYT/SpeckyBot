@@ -197,12 +197,6 @@ module.exports.call = async (bot, m) => {
                     await msg.delete().catch(()=>{});
                 })
             })
-        }else{
-            logger(msg.command,false,msg, bot);
-
-            if(bot.config.reply_unexisting_command){
-                return msg.channel.send(error(`🛑 Command \`${msg.command || "null"}\` doesn't exist or isn't loaded correctly.`));
-            }
         }
     }
 
