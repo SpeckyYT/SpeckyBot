@@ -175,7 +175,7 @@ module.exports.call = async (bot, m) => {
 
         if(illegal){
             const time = 10;
-            msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${"Reason".singPlur(errorReasons.length,false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
+            return msg.channel.send(error(`⚠️ You are doing something that you shouldn't!\n\n${"Reason".singPlur(errorReasons.length,false)}:\n${errorReasons.join("\n")}\n\nThis message and yours with autodestruct in ${time} seconds if you don't confirm.`))
             .then(async ms => {
                 const emote = '✅';
                 await ms.react(emote);
@@ -198,6 +198,8 @@ module.exports.call = async (bot, m) => {
                 })
             })
         }
+
+        return run(cmd, bot, msg, msg.command);
     }
 
     if(cmd){
