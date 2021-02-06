@@ -1,17 +1,26 @@
 const { Nekos, NekoLove, Miss, HMtai, Freaker } = require('hmfull');
 const promisify = require('promisify-func');
 
-async function handle(bot, msg, methods, sfw){
-    const method = Array.isArray(methods) ? methods.pick() : methods;
+const apis = [NekoLove, Miss, HMtai, Freaker];
 
-    const api = [NekoLove, Miss, HMtai, Freaker]
-    .filter(api => api[sfw][method])
+async function handle(bot, msg, methods, sfw){
+    methods = Array.isArray(methods) ? methods : [methods];
+
+    const api = apis
+    .map(api => api[sfw])
+    .map(api =>
+        Object
+        .entries(api)
+        .filter(([name]) => methods.includes(name))
+        .map(([_,f]) => f)
+    )
+    .flat()
     .pick();
 
     if(!api) return bot.cmdError('Endpoint not found');
 
     return msg.channel.send(
-        await promisify(api[sfw][method]())()
+        await promisify(api())()
         .then(img => bot.membed().setImage(img.url))
     )
 }
