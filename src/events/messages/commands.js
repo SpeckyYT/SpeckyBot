@@ -9,7 +9,7 @@ const promisify = require('promisify-func');
 const qdb = require('quick.db');
 const usersettings = new qdb.table('usersettings');
 
-const deleteTime = Infinity;
+const deleteTime = 2**31-1;
 
 module.exports.call = async (bot, m) => {
     const msg = m.extend().cmdExtend();
