@@ -1,7 +1,7 @@
 module.exports = {
     name: "globalchats",
     description: "Gives you some more informations about the Global Chat!",
-    category: "misc",
+    category: "important",
     aliases: ['globalchat','gc']
 }
 
@@ -27,6 +27,8 @@ const rules = [
 const notes = [
     "Note:",
     "Every channel connected to the global-chat can read your messages.",
+    "Everyone will see your username (and icon)",
+    "Everyone will see the name of the server you're writing in (and icon)",
     "Editing and deleting messages is possible.",
     "Sending images is allowed (if they're not against the rules)",
 ]
