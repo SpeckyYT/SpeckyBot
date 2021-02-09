@@ -9,13 +9,9 @@ module.exports.deleteFolder =
         const files = data.filter(d => fs.lstatSync(join(folder,d)).isFile());
         const dirs = data.filter(d => fs.lstatSync(join(folder,d)).isDirectory());
 
-        for(let f of files){
-            await fs.promises.unlink(join(folder,f));
-        }
+        for(let f of files) await fs.promises.unlink(join(folder,f));
 
-        for(let d of dirs){
-            await deleteRecursive(join(folder,d));
-        }
+        for(let d of dirs) await deleteRecursive(join(folder,d));
 
         return fs.promises.rmdir(folder);
     }
