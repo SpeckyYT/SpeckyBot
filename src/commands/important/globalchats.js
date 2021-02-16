@@ -35,6 +35,16 @@ const notes = [
 .map((note,i) => `${i ? `-`: "+"} ${note}`)
 .join('\n');
 
+const reactions = [
+    "On some messages, you may get a reaction once sending, and if it is one of the following, your message didn't got send to the Global-Chat",
+    "🚷: The bot doesn't have enough permissions",
+    "🔄: Don't send more than two messages in a row",
+    "➿: Your message is too big",
+    "🚳: Your message contains external emotes"
+]
+.map((v,i) => i ? v : v.code())
+.join('\n');
+
 module.exports.run = async (bot, msg) => {
     return msg.channel.send(
         bot.embed()
@@ -45,6 +55,7 @@ module.exports.run = async (bot, msg) => {
                 "By including \"[GLOBAL]\" into a channel's topic, the channel will turn into a global-chat!".code('c'),
                 rules.code('md'),
                 notes.code('diff'),
+                reactions
             ]
         )
         .setFooter(`${bot.globalchats.size} Global Chats Connected`)

@@ -3,10 +3,6 @@ module.exports = {
 }
 
 module.exports.call = async (bot, msg) => {
-    const emotes = msg.content.match(bot.regex.emote);
-    if(emotes && emotes.length)
-        if(emotes.some(e => !bot.emojis.cache.has(e))) return;
-
     msg.content = msg.content.replace(bot.regex.inviteLink,'https://discord.gg/4EecFku');
     msg.content = await bot.censureText(msg.content);
 
