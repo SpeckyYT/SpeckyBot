@@ -57,6 +57,7 @@
         "reddit-image-fetcher": "^2.0.6",
         "relevant-urban": "^2.0.0",
         "seedrandom": "^3.0.5",
+        "specky-endecode": "0.0.0",
         "string-similarity": "^3.0.0",
         "terminal-image": "^0.2.0",
         "tictactoejs": "^1.0.3",
