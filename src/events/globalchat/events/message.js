@@ -4,6 +4,7 @@ module.exports = {
 
 module.exports.call = async (bot, msg) => {
     if(!msg.channel.topicSetting('global')) return;
+    if(!bot.globalchats.has(msg.channel.id)) return;
 
     if(!msg.channel.permissionsFor(bot.user).has(bot.perms.globalchat))
         return msg.react('🚷').catch(()=>{});
