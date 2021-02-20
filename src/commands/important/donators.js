@@ -2,7 +2,7 @@ module.exports = {
     name: "donators",
     description: "Lists all the donators!",
     category: "important",
-    aliases: ["donations","donation","donator","patreon"]
+    aliases: ["donations","donation","donator","donate","patreon"]
 }
 
 const { join } = require('path');
