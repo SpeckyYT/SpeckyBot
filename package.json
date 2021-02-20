@@ -29,7 +29,7 @@
         "gifencoder": "^2.0.1",
         "hmfull": "^1.2.3",
         "iced-coffee-script": "^108.0.14",
-        "images-scraper": "^5.0.7",
+        "images-scraper": "^6.0.0",
         "is-image-url": "^1.1.8",
         "jimp": "^0.9.8",
         "koffee": "^1.14.0",
