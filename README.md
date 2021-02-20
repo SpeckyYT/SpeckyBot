@@ -28,7 +28,7 @@ Be sure to invite the [original SpeckyBot](https://discordapp.com/api/oauth2/aut
 <!---donators--->
 | Donator | Donation |
 |-|-|
-| TheHDCrafter | 20.00€ |
+| Black Wolf | 20.00€ |
 | Nicsi | 20.00€ |
 | Dav!d | 2.29€ |
 | Benjiman | 2.22€ |
