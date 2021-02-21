@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg) => {
         await aki.step(
             Object.keys(answers)[Object.values(answers).indexOf(r.emoji.name)]
         );
-        if(aki.progress > 80){
+        if(aki.progress > 99){
             await aki.win()
             const guess = aki.answers.last();
             message.edit(
