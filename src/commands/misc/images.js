@@ -7,9 +7,10 @@ module.exports = {
 }
 
 const google = new (require('images-scraper'))({
-    puppeteer:{
-        headless: true
-    }
+    puppeteer: {
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        headless: true,
+    },
 });
 
 module.exports.run = async (bot, msg) => {
