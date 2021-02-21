@@ -14,7 +14,11 @@
             4,
             {
                 "MemberExpression": 0,
-                "SwitchCase": 1
+                "SwitchCase": 1,
+                "VariableDeclarator": 1,
+                "ObjectExpression": 1,
+                "flatTernaryExpressions": false,
+                "ArrayExpression": 1
             }
         ],
         "no-unused-vars": [
