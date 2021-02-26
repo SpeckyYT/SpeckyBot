@@ -38,6 +38,7 @@
         "mathjs": "^7.6.0",
         "moment": "^2.29.1",
         "more-array-methods": "^1.1.2",
+        "namiko.moe": "0.0.1",
         "neapolitan-wrapper": "0.0.6",
         "nekos.life": "^2.0.7",
         "node-cron": "^2.0.3",
