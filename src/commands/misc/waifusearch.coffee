@@ -17,9 +17,8 @@ module.exports =
             .setDescription(
                 """
                 #{waifu.description.code()}
-                #{"From: #{waifu.source}".code()}
                 """
             )
             .setImage(waifu.imageRaw)
-            .setFooter('#{waifusGot.length} waifus found')
+            .setFooter(waifu.source)
         )
