@@ -14,7 +14,7 @@ module.exports =
             "555791735607787580"
             ...bot.config.owner
         ] then return bot.cmdError("Too long")
-        
+
         if user.bot then return bot.cmdError("Bots have automatically big pp")
 
         p1 = userID.substr 4

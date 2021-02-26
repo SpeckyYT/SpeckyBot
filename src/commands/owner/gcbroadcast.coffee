@@ -20,5 +20,5 @@ module.exports =
             .map (gc) =>
                 gc.send(embed).catch =>
         )
-        
+
         bot.cmdSuccess('Done!')

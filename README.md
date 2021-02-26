@@ -1,5 +1,5 @@
 # SpeckyBot
- 
+
 SpeckyBot is an open-source Discord Bot which allows to be totally customizable for developers!
 
 NOTE: being open-source, doesn't mean that you're legally allowed to pubblish this Discord Bot without permission.

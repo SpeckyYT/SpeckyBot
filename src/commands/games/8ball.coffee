@@ -41,7 +41,7 @@ negative = [
 
 module.exports.run = (bot, msg) ->
     question = msg.cmdContent.toLowerCase().replace /[^a-z]/g, ''
-    
+
     if not question then return bot.cmdError 'You have to ask a question'
 
     msg.channel.send(

@@ -7,7 +7,7 @@ module.exports =
         events = bot.eventNames()
         .map((e) -> [e,bot.listeners(e).length])
         .sort((a,b) -> b[1]-a[1])
-        
+
         msg.channel.send(
             bot.embed()
             .setTitle "Events!"
