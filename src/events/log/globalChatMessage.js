@@ -3,6 +3,7 @@ module.exports = {
 }
 
 module.exports.call = async (bot, msg) => {
+    if(msg.author.id == bot.user.id) return;
     if(!msg.channel.topicSetting('global')) return;
     const channel = bot.channels.cache.get("813019518141333525");
     if(!channel) return;
