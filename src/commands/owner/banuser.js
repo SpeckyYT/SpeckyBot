@@ -15,6 +15,8 @@ module.exports.run = async (bot, msg) => {
     const target = await bot.users.fetch(res[0]);
     if (!target) return bot.cmdError('Invalid User Mention/ID.');
 
+    if(bot.config.owner.includes(target.id)) return bot.cmdError('Owners Cannot be Banned/Unbanned');
+
     if(target.bot) return bot.cmdError("Bots can't be banned");
 
     if (db.get('bannedUsers').includes(target.id))
