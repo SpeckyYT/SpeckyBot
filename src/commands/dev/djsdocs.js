@@ -39,10 +39,14 @@ module.exports.run = async (bot,msg) => {
     if(res.events)
         embed.addField('Events',toCode(res.events.map(e => e.name)));
     if(res.returns)
-        embed.addField('Returns',toCode({
-            types:dumbarray(res.returns.types),
-            description:res.returns.description
-        }));
+        embed.addField('Returns',toCode(
+            res.returns.types || res.returns.description ?
+                {
+                    types:flat(res.returns.types),
+                    description:res.returns.description
+                }
+                : flat(res.returns)
+        ));
     if(res.meta)
         embed.addField('Meta',toCode(res.meta));
 
@@ -53,7 +57,7 @@ function toCode(obj){
     return inspect(obj,false,3).code('js')
 }
 
-function dumbarray(arr){
+function flat(arr){
     if(!Array.isArray(arr)) return arr;
-    return arr.map(a => Array.isArray(a) ? dumbarray(a) : a).join('');
+    return arr.flat(Infinity).join('');
 }
