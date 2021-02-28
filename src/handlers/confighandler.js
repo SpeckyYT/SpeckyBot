@@ -1,13 +1,12 @@
-const { writeFileSync, appendFileSync, existsSync, readFileSync } = require('fs'),
-    { join } = require('path'),
-    config = require('../../config.json');
+const { writeFileSync, appendFileSync, existsSync, readFileSync } = require('fs');
+const { join } = require('path');
 
 module.exports = (bot) => {
     const template =
     {
-        token: config.token,
-        prefix: config.prefix,
-        owner: config.owner
+        token: "TOKEN_HERE",
+        prefix: "PREFIX_HERE",
+        owner: ["BOT_OWNER1_ID_HERE", "BOT_OWNER2_ID_HERE"]
     }
 
     let config;
@@ -18,9 +17,6 @@ module.exports = (bot) => {
                 join(process.cwd(),'..','config.json')
             )
         );
-        if(typeof config.apikeys == "object"){
-            Object.keys(config.apikeys).forEach(prop => config[prop] = config.apikeys[prop])
-        }
     }catch(err){
         console.log("Wasn't able to load config.json a new file got created: template.config.json".error);
 
@@ -32,35 +28,44 @@ module.exports = (bot) => {
     }
 
 
-    const nConfig = config;
+    const nConfig = Object.assign({},config);
 
-    const items = ["token","prefix","color"]
-    const bools = ["reply_unexisting_command"]
-    const arrays = ["owner"]
+    const strings = [
+        "token",
+        "prefix",
+        "color",
+    ];
 
-    items.forEach(conf => {
-        if(typeof config[conf] == "undefined"){
-            nConfig[conf] = conf.toUpperCase()
-        }
-    });
+    const bools = [
+    ];
 
-    bools.forEach(conf => {
-        if(typeof config[conf] != "boolean"){
+    const arrays = [
+        "owner",
+    ];
+
+    const apikeys = [
+    ];
+
+    for(const conf of strings)
+        if(typeof nConfig[conf] != "string")
+            nConfig[conf] = conf.toUpperCase();
+
+    for(const conf of bools)
+        if(typeof nConfig[conf] != "boolean")
             nConfig[conf] = false;
-        }
-    })
 
-    if(typeof config.apikeys != "object"){
-        nConfig.apikeys = {}
-    }
+    for(const conf of arrays)
+        if(!Array.isArray(nConfig[conf]))
+            nConfig[conf] = [];
 
-    arrays.forEach(conf => {
-        if(typeof config[conf] == "undefined"){
-            nConfig[conf] = []
-        }
-    });
+    if(typeof nConfig.apikeys != 'object')
+        nConfig.apikeys = {};
 
-    if(Object.is(config, nConfig)){
+    for(const apikey of apikeys)
+        if(!nConfig.apikeys[apikey])
+            nConfig.apikeys[apikey] = apikey.toUpperCase();
+
+    if(!Object.is(config, nConfig)){
         const conf = JSON.stringify(nConfig, null, 4)
 
         writeFileSync(join(process.cwd(),'..','config.json'), conf, {})
