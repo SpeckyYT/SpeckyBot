@@ -5,7 +5,6 @@
     "main": "src/bot.js",
     "dependencies": {
         "@bjornlu/colorblind": "^1.0.3",
-        "@yerkopalma/morsee": "^1.0.6",
         "aki-api": "^5.2.1",
         "ascii-art": "^2.5.0",
         "ascii-table": "0.0.9",
@@ -38,6 +37,7 @@
         "mathjs": "^7.6.0",
         "moment": "^2.29.1",
         "more-array-methods": "^1.1.2",
+        "morsee": "^1.0.8",
         "namiko.moe": "0.0.1",
         "neapolitan-wrapper": "0.0.6",
         "nekos.life": "^2.0.7",

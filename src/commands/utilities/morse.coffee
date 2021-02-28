@@ -1,4 +1,4 @@
-{ encode, decode } = require('@yerkopalma/morsee');
+{ encode, decode } = require 'morsee'
 
 module.exports = 
     name: "morse",
@@ -7,6 +7,6 @@ module.exports =
     usage: '<.... . .-.. .-.. --- | hello>',
     run: (bot, msg) ->
         content = msg.cmdContent
-        if not content then return bot.cmdError('No text or morse code found');
-        regex = /^[^a-zA-Z0-9]*$/;
-        msg.channel.send (if content.match regex then decode content else encode content).code()
+        return bot.cmdError 'No text or morse code found' if not content
+        regex = /^[^a-zA-Z0-9]*$/
+        msg.channel.send ((if content.match regex then decode else encode) content).code()
