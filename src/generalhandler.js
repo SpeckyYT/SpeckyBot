@@ -35,7 +35,7 @@ module.exports = async (bot) => {
         "botfunctions",
         "missingdirectories",
         "missingfiles",
-        "confighandler",
+        "config",
         "prototypes",
         "templates",
         "events"
