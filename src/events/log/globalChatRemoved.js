@@ -11,6 +11,8 @@ module.exports.call = async (bot, c) => {
         ["Channel ID", c.id]
     ]
 
+    await bot.wait(1000);
+
     const gcs = bot.globalchats.size;
 
     return channel.send(
