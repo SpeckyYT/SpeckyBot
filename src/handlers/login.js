@@ -7,7 +7,7 @@ module.exports = (bot) => {
 
     return bot.login(bot.config.token)
     .then(() => {
-        bot.log(`Bot prefix: ${bot.config.token}`.startupinfo);
+        bot.log(`Bot prefix: ${bot.config.prefix}`.startupinfo);
         bot.log(`Logged as ${bot.user.tag}!`.startupinfo);
     })
     .catch(() => {
