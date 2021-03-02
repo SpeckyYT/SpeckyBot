@@ -46,7 +46,6 @@
         "node-speedrun": "^1.2.0",
         "node-webshot": "^1.0.4",
         "npm": "^6.14.11",
-        "npm-require-ts": "^1.0.1",
         "number-to-emoji": "^1.0.0",
         "opusscript": "0.0.7",
         "pretty-ms": "^7.0.1",
