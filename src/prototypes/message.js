@@ -23,6 +23,8 @@ module.exports = bot => {
         // Client
         msg.client = msg.client || bot;
 
+        // IDs
+        msg.ids = msg.content.match(bot.regex.id) || [];
 
         // Safety if extending twice
         msg._extended = true;
