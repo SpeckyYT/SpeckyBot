@@ -2,8 +2,8 @@ const { Channel } = require('discord.js');
 
 module.exports = bot => {
 
-    Channel.prototype.isNSFW = function(){
-        return this.nsfw && !this.topicSetting('no-nsfw')
+    Channel.prototype.isNSFW = function(hard = false){
+        return this.nsfw && (hard || !this.topicSetting('no-nsfw'))
     }
 
 }
