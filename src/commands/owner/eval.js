@@ -20,6 +20,13 @@ module.exports.run = async (bot, msg) => {
 
     const m = await msg.channel.send(i(evaluated).slice(0,1980).code('js'));
 
+    if(evaluated instanceof Array){
+        if(evaluated.some(i => i instanceof Promise)){
+            await Promise.all(evaluated).catch(e=>e);
+            return m.edit(i(evaluated,1).slice(0,1980).code('js'));
+        }
+    }
+
     if(evaluated instanceof Promise){
         await evaluated.catch(e=>e);
         return m.edit(i(evaluated,1).slice(0,1980).code('js'));
