@@ -8,17 +8,17 @@ module.exports = (bot) ->
 
     bot.embed = ->
         new MessageEmbed()
-        .setColor(bot.config.color)
-        .setThumbnail(bot.user.displayAvatarURL({format:'png'}))
+        .setColor bot.config.color
+        .setThumbnail bot.user.displayAvatarURL {format:'png'}
         .setTimestamp()
-        .setAuthor(bot.user.username, bot.user.displayAvatarURL(), "https://github.com/SpeckyYT/SpeckyBot");
+        .setAuthor bot.user.username, bot.user.displayAvatarURL(), "https://github.com/SpeckyYT/SpeckyBot"
 
     bot.globalChatEmbed = (msg) ->
         new MessageEmbed()
-        .setAuthor(msg.author.username,msg.author.displayAvatarURL(),msg.url)
-        .setColor(if usersettings.has(s = "#{msg.author.id}.embedcolor") then usersettings.get(s) else msg.member.displayHexColor)
-        .setDescription(msg.content or '')
-        .setFooter(msg.guild.name, msg.guild.iconURL())
-        .setTimestamp()
-        .attachFiles(msg.attachments.map((a)->a.url));
+        .setAuthor msg.author.username, msg.author.displayAvatarURL(), msg.url
+        .setColor if usersettings.has(s = "#{msg.author.id}.embedcolor") then usersettings.get(s) else msg.member.displayHexColor
+        .setDescription msg.content or ''
+        .setFooter msg.guild.name, msg.guild.iconURL()
+        .setTimestamp msg.createdTimestamp
+        .attachFiles msg.attachments.map (a)->a.url
 
