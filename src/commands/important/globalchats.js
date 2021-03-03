@@ -8,11 +8,12 @@ module.exports = {
 const rules = [
     [
         "Be sure to follow the following rules!",
-        "No NSFW. The global-chat is a SFW chat, which means that you're not allowed to send anything related to +18 content.",
+        "No NSFW/NSFL. The global-chat is a SFW chat, which means that you're not allowed to send anything related to +18 or illegal content.",
         "Don't spam. If nobody else is writing, be sure to edit your previous message instead of sending new ones.",
         "Don't use bot commands (of any bot). Use a bot-channel instead.",
         "Don't advertise. Do that in other channels where it's permitted.",
         "Don't use offensive swearwords.",
+        "Don't try to bypass any of the automatic filters/limitations.",
     ],
     [
         "The next rules are specifically for server admins/moderators.",
