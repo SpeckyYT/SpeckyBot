@@ -8,7 +8,7 @@ module.exports = (bot) => {
         trimStart: /^\s+/g,
         trimEnd: /\s+$/g,
         spaces: / +/g,
-        id: /(\d{17,19})/g,
+        id: /(\b\d{17,19}\b)/g,
         messageLink: /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/gi,
         inviteLink: /(?:\S+)(https?:\/\/)?(www\.)?(discord(?:app)?\.gg(?:\/|\\+\/+)|discord(?:app)?\.com(?:\/|\\+\/+)(?:invite\/))([A-z0-9-]{2,})/gi,
         link: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\\/=]*)/gi,
