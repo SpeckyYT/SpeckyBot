@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 
-const { readFile } = require('fs');
+const { createInterface } = require('readline');
+const { createReadStream } = require('fs');
 const { createServer } = require('net');
 const { join } = require('path');
 
@@ -10,9 +11,20 @@ module.exports = (bot) => {
 
     try{
         app.get('/log', (req, res) => {
-            readFile(
-                join(process.cwd(),'..','commands.log'),
-                (err,data) => res.send(String(data).split("\n").reverse().slice(0,1500).join("<br>"))
+            const file = join(process.cwd(),'..','commands.log');
+            const lines = [];
+            const rl = createInterface(
+                {
+                    input: createReadStream(file),
+                }
+            );
+            rl.on(
+                'line',
+                line => lines.push(line)
+            );
+            rl.on(
+                'close',
+                () => res.send(lines.reverse().slice(0,5000).join("<br>"))
             );
         });
         let port = 50000;
