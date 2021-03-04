@@ -6,6 +6,8 @@ const { createServer } = require('net');
 const { join } = require('path');
 
 module.exports = (bot) => {
+    if(global.website) global.website.close();
+
     try{
         app.get('/log', (req, res) => {
             readFile(

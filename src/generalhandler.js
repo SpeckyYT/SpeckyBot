@@ -27,7 +27,6 @@ module.exports = async (bot) => {
     }
 
     const priority = [
-        "clean",
         "dependencies",
         "languages",
         "botcache",
@@ -38,7 +37,7 @@ module.exports = async (bot) => {
         "config",
         "prototypes",
         "templates",
-        "events"
+        "events",
     ];
 
     load(priority);
