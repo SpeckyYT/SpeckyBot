@@ -6,21 +6,24 @@ module.exports.call = async (bot, msg) => {
     if(!msg.channel.topicSetting('global')) return;
     if(!bot.globalchats.has(msg.channel.id)) return;
 
-    if(!msg.channel.permissionsFor(bot.user).has(bot.perms.globalchat))
-        return msg.react('🚷').catch(()=>{});
+    const react = e => msg.react(e).catch(()=>{});
 
-    const prevMessages = bot.cache.gcmessages.last(2);
-    if(prevMessages && prevMessages.length > 1)
+    // Consecutive Messages
+    const consecutiveCount = 2;
+    const prevMessages = bot.cache.gcmessages.last(consecutiveCount);
+    if(prevMessages && prevMessages.length >= consecutiveCount)
         if(prevMessages.every(m => m.author.id == msg.author.id))
-            return msg.react('🔄').catch(()=>{});
+            return react(bot.emotes.notwice);
 
-    if(msg.content.split('\n').length > 20)
-        return msg.react('➿').catch(()=>{});
+    // Too big Messages
+    if(msg.content.split('\n').length > 15)
+        return react(bot.emotes.toolong);
 
+    // External Emotes
     const emotes = msg.content.match(bot.regex.emote);
     if(emotes && emotes.length)
         if(emotes.some(e => !bot.emojis.cache.has(e)))
-            return msg.react('🚳').catch(()=>{});
+            return react(bot.emotes.noexternal);
 
     bot.emit('globalMessage', msg);
 }
