@@ -9,7 +9,7 @@ module.exports.run = async (bot, msg) => {
     const rules = [
         [
             "Be sure to follow the following rules!",
-            "No NSFW/NSFL or similars. The global-chat is a SFW chat, which means that you're not allowed to send anything related to +18/illegal/disturbing/unsettling content.",
+            "No NSFW/NSFL or similars. Don't send anything related to +18/illegal/disturbing/unsettling content.",
             "Don't spam. If nobody else is writing, be sure to edit your previous message instead of sending new ones.",
             "Don't use bot commands (of any bot). Use a bot-channel instead.",
             "Don't advertise. Do that in other channels where it's permitted.",
@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg) => {
             "The global-chat channel can't be tagged as NSFW.",
             "Every server should moderate it's own server of the global-chat.",
             "If anyone breaks one of the rules above, the moderation team of that server should delete the message.",
-            "If the server doesn't follow the rules, the server may get banned from using SpeckyBot.",
+            "If big part of a server doesn't follow the rules, the server may get banned from using SpeckyBot.",
         ],
     ]
     .map(rules => rules.map((rule,i) => `${i ? `${i}.` : '#'} ${rule}`).join('\n'))
@@ -40,7 +40,7 @@ module.exports.run = async (bot, msg) => {
     .join('\n');
 
     const reactions = [
-        "On some messages, you may get a reaction once sending, and if it is one of the following, your message didn't got send to the Global-Chat",
+        "On some messages, you may get a reaction right after sending (the message gets ignored).",
         `${bot.emotes.notwice}: Don't send more than two messages in a row`,
         `${bot.emotes.toolong}: Your message is too big`,
         `${bot.emotes.noexternal}: Your message contains external emotes`,
