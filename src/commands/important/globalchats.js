@@ -18,10 +18,9 @@ module.exports.run = async (bot, msg) => {
         ],
         [
             "The next rules are specifically for server admins/moderators.",
-            "Don't create 2 or more global-chats in one server.",
-            "It's highly recommended to create a new channel for the global-chat.",
+            "It's highly recommended to create a new/separate channel for the global-chat.",
             "The global-chat channel can't be tagged as NSFW.",
-            "Every server should moderate it's own part of the global-chat.",
+            "Every server should moderate it's own server of the global-chat.",
             "If anyone breaks one of the rules above, the moderation team of that server should delete the message.",
             "If the server doesn't follow the rules, the server may get banned from using SpeckyBot.",
         ],
