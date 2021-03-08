@@ -48,6 +48,16 @@ module.exports.run = async (bot, msg) => {
     .map((v,i) => i ? v : v.code())
     .join('\n');
 
+    const tldr = [
+        "too long; didn't read.",
+        "Don't be a dumbass.",
+        "Don't share private/personal data.",
+        "Read the entire page you lazy ass.",
+        "Have fun.",
+    ]
+    .map((tl,i) => `${i ? `[${i}]:`: "#"} ${tl}`)
+    .join('\n');
+
     return msg.channel.send(
         bot.embed()
         .setTitle('Global Chat!')
@@ -57,7 +67,8 @@ module.exports.run = async (bot, msg) => {
                 "By including \"[GLOBAL]\" into a channel's topic, the channel will turn into a global-chat!".code('c'),
                 rules.code('md'),
                 notes.code('diff'),
-                reactions
+                reactions,
+                tldr.code('md'),
             ]
         )
         .setFooter(`${bot.globalchats.size} Global Chats Connected`)
