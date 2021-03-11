@@ -24,17 +24,6 @@ module.exports = (bot) => {
         .map((rule,i) => `${i ? `${i}.` : '#'} ${rule}`)
         .join('\n');
 
-        const notes = [
-            "Note:",
-            "Every channel connected to the global-chat can read your messages.",
-            "Everyone will see your username (and icon)",
-            "Everyone will see the name of the server you're writing in (and icon)",
-            "Editing and deleting messages is possible.",
-            "Sending images is allowed (if they're not against the rules)",
-        ]
-        .map((note,i) => `${i ? `-`: "+"} ${note}`)
-        .join('\n');
-
         const reactions = [
             "On some messages, you may get a reaction right after sending (the message gets ignored).",
             `${bot.emotes.notwice}: Don't send more than two messages in a row`,
@@ -42,6 +31,18 @@ module.exports = (bot) => {
             `${bot.emotes.noexternal}: Your message contains external emotes`,
         ]
         .map((v,i) => i ? v : v.code())
+        .join('\n');
+
+        const notes = [
+            "Note:",
+            "Every channel connected to the global-chat can read your messages.",
+            "Everyone will see your username (and icon)",
+            "Everyone will see the name of the server you're writing in (and icon)",
+            "Editing and deleting messages is possible.",
+            "Sending images is allowed (if they're not against the rules)",
+            "Rules may be subjected to changes at any time",
+        ]
+        .map((note,i) => `${i ? `-`: "+"} ${note}`)
         .join('\n');
 
         const tldr = [
@@ -72,12 +73,12 @@ module.exports = (bot) => {
                 value: adminRules.code('md'),
             },
             {
-                name: "Notes",
-                value: notes.code('diff'),
-            },
-            {
                 name: "Reactions",
                 value: reactions,
+            },
+            {
+                name: "Notes",
+                value: notes.code('diff'),
             },
             {
                 name: "TL;DR",
