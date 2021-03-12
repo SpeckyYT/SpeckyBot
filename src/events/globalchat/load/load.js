@@ -5,9 +5,17 @@ module.exports = {
 module.exports.call = (bot) => {
     const servers = [];
     const filter = c =>
+        c.guild &&
         c.topicSetting('global') &&
         !c.isNSFW(true) &&
-        !servers.includes((c.guild||{}).id) &&
-        (servers.push((c.guild||{}).id), true);
+        (
+            c.guild.memberCount -
+            c.guild.members.cache.filter(m=>m.user.bot).size
+        ) >= 15 &&
+        !servers.includes(c.guild.id) &&
+        (
+            servers.push(c.guild.id),
+            true
+        );
     bot.globalchats = bot.channels.cache.filter(filter);
 }
