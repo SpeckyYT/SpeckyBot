@@ -73,7 +73,6 @@ module.exports = (bot) => {
 
     Object.defineProperty(bot, 'config', {
         enumerable: false,
-        writable: false,
         value: nConfig
     });
 }
