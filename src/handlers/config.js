@@ -71,5 +71,9 @@ module.exports = (bot) => {
         writeFileSync(join(process.cwd(),'..','config.json'), conf, {})
     }
 
-    bot.config = config;
+    Object.defineProperty(bot, 'config', {
+        enumerable: false,
+        writable: false,
+        value: nConfig
+    });
 }

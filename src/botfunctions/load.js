@@ -8,7 +8,11 @@ module.exports = (bot) => {
             readFile(path,{encoding:'utf-8'},(err,data) => {
                 if(err) rej(err);
                 try{
-                    bot.config = JSON.parse(data);
+                    Object.defineProperty(bot, 'config', {
+                        enumerable: false,
+                        writable: false,
+                        value: JSON.parse(data),
+                    });
                     res();
                 }catch(e){
                     rej(e);
