@@ -57,13 +57,6 @@ const radios = [
 const { compareTwoStrings } = require('string-similarity');
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)){
-        const perms = ['CONNECT','SPEAK'].map(perm => msg.member.voice.channel.permissionsFor(bot.user.id).has(perm));
-        if(perms.some(v => !v)){
-            return bot.cmdError(`Missing permission${perms.filter(v => !v).length == 1 ? '' : 's'}: ${['CONNECT','SPEAK'].filter((v,i) => !perms[i]).join(' ')}`)
-        }
-    }
-
     const playlist =
         msg.cmdContent ?
             radios.map(r => ({

@@ -89,6 +89,7 @@ module.exports.call = async (bot, m) => {
         const userError     =  "⛔ This command isn't available for you.";
         const musicError1   =  "🎵 You have to be in a vocal channel to perform this command.";
         const musicError2   =  `🎵 You have to be in the same vocal channel of ${bot.user} to run this command.`
+        const musicError3   =  "🎵 Missing playing permissions in the vocal channel.\n\n"
         const officialError =  "🤖 This is the official SpeckyBot."
 
         const category = cmd.category;
@@ -118,6 +119,18 @@ module.exports.call = async (bot, m) => {
             if(msg.guild.me.voice && msg.guild.me.voice.channel){
                 if(msg.member.voice.channel.id != msg.guild.me.voice.channel.id){
                     return msg.channel.send(error(musicError2))
+                }
+            }
+            if(!bot.music.isPlaying(msg.guild.id)){
+                const perms = ['CONNECT','SPEAK']
+                .map(perm => msg.member.voice.channel.permissionsFor(bot.user.id).has(perm));
+                if(perms.some(v => !v)){
+                    return msg.channel.send(
+                        musicError3 +
+                        ['CONNECT','SPEAK']
+                        .filter((v,i) => !perms[i]).join('\n')
+                        .code('')
+                    )
                 }
             }
         }
