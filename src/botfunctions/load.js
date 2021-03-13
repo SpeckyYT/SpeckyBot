@@ -10,6 +10,8 @@ module.exports = (bot) => {
                 try{
                     Object.defineProperty(bot, 'config', {
                         enumerable: false,
+                        configurable: true,
+                        writable: true,
                         value: JSON.parse(data),
                     });
                     res();
