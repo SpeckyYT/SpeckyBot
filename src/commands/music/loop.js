@@ -7,7 +7,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing')
+    if(!bot.music.isPlaying(msg)) throw new Error('Not playing');
     if(!msg.args[0]) return bot.cmdError('You have to include a `yes` or `no`');
     switch(msg.args[0]){
         case 'yes':

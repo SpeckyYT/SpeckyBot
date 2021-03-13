@@ -121,7 +121,7 @@ module.exports.call = async (bot, m) => {
                     return msg.channel.send(error(musicError2))
                 }
             }
-            if(!bot.music.isPlaying(msg.guild.id)){
+            if(!bot.music.isPlaying(msg)){
                 const perms = ['CONNECT','SPEAK']
                 .map(perm => msg.member.voice.channel.permissionsFor(bot.user.id).has(perm));
                 if(perms.some(v => !v)){

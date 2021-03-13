@@ -8,8 +8,8 @@ module.exports = {
 const queueLength = 10;
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing');
-    const queue = await bot.music.getQueue(msg.guild.id);
+    if(!bot.music.isPlaying(msg)) throw new Error('Not playing');
+    const queue = await bot.music.getQueue(msg);
     if(!queue) return bot.cmdError('No queue found.');
 
     const [current, ...next] = queue.songs;

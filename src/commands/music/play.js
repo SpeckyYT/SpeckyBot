@@ -8,13 +8,15 @@ module.exports = {
 
 module.exports.run = async (bot, msg) => {
     if(!msg.cmdContent) return bot.cmdError('You have to include a song that you want to play.');
-    const { song, error } = await (
-        bot.music.isPlaying(msg.guild.id) ?
-            bot.music.addToQueue(msg.guild.id, msg.cmdContent, {}, msg.author.tag) :
-            bot.music.play(msg.member.voice.channel, msg.cmdContent, {}, msg.author.tag)
+    const search = {
+        search: msg.cmdContent,
+        requestedBy: msg.author.tag,
+    }
+    const song = await (
+        bot.music.isPlaying(msg) ?
+            bot.music.addToQueue(msg,search) :
+            bot.music.play(msg, search)
     );
-    if(error) return bot.cmdError(JSON.stringify(error));
-    if(!song) return bot.cmdError('Song not found (probably a bug?)');
     return msg.channel.send(
         bot.embed()
         .setTitle(song.name)

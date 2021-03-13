@@ -69,11 +69,15 @@ module.exports.run = async (bot, msg) => {
             .sort((a,b) => b.value-a.value)[0].radio :
             radios.pick();
 
-    if(bot.music.isPlaying(msg.guild.id)) bot.music.stop(msg.guild.id);
-    await bot.music.playlist(msg.guild.id, playlist.url, msg.member.voice.channel, 500, msg.author.tag);
-    bot.music.toggleQueueLoop(msg.guild.id);
-    bot.music.shuffle(msg.guild.id);
-    // bot.music.skip(msg.guild.id);
+    if(bot.music.isPlaying(msg)) bot.music.stop(msg);
+    await bot.music.playlist(msg, {
+        search: playlist.url,
+        requestedBy: msg.author.tag,
+        maxSongs: 500,
+    });
+    bot.music.toggleQueueLoop(msg);
+    bot.music.shuffle(msg);
+    bot.music.skip(msg);
     return msg.channel.send(
         bot.embed()
         .setTitle(`Now Playing "${playlist.name}"`)

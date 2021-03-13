@@ -6,7 +6,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing');
-    await bot.music.resume(msg.guild.id);
+    if(!bot.music.isPlaying(msg)) throw new Error('Not playing');
+    await bot.music.resume(msg);
     return bot.cmdSuccess('Playback resumed.');
 }

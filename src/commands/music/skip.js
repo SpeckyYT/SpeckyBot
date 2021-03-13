@@ -6,7 +6,7 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing')
-    const song = await bot.music.skip(msg.guild.id);
+    if(!bot.music.isPlaying(msg)) throw new Error('Not playing')
+    const song = await bot.music.skip(msg);
     return bot.cmdSuccess(`${song.name} got skipped!`);
 }

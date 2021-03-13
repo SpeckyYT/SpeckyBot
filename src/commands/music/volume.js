@@ -6,10 +6,10 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing');
+    if(!bot.music.isPlaying(msg)) throw new Error('Not playing');
     const volume = parseInt(msg.cmdContent);
     if(isNaN(volume)) return bot.cmdError('Volume is not a number');
     const newVolume = volume.clamp(10,250);
-    bot.music.setVolume(msg.guild.id, newVolume);
+    bot.music.setVolume(msg, newVolume);
     return bot.cmdSuccess(`Volume got set to ${newVolume}%`);
 }
