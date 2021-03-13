@@ -11,7 +11,21 @@ module.exports.run = async (bot, msg) => {
     return msg.channel.send(
         bot.embed()
         .setTitle(song.name)
-        .setDescription(`Author: ${song.author}\nDuration: ${song.duration}\n\`${bot.music.createProgressBar(msg.guild.id,20,'>','=')}\`\nRequested by: ${song.requestedBy}`)
+        .setDescription(
+            [
+                `Author: ${song.author}`,
+                `Duration: ${song.duration}`,
+                bot.music.createProgressBar(
+                    msg,
+                    {
+                        size: 20,
+                        arrow: '>',
+                        block: '=',
+                    }
+                ).code(),
+                `Requested by: ${song.requestedBy}`,
+            ]
+        )
         .setURL(song.url)
         .setImage(song.thumbnail)
     )

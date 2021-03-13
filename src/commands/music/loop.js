@@ -13,13 +13,13 @@ module.exports.run = async (bot, msg) => {
         case 'yes':
         case 'true':
         case 'on':
-            bot.music.setRepeatMode(msg.guild.id, true);
+            bot.music.setRepeatMode(msg, true);
             return bot.cmdSuccess("Loop got set to `true`")
             break;
         case 'no':
         case 'false':
         case 'off':
-            bot.music.setRepeatMode(msg.guild.id, false);
+            bot.music.setRepeatMode(msg, false);
             return bot.cmdSuccess("Loop got set to `false`")
             break;
         default:
