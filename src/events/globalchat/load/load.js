@@ -5,6 +5,7 @@ module.exports = {
 module.exports.call = (bot) => {
     const servers = [];
     const filter = c =>
+        c.type == 'text' &&
         c.guild &&
         c.topicSetting('global') &&
         !c.isNSFW(true) &&
