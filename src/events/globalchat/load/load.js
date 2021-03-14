@@ -12,6 +12,7 @@ module.exports.call = (bot) => {
             c.guild.memberCount -
             c.guild.members.cache.filter(m=>m.user.bot).size
         ) >= bot.cache.gcminmembers || 10 &&
+        c.permissionsFor(bot.user).has(bot.perms.globalchat) &&
         !servers.includes(c.guild.id) &&
         (
             servers.push(c.guild.id),
