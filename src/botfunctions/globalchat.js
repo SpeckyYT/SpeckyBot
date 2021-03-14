@@ -19,7 +19,7 @@ module.exports = (bot) => {
             "Every server should moderate it's own server of the global-chat.",
             "If anyone breaks one of the rules above, the moderation team of that server should delete the message.",
             "If big part of a server doesn't follow the rules, the server may get banned from using SpeckyBot.",
-            "Your server will have to have at least 15 members.",
+            `Your server will have to have at least ${bot.cache.gcminmembers || 10} members.`,
         ]
         .map((rule,i) => `${i ? `${i}.` : '#'} ${rule}`)
         .join('\n');
