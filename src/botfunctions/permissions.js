@@ -13,6 +13,9 @@ module.exports = (bot) => {
             embed,
             msgs,
         ],
-        commands: [files,embed],
+        commands: [
+            files,
+            embed,
+        ],
     }
 }
