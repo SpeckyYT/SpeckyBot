@@ -20,7 +20,7 @@ module.exports = (bot) => {
             "If anyone breaks one of the rules above, the moderation team of that server should delete the message.",
             "If big part of a server doesn't follow the rules, the server may get banned from using SpeckyBot.",
             `Your server will have to have at least ${bot.cache.gcminmembers || 10} members.`,
-            "SpeckyBot requires the following permissions: `read/send messages/files/embeds and manage messages`"
+            "SpeckyBot requires the following permissions: read/send messages/files/embeds and manage messages"
         ]
         .map((rule,i) => `${i ? `${i}.` : '#'} ${rule}`)
         .join('\n');
