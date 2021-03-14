@@ -13,13 +13,14 @@ module.exports = (bot) => {
         .join('\n');
 
         const adminRules = [
-            "The next rules are specifically for server admins/moderators.",
+            "The next rules/informations are specifically for server admins/moderators.",
             "It's highly recommended to create a new/separate channel for the global-chat.",
             "The global-chat channel can't be tagged as NSFW.",
             "Every server should moderate it's own server of the global-chat.",
             "If anyone breaks one of the rules above, the moderation team of that server should delete the message.",
             "If big part of a server doesn't follow the rules, the server may get banned from using SpeckyBot.",
             `Your server will have to have at least ${bot.cache.gcminmembers || 10} members.`,
+            "SpeckyBot requires the following permissions: `read/send messages/files/embeds and manage messages`"
         ]
         .map((rule,i) => `${i ? `${i}.` : '#'} ${rule}`)
         .join('\n');
@@ -69,7 +70,7 @@ module.exports = (bot) => {
                 value: userRules.code('md'),
             },
             {
-                name: "Mods/Admins Rules",
+                name: "Mods/Admins Rules/Informations",
                 value: adminRules.code('md'),
             },
             {
