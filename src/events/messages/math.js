@@ -8,6 +8,7 @@ const usersettings = new qdb.table('usersettings');
 module.exports.call = (bot, msg) => {
     if(!msg.content) return;
     if(!usersettings.get(`${msg.author.id}.math`)) return;
+    if(msg.content.match(/^[;:]/g)) return;
 
     const { result } = bot.matheval(msg.content, msg);
 
