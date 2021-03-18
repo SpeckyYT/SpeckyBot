@@ -75,7 +75,7 @@ Events get called by the [Discord.js](https://discord.js.org/#/docs/main/stable/
 | event        | String   | "message"                     | any event emitted from one above | true     |
 | emitter      | String   | "bot"                         | `bot` or `process`               | false    |
 | type         | String   | "once"                        | `on` or `once`                   | false    |
-| timezone     | String   | "Europe/Rome"                 | One of [these](https://raw.githubusercontent.com/node-cron/tz-offset/master/generated/offsets.json) timezones | false |
+| timezone     | String   | "Europe/Rome"                 | One of [these](https://github.com/moment/moment-timezone/blob/develop/data/packed/latest.json) timezones | false |
 | `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | true     |
 
 Note: You can have **ONLY ONE** exported function in the entire file
