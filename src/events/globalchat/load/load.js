@@ -9,14 +9,7 @@ module.exports.call = (bot) => {
         c.guild &&
         c.topicSetting('global') &&
         !c.isNSFW(true) &&
-        (
-            (
-                c.guild.memberCount -
-                c.guild.members.cache.filter(m=>m.user.bot).size
-            ) >= (
-                bot.cache.gcminmembers || 10
-            )
-        ) &&
+        (c.guild.memberCount >= bot.cache.gcminmembers || 10) &&
         c.permissionsFor(bot.user).has(bot.perms.globalchat) &&
         !servers.includes(c.guild.id) &&
         (
