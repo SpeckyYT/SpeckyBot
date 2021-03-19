@@ -5,7 +5,7 @@ const { EventEmitter } = require('events');
 module.exports = (bot) => {
     process.removeAllListeners();
     bot.removeAllListeners();
-    bot.cache.schedules.forEach(s=>s.destroy());
+    bot.cache.schedules.forEach(s => s.stop()); // ! destroy doesn't work now
     bot.cache.schedules = [];
 
     global.modules.loader(bot, 'events', ({filePath}) => {
