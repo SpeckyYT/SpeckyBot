@@ -1,18 +1,30 @@
+const { Util } = require('discord.js');
 const censor = require('discord-censor');
 const fetch = require('node-fetch');
 
-const bwsource = 'https://raw.githubusercontent.com/chucknorris-io/swear-words/master/en';
+const base = 'https://raw.githubusercontent.com/chucknorris-io/swear-words/master/';
+
+const bwsources = [
+    'en',
+]
 
 module.exports = (bot) => {
-    fetch.default(bwsource)
-    .then(r => r.text())
-    .then(w => w.split('\n'))
-    .then(w =>
-        censor.badwords.push(...w.filter(b => !censor.badwords.includes(b)))
+    Promise.all(
+        bwsources.map(bwsource =>
+            fetch.default(`${base}${bwsource}`)
+            .then(r => r.text())
+            .then(w => w.split('\n'))
+            .catch(() => {})
+        )
     )
-    .catch(() => {})
+    .then(badwords => badwords.flat(1))
+    .then(badwords => {
+        if(badwords.length){
+            censor.badwords.splice(0,Infinity);
+            censor.badwords.push(...badwords)
+        }
+    })
 
-    bot.censorText = (string, censor) =>
-        censor.censor(string, censor || '*\u200b'.repeat(6));
-
+    bot.censorText = (string, censorText) =>
+        Util.escapeItalic(censor.censor(string, censorText));
 }
