@@ -16,14 +16,20 @@ module.exports.loader = (bot,path,cb) => {
         if(!files.some(f => f.startsWith('.ignorefiles'))){
             files.filter(d => d.match(bot.supportedFiles))
             .forEach(file => {
+                const pathLog = stringPath.padEnd(36,' ');
+                const spacingLog1 = ' '.repeat(8);
+                const fileLog = file.padEnd(24,' ');
+                const spacingLog2 = ' '.repeat(2);
+                const stick = "|";
+                const timeLog = () => `${new Date().getTime() - start}ms`;
                 const start = new Date().getTime();
                 try{
                     const filePath = join(currPath,file);
                     cb({filePath});
-                    (bot.log||console.log)(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file.padEnd(32,' ')}|${' '.repeat(4)}${new Date().getTime() - start}ms`.debug);
+                    (bot.log||console.log)(`${pathLog.debug}${stick.green}${spacingLog1}${fileLog.debug}${stick.green}${spacingLog2}${timeLog().yellow}`);
                 }catch(err){
-                    (bot.log||console.log)(`${stringPath.padEnd(32,' ')}|${' '.repeat(8)}${file} ERROR!`.error);
-                    (bot.log||console.log)(err.message.error);
+                    (bot.log||console.log)(`${pathLog}${stick}${spacingLog1}${fileLog}${stick}${spacingLog2}ERROR!`.fatal);
+                    (bot.log||console.log)(`${(err||{}).message || err}`.error);
                 }
             })
         }
