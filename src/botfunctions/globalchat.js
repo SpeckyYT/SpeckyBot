@@ -41,7 +41,7 @@ module.exports = (bot) => {
             "Everyone will see the name of the server you're writing in (and icon)",
             "Editing and deleting messages is possible.",
             "Sending images is allowed (if they're not against the rules)",
-            "Rules may be subjected to changes at any time",
+            "Rules may be subject to changes at any time",
         ]
         .map((note,i) => `${i ? `-`: "+"} ${note}`)
         .join('\n');
