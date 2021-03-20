@@ -4,7 +4,7 @@ module.exports = {
 
 module.exports.call = async (bot, msg) => {
     msg.content = msg.content.replace(bot.regex.inviteLink,'https://discord.gg/4EecFku');
-    msg.content = bot.censorText(msg.content);
+    msg.content = bot.censorText(msg.content, '\\*');
 
     bot.globalchats
     .filter(chan => msg.channel.id != chan.id)

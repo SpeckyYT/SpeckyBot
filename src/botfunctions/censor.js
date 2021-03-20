@@ -1,5 +1,4 @@
-const { Util } = require('discord.js');
-const censor = require('discord-censor');
+const censor = require('good-censor');
 const fetch = require('node-fetch');
 
 const base = 'https://raw.githubusercontent.com/chucknorris-io/swear-words/master/';
@@ -26,5 +25,10 @@ module.exports = (bot) => {
     })
 
     bot.censorText = (string, censorText) =>
-        Util.escapeItalic(censor.censor(string, censorText));
+        censor.censor(
+            string,
+            {
+                censorText: censorText
+            }
+        );
 }
