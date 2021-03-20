@@ -28,7 +28,8 @@ module.exports = (bot) => {
         censor.censor(
             string,
             {
-                censorText: censorText
+                censorText: censorText,
+                censorStart: 1,
             }
         );
 }
