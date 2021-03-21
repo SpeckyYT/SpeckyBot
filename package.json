@@ -25,7 +25,7 @@
         "discord.js-docs": "^0.1.2",
         "express": "^4.17.1",
         "gifencoder": "^2.0.1",
-        "good-censor": "^1.0.2",
+        "good-censor": "^1.0.3",
         "hmfull": "^1.2.3",
         "iced-coffee-script": "^108.0.14",
         "images-scraper": "^6.1.1",
