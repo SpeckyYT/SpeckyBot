@@ -88,4 +88,10 @@ module.exports = (bot) => {
         )
         .setFooter(`${bot.globalchats.size} Global Chats Connected`)
     }
+
+    bot.globalChatCensor = (content) => {
+        content = content.replace(bot.regex.inviteLink,'https://discord.gg/4EecFku');
+        content = bot.censorText(content, '∗');
+        return content;
+    }
 }
