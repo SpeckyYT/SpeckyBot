@@ -8,6 +8,10 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     const botlists = [
         [
+            'Top.gg',
+            'https://top.gg/bot/398157933315227649/vote'
+        ],
+        [
             'Discord Boats',
             'https://discord.boats/bot/398157933315227649/vote'
         ],
