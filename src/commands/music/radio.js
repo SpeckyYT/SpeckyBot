@@ -57,17 +57,17 @@ const radios = [
 const { compareTwoStrings } = require('string-similarity');
 
 module.exports.run = async (bot, msg) => {
+    if(!msg.cmdContent) return msg.channel.send(embed(bot));
+
     const playlist =
-        msg.cmdContent ?
-            radios.map(r => ({
-                value: compareTwoStrings(
-                    msg.cmdContent.toLowerCase(),
-                    r.name.toLowerCase(),
-                ),
-                radio: r,
-            }))
-            .sort((a,b) => b.value-a.value)[0].radio :
-            radios.pick();
+        radios.map(r => ({
+            value: compareTwoStrings(
+                msg.cmdContent.toLowerCase(),
+                r.name.toLowerCase(),
+            ),
+            radio: r,
+        }))
+        .sort((a,b) => b.value-a.value)[0].radio;
 
     if(bot.music.isPlaying(msg)) bot.music.stop(msg);
     await bot.music.playlist(msg, {
@@ -78,13 +78,21 @@ module.exports.run = async (bot, msg) => {
     bot.music.toggleQueueLoop(msg);
     bot.music.shuffle(msg);
     bot.music.skip(msg);
-    return msg.channel.send(
+    return msg.channel.send(embed(bot, playlist))
+}
+
+function embed(bot, playlist){
+    const emb =
         bot.embed()
-        .setTitle(`Now Playing "${playlist.name}"`)
         .setDescription(`Available radio stations:\n${
             radios.map(radio => `+ ${radio.name}`).join('\n').code('diff')
-        }`)
+        }`);
+
+    if(playlist)
+        emb
+        .setTitle(`Now Playing "${playlist.name}"`)
         .setURL(playlist.url)
-        .setFooter(`From: ${playlist.from}`)
-    )
+        .setFooter(`From: ${playlist.from}`);
+
+    return emb;
 }
