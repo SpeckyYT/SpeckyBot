@@ -37,6 +37,7 @@ module.exports = async (bot) => {
         "config",
         "prototypes",
         "templates",
+        "music",
         "events",
     ];
 
