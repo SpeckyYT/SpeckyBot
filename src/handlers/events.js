@@ -16,7 +16,7 @@ module.exports = (bot) => {
             let eName = evt.event;
             if(!eName) throw new Error("Event not found!".toUpperCase());
             const calltype = evt.type == "once" ? "once" : "on";
-            const emi = evt.emitter || 'bot';
+            const emi = (evt.emitter || 'bot').toLowerCase();
             if(!Array.isArray(eName)) eName = [eName];
             for(let event of eName){
                 let emitter;
@@ -25,6 +25,8 @@ module.exports = (bot) => {
                         emitter = process; break;
                     case 'bot':
                         emitter = bot; break;
+                    case 'music':
+                        emitter = bot.music; break;
                 }
                 if(!(emitter instanceof EventEmitter)){
                     throw new Error("Event Emitter not found!");
