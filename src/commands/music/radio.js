@@ -5,7 +5,7 @@ module.exports = {
 }
 
 const radios = [
-    // NORMAL MUSIC
+    // EDM/DUBSTEP/TECHNO/TRAP/ETC
     {
         name: 'Muse',
         url: "https://youtube.com/playlist?list=PLTpHAWOyakLaaSnO1SyJor4r0y_ZmYwHg",
