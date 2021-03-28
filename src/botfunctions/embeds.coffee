@@ -16,7 +16,7 @@ module.exports = (bot) ->
     bot.globalChatEmbed = (msg) ->
         new MessageEmbed()
         .setAuthor msg.author.username, msg.author.displayAvatarURL(), msg.url
-        .setColor if usersettings.has(s = "#{msg.author.id}.embedcolor") then usersettings.get(s) else msg.member.displayHexColor
+        .setColor if usersettings.has(s = "#{msg.author.id}.embedcolor") then usersettings.get(s) else msg?.member?.displayHexColor
         .setDescription msg.content or ''
         .setFooter msg.guild.name, msg.guild.iconURL()
         .setTimestamp msg.createdTimestamp
