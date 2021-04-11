@@ -2,7 +2,8 @@ module.exports = {
     name: "djsdocs",
     description: "Lets you browse the Discord.js Documentation!",
     category: 'dev',
-    aliases: ['djsdoc']
+    aliases: ['djsdoc','doc','docs'],
+    usage: '<Class/Type> [property] [property] ...'
 }
 
 const djsdoc = require('discord.js-docs');
@@ -14,7 +15,8 @@ module.exports.run = async (bot,msg) => {
 
     if(!msg.cmdContent) return bot.cmdError('Missing query');
 
-    const res = doc.get(...msg.args);
+    const args = msg.args.map(a => a.split(/[^a-zA-Z0-9]+/g)).flat();
+    const res = doc.get(...args);
 
     if(!res) return bot.cmdError('Invalid query');
 
