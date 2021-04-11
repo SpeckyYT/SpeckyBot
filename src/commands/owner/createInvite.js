@@ -7,8 +7,8 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    function send(invite){
-        const string = "Here's server link ;)"
+    function send(invite, generated){
+        const string = `Here's server link ;) (${generated ? 'new' : 'old'} invite)`;
         return msg.author.send(`${string}\n${invite}`)
         .catch(() => msg.channel.send(`${string}\n${invite}`));
     }
@@ -21,9 +21,9 @@ module.exports.run = async (bot, msg) => {
     if(!guild.me.permissions.has("CREATE_INSTANT_INVITE")) return bot.cmdError("Bot doesn't have the permissions on that guild");
 
     const invites = await guild.fetchInvites().catch(()=>{});
-    if(invites || invites.size) return send(invites.random());
+    if(invites || invites.size) return send(invites.random(), false);
 
     const channel = guild.channels.cache.filter(c => c.type == "text").random();
     const invite = await channel.createInvite({maxUses: 1, maxAge: 150, unique: true});
-    return send(invite);
+    return send(invite, true);
 }
