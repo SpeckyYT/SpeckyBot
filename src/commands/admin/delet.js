@@ -3,8 +3,8 @@ module.exports = {
     description: "Deletes the last 3 messages!",
     category: "admin",
     aliases: ["..","."],
-    userPerms: ['MANAGE_MESSAGES'],
-    botPerms: ['MANAGE_MESSAGES']
+    userPerms: 8192,
+    botPerms: 8192
 }
 
 module.exports.run = (bot, msg) => msg.channel.bulkDelete(3);
