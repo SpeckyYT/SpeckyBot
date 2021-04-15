@@ -3,8 +3,8 @@ module.exports = {
     description: "Moves all users from one VC to another one!",
     category: "admin",
     aliases: ["moveuser","moveu","mu","mov"],
-    userPerms: ['MOVE_MEMBERS'],
-    botPerms: ['MOVE_MEMBERS']
+    userPerms: 16777216,
+    botPerms: 16777216
 }
 
 module.exports.run = async (bot, msg) => {
