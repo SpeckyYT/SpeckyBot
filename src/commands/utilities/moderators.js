@@ -5,7 +5,7 @@ module.exports = {
     template: 'statuses',
     data: {
         type: 'Mods',
-        check: (member) => member.permissions.has('MANAGE_MESSAGES') && !member.user.bot
+        check: (member) => member.permissions.has(8192) && !member.user.bot
     },
     aliases: ["moderator","mods"]
 }
