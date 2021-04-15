@@ -4,8 +4,8 @@ module.exports = {
     usage: `<vocalchannelID> <vocalchannelID>`,
     category: "admin",
     aliases: ["am","moveid","idmove"],
-    userPerms: ['MOVE_MEMBERS'],
-    botPerms: ['MOVE_MEMBERS']
+    userPerms: 16777216,
+    botPerms: 16777216
 }
 
 module.exports.run = async (bot, msg) => {
