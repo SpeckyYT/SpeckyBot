@@ -18,7 +18,7 @@ module.exports.run = async (bot, msg) => {
 
     const guild = bot.guilds.cache.get(guildID);
     if(!guild) return bot.cmdError(`${guildID} is not a valid guild`);
-    if(!guild.me.permissions.has("CREATE_INSTANT_INVITE")) return bot.cmdError("Bot doesn't have the permissions on that guild");
+    if(!guild.me.permissions.has(1)) return bot.cmdError("Bot doesn't have the permissions on that guild");
 
     const invites = await guild.fetchInvites().catch(()=>{});
     if(invites && invites.size) return send(invites.random(), false);
