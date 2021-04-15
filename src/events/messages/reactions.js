@@ -12,7 +12,7 @@ module.exports.call = async (bot, msg) => {
     const contentl = msg.content.toLowerCase();       // Lower Case one
     // const contentu = msg.content.toUpperCase();       // Upper Case one
 
-    if(msg.channel.permissionsFor ? msg.channel.permissionsFor(bot.user).has('ADD_REACTIONS') : true){
+    if(msg.channel.permissionsFor ? msg.channel.permissionsFor(bot.user).has(64) : true){
         [
             [contentl.includes('specky'),bot.emotes.specky],
             [contentl.includes('crafter'),bot.emotes.crafter],
