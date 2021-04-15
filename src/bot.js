@@ -1,4 +1,4 @@
-const { Client } = require('discord.js');
+const { Client, Intents:{ FLAGS }} = require('discord.js');
 const { join } = require('path');
 
 const summon = async (bot) => {
@@ -12,8 +12,21 @@ const summon = async (bot) => {
         messageCacheLifetime: 86400,
         messageSweepInterval: 60,
         retryLimit: 5,
-        disableMentions: 'everyone',
-        fetchAllMembers: false
+        allowedMentions:{ parse:[] },
+        ws:{
+            intents:[
+                FLAGS.GUILDS,
+                FLAGS.GUILD_MEMBERS,
+                FLAGS.GUILD_EMOJIS,
+                FLAGS.GUILD_INVITES,
+                FLAGS.GUILD_VOICE_STATES,
+                FLAGS.GUILD_PRESENCES,
+                FLAGS.GUILD_MESSAGES,
+                FLAGS.GUILD_MESSAGE_REACTIONS,
+                FLAGS.GUILD_MESSAGE_TYPING,
+                FLAGS.DIRECT_MESSAGES
+            ]
+        }
     })
 
     return require(join(__dirname,'generalhandler'))(bot);
