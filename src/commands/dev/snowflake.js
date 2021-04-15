@@ -8,15 +8,16 @@ module.exports = {
 }
 
 const { SnowflakeUtil: { deconstruct } } = require('discord.js');
+const prettyMs = require('pretty-ms');
 
 module.exports.run = async (bot, msg) => {
     let lsf, error;
 
     const prev = [];
 
-    if(!msg.args.length) return bot.cmdError('No valid Snowflake provided')
+    if(!msg.args.length) return bot.cmdError('No valid Snowflake provided');
 
-    msg.Args.forEach(arg => {
+    for(const arg of msg.Args){
         const snowflake = arg.split('').filter(c=>"0123456789".includes(c)).join('');
 
         if(isNaN(snowflake) || !snowflake){
@@ -27,33 +28,28 @@ module.exports.run = async (bot, msg) => {
             const binary = deconstructed.binary;
             const toobig = binary.includes('-') || snowflake.length > 19;
 
-            if(prev.includes(binary)){
-                return;
-            }else{
-                prev.push(binary)
-            }
+            if(!prev.includes(binary)) prev.push(binary);
+            else continue;
 
             const timenow = new Date();
-
-            const {sec, min, hrs, day, month, year} = bot.msToVars(timestamp - timenow);
 
             let skip = false;
 
             const embed = bot.embed()
-            .setTitle("Snowflake Timestamp")
+            .setTitle(snowflake)
             .setColor(bot.config.color);
 
-            if(year == Infinity || toobig){
+            if(toobig){
                 skip = true;
                 embed.setDescription("The requested Snowflake caused an overflow.");
-            }else{
-                embed.addField(`${timestamp <= timenow ? "How long ago the snowflake was created" : "Time left for that snowflake"}`,`${"year".singPlur(year)} ${"month".singPlur(month)} ${"day".singPlur(day)} ${"hour".singPlur(hrs)} ${"minute".singPlur(min)} and ${"second".singPlur(sec)}`);
-            }
-
-            if(toobig){ // > 9223372036854775807
-                skip = true;
                 embed.setFooter("Time isn't compatible in ISO8601 fomat...");
             }else{
+                embed.addField(
+                    `${timestamp <= timenow ?
+                        "How long ago the snowflake was created" :
+                        "Time left for that snowflake"}`,
+                    `${prettyMs(Math.abs(timenow - timestamp), { verbose: true })}`
+                );
                 embed.setFooter("Date of the snowflake");
                 embed.setTimestamp(timestamp);
             }
@@ -72,18 +68,16 @@ module.exports.run = async (bot, msg) => {
                 }
             }
 
-            if(lsf){
-                const diff = Math.abs(timestamp-lsf);
-                const {sec, min, hrs, day, month, year} = bot.msToVars(diff);
-                embed.addField(`Difference from previous snowflake`,`${"year".singPlur(year)} ${"month".singPlur(month)} ${"day".singPlur(day)} ${"hour".singPlur(hrs,)} ${"minute".singPlur(min)} and ${"second".singPlur(sec)}`)
-            }
+            if(lsf) embed.addField(
+                `Difference from previous snowflake`,
+                prettyMs(Math.abs(timestamp-lsf), { verbose: true })
+            )
             lsf = timestamp;
 
-            return msg.channel.send(embed);
+            await msg.channel.send(embed);
+            continue;
         }
-    });
-
-    if(error){
-        return error;
     }
+
+    if(error) return error;
 }
