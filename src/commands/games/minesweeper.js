@@ -63,11 +63,11 @@ module.exports.run = async (bot, msg) => {
 
     switch(msg.guild.id){
         case '265505748413448193':
-            bomb = bot.emotes.crafter;
-            break;
+            bomb = bot.emotes.crafter; break;
         case '491274461111123969':
-            bomb = bot.emotes.megaflushed;
-            break;
+            bomb = bot.emotes.megaflushed; break;
+        case '493675733697429504':
+            bomb = bot.emotes.omegalul; break;
         default:
             bomb = '🎆';
     }

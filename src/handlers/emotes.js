@@ -7,9 +7,7 @@ module.exports = (bot) => {
         const values = Object.values(emojis);
         Object.keys(emojis)
         .forEach((name,index) => {
-            if(bot.emotes[name]){
-                throw new Error(`Emote ${name || 'null'} already exists`);
-            }
+            if(bot.emotes[name]) throw new Error(`Emote ${name} already exists`);
             bot.emotes[name] = values[index];
         })
     })

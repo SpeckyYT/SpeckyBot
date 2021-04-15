@@ -7,7 +7,6 @@ module.exports = (bot) => {
     bot.stats.commandsExecuted = 0;
 
     bot.cache = {};
-    bot.cache.messages = [];
     bot.cache.lastImage = {};
     bot.cache.console = {};
     bot.cache.console.debug = false;
@@ -16,15 +15,12 @@ module.exports = (bot) => {
     bot.cache.runningcmds = [];
     bot.cache.globalchat = new Collection();
     bot.cache.globalchatsent = [];
-    bot.cache.math = {};
+    bot.cache.gcmessages = new Collection();
     bot.cache.schedules = [];
     bot.cache.statuses = [];
-
-    bot.economy = {}
+    bot.cache.streaming = [];
+    bot.cache.gcminmembers = 5;
 
     bot.globalchats = new Collection();
 
-    bot.debugN = 0;
-
-    bot.settings = {};
 }

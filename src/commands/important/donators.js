@@ -2,7 +2,7 @@ module.exports = {
     name: "donators",
     description: "Lists all the donators!",
     category: "important",
-    aliases: ["donations","donation","donator","patreon"]
+    aliases: ["donations","donation","donator","donate","patreon"]
 }
 
 const { join } = require('path');
@@ -18,7 +18,7 @@ module.exports.run = async (bot, msg) => {
     Object.keys(don)
     .map(k => obj.set(k,don[k]))
 
-    const donators = obj.sort((a, b) => console.table({a,b}) || b[0] - a[0]);
+    const donators = obj.sort((a, b) => b[0] - a[0]);
 
     const string = donators.map((donation, donator) => `**${donator}**: ${donation[0].toFixed(2)}${donation[1]||'€'}`).join('\n');
 

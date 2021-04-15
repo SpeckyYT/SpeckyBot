@@ -8,6 +8,7 @@ module.exports = {
 const { MessageEmbed } = require('discord.js');
 const os = require('os');
 const osu = require('node-os-utils');
+const prettyMs = require('pretty-ms');
 
 module.exports.run = async (bot, msg) => {
     const notSupported = "Operative system not supported"
@@ -84,8 +85,8 @@ ${osu.os.platform() != "win32" ? `Storage: ${diagramMaker(driveUsed,driveFree)} 
     .addField(`Total Guilds:`,`${bot.guilds.cache.size}`,true)
     .addField('\u200b','\u200b')
     .addField(`Total Executed Commands:`, `${bot.stats.commandsExecuted} Commands`)
-    .addField(`Bot Uptime:`,`${bot.formatTime(bot.uptime)}`,true)
-    .addField(`Process Uptime:`,`${bot.formatTime(process.uptime()*1000)}`,true)
+    .addField(`Bot Uptime:`,`${prettyMs(bot.uptime, { verbose: true })}`,true)
+    .addField(`Process Uptime:`,`${prettyMs(process.uptime()*1000, { verbose: true })}`,true)
     .setTimestamp()
     .setFooter(`${bot.user.username}`, bot.user.displayAvatarURL());
 

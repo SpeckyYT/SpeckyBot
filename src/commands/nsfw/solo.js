@@ -5,6 +5,6 @@ module.exports = {
     aliases: ["sologirl","alone"],
     template: 'nsfw',
     data: {
-        methods: ["girlSolo","girlSoloGif"]
+        methods: "solog"
     }
 }

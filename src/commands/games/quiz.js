@@ -6,7 +6,6 @@ module.exports = {
 }
 
 const fetch = require('node-fetch');
-const { MessageEmbed } = require('discord.js');
 const { compareTwoStrings } = require('string-similarity')
 
 function shuffle(array) {
@@ -53,7 +52,7 @@ module.exports.run = async (bot, msg) => {
                 });
                 data.correct_answer = Buffer.from(data.correct_answer, 'base64').toString();
 
-                const embed = new MessageEmbed()
+                const embed = bot.membed()
                 .setTitle('Trivia Question!')
                 .addField('Category:', `${Buffer.from(data.category, 'base64').toString()}`)
                 .addField('Difficulty:', `${Buffer.from(data.difficulty, 'base64').toString()}`)

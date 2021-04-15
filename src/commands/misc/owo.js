@@ -2,7 +2,7 @@ module.exports = {
     name: "owo",
     description: "OwO!",
     category: "misc",
-    type: "template",
+    type: "send",
     aliases: ["uwu"],
     run: () => "OwO"
 }

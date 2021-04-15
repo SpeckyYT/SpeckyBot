@@ -38,7 +38,8 @@ module.exports = (bot) => {
             "templates",
             "commands",
             "console",
-            "emotes"
+            "emotes",
+            "website"
         ];
 
         load(reloadable);

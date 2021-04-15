@@ -5,6 +5,7 @@ module.exports = {
 const os = require('os');
 
 module.exports.call = async (bot) => {
+    return; // RAM looks to be broken
     const freeRAM = os.freemem();
     const usedRAM = os.totalmem() - freeRAM;
 

@@ -6,6 +6,9 @@ module.exports = {
     aliases: ["slot"],
 }
 
+const db = require('quick.db');
+const economy = new db.table('economy');
+
 module.exports.run = async (bot, msg) => {
     let emojis = msg.guild.emojis.cache.filter(e => e.available);
     let slots = 3;
@@ -69,11 +72,7 @@ module.exports.run = async (bot, msg) => {
 
     const gain = Math.floor(Math.max(emojis.size/15,1.25) * Math.ceil(bet**1.15 * Math.max((slots-1)**1.4,1)));
 
-    if(won){
-        bot.economy[msg.author.id].money = bot.economy[msg.author.id].money + gain;
-    }else{
-        bot.economy[msg.author.id].money = bot.economy[msg.author.id].money - bet;
-    }
+    economy.add(`${msg.author.id}.money`,won?gain:-bet);
 
-    msg.channel.send(`${eArray.join('')}${won ? `\nYou won ${gain}₪! 🎰` : ""}`);
+    return msg.channel.send(`${eArray.join('')}${won ? `\nYou won ${gain}₪! 🎰` : ""}`);
 }

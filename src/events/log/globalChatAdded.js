@@ -11,9 +11,9 @@ module.exports.call = async (bot, c) => {
         ["Channel ID", c.id]
     ]
 
-    const gcs = bot.channels.cache
-    .filter(c => c.topic ? c.topic.toLowerCase().includes('[global]') : false)
-    .size;
+    await bot.wait(1000);
+
+    const gcs = bot.globalchats.size;
 
     return channel.send(
         bot.embed()

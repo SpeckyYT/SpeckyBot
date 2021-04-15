@@ -8,7 +8,6 @@
     userPerms: ["MANAGE_MESSAGES"]
 }
 
-const { MessageEmbed } = require('discord.js');
 const { join } = require('path');
 const { runGame } = require(join(__dirname,'SpeckySays','game'));
 
@@ -37,7 +36,7 @@ module.exports.run = async (bot, msg) => {
     }
 
     // collect players
-    const startembed = new MessageEmbed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
+    const startembed = bot.membed().setTitle("REACT TO THIS MESSAGE WITH 🎲 TO JOIN SIMON SAYS!")
     .setDescription(`Hosted by ${msg.author}`)
     .setColor(msg.member.displayColor)
     .setFooter(`The game will start in ${Math.floor(time / 1000)} seconds.`)
@@ -59,7 +58,7 @@ module.exports.run = async (bot, msg) => {
 
         channel.send(
             `The game is starting! Players: ${players.join(', ')}`,
-            new MessageEmbed()
+            bot.membed()
             .setTitle('**Only follow my commands if it starts with "Simon says". \n If you fail, you are out of the game!**')
             .setColor('#77ECF2')
         )

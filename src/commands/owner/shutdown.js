@@ -2,7 +2,7 @@ module.exports = {
     name: "shutdown",
     description: "Shuts the bot down!",
     category: "owner",
-    aliases: ["quit","exit","die","kill"]
+    aliases: ["quit","exit","die"]
 }
 
 module.exports.run = async (bot, msg) => {

@@ -2,5 +2,5 @@ module.exports =
     name: "fratm"
     description: "Man 🐴"
     category: "misc"
-    type: "template"
+    type: "send"
     run: (bot, msg) => "#{bot.emotes.fratm}🤝🐴"

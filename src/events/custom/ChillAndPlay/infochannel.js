@@ -23,11 +23,5 @@ module.exports = {
             guild.emojis.cache.filter(e => e.animated)
         ], '714465197032734760');
 
-        update([
-            guild.members.cache.filter(m => (m.user.presence.clientStatus || {}).desktop),
-            guild.members.cache.filter(m => (m.user.presence.clientStatus || {}).mobile),
-            guild.members.cache.filter(m => (m.user.presence.clientStatus || {}).web)
-        ], '732314555652374658');
-
     }
 }

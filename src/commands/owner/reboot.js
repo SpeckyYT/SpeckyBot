@@ -7,6 +7,7 @@ module.exports = {
 const { join } = require('path');
 
 module.exports.run = async (bot, msg) => {
+    await msg.channel.send('Rebooting!');
 
     // Remove Listeners
     bot.removeAllListeners();

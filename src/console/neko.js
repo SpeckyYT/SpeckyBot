@@ -6,7 +6,7 @@ module.exports = {
 let sfw,met;
 
 const { join } = require('path');
-const neko = new (require('nekos.life'))();
+const { Nekos: neko } = require('hmfull');
 
 const execute = async (bot,f) => {
     if(f){

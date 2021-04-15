@@ -1,22 +1,11 @@
 module.exports = {
-    event: "message"
+    event: "cleanMessage"
 }
 
 module.exports.call = async (bot, msg) => {
     if(msg.channel.type == 'dm') return;
     if(msg.channel.topicSetting('no-media')){
-        const linkRegEx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\\/=]*)/g
-
-        const matches = msg.content.match(linkRegEx);
-
-        if(msg.attachments.first()){
-            msg.delete().catch(()=>{});
-        }else
-        if(msg.embeds.length > 0){
-            msg.delete().catch(()=>{});
-        }else
-        if(matches){
-            msg.delete().catch(()=>{});
-        }
+        const matches = msg.content.match(bot.regex.link);
+        if(msg.attachments.first() || msg.embeds.length > 0 || matches) return msg.delete().catch(()=>{});
     }
 }

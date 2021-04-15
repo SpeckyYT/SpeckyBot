@@ -3,11 +3,13 @@ module.exports = {
     aliases: ["cockfight", "cf"],
     usage: "<bet>",
     category: "economy",
-    description: "Gets your current bot balance [Experimental]",
+    description: "Lets you play Chicken Fight! (illegal in California)",
 }
 
+const db = require('quick.db');
+const economy = new db.table('economy');
+
 module.exports.run = async (bot, msg) => {
-    const { economy } = bot
     const { author } = msg;
 
     const obet = msg.args[0];
@@ -17,21 +19,18 @@ module.exports.run = async (bot, msg) => {
 
     const won = Math.round(Math.random()) || msg.author.id.isOwner();
 
-    if(won){
-        economy[author.id].money = economy[author.id].money + bet;
-        msg.channel.send(
+    economy.add(`${msg.author.id}.money`,won?bet:-bet);
+
+    return msg.channel.send(
+        won ?
             bot.embed()
             .setAuthor(author.tag,author.displayAvatarURL())
             .setDescription(`Your little chicken won the fight!\n${bet}₪ got added to your bank! :rooster:`)
             .setColor('GREEN')
-        );
-    }else{
-        economy[author.id].money = economy[author.id].money - bet;
-        msg.channel.send(
+            :
             bot.embed()
             .setAuthor(author.tag,author.displayAvatarURL())
             .setDescription(`Your chicken died... `)
             .setColor('RED')
-        );
-    }
+    );
 }

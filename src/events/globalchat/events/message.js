@@ -1,13 +1,29 @@
 module.exports = {
-    event: "message"
+    event: "filteredMessage"
 }
 
 module.exports.call = async (bot, msg) => {
-    if(msg.author.bot) return;
-    if(msg.system) return;
-    if(bot.config.bannedUsers.includes(msg.author.id)) return;
-    const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false
-    if(check(msg.channel)){
-        bot.emit('globalMessage', msg);
-    }
+    if(!msg.channel.topicSetting('global')) return;
+    if(!bot.globalchats.has(msg.channel.id)) return;
+
+    const react = e => msg.react(e).catch(()=>{});
+
+    // Consecutive Messages
+    const consecutiveCount = 2;
+    const prevMessages = bot.cache.gcmessages.last(consecutiveCount);
+    if(prevMessages && prevMessages.length >= consecutiveCount)
+        if(prevMessages.every(m => m.author.id == msg.author.id))
+            return react(bot.emotes.notwice);
+
+    // Too big Messages
+    if(msg.content.split('\n').length > 15)
+        return react(bot.emotes.toolong);
+
+    // External Emotes
+    const emotes = msg.content.match(bot.regex.emote);
+    if(emotes && emotes.length)
+        if(emotes.some(e => !bot.emojis.cache.has(e)))
+            return react(bot.emotes.noexternal);
+
+    bot.emit('globalMessage', msg);
 }

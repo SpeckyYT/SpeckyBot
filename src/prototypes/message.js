@@ -17,12 +17,14 @@ module.exports = bot => {
 
 
         // Links
-        msg.links = (msg.content ? msg.content.match(/(https?:\/\/(www\.)?)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g) : []) || []
+        msg.links = (msg.content ? msg.content.match(bot.regex.link) : []) || []
 
 
         // Client
         msg.client = msg.client || bot;
 
+        // IDs
+        msg.ids = msg.content.match(bot.regex.id) || [];
 
         // Safety if extending twice
         msg._extended = true;

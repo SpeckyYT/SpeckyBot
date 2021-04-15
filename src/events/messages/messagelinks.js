@@ -1,15 +1,14 @@
 module.exports = {
-    event: "message"
+    event: "cleanMessage"
 }
 
-const { MessageEmbed } = require('discord.js');
+const qdb = require('quick.db');
+const usersettings = new qdb.table('usersettings');
 const poop = "https://images-ext-1.discordapp.net/external/qDr7Y7SwTvJ3D_jZOYRNU-Vak5cGKw3zlZfFT2t-Ihc/https/i.imgur.com/jNz2Dwp.png"
 
 module.exports.call = async (bot, msg) => {
-    if (msg.author.bot) return;
-    await bot.loadSettings();
-    const u_settings = bot.settings.user || {};
-    if(!(u_settings[msg.author.id] ? u_settings[msg.author.id].messagelink : false)) return;
+    if(msg.author.bot) return;
+    if(!usersettings.get(`${msg.author.id}.messagelink`)) return;
 
     const m = msg.extend().cmdExtend();
     if(!m.links.length) return;
@@ -17,12 +16,10 @@ module.exports.call = async (bot, msg) => {
     const perms = msg.guild.me.permissionsIn(msg.channel).toArray();
     if(!perms.includes('SEND_MESSAGES')) return;
 
-    const regex = /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/g;
-
     m.links.unique().forEach(async link => {
         if(m.content.includes(`<${link}>`)) return;
 
-        const discordLink = regex.exec(link);
+        const discordLink = bot.regex.messageLink.exec(link);
         if(!discordLink) return;
         const [, serverID, channelID, messageID] = discordLink;
         const server = bot.guilds.cache.get(serverID);
@@ -31,17 +28,16 @@ module.exports.call = async (bot, msg) => {
 
         try{
             await msg.channel.send(
-                new MessageEmbed()
+                bot.membed()
                 .setAuthor(message ? `${message.author.tag} (ID: ${message.author.id})` : "Unknown User", message ? message.author.displayAvatarURL() : poop)
                 .setDescription(`[Message](${link}) in <#${channelID}>\n${message ? message.content || "" : "Unknown Message"}`)
                 .setFooter(`${server ? server.name : "Unknown Server"} - Quoted by ${msg.author.tag}`, server ? server.iconURL() : poop)
                 .setTimestamp(message && message.createdAt || messageID.snowflake && messageID.snowflake().date)
                 .setColor(message ? 'GREEN' : 'RED')
             )
-            if(message && message.embeds && message.embeds.length){
-                message.embeds.forEach(embed =>
-                    msg.channel.send(new MessageEmbed(embed)).catch(()=>{})
-                )
+            if(message && message.embeds){
+                for(const embed of message.embeds)
+                    msg.channel.send(bot.membed(embed)).catch(()=>{});
             }
         }catch(e){}
     })

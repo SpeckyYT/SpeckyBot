@@ -7,24 +7,20 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)){
-        const perms = ['CONNECT','SPEAK'].map(perm => msg.member.voice.channel.permissionsFor(bot.user.id).has(perm));
-        if(perms.some(v => !v)){
-            return bot.cmdError(`Missing permission${perms.filter(v => !v).length == 1 ? '' : 's'}: ${['CONNECT','SPEAK'].filter((v,i) => !perms[i]).join(' ')}`)
-        }
-    }
     if(!msg.cmdContent) return bot.cmdError('You have to include a song that you want to play.');
-    const { song, error } = await (
-        bot.music.isPlaying(msg.guild.id) ?
-            bot.music.addToQueue(msg.guild.id, msg.cmdContent) :
-            bot.music.play(msg.member.voice.channel, msg.cmdContent)
+    const search = {
+        search: msg.cmdContent,
+        requestedBy: msg.author.tag,
+    }
+    const song = await (
+        bot.music.isPlaying(msg) ?
+            bot.music.addToQueue(msg,search) :
+            bot.music.play(msg, search)
     );
-    if(error) return bot.cmdError(JSON.stringify(error));
-    if(!song) return bot.cmdError('Song not found (probably a bug?)');
     return msg.channel.send(
         bot.embed()
         .setTitle(song.name)
-        .setDescription(`Author: ${song.author.name}\nDuration: ${song.duration}\nRequested by: ${song.requestedBy}`)
+        .setDescription(`Author: ${song.author}\nDuration: ${song.duration}\nRequested by: ${song.requestedBy}`)
         .setURL(song.url)
         .setImage(song.thumbnail)
     )

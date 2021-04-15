@@ -3,20 +3,15 @@ const { join } = require('path');
 const fs = require('fs');
 
 module.exports.saveAsset = (fileURL,filename) => {
-    if(!global.assets){
-        global.assets = {}
-    }
+    if(!global.assets) global.assets = {}
 
-    if(Array.isArray(fileURL)){
-        [fileURL, filename] = fileURL;
-    }
+
+    if(Array.isArray(fileURL)) [fileURL, filename] = fileURL;
 
     const assetsFolder = join(process.cwd(),'assets');
     const pathToFile = join(assetsFolder,filename);
 
-    if(!fs.existsSync(assetsFolder)){
-        fs.mkdirSync(assetsFolder);
-    }
+    if(!fs.existsSync(assetsFolder)) fs.mkdirSync(assetsFolder);
 
     return new Promise((res,rej) => {
         if(!fs.existsSync(pathToFile)){

@@ -5,6 +5,6 @@ module.exports = {
     aliases: ["erotic"],
     template: 'nsfw',
     data: {
-        methods: ["holoEro","eroFeet","ero","eroKitsune","eroKemonomimi","eroNeko","eroYuri"]
+        methods: ["ero","erofeet","erokitsu","erokemo","eroyuri","eroneko","holoero"]
     }
 }

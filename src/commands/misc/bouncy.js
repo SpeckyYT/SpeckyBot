@@ -38,7 +38,7 @@ module.exports.run = async (bot, msg) => {
     let zeroCounter = 0;
 
     for(let i = 0; i < frames; i++){
-        await new Promise(res => bot.setImmediate(res));
+        await bot.async();
 
         // PHYSICS
         speed.y += gravity

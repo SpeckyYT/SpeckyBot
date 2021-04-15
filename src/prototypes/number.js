@@ -7,7 +7,7 @@ module.exports = bot => {
     }
 
     Number.prototype.sleep = function(){
-        new Promise(resolve => bot.setTimeout(resolve, this));
+        return new Promise(resolve => bot.setTimeout(resolve, this));
     }
     Number.prototype.delay = Number.prototype.sleep;
     Number.prototype.wait = Number.prototype.sleep;

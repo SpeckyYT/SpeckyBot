@@ -17,7 +17,7 @@ module.exports = (bot) => {
 
 ## 1.2. Commands
 
-Commands get loaded in `bot.commands` as a Collection and get called from the event `events/guild/commands.js`.
+Commands get loaded in `bot.commands` as a Collection and get called from the event `events/messages/commands.js`.
 
 | Property     | Type     | Example                           | Info                                            | Required |
 |--------------|----------|-----------------------------------|-------------------------------------------------|----------|
@@ -25,9 +25,10 @@ Commands get loaded in `bot.commands` as a Collection and get called from the ev
 | category     | String   | "fun"                             | "help" command will show the various categories | false    |
 | description  | String   | "says hi to you"                  | everything works                                | false    |
 | usage        | String   | "<@user>"                         | example result: "sb!hello <@user>"              | false    |
-| type         | String   | "template"                        | if "template", then you have to return a string | false    |
+| type         | String   | "send"                            | if "send", it will send the returned value      | false    |
 | template     | String   | "test"                            | the command template to use for the command     | false    |
-| data         | Object   | {text:'hi'}                       | the data to pass trough the command template    | false    |
+| data         | Object   | { text: 'hi' }                    | the data to pass trough the command template    | false    |
+| limited      | Object   | { guild, channel, user }          | properties should be a string or array of IDs   | false    |
 | `anything`   | Function | (bot,msg)=>msg.channel.send("hi") | the function that will be called                | true     |
 | aliases      | Array    | ["hi","howdy"]                    | lowercase and no spaces                         | false    |
 | userPerms    | Array    | ["ADMINISTRATOR"]                 | permissions that the user should have           | false    |
@@ -74,6 +75,7 @@ Events get called by the [Discord.js](https://discord.js.org/#/docs/main/stable/
 | event        | String   | "message"                     | any event emitted from one above | true     |
 | emitter      | String   | "bot"                         | `bot` or `process`               | false    |
 | type         | String   | "once"                        | `on` or `once`                   | false    |
+| timezone     | String   | "Europe/Rome"                 | One of [these](https://github.com/moment/moment-timezone/blob/develop/data/packed/latest.json) timezones | false |
 | `anything`   | Function | (bot,msg)=>{console.log(msg)} | the function that will be called | true     |
 
 Note: You can have **ONLY ONE** exported function in the entire file
@@ -81,15 +83,15 @@ Note: You can have **ONLY ONE** exported function in the entire file
 ## 1.6. Handlers
 
 Handlers are files, which get called from the `generalhandler.js` file.
-Files in `handlers/loader` will be automatically called.
+Every file in the `handlers` folder will be automatically called on boot-up.
 
 ## 1.7. Languages
 
-The language files get loaded into `require.extensions` for extending the languages supported.
+The language files which manipulates `require.extensions` for extending the programming languages supported.
 
 ## 1.8. Modules
 
-The module files get loaded into `bot.modules` for easier access to common functions and properties.
+The module files get loaded into `bot.modules` and `global.modules` for easier access to common functions and properties.
 
 ## 1.9. Prototypes
 
@@ -123,3 +125,10 @@ module.exports.test = function({text}){
 
 - JavaScript (.js)
 - CoffeeScript (.coffee)
+  - LiveScript (.ls)
+  - Iced CoffeeScript (.iced)
+  - Koffee (.koffee)
+  - BlackCoffee (.blackcoffee)
+  - ToffeeScript (.toffee)
+  - Caffeine (.caffeine)
+  - Coco (.coco)

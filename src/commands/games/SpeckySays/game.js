@@ -1,4 +1,3 @@
-const { MessageEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
 const { join } = require('path');
 const config = require(join(__dirname,'settings'));
@@ -84,7 +83,7 @@ module.exports.runGame = async (channel, players_, bot) => {
         await bot.sleep(1000)
         playersOut = [...new Set(playersOut)]
         // say whos out
-        const embed = new MessageEmbed()
+        const embed = bot.membed()
         if (playersOut.length > 0) {
             embed.setDescription(`${playersOut.join(', ')} ${playersOut.length > 1 ? "are" : "is"} out!`)
             .setColor(`#FF230F`)
@@ -109,7 +108,7 @@ module.exports.runGame = async (channel, players_, bot) => {
     })();
 
     if(!prematurelyEnd){
-        const embed = new MessageEmbed()
+        const embed = bot.membed()
         .setTitle('The game has ended!')
         .setDescription(`${winners.join(', ')} won with ${rounds} point${rounds !== 1 ? 's' : ''}! GG!`)
         .setColor('#FFBE11');

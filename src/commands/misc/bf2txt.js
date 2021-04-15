@@ -8,16 +8,15 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!msg.args[0]){
-        return bot.cmdError(`Brainfuck string missing or invalid`);
-    }
+    if(!msg.cmdContent) return bot.cmdError(`Brainfuck string missing or invalid`);
 
     const insts = msg.cmdContent;
 
     const data = await bot.bf(insts,{
         limit:true,
         size: 2**([32,16,8,4,2].find(n => msg.flag(n+'bit')) || 8),
-        time: 10000
+        time: 10000,
+        msg
     });
 
     const { tOut, memory, string, numbers, cell, time } = data;

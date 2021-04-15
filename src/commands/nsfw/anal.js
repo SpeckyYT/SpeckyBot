@@ -5,6 +5,6 @@ module.exports = {
     aliases: ["ass"],
     template: 'nsfw',
     data: {
-        methods: 'anal'
+        methods: ['anal','ass']
     }
 }

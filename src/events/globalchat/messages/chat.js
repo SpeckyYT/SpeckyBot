@@ -3,11 +3,12 @@ module.exports = {
 }
 
 module.exports.call = async (bot, msg) => {
-    const check = (c) => c.topic ? c.topic.toLowerCase().includes('[global]') : false;
-    bot.channels.cache.filter(chan => check(chan) && msg.channel.id != chan.id)
+    msg.content = bot.globalChatCensor(msg.content);
+
+    bot.globalchats
+    .filter(chan => msg.channel.id != chan.id)
+    .filter(chan => chan.permissionsFor(bot.user).has(bot.perms.globalchat))
     .forEach(chan => {
-        const inviteRegex = /(?:https?)?(?::\/\/)?(?:di?sc(?:ord(?:app)?)?|top)\.(?:com|gg|invite|net)\/+[\w/]+/gi;
-        msg.content = msg.content.replace(inviteRegex,'https://discord.gg/4EecFku');
         bot.cache.globalchatsent.push(
             chan.send(bot.globalChatEmbed(msg))
             .then(m => {

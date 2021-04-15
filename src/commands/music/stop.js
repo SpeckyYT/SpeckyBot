@@ -1,12 +1,12 @@
 module.exports = {
     name: "stop",
-    description: "Pauses the music!",
+    description: "Stops the music!",
     category: "music",
-    aliases: ["pause"]
+    aliases: []
 }
 
 module.exports.run = async (bot, msg) => {
-    if(!bot.music.isPlaying(msg.guild.id)) throw new Error('Not playing')
-    await bot.music.pause(msg.guild.id);
-    return bot.cmdSuccess('Playback paused.');
+    if(!bot.music.isPlaying(msg)) throw new Error('Not playing');
+    bot.music.stop(msg);
+    return bot.cmdSuccess('Playback stopped.');
 }

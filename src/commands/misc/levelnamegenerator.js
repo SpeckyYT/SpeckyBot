@@ -3,6 +3,7 @@ module.exports = {
     description: "Generates a name for your Geometry Dash Level!",
     category: "misc",
     usage: "[name]",
+    flags: ['huge','svg','nocase'],
     aliases: ['lng']
 }
 
@@ -84,11 +85,19 @@ module.exports.run = async (bot, msg) => {
         })()}`;
     }
 
+    // MESSAGE FLAGS
+    const huge = msg.flag('huge');
+    const svg = msg.flag('svg');
+    const nocase = msg.flag('nocase');
+    const canvasSetup = huge ? [7680,4320] : [1280,720];
+    if(svg) canvasSetup.push('svg');
+
     // TRIM AND RANDOM CASE
-    name = name.trim().replace(/\s+/g,' ').randomCase();
+    name = name.trim().replace(bot.regex.spaces,' ')
+    if(!nocase) name = name.randomCase();
 
     // CANVAS SETUP
-    const canvas = Canvas.createCanvas(800,600);
+    const canvas = Canvas.createCanvas(...canvasSetup);
     const ctx = canvas.getContext('2d');
 
     // BACKGROUND
@@ -98,16 +107,42 @@ module.exports.run = async (bot, msg) => {
     ctx.fillStyle = gradient;
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
+    // MINOR UTILITIES
+    const min = Math.min(canvas.height,canvas.width);
+    ctx.imageSmoothingQuality = 'high';
+    ctx.imageSmoothingEnabled = true;
+    const CScaleRatio = 600;
+    const RScaleRatio = 600;
+
     // CORNERS
     if(!corner) corner = await Canvas.loadImage(global.assets.corner);
-    ctx.drawImage(corner,0,canvas.height-corner.height);
+    const CWidth = corner.width * min / CScaleRatio;
+    const CHeight = corner.height * min / CScaleRatio;
+    ctx.drawImage(
+        corner,
+        0,
+        canvas.height-CHeight,
+        CWidth, CHeight
+    );
     ctx.scale(-1,1);
-    ctx.drawImage(corner,-canvas.width,canvas.height-corner.height)
+    ctx.drawImage(
+        corner,
+        -canvas.width,
+        canvas.height-CHeight,
+        CWidth, CHeight
+    );
     ctx.scale(-1,1);
 
     // REFRESH
     if(!refresh) refresh = await Canvas.loadImage(global.assets.refresh);
-    ctx.drawImage(refresh,canvas.width/2-refresh.width/2,canvas.height*0.5);
+    const RWidth = refresh.width * min / RScaleRatio;
+    const RHeight = refresh.height * min / RScaleRatio;
+    ctx.drawImage(
+        refresh,
+        canvas.width/2 - RWidth/2,
+        canvas.height * 0.5,
+        RWidth, RHeight
+    );
 
     // TEXT
     ctx.textAlign = 'center';
@@ -131,5 +166,5 @@ module.exports.run = async (bot, msg) => {
     ctx.fillStyle = 'rgb(255,200,0)';
     ctx.fillText(name,...pos2,canvas.width);
 
-    return msg.channel.send(canvas.toBuffer().toAttachment('levelname.png'));
+    return msg.channel.send(canvas.toBuffer().toAttachment(`levelname.${svg?'svg':'png'}`));
 }

@@ -12,7 +12,7 @@ module.exports.run = async (bot, data) => {
             case 'on':
                 bot.cache.console.debug = true;
                 break;
-            
+
             case 'false':
             case 'off':
                 bot.cache.console.debug = false;

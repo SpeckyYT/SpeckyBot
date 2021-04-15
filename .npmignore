@@ -1,1 +1,21 @@
+src/assets
+src/events/private
+src/commands/private
+src/tmp
+require-cache/
+db/
+.*/
 
+*.tgz
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.avi
+*.csv
+*.ttf
+*.sqlite
+*.log
+
+template.config.json
+config.json

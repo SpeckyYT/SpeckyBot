@@ -3,74 +3,108 @@ module.exports = {
     description: "What about customization?",
     usage: `<setting> <values>`,
     category: "utilities",
+    flags: ['showall','deleteall'],
     aliases: ["us","usersetting"]
 }
 
-const { writeFile } = require('fs');
-const { join } = require('path');
+const qdb = require('quick.db');
+const usersettings = new qdb.table('usersettings');
 const { Util: { resolveColor } } = require('discord.js');
-const dir = join(process.cwd(),'..','db','u_settings');
 
 module.exports.run = async (bot, msg) => {
-    const { args } = msg;
-    const u_settings = require(dir);
-    let changed = false;
-    if(!u_settings[msg.author.id]){
-        u_settings[msg.author.id] = {};
-        changed = true;
-    }
-    switch(args[0]){
-        case "embedcolor":
-        case "ec":
-        case "embcol":
-            const color = resolveColor(args[1].toUpperCase());
-            if(!color) return bot.cmdError('Invalid color');
-            u_settings[msg.author.id].embedcolor = color;
+    const options = [
+        {
+            names: ['embedcolor','embcol','ec'],
+            description: 'Change the default color on your embeds!',
+            dbkey: 'embedcolor',
+            usage: '<HEX COLOR>',
+            type: ({arg}) => resolveColor(arg.toUpperCase())
+        },
+        {
+            names: ['ghostping','gp'],
+            description: 'Notifies you if you get ghostpinged!',
+            dbkey: 'ghostping',
+            type: 'boolean'
+        },
+        {
+            names: ['math'],
+            description: 'Automatically does maths for you!',
+            dbkey: 'math',
+            type: 'boolean'
+        },
+        {
+            names: ['messagelink','ml'],
+            description: 'Automatically quotes your message links!',
+            dbkey: 'messagelink',
+            type: 'boolean'
+        },
+        {
+            names: ['invalidcommand','ic'],
+            description: "Tries to guess the command you wanted to run if it doesn't exist!",
+            dbkey: 'invalidcommand',
+            type: 'boolean'
+        },
+        {
+            names: ['reactions','r'],
+            description: "Enables reactions on your messages if they contain specific words!",
+            dbkey: 'reactions',
+            type: 'boolean'
+        }
+    ];
 
-            msg.channel.send(`Changed your embed color to \`${args[1].toUpperCase()}\`!`);
-            changed = true;
-            break;
+    const option = options.find(opt => opt.names.includes(msg.args[0]));
 
-        case "ghostping":
-        case "gp":
-            u_settings[msg.author.id].ghostping = !u_settings[msg.author.id].ghostping;
-            msg.channel.send(`Your Ghostping option got changed to \`${u_settings[msg.author.id].ghostping}\``);
-            changed = true;
-            break;
+    if(option){
+        const dbstring = `${msg.author.id}.${option.dbkey}`;
+        const current = usersettings.get(dbstring);
 
-        case "math":
-            u_settings[msg.author.id].math = !u_settings[msg.author.id].math;
-            msg.channel.send(`Your Math option got changed to \`${u_settings[msg.author.id].math}\``);
-            changed = true;
-            break;
-
-        case "messagelink":
-        case "ml":
-            u_settings[msg.author.id].messagelink = !u_settings[msg.author.id].messagelink;
-            msg.channel.send(`Your MessageLink option got changed to \`${u_settings[msg.author.id].messagelink}\``);
-            changed = true;
-            break;
-
-        default:
-            const embed = bot.embed()
-            .setTitle("User Settings Help Page!")
+        if(typeof option.type == 'string'){
+            switch(option.type){
+                case 'boolean':
+                    usersettings.set(dbstring,!current);
+                    return bot.cmdSuccess(draw(option.dbkey,!current));
+            }
+        }
+        if (typeof option.type == 'function'){
+            let value = option.type(
+                {
+                    arg: msg.args[1] || '',
+                    args: msg.args.slice(1)
+                }
+            )
+            if(isNaN(value) && typeof value == 'number') value = 0;
+            usersettings.set(dbstring,value);
+            return bot.cmdSuccess(draw(option.dbkey,value));
+        }
+    }else if(msg.flag('showall')){
+        return msg.channel.send(
+            JSON.stringify(
+                usersettings.get(`${msg.author.id}`),
+                null,
+                2
+            ).code('json')
+        )
+    }else if(msg.flag('deleteall')){
+        usersettings.delete(`${msg.author.id}`);
+        return bot.cmdSuccess('Deleted all your usersettings!');
+    }else{
+        return msg.channel.send(
+            bot.embed()
+            .setTitle("Usersettings Help Page!")
             .setDescription(`Here you can set some weird stuff, which you can't do anywhere else!`)
             .addField('\u200b','\u200b')
-            .addField(`Change Default Message to Embed color:`,`\`${bot.config.prefix}usersettings ec <HEX COLOR>\``)
-            .addField(`Will give you a notification if someone Ghostpinged you:`,`\`${bot.config.prefix}usersettings gp\``)
-            .addField(`Will automatically do maths for you:`,`\`${bot.config.prefix}usersettings math\``)
-            .addField(`Will quote your message's message-links:`,`\`${bot.config.prefix}usersettings ml\``)
-            return msg.channel.send(embed);
+            .addFields(
+                options.map(
+                    opt => ({
+                        name: opt.description,
+                        value: `\`${bot.config.prefix}usersettings ${opt.names[0]}${opt.usage && " "+opt.usage || ''}\``
+                    })
+                )
+            )
+        )
     }
+}
 
-    if(changed){
-        writeFile(join(process.cwd(),'..','db','u_settings.json'), JSON.stringify(u_settings, null, 4), err => {
-            if(err){
-                msg.channel.send("Error while saving...");
-                console.error(err);
-            }else{
-                msg.channel.send("Saved sucessfully!");
-            }
-        })
-    }
+function draw(key, value){
+    return `Your \`${key}\` option got set to \`${value}\``
 }

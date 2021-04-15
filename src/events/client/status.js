@@ -1,10 +1,12 @@
 module.exports = {
-    event: "*/15 * * * * *"
+    event: ["ready","*/15 * * * * *"]
 }
 
 let lastStatus = '';
 
 module.exports.call = async (bot) => {
+    if(!bot.user) return;
+
     const statuses = [
         `${bot.guilds.cache.size} servers!`,
         `${bot.config.prefix}help`,

@@ -1,29 +1,13 @@
 module.exports = {
-    event: "message"
+    event: "cleanMessage"
 }
 
 module.exports.call = async (bot, msg) => {
-    if(msg.channel.type == 'dm') return;
-    if(!msg.channel.topic) return;
-
-    const text = '[alternate]'
-
-    if(msg.channel.topic.toLowerCase().includes(text.toLowerCase())){
-        let prevMsgs;
-
-        await msg.channel.messages.fetch({ limit: 2 })
-        .then(msgs => {
-            prevMsgs = msgs;
-        });
-
-        if(msg.deleted){
-            return;
-        }
+    if(msg.channel.topicSetting('alternate')){
+        const prevMsgs = await msg.channel.messages.fetch({ limit: 2 });
 
         if(prevMsgs.filter(ms => ms.author.id == msg.author.id).size > 1){
-            msg.delete().catch(()=>{
-                return
-            })
+            msg.delete().catch(()=>{});
         }
     }
 }

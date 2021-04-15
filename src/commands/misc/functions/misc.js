@@ -49,6 +49,6 @@ module.exports.getQuestion = () => {
 module.exports.getPersonName = () => {
     let firstNames = ['Gerty', 'Betty', 'Bobby', 'Nick', 'Jon', 'Scott', 'Alice', 'Ricky', 'Bobberto', 'Audri' , 'Sally' , 'Amber' , 'Jedd' , 'Joey', 'Billy', 'Willaim', 'Joe','Sarah','Judy','Kendra', 'Mary-Ann','Richard','John','Fred','Daniel', 'Thomas','Jacob','Noah','Luis','Samuel','Justin','David','Logan','Ben','Juan','Pedro','James','Santiago','Martin','Jack','Emma','Brianna','Emilia','Sara','Sue','Zoe','Lea','Alysha','Sofia','Mia','Victoria','Raquel','Isabella','Olivia','Paula','Charlotte','Mary','Nicole','Grace','Madison'];
     let lastNames = ['Winterbottom', 'Gertzenhiemen', 'Smith', 'Goldsworthy', 'Bobby', 'Rosebottom', 'Smith', 'McSnikkers','McPickles','Ryder','Flynn','Williams','Johnson','Jones','Brown','Davis','Taylor','Anderson','Martin','Thompson','Wilson','Miller','Allen','Young','Wright','Adams','Baker','King','Scott','Evans','Cook','Murphy','Gray','Ross','Coleman','Gonzales','Woods','Fisher','Cruz','Hicks'];
-    
+
     return firstNames.pick() + ' ' + lastNames.pick();
 }

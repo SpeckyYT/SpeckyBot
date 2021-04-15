@@ -1,7 +1,7 @@
 const { existsSync, appendFileSync } = require('fs');
 const { join } = require('path');
 
-module.exports = async () => {
+module.exports = () => {
     const template =
     {
         token: "TOKEN_HERE",
@@ -12,12 +12,6 @@ module.exports = async () => {
     const config = join(process.cwd(),'..','config.json');
     if (!existsSync(config))
         appendFileSync(config, JSON.stringify(template,null,4));
-
-    ['s_settings','u_settings','economy'].forEach(file => {
-        const db = join(process.cwd(),'..','db',`${file}.json`);
-        if (!existsSync(db))
-            appendFileSync(db, '{}');
-    });
 
     ["commands.log"].forEach(file => {
         const log = join(process.cwd(),'..',file)
