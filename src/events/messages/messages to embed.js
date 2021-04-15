@@ -11,7 +11,7 @@ module.exports.call = async (bot, msg) => {
     const color = typeof setting == 'number' ? setting : (Math.random()*0xFFFFFF<<0).toString(16);
 
     const perms = msg.guild ? msg.guild.me.permissionsIn(msg.channel).toArray() : [];
-    if(perms.includes('MANAGE_MESSAGES') && perms.includes('SEND_MESSAGES') || !msg.guild){
+    if(perms.includes(8192) && perms.includes(2048) || !msg.guild){
         if(msg.content.includes(':EMB:')){
             msg.delete().catch(()=>{})
             msg.content = msg.content.replace(/\s?(:EMB:)\s?/g,' ').trim();
