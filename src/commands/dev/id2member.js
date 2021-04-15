@@ -7,13 +7,18 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const id = parseInt(msg.args[0]);
-
-    await bot.users.fetch(id)
-    .then(user => {
-        msg.channel.send(user.tag)
-    })
-    .catch(err => {
-        msg.channel.send("User not found.")
-    })
+    const { args } = msg;
+    if (!args.length) return bot.cmdError('No ID provided.');
+    const id = args[0];
+    if (/\D+/g.test(id)) return bot.cmdError('Invalid ID provided.');
+    if (bot.users.cache.has(id)) {
+        return msg.channel.send(bot.users.cache.get(id).tag);
+    } else {
+        try {
+            return await bot.users.fetch(id)
+            .then(u => msg.channel.send(u.tag));
+        } catch {
+            return msg.channel.send('User not found.');
+        }
+    }
 }
