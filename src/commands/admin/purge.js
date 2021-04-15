@@ -3,8 +3,8 @@ module.exports = {
     description: "Deletes a TON of messages for you!",
     usage: `<message quantity>`,
     category: "admin",
-    userPerms: ['MANAGE_MESSAGES'],
-    botPerms: ['MANAGE_MESSAGES']
+    userPerms: 8192,
+    botPerms: 8192
 }
 
 const maxpurge = 10000;
@@ -22,7 +22,7 @@ module.exports.run = async (bot, msg) => {
     while(beg > 0){
         const amount = beg > 100 ? 100 : beg;
         beg -= amount;
-        await msg.channel.bulkDelete(amount)
+        await msg.channel.bulkDelete(amount, true)
         .catch(() => beg = 0);
     }
 
