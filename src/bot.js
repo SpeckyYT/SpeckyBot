@@ -12,7 +12,7 @@ const summon = async (bot) => {
         messageCacheLifetime: 86400,
         messageSweepInterval: 60,
         retryLimit: 5,
-        allowedMentions:{ parse:[] },
+        allowedMentions:{ parse:['users'] },
         ws:{
             intents:[
                 FLAGS.GUILDS,
