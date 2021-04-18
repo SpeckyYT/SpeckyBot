@@ -1,22 +1,26 @@
 module.exports = {
-    event: ['ready','*/10 * * * *']
+    event: 'ready'
 }
 
-const fs = require('fs');
+const fs = require('fs/promises');
 const { join } = require('path');
+const SDB = require('specky-database');
 
-module.exports.call = (bot) => {
+const regex = /(?<=<!---donators--->)(\n|\r|.)*?(?=<!---donators--->)/;
+
+module.exports.call = async (bot) => {
+    const donations = await SDB('donations.json');
     const readmepath = join(process.cwd(),'..','README.md');
-    fs.readFile(readmepath,{encoding:'utf-8'},(err,data) => {
-        fs.readFile(join(process.cwd(),'commands','important','data','donations.json'),{encoding:'utf-8'},(e,d)=> {
-            if(err || e) throw e || err;
-            const parsed = JSON.parse(d);
-            const arr = Object.keys(parsed).map((k,i) => [k,Object.values(parsed)[i]]).sort((a,b)=>b[1][0]-a[1][0]);
-            const dnt = arr.map(([n,v],i) => `| ${n} | ${Number(v[0]).toFixed(2)}${v[1] || '€'} |`).join('\r\n');
-            const string = `\r\n| Donator | Donation |\r\n|-|-|\r\n${dnt}\r\n`;
-            const regex = /(?<=<!---donators--->)(\r|\n|.)*(?=<!---donators--->)/;
-            if(string == data.match(regex)[0]) return;
-            fs.writeFile(readmepath,data.replace(/(?<=<!---donators--->)(\r|\n|.)*(?=<!---donators--->)/,string),{encoding:'utf-8'},()=>{})
-        })
-    })
+    const readme = await fs.readFile(readmepath, {encoding: 'utf-8'});
+
+    const dnt = donations
+    .sort((a,b) => b.donation[0] - a.donation[0])
+    .map(({name,donation}) => `| ${name} | ${donation[0].toFixed(2)}${donation[1]||'€'} |`)
+    .join('\r\n');
+
+    const string = `\r\n| Donator | Donation |\r\n|-|-|\r\n${dnt}\r\n`;
+    if(string == readme.match(regex)[0]) return;
+
+    return fs.writeFile(readmepath, readme.replace(regex, string), {encoding:'utf-8'});
 }
+
