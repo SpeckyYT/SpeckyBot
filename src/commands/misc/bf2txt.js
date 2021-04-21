@@ -10,22 +10,28 @@ module.exports = {
 module.exports.run = async (bot, msg) => {
     if(!msg.cmdContent) return bot.cmdError(`Brainfuck string missing or invalid`);
 
-    const insts = msg.cmdContent;
-
-    const data = await bot.bf(insts,{
-        limit:true,
+    const data = await bot.bf(msg.cmdContent, {
         size: 2**([32,16,8,4,2].find(n => msg.flag(n+'bit')) || 8),
-        time: 10000,
-        msg
+        timeout: 10000,
+        async: true
     });
 
-    const { tOut, memory, string, numbers, cell, time } = data;
+    const { timeout, memory, output, time } = data;
 
-    if(tOut){
-        return bot.cmdError(`**Time Limit Exceded**\n${numbers.length > 0 ? `Output:\n${String(string).code()}\n${numbers.join(" ").code()}\n`:""}Last cell: ${String(cell).code()}\nMemory:\n${memory.join(",").code()}\nTime: **${time}ms**`);
-    }
+    const sliceL = 512;
+    const slice = s => s.length > sliceL ? `${s.slice(0,sliceL)}...` : s;
 
-    const out = `${numbers.length > 0 ? `Output:\n${String(string).code()}\n${numbers.join(" ").code('js')}\n`:""}Memory: \n${memory.join(",").code('js')}\n\nTime: **${time}ms**`;
+    const opn = slice(JSON.stringify(output));
+    const ops = slice(String.fromCharCode(...output));
+    const opc = output.length ? `Output:\n${opn}\n${ops}`.code('js') : '';
+    const mmr = slice(JSON.stringify(memory));
+    const mms = `Memory: ${memory.length} bytes`;
+    const mmm = `${mms}\n${mmr}`.code('js');
+    const tm = `Time: ${time}ms`;
 
-    return msg.channel.send(out);
+    return msg.channel.send(
+        bot.membed()
+        .setColor(timeout ? 'RED' : 'GREEN')
+        .setDescription(`${opc}\n${mmm}\n${tm}`)
+    )
 }
