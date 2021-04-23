@@ -21,8 +21,8 @@ module.exports.call = async (bot, msg) => {
 
     // External Emotes
     const emotes = msg.content.match(bot.regex.emote);
-    if(emotes && emotes.length)
-        if(emotes.some(e => !bot.emojis.cache.has(e)))
+    if(Array.isArray(emotes))
+        if(emotes.map(e => e.match(bot.regex.id)[0]).some(e => !bot.emojis.cache.has(e)))
             return react(bot.emotes.noexternal);
 
     bot.emit('globalMessage', msg);
