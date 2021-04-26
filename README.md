@@ -30,6 +30,7 @@ Be sure to invite the [original SpeckyBot](https://discordapp.com/api/oauth2/aut
 |-|-|
 | Black Wolf | 20.00€ |
 | Nicsi | 20.00€ |
+| Specky | 14.33€ |
 | Dav!d | 2.29€ |
 | Benjiman | 2.22€ |
 <!---donators--->
