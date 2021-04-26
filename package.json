@@ -12,9 +12,9 @@
         "blackjack-n-deck": "^1.0.1",
         "caffeine": "^0.2.7",
         "canvas": "^2.7.0",
-        "cleverbot-free": "^1.1.1",
+        "cleverbot-free": "^1.1.5",
         "coco": "^0.9.1",
-        "coffeefuck": "^1.0.0",
+        "coffeefuck": "^1.0.1",
         "coffeescript": "^2.5.1",
         "color-convert": "^2.0.1",
         "color-diff": "^1.2.0",
@@ -47,7 +47,7 @@
         "node-snowflake": "0.0.1",
         "node-speedrun": "^1.2.0",
         "node-webshot": "^1.0.4",
-        "npm": "^7.10.0",
+        "npm": "^7.11.1",
         "number-to-emoji": "^1.0.0",
         "opusscript": "0.0.8",
         "pretty-ms": "^7.0.1",
@@ -71,7 +71,7 @@
         "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
-        "eslint": "^7.24.0"
+        "eslint": "^7.25.0"
     },
     "scripts": {
         "start": "node src/bot.js"
