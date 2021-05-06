@@ -47,7 +47,7 @@ module.exports.run = async (bot,msg) => {
     const img = await Canvas.loadImage(image);
 
     const canvas = Canvas.createCanvas(img.width,img.height);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     ctx.drawImage(img,0,0);
 
     const scheme = colorSchemes[msg._flags.find(f => colorSchemes[f]) || 'discord'];
@@ -59,9 +59,9 @@ module.exports.run = async (bot,msg) => {
 
             const brightness = getBrightness(pixel.data[0],pixel.data[1],pixel.data[2]);
 
-            pixel.data[0] = scheme[0]+1;
-            pixel.data[1] = scheme[1]+1;
-            pixel.data[2] = scheme[2]+1;
+            pixel.data[0] = scheme[0];
+            pixel.data[1] = scheme[1];
+            pixel.data[2] = scheme[2];
             pixel.data[3] = invert ? Math.abs(brightness-255) : brightness;
 
             ctx.putImageData(pixel,x,y);
