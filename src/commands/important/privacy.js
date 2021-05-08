@@ -5,16 +5,19 @@ module.exports = {
 }
 
 module.exports.run = async (bot, msg) => {
-    const botName = bot.user.username;
+    const botName = `\`${bot.user.username}\``;
     const embed = bot.embed()
     .addField(
         `What data does ${botName} collect?`,
         `${botName} collects the following data:\n`+
-        ['executed commands (guild ID, channel ID and user ID)'].map((v,i) => `${i+1}) ${v}`).join('\n')
+        [
+            'Executed commands',
+            'Other type of minor data (example: the global-chat)',
+        ].map((v,i) => `${i+1}) ${v}`).join('\n')
     )
     .addField(
         `Why does ${botName} need this data?`,
-        "The data is thoroughly collected for debugging purposes."
+        "The data is thoroughly collected for debugging and moderation purposes."
     )
     .addField(
         `Does ${botName} share any collected data?`,
@@ -22,11 +25,11 @@ module.exports.run = async (bot, msg) => {
     )
     .addField(
         `How can people contact ${botName} if they have concerns about the bot?`,
-        `Just do ${bot.config.prefix}invite, join the support server and ask there.`
+        `Just do \`${bot.config.prefix}invite\`, join the support server and ask there.`
     )
     .addField(
         "Is the stored data permanent?",
         "No, the saved data isn't permanent."
-    )
+    );
     return msg.channel.send(embed);
 }
