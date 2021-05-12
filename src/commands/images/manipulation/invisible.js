@@ -1,8 +1,19 @@
+const colorSchemes = {
+    discord: [ 54, 57, 63 ],
+    white: [ 255, 255, 255 ],
+    black: [ 0, 0, 0 ],
+}
+const colorSchemesAliases = {
+    dark: colorSchemes.discord,
+    light: colorSchemes.white,
+}
+const schemes = Object.assign({},colorSchemes,colorSchemesAliases);
+
 module.exports = {
     name: "invisible",
     description: "Turns your image into an invisible one!",
     category: "images",
-    flags: ['discord','white','black','invert'],
+    flags: Object.keys(schemes),
     aliases: ['invis'],
 }
 
@@ -22,24 +33,6 @@ function getBrightness(r,g,b){
     return brightness;
 }
 
-const colorSchemes = {
-    discord: [
-        54,
-        57,
-        63,
-    ],
-    white: [
-        255,
-        255,
-        255,
-    ],
-    black: [
-        0,
-        0,
-        0,
-    ],
-}
-
 module.exports.run = async (bot,msg) => {
     const image = bot.cache.lastImage[msg.channel.id];
     if(image == undefined) return bot.cmdError("No image found");
@@ -50,7 +43,7 @@ module.exports.run = async (bot,msg) => {
     const ctx = canvas.getContext('2d', { alpha: true });
     ctx.drawImage(img,0,0);
 
-    const scheme = colorSchemes[msg._flags.find(f => colorSchemes[f]) || 'discord'];
+    const scheme = schemes[msg._flags.find(f => schemes[f]) || 'discord'];
     const invert = msg.flag('invert');
 
     for(let y = 0; y < img.height; y++){
