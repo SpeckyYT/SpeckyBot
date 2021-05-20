@@ -15,7 +15,7 @@ const trimEnd = /\s+$/g
 const spaces = / +/g
 const id = /(\b\d{17,19}\b)/g
 const messageLink = /https?:\/\/(?:\w+\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)\/?/gi
-const inviteLink = /(?:\S+)(https?:\/\/)?(www\.)?(discord(?:app)?\.gg(?:\/|\\+\/+)|discord(?:app)?\.com(?:\/|\\+\/+)(?:invite\/))([A-z0-9-]{2,})/gi
+const inviteLink = /(?:\S*)(https?:\/\/)?(www\.)?(discord(?:app)?\.gg(?:\/|\\+\/+)|discord(?:app)?\.com(?:\/|\\+\/+)(?:invite\/))([A-z0-9-]{2,})/gi
 const link = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&\\/=]*)/gi
 const emote = /<a?:[\w]+:(\d{17,19})>/gi
 const ignoreCensor = new RegExp(
