@@ -23,7 +23,7 @@ const ignoreCensor = new RegExp(
         link,
         emote,
     ]
-    .map(regex => `(${stringify(regex)})`)
+    .map(regex => `(?:${stringify(regex)})`)
     .join('|'),
     'gi'
 );
