@@ -3,7 +3,7 @@ module.exports = (bot) => {
         const userRules = [
             "Be sure to follow the following rules!",
             "No NSFW/NSFL or similars. Don't send anything related to +18/illegal/disturbing/unsettling content.",
-            "Don't spam. This includes sending earrape videos, sending huge messages, sending too many attachments and disturbing ongoing discussions.",
+            "Don't spam. This includes sending earrape videos, sending messages with little to no content, sending huge messages, sending too many attachments and disturbing ongoing discussions.",
             "Don't use bot commands (of any bot). Use a bot-channel instead.",
             "Don't advertise. Do that in other channels where it's permitted.",
             "Be as nice as possible to everyone.",
