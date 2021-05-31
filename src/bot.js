@@ -19,12 +19,10 @@ const summon = async (bot) => {
         },
         intents: [
             FLAGS.GUILDS,
-            FLAGS.GUILD_MEMBERS,
             FLAGS.GUILD_MESSAGES,
             FLAGS.GUILD_VOICE_STATES,
             FLAGS.GUILD_MESSAGE_TYPING,
-            FLAGS.GUILD_MESSAGE_REACTIONS,
-            FLAGS.DIRECT_MESSAGES
+            FLAGS.GUILD_MESSAGE_REACTIONS
         ]
     })
 
