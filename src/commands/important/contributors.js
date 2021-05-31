@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['contributions','contributor','contribution']
 }
 
-const { join } = require('path');
+const SDB = require('specky-database');
 
 module.exports.run = async (bot,msg) =>
     bot.embed()
@@ -20,12 +20,9 @@ module.exports.run = async (bot,msg) =>
         ]
         .join(', ')
     )
-    .addField('Donations',
-        Object.keys(
-            bot.require(
-                join(__dirname,'data','donations.json')
-            )
-        )
+    .addField('Donators',
+        (await SDB('donations.json'))
+        .map(({name}) => name)
         .join(', ')
     )
     .addField('Other',

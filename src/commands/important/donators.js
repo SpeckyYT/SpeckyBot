@@ -5,22 +5,15 @@ module.exports = {
     aliases: ["donations","donation","donator","donate","patreon"]
 }
 
-const { join } = require('path');
-const { readFileSync } = require('fs');
-const { Collection } = require('discord.js');
+const SDB = require('specky-database');
 
 module.exports.run = async (bot, msg) => {
-    const don = JSON.parse(
-        readFileSync(join(__dirname,'data','donations.json'),{encoding:'utf-8'})
-    )
+    const donations = (await SDB('donations.json'))
+    .sort((a,b) => b.donation[0] - a.donation[0]);
 
-    const obj = new Collection();
-    Object.keys(don)
-    .map(k => obj.set(k,don[k]))
-
-    const donators = obj.sort((a, b) => b[0] - a[0]);
-
-    const string = donators.map((donation, donator) => `**${donator}**: ${donation[0].toFixed(2)}${donation[1]||'€'}`).join('\n');
+    const string = donations
+    .map(({name,donation}) => `**${name}**: ${donation[0].toFixed(2)}${donation[1]||'€'}`)
+    .join('\n');
 
     const embed = bot.embed()
     .setTitle("Donators!")

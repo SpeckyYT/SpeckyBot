@@ -8,7 +8,6 @@ module.exports = (bot) => {
 
         msgs
         .array()
-        .reverse()
         .some(message => {
             const matches = message.content.match(bot.regex.link);
             if(message.attachments.first()){

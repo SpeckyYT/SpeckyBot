@@ -3,7 +3,7 @@ module.exports = (bot) => {
         const userRules = [
             "Be sure to follow the following rules!",
             "No NSFW/NSFL or similars. Don't send anything related to +18/illegal/disturbing/unsettling content.",
-            "Don't spam. This includes sending earrape videos, sending huge messages, sending too many attachments and disturbing ongoing discussions.",
+            "Don't spam. This includes sending earrape videos, sending messages with little to no content, sending huge messages, sending too many attachments and disturbing ongoing discussions.",
             "Don't use bot commands (of any bot). Use a bot-channel instead.",
             "Don't advertise. Do that in other channels where it's permitted.",
             "Be as nice as possible to everyone.",
@@ -36,11 +36,13 @@ module.exports = (bot) => {
 
         const notes = [
             "Note:",
+            "People may be young, have epilepsy, have heart problems or other psychophysical problems, so be sure to act accordingly.",
             "Every channel connected to the global-chat can read your messages.",
             "Everyone will see your username (and icon)",
             "Everyone will see the name of the server you're writing in (and icon)",
             "Editing and deleting messages is possible.",
             "Sending images is allowed (if they're not against the rules)",
+            "Every message in the global-chat will get processed.",
             "Rules may be subject to changes at any time",
         ]
         .map((note,i) => `${i ? `-`: "+"} ${note}`)

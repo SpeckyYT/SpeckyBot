@@ -4,6 +4,8 @@ module.exports = {
 }
 
 module.exports.run = async (bot, data) => {
+    console.log('deprecated'.error);
+    /*
     if(!data.args[0]){
         return bot.cmdError(`Brainfuck string missing or invalid`);
     }
@@ -17,4 +19,5 @@ module.exports.run = async (bot, data) => {
     const out = `${numbers.length > 0 ? `Output:\n${string.success}\n\n${numbers.join(" ").success}\n\n`:""}Memory: \n\n${memory.join(",").info}\n`;
 
     console.log(out);
+    */
 }

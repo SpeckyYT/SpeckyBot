@@ -10,8 +10,9 @@ module.exports = (bot) => {
         bot.log(`Bot prefix: ${bot.config.prefix}`.startupinfo);
         bot.log(`Logged as ${bot.user.tag}!`.startupinfo);
     })
-    .catch(() => {
+    .catch(err => {
         bot.log("UNABLE TO LOGIN (wrong token or bad connection)".error);
+        bot.log(err);
         process.exit(1);
     });
 }

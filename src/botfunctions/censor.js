@@ -30,6 +30,7 @@ module.exports = (bot) => {
             {
                 censorText: censorText,
                 censorStart: 1,
+                ignore: bot.regex.ignoreCensor,
             }
         );
 }
