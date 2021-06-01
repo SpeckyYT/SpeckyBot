@@ -8,4 +8,5 @@ module.exports =
     ]
 
 module.exports.run = (bot, msg) ->
+    return bot.cmdError 'Command requires text' if not msg.cmdContent
     msg.channel.send bot.textToEmojiSpam msg.cmdContent
