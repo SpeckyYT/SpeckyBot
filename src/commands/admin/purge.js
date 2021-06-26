@@ -3,8 +3,8 @@ module.exports = {
     description: "Deletes a TON of messages for you!",
     usage: `<message quantity>`,
     category: "admin",
-    userPerms: 8192,
-    botPerms: 8192
+    userPerms: 8192n,
+    botPerms: 8192n
 }
 
 const maxpurge = 10000;
