@@ -45,10 +45,10 @@ module.exports.run = async (bot, msg) => {
     }
 
     try {
-        const filtered = await message.channel.messages
+        const filtered = await msg.channel.messages
         .fetch({ limit: size })
         .filter(m => isBot == m.author.bot);
-        return await msg.channel.bulkDelete(filtered, true);
+        return await msg.channel.bulkDelete(filtered, true)
     } catch (e) {
         return bot.cmdError(e.message)
     };
