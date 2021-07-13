@@ -22,7 +22,7 @@
         "deepai": "^1.0.17",
         "discord-canvas": "^1.4.1",
         "discord-music-player": "^7.1.4",
-        "discord.js": "^12.5.3",
+        "discord.js": "github:discordjs/discord.js",
         "discord.js-docs": "^0.1.2",
         "express": "^4.17.1",
         "gifencoder": "^2.0.1",

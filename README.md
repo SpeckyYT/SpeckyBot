@@ -17,8 +17,9 @@ Be sure to invite the [original SpeckyBot](https://discordapp.com/api/oauth2/aut
 ## [hng12](https://github.com/hng12)
 - coded the base for the economy system
 
-## [NaruDevnote](https://github.com/NaruDevnote)
+## [Devonte](https://github.com/devnote-dev)
 - coded banuser & unbanuser commands
+- help update to v13 (discord.js)
 
 ## [Zekromaster](https://github.com/Zekromaster)
 - added subcategories to the srprofile command
