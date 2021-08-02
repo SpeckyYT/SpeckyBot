@@ -6,6 +6,7 @@
     "dependencies": {
         "@bjornlu/colorblind": "^1.0.3",
         "aki-api": "^5.2.1",
+        "amongsprite": "^1.2.4",
         "ascii-art": "^2.7.0",
         "ascii-table": "0.0.9",
         "blackcoffee": "^0.1.5",
