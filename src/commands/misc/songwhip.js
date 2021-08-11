@@ -6,21 +6,20 @@ module.exports = {
     aliases: ["sw"]
 }
 
-const axios = require('axios')
+const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg) => {
-    if (!msg.args) {
-        return bot.cmdError("I can't convert nothing...")
-    }
+    if (!msg.args) return bot.cmdError("I can't convert nothing...")
 
     const url = msg.args[0]
-    if (!isValidURL(url)) {
-        return bot.cmdError("I can't convert invalid URLs...")
-    }
+    if (!isValidURL(url)) return bot.cmdError("I can't convert invalid URLs...")
 
-    const data = await axios.post('https://songwhip.com/', {url: url})
     // You can find an example JSON dump of the response here: <https://pastebin.com/HbUTE5E6>
-    const song = JSON.parse(data)
+    const song = await fetch('https://songwhip.com/', {
+        method: 'post',
+        body: JSON.stringify({ url: url }),
+    })
+    .then(res => res.json());
 
     // Keep the description at a decent length...
     const description = song.artists[0].description
