@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg) => {
 
     const user = msg.author;
     const embed = bot.embed()
-    .setTitle(`${song.name} by ${song.artists[0].map(a => a.name).join(', ')}`)
+    .setTitle(`${song.name} by ${song.artists.map(a => a.name).join(', ')}`)
     .setURL(song.url)
     .setDescription(description)
     .setThumbnail(song.image)
