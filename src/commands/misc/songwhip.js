@@ -9,14 +9,14 @@ module.exports = {
 const fetch = require('node-fetch');
 
 module.exports.run = async (bot, msg) => {
-    if (!msg.args) return bot.cmdError("I can't convert nothing...")
+    if (!msg.cmdContent) return bot.cmdError("I can't convert nothing...")
 
-    const url = msg.args[0]
+    const url = msg.cmdContent
     if (!isValidURL(url)) return bot.cmdError("I can't convert invalid URLs...")
 
     // You can find an example JSON dump of the response here: <https://pastebin.com/HbUTE5E6>
     const song = await fetch('https://songwhip.com/', {
-        method: 'post',
+        method: 'POST',
         body: JSON.stringify({ url: url }),
     })
     .then(res => res.json());
@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg) => {
 
     const user = msg.author;
     const embed = bot.embed()
-    .setTitle(`${song.name} by ${song.artists[0]}`)
+    .setTitle(`${song.name} by ${song.artists[0].map(a => a.name).join(', ')}`)
     .setURL(song.url)
     .setDescription(description)
     .setThumbnail(song.image)
