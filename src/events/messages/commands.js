@@ -94,7 +94,10 @@ module.exports.call = async (bot, m) => {
 
         const category = cmd.category;
 
-        if(category == "images") await bot.setLastImageCache(msg);
+        if(category == "images") {
+            await bot.setLastImageCache(msg);
+            return msg.channel.send(error("Image manipulation is deprecated on SpeckyBot.\nUse a different bot, like [NotSoBot](https://notsobot.com/)."))
+        }
         if(category == "economy") bot.economySummon(msg.author);
 
         if(category == "owner" || cmd.category === "private"){
@@ -113,6 +116,8 @@ module.exports.call = async (bot, m) => {
         }
 
         if(category == "music"){
+            return msg.channel.send(error("Music is deprecated on SpeckyBot\nBe sure to check out the bot [Muzika](https://discord.com/api/oauth2/authorize?client_id=692087631923642428&scope=bot&permissions=266287972351)"))
+
             if(!(msg.member.voice && msg.member.voice.channel)){
                 return msg.channel.send(error(musicError1))
             }
