@@ -34,7 +34,7 @@ module.exports.run = async (bot, msg) => {
 
     ctx.drawImage(avatar, 0, 0) // avatar
     ctx.drawImage(
-        await canvas.loadImage(global.assets.spwncircle, {}),
+        await Canvas.loadImage(global.assets.spwncircle),
         0, 0,
         avatar.width, avatar.height
     )
