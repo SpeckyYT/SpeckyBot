@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg) => {
         size: 4096,
     })
 
-    const avatar = await canvas.loadImage(avatarURL);
+    const avatar = await Canvas.loadImage(avatarURL);
 
     const canvas = Canvas.createCanvas(avatar.width, avatar.height);
     const ctx = canvas.getContext('2d');
