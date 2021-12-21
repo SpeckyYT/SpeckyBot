@@ -17,7 +17,9 @@ module.exports.run = async (bot, msg) => {
         msg.ids.length > 0 ?
             msg.ids[0] :
             msg.author.id
-    );
+    ).catch(() => null);
+
+    if(!userID) return "Couldn't find that user!";
 
     const avatarURL = userID.displayAvatarURL({
         dynamic: false,
