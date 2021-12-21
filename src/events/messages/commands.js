@@ -96,7 +96,6 @@ module.exports.call = async (bot, m) => {
 
         if(category == "images") {
             await bot.setLastImageCache(msg);
-            return msg.channel.send(error("Image manipulation is deprecated on SpeckyBot.\nUse a different bot, like [NotSoBot](https://notsobot.com/)."))
         }
         if(category == "economy") bot.economySummon(msg.author);
 
