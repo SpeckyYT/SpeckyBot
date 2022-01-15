@@ -5,19 +5,18 @@ module.exports = {
     category: 'misc'
 }
 
-const waifulabs = require('waifulabs');
-
 module.exports.run = async (bot, msg) => {
     if(!msg.cmdContent) return bot.cmdError('No seed found');
 
     const seed = parseInt(msg.args[0]);
     if(isNaN(seed)) return bot.cmdError('Seed is not a number');
+    if(seed < 0 || seed >= 2**32) return bot.cmdError('Seed is not valid');
+
+    const session = await (new (await import('waifusocket')).default()).login();
 
     const waifu = Array(17).fill(seed);
-    if(!waifulabs.isValidSeed(waifu)) return bot.cmdError('Seed is not valid');
 
-    const waifuBig = (await waifulabs.generateBigWaifu(waifu)).image;
-    const waifuImg = Buffer.from(waifuBig, 'base64');
-    const waifuAtt = waifuImg.toAttachment(`waifu${seed}.png`);
+    const waifuImg = (await session.genBig(waifu)).image;
+    const waifuAtt = waifuImg.toAttachment(`waifu-${seed}.png`);
     return msg.channel.send(waifuAtt);
 }

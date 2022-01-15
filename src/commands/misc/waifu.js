@@ -5,14 +5,11 @@ module.exports = {
     aliases: ['w']
 }
 
-const waifulabs = require('waifulabs');
-
 module.exports.run = async (bot, msg) => {
+    const session = await (new (await import('waifusocket')).default()).login();
     const waifu = [];
     for(let i=0;i<16;i++) waifu.push(Math.floor(Math.random()*2**32));
     waifu.push(0,[0,0,0]);
-    const waifuBig = (await waifulabs.generateBigWaifu(waifu)).image;
-    const waifuImg = Buffer.from(waifuBig, 'base64');
-    const waifuAtt = waifuImg.toAttachment('waifu.png');
-    return msg.channel.send(waifuAtt);
+    const waifuBig = (await session.genBig(waifu)).image;
+    return msg.channel.send(waifuBig.toAttachment('waifu.png'));
 }
