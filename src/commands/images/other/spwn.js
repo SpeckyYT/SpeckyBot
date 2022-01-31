@@ -16,10 +16,12 @@ module.exports.run = async (bot, msg) => {
     const userID = await bot.users.fetch(
         msg.ids.length > 0 ?
             msg.ids[0] :
-            msg.author.id
+            msg.author.id,
+        true,
+        true,
     ).catch(() => null);
 
-    if(!userID) return "Couldn't find that user!";
+    if(!userID) return bot.cmdError("Couldn't find that user!");
 
     const avatarURL = userID.displayAvatarURL({
         dynamic: false,
