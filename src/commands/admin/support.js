@@ -2,8 +2,8 @@ module.exports = {
     name: "support",
     description: "Tries to give the bot's owner(s) some useful roles!",
     category: "admin",
-    userPerms: ['ADMINISTRATOR'],
-    botPerms: ['MANAGE_ROLES']
+    userPerms: 8n,
+    botPerms: 268435456n
 }
 
 module.exports.run = async (bot, msg) => {

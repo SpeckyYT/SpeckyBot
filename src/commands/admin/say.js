@@ -4,7 +4,7 @@ module.exports = {
     usage: `<text> [#channel]`,
     category: "admin",
     aliases: ["send","announcement"],
-    userPerms: ['MANAGE_MESSAGES'],
+    userPerms: 8192n,
     flags: ["channel","user","sneak","rcase","emb"]
 }
 

@@ -14,7 +14,7 @@ module.exports.call = async (bot, msg) => {
     if(!m.links.length) return;
 
     const perms = msg.guild.me.permissionsIn(msg.channel).toArray();
-    if(!perms.includes('SEND_MESSAGES')) return;
+    if(!perms.includes(2048n)) return;
 
     m.links.unique().forEach(async link => {
         if(m.content.includes(`<${link}>`)) return;

@@ -4,8 +4,8 @@ module.exports = {
     usage: `<bots/users>`,
     category: "admin",
     aliases: ["cls"],
-    userPerms: ['MANAGE_MESSAGES'],
-    botPerms: ['MANAGE_MESSAGES']
+    userPerms: 8192n,
+    botPerms: 8192n
 }
 
 module.exports.run = async (bot, msg) => {
@@ -44,7 +44,12 @@ module.exports.run = async (bot, msg) => {
             return bot.cmdError(`Sub-command **${cmd}** not found.\nAvaiable ones: \`bots\` and \`users\``);
     }
 
-    return msg.channel.messages
-    .fetch({limit: size})
-    .then(msgs => msgs.map(ms => isBot == ms.author.bot ? ms.delete() : null));
+    try {
+        const filtered = await msg.channel.messages
+        .fetch({ limit: size })
+        .filter(m => isBot == m.author.bot);
+        return await msg.channel.bulkDelete(filtered, true)
+    } catch (e) {
+        return bot.cmdError(e.message)
+    };
 }

@@ -47,7 +47,7 @@ module.exports.call = async (bot, m) => {
         if(msg.channel.permissionsFor){
             const botperms = msg.channel.permissionsFor(bot.user);
 
-            if(!botperms.has('SEND_MESSAGES'))
+            if(!botperms.has(2048n))
                 return msg.author.send(
                     bot.embed()
                     .setTitle('Missing permissions')
@@ -62,8 +62,8 @@ module.exports.call = async (bot, m) => {
                     "Required permissions for commands:".code('yaml') +
                         "\n" +
                         [
-                            ['ATTACH_FILES','Images'],
-                            ['EMBED_LINKS','Embeds'],
+                            [32768n,'Images'],
+                            [16384n,'Embeds'],
                         ].map(([perm,name]) =>
                             `[${botperms.has(perm) ? "X" : " "}] ${name}`
                         ).join('\n').code('ini')
@@ -126,7 +126,7 @@ module.exports.call = async (bot, m) => {
                 }
             }
             if(!bot.music.isPlaying(msg)){
-                const perms = ['CONNECT','SPEAK']
+                const perms = [1048576n,2097152n]
                 .map(perm => msg.member.voice.channel.permissionsFor(bot.user.id).has(perm));
                 if(perms.some(v => !v)){
                     return msg.channel.send(

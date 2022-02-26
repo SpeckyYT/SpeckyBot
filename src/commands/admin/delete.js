@@ -4,8 +4,8 @@ module.exports = {
     usage: `<messageID>`,
     category: "admin",
     aliases: ["deletion", "msgdelet","msgdelete"],
-    userPerms: ['MANAGE_MESSAGES'],
-    botPerms: ['MANAGE_MESSAGES']
+    userPerms: 8192n,
+    botPerms: 8192n
 }
 
 module.exports.run = async (bot, msg) => {
