@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg) => {
         if(step > 3) return prevWaifu && msg.channel.send(await generateWaifuAttachment(prevWaifu));
         let newWaifus;
         Promise.all([
-            (async () => stepsWaifus[step] || session.genGrid(prevWaifu || undefined, step || 0))()
+            (async () => stepsWaifus[step] || session.genGrid(prevWaifu ? prevWaifu.seed : undefined, step || 0))()
             .then(waifus => {
                 newWaifus = waifus;
                 stepsWaifus[step] = newWaifus
@@ -43,7 +43,7 @@ module.exports.run = async (bot, msg) => {
             return msg.channel.send(
                 String(
                     [
-                        "+ Choose your initial waifu",
+                        "+ Choose your initial portrait",
                         "+ Tune the color palette",
                         "+ Fine tune the details",
                         "+ Finish with your favourite pose!"
@@ -60,13 +60,13 @@ module.exports.run = async (bot, msg) => {
                     "| 1  | 2  | 3  | 4  |\n"+
                     "| 5  | 6  | 7  | 8  |\n"+
                     "| 9  | 10 | 11 | 12 |\n"+
-                    "| 13 | 14 | 15 |    |"
+                    "| 13 | 14 | 15 | 16 |"
                 )
                 .code('c'),
                 canvas.toBuffer().toAttachment("waifus.png")
             )
             .then(m => {
-                const filter = (ms) => (ms.author.id == msg.author.id) && [...(step != 0 ? ['c','s','b'] : []),'r',...Array(15).fill().map((_,i)=>(i+1).toString())].some(v => ms.content.toLowerCase() == v.toLowerCase());
+                const filter = (ms) => (ms.author.id == msg.author.id) && [...(step != 0 ? ['c','s','b'] : []),'r',...Array(16).fill().map((_,i)=>(i+1).toString())].some(v => ms.content.toLowerCase() == v.toLowerCase());
                 let runned = false;
                 const collector = m.channel.createMessageCollector(filter, {time: 30000});
                 collector.on('collect', async m => {
