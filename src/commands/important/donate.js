@@ -1,13 +1,13 @@
 module.exports = {
-    name: "donators",
-    description: "Lists all the donators!",
+    name: "donate",
+    description: "Gives you a link to the donations!",
     category: "important",
-    aliases: ["donations","donation","donator","donate","patreon"]
+    aliases: ["donations","donation","donator","donator","patreon"]
 }
 
 module.exports.run = async (bot, msg) => {
     const embed = bot.embed()
-    .setTitle("Donators!")
+    .setTitle("Donate here!")
     .setURL("https://www.paypal.me/speckyy")
     .setFooter("Thank you all for the support!", bot.user.displayAvatarURL());
 
