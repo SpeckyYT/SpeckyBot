@@ -7,6 +7,7 @@ This folder contains every information what will be processed and loaded in the 
 Bot Functions are functions or properties that may be helpful anywhere you have the `bot` object available.
 
 Example:
+
 ```js
 module.exports = (bot) => {
     bot.helloWorld = function(){
@@ -60,6 +61,7 @@ This folder makes it easier to save and use emojis without having to write them 
 | `anything` | String | joy: "😂" |
 
 Example:
+
 ```js
 function(bot,msg){
     msg.channel.send(bot.emotes.joy)
@@ -68,7 +70,7 @@ function(bot,msg){
 
 ## 1.5. Events
 
-Events get called by the [Discord.js](https://discord.js.org/#/docs/main/stable/class/Client), [node-cron](https://www.npmjs.com/package/node-cron) (e.g. "0 20 4 * * *") or by custom events (e.g. "commandError").
+Events get called by the [Discord.js](https://discord.js.org/#/docs/main/stable/class/Client), [node-cron](https://www.npmjs.com/package/node-cron) (e.g. `0 20 4 * * *`) or by custom events (e.g. "commandError").
 
 | Property     | Type     | Example                       | Info                             | Required |
 |--------------|----------|-------------------------------|----------------------------------|----------|
@@ -98,6 +100,7 @@ The module files get loaded into `bot.modules` and `global.modules` for easier a
 The prototypes folder is code which adds (or modifies) prototypes.
 
 Example:
+
 ```js
 module.exports = () => {
     String.prototype.h = function(){
@@ -111,6 +114,7 @@ module.exports = () => {
 Templates offer an easier way to create commands with similar code without having to copy and paste.
 
 Example:
+
 ```js
 module.exports.test = function({text}){
     return function(bot,msg){
@@ -119,9 +123,9 @@ module.exports.test = function({text}){
 }
 ```
 
-# 2. Addidional Informations
+## 2. Addidional Informations
 
-## 2.1. Supported Programming Languages
+### 2.1. Supported Programming Languages
 
 - JavaScript (.js)
 - CoffeeScript (.coffee)
