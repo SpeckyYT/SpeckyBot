@@ -36,7 +36,7 @@
         "libsodium-wrappers": "^0.7.9",
         "livescript": "^1.6.0",
         "mathjs": "^9.3.2",
-        "moment": "^2.29.1",
+        "moment": "^2.29.4",
         "more-array-methods": "^1.1.2",
         "morsee": "^1.0.8",
         "namiko.moe": "0.0.1",
