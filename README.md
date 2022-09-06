@@ -1,5 +1,12 @@
 # SpeckyBot
 
+## SpeckyBot is dead
+
+| SpeckyBot didn't got updated for a while, and the required intents aren't provided anymore my Discord. Now it's deprecated and there is no reason to use this project.
+|-
+| Will it ever be revived?
+| No, but I may create another bot in Rust.
+
 SpeckyBot is an open-source Discord Bot which allows to be totally customizable for developers!
 
 NOTE: being open-source, doesn't mean that you're legally allowed to pubblish this Discord Bot without permission.
